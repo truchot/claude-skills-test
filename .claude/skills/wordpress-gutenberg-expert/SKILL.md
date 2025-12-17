@@ -20,11 +20,12 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ custom-meta.md
 │  └─ hooks-security.md
 │
-├─ Gutenberg Blocks (agents/gutenberg-blocks/)
+├─ Gutenberg (agents/gutenberg-blocks/)
 │  ├─ orchestrator.md
 │  ├─ custom-blocks.md
 │  ├─ block-variations.md
-│  └─ block-styles.md
+│  ├─ block-styles.md
+│  └─ data-stores.md
 │
 ├─ Tooling (agents/tooling/)
 │  ├─ orchestrator.md
@@ -54,14 +55,15 @@ Sous-orchestrateur avec 5 agents spécialisés :
 | `custom-meta.md` | postmeta, usermeta, meta boxes |
 | `hooks-security.md` | Actions, filters, nonces, sanitization |
 
-### 2. Gutenberg Blocks (`agents/gutenberg-blocks/`)
-Sous-orchestrateur avec 3 agents spécialisés :
+### 2. Gutenberg (`agents/gutenberg-blocks/`)
+Sous-orchestrateur avec 4 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
 | `custom-blocks.md` | Création de blocks from scratch |
 | `block-variations.md` | Variantes fonctionnelles (registerBlockVariation) |
 | `block-styles.md` | Variantes visuelles CSS (registerBlockStyle) |
+| `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 
 ### 3. Tooling (`agents/tooling/`)
 Sous-orchestrateur avec 3 agents spécialisés :
@@ -85,7 +87,6 @@ Sous-orchestrateur avec 1 agent (extensible) :
 |-------|---------|---------|
 | **WP Theme Expert** | `agents/wp-theme-expert.md` | Thèmes, FSE, theme.json, templates |
 | **WP REST API Expert** | `agents/wp-rest-api-expert.md` | API REST, endpoints, authentification |
-| **Gutenberg Data Expert** | `agents/gutenberg-data-expert.md` | State, useSelect, useDispatch, stores |
 
 ## Processus d'Orchestration
 
@@ -94,12 +95,11 @@ Sous-orchestrateur avec 1 agent (extensible) :
 | Mots-clés | Domaine | Agent/Sous-orchestrateur |
 |-----------|---------|--------------------------|
 | CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
-| block, variation, style, registerBlockType | Gutenberg Blocks | `agents/gutenberg-blocks/orchestrator.md` |
+| block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
 | WP-CLI, commande, projet, init, git, webpack, build, npm | Tooling | `agents/tooling/orchestrator.md` |
 | token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
 | theme, theme.json, FSE, template, pattern | Theme | `agents/wp-theme-expert.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
-| useSelect, useDispatch, store, @wordpress/data | Data | `agents/gutenberg-data-expert.md` |
 
 ### Étape 2 : Déléguer au Bon Niveau
 
@@ -138,12 +138,13 @@ Question: "Comment configurer theme.json ?"
 | Comment utiliser les meta ? | `wp-core/custom-meta.md` |
 | Comment utiliser les hooks ? | `wp-core/hooks-security.md` |
 
-### Gutenberg Blocks
+### Gutenberg
 | Question | Agent Final |
 |----------|-------------|
 | Comment créer un block from scratch ? | `gutenberg-blocks/custom-blocks.md` |
 | Comment créer une variation de Cover/Group ? | `gutenberg-blocks/block-variations.md` |
 | Comment ajouter un style CSS à un block ? | `gutenberg-blocks/block-styles.md` |
+| Comment utiliser useSelect/useDispatch ? | `gutenberg-blocks/data-stores.md` |
 
 ### Tooling
 | Question | Agent Final |
@@ -163,7 +164,6 @@ Question: "Comment configurer theme.json ?"
 |----------|-------|
 | Comment configurer theme.json ? | `wp-theme-expert.md` |
 | Comment créer un endpoint REST ? | `wp-rest-api-expert.md` |
-| Comment utiliser useSelect ? | `gutenberg-data-expert.md` |
 
 ## Questions Multi-Domaines
 
@@ -177,7 +177,7 @@ Combine les expertises quand nécessaire :
 → gutenberg-blocks/custom-blocks.md + wp-core/hooks-security.md
 
 "Block qui fetch des données REST"
-→ gutenberg-blocks/custom-blocks.md + wp-rest-api-expert.md + gutenberg-data-expert.md
+→ gutenberg-blocks/custom-blocks.md + gutenberg-blocks/data-stores.md + wp-rest-api-expert.md
 
 "Initialiser un projet avec build configuré"
 → tooling/project-bootstrap.md + tooling/build-tooling.md
