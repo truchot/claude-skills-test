@@ -35,11 +35,11 @@ Orchestrateur Principal (SKILL.md)
 │
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
-│  └─ design-tokens.md
+│  ├─ design-tokens.md
+│  └─ visual-review.md
 │
 ├─ WP Theme Expert (agents/wp-theme-expert.md)
-├─ WP REST API Expert (agents/wp-rest-api-expert.md)
-└─ Gutenberg Data Expert (agents/gutenberg-data-expert.md)
+└─ WP REST API Expert (agents/wp-rest-api-expert.md)
 ```
 
 ## Domaines et Agents
@@ -75,11 +75,12 @@ Sous-orchestrateur avec 3 agents spécialisés :
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 
 ### 4. Design (`agents/design/`)
-Sous-orchestrateur avec 1 agent (extensible) :
+Sous-orchestrateur avec 2 agents :
 
 | Agent | Domaine |
 |-------|---------|
 | `design-tokens.md` | Maquettes → theme.json, couleurs, typo, spacing |
+| `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
 ### 5. Agents Directs
 
@@ -97,7 +98,7 @@ Sous-orchestrateur avec 1 agent (extensible) :
 | CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
 | WP-CLI, commande, projet, init, git, webpack, build, npm | Tooling | `agents/tooling/orchestrator.md` |
-| token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
+| token, maquette, figma, palette, design system, visual, diff, screenshot, régression | Design | `agents/design/orchestrator.md` |
 | theme, theme.json, FSE, template, pattern | Theme | `agents/wp-theme-expert.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
 
@@ -158,6 +159,8 @@ Question: "Comment configurer theme.json ?"
 |----------|-------------|
 | Comment extraire les design tokens ? | `design/design-tokens.md` |
 | Comment structurer theme.json depuis une maquette ? | `design/design-tokens.md` |
+| Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
+| Comment faire des tests de régression visuelle ? | `design/visual-review.md` |
 
 ### Agents Directs
 | Question | Agent |
