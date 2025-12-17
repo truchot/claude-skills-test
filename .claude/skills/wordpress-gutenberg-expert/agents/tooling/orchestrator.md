@@ -12,7 +12,9 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | **Local Dev** | `local-dev.md` | wp-env, Local by Flywheel, Docker, base de données locale |
 | **Staging Setup** | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | **Build & Tooling** | `build-tooling.md` | @wordpress/scripts, webpack, npm |
-| **CI/CD & Deployment** | `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
+| **Repository Setup** | `repository-setup.md` | Création repo Git/GitHub, structure projet, .gitignore, branches |
+| **CI/CD Pipelines** | `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
+| **Deployment SSH** | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | **Issue Management** | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 
 ## Routing
@@ -22,13 +24,25 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | Mots-clés | Agent |
 |-----------|-------|
 | WP-CLI, commande, command, cli, wp command | WP-CLI Commands |
-| projet, init, bootstrap, setup, git, branch, structure, composer, package.json, gitignore, bedrock | Project Init |
+| projet, init, bootstrap, setup, structure, composer, package.json, bedrock | Project Init |
 | .env, wp-config, environment, constantes, config, WP_DEBUG, salts, keys | Environment Config |
 | wp-env, docker, local, localhost, database locale, import, export, sync, Local by Flywheel | Local Dev |
-| staging, serveur, .htaccess, .htpasswd, protection, utilisateur WP, user, role, notification client, email | Staging Setup |
+| staging, serveur staging, .htaccess, .htpasswd, protection, utilisateur WP, user, role, notification client, email | Staging Setup |
 | build, webpack, npm, @wordpress/scripts, lint, format, start, entry point | Build & Tooling |
-| CI/CD, pipeline, GitHub Actions, deploy, déploiement, SSH, rsync, secrets, production, automated | CI/CD & Deployment |
+| repo, repository, GitHub repo, git init, git clone, .gitignore, branches, gitflow | Repository Setup |
+| CI/CD, pipeline, GitHub Actions, tests, linting, phpcs, phpunit, workflow, artifacts | CI/CD Pipelines |
+| deploy, déploiement, SSH, rsync, secrets, production, clés SSH, SFTP, WP Engine, Kinsta | Deployment SSH |
 | issue, bug report, feature request, template, label, GitHub issue, GitLab issue, gh issue, glab | Issue Management |
+
+## Différences Clés
+
+### Repository Setup vs Project Init
+- **Repository Setup** : Création du repo, git init, remotes, .gitignore, structure Git
+- **Project Init** : Structure des fichiers du projet, composer.json, package.json, architecture
+
+### CI/CD Pipelines vs Deployment SSH
+- **CI/CD Pipelines** : Tests automatisés, linting, builds, GitHub Actions workflows
+- **Deployment SSH** : Configuration SSH, secrets, rsync vers serveur, SFTP, intégrations hébergeurs
 
 ## Exemples de Questions
 
@@ -36,16 +50,13 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 ```
 "Comment créer une commande WP-CLI custom ?"
 "Je veux une commande pour importer des données"
-"Comment faire un progress bar dans WP-CLI ?"
 → wp-cli-commands.md
 ```
 
 ### Project Init
 ```
-"Comment initialiser un nouveau projet WordPress ?"
-"Quelle structure de branches Git utiliser ?"
+"Quelle structure pour un projet WordPress ?"
 "Comment configurer le composer.json ?"
-"Quel .gitignore pour WordPress ?"
 "Comment structurer un projet Bedrock ?"
 → project-init.md
 ```
@@ -54,8 +65,6 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 ```
 "Comment configurer wp-config.php pour plusieurs environnements ?"
 "Comment utiliser des variables .env ?"
-"Quelles constantes WP_DEBUG utiliser ?"
-"Comment générer les security keys ?"
 → environment-config.md
 ```
 
@@ -64,8 +73,6 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 "Comment configurer wp-env pour mon projet ?"
 "Comment utiliser Docker pour WordPress ?"
 "Comment importer/exporter la base de données ?"
-"Comment synchroniser depuis la production ?"
-"Comment utiliser Local by Flywheel ?"
 → local-dev.md
 ```
 
@@ -73,37 +80,44 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 ```
 "Comment configurer un serveur staging ?"
 "Comment protéger le staging avec .htpasswd ?"
-"Comment créer un utilisateur WordPress pour le client ?"
-"Comment notifier le client de l'accès au staging ?"
 → staging-setup.md
 ```
 
 ### Build & Tooling
 ```
 "Comment configurer webpack pour mon plugin ?"
-"Comment faire plusieurs entry points ?"
 "Comment utiliser wp-scripts ?"
-"Comment optimiser mon build ?"
 → build-tooling.md
 ```
 
-### CI/CD & Deployment
+### Repository Setup
 ```
-"Comment mettre en place un repository GitHub ?"
+"Comment créer un repository GitHub ?"
+"Comment configurer les branches main/develop ?"
+"Quel .gitignore pour WordPress ?"
+→ repository-setup.md
+```
+
+### CI/CD Pipelines
+```
 "Comment configurer une pipeline CI/CD ?"
-"Comment déployer automatiquement sur le serveur ?"
-"Comment configurer les secrets GitHub ?"
+"Comment faire tourner PHPUnit dans GitHub Actions ?"
+"Comment configurer les tests automatisés ?"
+→ cicd-pipelines.md
+```
+
+### Deployment SSH
+```
 "Comment configurer les clés SSH pour le déploiement ?"
-→ cicd-deployment.md
+"Comment déployer avec rsync ?"
+"Comment configurer les secrets GitHub pour le deploy ?"
+→ deployment-ssh.md
 ```
 
 ### Issue Management
 ```
 "Comment créer des templates d'issues normalisés ?"
 "Comment configurer les labels GitHub ?"
-"Comment créer une issue pour un nouveau block ?"
-"Comment automatiser le labeling des issues ?"
-"Comment utiliser gh issue create ?"
 → issue-management.md
 ```
 
@@ -111,34 +125,25 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 
 ```
 "Initialiser un projet complet"
-→ project-init.md + environment-config.md + local-dev.md
+→ repository-setup.md + project-init.md + environment-config.md
 
-"Nouveau projet avec build configuré"
-→ project-init.md + build-tooling.md
+"Nouveau projet avec CI/CD"
+→ repository-setup.md + project-init.md + cicd-pipelines.md
 
 "Environnement de développement complet"
 → local-dev.md + environment-config.md
 
-"Mettre en place un environnement staging protégé"
-→ staging-setup.md + environment-config.md
-
-"Pipeline CI/CD complète avec tests et build"
-→ cicd-deployment.md + build-tooling.md
-
-"Environnements local + staging + production"
-→ local-dev.md + staging-setup.md + cicd-deployment.md
-
-"Commande WP-CLI pour builder le projet"
-→ wp-cli-commands.md + build-tooling.md
-
-"Migration de données entre environnements"
-→ local-dev.md + staging-setup.md
+"Pipeline CI/CD avec déploiement"
+→ cicd-pipelines.md + deployment-ssh.md
 
 "Projet complet avec issues et CI/CD"
-→ project-init.md + issue-management.md + cicd-deployment.md
+→ repository-setup.md + issue-management.md + cicd-pipelines.md
 
-"Workflow dev avec issues normalisées"
-→ issue-management.md + cicd-deployment.md
+"Environnements local + staging + production"
+→ local-dev.md + staging-setup.md + deployment-ssh.md
+
+"Infrastructure complète"
+→ repository-setup.md + cicd-pipelines.md + deployment-ssh.md
 ```
 
 ## Règles

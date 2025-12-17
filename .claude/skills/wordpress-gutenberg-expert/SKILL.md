@@ -18,7 +18,8 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ custom-taxonomies.md
 │  ├─ custom-roles.md
 │  ├─ custom-meta.md
-│  └─ hooks-security.md
+│  ├─ hooks-filters.md
+│  └─ security-validation.md
 │
 ├─ Gutenberg (agents/gutenberg-blocks/)
 │  ├─ orchestrator.md
@@ -35,7 +36,9 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ local-dev.md
 │  ├─ staging-setup.md
 │  ├─ build-tooling.md
-│  ├─ cicd-deployment.md
+│  ├─ repository-setup.md
+│  ├─ cicd-pipelines.md
+│  ├─ deployment-ssh.md
 │  └─ issue-management.md
 │
 ├─ Design (agents/design/)
@@ -45,7 +48,8 @@ Orchestrateur Principal (SKILL.md)
 │
 ├─ Theme (agents/theme/)
 │  ├─ orchestrator.md
-│  ├─ fse-templates.md
+│  ├─ block-theme.md
+│  ├─ templates-patterns.md
 │  ├─ style-engine.md
 │  └─ interactivity-api.md
 │
@@ -66,10 +70,12 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
+**Total : 35 agents spécialisés**
+
 ## Domaines et Agents
 
 ### 1. WP Core (`agents/wp-core/`)
-Sous-orchestrateur avec 5 agents spécialisés :
+Sous-orchestrateur avec 6 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -77,7 +83,8 @@ Sous-orchestrateur avec 5 agents spécialisés :
 | `custom-taxonomies.md` | register_taxonomy, terms, hiérarchie |
 | `custom-roles.md` | Rôles, capabilities, permissions |
 | `custom-meta.md` | postmeta, usermeta, meta boxes |
-| `hooks-security.md` | Actions, filters, nonces, sanitization |
+| `hooks-filters.md` | Actions, filters, priorités, lifecycle |
+| `security-validation.md` | Nonces, sanitization, escaping, CSRF, XSS |
 
 ### 2. Gutenberg (`agents/gutenberg-blocks/`)
 Sous-orchestrateur avec 4 agents spécialisés :
@@ -90,17 +97,19 @@ Sous-orchestrateur avec 4 agents spécialisés :
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 
 ### 3. Tooling (`agents/tooling/`)
-Sous-orchestrateur avec 8 agents spécialisés :
+Sous-orchestrateur avec 10 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
 | `wp-cli-commands.md` | Commandes WP-CLI custom |
-| `project-init.md` | Structure projet, Git, branches, Composer, package.json |
+| `project-init.md` | Structure projet, Composer, package.json |
 | `environment-config.md` | .env, wp-config.php multi-environnement, constantes WP |
 | `local-dev.md` | wp-env, Local by Flywheel, Docker, base de données locale |
 | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
-| `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
+| `repository-setup.md` | Création repo Git/GitHub, .gitignore, branches, gitflow |
+| `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
+| `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 
 ### 4. Design (`agents/design/`)
@@ -112,11 +121,12 @@ Sous-orchestrateur avec 2 agents :
 | `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
 ### 5. Theme (`agents/theme/`)
-Sous-orchestrateur avec 3 agents :
+Sous-orchestrateur avec 4 agents :
 
 | Agent | Domaine |
 |-------|---------|
-| `fse-templates.md` | Block themes, FSE, templates, template parts, patterns, theme.json |
+| `block-theme.md` | Structure block theme, theme.json (settings, styles), functions.php |
+| `templates-patterns.md` | Templates HTML, template parts, patterns, style variations |
 | `style-engine.md` | Style Engine API, génération CSS, block supports, variables CSS |
 | `interactivity-api.md` | @wordpress/interactivity, directives, state, actions, patterns interactifs |
 
@@ -145,17 +155,30 @@ Sous-orchestrateur avec 3 agents :
 
 | Mots-clés | Domaine | Agent/Sous-orchestrateur |
 |-----------|---------|--------------------------|
-| CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
+| CPT, taxonomy, role, meta, PHP | WP Core | `agents/wp-core/orchestrator.md` |
+| hook, action, filter, add_action, add_filter, priorité | WP Core | `agents/wp-core/hooks-filters.md` |
+| nonce, sanitize, escape, security, CSRF, XSS, SQL injection | WP Core | `agents/wp-core/security-validation.md` |
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
-| WP-CLI, commande, projet, init, git, webpack, build, npm, CI/CD, pipeline, deploy, SSH, staging, .htpasswd, .env, wp-config, docker, wp-env, local, issue, template, label, GitHub, GitLab | Tooling | `agents/tooling/orchestrator.md` |
-| token, maquette, figma, palette, design system, visual, diff, screenshot, régression | Design | `agents/design/orchestrator.md` |
-| theme, theme.json, FSE, template, pattern, style engine, block supports CSS, interactivity, wp-interactive, wp-bind, wp-on | Theme | `agents/theme/orchestrator.md` |
-| test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
+| WP-CLI, commande, projet, init, composer, package.json | Tooling | `agents/tooling/orchestrator.md` |
+| .env, wp-config, environment, constantes, config, WP_DEBUG | Tooling | `agents/tooling/environment-config.md` |
+| wp-env, docker, local, localhost, database locale | Tooling | `agents/tooling/local-dev.md` |
+| staging, serveur staging, .htpasswd, protection | Tooling | `agents/tooling/staging-setup.md` |
+| build, webpack, npm, @wordpress/scripts | Tooling | `agents/tooling/build-tooling.md` |
+| repo, repository, git init, git clone, .gitignore, branches | Tooling | `agents/tooling/repository-setup.md` |
+| CI/CD, pipeline, GitHub Actions, tests, linting, phpcs, phpunit | Tooling | `agents/tooling/cicd-pipelines.md` |
+| deploy, déploiement, SSH, rsync, secrets, production | Tooling | `agents/tooling/deployment-ssh.md` |
+| issue, bug report, template, label, GitHub issue, GitLab | Tooling | `agents/tooling/issue-management.md` |
+| token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
+| theme, block theme, theme.json settings, structure theme, functions.php | Theme | `agents/theme/block-theme.md` |
+| template, template-part, pattern, hero, cta, style variation | Theme | `agents/theme/templates-patterns.md` |
+| style engine, wp_style_engine, CSS, supports, variables CSS, --wp--preset | Theme | `agents/theme/style-engine.md` |
+| interactivity, wp-interactive, wp-bind, wp-on, directives, store, getContext | Theme | `agents/theme/interactivity-api.md` |
+| test, PHPUnit, Jest, Playwright, e2e, unit test, coverage | Testing | `agents/testing/orchestrator.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
-| RGPD, GDPR, consent, cookie, wp_has_consent, consentement, privacy, CMP | GDPR | `agents/gdpr-consent-api.md` |
-| i18n, l10n, traduction, translation, __(), _e(), POT, PO, MO, textdomain, WPML, Polylang | i18n | `agents/i18n-localization.md` |
-| SEO, meta, schema, JSON-LD, sitemap, Open Graph, Yoast, Rank Math, canonical, robots | SEO | `agents/seo-expert.md` |
-| a11y, accessibilité, accessibility, WCAG, ARIA, clavier, keyboard, screen reader, focus, alt | a11y | `agents/accessibility-expert.md` |
+| RGPD, GDPR, consent, cookie, wp_has_consent, consentement, privacy | GDPR | `agents/gdpr-consent-api.md` |
+| i18n, l10n, traduction, translation, __(), _e(), POT, PO, MO, WPML, Polylang | i18n | `agents/i18n-localization.md` |
+| SEO, meta, schema, JSON-LD, sitemap, Open Graph, Yoast, Rank Math | SEO | `agents/seo-expert.md` |
+| a11y, accessibilité, accessibility, WCAG, ARIA, clavier, keyboard, screen reader | a11y | `agents/accessibility-expert.md` |
 
 ### Étape 2 : Déléguer au Bon Niveau
 
@@ -163,35 +186,50 @@ Sous-orchestrateur avec 3 agents :
 Question: "Comment créer un custom post type ?"
 → WP Core orchestrator → custom-post-types.md
 
+Question: "Comment utiliser add_action et add_filter ?"
+→ WP Core → hooks-filters.md
+
+Question: "Comment sécuriser un formulaire avec nonce ?"
+→ WP Core → security-validation.md
+
 Question: "Comment créer une variation du block Group ?"
 → Gutenberg Blocks orchestrator → block-variations.md
 
-Question: "Comment initialiser un nouveau projet WordPress ?"
-→ Tooling orchestrator → project-init.md
+Question: "Comment créer un repository GitHub ?"
+→ Tooling → repository-setup.md
 
 Question: "Comment configurer une pipeline CI/CD ?"
-→ Tooling orchestrator → cicd-deployment.md
+→ Tooling → cicd-pipelines.md
+
+Question: "Comment déployer avec SSH et rsync ?"
+→ Tooling → deployment-ssh.md
 
 Question: "Comment mettre en place un environnement staging ?"
-→ Tooling orchestrator → staging-setup.md
+→ Tooling → staging-setup.md
 
 Question: "Comment configurer wp-env ?"
-→ Tooling orchestrator → local-dev.md
+→ Tooling → local-dev.md
 
 Question: "Comment configurer wp-config.php multi-environnement ?"
-→ Tooling orchestrator → environment-config.md
+→ Tooling → environment-config.md
 
 Question: "Comment extraire les tokens de ma maquette ?"
 → Design orchestrator → design-tokens.md
 
+Question: "Comment structurer un block theme ?"
+→ Theme → block-theme.md
+
 Question: "Comment configurer theme.json ?"
-→ Theme orchestrator → fse-templates.md
+→ Theme → block-theme.md
+
+Question: "Comment créer un template ou pattern ?"
+→ Theme → templates-patterns.md
 
 Question: "Comment WordPress génère-t-il le CSS ?"
-→ Theme orchestrator → style-engine.md
+→ Theme → style-engine.md
 
 Question: "Comment ajouter de l'interactivité à mon block ?"
-→ Theme orchestrator → interactivity-api.md
+→ Theme → interactivity-api.md
 
 Question: "Comment tester mon plugin WordPress ?"
 → Testing orchestrator → php-unit-tests.md
@@ -200,9 +238,6 @@ Question: "Comment faire des tests e2e avec Playwright ?"
 → Testing orchestrator → e2e-tests.md
 
 Question: "Comment rendre mon plugin conforme RGPD ?"
-→ gdpr-consent-api.md
-
-Question: "Comment utiliser wp_has_consent() ?"
 → gdpr-consent-api.md
 
 Question: "Comment traduire mon plugin ?"
@@ -231,7 +266,8 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment créer une taxonomy ? | `wp-core/custom-taxonomies.md` |
 | Comment créer un rôle custom ? | `wp-core/custom-roles.md` |
 | Comment utiliser les meta ? | `wp-core/custom-meta.md` |
-| Comment utiliser les hooks ? | `wp-core/hooks-security.md` |
+| Comment utiliser les hooks (actions/filters) ? | `wp-core/hooks-filters.md` |
+| Comment sécuriser mon code (nonces, sanitize, escape) ? | `wp-core/security-validation.md` |
 
 ### Gutenberg
 | Question | Agent Final |
@@ -246,21 +282,20 @@ Question: "Comment rendre mon block accessible au clavier ?"
 |----------|-------------|
 | Comment créer une commande WP-CLI ? | `tooling/wp-cli-commands.md` |
 | Comment initialiser un projet WordPress ? | `tooling/project-init.md` |
-| Comment structurer mon projet Git ? | `tooling/project-init.md` |
 | Comment configurer wp-config.php multi-env ? | `tooling/environment-config.md` |
 | Comment utiliser des variables .env ? | `tooling/environment-config.md` |
 | Comment configurer wp-env ? | `tooling/local-dev.md` |
 | Comment utiliser Docker pour WordPress ? | `tooling/local-dev.md` |
 | Comment configurer un serveur staging ? | `tooling/staging-setup.md` |
 | Comment configurer .htpasswd pour staging ? | `tooling/staging-setup.md` |
-| Comment créer un utilisateur WP pour le client ? | `tooling/staging-setup.md` |
 | Comment configurer webpack ? | `tooling/build-tooling.md` |
-| Comment configurer une pipeline CI/CD ? | `tooling/cicd-deployment.md` |
-| Comment configurer les secrets GitHub ? | `tooling/cicd-deployment.md` |
-| Comment déployer automatiquement ? | `tooling/cicd-deployment.md` |
+| Comment créer un repository GitHub ? | `tooling/repository-setup.md` |
+| Comment structurer les branches Git ? | `tooling/repository-setup.md` |
+| Comment configurer une pipeline CI/CD ? | `tooling/cicd-pipelines.md` |
+| Comment faire des tests automatisés ? | `tooling/cicd-pipelines.md` |
+| Comment déployer avec SSH/rsync ? | `tooling/deployment-ssh.md` |
+| Comment configurer les secrets GitHub ? | `tooling/deployment-ssh.md` |
 | Comment créer des templates d'issues ? | `tooling/issue-management.md` |
-| Comment normaliser les issues GitHub ? | `tooling/issue-management.md` |
-| Comment créer une issue pour un CPT ? | `tooling/issue-management.md` |
 
 ### Design
 | Question | Agent Final |
@@ -268,47 +303,34 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment extraire les design tokens ? | `design/design-tokens.md` |
 | Comment structurer theme.json depuis une maquette ? | `design/design-tokens.md` |
 | Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
-| Comment faire des tests de régression visuelle ? | `design/visual-review.md` |
 
 ### Theme
 | Question | Agent Final |
 |----------|-------------|
-| Comment structurer un block theme ? | `theme/fse-templates.md` |
-| Comment configurer theme.json ? | `theme/fse-templates.md` |
-| Comment créer un template/pattern ? | `theme/fse-templates.md` |
+| Comment structurer un block theme ? | `theme/block-theme.md` |
+| Comment configurer theme.json ? | `theme/block-theme.md` |
+| Comment créer un template/pattern ? | `theme/templates-patterns.md` |
+| Comment faire une style variation ? | `theme/templates-patterns.md` |
 | Comment WordPress génère le CSS des blocks ? | `theme/style-engine.md` |
 | Comment utiliser wp_style_engine_get_styles() ? | `theme/style-engine.md` |
-| Comment fonctionnent les block supports CSS ? | `theme/style-engine.md` |
 | Comment utiliser l'Interactivity API ? | `theme/interactivity-api.md` |
 | Comment créer un accordion/tabs interactif ? | `theme/interactivity-api.md` |
-| Comment utiliser wp-bind, wp-on, wp-class ? | `theme/interactivity-api.md` |
 
 ### Testing
 | Question | Agent Final |
 |----------|-------------|
 | Comment tester mon plugin avec PHPUnit ? | `testing/php-unit-tests.md` |
-| Comment utiliser WP_UnitTestCase ? | `testing/php-unit-tests.md` |
 | Comment tester mes composants React ? | `testing/js-unit-tests.md` |
-| Comment utiliser Jest avec WordPress ? | `testing/js-unit-tests.md` |
 | Comment faire des tests e2e ? | `testing/e2e-tests.md` |
-| Comment utiliser Playwright avec WordPress ? | `testing/e2e-tests.md` |
 
 ### Agents Directs
 | Question | Agent |
 |----------|-------|
 | Comment créer un endpoint REST ? | `wp-rest-api-expert.md` |
 | Comment rendre mon plugin conforme RGPD ? | `gdpr-consent-api.md` |
-| Comment utiliser le WP Consent API ? | `gdpr-consent-api.md` |
-| Comment enregistrer les cookies de mon plugin ? | `gdpr-consent-api.md` |
 | Comment traduire mon plugin/thème ? | `i18n-localization.md` |
-| Comment générer un fichier POT ? | `i18n-localization.md` |
-| Comment utiliser WPML/Polylang ? | `i18n-localization.md` |
 | Comment ajouter des meta tags SEO ? | `seo-expert.md` |
-| Comment implémenter Schema.org JSON-LD ? | `seo-expert.md` |
-| Comment intégrer Yoast/Rank Math ? | `seo-expert.md` |
 | Comment rendre mon site accessible (WCAG) ? | `accessibility-expert.md` |
-| Comment utiliser ARIA correctement ? | `accessibility-expert.md` |
-| Comment tester l'accessibilité ? | `accessibility-expert.md` |
 
 ## Questions Multi-Domaines
 
@@ -318,59 +340,56 @@ Combine les expertises quand nécessaire :
 "CPT avec capabilities custom"
 → wp-core/custom-post-types.md + wp-core/custom-roles.md
 
-"Block dynamique avec rendu PHP"
-→ gutenberg-blocks/custom-blocks.md + wp-core/hooks-security.md
+"Sécuriser un callback save_post"
+→ wp-core/hooks-filters.md + wp-core/security-validation.md
+
+"Block dynamique avec rendu PHP sécurisé"
+→ gutenberg-blocks/custom-blocks.md + wp-core/security-validation.md
 
 "Block qui fetch des données REST"
 → gutenberg-blocks/custom-blocks.md + gutenberg-blocks/data-stores.md + wp-rest-api-expert.md
 
-"Initialiser un projet avec build configuré"
-→ tooling/project-init.md + tooling/build-tooling.md
+"Initialiser un projet avec repo et CI/CD"
+→ tooling/repository-setup.md + tooling/project-init.md + tooling/cicd-pipelines.md
 
-"Mettre en place un repo avec CI/CD et déploiement"
-→ tooling/project-init.md + tooling/cicd-deployment.md
+"Pipeline CI/CD avec déploiement SSH"
+→ tooling/cicd-pipelines.md + tooling/deployment-ssh.md
 
 "Environnement complet local + staging + production"
-→ tooling/local-dev.md + tooling/staging-setup.md + tooling/cicd-deployment.md
+→ tooling/local-dev.md + tooling/staging-setup.md + tooling/deployment-ssh.md
 
 "Configuration multi-environnement complète"
 → tooling/environment-config.md + tooling/local-dev.md + tooling/staging-setup.md
 
 "Maquette Figma → theme.json complet"
-→ design/design-tokens.md + theme/fse-templates.md
+→ design/design-tokens.md + theme/block-theme.md
+
+"Block theme complet avec templates et patterns"
+→ theme/block-theme.md + theme/templates-patterns.md
 
 "Block theme avec styles optimisés"
-→ theme/fse-templates.md + theme/style-engine.md
+→ theme/block-theme.md + theme/style-engine.md
+
+"Pattern interactif dans un block theme"
+→ theme/templates-patterns.md + theme/interactivity-api.md
 
 "Block interactif avec Interactivity API"
 → gutenberg-blocks/custom-blocks.md + theme/interactivity-api.md
-
-"Pattern interactif dans un block theme"
-→ theme/fse-templates.md + theme/interactivity-api.md
 
 "Tester un block custom complet"
 → gutenberg-blocks/custom-blocks.md + testing/js-unit-tests.md + testing/e2e-tests.md
 
 "Plugin WordPress avec tests PHPUnit"
-→ wp-core/hooks-security.md + testing/php-unit-tests.md
+→ wp-core/hooks-filters.md + testing/php-unit-tests.md
 
 "Tests visuels et e2e combinés"
 → design/visual-review.md + testing/e2e-tests.md
 
 "Plugin avec tracking conforme RGPD"
-→ wp-core/hooks-security.md + gdpr-consent-api.md
-
-"Block avec scripts conditionnels selon consentement"
-→ gutenberg-blocks/custom-blocks.md + gdpr-consent-api.md
-
-"Thème avec intégration analytics conforme"
-→ theme/fse-templates.md + gdpr-consent-api.md
+→ wp-core/hooks-filters.md + gdpr-consent-api.md
 
 "Workflow projet complet avec issues normalisées"
-→ tooling/project-init.md + tooling/issue-management.md + tooling/cicd-deployment.md
-
-"Issue pour nouveau CPT avec meta et taxonomie"
-→ tooling/issue-management.md + wp-core/custom-post-types.md
+→ tooling/repository-setup.md + tooling/issue-management.md + tooling/cicd-pipelines.md
 
 "Plugin internationalisé avec traductions JS"
 → i18n-localization.md + gutenberg-blocks/custom-blocks.md
@@ -382,7 +401,7 @@ Combine les expertises quand nécessaire :
 → gutenberg-blocks/custom-blocks.md + accessibility-expert.md
 
 "Thème FSE multilingue"
-→ theme/fse-templates.md + i18n-localization.md
+→ theme/block-theme.md + theme/templates-patterns.md + i18n-localization.md
 
 "Plugin complet : i18n + SEO + a11y"
 → i18n-localization.md + seo-expert.md + accessibility-expert.md
