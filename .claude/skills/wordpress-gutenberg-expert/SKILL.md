@@ -38,7 +38,18 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ design-tokens.md
 │  └─ visual-review.md
 │
-├─ WP Theme Expert (agents/wp-theme-expert.md)
+├─ Theme (agents/theme/)
+│  ├─ orchestrator.md
+│  ├─ fse-templates.md
+│  ├─ style-engine.md
+│  └─ interactivity-api.md
+│
+├─ Testing (agents/testing/)
+│  ├─ orchestrator.md
+│  ├─ php-unit-tests.md
+│  ├─ js-unit-tests.md
+│  └─ e2e-tests.md
+│
 └─ WP REST API Expert (agents/wp-rest-api-expert.md)
 ```
 
@@ -82,11 +93,28 @@ Sous-orchestrateur avec 2 agents :
 | `design-tokens.md` | Maquettes → theme.json, couleurs, typo, spacing |
 | `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
-### 5. Agents Directs
+### 5. Theme (`agents/theme/`)
+Sous-orchestrateur avec 3 agents :
+
+| Agent | Domaine |
+|-------|---------|
+| `fse-templates.md` | Block themes, FSE, templates, template parts, patterns, theme.json |
+| `style-engine.md` | Style Engine API, génération CSS, block supports, variables CSS |
+| `interactivity-api.md` | @wordpress/interactivity, directives, state, actions, patterns interactifs |
+
+### 6. Testing (`agents/testing/`)
+Sous-orchestrateur avec 3 agents :
+
+| Agent | Domaine |
+|-------|---------|
+| `php-unit-tests.md` | PHPUnit, WP_UnitTestCase, factories, mocks |
+| `js-unit-tests.md` | Jest, @wordpress/scripts test-unit-js, React Testing Library |
+| `e2e-tests.md` | Playwright, @wordpress/e2e-test-utils, tests d'intégration |
+
+### 7. Agent Direct
 
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
-| **WP Theme Expert** | `agents/wp-theme-expert.md` | Thèmes, FSE, theme.json, templates |
 | **WP REST API Expert** | `agents/wp-rest-api-expert.md` | API REST, endpoints, authentification |
 
 ## Processus d'Orchestration
@@ -99,7 +127,8 @@ Sous-orchestrateur avec 2 agents :
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
 | WP-CLI, commande, projet, init, git, webpack, build, npm | Tooling | `agents/tooling/orchestrator.md` |
 | token, maquette, figma, palette, design system, visual, diff, screenshot, régression | Design | `agents/design/orchestrator.md` |
-| theme, theme.json, FSE, template, pattern | Theme | `agents/wp-theme-expert.md` |
+| theme, theme.json, FSE, template, pattern, style engine, block supports CSS, interactivity, wp-interactive, wp-bind, wp-on | Theme | `agents/theme/orchestrator.md` |
+| test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
 
 ### Étape 2 : Déléguer au Bon Niveau
@@ -118,7 +147,19 @@ Question: "Comment extraire les tokens de ma maquette ?"
 → Design orchestrator → design-tokens.md
 
 Question: "Comment configurer theme.json ?"
-→ Directement wp-theme-expert.md
+→ Theme orchestrator → fse-templates.md
+
+Question: "Comment WordPress génère-t-il le CSS ?"
+→ Theme orchestrator → style-engine.md
+
+Question: "Comment ajouter de l'interactivité à mon block ?"
+→ Theme orchestrator → interactivity-api.md
+
+Question: "Comment tester mon plugin WordPress ?"
+→ Testing orchestrator → php-unit-tests.md
+
+Question: "Comment faire des tests e2e avec Playwright ?"
+→ Testing orchestrator → e2e-tests.md
 ```
 
 ### Étape 3 : Exécution
@@ -162,10 +203,32 @@ Question: "Comment configurer theme.json ?"
 | Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
 | Comment faire des tests de régression visuelle ? | `design/visual-review.md` |
 
-### Agents Directs
+### Theme
+| Question | Agent Final |
+|----------|-------------|
+| Comment structurer un block theme ? | `theme/fse-templates.md` |
+| Comment configurer theme.json ? | `theme/fse-templates.md` |
+| Comment créer un template/pattern ? | `theme/fse-templates.md` |
+| Comment WordPress génère le CSS des blocks ? | `theme/style-engine.md` |
+| Comment utiliser wp_style_engine_get_styles() ? | `theme/style-engine.md` |
+| Comment fonctionnent les block supports CSS ? | `theme/style-engine.md` |
+| Comment utiliser l'Interactivity API ? | `theme/interactivity-api.md` |
+| Comment créer un accordion/tabs interactif ? | `theme/interactivity-api.md` |
+| Comment utiliser wp-bind, wp-on, wp-class ? | `theme/interactivity-api.md` |
+
+### Testing
+| Question | Agent Final |
+|----------|-------------|
+| Comment tester mon plugin avec PHPUnit ? | `testing/php-unit-tests.md` |
+| Comment utiliser WP_UnitTestCase ? | `testing/php-unit-tests.md` |
+| Comment tester mes composants React ? | `testing/js-unit-tests.md` |
+| Comment utiliser Jest avec WordPress ? | `testing/js-unit-tests.md` |
+| Comment faire des tests e2e ? | `testing/e2e-tests.md` |
+| Comment utiliser Playwright avec WordPress ? | `testing/e2e-tests.md` |
+
+### Agent Direct
 | Question | Agent |
 |----------|-------|
-| Comment configurer theme.json ? | `wp-theme-expert.md` |
 | Comment créer un endpoint REST ? | `wp-rest-api-expert.md` |
 
 ## Questions Multi-Domaines
@@ -186,7 +249,25 @@ Combine les expertises quand nécessaire :
 → tooling/project-bootstrap.md + tooling/build-tooling.md
 
 "Maquette Figma → theme.json complet"
-→ design/design-tokens.md + wp-theme-expert.md
+→ design/design-tokens.md + theme/fse-templates.md
+
+"Block theme avec styles optimisés"
+→ theme/fse-templates.md + theme/style-engine.md
+
+"Block interactif avec Interactivity API"
+→ gutenberg-blocks/custom-blocks.md + theme/interactivity-api.md
+
+"Pattern interactif dans un block theme"
+→ theme/fse-templates.md + theme/interactivity-api.md
+
+"Tester un block custom complet"
+→ gutenberg-blocks/custom-blocks.md + testing/js-unit-tests.md + testing/e2e-tests.md
+
+"Plugin WordPress avec tests PHPUnit"
+→ wp-core/hooks-security.md + testing/php-unit-tests.md
+
+"Tests visuels et e2e combinés"
+→ design/visual-review.md + testing/e2e-tests.md
 ```
 
 ## Format de Réponse
