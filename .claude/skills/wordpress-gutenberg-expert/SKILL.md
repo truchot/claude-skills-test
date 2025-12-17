@@ -57,7 +57,13 @@ Orchestrateur Principal (SKILL.md)
 │
 ├─ WP REST API Expert (agents/wp-rest-api-expert.md)
 │
-└─ GDPR & Consent API Expert (agents/gdpr-consent-api.md)
+├─ GDPR & Consent API Expert (agents/gdpr-consent-api.md)
+│
+├─ i18n Localization Expert (agents/i18n-localization.md)
+│
+├─ SEO Expert (agents/seo-expert.md)
+│
+└─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
 ## Domaines et Agents
@@ -129,6 +135,9 @@ Sous-orchestrateur avec 3 agents :
 |-------|---------|---------|
 | **WP REST API Expert** | `agents/wp-rest-api-expert.md` | API REST, endpoints, authentification |
 | **GDPR & Consent API** | `agents/gdpr-consent-api.md` | RGPD, WP Consent API, cookies, consentement |
+| **i18n Localization** | `agents/i18n-localization.md` | Traductions, POT/PO/MO, wp.i18n, WPML/Polylang |
+| **SEO Expert** | `agents/seo-expert.md` | Meta tags, Schema.org, sitemaps, Yoast/Rank Math |
+| **Accessibility (a11y)** | `agents/accessibility-expert.md` | WCAG, ARIA, clavier, lecteurs d'écran |
 
 ## Processus d'Orchestration
 
@@ -144,6 +153,9 @@ Sous-orchestrateur avec 3 agents :
 | test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
 | RGPD, GDPR, consent, cookie, wp_has_consent, consentement, privacy, CMP | GDPR | `agents/gdpr-consent-api.md` |
+| i18n, l10n, traduction, translation, __(), _e(), POT, PO, MO, textdomain, WPML, Polylang | i18n | `agents/i18n-localization.md` |
+| SEO, meta, schema, JSON-LD, sitemap, Open Graph, Yoast, Rank Math, canonical, robots | SEO | `agents/seo-expert.md` |
+| a11y, accessibilité, accessibility, WCAG, ARIA, clavier, keyboard, screen reader, focus, alt | a11y | `agents/accessibility-expert.md` |
 
 ### Étape 2 : Déléguer au Bon Niveau
 
@@ -192,6 +204,15 @@ Question: "Comment rendre mon plugin conforme RGPD ?"
 
 Question: "Comment utiliser wp_has_consent() ?"
 → gdpr-consent-api.md
+
+Question: "Comment traduire mon plugin ?"
+→ i18n-localization.md
+
+Question: "Comment ajouter des données structurées Schema.org ?"
+→ seo-expert.md
+
+Question: "Comment rendre mon block accessible au clavier ?"
+→ accessibility-expert.md
 ```
 
 ### Étape 3 : Exécution
@@ -279,7 +300,15 @@ Question: "Comment utiliser wp_has_consent() ?"
 | Comment rendre mon plugin conforme RGPD ? | `gdpr-consent-api.md` |
 | Comment utiliser le WP Consent API ? | `gdpr-consent-api.md` |
 | Comment enregistrer les cookies de mon plugin ? | `gdpr-consent-api.md` |
-| Comment vérifier le consentement utilisateur ? | `gdpr-consent-api.md` |
+| Comment traduire mon plugin/thème ? | `i18n-localization.md` |
+| Comment générer un fichier POT ? | `i18n-localization.md` |
+| Comment utiliser WPML/Polylang ? | `i18n-localization.md` |
+| Comment ajouter des meta tags SEO ? | `seo-expert.md` |
+| Comment implémenter Schema.org JSON-LD ? | `seo-expert.md` |
+| Comment intégrer Yoast/Rank Math ? | `seo-expert.md` |
+| Comment rendre mon site accessible (WCAG) ? | `accessibility-expert.md` |
+| Comment utiliser ARIA correctement ? | `accessibility-expert.md` |
+| Comment tester l'accessibilité ? | `accessibility-expert.md` |
 
 ## Questions Multi-Domaines
 
@@ -342,6 +371,21 @@ Combine les expertises quand nécessaire :
 
 "Issue pour nouveau CPT avec meta et taxonomie"
 → tooling/issue-management.md + wp-core/custom-post-types.md
+
+"Plugin internationalisé avec traductions JS"
+→ i18n-localization.md + gutenberg-blocks/custom-blocks.md
+
+"Block avec Schema SEO intégré"
+→ gutenberg-blocks/custom-blocks.md + seo-expert.md
+
+"Block accessible avec navigation clavier"
+→ gutenberg-blocks/custom-blocks.md + accessibility-expert.md
+
+"Thème FSE multilingue"
+→ theme/fse-templates.md + i18n-localization.md
+
+"Plugin complet : i18n + SEO + a11y"
+→ i18n-localization.md + seo-expert.md + accessibility-expert.md
 ```
 
 ## Format de Réponse
