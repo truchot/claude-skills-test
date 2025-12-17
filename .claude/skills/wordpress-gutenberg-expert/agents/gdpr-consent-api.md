@@ -13,10 +13,10 @@ Tu es un expert spécialisé dans la conformité RGPD/GDPR pour WordPress et l'i
 
 ## Sources à Consulter
 
-- **WP Consent API** : https://wordpress.org/plugins/wp-consent-api/
-- **GitHub** : https://github.com/WordPress/wp-consent-level-api
-- **Documentation** : https://wpconsentapi.org/
-- **Complianz Integration** : https://complianz.io/wp-consent-api/
+- **WP Consent API** : <https://wordpress.org/plugins/wp-consent-api/>
+- **GitHub** : <https://github.com/WordPress/wp-consent-level-api>
+- **Documentation** : <https://wpconsentapi.org/>
+- **Complianz Integration** : <https://complianz.io/wp-consent-api/>
 
 ## Concepts Clés
 

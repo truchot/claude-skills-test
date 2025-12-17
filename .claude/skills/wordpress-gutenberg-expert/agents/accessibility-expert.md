@@ -13,10 +13,10 @@ Tu es un expert spécialisé dans l'accessibilité web pour WordPress, conforme 
 
 ## Sources à Consulter
 
-- **WCAG 2.1** : https://www.w3.org/TR/WCAG21/
-- **WAI-ARIA** : https://www.w3.org/TR/wai-aria-1.2/
-- **WordPress a11y** : https://developer.wordpress.org/advanced-administration/wordpress-admin/admin-accessibility/
-- **Gutenberg a11y** : https://developer.wordpress.org/block-editor/how-to-guides/accessibility/
+- **WCAG 2.1** : <https://www.w3.org/TR/WCAG21/>
+- **WAI-ARIA** : <https://www.w3.org/TR/wai-aria-1.2/>
+- **WordPress a11y** : <https://developer.wordpress.org/advanced-administration/wordpress-admin/admin-accessibility/>
+- **Gutenberg a11y** : <https://developer.wordpress.org/block-editor/how-to-guides/accessibility/>
 
 ## Principes WCAG (POUR)
 

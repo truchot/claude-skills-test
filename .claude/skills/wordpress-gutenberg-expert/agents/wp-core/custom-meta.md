@@ -14,13 +14,14 @@ Tu es un expert spécialisé dans la gestion des métadonnées WordPress (post m
 
 ## Sources à Consulter
 
-- **Metadata API** : https://developer.wordpress.org/plugins/metadata/
-- **Custom Meta Boxes** : https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/
-- **register_meta()** : https://developer.wordpress.org/reference/functions/register_meta/
+- **Metadata API** : <https://developer.wordpress.org/plugins/metadata/>
+- **Custom Meta Boxes** : <https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/>
+- **register_meta()** : <https://developer.wordpress.org/reference/functions/register_meta/>
 
 ## Post Meta (postmeta)
 
 ### CRUD Operations
+
 ```php
 // CREATE - Ajoute une nouvelle entrée (peut créer des doublons)
 add_post_meta( $post_id, 'my_key', 'my_value' );
@@ -41,6 +42,7 @@ delete_post_meta( $post_id, 'my_key', 'specific_value' ); // valeur spécifique
 ```
 
 ### Types de Données
+
 ```php
 // String
 update_post_meta( $post_id, 'subtitle', sanitize_text_field( $subtitle ) );
@@ -65,6 +67,7 @@ $data = json_decode( get_post_meta( $post_id, 'json_data', true ), true );
 ## User Meta (usermeta)
 
 ### CRUD Operations
+
 ```php
 // CREATE/UPDATE
 update_user_meta( $user_id, 'favorite_color', 'blue' );
@@ -81,6 +84,7 @@ update_user_meta( $current_user_id, 'last_login', current_time( 'mysql' ) );
 ```
 
 ### Champ Profil Custom
+
 ```php
 // Ajouter le champ au profil
 add_action( 'show_user_profile', 'prefix_user_profile_fields' );
@@ -148,6 +152,7 @@ delete_comment_meta( $comment_id, 'rating' );
 ## Register Meta pour REST API
 
 ### Exposer une Meta dans l'API REST
+
 ```php
 add_action( 'init', 'prefix_register_meta' );
 
@@ -194,6 +199,7 @@ function prefix_register_meta() {
 ```
 
 ### Pour User Meta
+
 ```php
 register_meta( 'user', 'phone', array(
     'show_in_rest'      => true,
@@ -206,6 +212,7 @@ register_meta( 'user', 'phone', array(
 ## Meta Boxes Personnalisées
 
 ### Créer une Meta Box
+
 ```php
 add_action( 'add_meta_boxes', 'prefix_add_meta_boxes' );
 
@@ -257,6 +264,7 @@ function prefix_book_details_callback( $post ) {
 ```
 
 ### Sauvegarder la Meta Box
+
 ```php
 add_action( 'save_post_book', 'prefix_save_book_details' );
 
@@ -295,6 +303,7 @@ function prefix_save_book_details( $post_id ) {
 ## Queries avec Meta
 
 ### WP_Query avec meta_query
+
 ```php
 $query = new WP_Query( array(
     'post_type'  => 'book',
@@ -316,6 +325,7 @@ $query = new WP_Query( array(
 ```
 
 ### Comparaisons Disponibles
+
 | Compare | Description |
 |---------|-------------|
 | `=` | Égal (défaut) |
@@ -335,6 +345,7 @@ $query = new WP_Query( array(
 | `REGEXP` | Expression régulière |
 
 ### Tri par Meta
+
 ```php
 $query = new WP_Query( array(
     'post_type' => 'book',

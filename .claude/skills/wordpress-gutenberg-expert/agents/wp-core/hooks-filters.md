@@ -12,13 +12,14 @@ Tu es un expert spécialisé dans le système de hooks WordPress (actions et fil
 
 ## Sources à Consulter
 
-- **Plugin Handbook - Hooks** : https://developer.wordpress.org/plugins/hooks/
-- **Actions Reference** : https://developer.wordpress.org/plugins/hooks/actions/
-- **Filters Reference** : https://developer.wordpress.org/plugins/hooks/filters/
+- **Plugin Handbook - Hooks** : <https://developer.wordpress.org/plugins/hooks/>
+- **Actions Reference** : <https://developer.wordpress.org/plugins/hooks/actions/>
+- **Filters Reference** : <https://developer.wordpress.org/plugins/hooks/filters/>
 
 ## Système de Hooks
 
 ### Actions
+
 Les actions permettent d'exécuter du code à un moment précis.
 
 ```php
@@ -46,6 +47,7 @@ do_action( 'my_custom_action', $arg1, $arg2 );
 ```
 
 ### Filters
+
 Les filters permettent de modifier des données.
 
 ```php
@@ -70,6 +72,7 @@ $filtered_value = apply_filters( 'my_custom_filter', $value, $arg1 );
 ```
 
 ### Priorités
+
 ```php
 // Plus petit = exécuté en premier
 add_action( 'init', 'runs_first', 1 );
@@ -83,6 +86,7 @@ add_action( 'init', 'runs_very_last', PHP_INT_MAX );
 ## Hooks Lifecycle
 
 ### Ordre d'Exécution Principal
+
 ```
 muplugins_loaded
 ↓
@@ -114,6 +118,7 @@ shutdown
 ```
 
 ### Hooks d'Admin
+
 ```php
 // Menu admin
 add_action( 'admin_menu', 'prefix_add_admin_menu' );
@@ -129,6 +134,7 @@ add_action( 'admin_notices', 'prefix_admin_notices' );
 ```
 
 ### Hooks de Posts
+
 ```php
 // Avant sauvegarde
 add_filter( 'wp_insert_post_data', 'prefix_modify_post_data', 10, 2 );
@@ -148,6 +154,7 @@ add_action( 'wp_trash_post', 'prefix_on_trash' );
 ```
 
 ### Hooks de Meta
+
 ```php
 // Avant ajout/mise à jour
 add_filter( 'update_post_metadata', 'prefix_before_update_meta', 10, 5 );
@@ -163,6 +170,7 @@ add_action( 'deleted_post_meta', 'prefix_after_delete_meta', 10, 4 );
 ```
 
 ### Hooks de Users
+
 ```php
 // Login
 add_action( 'wp_login', 'prefix_on_login', 10, 2 );
@@ -176,6 +184,7 @@ add_action( 'deleted_user', 'prefix_after_delete_user' );
 ```
 
 ### Hooks de Comments
+
 ```php
 // Nouveau commentaire
 add_action( 'comment_post', 'prefix_after_comment', 10, 3 );
@@ -190,6 +199,7 @@ add_action( 'delete_comment', 'prefix_before_delete_comment' );
 ## Créer des Hooks Personnalisés
 
 ### Action Personnalisée
+
 ```php
 // Dans votre plugin/theme
 function prefix_process_data( $data ) {
@@ -212,6 +222,7 @@ add_action( 'prefix_before_process', function( $data ) {
 ```
 
 ### Filter Personnalisé
+
 ```php
 // Dans votre plugin/theme
 function prefix_get_settings() {
@@ -234,6 +245,7 @@ add_filter( 'prefix_settings', function( $settings ) {
 ## Supprimer des Hooks
 
 ### Supprimer un Hook de Fonction
+
 ```php
 // Fonctionne immédiatement
 remove_action( 'init', 'function_name' );
@@ -244,6 +256,7 @@ remove_action( 'init', 'function_name', 15 );
 ```
 
 ### Supprimer un Hook de Méthode de Classe
+
 ```php
 // Méthode statique
 remove_action( 'init', array( 'ClassName', 'method_name' ) );
@@ -259,6 +272,7 @@ add_action( 'plugins_loaded', 'prefix_remove_class_action', 20 );
 ```
 
 ### Supprimer un Hook de Closure
+
 ```php
 // Impossible de supprimer une closure anonyme !
 // Mauvaise pratique :
@@ -271,6 +285,7 @@ add_action( 'init', 'prefix_my_init' );
 ## Bonnes Pratiques
 
 ### Préfixer les Hooks Personnalisés
+
 ```php
 // Bon
 do_action( 'myplugin_before_save' );
@@ -282,6 +297,7 @@ apply_filters( 'output', $output );
 ```
 
 ### Documenter les Hooks
+
 ```php
 /**
  * Fires before processing the data.
@@ -306,6 +322,7 @@ $output = apply_filters( 'prefix_output', $output, $data );
 ```
 
 ### Vérifier si un Hook Existe
+
 ```php
 // Vérifier si une action a des callbacks
 if ( has_action( 'my_custom_hook' ) ) {
@@ -324,6 +341,7 @@ if ( has_action( 'init', 'specific_function' ) ) {
 ```
 
 ### Nombre d'Exécutions
+
 ```php
 // Vérifier si une action a déjà été exécutée
 if ( did_action( 'init' ) ) {

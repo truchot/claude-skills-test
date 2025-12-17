@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans les tests unitaires JavaScript pour WordPress 
 
 ## Sources à Consulter
 
-- **@wordpress/scripts** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
-- **Jest** : https://jestjs.io/
-- **React Testing Library** : https://testing-library.com/docs/react-testing-library/intro/
-- **Testing Library User Event** : https://testing-library.com/docs/user-event/intro/
+- **@wordpress/scripts** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/>
+- **Jest** : <https://jestjs.io/>
+- **React Testing Library** : <https://testing-library.com/docs/react-testing-library/intro/>
+- **Testing Library User Event** : <https://testing-library.com/docs/user-event/intro/>
 
 ## Setup avec @wordpress/scripts
 

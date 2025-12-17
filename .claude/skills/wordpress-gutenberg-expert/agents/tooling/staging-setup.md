@@ -13,8 +13,8 @@ Tu es un expert spécialisé dans la mise en place d'environnements de staging/p
 
 ## Sources à Consulter
 
-- **Apache htaccess** : https://httpd.apache.org/docs/current/howto/htaccess.html
-- **WordPress Security** : https://developer.wordpress.org/advanced-administration/security/
+- **Apache htaccess** : <https://httpd.apache.org/docs/current/howto/htaccess.html>
+- **WordPress Security** : <https://developer.wordpress.org/advanced-administration/security/>
 
 ## Workflow Staging
 

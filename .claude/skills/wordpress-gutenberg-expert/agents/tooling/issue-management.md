@@ -13,10 +13,10 @@ Tu es un expert spécialisé dans la création et gestion d'issues normalisées 
 
 ## Sources à Consulter
 
-- **GitHub Issue Templates** : https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests
-- **GitHub Issue Forms** : https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
-- **GitLab Issue Templates** : https://docs.gitlab.com/ee/user/project/description_templates.html
-- **GitHub CLI** : https://cli.github.com/manual/gh_issue_create
+- **GitHub Issue Templates** : <https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests>
+- **GitHub Issue Forms** : <https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms>
+- **GitLab Issue Templates** : <https://docs.gitlab.com/ee/user/project/description_templates.html>
+- **GitHub CLI** : <https://cli.github.com/manual/gh_issue_create>
 
 ## Types d'Issues WordPress
 

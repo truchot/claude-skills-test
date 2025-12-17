@@ -13,13 +13,14 @@ Tu es un expert spécialisé dans la création de commandes WP-CLI personnalisé
 
 ## Sources à Consulter
 
-- **WP-CLI Commands Cookbook** : https://make.wordpress.org/cli/handbook/guides/commands-cookbook/
-- **WP-CLI Internal API** : https://make.wordpress.org/cli/handbook/references/internal-api/
-- **WP-CLI GitHub** : https://github.com/wp-cli/wp-cli
+- **WP-CLI Commands Cookbook** : <https://make.wordpress.org/cli/handbook/guides/commands-cookbook/>
+- **WP-CLI Internal API** : <https://make.wordpress.org/cli/handbook/references/internal-api/>
+- **WP-CLI GitHub** : <https://github.com/wp-cli/wp-cli>
 
 ## Créer une Commande Custom
 
 ### Structure de Base
+
 ```php
 <?php
 /**
@@ -247,6 +248,7 @@ WP_CLI::add_command( 'book', 'Book_Command' );
 ## Enregistrer une Commande
 
 ### Méthode Simple (fonction)
+
 ```php
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
     WP_CLI::add_command( 'hello', function( $args ) {
@@ -256,6 +258,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 ```
 
 ### Méthode Classe
+
 ```php
 WP_CLI::add_command( 'book', 'Book_Command' );
 WP_CLI::add_command( 'book', 'Book_Command', array(
@@ -272,6 +275,7 @@ WP_CLI::add_command( 'book', 'Book_Command', array(
 ## Arguments et Options
 
 ### Arguments Positionnels
+
 ```php
 /**
  * ## OPTIONS
@@ -289,6 +293,7 @@ public function greet( $args, $assoc_args ) {
 ```
 
 ### Options Associatives
+
 ```php
 /**
  * ## OPTIONS
@@ -317,6 +322,7 @@ public function greet( $args, $assoc_args ) {
 ## Output Helpers
 
 ### Messages
+
 ```php
 WP_CLI::log( 'Info message' );           // Normal output
 WP_CLI::success( 'Done!' );              // Green success
@@ -328,6 +334,7 @@ WP_CLI::line( 'Plain line' );            // No formatting
 ```
 
 ### Colorize
+
 ```php
 WP_CLI::log( WP_CLI::colorize( '%GGreen text%n' ) );
 WP_CLI::log( WP_CLI::colorize( '%RRed text%n' ) );
@@ -336,6 +343,7 @@ WP_CLI::log( WP_CLI::colorize( '%BBold%n' ) );
 ```
 
 ### Tables
+
 ```php
 $items = array(
     array( 'name' => 'John', 'age' => 30 ),
@@ -351,6 +359,7 @@ $formatter->display_items( $items );
 ```
 
 ### Progress Bar
+
 ```php
 $progress = \WP_CLI\Utils\make_progress_bar( 'Processing', $total );
 
@@ -392,6 +401,7 @@ WP_CLI::runcommand( 'post list --post_type=book --format=json', array(
 ## Fichier de Commande Séparé
 
 ### Structure Plugin
+
 ```
 my-plugin/
 ├── my-plugin.php
@@ -402,6 +412,7 @@ my-plugin/
 ```
 
 ### Chargement Conditionnel
+
 ```php
 // my-plugin.php
 if ( defined( 'WP_CLI' ) && WP_CLI ) {

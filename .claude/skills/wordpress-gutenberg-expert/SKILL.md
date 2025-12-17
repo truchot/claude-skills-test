@@ -39,7 +39,8 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ repository-setup.md
 │  ├─ cicd-pipelines.md
 │  ├─ deployment-ssh.md
-│  └─ issue-management.md
+│  ├─ issue-management.md
+│  └─ quality-check.md
 │
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
@@ -70,11 +71,12 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
-**Total : 35 agents spécialisés**
+**Total : 36 agents spécialisés**
 
 ## Domaines et Agents
 
 ### 1. WP Core (`agents/wp-core/`)
+
 Sous-orchestrateur avec 6 agents spécialisés :
 
 | Agent | Domaine |
@@ -87,6 +89,7 @@ Sous-orchestrateur avec 6 agents spécialisés :
 | `security-validation.md` | Nonces, sanitization, escaping, CSRF, XSS |
 
 ### 2. Gutenberg (`agents/gutenberg-blocks/`)
+
 Sous-orchestrateur avec 4 agents spécialisés :
 
 | Agent | Domaine |
@@ -97,7 +100,8 @@ Sous-orchestrateur avec 4 agents spécialisés :
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 
 ### 3. Tooling (`agents/tooling/`)
-Sous-orchestrateur avec 10 agents spécialisés :
+
+Sous-orchestrateur avec 11 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -111,8 +115,10 @@ Sous-orchestrateur avec 10 agents spécialisés :
 | `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
 | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
+| `quality-check.md` | Linting (PHPCS, ESLint, markdownlint), validation, pre-commit |
 
 ### 4. Design (`agents/design/`)
+
 Sous-orchestrateur avec 2 agents :
 
 | Agent | Domaine |
@@ -121,6 +127,7 @@ Sous-orchestrateur avec 2 agents :
 | `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
 ### 5. Theme (`agents/theme/`)
+
 Sous-orchestrateur avec 4 agents :
 
 | Agent | Domaine |
@@ -131,6 +138,7 @@ Sous-orchestrateur avec 4 agents :
 | `interactivity-api.md` | @wordpress/interactivity, directives, state, actions, patterns interactifs |
 
 ### 6. Testing (`agents/testing/`)
+
 Sous-orchestrateur avec 3 agents :
 
 | Agent | Domaine |
@@ -260,6 +268,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 ## Routing Rapide
 
 ### WP Core (PHP Backend)
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment créer un CPT ? | `wp-core/custom-post-types.md` |
@@ -270,6 +279,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment sécuriser mon code (nonces, sanitize, escape) ? | `wp-core/security-validation.md` |
 
 ### Gutenberg
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment créer un block from scratch ? | `gutenberg-blocks/custom-blocks.md` |
@@ -278,6 +288,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment utiliser useSelect/useDispatch ? | `gutenberg-blocks/data-stores.md` |
 
 ### Tooling
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment créer une commande WP-CLI ? | `tooling/wp-cli-commands.md` |
@@ -298,6 +309,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment créer des templates d'issues ? | `tooling/issue-management.md` |
 
 ### Design
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment extraire les design tokens ? | `design/design-tokens.md` |
@@ -305,6 +317,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
 
 ### Theme
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment structurer un block theme ? | `theme/block-theme.md` |
@@ -317,6 +330,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment créer un accordion/tabs interactif ? | `theme/interactivity-api.md` |
 
 ### Testing
+
 | Question | Agent Final |
 |----------|-------------|
 | Comment tester mon plugin avec PHPUnit ? | `testing/php-unit-tests.md` |
@@ -324,6 +338,7 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment faire des tests e2e ? | `testing/e2e-tests.md` |
 
 ### Agents Directs
+
 | Question | Agent |
 |----------|-------|
 | Comment créer un endpoint REST ? | `wp-rest-api-expert.md` |
@@ -438,11 +453,11 @@ Combine les expertises quand nécessaire :
 
 ## Sources Principales
 
-- https://developer.wordpress.org/
-- https://developer.wordpress.org/block-editor/
-- https://developer.wordpress.org/themes/
-- https://developer.wordpress.org/plugins/
-- https://developer.wordpress.org/rest-api/
-- https://make.wordpress.org/cli/handbook/
-- https://github.com/WordPress/gutenberg
-- https://github.com/WordPress/wp-consent-level-api
+- <https://developer.wordpress.org/>
+- <https://developer.wordpress.org/block-editor/>
+- <https://developer.wordpress.org/themes/>
+- <https://developer.wordpress.org/plugins/>
+- <https://developer.wordpress.org/rest-api/>
+- <https://make.wordpress.org/cli/handbook/>
+- <https://github.com/WordPress/gutenberg>
+- <https://github.com/WordPress/wp-consent-level-api>

@@ -44,6 +44,7 @@ Question Design
 ## Exemples de Questions
 
 ### Design Tokens
+
 ```
 "Comment extraire les couleurs de ma maquette Figma ?"
 "Comment structurer mon theme.json avec les tokens ?"
@@ -53,6 +54,7 @@ Question Design
 ```
 
 ### Visual Review
+
 ```
 "Comment comparer ma maquette Figma avec mon intégration ?"
 "Comment faire des tests de régression visuelle ?"

@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans l'Interactivity API de WordPress - le système
 
 ## Sources à Consulter
 
-- **Documentation** : https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/
-- **API Reference** : https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/api-reference/
-- **GitHub** : https://github.com/WordPress/gutenberg/tree/trunk/packages/interactivity
-- **Tutorial** : https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/iapi-quick-start-guide/
+- **Documentation** : <https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/>
+- **API Reference** : <https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/api-reference/>
+- **GitHub** : <https://github.com/WordPress/gutenberg/tree/trunk/packages/interactivity>
+- **Tutorial** : <https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/iapi-quick-start-guide/>
 
 ## Qu'est-ce que l'Interactivity API ?
 
@@ -348,6 +348,7 @@ store( 'myPlugin', {
 ### Accordion Block
 
 **render.php**
+
 ```php
 <?php
 $unique_id = wp_unique_id( 'accordion-' );
@@ -384,6 +385,7 @@ $unique_id = wp_unique_id( 'accordion-' );
 ```
 
 **view.js**
+
 ```javascript
 import { store, getContext } from '@wordpress/interactivity';
 
@@ -400,6 +402,7 @@ store( 'myPlugin/accordion', {
 ### Counter Block
 
 **render.php**
+
 ```php
 <div
     <?php echo get_block_wrapper_attributes( array( 'class' => 'wp-block-my-counter' ) ); ?>
@@ -434,6 +437,7 @@ store( 'myPlugin/accordion', {
 ```
 
 **view.js**
+
 ```javascript
 import { store, getContext } from '@wordpress/interactivity';
 
@@ -470,6 +474,7 @@ store( 'myPlugin/counter', {
 ### Tabs Block
 
 **render.php**
+
 ```php
 <?php
 $tabs = $attributes['tabs'] ?? [];
@@ -512,6 +517,7 @@ $tabs = $attributes['tabs'] ?? [];
 ```
 
 **view.js**
+
 ```javascript
 import { store, getContext } from '@wordpress/interactivity';
 
@@ -542,6 +548,7 @@ store( 'myPlugin/tabs', {
 ### Fetch Data Block
 
 **render.php**
+
 ```php
 <div
     <?php echo get_block_wrapper_attributes(); ?>
@@ -582,6 +589,7 @@ store( 'myPlugin/tabs', {
 ```
 
 **view.js**
+
 ```javascript
 import { store, getContext } from '@wordpress/interactivity';
 

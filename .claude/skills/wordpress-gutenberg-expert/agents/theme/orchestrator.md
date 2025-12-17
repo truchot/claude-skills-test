@@ -14,6 +14,7 @@ Tu es l'orchestrateur des sous-agents Theme WordPress. Tu analyses la question e
 ## Différences Clés
 
 ### Block Theme
+
 - Structure de fichiers d'un **block theme**
 - Configuration **theme.json** (settings et styles)
 - **CSS custom properties** générées
@@ -22,6 +23,7 @@ Tu es l'orchestrateur des sous-agents Theme WordPress. Tu analyses la question e
 - **Child themes** pour block themes
 
 ### Templates & Patterns
+
 - Fichiers **templates** (index.html, single.html, page.html, etc.)
 - **Template parts** (header.html, footer.html)
 - **Block patterns** (hero.php, cta.php)
@@ -30,6 +32,7 @@ Tu es l'orchestrateur des sous-agents Theme WordPress. Tu analyses la question e
 - Query Loop dans les templates
 
 ### Style Engine
+
 - **Génération de CSS** depuis les attributs
 - **wp_style_engine_get_styles()** API PHP
 - **Block supports** (color, typography, spacing, border)
@@ -38,6 +41,7 @@ Tu es l'orchestrateur des sous-agents Theme WordPress. Tu analyses la question e
 - **Classes utilitaires** (.has-primary-color, etc.)
 
 ### Interactivity API
+
 - **@wordpress/interactivity** package
 - **Directives HTML** (wp-interactive, wp-bind, wp-on, wp-class, etc.)
 - **State management** (store, getContext, getElement)
@@ -95,6 +99,7 @@ Question Theme
 ## Exemples de Questions
 
 ### Block Theme
+
 ```
 "Comment structurer un block theme ?"
 "Comment configurer theme.json ?"
@@ -105,6 +110,7 @@ Question Theme
 ```
 
 ### Templates & Patterns
+
 ```
 "Comment créer un template single.html ?"
 "Comment créer un header.html ?"
@@ -115,6 +121,7 @@ Question Theme
 ```
 
 ### Style Engine
+
 ```
 "Comment WordPress génère-t-il le CSS des blocks ?"
 "Comment utiliser wp_style_engine_get_styles() ?"
@@ -124,6 +131,7 @@ Question Theme
 ```
 
 ### Interactivity API
+
 ```
 "Comment ajouter de l'interactivité à mon block ?"
 "Comment utiliser l'Interactivity API ?"

@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans le déploiement de projets WordPress via SSH e
 
 ## Sources à Consulter
 
-- **GitHub Secrets** : https://docs.github.com/en/actions/security-guides/encrypted-secrets
-- **rsync Documentation** : https://rsync.samba.org/documentation.html
-- **WP Engine Deploy** : https://wpengine.com/support/git/
-- **Deployer** : https://deployer.org/
+- **GitHub Secrets** : <https://docs.github.com/en/actions/security-guides/encrypted-secrets>
+- **rsync Documentation** : <https://rsync.samba.org/documentation.html>
+- **WP Engine Deploy** : <https://wpengine.com/support/git/>
+- **Deployer** : <https://deployer.org/>
 
 ## Configuration SSH
 

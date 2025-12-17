@@ -14,14 +14,15 @@ Tu es un expert spécialisé dans le Style Engine de WordPress - le système qui
 
 ## Sources à Consulter
 
-- **Style Engine** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-style-engine/
-- **Block Supports** : https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/
-- **Global Styles** : https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/
-- **GitHub Style Engine** : https://github.com/WordPress/gutenberg/tree/trunk/packages/style-engine
+- **Style Engine** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-style-engine/>
+- **Block Supports** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-supports/>
+- **Global Styles** : <https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/>
+- **GitHub Style Engine** : <https://github.com/WordPress/gutenberg/tree/trunk/packages/style-engine>
 
 ## Qu'est-ce que le Style Engine ?
 
 Le Style Engine est le système central de WordPress qui :
+
 1. **Génère du CSS** depuis les attributs de blocks et theme.json
 2. **Optimise les styles** en les regroupant et dédupliquant
 3. **Gère les CSS custom properties** (variables CSS)
@@ -123,6 +124,7 @@ wp_style_engine_get_stylesheet_from_css_rules(
 4. Le Style Engine génère le CSS correspondant
 
 ### block.json avec Supports
+
 ```json
 {
     "supports": {

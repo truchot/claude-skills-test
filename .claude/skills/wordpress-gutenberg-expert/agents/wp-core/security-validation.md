@@ -14,11 +14,11 @@ Tu es un expert spécialisé dans la sécurité WordPress et la validation des d
 
 ## Sources à Consulter
 
-- **Security** : https://developer.wordpress.org/plugins/security/
-- **Data Validation** : https://developer.wordpress.org/plugins/security/data-validation/
-- **Securing Input** : https://developer.wordpress.org/plugins/security/securing-input/
-- **Securing Output** : https://developer.wordpress.org/plugins/security/securing-output/
-- **Nonces** : https://developer.wordpress.org/plugins/security/nonces/
+- **Security** : <https://developer.wordpress.org/plugins/security/>
+- **Data Validation** : <https://developer.wordpress.org/plugins/security/data-validation/>
+- **Securing Input** : <https://developer.wordpress.org/plugins/security/securing-input/>
+- **Securing Output** : <https://developer.wordpress.org/plugins/security/securing-output/>
+- **Nonces** : <https://developer.wordpress.org/plugins/security/nonces/>
 
 ## Nonces - Protection CSRF
 
@@ -447,6 +447,7 @@ function prefix_handle_upload() {
 ## Checklist Sécurité
 
 ### Pour chaque formulaire
+
 - [ ] Nonce field ajouté (`wp_nonce_field`)
 - [ ] Nonce vérifié avant traitement (`wp_verify_nonce`)
 - [ ] Permissions vérifiées (`current_user_can`)
@@ -454,12 +455,14 @@ function prefix_handle_upload() {
 - [ ] Toutes les sorties échappées
 
 ### Pour les requêtes SQL
+
 - [ ] Utiliser `$wpdb->prepare()` avec placeholders
 - [ ] Jamais de concaténation directe de variables
 - [ ] Valider le type des données avant la requête
 - [ ] Utiliser `$wpdb->esc_like()` pour les recherches LIKE
 
 ### Pour les fichiers uploadés
+
 - [ ] Vérifier le type MIME avec `wp_check_filetype_and_ext`
 - [ ] Ne jamais faire confiance à `$_FILES['type']`
 - [ ] Utiliser `wp_handle_upload()`
@@ -467,11 +470,13 @@ function prefix_handle_upload() {
 - [ ] Vérifier les permissions d'upload
 
 ### Pour les URLs et redirections
+
 - [ ] Utiliser `wp_safe_redirect()` au lieu de `wp_redirect()`
 - [ ] Valider les URLs avec `esc_url_raw()` avant stockage
 - [ ] Échapper avec `esc_url()` à l'affichage
 
 ### Pour les données JSON
+
 - [ ] Utiliser `wp_json_encode()` pour l'encodage
 - [ ] Valider la structure JSON après décodage
 - [ ] Sanitiser chaque valeur individuellement

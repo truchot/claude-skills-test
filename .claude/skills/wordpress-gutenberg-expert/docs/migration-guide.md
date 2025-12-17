@@ -20,6 +20,7 @@ Ce guide aide à migrer les anciens patterns WordPress vers les approches modern
 ### Structure des fichiers
 
 **Avant (Classic Theme)** :
+
 ```
 theme/
 ├── header.php
@@ -33,6 +34,7 @@ theme/
 ```
 
 **Après (Block Theme)** :
+
 ```
 theme/
 ├── parts/
@@ -55,6 +57,7 @@ theme/
 ### Migration du Header
 
 **Avant** (`header.php`) :
+
 ```php
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -76,6 +79,7 @@ theme/
 ```
 
 **Après** (`parts/header.html`) :
+
 ```html
 <!-- wp:group {"tagName":"header","className":"site-header","layout":{"type":"constrained"}} -->
 <header class="wp-block-group site-header">
@@ -93,6 +97,7 @@ theme/
 ### Migration des Styles
 
 **Avant** (`style.css` + `functions.php`) :
+
 ```css
 /* style.css */
 :root {
@@ -113,6 +118,7 @@ function theme_customize_register( $wp_customize ) {
 ```
 
 **Après** (`theme.json`) :
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",
@@ -144,6 +150,7 @@ function theme_customize_register( $wp_customize ) {
 ### Shortcode Simple
 
 **Avant** :
+
 ```php
 // Shortcode [my_button text="Click" url="#"]
 add_shortcode( 'my_button', function( $atts ) {
@@ -163,6 +170,7 @@ add_shortcode( 'my_button', function( $atts ) {
 **Après** (Block) :
 
 `block.json` :
+
 ```json
 {
     "apiVersion": 3,
@@ -177,6 +185,7 @@ add_shortcode( 'my_button', function( $atts ) {
 ```
 
 `edit.js` :
+
 ```jsx
 import { RichText, URLInput } from '@wordpress/block-editor';
 
@@ -198,6 +207,7 @@ export default function Edit( { attributes, setAttributes } ) {
 ```
 
 `save.js` :
+
 ```jsx
 import { RichText } from '@wordpress/block-editor';
 
@@ -213,6 +223,7 @@ export default function Save( { attributes } ) {
 ### Shortcode avec Contenu Imbriqué
 
 **Avant** :
+
 ```php
 // [my_box title="Title"]Content[/my_box]
 add_shortcode( 'my_box', function( $atts, $content ) {
@@ -226,6 +237,7 @@ add_shortcode( 'my_box', function( $atts, $content ) {
 ```
 
 **Après** (Block avec InnerBlocks) :
+
 ```jsx
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
 
@@ -283,6 +295,7 @@ transforms: {
 ### Widget Simple
 
 **Avant** :
+
 ```php
 class My_Widget extends WP_Widget {
     public function __construct() {
@@ -316,6 +329,7 @@ class My_Widget extends WP_Widget {
 ```
 
 **Après** (Block) :
+
 ```jsx
 // Le block peut être utilisé dans les zones de widgets
 registerBlockType( 'my-plugin/info-box', {
@@ -355,6 +369,7 @@ registerBlockType( 'my-plugin/info-box', {
 ### Meta Box Classique
 
 **Avant** :
+
 ```php
 add_action( 'add_meta_boxes', function() {
     add_meta_box( 'my_meta', 'My Meta', 'render_my_meta', 'post' );
@@ -379,6 +394,7 @@ add_action( 'save_post', function( $post_id ) {
 **Après** (Sidebar Panel) :
 
 `PHP - Enregistrer la meta` :
+
 ```php
 register_post_meta( 'post', '_my_meta', array(
     'show_in_rest'  => true,
@@ -391,6 +407,7 @@ register_post_meta( 'post', '_my_meta', array(
 ```
 
 `JavaScript - Panel` :
+
 ```jsx
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { TextControl } from '@wordpress/components';
@@ -428,6 +445,7 @@ registerPlugin( 'my-meta-panel', { render: MyMetaPanel } );
 ### AJAX Classique
 
 **Avant** :
+
 ```php
 // PHP
 add_action( 'wp_ajax_get_data', 'ajax_get_data' );
@@ -454,6 +472,7 @@ jQuery.ajax( {
 ```
 
 **Après** (REST API) :
+
 ```php
 // PHP
 add_action( 'rest_api_init', function() {
@@ -493,6 +512,7 @@ const data = await apiFetch( { path: '/my-plugin/v1/data' } );
 ### Manipulation DOM
 
 **Avant** (jQuery) :
+
 ```js
 jQuery( document ).ready( function( $ ) {
     $( '.my-button' ).on( 'click', function() {
@@ -503,6 +523,7 @@ jQuery( document ).ready( function( $ ) {
 ```
 
 **Après** (Vanilla JS) :
+
 ```js
 document.addEventListener( 'DOMContentLoaded', () => {
     document.querySelectorAll( '.my-button' ).forEach( ( button ) => {
@@ -516,6 +537,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 ```
 
 **Après** (Interactivity API) :
+
 ```html
 <!-- view.html -->
 <div data-wp-interactive="my-plugin">
@@ -554,6 +576,7 @@ store( 'my-plugin', {
 ### Page d'Options Classique
 
 **Avant** :
+
 ```php
 add_action( 'admin_menu', function() {
     add_options_page( 'My Settings', 'My Plugin', 'manage_options', 'my-settings', 'render_settings' );
@@ -582,6 +605,7 @@ add_action( 'admin_init', function() {
 **Après** (React Settings Page) :
 
 `PHP` :
+
 ```php
 add_action( 'admin_menu', function() {
     add_options_page( 'My Settings', 'My Plugin', 'manage_options', 'my-settings', function() {
@@ -622,6 +646,7 @@ add_action( 'rest_api_init', function() {
 ```
 
 `JavaScript (settings.js)` :
+
 ```jsx
 import { useState, useEffect } from '@wordpress/element';
 import { TextControl, Button, Panel, PanelBody } from '@wordpress/components';
@@ -674,6 +699,7 @@ createRoot( document.getElementById( 'my-settings-root' ) ).render( <SettingsPag
 ### ACF / Custom Fields → Attributs de Block
 
 **Avant** (ACF) :
+
 ```php
 // Affichage dans template
 $hero_title = get_field( 'hero_title' );
@@ -687,6 +713,7 @@ $hero_image = get_field( 'hero_image' );
 **Après** (Block Pattern ou Block Custom) :
 
 `Pattern` :
+
 ```php
 <!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/hero.jpg' ) ); ?>","dimRatio":50} -->
 <div class="wp-block-cover">
@@ -702,6 +729,7 @@ $hero_image = get_field( 'hero_image' );
 ```
 
 `Block Custom` :
+
 ```jsx
 registerBlockType( 'my-theme/hero', {
     attributes: {
@@ -737,18 +765,21 @@ registerBlockType( 'my-theme/hero', {
 ## Checklist de Migration
 
 ### Avant de migrer
+
 - [ ] Sauvegarder la base de données
 - [ ] Lister toutes les fonctionnalités à migrer
 - [ ] Identifier les dépendances (plugins, thèmes)
 - [ ] Créer un environnement de test
 
 ### Pendant la migration
+
 - [ ] Migrer progressivement (pas tout d'un coup)
 - [ ] Tester chaque fonctionnalité migrée
 - [ ] Maintenir la rétrocompatibilité si nécessaire
 - [ ] Documenter les changements
 
 ### Après la migration
+
 - [ ] Tests complets (fonctionnels, visuels, performance)
 - [ ] Mettre à jour la documentation
 - [ ] Former les utilisateurs si nécessaire

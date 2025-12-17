@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans la configuration d'environnements de développ
 
 ## Sources à Consulter
 
-- **@wordpress/env** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/
-- **Local** : https://localwp.com/
-- **Docker WordPress** : https://hub.docker.com/_/wordpress
+- **@wordpress/env** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/>
+- **Local** : <https://localwp.com/>
+- **Docker WordPress** : <https://hub.docker.com/_/wordpress>
 
 ## Option A : @wordpress/env (Recommandé)
 
@@ -124,16 +124,16 @@ wp-env run cli -- npm run build --prefix wp-content/themes/my-theme
 
 | Environnement | URL | Credentials |
 |---------------|-----|-------------|
-| Site | http://localhost:8888 | - |
-| Admin | http://localhost:8888/wp-admin | admin / password |
-| Tests Site | http://localhost:8889 | - |
-| Tests Admin | http://localhost:8889/wp-admin | admin / password |
+| Site | <http://localhost:8888> | - |
+| Admin | <http://localhost:8888/wp-admin> | admin / password |
+| Tests Site | <http://localhost:8889> | - |
+| Tests Admin | <http://localhost:8889/wp-admin> | admin / password |
 
 ## Option B : Local by Flywheel
 
 ### Installation
 
-1. Télécharger depuis https://localwp.com/
+1. Télécharger depuis <https://localwp.com/>
 2. Installer l'application
 3. Créer un nouveau site
 

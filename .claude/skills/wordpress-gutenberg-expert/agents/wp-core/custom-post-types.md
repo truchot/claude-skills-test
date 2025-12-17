@@ -14,12 +14,13 @@ Tu es un expert spécialisé dans la création et la gestion des Custom Post Typ
 
 ## Sources à Consulter
 
-- **register_post_type()** : https://developer.wordpress.org/reference/functions/register_post_type/
-- **Post Types** : https://developer.wordpress.org/plugins/post-types/
+- **register_post_type()** : <https://developer.wordpress.org/reference/functions/register_post_type/>
+- **Post Types** : <https://developer.wordpress.org/plugins/post-types/>
 
 ## Création d'un Custom Post Type
 
 ### Structure Complète
+
 ```php
 add_action( 'init', 'prefix_register_book_post_type' );
 
@@ -81,6 +82,7 @@ function prefix_register_book_post_type() {
 ## Arguments Clés
 
 ### Visibilité
+
 | Argument | Description |
 |----------|-------------|
 | `public` | Visible front-end et admin |
@@ -92,6 +94,7 @@ function prefix_register_book_post_type() {
 | `exclude_from_search` | Exclure des recherches |
 
 ### REST API & Gutenberg
+
 ```php
 'show_in_rest'          => true,  // OBLIGATOIRE pour Gutenberg
 'rest_base'             => 'books',
@@ -100,6 +103,7 @@ function prefix_register_book_post_type() {
 ```
 
 ### Supports
+
 ```php
 'supports' => array(
     'title',           // Titre
@@ -117,6 +121,7 @@ function prefix_register_book_post_type() {
 ```
 
 ### Réécriture d'URL
+
 ```php
 'rewrite' => array(
     'slug'       => 'books',      // URL slug
@@ -128,6 +133,7 @@ function prefix_register_book_post_type() {
 ```
 
 ### Hiérarchie (comme les pages)
+
 ```php
 'hierarchical' => true,
 'supports'     => array( 'title', 'editor', 'page-attributes' ),
@@ -136,11 +142,13 @@ function prefix_register_book_post_type() {
 ## Capabilities Personnalisées
 
 ### Mapper sur un type existant
+
 ```php
 'capability_type' => 'post', // ou 'page'
 ```
 
 ### Capabilities complètement custom
+
 ```php
 'capability_type' => 'book',
 'capabilities'    => array(
@@ -156,6 +164,7 @@ function prefix_register_book_post_type() {
 ```
 
 ### Assigner les capabilities à un rôle
+
 ```php
 // À l'activation du plugin
 function prefix_add_caps() {
@@ -172,6 +181,7 @@ register_activation_hook( __FILE__, 'prefix_add_caps' );
 ## Templates Gutenberg
 
 ### Template par défaut
+
 ```php
 'template' => array(
     array( 'core/image', array(
@@ -206,7 +216,7 @@ register_activation_hook( __FILE__, 'prefix_add_caps' );
 'menu_icon' => 'data:image/svg+xml;base64,' . base64_encode( $svg ),
 ```
 
-Liste complète : https://developer.wordpress.org/resource/dashicons/
+Liste complète : <https://developer.wordpress.org/resource/dashicons/>
 
 ## Flush Rewrite Rules
 

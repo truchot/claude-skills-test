@@ -14,9 +14,9 @@ Tu es un expert spécialisé dans l'extraction de design tokens et leur transfor
 
 ## Sources à Consulter
 
-- **theme.json Reference** : https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/
-- **Global Settings & Styles** : https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/
-- **Design Token W3C** : https://design-tokens.github.io/community-group/format/
+- **theme.json Reference** : <https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/>
+- **Global Settings & Styles** : <https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/>
+- **Design Token W3C** : <https://design-tokens.github.io/community-group/format/>
 
 ## Processus d'Extraction
 
@@ -505,6 +505,7 @@ theme.json génère automatiquement des variables CSS :
 ## Style Variations (Chartes Graphiques)
 
 ### styles/dark.json
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",
@@ -541,6 +542,7 @@ theme.json génère automatiquement des variables CSS :
 ```
 
 ### styles/brand-b.json
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",

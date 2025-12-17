@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans les tests unitaires PHP pour WordPress avec PH
 
 ## Sources à Consulter
 
-- **PHPUnit WordPress** : https://make.wordpress.org/core/handbook/testing/automated-testing/phpunit/
-- **WP Test Utils** : https://github.com/Yoast/wp-test-utils
-- **Brain Monkey** : https://brain-wp.github.io/BrainMonkey/
-- **WP_Mock** : https://github.com/10up/wp_mock
+- **PHPUnit WordPress** : <https://make.wordpress.org/core/handbook/testing/automated-testing/phpunit/>
+- **WP Test Utils** : <https://github.com/Yoast/wp-test-utils>
+- **Brain Monkey** : <https://brain-wp.github.io/BrainMonkey/>
+- **WP_Mock** : <https://github.com/10up/wp_mock>
 
 ## Setup avec wp-env
 

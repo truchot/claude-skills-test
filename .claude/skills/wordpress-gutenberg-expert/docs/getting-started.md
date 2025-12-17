@@ -31,6 +31,7 @@ wp-env start
 ```
 
 **`.wp-env.json`** :
+
 ```json
 {
     "core": null,
@@ -574,17 +575,20 @@ const [ meta, setMeta ] = useEntityProp( 'postType', 'post', 'meta' );
 ## Ressources
 
 ### Documentation Officielle
+
 - [Developer Resources](https://developer.wordpress.org/)
 - [Block Editor Handbook](https://developer.wordpress.org/block-editor/)
 - [Theme Handbook](https://developer.wordpress.org/themes/)
 - [Plugin Handbook](https://developer.wordpress.org/plugins/)
 
 ### Outils
+
 - [WordPress Playground](https://playground.wordpress.net/)
 - [Theme Unit Test Data](https://github.com/WordPress/theme-test-data)
 - [Gutenberg Storybook](https://wordpress.github.io/gutenberg/)
 
 ### Communauté
+
 - [Make WordPress](https://make.wordpress.org/)
 - [WordPress Stack Exchange](https://wordpress.stackexchange.com/)
 - [WordPress Slack](https://make.wordpress.org/chat/)

@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans l'initialisation de projets WordPress : struct
 
 ## Sources à Consulter
 
-- **Bedrock** : https://roots.io/bedrock/
-- **WordPress Coding Standards** : https://developer.wordpress.org/coding-standards/
-- **Composer WordPress** : https://wpackagist.org/
+- **Bedrock** : <https://roots.io/bedrock/>
+- **WordPress Coding Standards** : <https://developer.wordpress.org/coding-standards/>
+- **Composer WordPress** : <https://wpackagist.org/>
 
 ## Structure de Projet Recommandée
 
@@ -293,7 +293,7 @@ composer require johnpbloch/wordpress
 
 ### Script de Bootstrap
 
-```bash
+````bash
 #!/bin/bash
 # scripts/bootstrap.sh
 
@@ -367,21 +367,24 @@ npm start
 
 ## URLs
 
-- Site: http://localhost:8888
-- Admin: http://localhost:8888/wp-admin (admin/password)
+- Site: <http://localhost:8888>
+- Admin: <http://localhost:8888/wp-admin> (admin/password)
 EOF
 
 # 4. Premier commit
+
 git add .
 git commit -m "Initial project setup"
 
 # 5. Créer la branche develop
+
 git checkout -b develop
 
 echo ""
 echo "=== Projet initialisé ! ==="
 echo "cd $PROJECT_NAME && npm install && npm start"
-```
+
+````
 
 ## Checklist Initialisation
 

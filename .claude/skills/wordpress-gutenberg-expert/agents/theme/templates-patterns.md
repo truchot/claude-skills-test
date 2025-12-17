@@ -13,14 +13,15 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 
 ## Sources à Consulter
 
-- **Templates** : https://developer.wordpress.org/themes/templates/
-- **Template Parts** : https://developer.wordpress.org/themes/templates/template-parts/
-- **Block Patterns** : https://developer.wordpress.org/block-editor/reference-guides/block-api/block-patterns/
-- **Style Variations** : https://developer.wordpress.org/themes/global-settings-and-styles/style-variations/
+- **Templates** : <https://developer.wordpress.org/themes/templates/>
+- **Template Parts** : <https://developer.wordpress.org/themes/templates/template-parts/>
+- **Block Patterns** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-patterns/>
+- **Style Variations** : <https://developer.wordpress.org/themes/global-settings-and-styles/style-variations/>
 
 ## Templates HTML
 
 ### templates/index.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -60,6 +61,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### templates/single.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -139,6 +141,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### templates/page.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -153,6 +156,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### templates/archive.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -184,6 +188,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### templates/search.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -219,6 +224,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### templates/404.html
+
 ```html
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
@@ -255,6 +261,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ## Template Parts
 
 ### parts/header.html
+
 ```html
 <!-- wp:group {"tagName":"header","className":"site-header","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}},"layout":{"type":"constrained"}} -->
 <header class="wp-block-group site-header">
@@ -275,6 +282,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### parts/footer.html
+
 ```html
 <!-- wp:group {"tagName":"footer","className":"site-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|30"}}},"backgroundColor":"secondary","textColor":"background","layout":{"type":"constrained"}} -->
 <footer class="wp-block-group site-footer">
@@ -335,6 +343,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### parts/sidebar.html
+
 ```html
 <!-- wp:group {"tagName":"aside","className":"sidebar","style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
 <aside class="wp-block-group sidebar">
@@ -366,6 +375,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ## Block Patterns
 
 ### patterns/hero.php
+
 ```php
 <?php
 /**
@@ -411,6 +421,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### patterns/cta.php
+
 ```php
 <?php
 /**
@@ -457,6 +468,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### patterns/testimonials.php
+
 ```php
 <?php
 /**
@@ -540,6 +552,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ## Style Variations
 
 ### styles/dark.json
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",
@@ -572,6 +585,7 @@ Tu es un expert senior en création de templates et patterns pour Block Themes W
 ```
 
 ### styles/vibrant.json
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",

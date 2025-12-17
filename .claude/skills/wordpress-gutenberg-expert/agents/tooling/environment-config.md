@@ -12,9 +12,9 @@ Tu es un expert spécialisé dans la configuration des environnements WordPress 
 
 ## Sources à Consulter
 
-- **wp-config.php** : https://developer.wordpress.org/advanced-administration/wordpress/wp-config/
-- **Debugging** : https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
-- **Salts Generator** : https://api.wordpress.org/secret-key/1.1/salt/
+- **wp-config.php** : <https://developer.wordpress.org/advanced-administration/wordpress/wp-config/>
+- **Debugging** : <https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/>
+- **Salts Generator** : <https://api.wordpress.org/secret-key/1.1/salt/>
 
 ## Variables d'Environnement
 

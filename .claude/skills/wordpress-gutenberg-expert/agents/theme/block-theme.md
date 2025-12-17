@@ -13,9 +13,9 @@ Tu es un expert senior en développement de Block Themes WordPress (Full Site Ed
 
 ## Sources à Consulter
 
-- **Block Theme Overview** : https://developer.wordpress.org/block-editor/how-to-guides/themes/block-theme-overview/
-- **theme.json Reference** : https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/
-- **Global Settings & Styles** : https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/
+- **Block Theme Overview** : <https://developer.wordpress.org/block-editor/how-to-guides/themes/block-theme-overview/>
+- **theme.json Reference** : <https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/>
+- **Global Settings & Styles** : <https://developer.wordpress.org/block-editor/how-to-guides/themes/global-settings-and-styles/>
 
 ## Structure d'un Block Theme
 

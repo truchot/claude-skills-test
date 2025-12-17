@@ -13,13 +13,14 @@ Tu es un expert spécialisé dans les Block Styles Gutenberg - des variantes vis
 
 ## Sources à Consulter
 
-- **Block Styles** : https://developer.wordpress.org/block-editor/reference-guides/block-api/block-styles/
-- **registerBlockStyle** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-blocks/#registerblockstyle
-- **theme.json styles** : https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/theme-json-living/#styles
+- **Block Styles** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-styles/>
+- **registerBlockStyle** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-blocks/#registerblockstyle>
+- **theme.json styles** : <https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/theme-json-living/#styles>
 
 ## Concept
 
 Les **Block Styles** sont des variantes **purement visuelles** d'un block :
+
 - Ajoutent une classe CSS au block
 - Sélectionnables dans la sidebar de l'éditeur
 - Ne modifient pas les attributs ou la structure
@@ -29,6 +30,7 @@ Les **Block Styles** sont des variantes **purement visuelles** d'un block :
 ## Enregistrer un Block Style
 
 ### JavaScript (Recommandé)
+
 ```js
 import { registerBlockStyle } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
@@ -53,6 +55,7 @@ domReady( () => {
 ```
 
 ### PHP
+
 ```php
 add_action( 'init', 'my_theme_register_block_styles' );
 
@@ -75,6 +78,7 @@ function my_theme_register_block_styles() {
 ```
 
 ### theme.json (WP 6.2+)
+
 ```json
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",
@@ -110,6 +114,7 @@ function my_theme_register_block_styles() {
 Quand un style est sélectionné, WordPress ajoute la classe `is-style-{name}` au block.
 
 ### Structure CSS
+
 ```css
 /* Block button avec style "gradient" */
 .wp-block-button.is-style-gradient .wp-block-button__link {
@@ -144,6 +149,7 @@ Quand un style est sélectionné, WordPress ajoute la classe `is-style-{name}` a
 ```
 
 ### Fichier CSS Séparé
+
 ```php
 // functions.php
 add_action( 'enqueue_block_assets', 'my_theme_block_styles_css' );
@@ -161,6 +167,7 @@ function my_theme_block_styles_css() {
 ## Exemples Pratiques
 
 ### Styles pour core/button
+
 ```js
 domReady( () => {
     // Style Gradient
@@ -239,6 +246,7 @@ domReady( () => {
 ```
 
 ### Styles pour core/group
+
 ```js
 domReady( () => {
     registerBlockStyle( 'core/group', {
@@ -285,6 +293,7 @@ domReady( () => {
 ```
 
 ### Styles pour core/image
+
 ```js
 domReady( () => {
     registerBlockStyle( 'core/image', {
@@ -335,6 +344,7 @@ domReady( () => {
 ## Supprimer un Block Style
 
 ### JavaScript
+
 ```js
 import { unregisterBlockStyle } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
@@ -349,6 +359,7 @@ domReady( () => {
 ```
 
 ### PHP
+
 ```php
 add_action( 'init', 'my_theme_unregister_block_styles' );
 
@@ -361,6 +372,7 @@ function my_theme_unregister_block_styles() {
 ## Style par Défaut
 
 ### Définir un style par défaut
+
 ```js
 registerBlockStyle( 'core/button', {
     name: 'gradient',
@@ -370,6 +382,7 @@ registerBlockStyle( 'core/button', {
 ```
 
 ### Forcer un style par défaut via filter
+
 ```php
 add_filter( 'render_block', 'my_theme_default_block_style', 10, 2 );
 
@@ -392,6 +405,7 @@ function my_theme_default_block_style( $block_content, $block ) {
 ## Styles dans Editor vs Frontend
 
 ### Styles spécifiques à l'éditeur
+
 ```css
 /* editor.scss - uniquement dans l'éditeur */
 .editor-styles-wrapper .wp-block-button.is-style-gradient .wp-block-button__link {
@@ -400,6 +414,7 @@ function my_theme_default_block_style( $block_content, $block ) {
 ```
 
 ### Styles frontend uniquement
+
 ```css
 /* style.scss - frontend + éditeur */
 /* ou dans un fichier séparé chargé uniquement en frontend */

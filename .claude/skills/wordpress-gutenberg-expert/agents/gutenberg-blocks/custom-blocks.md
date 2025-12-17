@@ -15,14 +15,15 @@ Tu es un expert spécialisé dans la création de blocks Gutenberg from scratch.
 
 ## Sources à Consulter
 
-- **Create a Block Tutorial** : https://developer.wordpress.org/block-editor/getting-started/tutorial/
-- **Block API Reference** : https://developer.wordpress.org/block-editor/reference-guides/block-api/
-- **@wordpress/create-block** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-create-block/
-- **GitHub Block Examples** : https://github.com/WordPress/block-development-examples
+- **Create a Block Tutorial** : <https://developer.wordpress.org/block-editor/getting-started/tutorial/>
+- **Block API Reference** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/>
+- **@wordpress/create-block** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-create-block/>
+- **GitHub Block Examples** : <https://github.com/WordPress/block-development-examples>
 
 ## Créer un Block
 
 ### Scaffold avec create-block
+
 ```bash
 # Block simple
 npx @wordpress/create-block my-block
@@ -38,6 +39,7 @@ npx @wordpress/create-block my-block --no-plugin
 ```
 
 ### Structure de Fichiers
+
 ```
 my-block/
 ├── build/                    # Compilé (ne pas modifier)
@@ -163,6 +165,7 @@ my-block/
 ## Attributs et Sources
 
 ### Types d'Attributs
+
 | Type | Description |
 |------|-------------|
 | `string` | Chaîne de caractères |
@@ -174,6 +177,7 @@ my-block/
 | `integer` | Entier |
 
 ### Sources d'Attributs
+
 | Source | Description | Exemple |
 |--------|-------------|---------|
 | `html` | Contenu HTML d'un élément | Texte formaté avec RichText |
@@ -392,6 +396,7 @@ export default function save( { attributes } ) {
 ## Dynamic Block (Rendu PHP)
 
 ### block.json
+
 ```json
 {
     "render": "file:./render.php"
@@ -399,6 +404,7 @@ export default function save( { attributes } ) {
 ```
 
 ### render.php
+
 ```php
 <?php
 /**

@@ -22,6 +22,7 @@ Ce guide couvre les problèmes courants rencontrés lors du développement WordP
 **Causes possibles** :
 
 1. **Script non chargé**
+
 ```php
 // Vérifier que le script est enqueued
 add_action( 'enqueue_block_editor_assets', function() {
@@ -37,6 +38,7 @@ add_action( 'enqueue_block_editor_assets', function() {
 2. **Erreur JavaScript** - Ouvrir la console du navigateur (F12)
 
 3. **Mauvaise catégorie**
+
 ```js
 // Vérifier que la catégorie existe
 registerBlockType( 'my-plugin/my-block', {
@@ -45,6 +47,7 @@ registerBlockType( 'my-plugin/my-block', {
 ```
 
 4. **Post type non supporté**
+
 ```js
 // Le block est limité à certains post types
 supports: {
@@ -59,6 +62,7 @@ supports: {
 **Causes** :
 
 1. **Différence save() vs rendu** - Le HTML sauvegardé ne correspond pas
+
 ```js
 // Le save() doit produire exactement le même HTML
 save: ( { attributes } ) => {
@@ -68,6 +72,7 @@ save: ( { attributes } ) => {
 ```
 
 2. **Attribut modifié sans migration**
+
 ```js
 // Ajouter une migration pour les anciennes versions
 deprecated: [
@@ -110,6 +115,7 @@ if ( isLoading ) return <Spinner />;
 **Symptômes** : Les blocks enfants disparaissent après sauvegarde.
 
 **Solution** :
+
 ```js
 // save() doit inclure InnerBlocks.Content
 save: () => {
@@ -451,6 +457,7 @@ wp plugin activate plugin-name
 ## Outils de Diagnostic
 
 ### Query Monitor
+
 ```php
 // Plugin pour analyser :
 // - Requêtes SQL
@@ -461,12 +468,14 @@ wp plugin activate plugin-name
 ```
 
 ### Debug Bar
+
 ```php
 // Informations de debug dans la admin bar
 // https://wordpress.org/plugins/debug-bar/
 ```
 
 ### WP-CLI Debug
+
 ```bash
 # Vérifier l'installation
 wp core verify-checksums

@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans les tests end-to-end pour WordPress avec Playw
 
 ## Sources à Consulter
 
-- **Playwright** : https://playwright.dev/
-- **E2E Test Utils** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-e2e-test-utils-playwright/
-- **Gutenberg E2E Tests** : https://github.com/WordPress/gutenberg/tree/trunk/test/e2e
-- **wp-env** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/
+- **Playwright** : <https://playwright.dev/>
+- **E2E Test Utils** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-e2e-test-utils-playwright/>
+- **Gutenberg E2E Tests** : <https://github.com/WordPress/gutenberg/tree/trunk/test/e2e>
+- **wp-env** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/>
 
 ## Setup
 

@@ -14,10 +14,11 @@ Tu es un expert senior en gestion d'état et données dans Gutenberg. Tu maîtri
 ## Sources à Consulter
 
 Utilise WebFetch pour accéder à :
-- **Data Module Reference** : https://developer.wordpress.org/block-editor/reference-guides/data/
-- **@wordpress/data** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-data/
-- **Packages Reference** : https://developer.wordpress.org/block-editor/reference-guides/packages/
-- **GitHub Packages** : https://github.com/WordPress/gutenberg/tree/trunk/packages
+
+- **Data Module Reference** : <https://developer.wordpress.org/block-editor/reference-guides/data/>
+- **@wordpress/data** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-data/>
+- **Packages Reference** : <https://developer.wordpress.org/block-editor/reference-guides/packages/>
+- **GitHub Packages** : <https://github.com/WordPress/gutenberg/tree/trunk/packages>
 
 ## Core Stores
 
@@ -35,6 +36,7 @@ Utilise WebFetch pour accéder à :
 ## useSelect - Lire les Données
 
 ### Syntaxe de Base
+
 ```js
 import { useSelect } from '@wordpress/data';
 
@@ -49,6 +51,7 @@ function MyComponent() {
 ```
 
 ### Sélecteurs Multiples
+
 ```js
 const { title, content, isSaving } = useSelect( ( select ) => {
     const editor = select( 'core/editor' );
@@ -61,6 +64,7 @@ const { title, content, isSaving } = useSelect( ( select ) => {
 ```
 
 ### Avec Dépendances
+
 ```js
 function PostMeta( { postId } ) {
     const meta = useSelect( ( select ) => {
@@ -99,6 +103,7 @@ select( 'core' ).getTaxonomies();
 ## useDispatch - Modifier les Données
 
 ### Syntaxe de Base
+
 ```js
 import { useDispatch } from '@wordpress/data';
 
@@ -146,6 +151,7 @@ await saveEntityRecord( 'postType', 'post', { id: 123, title: 'Updated' } );
 ## Créer un Custom Store
 
 ### Définition du Store
+
 ```js
 import { createReduxStore, register } from '@wordpress/data';
 
@@ -222,6 +228,7 @@ export default store;
 ```
 
 ### Utilisation du Custom Store
+
 ```js
 import { useSelect, useDispatch } from '@wordpress/data';
 
@@ -329,6 +336,7 @@ unsubscribe();
 ## Patterns Courants
 
 ### Charger des données avec dépendance
+
 ```js
 const { post, author } = useSelect( ( select ) => {
     const postData = select( 'core/editor' ).getCurrentPost();
@@ -340,6 +348,7 @@ const { post, author } = useSelect( ( select ) => {
 ```
 
 ### Vérifier si les données sont résolues
+
 ```js
 const { posts, hasResolved } = useSelect( ( select ) => {
     const query = { per_page: 10 };

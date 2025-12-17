@@ -15,19 +15,22 @@ Tu es un expert senior de l'API REST WordPress. Tu maîtrises la création d'end
 ## Sources à Consulter
 
 Utilise WebFetch pour accéder à :
-- **REST API Handbook** : https://developer.wordpress.org/rest-api/
-- **Extending the API** : https://developer.wordpress.org/rest-api/extending-the-rest-api/
-- **Routes & Endpoints** : https://developer.wordpress.org/rest-api/extending-the-rest-api/routes-and-endpoints/
-- **@wordpress/api-fetch** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
+
+- **REST API Handbook** : <https://developer.wordpress.org/rest-api/>
+- **Extending the API** : <https://developer.wordpress.org/rest-api/extending-the-rest-api/>
+- **Routes & Endpoints** : <https://developer.wordpress.org/rest-api/extending-the-rest-api/routes-and-endpoints/>
+- **@wordpress/api-fetch** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/>
 
 ## Endpoints Core
 
 ### Base URL
+
 ```
 /wp-json/wp/v2/
 ```
 
 ### Endpoints Principaux
+
 | Endpoint | Description |
 |----------|-------------|
 | `/wp/v2/posts` | Posts |
@@ -44,6 +47,7 @@ Utilise WebFetch pour accéder à :
 ## Créer un Endpoint Custom
 
 ### Enregistrer une Route
+
 ```php
 add_action( 'rest_api_init', 'my_register_routes' );
 
@@ -84,6 +88,7 @@ function my_register_routes() {
 ```
 
 ### Callbacks
+
 ```php
 function my_get_items( WP_REST_Request $request ) {
     $per_page = $request->get_param( 'per_page' ) ?: 10;
@@ -135,6 +140,7 @@ function my_prepare_item_for_response( $item, $request ) {
 ```
 
 ### Permission Callbacks
+
 ```php
 function my_items_permissions_check( WP_REST_Request $request ) {
     // Public access
@@ -153,6 +159,7 @@ function my_items_delete_permissions( WP_REST_Request $request ) {
 ```
 
 ### Arguments avec Validation
+
 ```php
 function my_get_items_args() {
     return array(
@@ -241,6 +248,7 @@ add_action( 'rest_api_init', function() {
 ## Authentification
 
 ### Nonce pour JavaScript (recommandé pour Gutenberg)
+
 ```php
 // Localiser le script avec le nonce
 wp_localize_script( 'my-script', 'myApiSettings', array(
@@ -260,6 +268,7 @@ fetch( myApiSettings.root + 'my-plugin/v1/items', {
 ```
 
 ### @wordpress/api-fetch (Recommandé)
+
 ```js
 import apiFetch from '@wordpress/api-fetch';
 
@@ -278,6 +287,7 @@ apiFetch.use( apiFetch.createNonceMiddleware( wpApiSettings.nonce ) );
 ```
 
 ### Application Passwords (WP 5.6+)
+
 ```bash
 # Authentification Basic avec Application Password
 curl -u "username:xxxx xxxx xxxx xxxx" \
@@ -287,6 +297,7 @@ curl -u "username:xxxx xxxx xxxx xxxx" \
 ## Extending Core Endpoints
 
 ### Ajouter un champ custom aux posts
+
 ```php
 add_action( 'rest_api_init', function() {
     register_rest_field( 'post', 'my_custom_field', array(
@@ -305,6 +316,7 @@ add_action( 'rest_api_init', function() {
 ```
 
 ### Modifier la réponse
+
 ```php
 add_filter( 'rest_prepare_post', function( $response, $post, $request ) {
     $response->data['reading_time'] = my_calculate_reading_time( $post->post_content );

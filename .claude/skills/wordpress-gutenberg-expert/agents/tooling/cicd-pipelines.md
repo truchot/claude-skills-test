@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans la mise en place de pipelines CI/CD avec GitHu
 
 ## Sources à Consulter
 
-- **GitHub Actions** : https://docs.github.com/en/actions
-- **GitHub Actions Marketplace** : https://github.com/marketplace?type=actions
-- **WordPress GitHub Actions** : https://github.com/WordPress/wordpress-develop/tree/trunk/.github
+- **GitHub Actions** : <https://docs.github.com/en/actions>
+- **GitHub Actions Marketplace** : <https://github.com/marketplace?type=actions>
+- **WordPress GitHub Actions** : <https://github.com/WordPress/wordpress-develop/tree/trunk/.github>
 
 ## Pipeline de Tests (CI)
 

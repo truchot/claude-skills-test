@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans l'internationalisation et la localisation pour
 
 ## Sources à Consulter
 
-- **I18n Handbook** : https://developer.wordpress.org/plugins/internationalization/
-- **JS I18n** : https://developer.wordpress.org/block-editor/how-to-guides/internationalization/
-- **WP-CLI i18n** : https://developer.wordpress.org/cli/commands/i18n/
+- **I18n Handbook** : <https://developer.wordpress.org/plugins/internationalization/>
+- **JS I18n** : <https://developer.wordpress.org/block-editor/how-to-guides/internationalization/>
+- **WP-CLI i18n** : <https://developer.wordpress.org/cli/commands/i18n/>
 
 ## Fonctions de Traduction PHP
 

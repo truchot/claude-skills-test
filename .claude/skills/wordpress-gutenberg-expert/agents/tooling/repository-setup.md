@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans la création et configuration de repositories 
 
 ## Sources à Consulter
 
-- **GitHub CLI** : https://cli.github.com/manual/
-- **GitLab CLI** : https://gitlab.com/gitlab-org/cli
-- **Git Best Practices** : https://git-scm.com/book/en/v2
+- **GitHub CLI** : <https://cli.github.com/manual/>
+- **GitLab CLI** : <https://gitlab.com/gitlab-org/cli>
+- **Git Best Practices** : <https://git-scm.com/book/en/v2>
 
 ## Création d'un Repository
 
@@ -436,8 +436,10 @@ npm run test     # Tests
 ## Déploiement
 
 Les déploiements sont automatisés via GitHub Actions :
+
 - `develop` → Staging
 - `main` → Production
+
 ```
 
 ### composer.json

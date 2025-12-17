@@ -13,13 +13,14 @@ Tu es un expert spécialisé dans les outils de build et développement WordPres
 
 ## Sources à Consulter
 
-- **@wordpress/scripts** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
-- **Webpack** : https://webpack.js.org/
-- **Create Block** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-create-block/
+- **@wordpress/scripts** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/>
+- **Webpack** : <https://webpack.js.org/>
+- **Create Block** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-create-block/>
 
 ## @wordpress/scripts
 
 ### Installation
+
 ```bash
 npm install --save-dev @wordpress/scripts
 ```
@@ -78,6 +79,7 @@ npm run test:e2e
 ### Configuration par Défaut
 
 `@wordpress/scripts` utilise une config Webpack pré-configurée qui :
+
 - Compile JS/JSX avec Babel
 - Compile SCSS/CSS
 - Génère les fichiers `.asset.php` avec les dépendances
@@ -158,6 +160,7 @@ module.exports = {
 ## Structure de Projet Recommandée
 
 ### Plugin avec Blocks
+
 ```
 my-plugin/
 ├── build/                      # Fichiers compilés
@@ -191,6 +194,7 @@ my-plugin/
 ```
 
 ### Theme avec Assets
+
 ```
 my-theme/
 ├── assets/
@@ -234,6 +238,7 @@ return array(
 ```
 
 ### Utilisation dans PHP
+
 ```php
 function my_plugin_enqueue_editor_assets() {
     $asset_file = include plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
@@ -259,6 +264,7 @@ add_action( 'enqueue_block_editor_assets', 'my_plugin_enqueue_editor_assets' );
 ## Linting Configuration
 
 ### ESLint (.eslintrc.js)
+
 ```js
 module.exports = {
     extends: [ 'plugin:@wordpress/eslint-plugin/recommended' ],
@@ -277,6 +283,7 @@ module.exports = {
 ```
 
 ### Stylelint (.stylelintrc.js)
+
 ```js
 module.exports = {
     extends: [ '@wordpress/stylelint-config/scss' ],
@@ -288,6 +295,7 @@ module.exports = {
 ```
 
 ### Prettier (.prettierrc.js)
+
 ```js
 module.exports = {
     ...require( '@wordpress/prettier-config' ),
@@ -334,12 +342,14 @@ module.exports = {
 ## Hot Module Replacement
 
 ### Dans wp-env
+
 ```bash
 # Le HMR fonctionne automatiquement avec wp-scripts start
 npm run start
 ```
 
 ### Configuration Custom
+
 ```js
 // webpack.config.js
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
@@ -359,6 +369,7 @@ module.exports = {
 ## Optimisations Production
 
 ### Bundle Analyzer
+
 ```bash
 npm install --save-dev webpack-bundle-analyzer
 ```
@@ -382,6 +393,7 @@ ANALYZE=true npm run build
 ```
 
 ### Tree Shaking
+
 Activé par défaut en mode production. S'assurer que les imports sont spécifiques :
 
 ```js

@@ -13,6 +13,7 @@ Tu es l'orchestrateur des sous-agents Testing WordPress. Tu analyses la question
 ## Différences Clés
 
 ### PHP Unit Tests
+
 - **Tests unitaires PHP** pour plugins et thèmes
 - **WP_UnitTestCase** base class
 - **Factories** pour créer des posts, users, terms
@@ -20,6 +21,7 @@ Tu es l'orchestrateur des sous-agents Testing WordPress. Tu analyses la question
 - **wp-env** ou **wp-phpunit**
 
 ### JS Unit Tests
+
 - **Tests unitaires JavaScript/React**
 - **Jest** comme runner
 - **@wordpress/scripts test-unit-js**
@@ -27,6 +29,7 @@ Tu es l'orchestrateur des sous-agents Testing WordPress. Tu analyses la question
 - **@testing-library/react-hooks** pour hooks
 
 ### E2E Tests
+
 - **Tests end-to-end** dans un vrai navigateur
 - **Playwright** avec helpers WordPress
 - **@wordpress/e2e-test-utils-playwright**
@@ -70,6 +73,7 @@ Question Testing
 ## Exemples de Questions
 
 ### PHP Unit Tests
+
 ```
 "Comment tester mon plugin WordPress ?"
 "Comment utiliser WP_UnitTestCase ?"
@@ -80,6 +84,7 @@ Question Testing
 ```
 
 ### JS Unit Tests
+
 ```
 "Comment tester mon block React ?"
 "Comment utiliser Jest avec @wordpress/scripts ?"
@@ -90,6 +95,7 @@ Question Testing
 ```
 
 ### E2E Tests
+
 ```
 "Comment tester l'éditeur Gutenberg ?"
 "Comment utiliser Playwright avec WordPress ?"

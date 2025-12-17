@@ -13,12 +13,13 @@ Tu es un expert spécialisé dans les Block Variations Gutenberg - des variantes
 
 ## Sources à Consulter
 
-- **Block Variations** : https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
-- **registerBlockVariation** : https://developer.wordpress.org/block-editor/reference-guides/packages/packages-blocks/#registerblockvariation
+- **Block Variations** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/>
+- **registerBlockVariation** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-blocks/#registerblockvariation>
 
 ## Concept
 
 Les **Block Variations** sont des configurations prédéfinies d'un block existant avec :
+
 - Des attributs par défaut différents
 - Des InnerBlocks prédéfinis
 - Une icône et un titre personnalisés
@@ -29,6 +30,7 @@ Les **Block Variations** sont des configurations prédéfinies d'un block exista
 ## Créer une Block Variation
 
 ### Syntaxe de Base
+
 ```js
 import { registerBlockVariation } from '@wordpress/blocks';
 
@@ -54,6 +56,7 @@ registerBlockVariation( 'core/group', {
 ```
 
 ### Enregistrement dans index.js
+
 ```js
 import { registerBlockVariation } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
@@ -68,6 +71,7 @@ domReady( () => {
 ```
 
 ### Ou via PHP (recommandé pour les thèmes)
+
 ```php
 add_action( 'enqueue_block_editor_assets', 'my_theme_block_variations' );
 
@@ -112,6 +116,7 @@ function my_theme_block_variations() {
 ## isActive - Détecter la Variation Active
 
 ### Par attributs (array)
+
 ```js
 {
     // Active si className contient 'is-style-card'
@@ -120,6 +125,7 @@ function my_theme_block_variations() {
 ```
 
 ### Par fonction (avancé)
+
 ```js
 {
     isActive: ( blockAttributes, variationAttributes ) => {
@@ -129,6 +135,7 @@ function my_theme_block_variations() {
 ```
 
 ### Comparaison multiple
+
 ```js
 {
     isActive: [ 'layout.type', 'className' ],
@@ -138,6 +145,7 @@ function my_theme_block_variations() {
 ## Exemples Pratiques
 
 ### Card Component (Group Variation)
+
 ```js
 registerBlockVariation( 'core/group', {
     name: 'card',
@@ -177,6 +185,7 @@ registerBlockVariation( 'core/group', {
 ```
 
 ### Hero Section (Cover Variation)
+
 ```js
 registerBlockVariation( 'core/cover', {
     name: 'hero',
@@ -211,6 +220,7 @@ registerBlockVariation( 'core/cover', {
 ```
 
 ### Two Column Layout (Columns Variation)
+
 ```js
 registerBlockVariation( 'core/columns', {
     name: 'two-column-text-image',
@@ -238,6 +248,7 @@ registerBlockVariation( 'core/columns', {
 ```
 
 ### Custom Embed (Embed Variation)
+
 ```js
 registerBlockVariation( 'core/embed', {
     name: 'loom',
@@ -257,6 +268,7 @@ registerBlockVariation( 'core/embed', {
 ```
 
 ### Query Loop Variation
+
 ```js
 registerBlockVariation( 'core/query', {
     name: 'latest-posts-grid',
@@ -293,6 +305,7 @@ registerBlockVariation( 'core/query', {
 ## Supprimer ou Modifier une Variation
 
 ### Supprimer une variation
+
 ```js
 import { unregisterBlockVariation } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
@@ -304,6 +317,7 @@ domReady( () => {
 ```
 
 ### Modifier une variation existante
+
 ```js
 import { getBlockVariations } from '@wordpress/blocks';
 

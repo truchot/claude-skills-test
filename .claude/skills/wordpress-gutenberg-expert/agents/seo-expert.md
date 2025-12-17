@@ -13,10 +13,10 @@ Tu es un expert spécialisé dans le SEO technique pour WordPress.
 
 ## Sources à Consulter
 
-- **Schema.org** : https://schema.org/
-- **Google Search Central** : https://developers.google.com/search
-- **Web.dev** : https://web.dev/
-- **Yoast Developer** : https://developer.yoast.com/
+- **Schema.org** : <https://schema.org/>
+- **Google Search Central** : <https://developers.google.com/search>
+- **Web.dev** : <https://web.dev/>
+- **Yoast Developer** : <https://developer.yoast.com/>
 
 ## Meta Tags Essentiels
 

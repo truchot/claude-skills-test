@@ -13,9 +13,9 @@ Tu es un expert spécialisé dans la gestion des rôles et capabilities WordPres
 
 ## Sources à Consulter
 
-- **Roles and Capabilities** : https://developer.wordpress.org/plugins/users/roles-and-capabilities/
-- **add_role()** : https://developer.wordpress.org/reference/functions/add_role/
-- **WP_Role** : https://developer.wordpress.org/reference/classes/wp_role/
+- **Roles and Capabilities** : <https://developer.wordpress.org/plugins/users/roles-and-capabilities/>
+- **add_role()** : <https://developer.wordpress.org/reference/functions/add_role/>
+- **WP_Role** : <https://developer.wordpress.org/reference/classes/wp_role/>
 
 ## Rôles WordPress par Défaut
 
@@ -31,6 +31,7 @@ Tu es un expert spécialisé dans la gestion des rôles et capabilities WordPres
 ## Créer un Rôle Personnalisé
 
 ### Création Simple
+
 ```php
 add_action( 'init', 'prefix_add_custom_roles' );
 
@@ -66,6 +67,7 @@ function prefix_add_custom_roles() {
 ```
 
 ### Cloner un Rôle Existant
+
 ```php
 function prefix_clone_role() {
     $editor = get_role( 'editor' );
@@ -86,6 +88,7 @@ function prefix_clone_role() {
 ## Gérer les Capabilities
 
 ### Ajouter une Capability à un Rôle
+
 ```php
 function prefix_add_caps_to_role() {
     $role = get_role( 'editor' );
@@ -101,6 +104,7 @@ register_activation_hook( __FILE__, 'prefix_add_caps_to_role' );
 ```
 
 ### Supprimer une Capability d'un Rôle
+
 ```php
 function prefix_remove_caps_from_role() {
     $role = get_role( 'author' );
@@ -112,6 +116,7 @@ function prefix_remove_caps_from_role() {
 ```
 
 ### Supprimer un Rôle
+
 ```php
 function prefix_remove_custom_role() {
     remove_role( 'book_manager' );
@@ -123,6 +128,7 @@ register_deactivation_hook( __FILE__, 'prefix_remove_custom_role' );
 ## Capabilities pour Custom Post Types
 
 ### Capabilities Mappées
+
 ```php
 register_post_type( 'book', array(
     'capability_type' => 'book',
@@ -135,6 +141,7 @@ register_post_type( 'book', array(
 ```
 
 ### Capabilities Explicites
+
 ```php
 register_post_type( 'book', array(
     'capabilities' => array(
@@ -178,6 +185,7 @@ register_taxonomy( 'genre', 'book', array(
 ## Vérifier les Permissions
 
 ### current_user_can()
+
 ```php
 // Vérifier une capability
 if ( current_user_can( 'edit_books' ) ) {
@@ -201,6 +209,7 @@ if ( current_user_can( 'administrator' ) ) {
 ```
 
 ### user_can()
+
 ```php
 // Pour un utilisateur spécifique
 $user = get_user_by( 'id', $user_id );
@@ -216,6 +225,7 @@ if ( user_can( $user, 'edit_post', $post_id ) ) {
 ```
 
 ### Dans les Templates
+
 ```php
 // Afficher seulement aux éditeurs et admins
 if ( current_user_can( 'edit_others_posts' ) ) {
@@ -233,6 +243,7 @@ if ( is_user_logged_in() && current_user_can( 'read' ) ) {
 Les meta caps sont des capabilities qui dépendent du contexte (quel post, quel utilisateur).
 
 ### map_meta_cap Filter
+
 ```php
 add_filter( 'map_meta_cap', 'prefix_map_meta_cap', 10, 4 );
 
@@ -259,6 +270,7 @@ function prefix_map_meta_cap( $caps, $cap, $user_id, $args ) {
 ## Gérer les Rôles des Utilisateurs
 
 ### Obtenir le Rôle d'un Utilisateur
+
 ```php
 $user = wp_get_current_user();
 
@@ -275,6 +287,7 @@ if ( in_array( 'book_manager', $user->roles, true ) ) {
 ```
 
 ### Changer le Rôle d'un Utilisateur
+
 ```php
 $user = new WP_User( $user_id );
 
@@ -295,6 +308,7 @@ $user->remove_cap( 'special_permission' );
 ## Bonnes Pratiques
 
 ### 1. Ajouter les Capabilities à l'Activation
+
 ```php
 register_activation_hook( __FILE__, 'prefix_plugin_activate' );
 
@@ -313,6 +327,7 @@ function prefix_plugin_activate() {
 ```
 
 ### 2. Nettoyer à la Désactivation
+
 ```php
 register_deactivation_hook( __FILE__, 'prefix_plugin_deactivate' );
 
@@ -326,6 +341,7 @@ function prefix_plugin_deactivate() {
 ```
 
 ### 3. Ne Jamais Vérifier par Rôle
+
 ```php
 // ❌ Mauvais
 if ( current_user_can( 'administrator' ) ) { }
@@ -335,6 +351,7 @@ if ( current_user_can( 'manage_options' ) ) { }
 ```
 
 ### 4. Utiliser map_meta_cap
+
 ```php
 // Permet de vérifier si l'utilisateur peut éditer CE post
 if ( current_user_can( 'edit_post', $post_id ) ) { }

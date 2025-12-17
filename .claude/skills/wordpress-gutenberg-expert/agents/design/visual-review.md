@@ -14,10 +14,10 @@ Tu es un expert spécialisé dans la review graphique et les tests de régressio
 
 ## Sources à Consulter
 
-- **Playwright** : https://playwright.dev/
-- **Playwright Visual Comparisons** : https://playwright.dev/docs/test-snapshots
-- **Percy** : https://percy.io/
-- **BackstopJS** : https://github.com/garris/BackstopJS
+- **Playwright** : <https://playwright.dev/>
+- **Playwright Visual Comparisons** : <https://playwright.dev/docs/test-snapshots>
+- **Percy** : <https://percy.io/>
+- **BackstopJS** : <https://github.com/garris/BackstopJS>
 
 ## Stack Recommandé
 
@@ -32,6 +32,7 @@ Tu es un expert spécialisé dans la review graphique et les tests de régressio
 ## Setup Playwright pour WordPress
 
 ### Installation
+
 ```bash
 npm init playwright@latest
 
@@ -43,6 +44,7 @@ npm init playwright@latest
 ```
 
 ### playwright.config.ts
+
 ```typescript
 import { defineConfig, devices } from '@playwright/test';
 
@@ -98,6 +100,7 @@ export default defineConfig({
 ## Tests de Régression Visuelle
 
 ### Test Basique - Capture de Pages
+
 ```typescript
 // tests/visual.spec.ts
 import { test, expect } from '@playwright/test';
@@ -145,6 +148,7 @@ test.describe('Visual Regression Tests', () => {
 ```
 
 ### Test de Composants Spécifiques
+
 ```typescript
 // tests/components.spec.ts
 import { test, expect } from '@playwright/test';
@@ -189,6 +193,7 @@ test.describe('Component Visual Tests', () => {
 ```
 
 ### Test Multi-Breakpoints
+
 ```typescript
 // tests/responsive.spec.ts
 import { test, expect } from '@playwright/test';
@@ -214,6 +219,7 @@ for (const bp of breakpoints) {
 ```
 
 ### Test avec États Interactifs
+
 ```typescript
 // tests/interactions.spec.ts
 import { test, expect } from '@playwright/test';
@@ -264,6 +270,7 @@ test.describe('Interactive States', () => {
 ## Comparer avec les Maquettes Figma
 
 ### Exporter les Maquettes comme Références
+
 ```typescript
 // scripts/setup-references.ts
 import { chromium } from '@playwright/test';
@@ -296,6 +303,7 @@ setupReferences();
 ```
 
 ### Test de Comparaison Figma vs Intégration
+
 ```typescript
 // tests/figma-comparison.spec.ts
 import { test, expect } from '@playwright/test';
@@ -349,12 +357,14 @@ test.describe('Figma vs Integration', () => {
 ## BackstopJS Alternative
 
 ### Installation
+
 ```bash
 npm install -g backstopjs
 backstop init
 ```
 
 ### backstop.json
+
 ```json
 {
     "id": "wordpress_visual_test",
@@ -405,6 +415,7 @@ backstop init
 ```
 
 ### Commandes BackstopJS
+
 ```bash
 # Créer les références (depuis les maquettes ou premier run)
 backstop reference
@@ -422,6 +433,7 @@ backstop openReport
 ## Intégration CI/CD
 
 ### GitHub Actions
+
 ```yaml
 # .github/workflows/visual-tests.yml
 name: Visual Regression Tests

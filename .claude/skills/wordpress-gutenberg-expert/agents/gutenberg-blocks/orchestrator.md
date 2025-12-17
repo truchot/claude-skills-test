@@ -14,23 +14,27 @@ Tu es l'orchestrateur des sous-agents Gutenberg. Tu analyses la question et dél
 ## Différences Clés
 
 ### Custom Blocks
+
 - Création d'un **nouveau block** from scratch
 - `registerBlockType()` ou `@wordpress/create-block`
 - Définition complète : attributs, edit, save, block.json
 
 ### Block Variations
+
 - **Variante fonctionnelle** d'un block existant
 - `registerBlockVariation()`
 - Modifie : attributs par défaut, innerBlocks, comportement
 - Exemples : Hero (variation de Cover), Card (variation de Group)
 
 ### Block Styles
+
 - **Variante visuelle** d'un block existant
 - `registerBlockStyle()`
 - Ajoute uniquement une classe CSS
 - Exemples : Button gradient, Image rounded, Quote fancy
 
 ### Data & Stores
+
 - **State management** dans Gutenberg
 - `useSelect()`, `useDispatch()` hooks
 - Stores core : `core`, `core/editor`, `core/block-editor`
@@ -78,6 +82,7 @@ Question sur Gutenberg
 ## Exemples de Routing
 
 ### Custom Blocks
+
 ```
 "Comment créer un block testimonial ?"
 "Je veux un block pour afficher des prix"
@@ -86,6 +91,7 @@ Question sur Gutenberg
 ```
 
 ### Block Variations
+
 ```
 "Je veux un Hero basé sur le block Cover"
 "Comment créer une Card à partir du Group ?"
@@ -94,6 +100,7 @@ Question sur Gutenberg
 ```
 
 ### Block Styles
+
 ```
 "Comment ajouter un style gradient au bouton ?"
 "Je veux un style Polaroid pour les images"
@@ -102,6 +109,7 @@ Question sur Gutenberg
 ```
 
 ### Data & Stores
+
 ```
 "Comment utiliser useSelect pour récupérer des posts ?"
 "Comment modifier le titre du post avec useDispatch ?"

@@ -29,6 +29,7 @@ Tu es l'orchestrateur des sous-agents WordPress Core. Tu analyses la question et
 ## Différences Clés
 
 ### Hooks & Filters
+
 - Système de hooks WordPress
 - Actions et filters
 - Priorités d'exécution
@@ -37,6 +38,7 @@ Tu es l'orchestrateur des sous-agents WordPress Core. Tu analyses la question et
 - Supprimer/modifier des hooks existants
 
 ### Security & Validation
+
 - Nonces (CSRF protection)
 - Sanitization (nettoyage des entrées)
 - Escaping (échappement des sorties)
@@ -54,6 +56,7 @@ Tu es l'orchestrateur des sous-agents WordPress Core. Tu analyses la question et
 ## Exemples de Routing
 
 ### Question Simple
+
 ```
 "Comment créer un custom post type ?"
 → Custom Post Types agent
@@ -66,6 +69,7 @@ Tu es l'orchestrateur des sous-agents WordPress Core. Tu analyses la question et
 ```
 
 ### Question Combinée
+
 ```
 "Comment créer un CPT avec des capabilities personnalisées ?"
 → Custom Post Types + Custom Roles

@@ -14,12 +14,13 @@ Tu es un expert spécialisé dans la création et la gestion des Custom Taxonomi
 
 ## Sources à Consulter
 
-- **register_taxonomy()** : https://developer.wordpress.org/reference/functions/register_taxonomy/
-- **Taxonomies** : https://developer.wordpress.org/plugins/taxonomies/
+- **register_taxonomy()** : <https://developer.wordpress.org/reference/functions/register_taxonomy/>
+- **Taxonomies** : <https://developer.wordpress.org/plugins/taxonomies/>
 
 ## Création d'une Custom Taxonomy
 
 ### Taxonomy Hiérarchique (comme Catégories)
+
 ```php
 add_action( 'init', 'prefix_register_genre_taxonomy' );
 
@@ -67,6 +68,7 @@ function prefix_register_genre_taxonomy() {
 ```
 
 ### Taxonomy Non-Hiérarchique (comme Tags)
+
 ```php
 add_action( 'init', 'prefix_register_author_taxonomy' );
 
@@ -107,12 +109,14 @@ function prefix_register_author_taxonomy() {
 ## Arguments Clés
 
 ### Hiérarchie
+
 | Valeur | Comportement |
 |--------|--------------|
 | `true` | Interface checkbox, comme les catégories, supporte parent/enfant |
 | `false` | Interface tag cloud/input, comme les tags, liste plate |
 
 ### Association avec Post Types
+
 ```php
 // À la registration
 register_taxonomy( 'genre', array( 'book', 'post' ), $args );
@@ -125,6 +129,7 @@ unregister_taxonomy_for_object_type( 'category', 'post' );
 ```
 
 ### REST API & Gutenberg
+
 ```php
 'show_in_rest'          => true,  // OBLIGATOIRE pour Gutenberg
 'rest_base'             => 'genres',
@@ -133,6 +138,7 @@ unregister_taxonomy_for_object_type( 'category', 'post' );
 ```
 
 ### Default Term
+
 ```php
 'default_term' => array(
     'name'        => __( 'Uncategorized', 'textdomain' ),
@@ -144,6 +150,7 @@ unregister_taxonomy_for_object_type( 'category', 'post' );
 ## Gestion des Terms
 
 ### Créer un Term
+
 ```php
 $term = wp_insert_term(
     'Science Fiction',           // Nom
@@ -163,6 +170,7 @@ if ( is_wp_error( $term ) ) {
 ```
 
 ### Mettre à jour un Term
+
 ```php
 wp_update_term( $term_id, 'genre', array(
     'name'        => 'Sci-Fi',
@@ -171,11 +179,13 @@ wp_update_term( $term_id, 'genre', array(
 ```
 
 ### Supprimer un Term
+
 ```php
 wp_delete_term( $term_id, 'genre' );
 ```
 
 ### Récupérer des Terms
+
 ```php
 // Tous les terms d'une taxonomy
 $terms = get_terms( array(
@@ -196,6 +206,7 @@ $term = get_term_by( 'name', 'Science Fiction', 'genre' );
 ```
 
 ### Assigner des Terms à un Post
+
 ```php
 // Remplacer tous les terms
 wp_set_post_terms( $post_id, array( $term_id_1, $term_id_2 ), 'genre' );
@@ -213,6 +224,7 @@ wp_set_post_terms( $post_id, array(), 'genre' );
 ## Term Meta
 
 ### Enregistrer une Meta
+
 ```php
 // Ajouter
 add_term_meta( $term_id, 'color', '#ff0000' );
@@ -269,6 +281,7 @@ function prefix_save_genre_meta( $term_id ) {
 ## Queries avec Taxonomies
 
 ### WP_Query
+
 ```php
 $query = new WP_Query( array(
     'post_type' => 'book',
@@ -290,6 +303,7 @@ $query = new WP_Query( array(
 ```
 
 ### tax_query Operators
+
 | Operator | Description |
 |----------|-------------|
 | `IN` | Correspond à n'importe quel term |
@@ -301,6 +315,7 @@ $query = new WP_Query( array(
 ## Templates
 
 ### Fichiers de templates
+
 ```
 taxonomy-genre.php           # Archive taxonomy genre
 taxonomy-genre-sci-fi.php    # Archive term sci-fi
@@ -309,6 +324,7 @@ archive.php                  # Fallback général
 ```
 
 ### Liens
+
 ```php
 // Lien vers l'archive du term
 $link = get_term_link( $term, 'genre' );
