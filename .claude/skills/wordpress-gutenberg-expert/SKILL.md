@@ -54,7 +54,9 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ js-unit-tests.md
 │  └─ e2e-tests.md
 │
-└─ WP REST API Expert (agents/wp-rest-api-expert.md)
+├─ WP REST API Expert (agents/wp-rest-api-expert.md)
+│
+└─ GDPR & Consent API Expert (agents/gdpr-consent-api.md)
 ```
 
 ## Domaines et Agents
@@ -119,11 +121,12 @@ Sous-orchestrateur avec 3 agents :
 | `js-unit-tests.md` | Jest, @wordpress/scripts test-unit-js, React Testing Library |
 | `e2e-tests.md` | Playwright, @wordpress/e2e-test-utils, tests d'intégration |
 
-### 7. Agent Direct
+### 7. Agents Directs
 
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
 | **WP REST API Expert** | `agents/wp-rest-api-expert.md` | API REST, endpoints, authentification |
+| **GDPR & Consent API** | `agents/gdpr-consent-api.md` | RGPD, WP Consent API, cookies, consentement |
 
 ## Processus d'Orchestration
 
@@ -138,6 +141,7 @@ Sous-orchestrateur avec 3 agents :
 | theme, theme.json, FSE, template, pattern, style engine, block supports CSS, interactivity, wp-interactive, wp-bind, wp-on | Theme | `agents/theme/orchestrator.md` |
 | test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
+| RGPD, GDPR, consent, cookie, wp_has_consent, consentement, privacy, CMP | GDPR | `agents/gdpr-consent-api.md` |
 
 ### Étape 2 : Déléguer au Bon Niveau
 
@@ -180,6 +184,12 @@ Question: "Comment tester mon plugin WordPress ?"
 
 Question: "Comment faire des tests e2e avec Playwright ?"
 → Testing orchestrator → e2e-tests.md
+
+Question: "Comment rendre mon plugin conforme RGPD ?"
+→ gdpr-consent-api.md
+
+Question: "Comment utiliser wp_has_consent() ?"
+→ gdpr-consent-api.md
 ```
 
 ### Étape 3 : Exécution
@@ -257,10 +267,14 @@ Question: "Comment faire des tests e2e avec Playwright ?"
 | Comment faire des tests e2e ? | `testing/e2e-tests.md` |
 | Comment utiliser Playwright avec WordPress ? | `testing/e2e-tests.md` |
 
-### Agent Direct
+### Agents Directs
 | Question | Agent |
 |----------|-------|
 | Comment créer un endpoint REST ? | `wp-rest-api-expert.md` |
+| Comment rendre mon plugin conforme RGPD ? | `gdpr-consent-api.md` |
+| Comment utiliser le WP Consent API ? | `gdpr-consent-api.md` |
+| Comment enregistrer les cookies de mon plugin ? | `gdpr-consent-api.md` |
+| Comment vérifier le consentement utilisateur ? | `gdpr-consent-api.md` |
 
 ## Questions Multi-Domaines
 
@@ -308,6 +322,15 @@ Combine les expertises quand nécessaire :
 
 "Tests visuels et e2e combinés"
 → design/visual-review.md + testing/e2e-tests.md
+
+"Plugin avec tracking conforme RGPD"
+→ wp-core/hooks-security.md + gdpr-consent-api.md
+
+"Block avec scripts conditionnels selon consentement"
+→ gutenberg-blocks/custom-blocks.md + gdpr-consent-api.md
+
+"Thème avec intégration analytics conforme"
+→ theme/fse-templates.md + gdpr-consent-api.md
 ```
 
 ## Format de Réponse
@@ -339,3 +362,4 @@ Combine les expertises quand nécessaire :
 - https://developer.wordpress.org/rest-api/
 - https://make.wordpress.org/cli/handbook/
 - https://github.com/WordPress/gutenberg
+- https://github.com/WordPress/wp-consent-level-api
