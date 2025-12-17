@@ -30,7 +30,10 @@ Orchestrateur Principal (SKILL.md)
 ├─ Tooling (agents/tooling/)
 │  ├─ orchestrator.md
 │  ├─ wp-cli-commands.md
-│  ├─ project-bootstrap.md
+│  ├─ project-init.md
+│  ├─ environment-config.md
+│  ├─ local-dev.md
+│  ├─ staging-setup.md
 │  ├─ build-tooling.md
 │  └─ cicd-deployment.md
 │
@@ -78,12 +81,15 @@ Sous-orchestrateur avec 4 agents spécialisés :
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 
 ### 3. Tooling (`agents/tooling/`)
-Sous-orchestrateur avec 4 agents spécialisés :
+Sous-orchestrateur avec 7 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
 | `wp-cli-commands.md` | Commandes WP-CLI custom |
-| `project-bootstrap.md` | Init projet, Git, environnements local/staging |
+| `project-init.md` | Structure projet, Git, branches, Composer, package.json |
+| `environment-config.md` | .env, wp-config.php multi-environnement, constantes WP |
+| `local-dev.md` | wp-env, Local by Flywheel, Docker, base de données locale |
+| `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
 
@@ -127,7 +133,7 @@ Sous-orchestrateur avec 3 agents :
 |-----------|---------|--------------------------|
 | CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
-| WP-CLI, commande, projet, init, git, webpack, build, npm, CI/CD, pipeline, deploy, SSH, staging, .htpasswd | Tooling | `agents/tooling/orchestrator.md` |
+| WP-CLI, commande, projet, init, git, webpack, build, npm, CI/CD, pipeline, deploy, SSH, staging, .htpasswd, .env, wp-config, docker, wp-env, local | Tooling | `agents/tooling/orchestrator.md` |
 | token, maquette, figma, palette, design system, visual, diff, screenshot, régression | Design | `agents/design/orchestrator.md` |
 | theme, theme.json, FSE, template, pattern, style engine, block supports CSS, interactivity, wp-interactive, wp-bind, wp-on | Theme | `agents/theme/orchestrator.md` |
 | test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
@@ -143,13 +149,19 @@ Question: "Comment créer une variation du block Group ?"
 → Gutenberg Blocks orchestrator → block-variations.md
 
 Question: "Comment initialiser un nouveau projet WordPress ?"
-→ Tooling orchestrator → project-bootstrap.md
+→ Tooling orchestrator → project-init.md
 
 Question: "Comment configurer une pipeline CI/CD ?"
 → Tooling orchestrator → cicd-deployment.md
 
 Question: "Comment mettre en place un environnement staging ?"
-→ Tooling orchestrator → project-bootstrap.md
+→ Tooling orchestrator → staging-setup.md
+
+Question: "Comment configurer wp-env ?"
+→ Tooling orchestrator → local-dev.md
+
+Question: "Comment configurer wp-config.php multi-environnement ?"
+→ Tooling orchestrator → environment-config.md
 
 Question: "Comment extraire les tokens de ma maquette ?"
 → Design orchestrator → design-tokens.md
@@ -200,10 +212,16 @@ Question: "Comment faire des tests e2e avec Playwright ?"
 | Question | Agent Final |
 |----------|-------------|
 | Comment créer une commande WP-CLI ? | `tooling/wp-cli-commands.md` |
-| Comment initialiser un projet WordPress ? | `tooling/project-bootstrap.md` |
+| Comment initialiser un projet WordPress ? | `tooling/project-init.md` |
+| Comment structurer mon projet Git ? | `tooling/project-init.md` |
+| Comment configurer wp-config.php multi-env ? | `tooling/environment-config.md` |
+| Comment utiliser des variables .env ? | `tooling/environment-config.md` |
+| Comment configurer wp-env ? | `tooling/local-dev.md` |
+| Comment utiliser Docker pour WordPress ? | `tooling/local-dev.md` |
+| Comment configurer un serveur staging ? | `tooling/staging-setup.md` |
+| Comment configurer .htpasswd pour staging ? | `tooling/staging-setup.md` |
+| Comment créer un utilisateur WP pour le client ? | `tooling/staging-setup.md` |
 | Comment configurer webpack ? | `tooling/build-tooling.md` |
-| Comment mettre en place un environnement staging ? | `tooling/project-bootstrap.md` |
-| Comment configurer .htpasswd pour staging ? | `tooling/project-bootstrap.md` |
 | Comment configurer une pipeline CI/CD ? | `tooling/cicd-deployment.md` |
 | Comment configurer les secrets GitHub ? | `tooling/cicd-deployment.md` |
 | Comment déployer automatiquement ? | `tooling/cicd-deployment.md` |
@@ -259,13 +277,16 @@ Combine les expertises quand nécessaire :
 → gutenberg-blocks/custom-blocks.md + gutenberg-blocks/data-stores.md + wp-rest-api-expert.md
 
 "Initialiser un projet avec build configuré"
-→ tooling/project-bootstrap.md + tooling/build-tooling.md
+→ tooling/project-init.md + tooling/build-tooling.md
 
 "Mettre en place un repo avec CI/CD et déploiement"
-→ tooling/cicd-deployment.md + tooling/project-bootstrap.md
+→ tooling/project-init.md + tooling/cicd-deployment.md
 
 "Environnement complet local + staging + production"
-→ tooling/project-bootstrap.md + tooling/cicd-deployment.md
+→ tooling/local-dev.md + tooling/staging-setup.md + tooling/cicd-deployment.md
+
+"Configuration multi-environnement complète"
+→ tooling/environment-config.md + tooling/local-dev.md + tooling/staging-setup.md
 
 "Maquette Figma → theme.json complet"
 → design/design-tokens.md + theme/fse-templates.md
