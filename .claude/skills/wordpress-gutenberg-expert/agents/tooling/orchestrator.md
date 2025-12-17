@@ -13,6 +13,7 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | **Staging Setup** | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | **Build & Tooling** | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | **CI/CD & Deployment** | `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
+| **Issue Management** | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 
 ## Routing
 
@@ -27,6 +28,7 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | staging, serveur, .htaccess, .htpasswd, protection, utilisateur WP, user, role, notification client, email | Staging Setup |
 | build, webpack, npm, @wordpress/scripts, lint, format, start, entry point | Build & Tooling |
 | CI/CD, pipeline, GitHub Actions, deploy, déploiement, SSH, rsync, secrets, production, automated | CI/CD & Deployment |
+| issue, bug report, feature request, template, label, GitHub issue, GitLab issue, gh issue, glab | Issue Management |
 
 ## Exemples de Questions
 
@@ -95,6 +97,16 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 → cicd-deployment.md
 ```
 
+### Issue Management
+```
+"Comment créer des templates d'issues normalisés ?"
+"Comment configurer les labels GitHub ?"
+"Comment créer une issue pour un nouveau block ?"
+"Comment automatiser le labeling des issues ?"
+"Comment utiliser gh issue create ?"
+→ issue-management.md
+```
+
 ## Combinaisons Fréquentes
 
 ```
@@ -121,6 +133,12 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 
 "Migration de données entre environnements"
 → local-dev.md + staging-setup.md
+
+"Projet complet avec issues et CI/CD"
+→ project-init.md + issue-management.md + cicd-deployment.md
+
+"Workflow dev avec issues normalisées"
+→ issue-management.md + cicd-deployment.md
 ```
 
 ## Règles

@@ -35,7 +35,8 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ local-dev.md
 │  ├─ staging-setup.md
 │  ├─ build-tooling.md
-│  └─ cicd-deployment.md
+│  ├─ cicd-deployment.md
+│  └─ issue-management.md
 │
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
@@ -83,7 +84,7 @@ Sous-orchestrateur avec 4 agents spécialisés :
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 
 ### 3. Tooling (`agents/tooling/`)
-Sous-orchestrateur avec 7 agents spécialisés :
+Sous-orchestrateur avec 8 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -94,6 +95,7 @@ Sous-orchestrateur avec 7 agents spécialisés :
 | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
+| `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 
 ### 4. Design (`agents/design/`)
 Sous-orchestrateur avec 2 agents :
@@ -136,7 +138,7 @@ Sous-orchestrateur avec 3 agents :
 |-----------|---------|--------------------------|
 | CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
-| WP-CLI, commande, projet, init, git, webpack, build, npm, CI/CD, pipeline, deploy, SSH, staging, .htpasswd, .env, wp-config, docker, wp-env, local | Tooling | `agents/tooling/orchestrator.md` |
+| WP-CLI, commande, projet, init, git, webpack, build, npm, CI/CD, pipeline, deploy, SSH, staging, .htpasswd, .env, wp-config, docker, wp-env, local, issue, template, label, GitHub, GitLab | Tooling | `agents/tooling/orchestrator.md` |
 | token, maquette, figma, palette, design system, visual, diff, screenshot, régression | Design | `agents/design/orchestrator.md` |
 | theme, theme.json, FSE, template, pattern, style engine, block supports CSS, interactivity, wp-interactive, wp-bind, wp-on | Theme | `agents/theme/orchestrator.md` |
 | test, PHPUnit, Jest, Playwright, e2e, unit test, coverage, assertion | Testing | `agents/testing/orchestrator.md` |
@@ -235,6 +237,9 @@ Question: "Comment utiliser wp_has_consent() ?"
 | Comment configurer une pipeline CI/CD ? | `tooling/cicd-deployment.md` |
 | Comment configurer les secrets GitHub ? | `tooling/cicd-deployment.md` |
 | Comment déployer automatiquement ? | `tooling/cicd-deployment.md` |
+| Comment créer des templates d'issues ? | `tooling/issue-management.md` |
+| Comment normaliser les issues GitHub ? | `tooling/issue-management.md` |
+| Comment créer une issue pour un CPT ? | `tooling/issue-management.md` |
 
 ### Design
 | Question | Agent Final |
@@ -331,6 +336,12 @@ Combine les expertises quand nécessaire :
 
 "Thème avec intégration analytics conforme"
 → theme/fse-templates.md + gdpr-consent-api.md
+
+"Workflow projet complet avec issues normalisées"
+→ tooling/project-init.md + tooling/issue-management.md + tooling/cicd-deployment.md
+
+"Issue pour nouveau CPT avec meta et taxonomie"
+→ tooling/issue-management.md + wp-core/custom-post-types.md
 ```
 
 ## Format de Réponse
