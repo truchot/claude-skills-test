@@ -427,6 +427,15 @@ Combine les expertises quand nécessaire :
 - [Liens vers la documentation]
 ```
 
+## Documentation du Skill
+
+| Document | Description |
+|----------|-------------|
+| [CHANGELOG.md](./CHANGELOG.md) | Historique des versions et modifications |
+| [docs/getting-started.md](./docs/getting-started.md) | Guide de démarrage rapide |
+| [docs/troubleshooting.md](./docs/troubleshooting.md) | Résolution des problèmes courants |
+| [docs/migration-guide.md](./docs/migration-guide.md) | Migration depuis les anciens patterns WordPress |
+
 ## Sources Principales
 
 - https://developer.wordpress.org/
