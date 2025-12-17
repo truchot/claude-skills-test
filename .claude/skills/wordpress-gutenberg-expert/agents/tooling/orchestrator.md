@@ -7,8 +7,9 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
 | **WP-CLI Commands** | `wp-cli-commands.md` | Créer des commandes WP-CLI custom |
-| **Project Bootstrap** | `project-bootstrap.md` | Initialisation projet, Git, environnement |
+| **Project Bootstrap** | `project-bootstrap.md` | Initialisation projet, Git, environnement local/staging |
 | **Build & Tooling** | `build-tooling.md` | @wordpress/scripts, webpack, npm |
+| **CI/CD & Deployment** | `cicd-deployment.md` | GitHub Actions, pipelines, déploiement, SSH, secrets |
 
 ## Routing
 
@@ -17,8 +18,9 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | Mots-clés | Agent |
 |-----------|-------|
 | WP-CLI, commande, command, cli, wp command | WP-CLI Commands |
-| projet, init, bootstrap, setup, git, branch, env, docker, .wp-env | Project Bootstrap |
+| projet, init, bootstrap, setup, git, branch, docker, .wp-env, local, staging, .env, .htaccess, .htpasswd | Project Bootstrap |
 | build, webpack, npm, @wordpress/scripts, lint, format, start | Build & Tooling |
+| CI/CD, pipeline, GitHub Actions, deploy, déploiement, SSH, rsync, secrets, production, automated | CI/CD & Deployment |
 
 ## Exemples de Questions
 
@@ -48,6 +50,18 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 → build-tooling.md
 ```
 
+### CI/CD & Deployment
+```
+"Comment mettre en place un repository GitHub ?"
+"Comment configurer une pipeline CI/CD ?"
+"Comment déployer automatiquement sur le serveur ?"
+"Comment configurer les secrets GitHub ?"
+"Comment configurer les clés SSH pour le déploiement ?"
+"Comment tester la connexion SSH au serveur ?"
+"Comment vérifier les fichiers déployés ?"
+→ cicd-deployment.md
+```
+
 ## Combinaisons Fréquentes
 
 ```
@@ -56,6 +70,15 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 
 "Commande WP-CLI pour builder le projet"
 → wp-cli-commands.md + build-tooling.md
+
+"Mettre en place un repo avec déploiement automatique"
+→ cicd-deployment.md + project-bootstrap.md
+
+"Pipeline CI/CD complète avec tests et build"
+→ cicd-deployment.md + build-tooling.md
+
+"Environnements local + staging + production"
+→ project-bootstrap.md + cicd-deployment.md
 ```
 
 ## Règles
