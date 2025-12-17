@@ -26,6 +26,16 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ block-variations.md
 │  └─ block-styles.md
 │
+├─ Tooling (agents/tooling/)
+│  ├─ orchestrator.md
+│  ├─ wp-cli-commands.md
+│  ├─ project-bootstrap.md
+│  └─ build-tooling.md
+│
+├─ Design (agents/design/)
+│  ├─ orchestrator.md
+│  └─ design-tokens.md
+│
 ├─ WP Theme Expert (agents/wp-theme-expert.md)
 ├─ WP REST API Expert (agents/wp-rest-api-expert.md)
 └─ Gutenberg Data Expert (agents/gutenberg-data-expert.md)
@@ -53,7 +63,23 @@ Sous-orchestrateur avec 3 agents spécialisés :
 | `block-variations.md` | Variantes fonctionnelles (registerBlockVariation) |
 | `block-styles.md` | Variantes visuelles CSS (registerBlockStyle) |
 
-### 3. Agents Directs
+### 3. Tooling (`agents/tooling/`)
+Sous-orchestrateur avec 3 agents spécialisés :
+
+| Agent | Domaine |
+|-------|---------|
+| `wp-cli-commands.md` | Commandes WP-CLI custom |
+| `project-bootstrap.md` | Init projet, Git, environnements |
+| `build-tooling.md` | @wordpress/scripts, webpack, npm |
+
+### 4. Design (`agents/design/`)
+Sous-orchestrateur avec 1 agent (extensible) :
+
+| Agent | Domaine |
+|-------|---------|
+| `design-tokens.md` | Maquettes → theme.json, couleurs, typo, spacing |
+
+### 5. Agents Directs
 
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
@@ -69,7 +95,9 @@ Sous-orchestrateur avec 3 agents spécialisés :
 |-----------|---------|--------------------------|
 | CPT, taxonomy, role, meta, hook, filter, nonce, PHP | WP Core | `agents/wp-core/orchestrator.md` |
 | block, variation, style, registerBlockType | Gutenberg Blocks | `agents/gutenberg-blocks/orchestrator.md` |
-| theme, theme.json, FSE, template | Theme | `agents/wp-theme-expert.md` |
+| WP-CLI, commande, projet, init, git, webpack, build, npm | Tooling | `agents/tooling/orchestrator.md` |
+| token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
+| theme, theme.json, FSE, template, pattern | Theme | `agents/wp-theme-expert.md` |
 | REST, API, endpoint, WP_REST | REST API | `agents/wp-rest-api-expert.md` |
 | useSelect, useDispatch, store, @wordpress/data | Data | `agents/gutenberg-data-expert.md` |
 
@@ -81,6 +109,12 @@ Question: "Comment créer un custom post type ?"
 
 Question: "Comment créer une variation du block Group ?"
 → Gutenberg Blocks orchestrator → block-variations.md
+
+Question: "Comment initialiser un nouveau projet WordPress ?"
+→ Tooling orchestrator → project-bootstrap.md
+
+Question: "Comment extraire les tokens de ma maquette ?"
+→ Design orchestrator → design-tokens.md
 
 Question: "Comment configurer theme.json ?"
 → Directement wp-theme-expert.md
@@ -103,7 +137,6 @@ Question: "Comment configurer theme.json ?"
 | Comment créer un rôle custom ? | `wp-core/custom-roles.md` |
 | Comment utiliser les meta ? | `wp-core/custom-meta.md` |
 | Comment utiliser les hooks ? | `wp-core/hooks-security.md` |
-| Comment sécuriser un formulaire ? | `wp-core/hooks-security.md` |
 
 ### Gutenberg Blocks
 | Question | Agent Final |
@@ -111,6 +144,19 @@ Question: "Comment configurer theme.json ?"
 | Comment créer un block from scratch ? | `gutenberg-blocks/custom-blocks.md` |
 | Comment créer une variation de Cover/Group ? | `gutenberg-blocks/block-variations.md` |
 | Comment ajouter un style CSS à un block ? | `gutenberg-blocks/block-styles.md` |
+
+### Tooling
+| Question | Agent Final |
+|----------|-------------|
+| Comment créer une commande WP-CLI ? | `tooling/wp-cli-commands.md` |
+| Comment initialiser un projet WordPress ? | `tooling/project-bootstrap.md` |
+| Comment configurer webpack ? | `tooling/build-tooling.md` |
+
+### Design
+| Question | Agent Final |
+|----------|-------------|
+| Comment extraire les design tokens ? | `design/design-tokens.md` |
+| Comment structurer theme.json depuis une maquette ? | `design/design-tokens.md` |
 
 ### Agents Directs
 | Question | Agent |
@@ -133,8 +179,11 @@ Combine les expertises quand nécessaire :
 "Block qui fetch des données REST"
 → gutenberg-blocks/custom-blocks.md + wp-rest-api-expert.md + gutenberg-data-expert.md
 
-"Variation de block avec styles CSS"
-→ gutenberg-blocks/block-variations.md + gutenberg-blocks/block-styles.md
+"Initialiser un projet avec build configuré"
+→ tooling/project-bootstrap.md + tooling/build-tooling.md
+
+"Maquette Figma → theme.json complet"
+→ design/design-tokens.md + wp-theme-expert.md
 ```
 
 ## Format de Réponse
@@ -164,4 +213,5 @@ Combine les expertises quand nécessaire :
 - https://developer.wordpress.org/themes/
 - https://developer.wordpress.org/plugins/
 - https://developer.wordpress.org/rest-api/
+- https://make.wordpress.org/cli/handbook/
 - https://github.com/WordPress/gutenberg
