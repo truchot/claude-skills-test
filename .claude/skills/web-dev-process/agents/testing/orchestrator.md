@@ -20,6 +20,7 @@ La phase Testing garantit la qualité et la fiabilité du code. Une bonne strat�
 | `unit-tests` | Tests unitaires, mocks, isolation |
 | `integration-tests` | Tests d'intégration, API, BDD |
 | `e2e-tests` | Tests end-to-end, parcours utilisateur |
+| `visual-regression` | Tests visuels, comparaison maquettes |
 | `performance` | Tests de charge, benchmarks |
 | `accessibility` | Tests WCAG, lecteurs d'écran |
 | `security` | Tests OWASP, vulnérabilités |
@@ -100,6 +101,7 @@ Coverage cible: 85%+ avec seuils par module
 | "Comment écrire des tests unitaires ?" | `unit-tests` |
 | "Tester mon API ?" | `integration-tests` |
 | "Tester un parcours utilisateur ?" | `e2e-tests` |
+| "Comparer avec les maquettes ?" | `visual-regression` |
 | "Mon site est-il rapide ?" | `performance` |
 | "Mon site est-il accessible ?" | `accessibility` |
 | "Mon site est-il sécurisé ?" | `security` |
