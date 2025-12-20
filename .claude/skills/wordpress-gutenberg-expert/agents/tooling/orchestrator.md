@@ -14,6 +14,7 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | **Build & Tooling** | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | **Repository Setup** | `repository-setup.md` | Création repo Git/GitHub, structure projet, .gitignore, branches |
 | **CI/CD Pipelines** | `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
+| **GitLab CI/CD** | `gitlab-ci.md` | GitLab CI pipelines, .gitlab-ci.yml, runners, environnements |
 | **Deployment SSH** | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | **Issue Management** | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 | **Quality Check** | `quality-check.md` | Linting, PHPCS, ESLint, markdownlint, validation, pre-commit |
@@ -32,6 +33,7 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | build, webpack, npm, @wordpress/scripts, entry point | Build & Tooling |
 | repo, repository, GitHub repo, git init, git clone, .gitignore, branches, gitflow | Repository Setup |
 | CI/CD, pipeline, GitHub Actions, tests, phpunit, workflow, artifacts | CI/CD Pipelines |
+| GitLab, GitLab CI, .gitlab-ci.yml, gitlab-ci, runner, GitLab runner, GitLab pipeline | GitLab CI/CD |
 | deploy, déploiement, SSH, rsync, secrets, production, clés SSH, SFTP, WP Engine, Kinsta | Deployment SSH |
 | issue, bug report, feature request, template, label, GitHub issue, GitLab issue, gh issue, glab | Issue Management |
 | quality, lint, linting, phpcs, eslint, markdownlint, stylelint, fix, validate, check, pre-commit, husky | Quality Check |
@@ -43,9 +45,10 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 - **Repository Setup** : Création du repo, git init, remotes, .gitignore, structure Git
 - **Project Init** : Structure des fichiers du projet, composer.json, package.json, architecture
 
-### CI/CD Pipelines vs Deployment SSH
+### CI/CD Pipelines vs GitLab CI/CD vs Deployment SSH
 
-- **CI/CD Pipelines** : Tests automatisés, linting, builds, GitHub Actions workflows
+- **CI/CD Pipelines** : GitHub Actions - tests automatisés, linting, builds, workflows
+- **GitLab CI/CD** : GitLab CI - .gitlab-ci.yml, runners, pipelines, environnements GitLab
 - **Deployment SSH** : Configuration SSH, secrets, rsync vers serveur, SFTP, intégrations hébergeurs
 
 ## Exemples de Questions
@@ -109,13 +112,23 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 → repository-setup.md
 ```
 
-### CI/CD Pipelines
+### CI/CD Pipelines (GitHub Actions)
 
 ```
 "Comment configurer une pipeline CI/CD ?"
 "Comment faire tourner PHPUnit dans GitHub Actions ?"
 "Comment configurer les tests automatisés ?"
 → cicd-pipelines.md
+```
+
+### GitLab CI/CD
+
+```
+"Comment configurer GitLab CI pour WordPress ?"
+"Comment créer un .gitlab-ci.yml ?"
+"Comment déployer avec GitLab CI ?"
+"Comment configurer les runners GitLab ?"
+→ gitlab-ci.md
 ```
 
 ### Deployment SSH
@@ -147,11 +160,17 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 "Environnement de développement complet"
 → local-dev.md + environment-config.md
 
-"Pipeline CI/CD avec déploiement"
+"Pipeline CI/CD GitHub Actions avec déploiement"
 → cicd-pipelines.md + deployment-ssh.md
 
-"Projet complet avec issues et CI/CD"
+"Pipeline CI/CD GitLab avec déploiement"
+→ gitlab-ci.md + deployment-ssh.md
+
+"Projet complet avec issues et CI/CD (GitHub)"
 → repository-setup.md + issue-management.md + cicd-pipelines.md
+
+"Projet complet avec issues et CI/CD (GitLab)"
+→ repository-setup.md + issue-management.md + gitlab-ci.md
 
 "Environnements local + staging + production"
 → local-dev.md + staging-setup.md + deployment-ssh.md

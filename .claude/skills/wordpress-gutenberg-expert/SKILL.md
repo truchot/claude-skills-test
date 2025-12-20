@@ -38,6 +38,7 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ build-tooling.md
 │  ├─ repository-setup.md
 │  ├─ cicd-pipelines.md
+│  ├─ gitlab-ci.md
 │  ├─ deployment-ssh.md
 │  ├─ issue-management.md
 │  └─ quality-check.md
@@ -71,7 +72,7 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
-**Total : 36 agents spécialisés**
+**Total : 37 agents spécialisés**
 
 ## Domaines et Agents
 
@@ -101,7 +102,7 @@ Sous-orchestrateur avec 4 agents spécialisés :
 
 ### 3. Tooling (`agents/tooling/`)
 
-Sous-orchestrateur avec 11 agents spécialisés :
+Sous-orchestrateur avec 12 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -113,6 +114,7 @@ Sous-orchestrateur avec 11 agents spécialisés :
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | `repository-setup.md` | Création repo Git/GitHub, .gitignore, branches, gitflow |
 | `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
+| `gitlab-ci.md` | GitLab CI pipelines, .gitlab-ci.yml, runners, environnements |
 | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 | `quality-check.md` | Linting (PHPCS, ESLint, markdownlint), validation, pre-commit |
