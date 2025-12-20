@@ -1,320 +1,27 @@
-# Issue Management Expert
+# WordPress Issue Templates Expert
 
-Tu es un expert spécialisé dans la création et gestion d'issues normalisées sur GitHub et GitLab pour les projets WordPress.
+Tu es un expert spécialisé dans la création de templates d'issues **spécifiques à WordPress** sur GitHub et GitLab.
+
+> **Note** : Pour les templates génériques (bug report, feature request, security), référence-toi à `web-dev-process/templates/ISSUE_TEMPLATE/`.
+> Ce fichier contient uniquement les templates spécifiques au développement WordPress.
 
 ## Ton Domaine
 
-- Templates d'issues par type de tâche
-- GitHub Issues & Issue Forms
-- GitLab Issues & Templates
-- Labels et organisation
-- CLI (gh, glab)
-- Automatisation des issues
+- Templates d'issues WordPress-spécifiques
+- Block Gutenberg requests
+- Custom Post Type requests
+- Custom Taxonomy requests
+- Custom Meta requests
+- WordPress environment setup
 
-## Sources à Consulter
+## Sources
 
-- **GitHub Issue Templates** : <https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests>
+- **web-dev-process** : `../../../web-dev-process/templates/` pour les templates génériques
 - **GitHub Issue Forms** : <https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms>
-- **GitLab Issue Templates** : <https://docs.gitlab.com/ee/user/project/description_templates.html>
-- **GitHub CLI** : <https://cli.github.com/manual/gh_issue_create>
 
-## Types d'Issues WordPress
+## Templates WordPress-Spécifiques
 
-| Type | Label | Préfixe | Utilisation |
-|------|-------|---------|-------------|
-| Bug | `bug` | `fix:` | Correction d'anomalie |
-| Feature | `feature` | `feat:` | Nouvelle fonctionnalité |
-| Enhancement | `enhancement` | `enhance:` | Amélioration existante |
-| Block | `block` | `block:` | Création/modification de block |
-| Theme | `theme` | `theme:` | Modification du thème |
-| Plugin | `plugin` | `plugin:` | Modification d'un plugin |
-| Refactor | `refactor` | `refactor:` | Refactorisation code |
-| Performance | `performance` | `perf:` | Optimisation |
-| Security | `security` | `security:` | Vulnérabilité/sécurité |
-| Documentation | `docs` | `docs:` | Documentation |
-| Test | `test` | `test:` | Ajout/modification de tests |
-| CI/CD | `ci` | `ci:` | Pipeline/déploiement |
-| Design | `design` | `design:` | UI/UX |
-
-## Structure de Dossiers
-
-### GitHub
-
-```
-.github/
-├── ISSUE_TEMPLATE/
-│   ├── config.yml
-│   ├── bug_report.yml
-│   ├── feature_request.yml
-│   ├── block_request.yml
-│   ├── enhancement.yml
-│   ├── security.yml
-│   └── documentation.yml
-├── PULL_REQUEST_TEMPLATE.md
-└── labels.yml
-```
-
-### GitLab
-
-```
-.gitlab/
-├── issue_templates/
-│   ├── Bug.md
-│   ├── Feature.md
-│   ├── Block.md
-│   ├── Enhancement.md
-│   ├── Security.md
-│   └── Documentation.md
-└── merge_request_templates/
-    └── Default.md
-```
-
-## GitHub Issue Forms (YAML)
-
-### config.yml
-
-```yaml
-# .github/ISSUE_TEMPLATE/config.yml
-blank_issues_enabled: false
-contact_links:
-  - name: Documentation
-    url: https://docs.example.com
-    about: Consultez la documentation avant de créer une issue
-  - name: Discussions
-    url: https://github.com/org/repo/discussions
-    about: Pour les questions générales
-```
-
-### Bug Report
-
-```yaml
-# .github/ISSUE_TEMPLATE/bug_report.yml
-name: 🐛 Bug Report
-description: Signaler un bug ou une anomalie
-title: "[Bug]: "
-labels: ["bug", "triage"]
-assignees: []
-
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Merci de prendre le temps de remplir ce rapport de bug.
-        Plus les informations sont précises, plus vite nous pourrons corriger le problème.
-
-  - type: textarea
-    id: description
-    attributes:
-      label: Description du bug
-      description: Une description claire et concise du bug
-      placeholder: "Décrivez le comportement inattendu..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: steps
-    attributes:
-      label: Étapes pour reproduire
-      description: Les étapes pour reproduire le comportement
-      placeholder: |
-        1. Aller sur '...'
-        2. Cliquer sur '...'
-        3. Faire défiler jusqu'à '...'
-        4. Voir l'erreur
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected
-    attributes:
-      label: Comportement attendu
-      description: Ce qui devrait se passer normalement
-      placeholder: "Je m'attendais à ce que..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual
-    attributes:
-      label: Comportement actuel
-      description: Ce qui se passe réellement
-      placeholder: "Au lieu de ça, il se passe..."
-    validations:
-      required: true
-
-  - type: dropdown
-    id: environment
-    attributes:
-      label: Environnement
-      description: Où le bug se produit-il ?
-      options:
-        - Production
-        - Staging
-        - Local (wp-env)
-        - Local (Docker)
-        - Local (Local by Flywheel)
-    validations:
-      required: true
-
-  - type: input
-    id: wp-version
-    attributes:
-      label: Version WordPress
-      description: Quelle version de WordPress ?
-      placeholder: "6.4.2"
-    validations:
-      required: true
-
-  - type: input
-    id: php-version
-    attributes:
-      label: Version PHP
-      description: Quelle version de PHP ?
-      placeholder: "8.2"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: browser
-    attributes:
-      label: Navigateur
-      description: Sur quel navigateur ?
-      multiple: true
-      options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Edge
-        - Autre
-    validations:
-      required: false
-
-  - type: textarea
-    id: screenshots
-    attributes:
-      label: Captures d'écran
-      description: Si applicable, ajoutez des captures d'écran
-      placeholder: "Glissez-déposez vos images ici..."
-    validations:
-      required: false
-
-  - type: textarea
-    id: logs
-    attributes:
-      label: Logs d'erreur
-      description: Copiez les erreurs de la console ou debug.log
-      render: shell
-    validations:
-      required: false
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: Checklist
-      options:
-        - label: J'ai vérifié que cette issue n'existe pas déjà
-          required: true
-        - label: J'ai lu la documentation
-          required: true
-        - label: J'ai testé avec les plugins désactivés
-          required: false
-```
-
-### Feature Request
-
-```yaml
-# .github/ISSUE_TEMPLATE/feature_request.yml
-name: ✨ Feature Request
-description: Proposer une nouvelle fonctionnalité
-title: "[Feature]: "
-labels: ["feature", "triage"]
-
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Merci de proposer une nouvelle fonctionnalité !
-
-  - type: textarea
-    id: problem
-    attributes:
-      label: Problème ou besoin
-      description: Quel problème cette fonctionnalité résoudrait-elle ?
-      placeholder: "Je suis frustré quand..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: Solution proposée
-      description: Décrivez la solution que vous aimeriez
-      placeholder: "J'aimerais pouvoir..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considérées
-      description: Avez-vous envisagé d'autres solutions ?
-      placeholder: "J'ai aussi pensé à..."
-    validations:
-      required: false
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priorité estimée
-      options:
-        - Critique (bloquant)
-        - Haute (important)
-        - Moyenne (souhaitable)
-        - Basse (nice to have)
-    validations:
-      required: true
-
-  - type: dropdown
-    id: scope
-    attributes:
-      label: Scope
-      description: Quelle partie du projet est concernée ?
-      multiple: true
-      options:
-        - Theme
-        - Plugin
-        - Block Gutenberg
-        - Admin WordPress
-        - Frontend
-        - API REST
-        - Performance
-        - Accessibilité
-    validations:
-      required: true
-
-  - type: textarea
-    id: mockups
-    attributes:
-      label: Maquettes / Wireframes
-      description: Si vous avez des visuels ou mockups
-      placeholder: "Glissez-déposez vos images..."
-    validations:
-      required: false
-
-  - type: textarea
-    id: acceptance
-    attributes:
-      label: Critères d'acceptance
-      description: Comment saurons-nous que c'est terminé ?
-      placeholder: |
-        - [ ] Critère 1
-        - [ ] Critère 2
-        - [ ] Critère 3
-    validations:
-      required: false
-```
-
-### Block Request
+### Block Gutenberg Request
 
 ```yaml
 # .github/ISSUE_TEMPLATE/block_request.yml
@@ -412,7 +119,7 @@ body:
     id: acceptance
     attributes:
       label: Critères d'acceptance
-      placeholder: |
+      value: |
         - [ ] Block visible dans l'inserter
         - [ ] Options fonctionnelles dans l'éditeur
         - [ ] Rendu frontend conforme à la maquette
@@ -422,161 +129,7 @@ body:
       required: false
 ```
 
-### Security Issue
-
-```yaml
-# .github/ISSUE_TEMPLATE/security.yml
-name: 🔒 Security Issue
-description: Signaler une vulnérabilité de sécurité
-title: "[Security]: "
-labels: ["security", "priority:high"]
-
-body:
-  - type: markdown
-    attributes:
-      value: |
-        ⚠️ **IMPORTANT** : Pour les vulnérabilités critiques, contactez-nous en privé à security@example.com
-
-  - type: dropdown
-    id: severity
-    attributes:
-      label: Sévérité
-      options:
-        - Critique (exploitation active possible)
-        - Haute (données sensibles exposées)
-        - Moyenne (impact limité)
-        - Basse (risque théorique)
-    validations:
-      required: true
-
-  - type: dropdown
-    id: type
-    attributes:
-      label: Type de vulnérabilité
-      options:
-        - XSS (Cross-Site Scripting)
-        - SQL Injection
-        - CSRF (Cross-Site Request Forgery)
-        - Authentication Bypass
-        - Authorization Bypass
-        - Information Disclosure
-        - File Upload
-        - Path Traversal
-        - Autre
-    validations:
-      required: true
-
-  - type: textarea
-    id: description
-    attributes:
-      label: Description
-      description: Décrivez la vulnérabilité
-    validations:
-      required: true
-
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: Étapes de reproduction
-      description: Comment reproduire le problème ?
-      render: shell
-    validations:
-      required: true
-
-  - type: textarea
-    id: impact
-    attributes:
-      label: Impact
-      description: Quel est l'impact potentiel ?
-    validations:
-      required: true
-
-  - type: textarea
-    id: remediation
-    attributes:
-      label: Suggestion de correction
-      description: Avez-vous une suggestion pour corriger ?
-    validations:
-      required: false
-```
-
-### WordPress Dev Tasks
-
-```yaml
-# .github/ISSUE_TEMPLATE/wp_dev_environment.yml
-name: 🛠️ Dev Environment Setup
-description: Mettre en place un environnement de développement
-title: "[DevEnv]: "
-labels: ["setup", "environment", "triage"]
-
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Configuration d'un environnement de développement WordPress.
-
-  - type: dropdown
-    id: env-type
-    attributes:
-      label: Type d'environnement
-      options:
-        - wp-env (@wordpress/env)
-        - Docker Compose
-        - Local by Flywheel
-        - DDEV
-        - Autre
-    validations:
-      required: true
-
-  - type: input
-    id: wp-version
-    attributes:
-      label: Version WordPress cible
-      placeholder: "6.4"
-    validations:
-      required: true
-
-  - type: input
-    id: php-version
-    attributes:
-      label: Version PHP
-      placeholder: "8.2"
-    validations:
-      required: true
-
-  - type: checkboxes
-    id: features
-    attributes:
-      label: Fonctionnalités requises
-      options:
-        - label: Debug mode (WP_DEBUG)
-        - label: Query Monitor
-        - label: Mailhog (emails)
-        - label: phpMyAdmin
-        - label: SSL local
-        - label: Multisite
-
-  - type: textarea
-    id: plugins
-    attributes:
-      label: Plugins à pré-installer
-      placeholder: |
-        - query-monitor
-        - debug-bar
-        - plugin-custom
-
-  - type: textarea
-    id: acceptance
-    attributes:
-      label: Critères d'acceptance
-      value: |
-        - [ ] Environnement démarre sans erreur
-        - [ ] WordPress accessible sur localhost
-        - [ ] Admin accessible (admin/password)
-        - [ ] Debug mode activé
-        - [ ] Plugins dev installés et activés
-        - [ ] Documentation README mise à jour
-```
+### Custom Post Type Request
 
 ```yaml
 # .github/ISSUE_TEMPLATE/wp_custom_post_type.yml
@@ -686,75 +239,7 @@ body:
         - [ ] Compatible Gutenberg (si editor activé)
 ```
 
-```yaml
-# .github/ISSUE_TEMPLATE/wp_custom_meta.yml
-name: 🏷️ Custom Post Meta
-description: Créer des meta fields pour un post type
-title: "[Meta]: "
-labels: ["meta", "wp-core", "triage"]
-
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Création de meta fields personnalisés pour un post type.
-
-  - type: input
-    id: post-type
-    attributes:
-      label: Post Type cible
-      placeholder: "portfolio"
-    validations:
-      required: true
-
-  - type: textarea
-    id: meta-fields
-    attributes:
-      label: Meta fields à créer
-      description: Un champ par ligne avec format "meta_key | type | description"
-      placeholder: |
-        _portfolio_client | string | Nom du client
-        _portfolio_url | url | URL du projet
-        _portfolio_date | date | Date de réalisation
-        _portfolio_featured | boolean | Projet mis en avant
-    validations:
-      required: true
-
-  - type: dropdown
-    id: ui-type
-    attributes:
-      label: Interface d'édition
-      options:
-        - Meta box custom (PHP)
-        - Plugin ACF
-        - Plugin CMB2
-        - Plugin Meta Box
-        - Sidebar Gutenberg (SlotFill)
-    validations:
-      required: true
-
-  - type: checkboxes
-    id: options
-    attributes:
-      label: Options
-      options:
-        - label: show_in_rest (exposer dans l'API REST)
-        - label: single (valeur unique vs array)
-        - label: sanitize_callback
-        - label: auth_callback (permissions)
-
-  - type: textarea
-    id: acceptance
-    attributes:
-      label: Critères d'acceptance
-      value: |
-        - [ ] Meta fields enregistrés avec register_post_meta()
-        - [ ] Interface d'édition fonctionnelle
-        - [ ] Données sauvegardées correctement
-        - [ ] Sanitization en place
-        - [ ] Accessible via API REST (si activé)
-        - [ ] Documentation des champs
-```
+### Custom Taxonomy Request
 
 ```yaml
 # .github/ISSUE_TEMPLATE/wp_custom_taxonomy.yml
@@ -844,6 +329,80 @@ body:
         - [ ] API REST accessible (si activé)
 ```
 
+### Custom Post Meta Request
+
+```yaml
+# .github/ISSUE_TEMPLATE/wp_custom_meta.yml
+name: 🏷️ Custom Post Meta
+description: Créer des meta fields pour un post type
+title: "[Meta]: "
+labels: ["meta", "wp-core", "triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Création de meta fields personnalisés pour un post type.
+
+  - type: input
+    id: post-type
+    attributes:
+      label: Post Type cible
+      placeholder: "portfolio"
+    validations:
+      required: true
+
+  - type: textarea
+    id: meta-fields
+    attributes:
+      label: Meta fields à créer
+      description: Un champ par ligne avec format "meta_key | type | description"
+      placeholder: |
+        _portfolio_client | string | Nom du client
+        _portfolio_url | url | URL du projet
+        _portfolio_date | date | Date de réalisation
+        _portfolio_featured | boolean | Projet mis en avant
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ui-type
+    attributes:
+      label: Interface d'édition
+      options:
+        - Meta box custom (PHP)
+        - Plugin ACF
+        - Plugin CMB2
+        - Plugin Meta Box
+        - Sidebar Gutenberg (SlotFill)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: options
+    attributes:
+      label: Options
+      options:
+        - label: show_in_rest (exposer dans l'API REST)
+        - label: single (valeur unique vs array)
+        - label: sanitize_callback
+        - label: auth_callback (permissions)
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptance
+      value: |
+        - [ ] Meta fields enregistrés avec register_post_meta()
+        - [ ] Interface d'édition fonctionnelle
+        - [ ] Données sauvegardées correctement
+        - [ ] Sanitization en place
+        - [ ] Accessible via API REST (si activé)
+        - [ ] Documentation des champs
+```
+
+### Custom Term Meta Request
+
 ```yaml
 # .github/ISSUE_TEMPLATE/wp_term_meta.yml
 name: 🔖 Custom Term Meta
@@ -901,139 +460,109 @@ body:
         - [ ] Accessible via API REST (si activé)
 ```
 
-## GitLab Issue Templates (Markdown)
-
-### Bug Template
-
-```markdown
-<!-- .gitlab/issue_templates/Bug.md -->
-## 🐛 Bug Report
-
-### Description
-<!-- Une description claire et concise du bug -->
-
-### Étapes pour reproduire
-1. Aller sur '...'
-2. Cliquer sur '...'
-3. Voir l'erreur
-
-### Comportement attendu
-<!-- Ce qui devrait se passer -->
-
-### Comportement actuel
-<!-- Ce qui se passe réellement -->
-
-### Environnement
-- **WordPress** :
-- **PHP** :
-- **Navigateur** :
-- **Environnement** : Production / Staging / Local
-
-### Captures d'écran
-<!-- Si applicable -->
-
-### Logs
-```
-<!-- Copiez les erreurs ici -->
-```
-
-/label ~bug ~triage
-/assign @
-```
-
-### Feature Template
-
-```markdown
-<!-- .gitlab/issue_templates/Feature.md -->
-## ✨ Feature Request
-
-### Problème ou besoin
-<!-- Quel problème cette fonctionnalité résoudrait-elle ? -->
-
-### Solution proposée
-<!-- Décrivez la solution que vous aimeriez -->
-
-### Critères d'acceptance
-- [ ] Critère 1
-- [ ] Critère 2
-- [ ] Critère 3
-
-### Priorité
-<!-- Critique / Haute / Moyenne / Basse -->
-
-### Maquettes
-<!-- Lien Figma ou images -->
-
-/label ~feature ~triage
-/assign @
-```
-
-### Block Template
-
-```markdown
-<!-- .gitlab/issue_templates/Block.md -->
-## 🧱 Block Gutenberg
-
-### Type
-<!-- Nouveau block / Variation / Style / Pattern -->
-
-### Nom technique
-`my-namespace/my-block`
-
-### Description
-<!-- À quoi sert ce block ? -->
-
-### Attributs
-| Attribut | Type | Description | Défaut |
-|----------|------|-------------|--------|
-| title | string | Titre | "" |
-| showImage | boolean | Afficher image | true |
-
-### Block Supports
-- [ ] color
-- [ ] typography
-- [ ] spacing
-- [ ] align
-
-### Type de rendu
-<!-- Statique / Dynamique / Hybride -->
-
-### Maquette
-<!-- Lien Figma -->
-
-### Critères d'acceptance
-- [ ] Block visible dans l'inserter
-- [ ] Rendu conforme à la maquette
-- [ ] Tests e2e passent
-
-/label ~block ~gutenberg ~triage
-/assign @
-```
-
-## Labels Standardisés
-
-### labels.yml (GitHub Actions)
+### WordPress Dev Environment Setup
 
 ```yaml
-# .github/labels.yml
-# Utilisé avec github-labeler action
+# .github/ISSUE_TEMPLATE/wp_dev_environment.yml
+name: 🛠️ WordPress Dev Environment
+description: Mettre en place un environnement de développement WordPress
+title: "[DevEnv]: "
+labels: ["setup", "environment", "triage"]
 
-# Types
-- name: bug
-  color: "d73a4a"
-  description: "Something isn't working"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Configuration d'un environnement de développement WordPress.
 
-- name: feature
-  color: "a2eeef"
-  description: "New feature or request"
+  - type: dropdown
+    id: env-type
+    attributes:
+      label: Type d'environnement
+      options:
+        - wp-env (@wordpress/env)
+        - Docker Compose
+        - Local by Flywheel
+        - DDEV
+        - Autre
+    validations:
+      required: true
 
-- name: enhancement
-  color: "84b6eb"
-  description: "Improvement to existing feature"
+  - type: input
+    id: wp-version
+    attributes:
+      label: Version WordPress cible
+      placeholder: "6.4"
+    validations:
+      required: true
 
+  - type: input
+    id: php-version
+    attributes:
+      label: Version PHP
+      placeholder: "8.2"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: features
+    attributes:
+      label: Fonctionnalités requises
+      options:
+        - label: Debug mode (WP_DEBUG)
+        - label: Query Monitor
+        - label: Mailhog (emails)
+        - label: phpMyAdmin
+        - label: SSL local
+        - label: Multisite
+
+  - type: textarea
+    id: plugins
+    attributes:
+      label: Plugins à pré-installer
+      placeholder: |
+        - query-monitor
+        - debug-bar
+        - plugin-custom
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptance
+      value: |
+        - [ ] Environnement démarre sans erreur
+        - [ ] WordPress accessible sur localhost
+        - [ ] Admin accessible (admin/password)
+        - [ ] Debug mode activé
+        - [ ] Plugins dev installés et activés
+        - [ ] Documentation README mise à jour
+```
+
+## Labels WordPress-Spécifiques
+
+À ajouter aux labels génériques de `web-dev-process` :
+
+```yaml
+# Labels WordPress spécifiques
 - name: block
   color: "7057ff"
   description: "Gutenberg block related"
+
+- name: gutenberg
+  color: "7057ff"
+  description: "Gutenberg/Block Editor"
+
+- name: cpt
+  color: "0075ca"
+  description: "Custom Post Type"
+
+- name: taxonomy
+  color: "0075ca"
+  description: "Custom Taxonomy"
+
+- name: meta
+  color: "0075ca"
+  description: "Post/Term Meta"
 
 - name: theme
   color: "0075ca"
@@ -1043,317 +572,48 @@ body:
   color: "008672"
   description: "Plugin related"
 
-- name: refactor
-  color: "cfd3d7"
-  description: "Code refactoring"
+- name: wp-core
+  color: "21759b"
+  description: "WordPress Core functionality"
 
-- name: performance
-  color: "fbca04"
-  description: "Performance improvement"
-
-- name: security
-  color: "b60205"
-  description: "Security issue"
-
-- name: docs
-  color: "0e8a16"
-  description: "Documentation"
-
-- name: test
-  color: "bfd4f2"
-  description: "Testing related"
-
-- name: ci
-  color: "e99695"
-  description: "CI/CD related"
-
-# Priorités
-- name: "priority:critical"
-  color: "b60205"
-  description: "Critical priority"
-
-- name: "priority:high"
-  color: "d93f0b"
-  description: "High priority"
-
-- name: "priority:medium"
-  color: "fbca04"
-  description: "Medium priority"
-
-- name: "priority:low"
-  color: "0e8a16"
-  description: "Low priority"
-
-# Status
-- name: triage
-  color: "ededed"
-  description: "Needs triage"
-
-- name: "status:in-progress"
-  color: "0052cc"
-  description: "Work in progress"
-
-- name: "status:blocked"
-  color: "b60205"
-  description: "Blocked by something"
-
-- name: "status:review"
-  color: "fbca04"
-  description: "Needs review"
-
-# Effort
-- name: "effort:small"
-  color: "c2e0c6"
-  description: "Small effort (< 1 day)"
-
-- name: "effort:medium"
-  color: "fef2c0"
-  description: "Medium effort (1-3 days)"
-
-- name: "effort:large"
-  color: "f9d0c4"
-  description: "Large effort (> 3 days)"
+- name: wp-rest-api
+  color: "21759b"
+  description: "WordPress REST API"
 ```
 
-## CLI : Créer des Issues
+## Usage
 
-### GitHub CLI (gh)
+### Combiner avec web-dev-process
 
 ```bash
-# Créer une issue bug
-gh issue create \
-  --title "[Bug]: Le block Hero ne s'affiche pas" \
-  --body "## Description
-Le block Hero ne s'affiche pas sur mobile.
+# Copier les templates génériques
+cp -r .claude/skills/web-dev-process/templates/ISSUE_TEMPLATE/* .github/ISSUE_TEMPLATE/
 
-## Étapes
-1. Ajouter un block Hero
-2. Visualiser sur mobile
-
-## Attendu
-Le block doit s'afficher en full width." \
-  --label "bug,block,priority:high" \
-  --assignee "@me"
-
-# Créer une issue feature
-gh issue create \
-  --title "[Feature]: Ajouter un block Testimonials" \
-  --body-file .github/ISSUE_TEMPLATE/feature_body.md \
-  --label "feature,block" \
-  --milestone "v2.0"
-
-# Créer depuis un template
-gh issue create --template "block_request.yml"
-
-# Lister les issues
-gh issue list --label "bug" --state open
-
-# Voir une issue
-gh issue view 123
-
-# Fermer une issue
-gh issue close 123 --comment "Résolu dans #456"
+# Ajouter les templates WordPress
+# (copier le contenu YAML ci-dessus dans les fichiers appropriés)
 ```
 
-### GitLab CLI (glab)
-
-```bash
-# Créer une issue
-glab issue create \
-  --title "[Bug]: Erreur 500 sur le checkout" \
-  --description "Description du bug..." \
-  --label "bug,priority:high" \
-  --assignee "username"
-
-# Depuis un template
-glab issue create --template "Bug"
-
-# Lister les issues
-glab issue list --label "bug"
-
-# Voir une issue
-glab issue view 123
-```
-
-## Automatisation GitHub Actions
-
-### Auto-labeler
-
-```yaml
-# .github/workflows/labeler.yml
-name: Issue Labeler
-
-on:
-  issues:
-    types: [opened, edited]
-
-jobs:
-  label:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: github/issue-labeler@v3
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          configuration-path: .github/labeler.yml
-```
-
-```yaml
-# .github/labeler.yml
-bug:
-  - '/\[Bug\]/i'
-  - '/bug/i'
-
-feature:
-  - '/\[Feature\]/i'
-  - '/feature request/i'
-
-block:
-  - '/\[Block\]/i'
-  - '/gutenberg/i'
-  - '/block/i'
-
-security:
-  - '/\[Security\]/i'
-  - '/vulnerability/i'
-  - '/XSS|SQL injection|CSRF/i'
-```
-
-### Sync Labels
-
-```yaml
-# .github/workflows/sync-labels.yml
-name: Sync Labels
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/labels.yml'
-
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: micnncim/action-label-syncer@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          manifest: .github/labels.yml
-```
-
-### Issue Assignment
-
-```yaml
-# .github/workflows/auto-assign.yml
-name: Auto Assign
-
-on:
-  issues:
-    types: [opened]
-
-jobs:
-  assign:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: pozil/auto-assign-issue@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: |
-            lead-dev
-          numOfAssignee: 1
-```
-
-## Script : Bootstrap Issues
-
-```bash
-#!/bin/bash
-# scripts/setup-issue-templates.sh
-
-PROJECT_DIR=${1:-.}
-
-echo "=== Configuration des templates d'issues ==="
-
-# Créer la structure
-mkdir -p "$PROJECT_DIR/.github/ISSUE_TEMPLATE"
-
-# Télécharger les templates (ou copier depuis un repo template)
-TEMPLATES=(
-  "config.yml"
-  "bug_report.yml"
-  "feature_request.yml"
-  "block_request.yml"
-  "enhancement.yml"
-  "security.yml"
-)
-
-for template in "${TEMPLATES[@]}"; do
-  echo "Création de $template..."
-  # Ici, copier ou générer le template
-done
-
-# Créer labels.yml
-echo "Création de labels.yml..."
-# ...
-
-# Synchroniser les labels
-echo "Synchronisation des labels..."
-gh label create "bug" --color "d73a4a" --description "Something isn't working" --force
-gh label create "feature" --color "a2eeef" --description "New feature" --force
-gh label create "block" --color "7057ff" --description "Gutenberg block" --force
-# ...
-
-echo "=== Configuration terminée ! ==="
-```
-
-## Bonnes Pratiques
-
-### 1. Titres Normalisés
+### Structure finale
 
 ```
-[Type]: Description courte
-
-Exemples :
-[Bug]: Le block Hero ne s'affiche pas sur mobile
-[Feature]: Ajouter un système de notation
-[Block]: Créer le block Testimonials
-[Security]: XSS dans le champ recherche
+.github/
+├── ISSUE_TEMPLATE/
+│   ├── config.yml              # De web-dev-process
+│   ├── bug_report.md           # De web-dev-process
+│   ├── feature_request.md      # De web-dev-process
+│   ├── task.md                 # De web-dev-process
+│   ├── block_request.yml       # WordPress-spécifique
+│   ├── wp_custom_post_type.yml # WordPress-spécifique
+│   ├── wp_custom_taxonomy.yml  # WordPress-spécifique
+│   ├── wp_custom_meta.yml      # WordPress-spécifique
+│   ├── wp_term_meta.yml        # WordPress-spécifique
+│   └── wp_dev_environment.yml  # WordPress-spécifique
+└── PULL_REQUEST_TEMPLATE.md    # De web-dev-process
 ```
 
-### 2. Labels Cohérents
+## Checklist
 
-- Un label de **type** (bug, feature, block...)
-- Un label de **priorité** (priority:high, priority:low...)
-- Un label de **status** si workflow (triage, in-progress...)
-- Des labels de **scope** si nécessaire (frontend, api...)
-
-### 3. Critères d'Acceptance
-
-Toujours inclure des critères d'acceptance clairs :
-
-```markdown
-### Critères d'acceptance
-- [ ] Le block s'affiche correctement dans l'éditeur
-- [ ] Le rendu frontend est conforme à la maquette
-- [ ] Les tests e2e passent
-- [ ] La documentation est à jour
-```
-
-### 4. Liens Croisés
-
-Référencer les issues liées :
-
-```markdown
-Bloqué par #123
-Résout #456
-Voir aussi #789
-```
-
-## Checklist Setup
-
-- [ ] Créer `.github/ISSUE_TEMPLATE/config.yml`
-- [ ] Créer les templates par type (bug, feature, block...)
-- [ ] Configurer les labels avec `labels.yml`
-- [ ] Activer l'auto-labeler si souhaité
-- [ ] Documenter le processus dans CONTRIBUTING.md
-- [ ] Former l'équipe aux conventions
+- [ ] Templates génériques copiés depuis web-dev-process
+- [ ] Templates WordPress ajoutés
+- [ ] Labels WordPress configurés
+- [ ] CONTRIBUTING.md référence les deux sources
