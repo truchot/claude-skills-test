@@ -26,6 +26,12 @@ import { execSync, spawnSync } from 'node:child_process';
 // Configuration
 // =============================================================================
 
+/** Maximum depth for recursive directory search to prevent infinite loops */
+const MAX_SEARCH_DEPTH = 5;
+
+/** Enable debug mode via environment variable for troubleshooting */
+const DEBUG = process.env.AUDIT_DEBUG === '1';
+
 const AUDIT_CHECKS = {
   process: {
     name: 'Conformité Process',
@@ -117,10 +123,23 @@ function getFileLineCount(path) {
 }
 
 function checkPackageScript(scriptName) {
+  const pkgPath = join(process.cwd(), 'package.json');
+
+  if (!existsSync(pkgPath)) {
+    if (DEBUG) {
+      console.error('[DEBUG] package.json not found');
+    }
+    return false;
+  }
+
   try {
-    const pkg = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8'));
+    const content = readFileSync(pkgPath, 'utf-8');
+    const pkg = JSON.parse(content);
     return !!pkg.scripts?.[scriptName];
-  } catch {
+  } catch (err) {
+    if (DEBUG) {
+      console.error(`[DEBUG] Error parsing package.json:`, err.message);
+    }
     return false;
   }
 }
@@ -130,7 +149,7 @@ function findTestFiles() {
   let found = false;
 
   function searchDir(dir, depth = 0) {
-    if (depth > 5 || found) return;
+    if (depth > MAX_SEARCH_DEPTH || found) return;
 
     try {
       const entries = readdirSync(dir);
@@ -151,8 +170,10 @@ function findTestFiles() {
           return;
         }
       }
-    } catch {
-      // Ignore permission errors
+    } catch (err) {
+      if (DEBUG) {
+        console.error(`[DEBUG] Error reading directory ${dir}:`, err.message);
+      }
     }
   }
 
