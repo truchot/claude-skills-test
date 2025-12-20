@@ -1,104 +1,26 @@
-# Quality Check Expert
+# Quality Check WordPress Expert
 
-Tu es un expert spécialisé dans le contrôle qualité du code et de la documentation pour projets WordPress.
+Tu es un expert spécialisé dans le contrôle qualité du code pour projets WordPress.
+
+> **Référence générique** : Pour les outils génériques (Markdownlint, Husky, lint-staged, ESLint/Stylelint de base), consulter `web-dev-process/configs/`.
 
 ## Ton Domaine
 
-- Linting Markdown (markdownlint)
-- Validation des liens
-- Vérification de la structure des fichiers
-- Standards de code WordPress (PHPCS, ESLint)
-- Contrôle qualité automatisé
-- Hooks de pre-commit
+- PHPCS avec WordPress Coding Standards
+- ESLint config @wordpress
+- Stylelint config @wordpress
+- Validation des préfixes WordPress
+- Text domain et i18n
 
-## Sources à Consulter
+## Sources WordPress
 
-- **Markdownlint** : <https://github.com/DavidAnson/markdownlint>
 - **WordPress Coding Standards** : <https://developer.wordpress.org/coding-standards/>
-- **PHPCS** : <https://github.com/squizlabs/PHP_CodeSniffer>
+- **PHPCS WP** : <https://github.com/WordPress/WordPress-Coding-Standards>
 - **ESLint WP** : <https://www.npmjs.com/package/@wordpress/eslint-plugin>
 
-## Configuration Qualité pour ce Skill
+## PHPCS WordPress
 
-### Installation des Outils
-
-```bash
-# Dans le dossier du skill
-cd .claude/skills/wordpress-gutenberg-expert
-
-# Installer les dépendances
-npm install
-
-# Vérifier la qualité
-npm run check
-```
-
-### Scripts Disponibles
-
-```bash
-npm run lint        # Lint complet (Markdown + liens)
-npm run lint:md     # Lint Markdown uniquement
-npm run lint:md:fix # Fix automatique Markdown
-npm run fix         # Alias pour lint:md:fix
-npm run validate    # Validation structure skill
-npm run check       # Lint + Validation
-```
-
-## Linting Markdown
-
-### Configuration .markdownlint.json
-
-```json
-{
-    "default": true,
-    "MD013": false,           // Désactiver la limite de longueur de ligne
-    "MD033": {                // Autoriser certains éléments HTML
-        "allowed_elements": ["details", "summary", "kbd", "br"]
-    },
-    "MD041": true,            // Premier élément doit être H1
-    "MD024": {                // Titres dupliqués autorisés entre frères
-        "siblings_only": true
-    }
-}
-```
-
-### Règles Importantes
-
-| Règle | Description | Correction |
-|-------|-------------|------------|
-| MD001 | Niveaux de titres consécutifs | H1 → H2 → H3, pas H1 → H3 |
-| MD009 | Espaces en fin de ligne | Supprimer trailing spaces |
-| MD010 | Tabulations | Remplacer par espaces |
-| MD012 | Lignes vides multiples | Max 2 lignes vides |
-| MD022 | Espace autour des titres | Ligne vide avant/après |
-| MD031 | Blocs de code fencés | Ligne vide avant/après |
-| MD040 | Langage des blocs de code | Spécifier le langage |
-| MD047 | Newline finale | Fichier doit finir par newline |
-
-### Exemple de Fix
-
-````text
-# Avant
-## Titre
-Du texte sans espace.
-```php
-code
-```
-
-# Après (corrigé)
-
-## Titre
-
-Du texte avec espace.
-
-```php
-code
-```
-````
-
-## Linting PHP (WordPress)
-
-### Installation PHPCS avec WordPress Standards
+### Installation
 
 ```bash
 composer require --dev wp-coding-standards/wpcs
@@ -139,18 +61,19 @@ composer require --dev dealerdirect/phpcodesniffer-composer-installer
         </properties>
     </rule>
 
-    <!-- Prefixes -->
+    <!-- Prefixes obligatoires -->
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array">
                 <element value="my_plugin"/>
+                <element value="MyPlugin"/>
             </property>
         </properties>
     </rule>
 </ruleset>
 ```
 
-### Commandes PHPCS
+### Commandes
 
 ```bash
 # Vérifier
@@ -159,11 +82,11 @@ composer phpcs
 # Corriger automatiquement
 composer phpcbf
 
-# Vérifier un fichier spécifique
+# Fichier spécifique
 ./vendor/bin/phpcs includes/class-my-plugin.php
 ```
 
-## Linting JavaScript (ESLint)
+## ESLint WordPress
 
 ### Installation
 
@@ -182,32 +105,30 @@ module.exports = {
     },
     globals: {
         wp: 'readonly',
+        jQuery: 'readonly',
     },
     rules: {
         'no-console': 'warn',
         'no-unused-vars': 'error',
+        '@wordpress/no-unsafe-wp-apis': 'warn',
     },
 };
 ```
 
-### Configuration package.json
+### Commandes
 
-```json
-{
-    "scripts": {
-        "lint:js": "wp-scripts lint-js",
-        "lint:js:fix": "wp-scripts lint-js --fix"
-    }
-}
+```bash
+npm run lint:js
+npm run lint:js -- --fix
 ```
 
-## Linting CSS (Stylelint)
+## Stylelint WordPress
 
 ### Configuration .stylelintrc.json
 
 ```json
 {
-    "extends": "@wordpress/stylelint-config",
+    "extends": "@wordpress/stylelint-config/scss",
     "rules": {
         "selector-class-pattern": null,
         "no-descending-specificity": null
@@ -222,166 +143,166 @@ npm run lint:css
 npm run lint:css -- --fix
 ```
 
-## Validation de Structure
+## Règles WordPress Importantes
 
-### Script de Validation
+### Préfixes Obligatoires
 
-```js
-// scripts/validate-skill.js
-// Vérifie :
-// - Présence du frontmatter SKILL.md
-// - Structure des dossiers agents
-// - Présence des orchestrateurs
-// - Format des fichiers agents
-// - Présence de la documentation
+```php
+<?php
+// ✅ Bon - préfixe global
+function my_plugin_init() {}
+add_action( 'init', 'my_plugin_init' );
+
+// ❌ Mauvais - pas de préfixe
+function init_stuff() {}
+
+// ✅ Bon - classe avec préfixe
+class My_Plugin_Controller {}
+
+// ✅ Bon - constante préfixée
+define( 'MY_PLUGIN_VERSION', '1.0.0' );
 ```
 
-### Exécution
+### Text Domain i18n
 
-```bash
-npm run validate
+```php
+<?php
+// ✅ Bon - text domain correct
+__( 'Hello', 'my-plugin' );
+_e( 'Hello', 'my-plugin' );
+esc_html__( 'Hello', 'my-plugin' );
+
+// ❌ Mauvais - text domain incorrect
+__( 'Hello', 'wrong-domain' );
+
+// ❌ Mauvais - variable dans text domain
+__( 'Hello', $domain );
 ```
 
-## Workflow Qualité
+### Escaping Obligatoire
 
-### Avant Chaque Commit
+```php
+<?php
+// ✅ Bon - output échappé
+echo esc_html( $variable );
+echo esc_attr( $attribute );
+echo esc_url( $url );
+echo wp_kses_post( $html );
 
-```bash
-# 1. Linter le code
-npm run lint
-
-# 2. Fixer automatiquement
-npm run fix
-
-# 3. Valider la structure
-npm run validate
-
-# 4. Vérification complète
-npm run check
+// ❌ Mauvais - pas d'échappement
+echo $variable;
 ```
 
-### Intégration CI/CD
+### Nonces et Capabilities
 
-```yaml
-# .github/workflows/quality.yml
-name: Quality Check
+```php
+<?php
+// ✅ Bon - vérification nonce
+if ( ! wp_verify_nonce( $_POST['nonce'], 'my_action' ) ) {
+    wp_die( 'Security check failed' );
+}
 
-on: [push, pull_request]
-
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: '.claude/skills/wordpress-gutenberg-expert/package-lock.json'
-
-      - name: Install dependencies
-        working-directory: .claude/skills/wordpress-gutenberg-expert
-        run: npm ci
-
-      - name: Run linting
-        working-directory: .claude/skills/wordpress-gutenberg-expert
-        run: npm run check
+// ✅ Bon - vérification capability
+if ( ! current_user_can( 'manage_options' ) ) {
+    wp_die( 'Unauthorized' );
+}
 ```
 
-## Hooks Pre-commit
-
-### Installation avec Husky
-
-```bash
-npm install --save-dev husky lint-staged
-npx husky install
-npx husky add .husky/pre-commit "npx lint-staged"
-```
-
-### Configuration lint-staged
+## Scripts package.json
 
 ```json
 {
-    "lint-staged": {
-        "*.md": [
-            "markdownlint --fix",
-            "git add"
-        ],
-        "*.php": [
-            "phpcs --standard=WordPress"
-        ],
-        "*.js": [
-            "eslint --fix",
-            "git add"
-        ]
+    "scripts": {
+        "lint:js": "wp-scripts lint-js",
+        "lint:js:fix": "wp-scripts lint-js --fix",
+        "lint:css": "wp-scripts lint-style",
+        "lint:css:fix": "wp-scripts lint-style --fix",
+        "lint:php": "composer phpcs",
+        "lint:php:fix": "composer phpcbf",
+        "lint": "npm run lint:js && npm run lint:css && npm run lint:php"
     }
 }
 ```
 
-## Checklist Qualité
+## composer.json
 
-### Pour Chaque Agent/Document
-
-- [ ] Titre H1 présent
-- [ ] Sections bien structurées (H2, H3)
-- [ ] Blocs de code avec langage spécifié
-- [ ] Pas d'espaces trailing
-- [ ] Newline finale
-- [ ] Liens valides
-- [ ] Exemples de code fonctionnels
-
-### Pour le Skill Global
-
-- [ ] SKILL.md avec frontmatter valide
-- [ ] Tous les orchestrateurs présents
-- [ ] Documentation complète
-- [ ] CHANGELOG à jour
-- [ ] Validation passe sans erreur
-
-## Résolution des Erreurs Courantes
-
-### MD013: Line too long
-
-```bash
-# Désactiver globalement dans .markdownlint.json
-{ "MD013": false }
-
-# Ou désactiver localement
-<!-- markdownlint-disable MD013 -->
-Long line here...
-<!-- markdownlint-enable MD013 -->
-```
-
-### MD033: Inline HTML
-
-```bash
-# Autoriser certains éléments
+```json
 {
-    "MD033": {
-        "allowed_elements": ["details", "summary", "kbd"]
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
     }
 }
 ```
 
-### MD041: First line should be H1
+## Checklist Qualité WordPress
 
-```bash
-# Le fichier DOIT commencer par un H1
-# Exception pour SKILL.md qui commence par frontmatter
+### PHP
+
+- [ ] Préfixes sur fonctions, classes, constantes
+- [ ] Text domain correct pour i18n
+- [ ] Escaping sur tous les outputs
+- [ ] Nonces pour les formulaires
+- [ ] Capability checks
+- [ ] Sanitization des inputs
+- [ ] PHPCS WordPress passe
+
+### JavaScript
+
+- [ ] ESLint @wordpress passe
+- [ ] Pas d'APIs expérimentales non gérées
+- [ ] Imports spécifiques (tree shaking)
+
+### CSS
+
+- [ ] Stylelint @wordpress passe
+- [ ] Variables CSS WordPress utilisées
+- [ ] Pas de !important inutiles
+
+## Résolution Erreurs Courantes
+
+### WordPress.WP.I18n.MissingTranslatorsComment
+
+```php
+<?php
+// ❌ Erreur
+printf( __( 'Hello %s', 'my-plugin' ), $name );
+
+// ✅ Correction
+/* translators: %s: user name */
+printf( __( 'Hello %s', 'my-plugin' ), $name );
 ```
 
-### Liens Cassés
+### WordPress.Security.EscapeOutput
 
-```bash
-# Vérifier les liens manuellement
-markdown-link-check README.md --verbose
+```php
+<?php
+// ❌ Erreur
+echo $content;
 
-# Ignorer certains patterns dans .markdown-link-check.json
-{
-    "ignorePatterns": [
-        { "pattern": "^https://example.com" }
-    ]
+// ✅ Correction selon contexte
+echo esc_html( $content );    // Texte
+echo esc_attr( $content );    // Attribut
+echo wp_kses_post( $content ); // HTML autorisé
+```
+
+### WordPress.NamingConventions.PrefixAllGlobals
+
+```php
+<?php
+// ❌ Erreur
+$my_var = 'value';
+
+// ✅ Correction - dans une classe
+class My_Plugin {
+    private $my_var = 'value';
 }
+
+// ✅ Ou - avec préfixe
+$my_plugin_var = 'value';
 ```
