@@ -5,6 +5,36 @@ Toutes les modifications notables de ce skill sont documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.4.0] - 2024-12-XX
+
+### Modifié
+
+- **Refactoring SRP complet** - Application du Single Responsibility Principle :
+
+  **Agents refactorisés (contenu générique délégué à `web-dev-process`)** :
+  - `accessibility-expert.md` → Focus sur accessibilité Gutenberg/WordPress uniquement
+  - `seo-expert.md` → Focus sur wp_head, Yoast/RankMath, WP sitemaps uniquement
+  - `design/design-tokens.md` → Focus sur theme.json v3 uniquement
+  - `tooling/cicd-pipelines.md` → Focus sur WP test suite et matrice PHP×WP
+  - `tooling/build-tooling.md` → Focus sur @wordpress/scripts et .asset.php
+  - `tooling/local-dev.md` → Focus sur wp-env et WP-CLI
+  - `tooling/quality-check.md` → Focus sur PHPCS WordPress et text domain i18n
+  - `tooling/environment-config.md` → Focus sur wp-config.php et constantes WP
+  - `testing/php-unit-tests.md` → Focus sur WP_UnitTestCase et Brain Monkey
+  - `tooling/repository-setup.md` → Focus sur structures WP (theme/plugin/site)
+  - `tooling/issue-management.md` → Focus sur templates WordPress-spécifiques
+
+  **Agents déplacés vers `web-dev-process`** :
+  - `design/visual-review.md` → `web-dev-process/agents/testing/visual-regression.md`
+
+  **Agents conservés tels quels (déjà WordPress-spécifiques)** :
+  - `testing/e2e-tests.md` - Utilise `@wordpress/e2e-test-utils-playwright`
+  - `testing/js-unit-tests.md` - Utilise `@wordpress/scripts test-unit-js`
+
+### Supprimé
+
+- Contenu générique (WCAG, Playwright config, Git workflow, etc.) déplacé vers `web-dev-process`
+
 ## [1.3.0] - 2024-01-XX
 
 ### Ajouté

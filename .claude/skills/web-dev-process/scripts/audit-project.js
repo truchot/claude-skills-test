@@ -20,7 +20,7 @@
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { execSync } from 'node:child_process';
+import { execSync, spawnSync } from 'node:child_process';
 
 // =============================================================================
 // Configuration
@@ -209,10 +209,15 @@ function runCheck(check) {
 
   if (check.patterns) {
     // Check that none of the patterns are tracked in git
-    return !check.patterns.some(p => {
+    // Use spawnSync with array arguments to prevent command injection
+    return !check.patterns.some(pattern => {
       try {
-        execSync(`git ls-files ${p} 2>/dev/null`, { stdio: 'pipe' });
-        return true;
+        const result = spawnSync('git', ['ls-files', '--', pattern], {
+          stdio: 'pipe',
+          encoding: 'utf-8',
+        });
+        // Returns true if files are tracked (output is non-empty)
+        return result.stdout && result.stdout.trim().length > 0;
       } catch {
         return false;
       }
