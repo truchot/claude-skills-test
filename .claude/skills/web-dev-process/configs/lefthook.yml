@@ -84,14 +84,23 @@ pre-push:
 # =============================================================================
 post-checkout:
   commands:
-    # Installation des dépendances si package.json a changé
+    # Installation des dépendances si lockfile a changé
     install-deps:
       run: |
         PREV_HEAD=$1
         NEW_HEAD=$2
-        if git diff --name-only $PREV_HEAD $NEW_HEAD | grep -q "package.json\|pnpm-lock.yaml"; then
-          echo "📦 package.json changed, running pnpm install..."
-          pnpm install
+        LOCKFILES="package.json\|pnpm-lock.yaml\|package-lock.json\|yarn.lock\|bun.lockb"
+        if git diff --name-only $PREV_HEAD $NEW_HEAD | grep -q "$LOCKFILES"; then
+          echo "📦 Dependencies changed, installing..."
+          if [ -f "pnpm-lock.yaml" ]; then
+            pnpm install
+          elif [ -f "yarn.lock" ]; then
+            yarn install
+          elif [ -f "bun.lockb" ]; then
+            bun install
+          else
+            npm install
+          fi
         fi
       interactive: true
 
@@ -103,9 +112,18 @@ post-merge:
     # Installation des dépendances après merge
     install-deps:
       run: |
-        if git diff --name-only HEAD@{1} HEAD | grep -q "package.json\|pnpm-lock.yaml"; then
-          echo "📦 Dependencies changed, running pnpm install..."
-          pnpm install
+        LOCKFILES="package.json\|pnpm-lock.yaml\|package-lock.json\|yarn.lock\|bun.lockb"
+        if git diff --name-only HEAD@{1} HEAD | grep -q "$LOCKFILES"; then
+          echo "📦 Dependencies changed, installing..."
+          if [ -f "pnpm-lock.yaml" ]; then
+            pnpm install
+          elif [ -f "yarn.lock" ]; then
+            yarn install
+          elif [ -f "bun.lockb" ]; then
+            bun install
+          else
+            npm install
+          fi
         fi
       interactive: true
 
