@@ -16,7 +16,9 @@ const {
   safeReadFile,
   parseFrontmatter,
   fileExists,
-  printSeparator
+  printSeparator,
+  escapeRegex,
+  TestError
 } = require('./utils');
 const { SKILL_ROOT, DOMAINS, STANDALONE_AGENTS } = require('./config');
 
@@ -30,16 +32,16 @@ const skillPath = path.join(SKILL_ROOT, 'SKILL.md');
 
 // Check SKILL.md exists
 if (!fileExists(skillPath)) {
-  console.log('❌ SKILL.md not found');
-  process.exit(1);
+  console.error(`❌ SKILL.md not found at: ${skillPath}`);
+  throw new TestError('SKILL.md not found', { path: skillPath });
 }
 console.log('✅ SKILL.md exists');
 passed++;
 
 const { content, error } = safeReadFile(skillPath);
 if (error) {
-  console.log(`❌ Cannot read SKILL.md: ${error}`);
-  process.exit(1);
+  console.error(`❌ Cannot read SKILL.md: ${error}`);
+  throw new TestError(`Cannot read SKILL.md: ${error}`, { path: skillPath });
 }
 
 // Check frontmatter
@@ -70,7 +72,9 @@ if (!frontmatter) {
 // Check domains are documented
 console.log('\n📁 Domains documented:');
 for (const domain of DOMAINS) {
-  const domainRegex = new RegExp(domain.replace('-', '[-\\s]'), 'i');
+  // Escape special regex characters first, then handle hyphen-to-space pattern
+  const escapedDomain = escapeRegex(domain).replace(/-/g, '[-\\s]');
+  const domainRegex = new RegExp(escapedDomain, 'i');
   if (domainRegex.test(content)) {
     console.log(`  ✅ ${domain}`);
     passed++;
@@ -149,8 +153,12 @@ console.log(`\n📊 Results: ${passed} passed, ${failed} failed`);
 
 if (failed > 0) {
   console.log('\n❌ Some tests failed');
+  // Use process.exit for test runner compatibility, but with clear message
   process.exit(1);
 } else {
   console.log('\n✅ All tests passed');
   process.exit(0);
 }
+
+// Export for test runner integration
+module.exports = { passed, failed };

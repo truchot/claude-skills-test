@@ -16,7 +16,9 @@ const {
   safeReadFile,
   parseFrontmatter,
   fileExists,
-  printSeparator
+  printSeparator,
+  escapeRegex,
+  TestError
 } = require('./utils');
 const { SKILL_ROOT, PHASES } = require('./config');
 
@@ -30,16 +32,16 @@ const skillPath = path.join(SKILL_ROOT, 'SKILL.md');
 
 // Check SKILL.md exists
 if (!fileExists(skillPath)) {
-  console.log('❌ SKILL.md not found');
-  process.exit(1);
+  console.error(`❌ SKILL.md not found at: ${skillPath}`);
+  throw new TestError('SKILL.md not found', { path: skillPath });
 }
 console.log('✅ SKILL.md exists');
 passed++;
 
 const { content, error } = safeReadFile(skillPath);
 if (error) {
-  console.log(`❌ Cannot read SKILL.md: ${error}`);
-  process.exit(1);
+  console.error(`❌ Cannot read SKILL.md: ${error}`);
+  throw new TestError(`Cannot read SKILL.md: ${error}`, { path: skillPath });
 }
 
 // Check frontmatter
@@ -76,8 +78,9 @@ if (!frontmatter) {
 // Check phases are documented
 console.log('\n📁 Phases documented:');
 for (const phase of PHASES) {
-  // Check various ways the phase might be mentioned
-  const phaseRegex = new RegExp(phase, 'i');
+  // Escape special regex characters in phase name to prevent unexpected behavior
+  const escapedPhase = escapeRegex(phase);
+  const phaseRegex = new RegExp(escapedPhase, 'i');
   if (phaseRegex.test(content)) {
     console.log(`  ✅ ${phase}`);
     passed++;
@@ -109,7 +112,9 @@ if (content.includes('Mots-clés') || content.includes('mots-clés')) {
 console.log('\n🔗 Phase orchestrator references:');
 let orchestratorsFound = 0;
 for (const phase of PHASES) {
-  const orchestratorRef = new RegExp(`${phase}/orchestrator`, 'i');
+  // Escape special regex characters in phase name
+  const escapedPhase = escapeRegex(phase);
+  const orchestratorRef = new RegExp(`${escapedPhase}/orchestrator`, 'i');
   if (orchestratorRef.test(content)) {
     orchestratorsFound++;
   }
@@ -127,8 +132,12 @@ console.log(`\n📊 Results: ${passed} passed, ${failed} failed`);
 
 if (failed > 0) {
   console.log('\n❌ Some tests failed');
+  // Use process.exit for test runner compatibility, but with clear message
   process.exit(1);
 } else {
   console.log('\n✅ All tests passed');
   process.exit(0);
 }
+
+// Export for test runner integration
+module.exports = { passed, failed };

@@ -45,11 +45,13 @@ jobs:
             echo 'EOF'
           } >> $GITHUB_OUTPUT
 
-          # Extract counts
-          PHASES=$(echo "$OUTPUT" | grep -c "Phase:")
-          AGENTS=$(echo "$OUTPUT" | grep -oP '✅.*\.md' | wc -l)
+          # Extract counts dynamically from output (no hardcoded values)
+          PHASES=$(echo "$OUTPUT" | grep -c "Phase:" || echo "0")
+          AGENTS=$(echo "$OUTPUT" | grep -oP '✅.*\.md' | wc -l || echo "0")
 
-          echo "phases_count=${PHASES:-7}" >> $GITHUB_OUTPUT
+          # Get expected phase count from config if available
+          EXPECTED_PHASES=$(node -e "try { console.log(require('./config.js').PHASE_COUNT || 7) } catch(e) { console.log(7) }" 2>/dev/null || echo "7")
+          echo "phases_count=${PHASES:-$EXPECTED_PHASES}" >> $GITHUB_OUTPUT
           echo "agents_count=${AGENTS:-0}" >> $GITHUB_OUTPUT
           echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
 

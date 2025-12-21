@@ -103,6 +103,9 @@ const PHASE_KEYWORDS = {
   'maintenance': ['monitoring', 'log', 'alerte', 'bug', 'update']
 };
 
+/** @const {number} Number of development phases */
+const PHASE_COUNT = PHASES.length;
+
 module.exports = {
   SKILL_ROOT,
   AGENTS_DIR,
@@ -110,6 +113,7 @@ module.exports = {
   GUIDES_DIR,
   TEMPLATES_DIR,
   PHASES,
+  PHASE_COUNT,
   EXPECTED_AGENTS_PER_PHASE,
   AGENT_REQUIREMENTS,
   PHASE_DESCRIPTIONS,
