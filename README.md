@@ -156,7 +156,7 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 ```bash
 # Tests par skill
-cd .claude/skills/project-management/tests && bash run-tests.sh
+cd .claude/skills/web-agency/tests && bash run-tests.sh
 cd .claude/skills/web-dev-process/tests && bash run-tests.sh
 cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 ```
