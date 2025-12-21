@@ -1,7 +1,7 @@
 ---
 name: web-dev-process
 description: Processus de développement web standardisé - Framework agnostique pour guider toutes les phases d'un projet web, de la découverte à la maintenance.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Web Development Process - Orchestrateur Principal
@@ -62,7 +62,11 @@ Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills sp�
 | `design/architecture` | Architecture technique (patterns, composants) |
 | `design/data-modeling` | Modélisation des données (BDD, schémas) |
 | `design/api-design` | Design d'API (REST, GraphQL, conventions) |
-| `design/ui-ux` | Principes UI/UX (accessibilité, ergonomie) |
+| `design/ui-ux` | **Orchestrateur** UI/UX |
+| ↳ `design/ux-principles` | Lois de l'UX, hiérarchie visuelle, feedback |
+| ↳ `design/responsive-design` | Mobile-first, breakpoints, patterns |
+| ↳ `design/design-system` | Tokens, composants, Storybook |
+| ↳ `design/accessibility` | WCAG, ARIA, navigation clavier |
 
 **Mots-clés** : architecture, schéma, modèle, API, endpoint, base de données, UI, UX, wireframe, mockup
 
@@ -74,10 +78,24 @@ Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills sp�
 | Agent | Responsabilité |
 |-------|---------------|
 | `setup/orchestrator` | Coordination de l'initialisation projet |
-| `setup/repository` | Configuration Git et stratégie de branches |
-| `setup/environment` | Environnements (dev, staging, prod) |
-| `setup/cicd` | Pipelines CI/CD (principes généraux) |
-| `setup/quality-tools` | Outils qualité (linting, formatting, hooks) |
+| `setup/repository` | **Orchestrateur** configuration Git |
+| ↳ `setup/git-config` | Aliases, .gitignore, .gitattributes |
+| ↳ `setup/branching-strategies` | GitHub Flow, Git Flow, Trunk-based |
+| ↳ `setup/branch-protection` | Règles de protection, CODEOWNERS |
+| ↳ `setup/pr-templates` | Templates PR/Issues, labels |
+| `setup/environment` | **Orchestrateur** environnements |
+| ↳ `setup/env-variables` | dotenv, validation Zod |
+| ↳ `setup/docker` | Dockerfile, docker-compose |
+| ↳ `setup/secrets-management` | Vault, AWS Secrets, 1Password |
+| `setup/cicd` | **Orchestrateur** CI/CD |
+| ↳ `setup/ci-principles` | Build, test, quality gates |
+| ↳ `setup/cd-principles` | Déploiement, environnements |
+| ↳ `setup/deployment-strategies` | Rolling, Blue-Green, Canary |
+| `setup/quality-tools` | **Orchestrateur** outils qualité |
+| ↳ `setup/linting` | ESLint, Stylelint |
+| ↳ `setup/formatting` | Prettier, EditorConfig |
+| ↳ `setup/git-hooks` | Husky, Lefthook, lint-staged |
+| ↳ `setup/commit-conventions` | Commitlint, conventional commits |
 
 **Mots-clés** : git, repo, branch, environnement, CI/CD, pipeline, linter, prettier, husky, pre-commit
 
@@ -92,7 +110,10 @@ Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills sp�
 | `development/coding-standards` | Conventions et standards de code |
 | `development/code-review` | Pratiques de revue de code |
 | `development/git-workflow` | Workflow Git (commits, PRs, merges) |
-| `development/documentation` | Documentation technique (ADRs, README) |
+| `development/documentation` | **Orchestrateur** documentation |
+| ↳ `development/readme` | Structure README, badges |
+| ↳ `development/adr` | Architecture Decision Records |
+| ↳ `development/runbooks` | Procédures opérationnelles |
 
 **Mots-clés** : code, convention, standard, review, PR, pull request, commit, merge, documentation, ADR
 
@@ -109,7 +130,9 @@ Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills sp�
 | `testing/e2e-tests` | Tests end-to-end |
 | `testing/performance` | Tests de performance et charge |
 | `testing/accessibility` | Tests d'accessibilité (WCAG) |
-| `testing/security` | Tests de sécurité (OWASP) |
+| `testing/security` | **Orchestrateur** sécurité |
+| ↳ `testing/dependency-audit` | npm audit, Snyk, Dependabot |
+| ↳ `testing/security-headers` | CSP, HSTS, X-Frame-Options |
 
 **Mots-clés** : test, unit, intégration, e2e, end-to-end, performance, charge, accessibilité, WCAG, sécurité, OWASP
 
@@ -135,7 +158,10 @@ Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills sp�
 | Agent | Responsabilité |
 |-------|---------------|
 | `maintenance/orchestrator` | Coordination de la maintenance |
-| `maintenance/monitoring` | Observabilité et alerting |
+| `maintenance/monitoring` | **Orchestrateur** observabilité |
+| ↳ `maintenance/metrics` | Prometheus, Golden Signals |
+| ↳ `maintenance/logging` | Logs structurés, Pino, ELK |
+| ↳ `maintenance/alerting` | Règles d'alerte, on-call |
 | `maintenance/bug-tracking` | Gestion des incidents et bugs |
 | `maintenance/updates` | Mises à jour et dépendances |
 
@@ -224,6 +250,22 @@ Quand tu réponds à une question :
 ---
 
 ## Changelog
+
+### v1.1.0 (2024-12-21)
+- **Refactoring SRP** : Application du Single Responsibility Principle
+- 8 agents volumineux convertis en orchestrateurs
+- 26 nouveaux agents focalisés créés
+- Amélioration de la maintenabilité et réutilisabilité
+
+Agents refactorisés :
+- `quality-tools` → linting, formatting, git-hooks, commit-conventions
+- `cicd` → ci-principles, cd-principles, deployment-strategies
+- `environment` → env-variables, docker, secrets-management
+- `repository` → git-config, branching-strategies, branch-protection, pr-templates
+- `documentation` → readme, adr, runbooks
+- `security` → dependency-audit, security-headers
+- `monitoring` → metrics, logging, alerting
+- `ui-ux` → ux-principles, responsive-design, design-system, accessibility
 
 ### v1.0.0
 - Structure initiale avec 7 phases
