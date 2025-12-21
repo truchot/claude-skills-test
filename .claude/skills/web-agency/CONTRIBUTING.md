@@ -191,7 +191,14 @@ cd .claude/skills/web-agency/tests
 bash run-tests.sh
 ```
 
-Tous les tests doivent passer avant de soumettre.
+**Tous les tests doivent passer avant de soumettre.**
+
+Les tests vérifient :
+- Structure des agents (frontmatter, sections SRP)
+- Cohérence du routage (références valides)
+- Existence des templates
+- Workflows d'intégration
+- Correspondance routage/capacités agents
 
 ## Ajouter un Nouveau Template
 
@@ -275,18 +282,37 @@ Toujours nommés `orchestrator.md` dans leur répertoire.
 
 ## Checklist de Contribution
 
-Avant de soumettre :
+### Avant de coder
+
+- [ ] Lire un agent existant similaire comme référence
+- [ ] Identifier le bon sous-domaine
+- [ ] Vérifier qu'un agent similaire n'existe pas déjà
+
+### Pendant le développement
 
 - [ ] Agent a une responsabilité unique claire
 - [ ] Section "Tu NE fais PAS" présente avec délégations
 - [ ] Template de sortie défini
 - [ ] Orchestrateur mis à jour avec règles de routage
 - [ ] Tests ajoutés dans `config.js`
-- [ ] Tous les tests passent (`bash run-tests.sh`)
+
+### Avant de soumettre
+
+```bash
+# OBLIGATOIRE : Lancer tous les tests
+cd .claude/skills/web-agency/tests
+bash run-tests.sh
+
+# Vérifier : 7 suites passent, 0 échec
+```
+
+- [ ] **Tous les tests passent** (7/7 suites)
 - [ ] Documentation à jour si nécessaire
+- [ ] Commit message suit le format conventionnel
 
 ## Besoin d'Aide ?
 
 - Consulter les agents existants comme référence
-- Regarder `docs/web-agency-vision.md` pour la roadmap
+- Lire `docs/examples.md` pour des exemples d'utilisation
+- Consulter `docs/adr/` pour les décisions d'architecture
 - Exécuter les tests pour valider la structure

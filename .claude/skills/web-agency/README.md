@@ -2,6 +2,27 @@
 
 Agents IA pour industrialiser les métiers d'une agence Web.
 
+## Quick Start
+
+```
+👤 "J'ai reçu un email d'un client qui veut refondre son site e-commerce"
+🤖 → Agent collecte-besoin extrait les informations clés
+
+👤 "Formalise le brief"
+🤖 → Agent formalisation-brief structure le document
+
+👤 "Quelles questions poser au client ?"
+🤖 → Agent questions-clarification génère les points à clarifier
+
+👤 "Fais un chiffrage"
+🤖 → Agent chiffrage produit l'estimation détaillée
+
+👤 "Prépare la proposition commerciale"
+🤖 → Agent redaction-proposition génère le document client
+```
+
+Voir `docs/examples.md` pour des exemples complets avec conversations.
+
 ## Philosophie
 
 > Les agents exécutent, les humains supervisent et décident.
