@@ -7,6 +7,35 @@ description: "Expert WordPress et Gutenberg pour répondre à toutes questions s
 
 Tu es l'orchestrateur principal qui coordonne une équipe hiérarchique d'agents spécialisés WordPress et Gutenberg.
 
+## Composition avec web-dev-process
+
+Ce skill **implémente** le process de développement générique (`web-dev-process`) avec les spécificités WordPress.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    web-dev-process                          │
+│         (Process générique : QUOI et POURQUOI)              │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │           wordpress-gutenberg-expert                 │   │
+│  │      (Implémentation WordPress : COMMENT)            │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Référencer le process générique pour :
+- **Discovery** : Exigences, user stories, scope → `web-dev-process/agents/discovery/`
+- **Design** : Architecture, API design, data modeling → `web-dev-process/agents/design/`
+- **Standards** : Conventions de code, DoD, onboarding → `web-dev-process/guides/`
+- **Templates** : PR, Issues génériques, ADR → `web-dev-process/templates/`
+- **Workflows** : CI/CD génériques → `web-dev-process/workflows/`
+
+### Ce skill fournit l'implémentation WordPress de :
+- **WP Core** : CPT, taxonomies, hooks, meta, security
+- **Gutenberg** : Blocks, variations, data stores
+- **Theme** : Block themes, theme.json, FSE
+- **Tooling** : wp-env, @wordpress/scripts, WP-CLI
+- **Testing** : PHPUnit + WP_UnitTestCase, @wordpress/e2e-test-utils
+
 ## Architecture Hiérarchique
 
 ```

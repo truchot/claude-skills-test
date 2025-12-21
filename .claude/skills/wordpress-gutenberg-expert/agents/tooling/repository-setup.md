@@ -1,88 +1,28 @@
-# Repository Setup Expert
+# Repository Setup WordPress Expert
 
-Tu es un expert spécialisé dans la création et configuration de repositories Git pour projets WordPress.
+Tu es un expert spécialisé dans la configuration de repositories Git pour projets WordPress.
+
+> **Référence générique** : Pour les concepts Git généraux (initialisation, branches, hooks, conventional commits), consulter `web-dev-process/agents/setup/repository.md`.
 
 ## Ton Domaine
 
-- Création de repositories Git/GitHub/GitLab
-- Structure de projet WordPress
-- Configuration .gitignore
-- Initialisation de projets
-- Gestion des branches (gitflow)
-- Configuration des remotes
+- Structure de projet WordPress (theme, plugin, site)
+- .gitignore spécifique WordPress
+- Configuration wp-cli.yml
+- Organisation des fichiers WordPress
 
-## Sources à Consulter
+## Sources WordPress
 
-- **GitHub CLI** : <https://cli.github.com/manual/>
-- **GitLab CLI** : <https://gitlab.com/gitlab-org/cli>
-- **Git Best Practices** : <https://git-scm.com/book/en/v2>
+- **Theme Development** : <https://developer.wordpress.org/themes/>
+- **Plugin Development** : <https://developer.wordpress.org/plugins/>
 
-## Création d'un Repository
-
-### Vérifier l'Existant
-
-```bash
-# Vérifier si un repo existe déjà
-git remote -v
-
-# Si le repo existe sur GitHub, le cloner
-git clone git@github.com:organisation/projet-wordpress.git
-
-# Si c'est un projet existant sans Git
-cd /path/to/existing/project
-git init
-git add .
-git commit -m "Initial commit"
-```
-
-### Créer un Repository sur GitHub
-
-```bash
-# Via GitHub CLI (gh)
-gh repo create organisation/projet-wordpress \
-    --private \
-    --description "Projet WordPress - Theme/Plugin" \
-    --clone
-
-# Ou créer et lier un repo existant
-gh repo create organisation/projet-wordpress --private --source=. --push
-
-# Avec template
-gh repo create organisation/nouveau-projet \
-    --template organisation/template-wordpress \
-    --private \
-    --clone
-```
-
-### Créer un Repository sur GitLab
-
-```bash
-# Via GitLab CLI (glab)
-glab repo create projet-wordpress \
-    --private \
-    --description "Projet WordPress"
-
-# Cloner un repo existant
-glab repo clone groupe/projet-wordpress
-
-# Créer et pousser
-glab repo create --name projet-wordpress
-git push -u origin main
-```
-
-## Structure de Projet WordPress
-
-### Structure Recommandée - Theme
+## Structure Recommandée - Theme Block
 
 ```
 mon-theme/
 ├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml
-│   │   ├── deploy-staging.yml
-│   │   └── deploy-production.yml
-│   └── ISSUE_TEMPLATE/
-│       └── bug_report.yml
+│   └── workflows/
+│       └── ci.yml
 ├── assets/
 │   ├── fonts/
 │   ├── images/
@@ -119,7 +59,7 @@ mon-theme/
 └── theme.json
 ```
 
-### Structure Recommandée - Plugin
+## Structure Recommandée - Plugin
 
 ```
 mon-plugin/
@@ -144,6 +84,11 @@ mon-plugin/
 ├── src/
 │   ├── blocks/
 │   │   └── my-block/
+│   │       ├── block.json
+│   │       ├── edit.js
+│   │       ├── save.js
+│   │       ├── index.js
+│   │       └── style.scss
 │   ├── js/
 │   └── scss/
 ├── tests/
@@ -159,7 +104,7 @@ mon-plugin/
 └── uninstall.php
 ```
 
-### Structure Site Complet
+## Structure Site Complet
 
 ```
 projet-wordpress/
@@ -171,7 +116,7 @@ projet-wordpress/
 ├── scripts/
 │   ├── deploy.sh
 │   ├── setup-local.sh
-│   └── test-connection.sh
+│   └── sync-db.sh
 ├── wp-content/
 │   ├── themes/
 │   │   └── mon-theme/
@@ -181,6 +126,7 @@ projet-wordpress/
 │       └── custom-functionality.php
 ├── .editorconfig
 ├── .gitignore
+├── .wp-env.json
 ├── composer.json
 ├── docker-compose.yml
 ├── package.json
@@ -188,12 +134,12 @@ projet-wordpress/
 └── wp-cli.yml
 ```
 
-## Configuration .gitignore
+## .gitignore WordPress
 
-### .gitignore pour Site WordPress Complet
+### Site WordPress Complet
 
 ```gitignore
-# WordPress core (si géré séparément)
+# WordPress core (géré par Composer ou séparément)
 /wp-admin/
 /wp-includes/
 /wp-*.php
@@ -216,8 +162,9 @@ wp-config.php
 /wp-content/object-cache.php
 /wp-content/db.php
 
-# Plugins générés/commerciaux (à adapter)
+# Plugins commerciaux/générés (à adapter)
 /wp-content/plugins/akismet/
+/wp-content/plugins/advanced-custom-fields-pro/
 
 # Dépendances
 /vendor/
@@ -226,8 +173,6 @@ wp-config.php
 # Build
 /wp-content/themes/*/build/
 /wp-content/plugins/*/build/
-*.min.js
-*.min.css
 
 # Environnement
 .env
@@ -240,24 +185,20 @@ debug.log
 .idea/
 .vscode/
 *.code-workspace
-*.sublime-*
 
 # OS
 .DS_Store
 Thumbs.db
-desktop.ini
 
 # Tests
 /coverage/
 .phpunit.result.cache
 
-# Misc
-*.bak
-*.swp
-*~
+# wp-env
+/wp-env-home/
 ```
 
-### .gitignore pour Theme
+### Theme WordPress
 
 ```gitignore
 # Build
@@ -279,11 +220,11 @@ desktop.ini
 .DS_Store
 Thumbs.db
 
-# Source maps en production
+# Source maps
 *.map
 ```
 
-### .gitignore pour Plugin
+### Plugin WordPress
 
 ```gitignore
 # Build
@@ -313,141 +254,70 @@ Thumbs.db
 /*.zip
 ```
 
-## Configuration EditorConfig
+## Configuration wp-cli.yml
 
-```ini
-# .editorconfig
-root = true
+```yaml
+# wp-cli.yml
+path: wp
 
-[*]
-charset = utf-8
-end_of_line = lf
-indent_size = 4
-indent_style = tab
-insert_final_newline = true
-trim_trailing_whitespace = true
+# Alias pour les environnements
+@staging:
+  ssh: user@staging.example.com
+  path: /var/www/staging/wp
 
-[*.md]
-trim_trailing_whitespace = false
+@production:
+  ssh: user@production.example.com
+  path: /var/www/production/wp
 
-[*.{yml,yaml}]
-indent_style = space
-indent_size = 2
+# Configuration par défaut
+config create:
+  dbprefix: wp_
+  locale: fr_FR
+  extra-php: |
+    define( 'WP_DEBUG', false );
+    define( 'WP_DEBUG_LOG', false );
 
-[*.json]
-indent_style = space
-indent_size = 2
-
-[{package.json,composer.json}]
-indent_style = space
-indent_size = 4
-
-[*.{js,jsx,ts,tsx}]
-indent_style = space
-indent_size = 2
+core install:
+  admin_user: admin
+  admin_email: admin@example.com
 ```
 
-## Gestion des Branches
-
-### Configuration Gitflow
-
-```bash
-# Branches principales
-git branch main      # Production
-git branch develop   # Développement
-
-# Configurer la branche par défaut
-git config init.defaultBranch main
-
-# Protection de branches (via GitHub CLI)
-gh api repos/{owner}/{repo}/branches/main/protection \
-    -X PUT \
-    -f required_status_checks='{"strict":true,"contexts":["ci"]}' \
-    -f enforce_admins=true \
-    -f required_pull_request_reviews='{"required_approving_review_count":1}'
-```
-
-### Workflow de Branches
-
-```bash
-# Nouvelle feature
-git checkout develop
-git checkout -b feature/nouvelle-fonctionnalite
-# ... développement ...
-git push -u origin feature/nouvelle-fonctionnalite
-# Créer PR vers develop
-
-# Hotfix
-git checkout main
-git checkout -b hotfix/correction-urgente
-# ... correction ...
-git push -u origin hotfix/correction-urgente
-# Créer PR vers main ET develop
-
-# Release
-git checkout develop
-git checkout -b release/1.2.0
-# ... derniers ajustements ...
-git push -u origin release/1.2.0
-# Créer PR vers main
-```
-
-## Initialisation de Fichiers de Base
-
-### README.md
-
-```markdown
-# Nom du Projet
-
-Description courte du projet.
-
-## Prérequis
-
-- PHP >= 8.0
-- WordPress >= 6.0
-- Node.js >= 18
-
-## Installation
-
-```bash
-git clone git@github.com:organisation/projet.git
-cd projet
-composer install
-npm install
-npm run build
-```
-
-## Développement
-
-```bash
-npm run start    # Watch mode
-npm run build    # Build production
-npm run lint     # Linting
-npm run test     # Tests
-```
-
-## Structure
-
-- `/src` - Sources JavaScript/SCSS
-- `/build` - Fichiers compilés (généré)
-- `/inc` - Classes PHP
-- `/templates` - Templates HTML
-
-## Déploiement
-
-Les déploiements sont automatisés via GitHub Actions :
-
-- `develop` → Staging
-- `main` → Production
-
-```
-
-### composer.json
+## Configuration .wp-env.json
 
 ```json
 {
-    "name": "organisation/mon-projet",
-    "description": "Description du projet",
+    "core": null,
+    "phpVersion": "8.2",
+    "plugins": [
+        "./wp-content/plugins/mon-plugin"
+    ],
+    "themes": [
+        "./wp-content/themes/mon-theme"
+    ],
+    "config": {
+        "WP_DEBUG": true,
+        "WP_DEBUG_LOG": true,
+        "SCRIPT_DEBUG": true
+    },
+    "mappings": {
+        "wp-content/uploads": "./uploads"
+    },
+    "env": {
+        "tests": {
+            "config": {
+                "WP_DEBUG": false
+            }
+        }
+    }
+}
+```
+
+## composer.json WordPress
+
+```json
+{
+    "name": "organisation/mon-projet-wordpress",
+    "description": "Projet WordPress",
     "type": "wordpress-theme",
     "license": "GPL-2.0-or-later",
     "require": {
@@ -457,7 +327,8 @@ Les déploiements sont automatisés via GitHub Actions :
         "wp-coding-standards/wpcs": "^3.0",
         "phpcompatibility/phpcompatibility-wp": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "yoast/phpunit-polyfills": "^2.0"
     },
     "scripts": {
         "phpcs": "phpcs",
@@ -472,53 +343,39 @@ Les déploiements sont automatisés via GitHub Actions :
 }
 ```
 
-### package.json
+## package.json WordPress
 
 ```json
 {
-    "name": "mon-projet",
+    "name": "mon-projet-wordpress",
     "version": "1.0.0",
-    "description": "Description du projet",
+    "description": "Projet WordPress",
     "scripts": {
         "build": "wp-scripts build",
         "start": "wp-scripts start",
         "lint:js": "wp-scripts lint-js",
         "lint:css": "wp-scripts lint-style",
-        "lint": "npm run lint:js && npm run lint:css",
-        "test": "wp-scripts test-unit-js"
+        "lint:php": "composer phpcs",
+        "lint": "npm run lint:js && npm run lint:css && npm run lint:php",
+        "test:js": "wp-scripts test-unit-js",
+        "test:php": "composer test",
+        "test": "npm run test:js && npm run test:php",
+        "env:start": "wp-env start",
+        "env:stop": "wp-env stop",
+        "env:clean": "wp-env clean"
     },
     "devDependencies": {
+        "@wordpress/env": "^9.0.0",
         "@wordpress/scripts": "^27.0.0"
     }
 }
 ```
 
-## Configuration des Remotes
+## Bonnes Pratiques WordPress
 
-```bash
-# Ajouter un remote
-git remote add origin git@github.com:organisation/projet.git
-git remote add upstream git@github.com:original/projet.git
-
-# Vérifier les remotes
-git remote -v
-
-# Changer l'URL d'un remote
-git remote set-url origin git@github.com:new-organisation/projet.git
-
-# Supprimer un remote
-git remote remove upstream
-
-# Fetch depuis tous les remotes
-git fetch --all
-```
-
-## Bonnes Pratiques
-
-1. **Un commit = une modification logique**
-2. **Messages de commit clairs** (convention : type(scope): message)
-3. **Ne jamais commiter de credentials**
-4. **Utiliser des branches pour chaque feature**
-5. **Faire des PR pour review**
-6. **Taguer les releases**
-7. **Documenter dans le README**
+1. **Ne jamais versionner wp-config.php** : Utiliser .env ou variables d'environnement
+2. **Ignorer /uploads/** : Trop volumineux, synchroniser séparément
+3. **Build séparé** : Toujours ignorer /build/, regénérer en CI
+4. **Plugins commerciaux** : Ignorer ou gérer via Composer privé
+5. **mu-plugins versionné** : Code custom critique doit être versionné
+6. **wp-cli.yml** : Facilite les déploiements et la synchro
