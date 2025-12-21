@@ -83,3 +83,46 @@ Invoque le skill `web-agency` pour :
 2. **Supervision humaine** - Livrables à valider avant envoi
 3. **Traçabilité** - Décisions documentées
 4. **Escalade claire** - Quand solliciter un humain
+
+## Tests
+
+Les tests valident la structure des agents, le routage, et les templates.
+
+**Prérequis** : Node.js >= 14.0.0 (pas de dépendances npm à installer)
+
+### Exécuter tous les tests
+
+```bash
+cd .claude/skills/web-agency/tests
+bash run-tests.sh
+```
+
+### Exécuter un test spécifique
+
+```bash
+cd .claude/skills/web-agency/tests
+
+# Tests de structure
+node validate-agents.test.js
+node validate-templates.test.js
+
+# Tests de routage
+node validate-routing.test.js
+node validate-orchestrator-routing.test.js
+
+# Tests d'intégration
+node validate-workflows.test.js
+node validate-template-generation.test.js
+node validate-agent-examples.test.js
+```
+
+### CI/CD
+
+Les tests s'exécutent automatiquement sur chaque PR via GitHub Actions.
+Un rapport de test est posté en commentaire de la PR.
+
+## Documentation
+
+- `CHANGELOG.md` - Historique des versions
+- `CONTRIBUTING.md` - Guide pour ajouter des agents
+- `docs/examples.md` - Exemples d'utilisation
