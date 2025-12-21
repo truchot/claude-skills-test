@@ -14,17 +14,28 @@ let passed = 0;
 let failed = 0;
 
 /**
- * Find all .md files recursively
+ * Find all .md files recursively (with depth limit and error handling)
  */
-function findMarkdownFiles(dir, files = []) {
-  const items = fs.readdirSync(dir);
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    if (fs.statSync(fullPath).isDirectory()) {
-      findMarkdownFiles(fullPath, files);
-    } else if (item.endsWith('.md')) {
-      files.push(fullPath);
+function findMarkdownFiles(dir, files = [], depth = 0, maxDepth = 5) {
+  if (depth > maxDepth) return files;
+
+  try {
+    const items = fs.readdirSync(dir);
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      try {
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {
+          findMarkdownFiles(fullPath, files, depth + 1, maxDepth);
+        } else if (item.endsWith('.md')) {
+          files.push(fullPath);
+        }
+      } catch (err) {
+        console.error(`Warning: Cannot access ${fullPath}: ${err.message}`);
+      }
     }
+  } catch (err) {
+    console.error(`Warning: Cannot read directory ${dir}: ${err.message}`);
   }
   return files;
 }
@@ -80,10 +91,16 @@ function extractAgentReferences(content) {
  * Validate orchestrator routing
  */
 function validateOrchestrator(filePath, existingAgents) {
-  const relativePath = path.relative(AGENTS_DIR, filePath);
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const references = extractAgentReferences(content);
   const errors = [];
+
+  let content;
+  try {
+    content = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    return { references: 0, errors: [`Cannot read file: ${err.message}`] };
+  }
+
+  const references = extractAgentReferences(content);
 
   for (const ref of references) {
     // Check if the referenced agent exists
@@ -107,6 +124,12 @@ function validateOrchestrator(filePath, existingAgents) {
 // Main execution
 console.log('🧪 Validating Routing Consistency\n');
 console.log('='.repeat(50));
+
+// Check if agents directory exists
+if (!fs.existsSync(AGENTS_DIR)) {
+  console.error(`❌ Agents directory not found: ${AGENTS_DIR}`);
+  process.exit(1);
+}
 
 const allFiles = findMarkdownFiles(AGENTS_DIR);
 const orchestratorFiles = allFiles.filter(f => f.includes('orchestrator'));

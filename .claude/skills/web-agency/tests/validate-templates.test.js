@@ -12,7 +12,6 @@ const path = require('path');
 
 const SKILL_DIR = path.join(__dirname, '..');
 const TEMPLATES_DIR = path.join(SKILL_DIR, 'templates/project-management');
-const AGENTS_DIR = path.join(SKILL_DIR, 'agents/project-management');
 
 let passed = 0;
 let failed = 0;
@@ -32,17 +31,16 @@ const EXPECTED_TEMPLATES = [
 ];
 
 /**
- * Required sections for templates
- */
-const REQUIRED_SECTIONS = [
-  'Informations',  // Or similar header section
-];
-
-/**
  * Validate template structure
  */
 function validateTemplate(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8');
+  let content;
+  try {
+    content = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    return [`Cannot read file: ${err.message}`];
+  }
+
   const errors = [];
 
   // Check for main heading
@@ -70,7 +68,7 @@ console.log('='.repeat(50));
 
 // Check if templates directory exists
 if (!fs.existsSync(TEMPLATES_DIR)) {
-  console.log('❌ Templates directory not found:', TEMPLATES_DIR);
+  console.error(`❌ Templates directory not found: ${TEMPLATES_DIR}`);
   process.exit(1);
 }
 
@@ -102,7 +100,13 @@ for (const template of EXPECTED_TEMPLATES) {
 // List any extra templates
 console.log('\n📋 Extra templates found:\n');
 
-const actualTemplates = fs.readdirSync(TEMPLATES_DIR).filter(f => f.endsWith('.md'));
+let actualTemplates = [];
+try {
+  actualTemplates = fs.readdirSync(TEMPLATES_DIR).filter(f => f.endsWith('.md'));
+} catch (err) {
+  console.error(`Warning: Cannot list templates: ${err.message}`);
+}
+
 const extraTemplates = actualTemplates.filter(t => !EXPECTED_TEMPLATES.includes(t));
 
 if (extraTemplates.length === 0) {

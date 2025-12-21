@@ -20,23 +20,34 @@ let failed = 0;
 const errors = [];
 
 /**
- * Find all .md files recursively
+ * Find all .md files recursively (with depth limit)
  */
-function findMarkdownFiles(dir, files = []) {
-  const items = fs.readdirSync(dir);
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    if (fs.statSync(fullPath).isDirectory()) {
-      findMarkdownFiles(fullPath, files);
-    } else if (item.endsWith('.md')) {
-      files.push(fullPath);
+function findMarkdownFiles(dir, files = [], depth = 0, maxDepth = 5) {
+  if (depth > maxDepth) return files;
+
+  try {
+    const items = fs.readdirSync(dir);
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      try {
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {
+          findMarkdownFiles(fullPath, files, depth + 1, maxDepth);
+        } else if (item.endsWith('.md')) {
+          files.push(fullPath);
+        }
+      } catch (err) {
+        console.error(`Warning: Cannot access ${fullPath}: ${err.message}`);
+      }
     }
+  } catch (err) {
+    console.error(`Warning: Cannot read directory ${dir}: ${err.message}`);
   }
   return files;
 }
 
 /**
- * Parse YAML frontmatter
+ * Parse YAML frontmatter (simple parser for basic key: value)
  */
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/);
@@ -45,9 +56,13 @@ function parseFrontmatter(content) {
   const frontmatter = {};
   const lines = match[1].split('\n');
   for (const line of lines) {
-    const [key, ...valueParts] = line.split(':');
-    if (key && valueParts.length > 0) {
-      frontmatter[key.trim()] = valueParts.join(':').trim();
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim();
+      const value = line.substring(colonIndex + 1).trim();
+      if (key) {
+        frontmatter[key] = value;
+      }
     }
   }
   return frontmatter;
@@ -57,10 +72,15 @@ function parseFrontmatter(content) {
  * Validate a single agent file
  */
 function validateAgent(filePath) {
-  const relativePath = path.relative(AGENTS_DIR, filePath);
-  const content = fs.readFileSync(filePath, 'utf-8');
   const isOrchestrator = filePath.includes('orchestrator');
   const fileErrors = [];
+
+  let content;
+  try {
+    content = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    return [`Cannot read file: ${err.message}`];
+  }
 
   // Check frontmatter
   const frontmatter = parseFrontmatter(content);
@@ -105,7 +125,13 @@ function validateAgent(filePath) {
 
 // Main execution
 console.log('🧪 Validating Agent Structure\n');
-console.log('=' .repeat(50));
+console.log('='.repeat(50));
+
+// Check if agents directory exists
+if (!fs.existsSync(AGENTS_DIR)) {
+  console.error(`❌ Agents directory not found: ${AGENTS_DIR}`);
+  process.exit(1);
+}
 
 const files = findMarkdownFiles(AGENTS_DIR);
 console.log(`Found ${files.length} agent files\n`);
