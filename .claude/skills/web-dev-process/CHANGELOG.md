@@ -5,6 +5,15 @@ Toutes les modifications notables de ce skill sont documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
+## [1.1.1] - 2024-12-21
+
+### Changed
+- Optimisation CI : cache `node_modules` partagé entre jobs
+- Nouveau job `install` dédié avec cache conditionnel
+- Suppression des `pnpm install` redondants (~10-15s économisés par job)
+
+---
+
 ## [1.1.0] - 2024-12-21
 
 ### Added
