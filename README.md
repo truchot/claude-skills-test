@@ -1,44 +1,212 @@
-# Project Name
+# Claude Skills - Web Agency
 
-A brief description of what this project does and who it's for.
+Collection de skills Claude pour industrialiser les métiers d'une agence Web, avec supervision humaine.
 
-## Features
+## Philosophie
 
-- Feature 1
-- Feature 2
-- Feature 3
+> **Les agents exécutent, les humains supervisent et décident.**
+
+```
+CLIENT <--> HUMAIN (supervision) <--> AGENTS (exécution)
+```
+
+## Skills Disponibles
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [web-agency](.claude/skills/web-agency/) | Gestion de projet, relation client, facturation | 24 | Actif |
+| [web-dev-process](.claude/skills/web-dev-process/) | Process de développement web (7 phases) | 61 | Actif |
+| [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Expert WordPress & Gutenberg | 41 | Actif |
+
+**Total : 126 agents spécialisés**
+
+## Architecture
+
+```
+.claude/skills/
+├── web-agency/                    # Métiers agence (gestion projet, client)
+│   ├── SKILL.md                   # Orchestrateur principal
+│   ├── agents/                    # 24 agents spécialisés
+│   │   └── project-management/    # Gestion de projet
+│   ├── templates/                 # 8 templates réutilisables
+│   └── tests/                     # Suite de validation
+│
+├── web-dev-process/               # Process technique générique
+│   ├── SKILL.md                   # Orchestrateur 7 phases
+│   ├── agents/                    # 61 agents (discovery → maintenance)
+│   ├── configs/                   # ESLint, Prettier, Commitlint
+│   ├── templates/                 # PR, Issues, ADR
+│   └── workflows/                 # GitHub Actions, GitLab CI
+│
+└── wordpress-gutenberg-expert/    # Implémentation WordPress
+    ├── SKILL.md                   # Orchestrateur WP
+    ├── agents/                    # 41 agents (WP Core, Gutenberg, Theme)
+    ├── docs/                      # Guides et troubleshooting
+    └── references/                # Guides d'implémentation
+```
+
+## Domaines Métiers
+
+### web-agency
+
+| Domaine | Statut | Description |
+|---------|--------|-------------|
+| Gestion de projet | Actif | Brief, estimation, planning, suivi, facturation |
+| Stratégie & Conseil | À venir | Audit, benchmark, recommandations |
+| Design & Création | À venir | DA, branding, maquettes |
+| Contenu & Rédaction | À venir | Copywriting, SEO éditorial |
+| Marketing Digital | À venir | SEO, SEA, analytics, social media |
+
+### web-dev-process (7 phases)
+
+1. **Discovery** - Exigences, user stories, scope
+2. **Design** - Architecture, API, UI/UX, accessibilité
+3. **Setup** - Git, environnements, CI/CD, qualité
+4. **Development** - Standards, code review, documentation
+5. **Testing** - Unit, intégration, e2e, performance, sécurité
+6. **Deployment** - Staging, production, rollback
+7. **Maintenance** - Monitoring, alerting, mises à jour
+
+### wordpress-gutenberg-expert
+
+- **WP Core** : CPT, taxonomies, hooks, meta, sécurité
+- **Gutenberg** : Blocks, variations, styles, data stores
+- **Theme** : Block themes, theme.json, FSE, Interactivity API
+- **Tooling** : WP-CLI, wp-env, CI/CD, déploiement
+- **Testing** : PHPUnit, Jest, Playwright
+- **Spécialistes** : REST API, RGPD, i18n, SEO, Accessibilité
 
 ## Installation
 
-```bash
-# Add installation commands here
-npm install
-```
-
-## Usage
+Ces skills sont conçus pour être utilisés avec [Claude Code](https://docs.anthropic.com/claude-code).
 
 ```bash
-# Add usage examples here
-npm start
+# Cloner le repository
+git clone https://github.com/truchot/claude-skills-test.git
+
+# Les skills sont automatiquement disponibles dans Claude Code
+# depuis le dossier .claude/skills/
 ```
 
-```javascript
-// Code examples if applicable
-const example = require('./example');
+## Utilisation
+
+### Avec Claude Code
+
+Les skills sont automatiquement chargés. Exemples de requêtes :
+
+```
+# Gestion de projet
+"Aide-moi à rédiger un brief client pour un site e-commerce"
+"Crée une estimation pour ce projet"
+"Génère un planning de production"
+
+# Développement web
+"Comment structurer mes user stories ?"
+"Quelle architecture pour mon API REST ?"
+"Configure mon pipeline CI/CD"
+
+# WordPress
+"Comment créer un custom post type ?"
+"Aide-moi à créer un block Gutenberg"
+"Comment configurer theme.json ?"
 ```
 
-## Configuration
+### Composition des Skills
 
-Describe any configuration options or environment variables needed.
+Les skills fonctionnent ensemble :
 
-## Contributing
+```
+web-agency (QUOI livrer au client)
+    │
+    └── web-dev-process (COMMENT développer - générique)
+            │
+            └── wordpress-gutenberg-expert (COMMENT - WordPress)
+```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Tests
 
-## License
+```bash
+# Tests web-agency
+cd .claude/skills/web-agency/tests
+bash run-tests.sh
 
-Specify your license here (e.g., MIT, Apache 2.0, etc.)
+# Tests individuels
+node validate-agents.test.js
+node validate-templates.test.js
+node validate-routing.test.js
+```
 
-## Contact
+## Structure d'un Agent
 
-Your contact information or links to support channels.
+Chaque agent suit le principe de responsabilité unique (SRP) :
+
+```markdown
+---
+name: agent-name
+description: Description courte
+---
+
+# Titre de l'Agent
+
+## Contexte
+[Quand utiliser cet agent]
+
+## Responsabilités
+[Ce que fait l'agent]
+
+## Entrées
+[Ce dont l'agent a besoin]
+
+## Sorties
+[Ce que l'agent produit]
+
+## Règles
+[Contraintes et bonnes pratiques]
+```
+
+## Principes de Conception
+
+1. **Supervision humaine** : Tous les livrables nécessitent une validation humaine
+2. **Traçabilité** : Historique complet des décisions et modifications
+3. **Escalade claire** : Critères définis pour solliciter un humain
+4. **Templates réutilisables** : Modèles standardisés pour chaque type de livrable
+5. **Single Responsibility** : Un agent = une responsabilité
+
+## Contribuer
+
+Les contributions sont les bienvenues ! Voir [CONTRIBUTING.md](.claude/skills/web-agency/CONTRIBUTING.md) pour les guidelines.
+
+### Développement
+
+```bash
+# Créer une branche
+git checkout -b feature/mon-agent
+
+# Valider les tests
+cd .claude/skills/web-agency/tests && bash run-tests.sh
+
+# Commit conventionnel
+git commit -m "feat(web-agency): add new agent for X"
+```
+
+## Roadmap
+
+- [x] Domaine 1 : Gestion de projet (24 agents)
+- [x] web-dev-process : 7 phases (61 agents)
+- [x] wordpress-gutenberg-expert (41 agents)
+- [ ] Domaine 2 : Stratégie & Conseil
+- [ ] Domaine 3 : Design & Création
+- [ ] Domaine 5 : Contenu & Rédaction
+- [ ] Domaine 6 : Marketing Digital
+- [ ] Tests pour web-dev-process
+- [ ] Tests pour wordpress-gutenberg-expert
+
+## Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## Ressources
+
+- [Documentation Claude Code](https://docs.anthropic.com/claude-code)
+- [WordPress Developer Resources](https://developer.wordpress.org/)
+- [Gutenberg Handbook](https://developer.wordpress.org/block-editor/)
