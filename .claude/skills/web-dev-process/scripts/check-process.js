@@ -49,6 +49,9 @@ const PACKAGE_JSON_CHECKS = [
   { field: 'scripts.build', required: false, description: 'Script de build' },
 ];
 
+/** Protected branch names that indicate main development branches */
+const PROTECTED_BRANCHES = ['main', 'master', 'develop'];
+
 // =============================================================================
 // Helpers
 // =============================================================================
@@ -167,7 +170,7 @@ function checkGitStatus() {
 
     // Vérifier la branche principale
     const branch = execSync('git branch --show-current', { stdio: 'pipe' }).toString().trim();
-    if (['main', 'master', 'develop'].includes(branch)) {
+    if (PROTECTED_BRANCHES.includes(branch)) {
       log(icons.info, `Branche actuelle: ${branch}`);
     }
 

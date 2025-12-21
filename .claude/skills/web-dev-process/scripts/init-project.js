@@ -132,11 +132,12 @@ function installDependencies(deps, pm) {
   log('📦', `Installation des dépendances avec ${pm}...`);
 
   try {
-    execSync(commands[pm], { stdio: 'inherit' });
+    execSync(commands[pm], { stdio: 'inherit', timeout: 300000 });
     success('Dépendances installées');
     return true;
   } catch (err) {
-    error('Échec de l\'installation des dépendances');
+    error(`Échec de l'installation: ${err.message}`);
+    console.log(`\nEssayez manuellement: ${commands[pm]}\n`);
     return false;
   }
 }

@@ -90,4 +90,30 @@ Les workflows CI attendent ces scripts dans votre `package.json` :
 | `test` | ci.yml | Tests unitaires |
 | `build` | ci.yml, deploy-*.yml | Build production |
 
-> **Note** : Les workflows utilisent `pnpm` comme package manager. Assurez-vous d'avoir un `pnpm-lock.yaml` dans votre projet.
+## Package Manager
+
+Les workflows utilisent **pnpm** par défaut. Pour utiliser un autre package manager :
+
+| Package Manager | Modifications requises |
+|-----------------|------------------------|
+| **npm** | Remplacer `pnpm` par `npm`, supprimer `pnpm/action-setup`, utiliser `package-lock.json` |
+| **yarn** | Remplacer `pnpm` par `yarn`, utiliser `yarn.lock`, configurer cache yarn |
+| **bun** | Remplacer `pnpm` par `bun`, utiliser `oven-sh/setup-bun`, utiliser `bun.lockb` |
+
+Exemple d'adaptation pour npm :
+
+```yaml
+# Supprimer cette étape:
+# - name: Setup pnpm
+#   uses: pnpm/action-setup@v4
+
+# Modifier le cache:
+- name: Setup Node.js
+  uses: actions/setup-node@v4
+  with:
+    node-version: ${{ env.NODE_VERSION }}
+    cache: 'npm'  # Au lieu de 'pnpm'
+
+# Modifier les commandes:
+- run: npm ci  # Au lieu de pnpm install --frozen-lockfile
+```
