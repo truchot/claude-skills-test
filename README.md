@@ -14,20 +14,21 @@ CLIENT <--> HUMAIN (supervision) <--> AGENTS (exécution)
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [web-agency](.claude/skills/web-agency/) | Gestion de projet, relation client, facturation | 24 | Actif |
+| [web-agency](.claude/skills/web-agency/) | Gestion de projet, technique, relation client | 30 | Actif |
 | [web-dev-process](.claude/skills/web-dev-process/) | Process de développement web (7 phases) | 61 | Actif |
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Expert WordPress & Gutenberg | 41 | Actif |
 
-**Total : 126 agents spécialisés**
+**Total : 132 agents spécialisés**
 
 ## Architecture
 
 ```
 .claude/skills/
-├── web-agency/                    # Métiers agence (gestion projet, client)
+├── web-agency/                    # Métiers agence (gestion projet, technique, client)
 │   ├── SKILL.md                   # Orchestrateur principal
-│   ├── agents/                    # 24 agents spécialisés
-│   │   └── project-management/    # Gestion de projet
+│   ├── agents/                    # 30 agents spécialisés
+│   │   ├── project-management/    # Gestion de projet (24 agents)
+│   │   └── technical/             # Technique & Développement (6 agents)
 │   ├── templates/                 # 8 templates réutilisables
 │   └── tests/                     # Suite de validation
 │
@@ -52,10 +53,21 @@ CLIENT <--> HUMAIN (supervision) <--> AGENTS (exécution)
 | Domaine | Statut | Description |
 |---------|--------|-------------|
 | Gestion de projet | Actif | Brief, estimation, planning, suivi, facturation |
+| Technique & Développement | Actif | Stack, specs techniques, architecture, qualité |
 | Stratégie & Conseil | À venir | Audit, benchmark, recommandations |
 | Design & Création | À venir | DA, branding, maquettes |
 | Contenu & Rédaction | À venir | Copywriting, SEO éditorial |
 | Marketing Digital | À venir | SEO, SEA, analytics, social media |
+
+Le domaine **Technique** orchestre les skills `web-dev-process` et `wordpress-gutenberg-expert` :
+
+```
+web-agency/technical (6 agents)
+    │
+    ├── web-dev-process (61 agents) - Process générique
+    │
+    └── wordpress-gutenberg-expert (41 agents) - WordPress
+```
 
 ### web-dev-process (7 phases)
 
@@ -192,10 +204,11 @@ git commit -m "feat(web-agency): add new agent for X"
 ## Roadmap
 
 - [x] Domaine 1 : Gestion de projet (24 agents)
+- [x] Domaine 2 : Technique & Développement (6 agents)
 - [x] web-dev-process : 7 phases (61 agents)
 - [x] wordpress-gutenberg-expert (41 agents)
-- [ ] Domaine 2 : Stratégie & Conseil
-- [ ] Domaine 3 : Design & Création
+- [ ] Domaine 3 : Stratégie & Conseil
+- [ ] Domaine 4 : Design & Création
 - [ ] Domaine 5 : Contenu & Rédaction
 - [ ] Domaine 6 : Marketing Digital
 - [ ] Tests pour web-dev-process
