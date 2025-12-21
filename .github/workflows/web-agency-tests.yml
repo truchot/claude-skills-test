@@ -1,0 +1,39 @@
+name: Web Agency Skill Tests
+
+on:
+  pull_request:
+    paths:
+      - '.claude/skills/web-agency/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '.claude/skills/web-agency/**'
+
+jobs:
+  test:
+    name: Validate Web Agency Skill
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run validation tests
+        working-directory: .claude/skills/web-agency/tests
+        run: |
+          echo "🧪 Running Web Agency Skill Tests"
+          bash run-tests.sh
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: .claude/skills/web-agency/tests/
+          retention-days: 7
