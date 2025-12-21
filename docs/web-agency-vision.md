@@ -16,7 +16,7 @@ Les agents IA exécutent les tâches opérationnelles tandis que les humains ass
 
 | # | Domaine | Skill | Statut |
 |---|---------|-------|--------|
-| 1 | **Gestion de projet & Relation client** | `web-agency/project-management` | 🔴 À créer |
+| 1 | **Gestion de projet & Relation client** | `web-agency/project-management` | 🟢 Actif |
 | 2 | **Stratégie & Conseil** | `web-agency/strategy` | 🔴 À créer |
 | 3 | **Design & Création graphique** | `web-agency/design` | 🔴 À créer |
 | 4 | **Technique & Développement** | `web-dev-process` | 🟢 Existant |
@@ -188,9 +188,9 @@ Acquisition, visibilité, conversion et fidélisation.
 ## Roadmap de développement
 
 ### Phase 1 : Gestion de projet (prioritaire)
-- [ ] Structurer les agents
+- [x] Structurer les agents (24 agents SRP)
 - [ ] Créer les templates (brief, devis, planning)
-- [ ] Définir les workflows
+- [x] Définir les workflows
 
 ### Phase 2 : Contenu & Rédaction
 - [ ] Agents de rédaction

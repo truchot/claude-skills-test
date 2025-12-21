@@ -46,30 +46,38 @@ Tu coordonnes la **gestion de projet et la relation client** au sein de l'agence
 Requête Gestion de Projet
 │
 ├─ Phase commerciale (avant signature) ?
-│  ├─ Brief ou besoin client → avant-projet/brief-client
-│  ├─ Estimation ou chiffrage → avant-projet/estimation
-│  └─ Proposition commerciale → avant-projet/proposition
+│  ├─ Collecter le besoin brut → avant-projet/collecte-besoin
+│  ├─ Structurer le brief → avant-projet/formalisation-brief
+│  ├─ Questions à poser → avant-projet/questions-clarification
+│  ├─ Découper le périmètre → avant-projet/analyse-perimetre
+│  ├─ Chiffrer les charges → avant-projet/chiffrage
+│  ├─ Identifier les risques → avant-projet/hypotheses-risques
+│  └─ Rédiger la proposition → avant-projet/redaction-proposition
 │
 ├─ Projet en cours ?
-│  ├─ Planning ou jalons → pilotage/planning
-│  ├─ Suivi ou reporting → pilotage/suivi-avancement
-│  ├─ Risques ou alertes → pilotage/risques
-│  └─ Équipe ou ressources → pilotage/ressources
+│  ├─ Créer le planning → pilotage/creation-planning
+│  ├─ Analyser dépendances → pilotage/analyse-dependances
+│  ├─ Reporting hebdo → pilotage/reporting-hebdo
+│  ├─ Analyser les écarts → pilotage/analyse-ecarts
+│  └─ Alertes et risques → pilotage/alertes-projet
 │
 ├─ Communication client ?
 │  ├─ Compte-rendu réunion → communication/compte-rendu
-│  ├─ Email à rédiger → communication/email-client
-│  └─ Présentation → communication/presentation
+│  ├─ Demander validation → communication/email-demande-validation
+│  ├─ Relancer le client → communication/email-relance
+│  ├─ Annoncer livraison → communication/email-annonce-livraison
+│  ├─ Annoncer un retard → communication/email-annonce-retard
+│  └─ Demander des infos → communication/email-demande-information
 │
 ├─ Fin de projet ?
-│  ├─ Recette ou validation → livraison/recettage
-│  ├─ Documentation livraison → livraison/documentation
-│  └─ Bilan projet → livraison/bilan
+│  ├─ Préparer la recette → livraison/plan-recette
+│  ├─ Créer cas de test → livraison/grille-recette
+│  ├─ Suivre les anomalies → livraison/suivi-anomalies
+│  └─ Générer le PV → livraison/pv-recette
 │
 └─ Facturation ?
-   ├─ Échéancier → facturation/jalons-facturation
-   ├─ Génération facture → facturation/facture
-   └─ Relance impayé → facturation/relance
+   ├─ Préparer facture → facturation/preparation-facture
+   └─ Suivre paiements → facturation/suivi-paiements
 ```
 
 ## Cycle de Vie Projet
