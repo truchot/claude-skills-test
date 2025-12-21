@@ -2,13 +2,21 @@
 /**
  * Test: Validate Templates
  *
- * Checks that:
- * - All referenced templates exist
- * - Templates have required structure
+ * Validates that:
+ * - All expected templates exist
+ * - Templates have proper structure (headings, tables)
+ * - Templates are not empty or malformed
+ *
+ * @module tests/validate-templates
  */
 
 const fs = require('fs');
 const path = require('path');
+const {
+  safeReadFile,
+  directoryExists,
+  printSeparator
+} = require('./utils');
 
 const SKILL_DIR = path.join(__dirname, '..');
 const TEMPLATES_DIR = path.join(SKILL_DIR, 'templates/project-management');
@@ -17,7 +25,8 @@ let passed = 0;
 let failed = 0;
 
 /**
- * Expected templates based on orchestrator references
+ * Expected templates based on orchestrator and agent references
+ * @type {string[]}
  */
 const EXPECTED_TEMPLATES = [
   'brief-client.md',
@@ -31,14 +40,15 @@ const EXPECTED_TEMPLATES = [
 ];
 
 /**
- * Validate template structure
+ * Validate template structure and content
+ *
+ * @param {string} filePath - Path to template file
+ * @returns {string[]} Array of validation errors (empty if valid)
  */
 function validateTemplate(filePath) {
-  let content;
-  try {
-    content = fs.readFileSync(filePath, 'utf-8');
-  } catch (err) {
-    return [`Cannot read file: ${err.message}`];
+  const { content, error } = safeReadFile(filePath);
+  if (error) {
+    return [error];
   }
 
   const errors = [];
@@ -59,20 +69,23 @@ function validateTemplate(filePath) {
     errors.push('Template seems too short (< 3 sections)');
   }
 
+  // Check minimum content length
+  if (content.length < 500) {
+    errors.push('Template content too short (< 500 chars)');
+  }
+
   return errors;
 }
 
 // Main execution
 console.log('🧪 Validating Templates\n');
-console.log('='.repeat(50));
+printSeparator();
 
-// Check if templates directory exists
-if (!fs.existsSync(TEMPLATES_DIR)) {
+if (!directoryExists(TEMPLATES_DIR)) {
   console.error(`❌ Templates directory not found: ${TEMPLATES_DIR}`);
   process.exit(1);
 }
 
-// Check expected templates exist
 console.log('\n📁 Checking template existence:\n');
 
 for (const template of EXPECTED_TEMPLATES) {
@@ -117,7 +130,8 @@ if (extraTemplates.length === 0) {
   }
 }
 
-console.log('\n' + '='.repeat(50));
+console.log('\n');
+printSeparator();
 console.log(`\n📊 Results: ${passed} passed, ${failed} failed`);
 console.log(`   Templates expected: ${EXPECTED_TEMPLATES.length}`);
 console.log(`   Templates found: ${actualTemplates.length}`);

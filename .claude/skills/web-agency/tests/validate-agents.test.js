@@ -2,84 +2,44 @@
 /**
  * Test: Validate Agent Structure
  *
- * Checks that each agent file has:
- * - Valid YAML frontmatter (name, description)
- * - A main heading
- * - "Ta Responsabilité Unique" section (for non-orchestrators)
- * - "Tu NE fais PAS" section (for non-orchestrators)
+ * Validates that each agent file follows the required structure:
+ * - Valid YAML frontmatter with name and description
+ * - Main heading (H1)
+ * - "Ta Responsabilité Unique" section (for specialized agents)
+ * - "Tu NE fais PAS" section (for specialized agents)
+ * - Routing rules (for orchestrators)
+ *
+ * @module tests/validate-agents
  */
 
-const fs = require('fs');
 const path = require('path');
+const {
+  findMarkdownFiles,
+  safeReadFile,
+  parseFrontmatter,
+  directoryExists,
+  printSeparator
+} = require('./utils');
 
 const AGENTS_DIR = path.join(__dirname, '../agents/project-management');
 
 // Test results
 let passed = 0;
 let failed = 0;
-const errors = [];
 
 /**
- * Find all .md files recursively (with depth limit)
- */
-function findMarkdownFiles(dir, files = [], depth = 0, maxDepth = 5) {
-  if (depth > maxDepth) return files;
-
-  try {
-    const items = fs.readdirSync(dir);
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      try {
-        const stat = fs.statSync(fullPath);
-        if (stat.isDirectory()) {
-          findMarkdownFiles(fullPath, files, depth + 1, maxDepth);
-        } else if (item.endsWith('.md')) {
-          files.push(fullPath);
-        }
-      } catch (err) {
-        console.error(`Warning: Cannot access ${fullPath}: ${err.message}`);
-      }
-    }
-  } catch (err) {
-    console.error(`Warning: Cannot read directory ${dir}: ${err.message}`);
-  }
-  return files;
-}
-
-/**
- * Parse YAML frontmatter (simple parser for basic key: value)
- */
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return null;
-
-  const frontmatter = {};
-  const lines = match[1].split('\n');
-  for (const line of lines) {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      const value = line.substring(colonIndex + 1).trim();
-      if (key) {
-        frontmatter[key] = value;
-      }
-    }
-  }
-  return frontmatter;
-}
-
-/**
- * Validate a single agent file
+ * Validate a single agent file against required structure
+ *
+ * @param {string} filePath - Path to the agent file
+ * @returns {string[]} Array of error messages (empty if valid)
  */
 function validateAgent(filePath) {
   const isOrchestrator = filePath.includes('orchestrator');
   const fileErrors = [];
 
-  let content;
-  try {
-    content = fs.readFileSync(filePath, 'utf-8');
-  } catch (err) {
-    return [`Cannot read file: ${err.message}`];
+  const { content, error } = safeReadFile(filePath);
+  if (error) {
+    return [error];
   }
 
   // Check frontmatter
@@ -102,12 +62,10 @@ function validateAgent(filePath) {
 
   // Non-orchestrator specific checks
   if (!isOrchestrator) {
-    // Check for "Ta Responsabilité Unique" section
     if (!content.includes('Ta Responsabilité Unique') && !content.includes('Responsabilité Unique')) {
       fileErrors.push('Missing "Ta Responsabilité Unique" section');
     }
 
-    // Check for "Tu NE fais PAS" section
     if (!content.includes('Tu NE fais PAS') && !content.includes('Tu NE Fais PAS')) {
       fileErrors.push('Missing "Tu NE fais PAS" section');
     }
@@ -125,10 +83,9 @@ function validateAgent(filePath) {
 
 // Main execution
 console.log('🧪 Validating Agent Structure\n');
-console.log('='.repeat(50));
+printSeparator();
 
-// Check if agents directory exists
-if (!fs.existsSync(AGENTS_DIR)) {
+if (!directoryExists(AGENTS_DIR)) {
   console.error(`❌ Agents directory not found: ${AGENTS_DIR}`);
   process.exit(1);
 }
@@ -149,11 +106,11 @@ for (const file of files) {
       console.log(`   └─ ${err}`);
     }
     failed++;
-    errors.push({ file: relativePath, errors: fileErrors });
   }
 }
 
-console.log('\n' + '='.repeat(50));
+console.log('\n');
+printSeparator();
 console.log(`\n📊 Results: ${passed} passed, ${failed} failed`);
 
 if (failed > 0) {

@@ -22,7 +22,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: .claude/skills/web-agency/tests/package.json
 
       - name: Run validation tests
         working-directory: .claude/skills/web-agency/tests

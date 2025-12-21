@@ -2,11 +2,20 @@
 /**
  * Test: Validate Routing Consistency
  *
- * Checks that orchestrators reference agents that actually exist
+ * Validates that orchestrators reference agents that actually exist.
+ * Checks for broken references and orphaned agents.
+ *
+ * @module tests/validate-routing
  */
 
 const fs = require('fs');
 const path = require('path');
+const {
+  findMarkdownFiles,
+  safeReadFile,
+  directoryExists,
+  printSeparator
+} = require('./utils');
 
 const AGENTS_DIR = path.join(__dirname, '../agents/project-management');
 
@@ -14,44 +23,18 @@ let passed = 0;
 let failed = 0;
 
 /**
- * Find all .md files recursively (with depth limit and error handling)
- */
-function findMarkdownFiles(dir, files = [], depth = 0, maxDepth = 5) {
-  if (depth > maxDepth) return files;
-
-  try {
-    const items = fs.readdirSync(dir);
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      try {
-        const stat = fs.statSync(fullPath);
-        if (stat.isDirectory()) {
-          findMarkdownFiles(fullPath, files, depth + 1, maxDepth);
-        } else if (item.endsWith('.md')) {
-          files.push(fullPath);
-        }
-      } catch (err) {
-        console.error(`Warning: Cannot access ${fullPath}: ${err.message}`);
-      }
-    }
-  } catch (err) {
-    console.error(`Warning: Cannot read directory ${dir}: ${err.message}`);
-  }
-  return files;
-}
-
-/**
  * Get all agent names from file paths
+ *
+ * @param {string[]} files - Array of file paths
+ * @returns {Set<string>} Set of agent names (both short and full path forms)
  */
 function getAgentNames(files) {
   const agents = new Set();
   for (const file of files) {
     const relativePath = path.relative(AGENTS_DIR, file);
-    // Extract agent name: "pilotage/creation-planning.md" -> "creation-planning"
     const name = path.basename(file, '.md');
     agents.add(name);
 
-    // Also add with subdomain prefix: "pilotage/creation-planning"
     const dir = path.dirname(relativePath);
     if (dir !== '.') {
       agents.add(`${dir}/${name}`);
@@ -62,52 +45,62 @@ function getAgentNames(files) {
 
 /**
  * Extract agent references from orchestrator content
+ * Uses multiple patterns to catch different reference styles
+ *
+ * @param {string} content - Orchestrator markdown content
+ * @returns {string[]} Unique array of referenced agent names
  */
 function extractAgentReferences(content) {
-  const references = [];
+  const references = new Set();
 
-  // Match patterns like: `agent-name` or → agent-name or | `agent-name`
+  // Patterns for different reference styles
   const patterns = [
-    /`([a-z-]+)`/g,                           // `agent-name`
-    /→\s*([a-z-]+\/[a-z-]+)/g,                // → subdir/agent-name
-    /\|\s*`([a-z-]+\/[a-z-]+)`/g,             // | `subdir/agent-name`
+    /`([a-z][a-z0-9-]*)`/g,                    // `agent-name`
+    /→\s*([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)/g, // → subdir/agent-name
+    /\|\s*`([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)`/g, // | `subdir/agent-name`
   ];
+
+  // Non-agent keywords to skip
+  const skipKeywords = new Set([
+    'orchestrator', 'templates', 'docs', 'agents',
+    'project-management', 'web-agency', 'avant-projet',
+    'pilotage', 'communication', 'livraison', 'facturation'
+  ]);
 
   for (const pattern of patterns) {
     let match;
-    while ((match = pattern.exec(content)) !== null) {
+    const regex = new RegExp(pattern.source, pattern.flags);
+    while ((match = regex.exec(content)) !== null) {
       const ref = match[1];
-      // Skip common non-agent references
-      if (!['orchestrator', 'templates', 'docs', 'agents'].includes(ref)) {
-        references.push(ref);
+      if (!skipKeywords.has(ref) && !skipKeywords.has(ref.split('/')[0])) {
+        references.add(ref);
       }
     }
   }
 
-  return [...new Set(references)];
+  return [...references];
 }
 
 /**
- * Validate orchestrator routing
+ * Validate orchestrator routing references
+ *
+ * @param {string} filePath - Path to orchestrator file
+ * @param {Set<string>} existingAgents - Set of valid agent names
+ * @returns {{ references: number, errors: string[] }} Validation result
  */
 function validateOrchestrator(filePath, existingAgents) {
-  const errors = [];
-
-  let content;
-  try {
-    content = fs.readFileSync(filePath, 'utf-8');
-  } catch (err) {
-    return { references: 0, errors: [`Cannot read file: ${err.message}`] };
+  const { content, error } = safeReadFile(filePath);
+  if (error) {
+    return { references: 0, errors: [error] };
   }
 
   const references = extractAgentReferences(content);
+  const errors = [];
 
   for (const ref of references) {
-    // Check if the referenced agent exists
     const agentName = ref.includes('/') ? path.basename(ref) : ref;
 
     if (!existingAgents.has(agentName) && !existingAgents.has(ref)) {
-      // Special case: check if it's a subdir reference
       const possiblePath = ref.includes('/')
         ? path.join(AGENTS_DIR, ref + '.md')
         : null;
@@ -123,10 +116,9 @@ function validateOrchestrator(filePath, existingAgents) {
 
 // Main execution
 console.log('🧪 Validating Routing Consistency\n');
-console.log('='.repeat(50));
+printSeparator();
 
-// Check if agents directory exists
-if (!fs.existsSync(AGENTS_DIR)) {
+if (!directoryExists(AGENTS_DIR)) {
   console.error(`❌ Agents directory not found: ${AGENTS_DIR}`);
   process.exit(1);
 }
@@ -154,7 +146,8 @@ for (const file of orchestratorFiles) {
   }
 }
 
-console.log('\n' + '='.repeat(50));
+console.log('\n');
+printSeparator();
 console.log(`\n📊 Results: ${passed} passed, ${failed} failed`);
 
 if (failed > 0) {
