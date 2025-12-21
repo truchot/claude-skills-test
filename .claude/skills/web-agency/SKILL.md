@@ -1,6 +1,7 @@
 ---
 name: web-agency
 description: Agents IA pour industrialiser les métiers d'une agence Web - Gestion de projet, Technique, Stratégie, Design, Contenu, Marketing
+version: 1.1.0
 ---
 
 # Web Agency - Skill Principal
