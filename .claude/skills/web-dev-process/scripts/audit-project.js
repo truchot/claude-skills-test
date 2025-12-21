@@ -16,6 +16,11 @@
  *   --json       Sortie au format JSON
  *   --ci         Mode CI (exit codes stricts)
  *   --no-deps    Ignorer l'audit des dépendances
+ *   --verbose    Mode verbeux (affiche les erreurs de debug)
+ *
+ * Environment Variables:
+ *   AUDIT_DEBUG=1           Enable debug output (same as --verbose)
+ *   AUDIT_MAX_DEPTH=<n>     Maximum directory search depth (default: 5)
  */
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -26,11 +31,14 @@ import { execSync, spawnSync } from 'node:child_process';
 // Configuration
 // =============================================================================
 
-/** Maximum depth for recursive directory search to prevent infinite loops */
-const MAX_SEARCH_DEPTH = 5;
+/** Parse command line arguments early for configuration */
+const ARGS = process.argv.slice(2);
 
-/** Enable debug mode via environment variable for troubleshooting */
-const DEBUG = process.env.AUDIT_DEBUG === '1';
+/** Maximum depth for recursive directory search to prevent infinite loops */
+const MAX_SEARCH_DEPTH = parseInt(process.env.AUDIT_MAX_DEPTH, 10) || 5;
+
+/** Enable debug mode via environment variable or --verbose flag */
+const DEBUG = process.env.AUDIT_DEBUG === '1' || ARGS.includes('--verbose');
 
 const AUDIT_CHECKS = {
   process: {
@@ -375,10 +383,9 @@ function printJson(auditResults, depAudit, globalScore) {
 // =============================================================================
 
 function main() {
-  const args = process.argv.slice(2);
-  const jsonOutput = args.includes('--json');
-  const ciMode = args.includes('--ci');
-  const skipDeps = args.includes('--no-deps');
+  const jsonOutput = ARGS.includes('--json');
+  const ciMode = ARGS.includes('--ci');
+  const skipDeps = ARGS.includes('--no-deps');
 
   // Exécuter l'audit par catégorie
   const auditResults = Object.values(AUDIT_CHECKS).map(runCategoryAudit);

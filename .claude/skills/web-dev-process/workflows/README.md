@@ -65,3 +65,29 @@ Configurez ces secrets dans votre repository :
 | `NPM_TOKEN` | Publication npm (si applicable) |
 | `DEPLOY_TOKEN` | Déploiement (Vercel, Netlify, etc.) |
 | `CODECOV_TOKEN` | Couverture de code |
+
+## Scripts package.json Requis
+
+Les workflows CI attendent ces scripts dans votre `package.json` :
+
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "vite build"
+  }
+}
+```
+
+| Script | Workflow | Description |
+|--------|----------|-------------|
+| `lint` | ci.yml | Vérification ESLint |
+| `format:check` | ci.yml | Vérification Prettier |
+| `typecheck` | ci.yml | Vérification TypeScript |
+| `test` | ci.yml | Tests unitaires |
+| `build` | ci.yml, deploy-*.yml | Build production |
+
+> **Note** : Les workflows utilisent `pnpm` comme package manager. Assurez-vous d'avoir un `pnpm-lock.yaml` dans votre projet.
