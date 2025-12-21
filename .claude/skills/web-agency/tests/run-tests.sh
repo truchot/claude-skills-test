@@ -13,6 +13,10 @@ TESTS=(
   "validate-agents.test.js"
   "validate-routing.test.js"
   "validate-templates.test.js"
+  "validate-workflows.test.js"
+  "validate-orchestrator-routing.test.js"
+  "validate-template-generation.test.js"
+  "validate-agent-examples.test.js"
 )
 
 PASSED=0
