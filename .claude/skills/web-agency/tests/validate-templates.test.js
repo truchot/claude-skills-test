@@ -18,15 +18,25 @@ const {
   printSeparator
 } = require('./utils');
 
+// =============================================================================
+// Configuration Constants
+// =============================================================================
+
+/** @const {string} Base directory for skill */
 const SKILL_DIR = path.join(__dirname, '..');
+
+/** @const {string} Directory containing templates */
 const TEMPLATES_DIR = path.join(SKILL_DIR, 'templates/project-management');
 
-let passed = 0;
-let failed = 0;
+/** @const {number} Minimum number of heading sections required */
+const MIN_HEADING_COUNT = 3;
+
+/** @const {number} Minimum content length in characters */
+const MIN_CONTENT_LENGTH = 500;
 
 /**
  * Expected templates based on orchestrator and agent references
- * @type {string[]}
+ * @const {string[]}
  */
 const EXPECTED_TEMPLATES = [
   'brief-client.md',
@@ -38,6 +48,17 @@ const EXPECTED_TEMPLATES = [
   'pv-recette.md',
   'bilan-projet.md'
 ];
+
+// =============================================================================
+// Test Results
+// =============================================================================
+
+let passed = 0;
+let failed = 0;
+
+// =============================================================================
+// Validation Functions
+// =============================================================================
 
 /**
  * Validate template structure and content
@@ -65,19 +86,22 @@ function validateTemplate(filePath) {
 
   // Check for sections/structure
   const headingCount = (content.match(/^##?\s+/gm) || []).length;
-  if (headingCount < 3) {
-    errors.push('Template seems too short (< 3 sections)');
+  if (headingCount < MIN_HEADING_COUNT) {
+    errors.push(`Template seems too short (< ${MIN_HEADING_COUNT} sections)`);
   }
 
   // Check minimum content length
-  if (content.length < 500) {
-    errors.push('Template content too short (< 500 chars)');
+  if (content.length < MIN_CONTENT_LENGTH) {
+    errors.push(`Template content too short (< ${MIN_CONTENT_LENGTH} chars)`);
   }
 
   return errors;
 }
 
-// Main execution
+// =============================================================================
+// Main Execution
+// =============================================================================
+
 console.log('🧪 Validating Templates\n');
 printSeparator();
 

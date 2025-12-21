@@ -17,10 +17,50 @@ const {
   printSeparator
 } = require('./utils');
 
+// =============================================================================
+// Configuration Constants
+// =============================================================================
+
+/** @const {string} Directory containing agents */
 const AGENTS_DIR = path.join(__dirname, '../agents/project-management');
+
+/**
+ * Regex patterns for extracting agent references from markdown
+ * Pre-compiled for performance (avoids creating RegExp in loops)
+ * @const {RegExp[]}
+ */
+const AGENT_REFERENCE_PATTERNS = [
+  // Matches: `agent-name` (backtick-wrapped agent names)
+  /`([a-z][a-z0-9-]*)`/g,
+
+  // Matches: → subdir/agent-name (arrow followed by path)
+  /→\s*([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)/g,
+
+  // Matches: | `subdir/agent-name` (table cell with path)
+  /\|\s*`([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)`/g,
+];
+
+/**
+ * Keywords to skip when extracting agent references
+ * These are structural terms, not actual agent names
+ * @const {Set<string>}
+ */
+const SKIP_KEYWORDS = new Set([
+  'orchestrator', 'templates', 'docs', 'agents',
+  'project-management', 'web-agency', 'avant-projet',
+  'pilotage', 'communication', 'livraison', 'facturation'
+]);
+
+// =============================================================================
+// Test Results
+// =============================================================================
 
 let passed = 0;
 let failed = 0;
+
+// =============================================================================
+// Helper Functions
+// =============================================================================
 
 /**
  * Get all agent names from file paths
@@ -45,7 +85,7 @@ function getAgentNames(files) {
 
 /**
  * Extract agent references from orchestrator content
- * Uses multiple patterns to catch different reference styles
+ * Uses pre-compiled patterns for better performance
  *
  * @param {string} content - Orchestrator markdown content
  * @returns {string[]} Unique array of referenced agent names
@@ -53,26 +93,17 @@ function getAgentNames(files) {
 function extractAgentReferences(content) {
   const references = new Set();
 
-  // Patterns for different reference styles
-  const patterns = [
-    /`([a-z][a-z0-9-]*)`/g,                    // `agent-name`
-    /→\s*([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)/g, // → subdir/agent-name
-    /\|\s*`([a-z][a-z0-9-]*\/[a-z][a-z0-9-]*)`/g, // | `subdir/agent-name`
-  ];
+  for (const pattern of AGENT_REFERENCE_PATTERNS) {
+    // Reset regex lastIndex to ensure fresh matching
+    pattern.lastIndex = 0;
 
-  // Non-agent keywords to skip
-  const skipKeywords = new Set([
-    'orchestrator', 'templates', 'docs', 'agents',
-    'project-management', 'web-agency', 'avant-projet',
-    'pilotage', 'communication', 'livraison', 'facturation'
-  ]);
-
-  for (const pattern of patterns) {
     let match;
-    const regex = new RegExp(pattern.source, pattern.flags);
-    while ((match = regex.exec(content)) !== null) {
+    while ((match = pattern.exec(content)) !== null) {
       const ref = match[1];
-      if (!skipKeywords.has(ref) && !skipKeywords.has(ref.split('/')[0])) {
+      const refRoot = ref.split('/')[0];
+
+      // Skip structural keywords
+      if (!SKIP_KEYWORDS.has(ref) && !SKIP_KEYWORDS.has(refRoot)) {
         references.add(ref);
       }
     }
@@ -114,7 +145,10 @@ function validateOrchestrator(filePath, existingAgents) {
   return { references: references.length, errors };
 }
 
-// Main execution
+// =============================================================================
+// Main Execution
+// =============================================================================
+
 console.log('🧪 Validating Routing Consistency\n');
 printSeparator();
 
