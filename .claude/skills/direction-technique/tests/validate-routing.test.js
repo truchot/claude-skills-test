@@ -55,7 +55,9 @@ if (skillError) {
   failed++;
 } else if (skillContent) {
   // Extract agent references like `domain/agent` or `agent`
-  const agentRefPattern = /`([a-z-]+\/[a-z-]+)`|`([a-z-]+)`/g;
+  // Pattern supports: lowercase letters, numbers, and hyphens (kebab-case with optional numbers)
+  // Examples: `qualite/code-review`, `architecture/adr-001`, `poc-spike`
+  const agentRefPattern = /`([a-z0-9-]+\/[a-z0-9-]+)`|`([a-z0-9-]+)`/g;
   const references = new Set();
   let match;
 
@@ -123,7 +125,8 @@ for (const domain of DOMAINS) {
   if (!content) continue;
 
   // Extract agent references from routing tables
-  const tablePattern = /\|\s*`([a-z-]+)`\s*\|/g;
+  // Pattern supports: lowercase letters, numbers, and hyphens (kebab-case)
+  const tablePattern = /\|\s*`([a-z0-9-]+)`\s*\|/g;
   const referencedAgents = new Set();
   let tableMatch;
 
@@ -175,7 +178,8 @@ for (const domain of DOMAINS) {
     if (!content) continue;
 
     // Look for cross-domain references like "domain/agent"
-    const crossRefPattern = /([a-z-]+)\/([a-z-]+)(?:\.md)?/g;
+    // Pattern supports: lowercase letters, numbers, and hyphens (kebab-case)
+    const crossRefPattern = /([a-z0-9-]+)\/([a-z0-9-]+)(?:\.md)?/g;
     let crossMatch;
 
     while ((crossMatch = crossRefPattern.exec(content)) !== null) {

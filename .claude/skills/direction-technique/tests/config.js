@@ -1,5 +1,14 @@
 /**
  * Centralized configuration for technical skill tests
+ *
+ * ## Naming Conventions
+ *
+ * - Domains: lowercase-kebab-case (e.g., `avant-projet`, `qualite`)
+ * - Agents: lowercase-kebab-case (e.g., `audit-existant`, `code-review`)
+ * - Numbers allowed in agent names (e.g., `adr-001` if needed)
+ *
+ * These conventions are enforced by validation tests.
+ *
  * @module tests/config
  */
 
@@ -124,6 +133,13 @@ const AGENT_REQUIREMENTS = {
 
 /**
  * Domain keywords for routing validation
+ *
+ * NOTE: Case Handling
+ * - Keywords are normalized to lowercase during matching
+ * - Both "POC" and "poc" will match the same keyword
+ * - SKILL.md and orchestrator content is also lowercased for comparison
+ * - This ensures case-insensitive routing in production
+ *
  * @const {Object}
  */
 const DOMAIN_KEYWORDS = {
