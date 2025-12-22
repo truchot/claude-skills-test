@@ -106,11 +106,20 @@ const AGENT_REQUIREMENTS = {
   /** Required frontmatter fields */
   frontmatter: ['name', 'description'],
 
-  /** Minimum content length (characters) */
-  minContentLength: 300,
+  /** Minimum content length for orchestrators (characters) - more comprehensive */
+  minOrchestratorLength: 800,
+
+  /** Minimum content length for specialized agents (characters) */
+  minAgentLength: 500,
+
+  /** Legacy threshold for backwards compatibility */
+  minContentLength: 500,
+
+  /** Expected sections for orchestrators */
+  orchestratorSections: ['Règles de Routage', 'Arbre de Décision'],
 
   /** Expected sections for technical agents */
-  expectedSections: ['Mission', 'Points d\'Escalade']
+  agentSections: ['Mission', 'Points d\'Escalade']
 };
 
 /**
