@@ -1,91 +1,222 @@
-# Claude Skills Collection
+# Claude Skills - Web Agency
 
-A collection of specialized Claude Code skills for software development workflows.
+Collection modulaire de skills Claude pour industrialiser les métiers d'une agence Web.
 
-## Available Skills
+## Philosophie
 
-| Skill | Description | Status |
-|-------|-------------|--------|
-| **design-system-foundations** | Expert en Design Systems avec approche Atomic Design industrielle. Structuration des fondations (couleurs, typographie, espacement, ombres), atomes, molécules et templates. | ✅ Active |
-| **web-dev-process** | Processus de développement web standardisé - Framework agnostique pour toutes les phases d'un projet web. | ✅ Active |
-| **wordpress-gutenberg-expert** | Expert WordPress et Gutenberg pour le développement de thèmes, plugins, et blocks. | ✅ Active |
-
-## Skill Structure
-
-Each skill follows the hierarchical orchestration pattern:
+> **Les skills exécutent, web-agency orchestre, les humains supervisent.**
 
 ```
-.claude/skills/<skill-name>/
-├── SKILL.md                    # Main orchestrator
-├── CHANGELOG.md                # Version history
-├── agents/                     # Specialized sub-agents
-│   ├── <category>/
-│   │   ├── orchestrator.md     # Category router
-│   │   └── <topic>.md          # Topic expert
-├── docs/                       # Documentation
-│   ├── getting-started.md
-│   └── ...
-└── references/                 # External resources
-    └── resources.md
+CLIENT
+   │
+   ▼
+┌─────────────────────────────────────────────────────┐
+│              WEB-AGENCY (orchestrateur)             │
+│                                                     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐            │
+│  │ project- │ │technical │ │ strategy │ ...        │
+│  │management│ │          │ │          │            │
+│  └──────────┘ └──────────┘ └──────────┘            │
+└─────────────────────────────────────────────────────┘
+   │
+   ▼
+HUMAIN (supervision)
 ```
 
-## Using Skills
+## Skills Disponibles
 
-Skills are automatically loaded by Claude Code when invoked. To use a skill:
+### Orchestrateur
+
+| Skill | Description | Version |
+|-------|-------------|---------|
+| [web-agency](.claude/skills/web-agency/) | Méta-orchestrateur - compose les skills métiers | 2.0.0 |
+
+### Skills Métiers
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [project-management](.claude/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
+| [technical](.claude/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
+| [strategy](.claude/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
+| [design](.claude/skills/design/) | Design & création graphique | - | 🔴 Planifié |
+| [content](.claude/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
+| [marketing](.claude/skills/marketing/) | Marketing digital | - | 🔴 Planifié |
+
+### Skills Techniques
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
+| [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
+
+**Total : 153 agents spécialisés**
+
+## Architecture
+
+```
+.claude/skills/
+│
+├── web-agency/                    # ORCHESTRATEUR (compose les skills)
+│   └── SKILL.md
+│
+├── project-management/            # Skill métier : Gestion de projet
+│   ├── SKILL.md
+│   ├── avant-projet/              # 7 agents
+│   ├── pilotage/                  # 5 agents
+│   ├── communication/             # 6 agents
+│   ├── livraison/                 # 4 agents
+│   ├── facturation/               # 2 agents
+│   └── templates/                 # 8 templates
+│
+├── technical/                     # Skill métier : Technique
+│   ├── SKILL.md
+│   └── *.md                       # 6 agents
+│
+├── strategy/                      # Skill métier : Stratégie (planifié)
+├── design/                        # Skill métier : Design (planifié)
+├── content/                       # Skill métier : Contenu (planifié)
+├── marketing/                     # Skill métier : Marketing (planifié)
+│
+├── web-dev-process/               # Skill technique : Process dev
+│   ├── SKILL.md
+│   └── agents/                    # 61 agents (7 phases)
+│
+├── wordpress-gutenberg-expert/    # Skill technique : WordPress
+│   ├── SKILL.md
+│   └── agents/                    # 41 agents (6 domaines)
+│
+└── design-system-foundations/     # Skill technique : Design System
+    ├── SKILL.md
+    ├── agents/                    # 21 agents (4 niveaux Atomic Design)
+    │   ├── foundations/           # Colors, Typography, Spacing, Shadows
+    │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
+    │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
+    │   └── templates/             # Hero, Layouts, Pages
+    └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
+```
+
+## Composition des Skills
+
+### Hiérarchie
+
+```
+web-agency (orchestrateur)
+    │
+    ├── project-management (24 agents)
+    │
+    ├── technical (6 agents)
+    │   │
+    │   ├── web-dev-process (61 agents)
+    │   │
+    │   ├── wordpress-gutenberg-expert (41 agents)
+    │   │
+    │   └── design-system-foundations (21 agents)
+    │
+    ├── strategy (planifié)
+    ├── design (planifié)
+    ├── content (planifié)
+    └── marketing (planifié)
+```
+
+### Workflow type : Nouveau projet
+
+```
+1. project-management  → Brief, estimation, proposition
+2. strategy            → Audit, benchmark, recommandations
+3. design              → DA, maquettes
+   └── design-system-foundations → Tokens, composants, guidelines
+4. content             → Arborescence, contenus
+5. technical           → Specs, estimation technique
+   └── web-dev-process → Setup, dev, test, deploy
+   └── wordpress-*     → Si projet WordPress
+6. project-management  → Pilotage, livraison, facturation
+7. marketing           → Lancement, acquisition
+```
+
+## Installation
 
 ```bash
-# In Claude Code conversation
-"Invoke the design-system-foundations skill to help me create a color palette"
+# Cloner le repository
+git clone https://github.com/truchot/claude-skills-test.git
+
+# Les skills sont automatiquement disponibles dans Claude Code
 ```
 
-Or use the skill command:
+## Utilisation
+
+### Exemples de requêtes
 
 ```
-/skill design-system-foundations
+# Orchestration
+"J'ai un nouveau projet de site e-commerce WordPress"
+→ web-agency compose : project-management + technical + wordpress-gutenberg-expert
+
+# Gestion de projet
+"Aide-moi à rédiger un brief client"
+→ project-management/avant-projet
+
+# Technique
+"Quelle stack pour ce projet ?"
+→ technical/selection-stack
+
+# WordPress
+"Comment créer un block Gutenberg ?"
+→ wordpress-gutenberg-expert/gutenberg-blocks
+
+# Design System
+"Crée une palette de couleurs WCAG AA"
+→ design-system-foundations/foundations/colors
+
+"Comment structurer mes boutons avec BEM ?"
+→ design-system-foundations/atoms/buttons
 ```
 
-## Design System Foundations Skill
+## Tests
 
-The most comprehensive skill in this collection, featuring:
+```bash
+# Tests par skill
+cd .claude/skills/web-agency/tests && bash run-tests.sh
+cd .claude/skills/web-dev-process/tests && bash run-tests.sh
+cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
+```
 
-### Features
+## Principes de Conception
 
-- **20+ specialized agents** organized by Atomic Design levels
-- **Foundations**: Colors, Typography, Spacing, Shadows
-- **Atoms**: Buttons, Inputs, Labels, Icons, Badges
-- **Molecules**: Forms, Cards, Navigation, Modals, Alerts
-- **Templates**: Hero sections, Layouts, Pages
+1. **Modularité** : Chaque skill est autonome et réutilisable
+2. **Composition** : Les skills se combinent pour des workflows complexes
+3. **Supervision humaine** : Validation humaine à chaque étape
+4. **Single Responsibility** : Un agent = une responsabilité
+5. **Traçabilité** : Historique des décisions
 
-### Documentation
+## Roadmap
 
-- Getting Started Guide
-- Naming Conventions (BEM, CSS tokens)
-- Animation Performance Guide
-- Testing Guide (Jest, Testing Library)
-- Dark Mode Implementation
-- Bundle Optimization
+### Skills actifs
+- [x] web-agency (orchestrateur v2.0.0)
+- [x] project-management (24 agents)
+- [x] technical (6 agents)
+- [x] web-dev-process (61 agents)
+- [x] wordpress-gutenberg-expert (41 agents)
+- [x] design-system-foundations (21 agents)
 
-### Key Principles
+### Skills planifiés
+- [ ] strategy
+- [ ] design
+- [ ] content
+- [ ] marketing
 
-- WCAG AA accessibility compliance
-- 8pt spacing system
-- Modular typography scale (1.25)
-- CSS Custom Properties (Design Tokens)
-- React/TypeScript component patterns
+### Infrastructure
+- [x] Tests web-agency
+- [x] Tests web-dev-process
+- [x] Tests wordpress-gutenberg-expert
+- [x] CI/CD workflows
 
-## Contributing
+## Licence
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-skill`)
-3. Follow the existing skill structure
-4. Include comprehensive documentation
-5. Submit a Pull Request
+MIT - Voir [LICENSE](LICENSE)
 
-## License
+## Ressources
 
-MIT
-
-## Related
-
-- [Claude Code Documentation](https://docs.anthropic.com/claude-code)
+- [Documentation Claude Code](https://docs.anthropic.com/claude-code)
+- [WordPress Developer Resources](https://developer.wordpress.org/)
 - [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
