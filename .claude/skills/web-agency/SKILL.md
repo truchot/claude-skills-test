@@ -69,16 +69,16 @@ HUMAIN (supervision)
 Selon [ADR-005](./docs/adr/005-skill-responsibility-boundaries.md) :
 
 ```
-STRATÉGIE (direction-technique)
-   "QUOI faire et pourquoi"
+NIVEAU 1 : POURQUOI (direction-technique)
+   "Pourquoi on fait ça ? Quels objectifs ?"
         │
         ▼
-PROCESSUS (web-dev-process)
-   "COMMENT faire (générique)"
+NIVEAU 2 : QUOI (web-dev-process)
+   "Quoi mettre en place ? Quelles étapes ?"
         │
         ▼
-IMPLÉMENTATION (wordpress-*, design-system-*)
-   "Code spécifique"
+NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
+   "Comment l'implémenter ? Quel code ?"
 ```
 
 ## Documentation

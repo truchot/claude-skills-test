@@ -34,33 +34,32 @@ Adopter une **séparation en 3 niveaux de responsabilité** :
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         NIVEAU 1 : STRATÉGIE                                 │
-│                       (direction-technique)                                  │
+│                    NIVEAU 1 : POURQUOI                                       │
+│                   (direction-technique)                                      │
 │                                                                              │
-│  Responsabilité : DÉCIDER quoi faire et pourquoi                            │
-│  Questions : "Quelle stack ?", "Quelle architecture ?", "Quels standards ?" │
-│  Output : Décisions, ADRs, Standards, Politiques                            │
+│  Responsabilité : Expliquer POURQUOI on fait les choses                     │
+│  Questions : "Pourquoi CI/CD ?", "Pourquoi cette archi ?", "Quel objectif ?"│
+│  Output : Justifications, ADRs, Politiques, Standards, Objectifs            │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         NIVEAU 2 : PROCESSUS                                 │
-│                        (web-dev-process)                                     │
+│                       NIVEAU 2 : QUOI                                        │
+│                    (web-dev-process)                                         │
 │                                                                              │
-│  Responsabilité : DÉFINIR comment faire (générique)                         │
-│  Questions : "Quel workflow ?", "Quelles étapes ?", "Quelles bonnes         │
-│              pratiques ?"                                                    │
-│  Output : Process, Templates, Checklists, Guides                            │
+│  Responsabilité : Définir QUOI mettre en place                              │
+│  Questions : "Quelles étapes ?", "Quel workflow ?", "Quels outils ?"        │
+│  Output : Process, Templates, Checklists, Guides, Structures                │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       NIVEAU 3 : IMPLÉMENTATION                              │
-│                   (wordpress-gutenberg-expert, etc.)                         │
+│                      NIVEAU 3 : COMMENT                                      │
+│                (wordpress-gutenberg-expert, etc.)                            │
 │                                                                              │
-│  Responsabilité : EXÉCUTER avec une technologie spécifique                  │
+│  Responsabilité : Expliquer COMMENT implémenter concrètement                │
 │  Questions : "Quel code ?", "Quelle config ?", "Quelle commande ?"          │
-│  Output : Code, Configurations, Scripts                                      │
+│  Output : Code, Configurations, Scripts, Commandes                          │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -68,53 +67,49 @@ Adopter une **séparation en 3 niveaux de responsabilité** :
 
 #### 1. CI/CD
 
-| Niveau | Skill | Responsabilité | Exemple |
-|--------|-------|----------------|---------|
-| Stratégie | direction-technique | "On fait du CI/CD avec quality gates" | Décision d'adopter CI/CD |
-| Processus | web-dev-process | "Pipeline = build → test → deploy" | Structure du pipeline |
-| Implémentation | wordpress-* | "GitHub Actions avec wp-env" | Code YAML spécifique |
+| Niveau | Skill | Question | Exemple |
+|--------|-------|----------|---------|
+| POURQUOI | direction-technique | "Pourquoi CI/CD ?" | "Pour garantir qualité et rapidité de livraison" |
+| QUOI | web-dev-process | "Quoi mettre en place ?" | "Pipeline = build → test → deploy" |
+| COMMENT | wordpress-* | "Comment l'implémenter ?" | "GitHub Actions avec wp-env, PHPUnit" |
 
-**Règle** : `direction-technique` décide, `web-dev-process` structure, `wordpress-*` implémente.
+**Règle** : `direction-technique` justifie, `web-dev-process` structure, `wordpress-*` code.
 
 #### 2. Code Review
 
-| Niveau | Skill | Responsabilité |
-|--------|-------|----------------|
-| Stratégie | direction-technique | "On fait des code reviews obligatoires" |
-| Processus | web-dev-process | "Checklist de review, process PR" |
-| Implémentation | - | Pas besoin (GitHub/GitLab natif) |
-
-**Règle** : Supprimer `direction-technique/qualite/code-review.md`, garder `web-dev-process/development/code-review.md`.
+| Niveau | Skill | Question | Exemple |
+|--------|-------|----------|---------|
+| POURQUOI | direction-technique | "Pourquoi des reviews ?" | "Pour la qualité et le partage de connaissances" |
+| QUOI | web-dev-process | "Quoi vérifier ?" | "Checklist, workflow PR, types de commentaires" |
+| COMMENT | - | - | Pas besoin (GitHub/GitLab natif) |
 
 #### 3. Architecture
 
-| Niveau | Skill | Responsabilité |
-|--------|-------|----------------|
-| Stratégie | direction-technique | "Architecture hexagonale, patterns" |
-| Processus | web-dev-process | "Comment documenter l'architecture" |
-| Implémentation | wordpress-* | "Architecture block theme" |
-
-**Règle** : `direction-technique/architecture/*` = décisions. `web-dev-process/design/architecture.md` → renommer en `architecture-documentation.md`.
+| Niveau | Skill | Question | Exemple |
+|--------|-------|----------|---------|
+| POURQUOI | direction-technique | "Pourquoi cette archi ?" | "Hexagonale pour testabilité et découplage" |
+| QUOI | web-dev-process | "Quoi documenter ?" | "ADRs, diagrammes, conventions" |
+| COMMENT | wordpress-* | "Comment l'implémenter ?" | "Structure block theme, hooks, filters" |
 
 #### 4. Qualité / Linting
 
-| Niveau | Skill | Responsabilité |
-|--------|-------|----------------|
-| Stratégie | direction-technique | "Standards : ESLint strict, coverage 80%" |
-| Processus | web-dev-process | "Comment configurer, quel workflow" |
-| Implémentation | wordpress-* | "PHPCS WordPress, ESLint WP" |
+| Niveau | Skill | Question | Exemple |
+|--------|-------|----------|---------|
+| POURQUOI | direction-technique | "Pourquoi ces standards ?" | "Coverage 80% pour fiabilité" |
+| QUOI | web-dev-process | "Quoi configurer ?" | "ESLint, Prettier, Husky, workflow" |
+| COMMENT | wordpress-* | "Comment pour WP ?" | "PHPCS WordPress, ESLint @wordpress" |
 
 ### Matrice de Responsabilités Finale
 
-| Domaine | direction-technique | web-dev-process | wordpress-* |
-|---------|---------------------|-----------------|-------------|
-| **CI/CD** | Politique | Process & Templates | Config spécifique |
-| **Code Review** | ❌ Supprimer | Process complet | - |
-| **Architecture** | Décisions & Patterns | Documentation | Implémentation WP |
-| **Tests** | Politique (coverage, etc.) | Types & Process | PHPUnit, Jest WP |
-| **Qualité** | Standards & Métriques | Outils & Config | PHPCS, ESLint WP |
-| **Sécurité** | Politiques OWASP/RGPD | Audits & Checklists | Nonces, Sanitize |
-| **Performance** | Objectifs & SLOs | Audits & Outils | WP-specific |
+| Domaine | POURQUOI (direction-technique) | QUOI (web-dev-process) | COMMENT (wordpress-*) |
+|---------|--------------------------------|------------------------|----------------------|
+| **CI/CD** | Objectifs qualité, métriques | Pipeline, étapes, outils | Code YAML, configs |
+| **Code Review** | Politique d'approbation | Checklist, workflow | - |
+| **Architecture** | Justification patterns | Documentation, ADRs | Implémentation WP |
+| **Tests** | Objectifs coverage | Types, stratégies | PHPUnit, Jest WP |
+| **Qualité** | Standards, seuils | Outils, workflow | PHPCS, ESLint WP |
+| **Sécurité** | Politique OWASP/RGPD | Audits, checklists | Nonces, Sanitize |
+| **Performance** | Objectifs SLOs | Méthodes audit | Optimisations WP |
 
 ## Conséquences
 

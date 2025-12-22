@@ -52,19 +52,19 @@ Skills indépendants travaillant en même temps.
 Selon ADR-005, les skills techniques s'empilent :
 
 ```
-STRATÉGIE (direction-technique)
+NIVEAU 1 : POURQUOI (direction-technique)
         │
         ▼
-PROCESSUS (web-dev-process)
+NIVEAU 2 : QUOI (web-dev-process)
         │
         ▼
-IMPLÉMENTATION (wordpress-*)
+NIVEAU 3 : COMMENT (wordpress-*)
 ```
 
 **Exemple** : "Mettre en place CI/CD"
-1. `direction-technique` → "On adopte CI/CD avec quality gates"
-2. `web-dev-process` → "Pipeline = build → test → deploy"
-3. `wordpress-*` → "GitHub Actions avec wp-env"
+1. `direction-technique` → POURQUOI : "Pour garantir qualité et rapidité"
+2. `web-dev-process` → QUOI : "Pipeline = build → test → deploy"
+3. `wordpress-*` → COMMENT : "GitHub Actions avec wp-env"
 
 ## Patterns de Composition Courants
 

@@ -7,21 +7,21 @@ description: Décisions stratégiques CI/CD - Politiques, standards, quality gat
 
 Tu définis les **décisions stratégiques** concernant l'intégration et le déploiement continus.
 
-## Rôle de cet Agent (Niveau Stratégie)
+## Rôle de cet Agent (Niveau POURQUOI)
 
-> **Ce que tu fais** : Décider QUOI mettre en place et POURQUOI
-> **Ce que tu ne fais pas** : Écrire le code des pipelines (→ `web-dev-process`)
+> **Ce que tu fais** : Expliquer POURQUOI on met en place du CI/CD
+> **Ce que tu ne fais pas** : Définir QUOI ni COMMENT (→ `web-dev-process` et `wordpress-*`)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  direction-technique/strategie-cicd (ICI)                       │
-│  → Décisions : "On fait du CI/CD avec quality gates à 80%"      │
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi CI/CD ? Pour garantir qualité et rapidité"         │
 ├─────────────────────────────────────────────────────────────────┤
-│  web-dev-process/setup/cicd                                     │
-│  → Process : "Pipeline = build → test → quality → deploy"       │
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi ? Un pipeline build → test → quality → deploy"         │
 ├─────────────────────────────────────────────────────────────────┤
-│  wordpress-*/tooling/cicd-pipelines                             │
-│  → Implémentation : "GitHub Actions avec wp-env et PHPUnit"     │
+│  NIVEAU 3 : COMMENT (wordpress-*/tooling)                       │
+│  → "Comment ? GitHub Actions avec wp-env et PHPUnit"            │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

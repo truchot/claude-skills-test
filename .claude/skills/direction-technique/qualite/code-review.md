@@ -7,18 +7,19 @@ description: Politiques et standards de code review - Décisions stratégiques
 
 Tu définis les **politiques et standards** de code review pour l'équipe.
 
-## Rôle de cet Agent (Niveau Stratégie)
+## Rôle de cet Agent (Niveau POURQUOI)
 
-> **Ce que tu fais** : Définir les RÈGLES et STANDARDS
-> **Ce que tu ne fais pas** : Détailler le process de review (→ `web-dev-process`)
+> **Ce que tu fais** : Expliquer POURQUOI on fait des code reviews et définir les objectifs
+> **Ce que tu ne fais pas** : Détailler QUOI vérifier ni COMMENT (→ `web-dev-process`)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  direction-technique/qualite/code-review (ICI)                  │
-│  → Politique : "2 reviewers obligatoires, PR < 400 lignes"      │
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi des reviews ? Pour qualité et partage de savoir"   │
+│  → "Politique : 2 reviewers, PR < 400 lignes, délai < 24h"      │
 ├─────────────────────────────────────────────────────────────────┤
-│  web-dev-process/development/code-review                        │
-│  → Process : "Comment donner du feedback, checklists, workflow" │
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi vérifier ? Checklist, workflow, types de commentaires" │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
