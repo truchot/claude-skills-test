@@ -217,6 +217,36 @@ Maintenance et évolution technique.
 | post-mortem, RCA | `support/post-mortem` |
 | veille, nouvelle techno, upgrade | `support/veille-technologique` |
 
+### Priorité des Mots-Clés
+
+Quand plusieurs domaines correspondent à une requête :
+
+1. **Match le plus spécifique gagne**
+   - "audit sécurité" → `securite/audit-securite` (pas `avant-projet/audit-existant`)
+   - "architecture infrastructure" → `infrastructure/architecture-infra` (pas `architecture/`)
+   - "performance backend" → `performance/optimisation-backend` (pas générique)
+
+2. **Contexte de la conversation**
+   - Si la conversation porte déjà sur un domaine, privilégier ce domaine
+   - Les références explicites au domaine ont priorité absolue
+
+3. **Mots-clés composés > simples**
+   - "audit de performance" → `performance/audit-performance`
+   - "audit" seul + contexte sécurité → `securite/audit-securite`
+   - "audit" seul + contexte existant/legacy → `avant-projet/audit-existant`
+
+4. **En cas d'ambiguïté persistante**
+   - L'orchestrateur peut demander clarification à l'utilisateur
+   - Suggérer les domaines possibles avec leurs différences
+
+**Exemples de résolution d'ambiguïté :**
+
+| Requête | Domaines possibles | Résolution |
+|---------|-------------------|------------|
+| "faire un audit" | avant-projet, securite, performance | Demander : "Quel type d'audit ? Existant/legacy, sécurité, ou performance ?" |
+| "architecture du système" | architecture, infrastructure | → `architecture/architecture-systeme` (mot-clé exact) |
+| "problème de performance" | performance, support | → `performance/` si diagnostic, `support/troubleshooting` si bug urgent |
+
 ### Vers les Skills Techniques
 
 | Contexte | Skill |

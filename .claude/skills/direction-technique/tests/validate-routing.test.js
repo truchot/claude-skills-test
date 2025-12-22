@@ -47,9 +47,13 @@ console.log(`\n📋 Found ${existingAgents.size} agent references\n`);
 // 1. Validate SKILL.md routing references
 console.log('1. SKILL.md Agent References');
 const skillMdPath = path.join(SKILL_ROOT, 'SKILL.md');
-const { content: skillContent } = safeReadFile(skillMdPath);
+const { content: skillContent, error: skillError } = safeReadFile(skillMdPath);
 
-if (skillContent) {
+if (skillError) {
+  console.log(`   ❌ Cannot read SKILL.md: ${skillError}`);
+  issues.push(`Cannot read SKILL.md: ${skillError}`);
+  failed++;
+} else if (skillContent) {
   // Extract agent references like `domain/agent` or `agent`
   const agentRefPattern = /`([a-z-]+\/[a-z-]+)`|`([a-z-]+)`/g;
   const references = new Set();
@@ -109,7 +113,13 @@ for (const domain of DOMAINS) {
     continue;
   }
 
-  const { content } = safeReadFile(orchestratorPath);
+  const { content, error } = safeReadFile(orchestratorPath);
+  if (error) {
+    console.log(`   ❌ ${domain}/orchestrator.md: ${error}`);
+    issues.push(`Cannot read ${domain}/orchestrator.md: ${error}`);
+    failed++;
+    continue;
+  }
   if (!content) continue;
 
   // Extract agent references from routing tables
@@ -157,7 +167,11 @@ for (const domain of DOMAINS) {
   const files = findMarkdownFiles(domainDir);
 
   for (const file of files) {
-    const { content } = safeReadFile(file);
+    const { content, error } = safeReadFile(file);
+    if (error) {
+      console.log(`   ⚠️  Cannot read ${path.relative(SKILL_ROOT, file)}: ${error}`);
+      continue;
+    }
     if (!content) continue;
 
     // Look for cross-domain references like "domain/agent"
