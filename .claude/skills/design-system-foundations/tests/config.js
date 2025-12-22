@@ -111,6 +111,10 @@ const LEVEL_KEYWORDS = {
 /** @const {number} Number of Atomic Design levels */
 const LEVEL_COUNT = LEVELS.length;
 
+/** @const {number} Total number of agents across all levels (computed) */
+const TOTAL_AGENT_COUNT = Object.values(EXPECTED_AGENTS_PER_LEVEL)
+  .reduce((sum, agents) => sum + agents.length, 0);
+
 module.exports = {
   SKILL_ROOT,
   AGENTS_DIR,
@@ -118,6 +122,7 @@ module.exports = {
   REFERENCES_DIR,
   LEVELS,
   LEVEL_COUNT,
+  TOTAL_AGENT_COUNT,
   EXPECTED_AGENTS_PER_LEVEL,
   EXPECTED_DOCS,
   AGENT_REQUIREMENTS,
