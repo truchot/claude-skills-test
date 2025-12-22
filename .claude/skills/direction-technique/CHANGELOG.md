@@ -13,6 +13,8 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Permissions d'exécution sur les fichiers de test
 - CHANGELOG.md avec historique et guide de migration
 - tests/README.md avec documentation complète
+- `.gitattributes` pour line endings consistants (LF)
+- `.editorconfig` pour formatage uniforme
 
 ### Changed
 - Migration de tous les tests vers `TestReporter` pour JSON natif
@@ -20,6 +22,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - package.json: `private: true` et documentation zéro-dépendance
 - Regex code blocks : `[\w-]*` pour langages avec tirets (`objective-c`, `shell-session`)
 - Liste langages étendue : `c`, `cpp`, `makefile`, `promql`, `diff`, etc.
+- CI workflow: utilise JSON output pour extraction fiable des compteurs
 
 ### Fixed
 - Comparaison CSRF timing-safe avec `crypto.timingSafeEqual()`
