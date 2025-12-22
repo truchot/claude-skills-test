@@ -5,6 +5,13 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Check Node.js is installed
+if ! command -v node &> /dev/null; then
+    echo "❌ Error: Node.js is required but not installed"
+    echo "   Please install Node.js 14+ from https://nodejs.org"
+    exit 1
+fi
+
 echo "🚀 Running Design System Foundations Skill Tests"
 echo "================================================="
 echo ""
