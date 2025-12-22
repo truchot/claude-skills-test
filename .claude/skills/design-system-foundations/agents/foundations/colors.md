@@ -112,10 +112,12 @@ Tu es expert en **systèmes de couleurs** pour design systems. Tu guides la cré
   --color-secondary-hover: var(--color-gray-700);
 
   --color-success: var(--color-green-500);
+  --color-success-dark: var(--color-green-600);  /* WCAG AA compliant with white text */
   --color-success-light: var(--color-green-50);
   --color-warning: var(--color-yellow-500);
   --color-warning-light: var(--color-yellow-50);
   --color-error: var(--color-red-500);
+  --color-error-dark: var(--color-red-600);      /* WCAG AA compliant with white text */
   --color-error-light: var(--color-red-50);
 
   --color-background: #ffffff;
