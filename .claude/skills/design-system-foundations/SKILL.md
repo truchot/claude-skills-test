@@ -1,7 +1,7 @@
 ---
 name: design-system-foundations
 description: "Expert en Design Systems avec approche Atomic Design industrielle. Utilisé pour structurer les fondations (couleurs, typographie, espacement, ombres), atomes, molécules et templates de manière cohérente et scalable. Invoque ce skill lors des interactions avec les designers ou pour créer/auditer un design system."
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Design System Foundations - Orchestrateur Principal

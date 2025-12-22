@@ -4,6 +4,50 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [1.1.0] - 2025-12-22
+
+### Added
+
+#### Test Suite
+- `tests/run-tests.sh` - Test runner with Node.js version check (v14+)
+- `tests/validate-skill.test.js` - SKILL.md structure validation
+- `tests/validate-levels.test.js` - Atomic Design levels validation
+- `tests/validate-agents.test.js` - Agent structure and frontmatter validation
+- `tests/validate-tokens.test.js` - CSS token pattern validation
+- `tests/validate-docs.test.js` - Documentation completeness validation
+- `tests/config.js` - Centralized test configuration
+- `tests/utils.js` - Shared test utilities
+
+#### CI/CD
+- `.github/workflows/design-system-foundations-tests.yml` - GitHub Actions workflow
+- JSON_SUMMARY output for reliable CI parsing
+
+#### Documentation
+- `docs/accessibility-checklist.md` - WCAG AA checklist with contrast requirements
+- `cn()` utility function documentation in getting-started.md
+- CSS Nesting browser compatibility notes in naming-conventions.md
+- Inputs.md variants documentation table
+
+### Changed
+
+#### Accessibility Improvements
+- Renamed color tokens for WCAG AA clarity:
+  - `--color-success` now uses green-600 (4.5:1 contrast ratio)
+  - `--color-success-bg` for backgrounds (green-500, requires dark text)
+- Added explicit contrast ratio comments to all color tokens
+- Badge component uses spacing tokens instead of hardcoded values
+- Dark mode aware notification badge border
+
+#### Code Quality
+- YAML frontmatter added to all 21 agent files
+- Computed `TOTAL_AGENT_COUNT` constant in test config
+- Production environment warning in tests/utils.js
+- Improved orchestrator routing with both hyphenated and non-hyphenated agent name checks
+
+### Fixed
+- Templates orchestrator routing test (agent name format mismatch)
+- Agent count in documentation (corrected to 21 total)
+
 ## [1.0.0] - 2025-12-21
 
 ### Added

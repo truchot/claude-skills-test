@@ -48,12 +48,18 @@ design-system-foundations/
 │       ├── layouts.md          # Dashboard, auth, marketing
 │       └── pages.md            # List, detail, error pages
 ├── docs/
-│   ├── getting-started.md      # Quick start guide
-│   ├── naming-conventions.md   # BEM, tokens, components
+│   ├── getting-started.md      # Quick start guide + cn() utility
+│   ├── naming-conventions.md   # BEM, tokens, CSS Nesting
 │   ├── animation-performance.md # GPU-accelerated animations
 │   ├── testing-guide.md        # Jest, Testing Library
 │   ├── dark-mode.md            # Theme implementation
-│   └── bundle-optimization.md  # Tree-shaking, code-splitting
+│   ├── bundle-optimization.md  # Tree-shaking, code-splitting
+│   └── accessibility-checklist.md # WCAG AA compliance
+├── tests/
+│   ├── run-tests.sh            # Test runner (Node.js 14+)
+│   ├── config.js               # Centralized test config
+│   ├── utils.js                # Shared utilities
+│   └── validate-*.test.js      # 5 validation suites
 └── references/
     └── resources.md            # External tools and resources
 ```
@@ -67,10 +73,15 @@ design-system-foundations/
 - **Shadows**: 5-level elevation, z-index scale, focus rings
 
 ### Components
-- **20+ specialized agents** with CSS + React/TypeScript examples
-- **Accessibility-first**: ARIA attributes, keyboard navigation, contrast ratios
-- **Dark mode ready**: CSS custom properties architecture
+- **21 agents** (4 orchestrators + 17 specialized) with CSS + React/TypeScript
+- **Accessibility-first**: WCAG AA contrast ratios, ARIA attributes, keyboard navigation
+- **Dark mode ready**: CSS custom properties with semantic tokens
 - **Storybook examples**: Documentation patterns included
+
+### Quality Assurance
+- **5 validation test suites** with JSON output for CI
+- **GitHub Actions workflow** for automated testing
+- **YAML frontmatter** on all agents for metadata
 
 ### Documentation
 - Migration guides (Bootstrap, Tailwind, legacy CSS)
@@ -94,7 +105,7 @@ This skill focuses on the **technical implementation** of design systems, not th
 
 ## Version
 
-**v1.0.0** (2025-12-21)
+**v1.1.0** (2025-12-22)
 
 See [CHANGELOG.md](./CHANGELOG.md) for full history.
 
