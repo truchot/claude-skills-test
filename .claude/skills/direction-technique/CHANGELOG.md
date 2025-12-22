@@ -18,10 +18,19 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Migration de tous les tests vers `TestReporter` pour JSON natif
 - Amélioration du contexte d'erreur (chemins complets)
 - package.json: `private: true` et documentation zéro-dépendance
+- Regex code blocks : `[\w-]*` pour langages avec tirets (`objective-c`, `shell-session`)
+- Liste langages étendue : `c`, `cpp`, `makefile`, `promql`, `diff`, etc.
+
+### Fixed
+- Comparaison CSRF timing-safe avec `crypto.timingSafeEqual()`
+- Documentation seuils de validation dans config.js
 
 ### Security
 - CSP nonce-based au lieu de `'unsafe-inline'`
-- Protection CSRF Double Submit Cookie (remplacement csurf)
+- Protection CSRF Double Submit Cookie avec :
+  - Comparaison timing-safe (évite timing attacks)
+  - Warnings sur pièges courants
+  - Table des alternatives par framework
 - Anonymisation RGPD avec ID aléatoire sans lien userId
 - Sanitisation des erreurs Zod pour éviter l'exposition de secrets
 
