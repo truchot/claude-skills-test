@@ -62,22 +62,22 @@ Tu es expert en **badges et indicateurs** pour design systems. Tu guides la cré
    ══════════════════════════════════════════════════════════════════ */
 
 .badge--sm {
-  min-width: 16px;
-  height: 16px;
+  min-width: var(--space-4);   /* 16px */
+  height: var(--space-4);
   padding: 0 var(--space-1);
-  font-size: 10px;
+  font-size: var(--font-size-2xs, 0.625rem); /* 10px */
 }
 
 .badge--md {
-  min-width: 20px;
-  height: 20px;
+  min-width: var(--space-5);   /* 20px */
+  height: var(--space-5);
   padding: 0 var(--space-1-5);
   font-size: var(--font-size-xs);
 }
 
 .badge--lg {
-  min-width: 24px;
-  height: 24px;
+  min-width: var(--space-6);   /* 24px */
+  height: var(--space-6);
   padding: 0 var(--space-2);
   font-size: var(--font-size-sm);
 }
@@ -196,26 +196,26 @@ Tu es expert en **badges et indicateurs** pour design systems. Tu guides la cré
 
 .badge--notification {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  min-width: 18px;
-  height: 18px;
+  top: calc(-1 * var(--space-1));
+  right: calc(-1 * var(--space-1));
+  min-width: calc(var(--space-4) + var(--space-0-5)); /* 18px */
+  height: calc(var(--space-4) + var(--space-0-5));
   padding: 0 var(--space-1);
-  font-size: 10px;
+  font-size: var(--font-size-2xs, 0.625rem); /* 10px */
   font-weight: var(--font-weight-bold);
   background-color: var(--color-error);
   color: white;
-  border: 2px solid var(--color-background);
+  border: 2px solid var(--badge-border-color, var(--color-background)); /* Dark mode aware via CSS var */
   border-radius: 9999px;
   z-index: 1;
 }
 
 /* Dot only (no count) */
 .badge--notification-dot {
-  top: -2px;
-  right: -2px;
-  width: 10px;
-  height: 10px;
+  top: calc(-1 * var(--space-0-5));
+  right: calc(-1 * var(--space-0-5));
+  width: var(--space-2-5);   /* 10px */
+  height: var(--space-2-5);
   min-width: auto;
   padding: 0;
 }

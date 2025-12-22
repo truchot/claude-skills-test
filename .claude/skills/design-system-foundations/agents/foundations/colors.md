@@ -89,20 +89,20 @@ Tu es expert en **systèmes de couleurs** pour design systems. Tu guides la cré
 
   /* Green Scale (Success) */
   --color-green-50: #f0fdf4;
-  --color-green-500: #22c55e;    /* 2.8:1 on white - UI only, use 600+ for text */
+  --color-green-500: #22c55e;    /* 2.8:1 - backgrounds/borders only, NOT for text */
   --color-green-600: #16a34a;    /* 4.5:1 on white - WCAG AA ✓ */
   --color-green-700: #15803d;    /* 5.8:1 on white - WCAG AA ✓ */
 
   /* Red Scale (Error) */
   --color-red-50: #fef2f2;
-  --color-red-500: #ef4444;      /* 3.9:1 on white - Large text only */
+  --color-red-500: #ef4444;      /* 3.9:1 - backgrounds/borders only, NOT for text */
   --color-red-600: #dc2626;      /* 4.5:1 on white - WCAG AA ✓ */
   --color-red-700: #b91c1c;      /* 5.7:1 on white - WCAG AA ✓ */
 
   /* Yellow Scale (Warning) */
   --color-yellow-50: #fefce8;
-  --color-yellow-500: #eab308;   /* 2.1:1 on white - Use with dark text */
-  --color-yellow-600: #ca8a04;   /* 3.0:1 on white - Use with dark text */
+  --color-yellow-500: #eab308;   /* 2.1:1 - backgrounds only, requires dark text */
+  --color-yellow-600: #ca8a04;   /* 3.0:1 - backgrounds only, requires dark text */
 
   /* ══════════════════════════════════════════════════════════════════
      SEMANTICS - Alias by usage

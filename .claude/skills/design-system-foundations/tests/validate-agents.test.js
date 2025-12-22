@@ -82,9 +82,13 @@ function validateAgent(filePath, level) {
 
     // Foundation agents should have CSS tokens
     if (isFoundation) {
-      const cssVars = extractCSSVariables(content);
-      if (cssVars.length < 3) {
-        fileErrors.push('Foundation agent should define multiple CSS custom properties');
+      try {
+        const cssVars = extractCSSVariables(content) || [];
+        if (cssVars.length < 3) {
+          fileErrors.push('Foundation agent should define multiple CSS custom properties');
+        }
+      } catch (err) {
+        fileErrors.push(`Error extracting CSS variables: ${err.message}`);
       }
     }
 

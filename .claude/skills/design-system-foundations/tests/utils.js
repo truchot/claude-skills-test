@@ -2,9 +2,18 @@
  * Shared utilities for skill tests
  * @module tests/utils
  *
- * NOTE: This module uses synchronous I/O intentionally for test simplicity.
- * For production use, consider async alternatives.
+ * WARNING: This module uses synchronous I/O intentionally for test simplicity.
+ * It should NOT be used in production applications.
+ *
+ * For production use, consider:
+ * - Async alternatives (fs.promises)
+ * - A proper YAML parser like js-yaml for frontmatter
  */
+
+// Guard against accidental production use
+if (process.env.NODE_ENV === 'production') {
+  console.warn('Warning: tests/utils.js uses sync I/O and should not be used in production');
+}
 
 const fs = require('fs');
 const path = require('path');
