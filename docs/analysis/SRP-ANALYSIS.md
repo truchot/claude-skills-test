@@ -559,3 +559,50 @@ L'architecture actuelle démontre une **bonne compréhension du SRP** au niveau 
 3. **Risque principal** : Duplication entre skills techniques
 
 **Prochaine étape recommandée** : Créer un ADR pour clarifier la séparation direction-technique / web-dev-process / wordpress-gutenberg-expert.
+
+---
+
+## Annexe : Actions Réalisées (v1.1)
+
+Suite à cette analyse, les corrections suivantes ont été apportées :
+
+### ADR-005 Créé
+
+Fichier : `.claude/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md`
+
+Définit la séparation en 3 niveaux :
+- **Stratégie** (direction-technique) : Décider QUOI et POURQUOI
+- **Processus** (web-dev-process) : Définir COMMENT (générique)
+- **Implémentation** (wordpress-*, etc.) : Coder (spécifique)
+
+### web-agency Refactoré
+
+Nouveau SKILL.md allégé (responsabilité unique : routage)
+
+Nouveaux fichiers créés :
+- `orchestration/routing.md` - Règles de routage détaillées
+- `orchestration/composition.md` - Comment combiner les skills
+- `orchestration/escalation.md` - Points d'escalade humaine
+- `workflows/nouveau-projet.md` - Workflow complet nouveau projet
+- `workflows/refonte.md` - Workflow refonte site existant
+
+### Duplications CI/CD Résolues
+
+`direction-technique/infrastructure/strategie-cicd.md` :
+- **Avant** : Contenait du code YAML complet (duplication avec web-dev-process)
+- **Après** : Focus sur les décisions stratégiques uniquement (quality gates, politiques)
+
+### Duplications Code Review Résolues
+
+`direction-technique/qualite/code-review.md` :
+- **Avant** : Process complet identique à web-dev-process
+- **Après** : Focus sur les politiques (nombre d'approbations, taille PR, délais)
+
+### Résultat Post-Corrections
+
+| Métrique | Avant | Après |
+|----------|-------|-------|
+| Duplications CI/CD | 4 agents | 1 source + références |
+| Duplications Code Review | 2 agents identiques | 1 politique + 1 process |
+| web-agency responsabilités | 5 | 1 (routage) |
+| ADRs documentant l'architecture | 4 | 5 |

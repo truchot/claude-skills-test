@@ -1,231 +1,137 @@
 ---
-name: code-review
-description: Processus et bonnes pratiques de revue de code
+name: code-review-policy
+description: Politiques et standards de code review - Décisions stratégiques
 ---
 
-# Code Review
+# Politique de Code Review
 
-Tu encadres le processus de **revue de code** pour assurer qualité et partage de connaissances.
+Tu définis les **politiques et standards** de code review pour l'équipe.
 
-## Objectifs de la Code Review
+## Rôle de cet Agent (Niveau Stratégie)
 
-1. **Qualité** : Détecter bugs et problèmes
-2. **Standards** : Assurer la cohérence
-3. **Apprentissage** : Partager les connaissances
-4. **Sécurité** : Identifier les vulnérabilités
-5. **Maintenabilité** : Garantir la lisibilité
-
-## Processus de Review
-
-### Workflow Standard
+> **Ce que tu fais** : Définir les RÈGLES et STANDARDS
+> **Ce que tu ne fais pas** : Détailler le process de review (→ `web-dev-process`)
 
 ```
-Developer                 Reviewer                  CI
-    │                         │                     │
-    │  1. Push + Open PR      │                     │
-    ├─────────────────────────┼─────────────────────►
-    │                         │  2. CI checks       │
-    │                         │◄────────────────────┤
-    │  3. Request review      │                     │
-    ├────────────────────────►│                     │
-    │                         │  4. Review code     │
-    │  5. Feedback            │                     │
-    │◄────────────────────────┤                     │
-    │  6. Address feedback    │                     │
-    ├────────────────────────►│                     │
-    │                         │  7. Approve         │
-    │  8. Merge               │                     │
-    ├─────────────────────────┼─────────────────────►
+┌─────────────────────────────────────────────────────────────────┐
+│  direction-technique/qualite/code-review (ICI)                  │
+│  → Politique : "2 reviewers obligatoires, PR < 400 lignes"      │
+├─────────────────────────────────────────────────────────────────┤
+│  web-dev-process/development/code-review                        │
+│  → Process : "Comment donner du feedback, checklists, workflow" │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Checklist du Reviewer
+**Pour le process détaillé** : Voir `web-dev-process/agents/development/code-review.md`
 
-#### Fonctionnel
-- [ ] Le code fait ce qui est demandé
-- [ ] Les edge cases sont gérés
-- [ ] Les erreurs sont correctement gérées
-- [ ] Pas de régression sur l'existant
+## Politiques à Définir
 
-#### Qualité
-- [ ] Code lisible et compréhensible
-- [ ] Nommage clair et cohérent
-- [ ] Pas de code mort ou commenté
-- [ ] DRY respecté (pas de duplication)
-- [ ] SOLID respecté
+### 1. Politique d'Approbation
 
-#### Tests
-- [ ] Tests unitaires présents
-- [ ] Tests pertinents (pas de tests triviaux)
-- [ ] Couverture suffisante
-- [ ] Tests lisibles
+| Contexte | Politique recommandée |
+|----------|----------------------|
+| PR standard | 1 approbation minimum |
+| Code critique (auth, paiement) | 2 approbations + senior |
+| Hotfix urgent | 1 approbation + post-review |
+| Infra/CI | Approbation DevOps/SRE |
 
-#### Sécurité
-- [ ] Pas de données sensibles en dur
-- [ ] Inputs validés
-- [ ] Outputs échappés
-- [ ] Pas de vulnérabilités évidentes
+### 2. Politique de Taille de PR
 
-#### Performance
-- [ ] Pas de N+1 queries
-- [ ] Pas de boucles coûteuses
-- [ ] Pas de memory leaks
-- [ ] Complexité algorithmique raisonnable
+| Taille | Politique |
+|--------|-----------|
+| < 200 lignes | Idéal, merger rapidement |
+| 200-400 lignes | Acceptable |
+| 400-800 lignes | Demander découpage |
+| > 800 lignes | Refuser, exiger découpage |
 
-#### Documentation
-- [ ] Code auto-documenté
-- [ ] Commentaires utiles si nécessaires
-- [ ] README/docs mis à jour si besoin
+### 3. Politique de Délai
 
-### Types de Commentaires
+| Délai | Standard |
+|-------|----------|
+| Première review | < 4 heures (heures ouvrées) |
+| Réponse aux commentaires | < 24 heures |
+| Review complète | < 48 heures |
+| Escalade si blocage | Après 48h sans activité |
 
-| Préfixe | Signification | Blocking |
-|---------|---------------|----------|
-| `[blocking]` | Doit être corrigé | Oui |
-| `[suggestion]` | Amélioration optionnelle | Non |
-| `[question]` | Demande de clarification | Variable |
-| `[nit]` | Détail mineur | Non |
-| `[praise]` | Point positif ! | Non |
+### 4. Politique de Qualité
 
-### Exemples de Commentaires
+**Critères bloquants (merge interdit si non respectés) :**
 
-```markdown
-// ❌ Mauvais
-"C'est pas bon"
-"Pourquoi tu fais ça ?"
-"Nul"
+- [ ] Tests passants
+- [ ] Lint sans erreurs
+- [ ] Build réussi
+- [ ] Coverage maintenu ou amélioré
+- [ ] Pas de vulnérabilités critiques
+- [ ] Approbation(s) obtenue(s)
 
-// ✅ Bon
-"[blocking] Cette requête peut causer un N+1.
-Suggestion : utiliser un eager loading avec `include`."
+**Critères recommandés (non bloquants) :**
 
-"[suggestion] On pourrait extraire cette logique dans un helper
-pour la réutiliser dans OrderService."
-
-"[question] Je ne comprends pas pourquoi on vérifie cette condition.
-Peux-tu m'expliquer le use case ?"
-
-"[praise] Belle utilisation du pattern Strategy ici ! 👍"
-```
-
-## Bonnes Pratiques
-
-### Pour l'Auteur
-
-#### Avant de soumettre
-- [ ] Relire son propre code
-- [ ] Vérifier que les tests passent
-- [ ] S'assurer que le linter est content
-- [ ] Écrire une bonne description de PR
-
-#### Description de PR
-
-```markdown
-## Description
-[Résumé des changements]
-
-## Type de changement
-- [ ] Bug fix
-- [ ] Nouvelle feature
-- [ ] Refactoring
-- [ ] Documentation
-
-## Comment tester
-1. [Étape 1]
-2. [Étape 2]
-
-## Screenshots (si UI)
-[Captures d'écran]
-
-## Checklist
-- [ ] Tests ajoutés
+- [ ] Tests unitaires pour nouveau code
 - [ ] Documentation mise à jour
-- [ ] Pas de breaking changes
+- [ ] Pas de TODO sans ticket associé
 
-## Tickets liés
-Closes #123
-```
+## Standards de Communication
 
-#### Taille des PR
-- Idéal : < 400 lignes
-- Maximum : 800 lignes
-- Plus grand ? Découper en plusieurs PR
+### Préfixes Obligatoires
 
-### Pour le Reviewer
+| Préfixe | Signification | Bloquant |
+|---------|---------------|----------|
+| `[blocking]` | Doit être corrigé avant merge | Oui |
+| `[suggestion]` | Amélioration recommandée | Non |
+| `[question]` | Demande de clarification | Variable |
+| `[nit]` | Détail cosmétique | Non |
 
-1. **Répondre rapidement** (< 24h idéalement)
-2. **Être constructif**, pas destructif
-3. **Expliquer le "pourquoi"**, pas juste le "quoi"
-4. **Proposer des solutions**, pas juste critiquer
-5. **Reconnaître le bon travail**
-6. **Ne pas bloquer sur des détails**
+### Règles de Feedback
 
-### Communication
+1. **Constructif** : Proposer des solutions, pas juste critiquer
+2. **Factuel** : Baser sur des faits, pas des opinions
+3. **Priorisé** : Distinguer bloquant vs nice-to-have
+4. **Respectueux** : Critiquer le code, pas la personne
 
-| À éviter | Préférer |
-|----------|----------|
-| "Tu devrais..." | "On pourrait..." |
-| "C'est faux" | "Je pense que X serait mieux parce que..." |
-| "Toujours faire X" | "Dans ce contexte, X serait plus adapté" |
-| Impératif | Interrogatif / Suggestif |
+## Métriques à Suivre
 
-## Métriques de Review
-
-| Métrique | Cible | Mesure |
+| Métrique | Cible | Alerte |
 |----------|-------|--------|
-| Temps de première review | < 4h | Outils PR |
-| Temps total de review | < 24h | Outils PR |
-| Nombre d'allers-retours | < 3 | Comptage |
-| Taille moyenne PR | < 400 lignes | Stats |
+| Temps moyen de review | < 4h | > 8h |
+| Taille moyenne PR | < 300 lignes | > 500 lignes |
+| Taux de rejet | < 10% | > 20% |
+| Rounds de review | < 2 | > 3 |
 
-## Automatisation
+## Template de Politique Équipe
 
-### GitHub Actions
+```markdown
+# Politique Code Review - [Équipe/Projet]
 
-```yaml
-name: PR Checks
+## Approbations
+- Standard : [X] approbation(s)
+- Critique : [X] approbations + [rôle]
 
-on: [pull_request]
+## Taille PR
+- Maximum : [X] lignes
+- Action si dépassement : [Refus / Discussion]
 
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run lint
+## Délais
+- Première review : [X]h
+- Review complète : [X]h
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm test
+## CODEOWNERS
+[Lister les responsables par zone de code]
 
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run test:coverage
-      - uses: codecov/codecov-action@v3
+## Exceptions
+[Cas où les règles peuvent être assouplies]
 ```
 
-### CODEOWNERS
+## Points d'Escalade
 
-```
-# .github/CODEOWNERS
-* @default-reviewer
-
-/src/auth/ @auth-team
-/src/api/ @backend-team
-/src/components/ @frontend-team
-/docs/ @tech-writer
-```
+| Situation | Action |
+|-----------|--------|
+| Désaccord bloquant > 48h | Arbitrage tech lead |
+| PR bloquée sans raison | Escalade manager |
+| Violation répétée des standards | Discussion 1:1 |
+| Standards inadaptés | Proposition de changement en rétrospective |
 
 ## Références
 
-| Aspect | Agent de référence |
-|--------|-------------------|
-| Conventions | `qualite/conventions-code` |
-| Métriques | `qualite/metriques-qualite` |
-| Workflow Git | `web-dev-process/development/git-workflow` |
+- `web-dev-process/agents/development/code-review.md` - Process détaillé
+- `qualite/conventions-code.md` - Standards de code
+- `qualite/metriques-qualite.md` - Métriques qualité
