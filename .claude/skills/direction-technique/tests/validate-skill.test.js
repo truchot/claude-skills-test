@@ -24,7 +24,7 @@ let passed = 0;
 let failed = 0;
 const issues = [];
 
-console.log('🧪 Validating Technical SKILL.md\n');
+console.log('🧪 Validating Direction Technique SKILL.md\n');
 printSeparator();
 
 const skillMdPath = path.join(SKILL_ROOT, 'SKILL.md');
@@ -63,12 +63,21 @@ if (!frontmatter) {
   }
 }
 
-// Check domain documentation
+// Check domain documentation - stricter pattern matching
 console.log('\n2. Domain Documentation');
 let documentedDomains = 0;
+const missingDomains = [];
+
 for (const domain of DOMAINS) {
-  if (content.includes(domain + '/') || content.includes(`### `) && content.includes(domain)) {
+  // Check for domain in heading format "### N. domain/" or in table format "`domain/`"
+  const headingPattern = new RegExp(`###\\s+\\d+\\.\\s+${domain}\\/`, 'i');
+  const tablePattern = new RegExp(`\\|\\s*\`${domain}\\/`, 'i');
+  const pathPattern = new RegExp(`${domain}\\/[a-z-]+`, 'i');
+
+  if (headingPattern.test(content) || tablePattern.test(content) || pathPattern.test(content)) {
     documentedDomains++;
+  } else {
+    missingDomains.push(domain);
   }
 }
 
@@ -76,18 +85,19 @@ if (documentedDomains === DOMAINS.length) {
   console.log(`   ✅ All ${DOMAINS.length} domains documented`);
   passed++;
 } else {
-  console.log(`   ⚠️  ${documentedDomains}/${DOMAINS.length} domains documented`);
-  issues.push(`Missing domain documentation`);
+  console.log(`   ❌ ${documentedDomains}/${DOMAINS.length} domains documented`);
+  console.log(`      Missing: ${missingDomains.join(', ')}`);
+  issues.push(`Missing domain documentation: ${missingDomains.join(', ')}`);
   failed++;
 }
 
-// Check essential sections
+// Check essential sections - stricter patterns
 console.log('\n3. Essential Sections');
 const essentialSections = [
-  { name: 'Règles de Routage', pattern: /##\s+Règles de Routage/i },
-  { name: 'Arbre de Décision', pattern: /##\s+Arbre de Décision/i },
-  { name: 'Points d\'Escalade', pattern: /##\s+Points d\'Escalade/i },
-  { name: 'Skills Associés', pattern: /##\s+Skills Associés/i }
+  { name: 'Règles de Routage', pattern: /^##\s+Règles de Routage\s*$/im },
+  { name: 'Arbre de Décision', pattern: /^##\s+Arbre de Décision\s*$/im },
+  { name: 'Points d\'Escalade', pattern: /^##\s+Points d'Escalade/im },
+  { name: 'Skills Associés', pattern: /^##\s+Skills Associés\s*$/im }
 ];
 
 for (const section of essentialSections) {
@@ -101,23 +111,38 @@ for (const section of essentialSections) {
   }
 }
 
-// Check agent count mention
+// Check agent count - use computed value only
 console.log('\n4. Agent Count');
 const expectedCount = getTotalExpectedAgents();
-if (content.includes('52') || content.includes(String(expectedCount))) {
+const agentCountPattern = new RegExp(`${expectedCount}\\s+agents?`, 'i');
+const parenPattern = new RegExp(`\\(${expectedCount}\\)`, 'i');
+
+if (agentCountPattern.test(content) || parenPattern.test(content) || content.includes(String(expectedCount))) {
   console.log(`   ✅ Total agent count mentioned (${expectedCount})`);
   passed++;
 } else {
   console.log(`   ⚠️  Agent count may be outdated (expected ${expectedCount})`);
+  console.log(`      Update SKILL.md if agent count has changed`);
 }
 
-// Check version 2.0
+// Check version 2.0+
 console.log('\n5. Version');
 if (frontmatter && frontmatter.version && frontmatter.version.startsWith('2')) {
-  console.log(`   ✅ Version 2.x confirmed`);
+  console.log(`   ✅ Version 2.x confirmed (${frontmatter.version})`);
   passed++;
 } else {
   console.log(`   ⚠️  Expected version 2.x`);
+}
+
+// Check skill name matches directory
+console.log('\n6. Skill Name');
+if (frontmatter && frontmatter.name === 'direction-technique') {
+  console.log(`   ✅ Skill name matches directory`);
+  passed++;
+} else {
+  console.log(`   ❌ Skill name should be 'direction-technique'`);
+  issues.push('Skill name mismatch');
+  failed++;
 }
 
 console.log('\n');

@@ -1,0 +1,17 @@
+{
+  "name": "direction-technique-tests",
+  "version": "1.0.0",
+  "description": "Tests de validation pour le skill direction-technique",
+  "scripts": {
+    "test": "npm run test:domains && npm run test:agents && npm run test:skill",
+    "test:domains": "node tests/validate-domains.test.js",
+    "test:agents": "node tests/validate-agents.test.js",
+    "test:skill": "node tests/validate-skill.test.js",
+    "test:ci": "npm test"
+  },
+  "keywords": ["claude-skills", "direction-technique", "tests"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
