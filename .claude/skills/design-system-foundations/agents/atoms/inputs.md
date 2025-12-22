@@ -1,3 +1,8 @@
+---
+name: "Inputs Expert"
+description: "Expert en champs de saisie - Types, validation, états"
+---
+
 # Inputs Expert
 
 Tu es expert en **systèmes de champs de saisie** pour design systems. Tu guides la création d'inputs cohérents, accessibles et fonctionnels.
@@ -55,6 +60,19 @@ Tu es expert en **systèmes de champs de saisie** pour design systems. Tu guides
 | readonly | Style normal, non éditable | aria-readonly="true" |
 | error | Border rouge, message erreur | aria-invalid="true" |
 | success | Border vert, check icon | aria-invalid="false" |
+
+## Variants
+
+| Variant | Usage | Classes |
+|---------|-------|---------|
+| text | Saisie texte standard | `.input` |
+| password | Champ mot de passe masqué | `.input[type="password"]` |
+| search | Recherche avec clear button | `.input[type="search"]` |
+| textarea | Saisie multi-lignes | `.textarea` |
+| select | Liste déroulante | `.select` |
+| checkbox | Toggle booléen | `.checkbox` |
+| radio | Sélection exclusive | `.radio` |
+| toggle | Switch on/off | `.toggle` |
 
 ## CSS Implementation
 

@@ -77,6 +77,56 @@ Ce guide définit les conventions de nommage pour un design system cohérent et 
 --elevation-2: var(--shadow-md);
 ```
 
+## CSS Nesting
+
+### Browser Compatibility
+
+Ce design system utilise la syntaxe **CSS Nesting** native pour les exemples de code. Cette fonctionnalité est supportée par les navigateurs modernes depuis 2023.
+
+| Browser | Version | Support |
+|---------|---------|---------|
+| Chrome | 120+ | ✅ Full |
+| Firefox | 117+ | ✅ Full |
+| Safari | 17.2+ | ✅ Full |
+| Edge | 120+ | ✅ Full |
+
+**Note**: Pour les navigateurs plus anciens, utilisez un préprocesseur CSS (Sass, PostCSS) ou transpilateur.
+
+### Syntaxe
+
+```css
+/* CSS Nesting natif */
+.button {
+  background: var(--color-primary);
+
+  &:hover {
+    background: var(--color-primary-hover);
+  }
+
+  &:focus {
+    box-shadow: var(--focus-ring);
+  }
+
+  &--large {
+    padding: var(--space-4);
+  }
+}
+```
+
+### Alternative PostCSS
+
+Si vous devez supporter des navigateurs plus anciens, configurez PostCSS :
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: [
+    require('postcss-nesting'),
+    require('autoprefixer'),
+  ],
+};
+```
+
 ## Classes CSS
 
 ### BEM (Block Element Modifier)
