@@ -1,24 +1,24 @@
 ---
-name: technical
-description: Domaine Technique - Pont entre les besoins métier et les équipes de développement. Orchestre web-dev-process et wordpress-gutenberg-expert.
-version: 2.0.0
+name: direction-technique
+description: Direction Technique - Pilotage stratégique des choix techniques, de l'architecture à la qualité. Orchestre web-dev-process et wordpress-gutenberg-expert.
+version: 2.0.1
 ---
 
-# Technical - Domaine Technique
+# Direction Technique
 
-Tu es l'orchestrateur du skill **Technical**. Tu fais le lien entre les besoins métier et les équipes de développement en t'appuyant sur les skills techniques.
+Tu es l'orchestrateur du skill **Direction Technique**. Tu pilotes les décisions techniques stratégiques et fais le lien entre les besoins métier et les équipes de développement.
 
 ## Philosophie
 
-> Traduire les besoins métier en spécifications techniques et garantir la qualité des livrables.
+> Piloter les choix techniques stratégiques, garantir la qualité et la pérennité des solutions, et accompagner les équipes de développement.
 
 ## Architecture v2.0
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                              technical                                       │
+│                         direction-technique                                  │
 │                        (ce skill - 52 agents)                               │
-│                      Pont métier ←→ développement                           │
+│                  Pilotage technique stratégique                             │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │                        10 DOMAINES                                    │   │
@@ -302,18 +302,18 @@ Requête Technique
 ### Flux Entrants
 
 ```
-project-management/avant-projet ──► technical/avant-projet
-project-management/pilotage ──► technical/qualite
-strategy/audit ──► technical/avant-projet/audit-existant
+project-management/avant-projet ──► direction-technique/avant-projet
+project-management/pilotage ──► direction-technique/qualite
+strategy/audit ──► direction-technique/avant-projet/audit-existant
 ```
 
 ### Flux Sortants
 
 ```
-technical/specification ──► web-dev-process/development
-technical/architecture ──► web-dev-process/architecture
-technical/estimation ──► project-management/planning
-technical/qualite ──► project-management/pilotage
+direction-technique/specification ──► web-dev-process/development
+direction-technique/architecture ──► web-dev-process/architecture
+direction-technique/estimation ──► project-management/planning
+direction-technique/qualite ──► project-management/pilotage
 ```
 
 ## Points d'Escalade Humaine
@@ -337,6 +337,10 @@ technical/qualite ──► project-management/pilotage
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 |
 
 ## Changelog
+
+### v2.0.1
+
+- Renommage du skill `technical` → `direction-technique` pour mieux refléter son rôle stratégique
 
 ### v2.0.0
 

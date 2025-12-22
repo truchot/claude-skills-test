@@ -35,7 +35,7 @@ Direction artistique, identité visuelle, maquettes et prototypes.
 | Skill | Interaction |
 |-------|-------------|
 | `strategy` | Recommandations de positionnement |
-| `technical` | Intégration des maquettes |
+| `direction-technique` | Intégration des maquettes |
 | `content` | Mise en page des contenus |
 | `web-dev-process` | Design system, tokens |
 

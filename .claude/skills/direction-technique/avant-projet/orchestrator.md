@@ -52,11 +52,11 @@ Requête Avant-Projet
 ### Depuis project-management
 
 ```
-avant-projet/formalisation-brief ──► technical/avant-projet/selection-stack
-avant-projet/analyse-perimetre ──► technical/avant-projet/etude-faisabilite
+avant-projet/formalisation-brief ──► direction-technique/avant-projet/selection-stack
+avant-projet/analyse-perimetre ──► direction-technique/avant-projet/etude-faisabilite
 ```
 
-### Vers les autres domaines technical
+### Vers les autres domaines direction-technique
 
 ```
 avant-projet/selection-stack ──► specification/cadrage-technique

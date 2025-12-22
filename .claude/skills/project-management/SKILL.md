@@ -114,7 +114,7 @@ Ce skill interagit avec :
 
 | Skill | Interaction |
 |-------|-------------|
-| `technical` | Estimation technique, specs, qualité |
+| `direction-technique` | Estimation technique, specs, qualité |
 | `strategy` | Recommandations stratégiques |
 | `design` | Maquettes, DA |
 | `content` | Contenus à livrer |
