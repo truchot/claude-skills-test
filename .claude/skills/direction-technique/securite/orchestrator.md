@@ -108,6 +108,53 @@ Requête Sécurité
 - [ ] Monitoring sécurité
 - [ ] Plan de réponse incidents
 
+## Flux de Travail Typique
+
+```
+architecture/architecture-systeme
+              │
+              ▼
+    ┌────────────────────┐
+    │   conformite-rgpd  │  ← Identifier données sensibles
+    └─────────┬──────────┘
+              │
+    ┌─────────┴──────────┐
+    ▼                    ▼
+┌───────────────┐  ┌──────────────┐
+│gestion-secrets│  │securite-     │
+│               │  │applicative   │
+└───────┬───────┘  └──────┬───────┘
+        │                 │
+        └────────┬────────┘
+                 ▼
+    ┌────────────────────┐
+    │   audit-securite   │  ← Validation avant prod
+    └────────────────────┘
+                 │
+                 ▼
+    infrastructure/strategie-deploiement
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `architecture/architecture-systeme` | Architecture à sécuriser |
+| `specification/specification-technique` | Exigences de sécurité |
+| `infrastructure/environnements` | Configuration environnements |
+| `avant-projet/etude-faisabilite` | Contraintes réglementaires |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `infrastructure/strategie-deploiement` | Checklist sécurité déploiement |
+| `qualite/conventions-code` | Standards de code sécurisé |
+| `support/gestion-incidents` | Procédures incidents sécurité |
+| `project-management/pilotage` | Rapport risques sécurité |
+
 ## Points d'Escalade
 
 | Situation | Action |
@@ -116,3 +163,17 @@ Requête Sécurité
 | Fuite de données | Procédure incident + notification |
 | Doute sur conformité | Consultation DPO |
 | Attaque en cours | Activation plan de réponse |
+
+## Désambiguïsation
+
+### Mot-clé "audit"
+
+Le mot "audit" peut concerner plusieurs domaines :
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| Audit de **sécurité/vulnérabilités/pentest** | securite | `audit-securite` |
+| Audit de **l'existant/legacy/code** | avant-projet | `audit-existant` |
+| Audit de **performance/latence** | performance | `audit-performance` |
+
+> **Règle** : Si le contexte mentionne vulnérabilités, OWASP, pentest, ou scan → `audit-securite`

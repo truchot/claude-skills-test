@@ -124,13 +124,20 @@ for (const domain of DOMAINS) {
   }
   if (!content) continue;
 
+  // Only check routing tables BEFORE the disambiguation section
+  // Disambiguation sections intentionally reference agents from other domains
+  const disambiguationIndex = content.indexOf('## Désambiguïsation');
+  const routingContent = disambiguationIndex > 0
+    ? content.substring(0, disambiguationIndex)
+    : content;
+
   // Extract agent references from routing tables
   // Pattern supports: lowercase letters, numbers, and hyphens (kebab-case)
   const tablePattern = /\|\s*`([a-z0-9-]+)`\s*\|/g;
   const referencedAgents = new Set();
   let tableMatch;
 
-  while ((tableMatch = tablePattern.exec(content)) !== null) {
+  while ((tableMatch = tablePattern.exec(routingContent)) !== null) {
     const agentName = tableMatch[1];
     if (agentName !== 'orchestrator') {
       referencedAgents.add(agentName);

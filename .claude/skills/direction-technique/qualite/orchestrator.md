@@ -62,6 +62,58 @@ Requête Qualité
 | Bugs en production | < 5/mois | Monitoring |
 | Score SonarQube | A | Scan |
 
+## Flux de Travail Typique
+
+```
+specification/specification-technique
+              │
+              ▼
+    ┌────────────────────┐
+    │  conventions-code  │  ← Définir les standards
+    └─────────┬──────────┘
+              │
+              ▼
+    ┌────────────────────┐
+    │   code-review      │  ← Pendant le développement
+    └─────────┬──────────┘
+              │
+    ┌─────────┴──────────┐
+    ▼                    ▼
+┌───────────┐    ┌────────────────┐
+│metriques- │    │dette-technique │
+│qualite    │    │                │
+└─────┬─────┘    └───────┬────────┘
+      │                  │
+      └────────┬─────────┘
+               ▼
+    ┌────────────────────┐
+    │ definition-of-done │  ← Validation finale
+    └────────────────────┘
+               │
+               ▼
+    communication/handoff-developpeur
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `specification/specification-technique` | Contraintes qualité du projet |
+| `architecture/patterns-design` | Patterns à respecter |
+| `infrastructure/strategie-cicd` | Configuration CI/CD |
+| `project-management/pilotage` | Objectifs qualité sprint |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `communication/handoff-developpeur` | Standards à suivre |
+| `estimation/analyse-risques` | Risques liés à la qualité |
+| `project-management/pilotage` | Métriques qualité |
+| `support/troubleshooting` | Patterns d'erreurs récurrents |
+
 ## Points d'Escalade
 
 | Situation | Action |

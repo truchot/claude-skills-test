@@ -94,6 +94,55 @@ L1 (15 min max)
 | Contact | PagerDuty / OpsGenie |
 | Compensation | Selon politique RH |
 
+## Flux de Travail Typique
+
+```
+infrastructure/strategie-deploiement (mise en prod)
+              │
+              ▼
+    ┌─────────────────────┐
+    │  gestion-incidents  │  ← Si incident survient
+    └─────────┬───────────┘
+              │
+              ▼
+    ┌─────────────────────┐
+    │   troubleshooting   │  ← Investigation
+    └─────────┬───────────┘
+              │
+              ▼
+    ┌─────────────────────┐
+    │     post-mortem     │  ← Analyse post-résolution
+    └─────────┬───────────┘
+              │
+              ▼
+    ┌──────────────────────┐
+    │veille-technologique  │  ← Amélioration continue
+    └──────────────────────┘
+              │
+              ▼
+    avant-projet/selection-stack (si migration)
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `infrastructure/strategie-deploiement` | Runbooks, monitoring |
+| `performance/monitoring-perf` | Alertes performance |
+| `securite/audit-securite` | Alertes sécurité |
+| `qualite/dette-technique` | Problèmes connus |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `avant-projet/selection-stack` | Recommandations migration |
+| `qualite/dette-technique` | Bugs et dette identifiés |
+| `communication/reporting-technique` | Rapports incidents |
+| `architecture/adr` | Décisions post-incident |
+
 ## Points d'Escalade
 
 | Situation | Action |
@@ -102,3 +151,15 @@ L1 (15 min max)
 | Pattern d'incidents récurrent | Investigation root cause |
 | Surcharge d'astreinte | Renfort équipe |
 | Technologie obsolète critique | Plan de migration urgent |
+
+## Désambiguïsation
+
+### Problème de performance
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| **Bug/incident** urgent en production | support | `troubleshooting` |
+| **Diagnostic** proactif/planifié | performance | `audit-performance` |
+| **Optimisation** prévue | performance | `optimisation-*` |
+
+> **Règle** : Urgence/incident → `support`. Analyse planifiée → `performance`

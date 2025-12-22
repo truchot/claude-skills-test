@@ -74,6 +74,48 @@ avant-projet/poc-spike ──► specification/specification-technique
 | `etude-faisabilite` | Note de faisabilité |
 | `poc-spike` | Rapport de POC avec conclusions |
 
+## Flux de Travail Typique
+
+```
+project-management/avant-projet/formalisation-brief
+                    │
+                    ▼
+         ┌──────────────────┐
+         │  audit-existant  │  ← Si reprise/évolution
+         └────────┬─────────┘
+                  │
+    ┌─────────────┼─────────────┐
+    ▼             ▼             ▼
+┌────────┐  ┌───────────┐  ┌──────────────┐
+│etude-  │  │selection- │  │   poc-spike  │
+│faisa-  │  │stack      │  │              │
+│bilite  │  │           │  │              │
+└────┬───┘  └─────┬─────┘  └──────┬───────┘
+     │            │               │
+     └────────────┼───────────────┘
+                  ▼
+     specification/cadrage-technique
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `project-management/avant-projet/formalisation-brief` | Brief client et besoins |
+| `project-management/avant-projet/analyse-perimetre` | Périmètre fonctionnel |
+| `strategy/audit` | Recommandations stratégiques |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `specification/cadrage-technique` | Stack et contraintes validées |
+| `architecture/review-architecture` | Audit existant pour review |
+| `estimation/analyse-risques` | Risques techniques identifiés |
+| `estimation/estimation-macro` | Complexité pour chiffrage |
+
 ## Points d'Escalade
 
 | Situation | Action |
@@ -82,3 +124,17 @@ avant-projet/poc-spike ──► specification/specification-technique
 | Existant trop dégradé | Recommander refonte vs évolution |
 | Faisabilité incertaine | Proposer POC avant engagement |
 | POC non concluant | Réévaluer les options avec équipe |
+
+## Désambiguïsation
+
+### Mot-clé "audit"
+
+Le mot "audit" peut concerner plusieurs domaines :
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| Audit de **l'existant/legacy/code** | avant-projet | `audit-existant` |
+| Audit de **sécurité/vulnérabilités** | securite | `audit-securite` |
+| Audit de **performance/latence** | performance | `audit-performance` |
+
+> **Règle** : Si le contexte n'est pas clair, demander : "S'agit-il d'un audit de code existant, de sécurité, ou de performance ?"

@@ -67,6 +67,56 @@ Requête Communication
 | Product/Business | Vulgarisation, impacts fonctionnels |
 | Direction | Executive summary, risques, coûts |
 
+## Flux de Travail Typique
+
+```
+specification/specification-technique
+              │
+              ▼
+    ┌─────────────────────┐
+    │  handoff-developpeur│  ← Brief initial
+    └─────────┬───────────┘
+              │
+              ▼
+    ┌─────────────────────┐
+    │onboarding-technique │  ← Si nouveau dev
+    └─────────┬───────────┘
+              │
+              ▼
+    ┌──────────────────────┐
+    │documentation-        │  ← Pendant le dev
+    │technique             │
+    └─────────┬────────────┘
+              │
+              ▼
+    ┌─────────────────────┐
+    │ reporting-technique │  ← Synthèse
+    └─────────────────────┘
+              │
+              ▼
+    project-management/pilotage
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `specification/specification-technique` | Specs à transmettre |
+| `qualite/conventions-code` | Standards à documenter |
+| `architecture/adr` | Décisions à communiquer |
+| `performance/monitoring-perf` | Métriques à reporter |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `project-management/pilotage` | Rapports de progression |
+| `web-dev-process/development` | Documentation dev |
+| `support/troubleshooting` | Base de connaissance |
+| `qualite/code-review` | Guidelines pour reviews |
+
 ## Points d'Escalade
 
 | Situation | Action |

@@ -69,6 +69,53 @@ Requête Performance
 | Error Rate | < 0.1% | Taux d'erreur |
 | Throughput | Variable | Requêtes/seconde |
 
+## Flux de Travail Typique
+
+```
+support/troubleshooting (si problème détecté)
+              │
+              ▼
+    ┌────────────────────┐
+    │  audit-performance │  ← Diagnostic initial
+    └─────────┬──────────┘
+              │
+    ┌─────────┴──────────┐
+    ▼                    ▼
+┌──────────────┐  ┌──────────────┐
+│optimisation- │  │optimisation- │
+│frontend      │  │backend       │
+└──────┬───────┘  └──────┬───────┘
+       │                 │
+       └────────┬────────┘
+                ▼
+    ┌────────────────────┐
+    │   monitoring-perf  │  ← Suivi continu
+    └────────────────────┘
+                │
+                ▼
+       qualite/metriques-qualite
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `support/troubleshooting` | Problèmes de performance détectés |
+| `qualite/metriques-qualite` | Métriques de base |
+| `infrastructure/strategie-cicd` | Outils de mesure CI |
+| `architecture/architecture-systeme` | Architecture à optimiser |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `qualite/metriques-qualite` | Métriques performance |
+| `infrastructure/strategie-cicd` | Tests de performance CI |
+| `communication/reporting-technique` | Rapports performance |
+| `estimation/analyse-risques` | Risques liés aux perfs |
+
 ## Points d'Escalade
 
 | Situation | Action |
@@ -77,3 +124,25 @@ Requête Performance
 | Latence API > 2s | Diagnostic backend |
 | Error rate > 1% | Alerte + investigation |
 | Dégradation progressive | Revue des changements récents |
+
+## Désambiguïsation
+
+### Mot-clé "audit"
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| Audit de **performance/latence/Lighthouse** | performance | `audit-performance` |
+| Audit de **sécurité/vulnérabilités** | securite | `audit-securite` |
+| Audit de **l'existant/legacy** | avant-projet | `audit-existant` |
+
+> **Règle** : Si le contexte mentionne lenteur, Lighthouse, Core Web Vitals, ou latence → `audit-performance`
+
+### Mot-clé "monitoring"
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| Monitoring **performance/APM** | performance | `monitoring-perf` |
+| Monitoring **incidents/alertes** | support | `gestion-incidents` |
+| Monitoring **sécurité** | securite | `audit-securite` |
+
+> **Règle** : Monitoring proactif des métriques → `monitoring-perf`, réaction à incident → `support`

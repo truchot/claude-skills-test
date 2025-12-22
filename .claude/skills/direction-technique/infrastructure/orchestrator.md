@@ -67,6 +67,53 @@ Requête Infrastructure
 | **Monitoring** | Observabilité des systèmes |
 | **GitOps** | Git comme source de vérité |
 
+## Flux de Travail Typique
+
+```
+architecture/architecture-systeme
+              │
+              ▼
+    ┌────────────────────┐
+    │  architecture-infra│  ← Conception IaC
+    └─────────┬──────────┘
+              │
+    ┌─────────┴──────────┐
+    ▼                    ▼
+┌──────────────┐  ┌──────────────┐
+│environnements│  │strategie-cicd│
+│              │  │              │
+└──────┬───────┘  └──────┬───────┘
+       │                 │
+       └────────┬────────┘
+                ▼
+    ┌─────────────────────┐
+    │strategie-deploiement│  ← Mise en prod
+    └─────────────────────┘
+                │
+                ▼
+       support/gestion-incidents
+```
+
+## Entrées / Sorties
+
+### Entrées
+
+| Source | Information |
+|--------|-------------|
+| `architecture/architecture-systeme` | Architecture applicative |
+| `securite/gestion-secrets` | Stratégie secrets |
+| `avant-projet/selection-stack` | Stack technique choisie |
+| `estimation/estimation-detaillee` | Besoins ressources |
+
+### Sorties
+
+| Destination | Information |
+|-------------|-------------|
+| `support/gestion-incidents` | Runbooks, procédures |
+| `qualite/metriques-qualite` | Métriques CI/CD |
+| `securite/audit-securite` | Configuration à auditer |
+| `communication/documentation-technique` | Doc infrastructure |
+
 ## Points d'Escalade
 
 | Situation | Action |
@@ -75,3 +122,15 @@ Requête Infrastructure
 | Coût infra excessif | Optimisation + validation direction |
 | Changement majeur d'archi | Review + ADR |
 | Nouvelle région/compliance | Validation légal/sécurité |
+
+## Désambiguïsation
+
+### Mot-clé "architecture"
+
+| Contexte | Domaine | Agent |
+|----------|---------|-------|
+| Architecture **infrastructure/cloud/serveurs** | infrastructure | `architecture-infra` |
+| Architecture **applicative/système** | architecture | `architecture-systeme` |
+| Architecture **patterns/design** | architecture | `patterns-design` |
+
+> **Règle** : AWS, GCP, Azure, Terraform, Kubernetes → `architecture-infra`. Code, modules, couches → `architecture-systeme`
