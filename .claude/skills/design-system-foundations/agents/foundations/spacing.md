@@ -134,6 +134,19 @@ Tu es expert en **systèmes d'espacement** pour design systems. Tu guides la cr�
   --space-section-md: var(--space-16); /* 64px */
   --space-section-lg: var(--space-24); /* 96px */
   --space-section-xl: var(--space-32); /* 128px */
+
+  /* ══════════════════════════════════════════════════════════════════
+     BORDER RADIUS
+     ══════════════════════════════════════════════════════════════════ */
+
+  --radius-none: 0;
+  --radius-sm: 0.125rem;   /* 2px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-3xl: 1.5rem;    /* 24px */
+  --radius-full: 9999px;   /* Pill shape */
 }
 ```
 

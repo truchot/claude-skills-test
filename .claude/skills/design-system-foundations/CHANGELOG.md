@@ -4,7 +4,7 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
-## [1.0.0] - 2024-12-21
+## [1.0.0] - 2025-12-21
 
 ### Added
 

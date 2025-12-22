@@ -93,9 +93,9 @@ Tu es expert en **badges et indicateurs** pour design systems. Tu guides la cré
   color: white;
 }
 
-/* Success */
+/* Success - Using green-600 (#16a34a) for WCAG AA compliance (4.5:1) */
 .badge--success {
-  background-color: var(--color-success);
+  background-color: var(--color-success-dark, #16a34a);
   color: white;
 }
 
@@ -589,7 +589,7 @@ export function AvatarWithStatus({
 | Badge Type | Background | Text | Contrast Ratio |
 |------------|------------|------|----------------|
 | Primary | #2563eb | white | 4.6:1 ✅ |
-| Success | #22c55e | white | 3.1:1 ⚠️ (large only) |
+| Success | #16a34a | white | 4.5:1 ✅ |
 | Warning | #eab308 | #171717 | 8.5:1 ✅ |
 | Error | #ef4444 | white | 4.5:1 ✅ |
 
