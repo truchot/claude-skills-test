@@ -220,7 +220,53 @@ module.exports = {
 }
 ```
 
-## @font-face avec Subset
+## Font Loading Optimization
+
+### Stratégies font-display
+
+| Valeur | Comportement | Cas d'usage |
+|--------|--------------|-------------|
+| `swap` | Texte visible immédiatement (FOUT) | **Recommandé** pour body text |
+| `optional` | Utilise cache ou system font | Performance critique, accepte fallback |
+| `fallback` | Court délai puis fallback | Compromis FOUT/FOIT |
+| `block` | Invisible pendant chargement (FOIT) | Logo, icônes critiques |
+| `auto` | Dépend du navigateur | Non recommandé |
+
+### FOUT vs FOIT
+
+```
+FOUT (Flash of Unstyled Text)
+├── Texte visible immédiatement avec fallback
+├── Police custom remplace quand chargée
+├── ✅ Meilleur pour l'accessibilité
+└── Utiliser: font-display: swap
+
+FOIT (Flash of Invisible Text)
+├── Texte invisible pendant chargement
+├── Peut bloquer jusqu'à 3s (timeout navigateur)
+├── ❌ Mauvais pour l'UX
+└── Éviter: font-display: block
+```
+
+### Preload des polices critiques
+
+```html
+<!-- Dans <head> - avant CSS -->
+<link
+  rel="preload"
+  href="/fonts/inter-400.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<!-- Optimisation : preload uniquement les weights critiques -->
+<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
+<!-- Ne pas preload les weights secondaires (500, 600) -->
+```
+
+### @font-face avec Subset
 
 ```css
 /* Optimized font loading */
@@ -228,8 +274,9 @@ module.exports = {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-display: swap; /* Prevent FOIT */
+  font-display: swap; /* Prevent FOIT - texte visible immédiatement */
   src: url('/fonts/inter-400.woff2') format('woff2');
+  /* Subset Latin - réduit la taille de ~100kb à ~20kb */
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
                  U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122,
                  U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -241,8 +288,79 @@ module.exports = {
   font-weight: 700;
   font-display: swap;
   src: url('/fonts/inter-700.woff2') format('woff2');
-  unicode-range: U+0000-00FF; /* Latin subset */
+  unicode-range: U+0000-00FF; /* Latin subset only */
 }
+
+/* Extended Latin pour langues européennes (chargé à la demande) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+                 U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+```
+
+### Font Loading API (JavaScript)
+
+```js
+// Détection du chargement des polices
+document.fonts.ready.then(() => {
+  document.documentElement.classList.add('fonts-loaded');
+});
+
+// Vérification d'une police spécifique
+document.fonts.load('700 1em Inter').then(() => {
+  console.log('Inter Bold loaded');
+});
+
+// Stratégie progressive (FOFT - Flash of Faux Text)
+if ('fonts' in document) {
+  // Charge d'abord le regular
+  document.fonts.load('400 1em Inter').then(() => {
+    document.documentElement.classList.add('fonts-stage-1');
+
+    // Puis les autres weights
+    Promise.all([
+      document.fonts.load('500 1em Inter'),
+      document.fonts.load('700 1em Inter'),
+    ]).then(() => {
+      document.documentElement.classList.add('fonts-stage-2');
+    });
+  });
+}
+```
+
+```css
+/* CSS progressif avec FOFT */
+body {
+  font-family: system-ui, sans-serif; /* Fallback initial */
+}
+
+.fonts-stage-1 body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Ajuste le faux bold/italic après chargement */
+.fonts-stage-1 strong {
+  font-weight: 700;
+  font-synthesis: none; /* Désactive le faux bold */
+}
+```
+
+### Outils de Subsetting
+
+```bash
+# Avec glyphhanger (npm install -g glyphhanger)
+glyphhanger --whitelist="ABCDEFGHIJKLMNOPQRSTUVWXYZ..." --subset=Inter.ttf
+
+# Avec fonttools (pip install fonttools)
+pyftsubset Inter.ttf --unicodes="U+0000-00FF" --output-file=inter-latin.woff2
+
+# Avec google-webfonts-helper (interface web)
+# https://gwfh.mranftl.com/fonts
 ```
 
 ## Accessibilité Typographique
