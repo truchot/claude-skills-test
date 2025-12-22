@@ -45,7 +45,7 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 
 ### Technical
 - Architecture hiérarchique avec orchestrateurs par niveau
-- 20 agents spécialisés au total
+- 21 agents au total (4 orchestrateurs + 17 agents spécialisés)
 - CSS + React/TypeScript pour chaque composant
 - Checklists d'accessibilité intégrées
 - Exemples Storybook inclus

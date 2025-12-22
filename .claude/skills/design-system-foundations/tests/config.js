@@ -111,7 +111,10 @@ const LEVEL_KEYWORDS = {
 /** @const {number} Number of Atomic Design levels */
 const LEVEL_COUNT = LEVELS.length;
 
-/** @const {number} Total number of agents across all levels (computed) */
+/**
+ * @const {number} Total number of agents across all levels (computed)
+ * Includes 4 orchestrators (one per level) + 17 specialized agents = 21 total
+ */
 const TOTAL_AGENT_COUNT = Object.values(EXPECTED_AGENTS_PER_LEVEL)
   .reduce((sum, agents) => sum + agents.length, 0);
 

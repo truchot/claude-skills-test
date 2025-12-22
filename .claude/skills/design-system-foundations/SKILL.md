@@ -91,7 +91,7 @@ Orchestrateur Principal (SKILL.md)
    └─ pages.md             ← Pages types, patterns de page
 ```
 
-**Total : 20 agents spécialisés**
+**Total : 21 agents** (4 orchestrateurs + 17 agents spécialisés)
 
 ---
 

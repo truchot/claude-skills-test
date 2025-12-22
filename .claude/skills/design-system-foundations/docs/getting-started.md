@@ -8,6 +8,66 @@ Ce guide explique comment utiliser le skill Design System Foundations pour crée
 - Accès à une maquette (Figma, Sketch, Adobe XD)
 - Projet frontend initialisé (React, Vue, Angular, ou vanilla)
 
+## Dépendances Requises
+
+### Utilitaire `cn()` pour React/TypeScript
+
+Les exemples de composants React utilisent une fonction utilitaire `cn()` pour fusionner les classes CSS conditionnellement. Installez les dépendances nécessaires :
+
+```bash
+npm install clsx tailwind-merge
+```
+
+Créez le fichier utilitaire :
+
+```typescript
+// src/utils/cn.ts (ou lib/utils.ts)
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+/**
+ * Combine les classes CSS avec support Tailwind
+ * Gère les conflits de classes et les conditions
+ *
+ * @example
+ * cn('px-4 py-2', isLarge && 'px-6 py-3', className)
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+#### Usage dans les composants
+
+```tsx
+import { cn } from '@/utils/cn';
+
+// Classes conditionnelles
+<button className={cn(
+  'btn btn--primary',
+  isDisabled && 'btn--disabled',
+  className
+)}>
+
+// Override de styles via props
+<Card className={cn('card', 'custom-class')} />
+```
+
+#### Alternative sans Tailwind
+
+Si vous n'utilisez pas Tailwind CSS, vous pouvez simplifier :
+
+```typescript
+// Version simple avec clsx uniquement
+import { clsx, type ClassValue } from 'clsx';
+export const cn = (...inputs: ClassValue[]) => clsx(inputs);
+
+// Ou version vanilla (sans dépendances)
+export function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(' ');
+}
+```
+
 ## Workflow Recommandé
 
 ### 1. Extraction des Foundations
