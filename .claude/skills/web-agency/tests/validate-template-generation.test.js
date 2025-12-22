@@ -270,14 +270,13 @@ function testTemplateDocumentation(content) {
 console.log('📄 Validating Template Generation with Sample Data\n');
 printSeparator();
 
-const projectTemplatesDir = path.join(TEMPLATES_DIR, 'project-management');
-
-if (!directoryExists(projectTemplatesDir)) {
-  console.error(`❌ Templates directory not found: ${projectTemplatesDir}`);
+// TEMPLATES_DIR already points to project-management/templates/project-management
+if (!directoryExists(TEMPLATES_DIR)) {
+  console.error(`❌ Templates directory not found: ${TEMPLATES_DIR}`);
   process.exit(1);
 }
 
-const templateFiles = findMarkdownFiles(projectTemplatesDir);
+const templateFiles = findMarkdownFiles(TEMPLATES_DIR);
 console.log(`Found ${templateFiles.length} templates to test\n`);
 
 for (const filePath of templateFiles) {

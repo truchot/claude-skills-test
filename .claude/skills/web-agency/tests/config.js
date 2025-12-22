@@ -1,21 +1,48 @@
 /**
  * Centralized configuration for web-agency skill tests
  * @module tests/config
+ *
+ * NOTE: Since v2.0.0 refactoring, web-agency is a meta-orchestrator.
+ * Agents are now in separate skills (project-management, technical, etc.)
  */
 
+const fs = require('fs');
 const path = require('path');
 
 /** @const {string} Base directory for the web-agency skill */
 const SKILL_ROOT = path.join(__dirname, '..');
 
-/** @const {string} Directory containing all agents */
-const AGENTS_DIR = path.join(SKILL_ROOT, 'agents');
+/** @const {string} Base directory for all skills */
+const SKILLS_ROOT = path.join(SKILL_ROOT, '..');
 
-/** @const {string} Directory for project management domain */
-const PROJECT_MANAGEMENT_DIR = path.join(AGENTS_DIR, 'project-management');
+/** @const {string} Directory for project management skill (external) */
+const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
 
-/** @const {string} Directory containing templates */
-const TEMPLATES_DIR = path.join(SKILL_ROOT, 'templates');
+/** @const {string} Directory containing templates (in project-management skill) */
+const TEMPLATES_DIR = path.join(PROJECT_MANAGEMENT_DIR, 'templates', 'project-management');
+
+/**
+ * Validate that required external skills exist
+ * @returns {{ valid: boolean, missing: string[] }}
+ */
+function validateRequiredSkills() {
+  const requiredSkills = [
+    { name: 'project-management', path: PROJECT_MANAGEMENT_DIR }
+  ];
+
+  const missing = [];
+  for (const skill of requiredSkills) {
+    try {
+      if (!fs.statSync(skill.path).isDirectory()) {
+        missing.push(skill.name);
+      }
+    } catch {
+      missing.push(skill.name);
+    }
+  }
+
+  return { valid: missing.length === 0, missing };
+}
 
 /** @const {string[]} Sub-domains in project management */
 const PROJECT_MANAGEMENT_SUBDOMAINS = [
@@ -205,7 +232,7 @@ const EXPECTED_ROUTING = {
 
 module.exports = {
   SKILL_ROOT,
-  AGENTS_DIR,
+  SKILLS_ROOT,
   PROJECT_MANAGEMENT_DIR,
   TEMPLATES_DIR,
   PROJECT_MANAGEMENT_SUBDOMAINS,
@@ -215,5 +242,6 @@ module.exports = {
   AGENT_REFERENCE_PATTERNS,
   WORKFLOWS,
   SAMPLE_DATA,
-  EXPECTED_ROUTING
+  EXPECTED_ROUTING,
+  validateRequiredSkills
 };

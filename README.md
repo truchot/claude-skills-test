@@ -1,44 +1,200 @@
-# Project Name
+# Claude Skills - Web Agency
 
-A brief description of what this project does and who it's for.
+Collection modulaire de skills Claude pour industrialiser les métiers d'une agence Web.
 
-## Features
+## Philosophie
 
-- Feature 1
-- Feature 2
-- Feature 3
+> **Les skills exécutent, web-agency orchestre, les humains supervisent.**
+
+```
+CLIENT
+   │
+   ▼
+┌─────────────────────────────────────────────────────┐
+│              WEB-AGENCY (orchestrateur)             │
+│                                                     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐            │
+│  │ project- │ │technical │ │ strategy │ ...        │
+│  │management│ │          │ │          │            │
+│  └──────────┘ └──────────┘ └──────────┘            │
+└─────────────────────────────────────────────────────┘
+   │
+   ▼
+HUMAIN (supervision)
+```
+
+## Skills Disponibles
+
+### Orchestrateur
+
+| Skill | Description | Version |
+|-------|-------------|---------|
+| [web-agency](.claude/skills/web-agency/) | Méta-orchestrateur - compose les skills métiers | 2.0.0 |
+
+### Skills Métiers
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [project-management](.claude/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
+| [technical](.claude/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
+| [strategy](.claude/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
+| [design](.claude/skills/design/) | Design & création graphique | - | 🔴 Planifié |
+| [content](.claude/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
+| [marketing](.claude/skills/marketing/) | Marketing digital | - | 🔴 Planifié |
+
+### Skills Techniques
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
+
+**Total : 132 agents spécialisés**
+
+## Architecture
+
+```
+.claude/skills/
+│
+├── web-agency/                    # ORCHESTRATEUR (compose les skills)
+│   └── SKILL.md
+│
+├── project-management/            # Skill métier : Gestion de projet
+│   ├── SKILL.md
+│   ├── avant-projet/              # 7 agents
+│   ├── pilotage/                  # 5 agents
+│   ├── communication/             # 6 agents
+│   ├── livraison/                 # 4 agents
+│   ├── facturation/               # 2 agents
+│   └── templates/                 # 8 templates
+│
+├── technical/                     # Skill métier : Technique
+│   ├── SKILL.md
+│   └── *.md                       # 6 agents
+│
+├── strategy/                      # Skill métier : Stratégie (planifié)
+├── design/                        # Skill métier : Design (planifié)
+├── content/                       # Skill métier : Contenu (planifié)
+├── marketing/                     # Skill métier : Marketing (planifié)
+│
+├── web-dev-process/               # Skill technique : Process dev
+│   ├── SKILL.md
+│   └── agents/                    # 61 agents (7 phases)
+│
+└── wordpress-gutenberg-expert/    # Skill technique : WordPress
+    ├── SKILL.md
+    └── agents/                    # 41 agents (6 domaines)
+```
+
+## Composition des Skills
+
+### Hiérarchie
+
+```
+web-agency (orchestrateur)
+    │
+    ├── project-management (24 agents)
+    │
+    ├── technical (6 agents)
+    │   │
+    │   ├── web-dev-process (61 agents)
+    │   │
+    │   └── wordpress-gutenberg-expert (41 agents)
+    │
+    ├── strategy (planifié)
+    ├── design (planifié)
+    ├── content (planifié)
+    └── marketing (planifié)
+```
+
+### Workflow type : Nouveau projet
+
+```
+1. project-management  → Brief, estimation, proposition
+2. strategy            → Audit, benchmark, recommandations
+3. design              → DA, maquettes
+4. content             → Arborescence, contenus
+5. technical           → Specs, estimation technique
+   └── web-dev-process → Setup, dev, test, deploy
+   └── wordpress-*     → Si projet WordPress
+6. project-management  → Pilotage, livraison, facturation
+7. marketing           → Lancement, acquisition
+```
 
 ## Installation
 
 ```bash
-# Add installation commands here
-npm install
+# Cloner le repository
+git clone https://github.com/truchot/claude-skills-test.git
+
+# Les skills sont automatiquement disponibles dans Claude Code
 ```
 
-## Usage
+## Utilisation
+
+### Exemples de requêtes
+
+```
+# Orchestration
+"J'ai un nouveau projet de site e-commerce WordPress"
+→ web-agency compose : project-management + technical + wordpress-gutenberg-expert
+
+# Gestion de projet
+"Aide-moi à rédiger un brief client"
+→ project-management/avant-projet
+
+# Technique
+"Quelle stack pour ce projet ?"
+→ technical/selection-stack
+
+# WordPress
+"Comment créer un block Gutenberg ?"
+→ wordpress-gutenberg-expert/gutenberg-blocks
+```
+
+## Tests
 
 ```bash
-# Add usage examples here
-npm start
+# Tests par skill
+cd .claude/skills/web-agency/tests && bash run-tests.sh
+cd .claude/skills/web-dev-process/tests && bash run-tests.sh
+cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 ```
 
-```javascript
-// Code examples if applicable
-const example = require('./example');
-```
+## Principes de Conception
 
-## Configuration
+1. **Modularité** : Chaque skill est autonome et réutilisable
+2. **Composition** : Les skills se combinent pour des workflows complexes
+3. **Supervision humaine** : Validation humaine à chaque étape
+4. **Single Responsibility** : Un agent = une responsabilité
+5. **Traçabilité** : Historique des décisions
 
-Describe any configuration options or environment variables needed.
+## Roadmap
 
-## Contributing
+### Skills actifs
+- [x] web-agency (orchestrateur v2.0.0)
+- [x] project-management (24 agents)
+- [x] technical (6 agents)
+- [x] web-dev-process (61 agents)
+- [x] wordpress-gutenberg-expert (41 agents)
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Skills planifiés
+- [ ] strategy
+- [ ] design
+- [ ] content
+- [ ] marketing
 
-## License
+### Infrastructure
+- [x] Tests web-agency
+- [x] Tests web-dev-process
+- [x] Tests wordpress-gutenberg-expert
+- [x] CI/CD workflows
 
-Specify your license here (e.g., MIT, Apache 2.0, etc.)
+## Licence
 
-## Contact
+MIT - Voir [LICENSE](LICENSE)
 
-Your contact information or links to support channels.
+## Ressources
+
+- [Documentation Claude Code](https://docs.anthropic.com/claude-code)
+- [WordPress Developer Resources](https://developer.wordpress.org/)
