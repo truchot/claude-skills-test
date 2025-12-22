@@ -4,12 +4,20 @@
 #
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MIN_NODE_VERSION=14
 
 # Check Node.js is installed
 if ! command -v node &> /dev/null; then
     echo "❌ Error: Node.js is required but not installed"
-    echo "   Please install Node.js 14+ from https://nodejs.org"
+    echo "   Please install Node.js ${MIN_NODE_VERSION}+ from https://nodejs.org"
     exit 1
+fi
+
+# Check Node.js version
+NODE_VERSION=$(node -v | sed 's/v//' | cut -d. -f1)
+if [ "$NODE_VERSION" -lt "$MIN_NODE_VERSION" ]; then
+    echo "⚠️  Warning: Node.js ${MIN_NODE_VERSION}+ recommended (found v$(node -v | sed 's/v//'))"
+    echo "   Some features may not work correctly"
 fi
 
 # Install dependencies if package.json has any

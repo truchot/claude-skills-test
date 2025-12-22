@@ -42,11 +42,12 @@ Guide consolidé des bonnes pratiques d'accessibilité pour le design system, co
 ```css
 /* ✅ Backgrounds avec texte blanc (4.5:1+) */
 --color-primary: #2563eb;        /* 4.6:1 */
---color-success-dark: #16a34a;   /* 4.5:1 - utiliser pour badges/buttons */
---color-error: #ef4444;          /* 4.5:1 */
+--color-success: #16a34a;        /* 4.5:1 - default, WCAG AA compliant */
+--color-error: #dc2626;          /* 4.5:1 */
 
 /* ⚠️ Attention - contraste insuffisant avec blanc */
---color-success: #22c55e;        /* 3.1:1 - utiliser avec texte foncé */
+--color-success-bg: #22c55e;     /* 2.8:1 - backgrounds only, use dark text */
+--color-error-bg: #ef4444;       /* 3.9:1 - backgrounds only, use dark text */
 --color-warning: #eab308;        /* Utiliser avec --color-gray-900 */
 
 /* ✅ Foreground sur backgrounds clairs */

@@ -116,13 +116,18 @@ Tu es expert en **systèmes de couleurs** pour design systems. Tu guides la cré
   --color-secondary: var(--color-gray-600);      /* 6.3:1 on white - WCAG AA ✓ */
   --color-secondary-hover: var(--color-gray-700);/* 8.5:1 on white - WCAG AAA ✓ */
 
-  --color-success: var(--color-green-500);       /* 2.8:1 - UI only */
-  --color-success-dark: var(--color-green-600);  /* 4.5:1 on white - WCAG AA ✓ */
+  /* Success - Use green-600 as default for WCAG AA compliance */
+  --color-success: var(--color-green-600);       /* 4.5:1 on white - WCAG AA ✓ */
+  --color-success-bg: var(--color-green-500);    /* 2.8:1 - Backgrounds only, use dark text */
   --color-success-light: var(--color-green-50);
+
+  /* Warning - Always use dark text on yellow backgrounds */
   --color-warning: var(--color-yellow-500);      /* Use dark text on this bg */
   --color-warning-light: var(--color-yellow-50);
-  --color-error: var(--color-red-500);           /* 3.9:1 - Large text only */
-  --color-error-dark: var(--color-red-600);      /* 4.5:1 on white - WCAG AA ✓ */
+
+  /* Error - Use red-600 as default for WCAG AA compliance */
+  --color-error: var(--color-red-600);           /* 4.5:1 on white - WCAG AA ✓ */
+  --color-error-bg: var(--color-red-500);        /* 3.9:1 - Backgrounds only, use dark text */
   --color-error-light: var(--color-red-50);
 
   --color-background: #ffffff;

@@ -98,9 +98,9 @@ Tu es expert en **badges et indicateurs** pour design systems. Tu guides la cré
   color: white;
 }
 
-/* Success - Using green-600 (#16a34a) for WCAG AA compliance (4.5:1) */
+/* Success - Using --color-success (green-600) for WCAG AA compliance (4.5:1) */
 .badge--success {
-  background-color: var(--color-success-dark, #16a34a);
+  background-color: var(--color-success, #16a34a);
   color: white;
 }
 

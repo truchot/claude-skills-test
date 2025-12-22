@@ -56,14 +56,14 @@ Guide complet pour implémenter le dark mode dans votre design system.
   --color-primary-hover: #1d4ed8;
   --color-primary-light: #dbeafe;
 
-  /* Status colors (with dark variants for WCAG compliance) */
-  --color-success: #22c55e;
-  --color-success-dark: #16a34a;    /* Use for solid backgrounds with white text */
+  /* Status colors (WCAG AA compliant by default) */
+  --color-success: #16a34a;         /* 4.5:1 - WCAG AA compliant */
+  --color-success-bg: #22c55e;      /* Use for backgrounds with dark text */
   --color-success-light: #dcfce7;
   --color-warning: #eab308;
   --color-warning-light: #fef9c3;
-  --color-error: #ef4444;
-  --color-error-dark: #dc2626;      /* Use for solid backgrounds with white text */
+  --color-error: #dc2626;           /* 4.5:1 - WCAG AA compliant */
+  --color-error-bg: #ef4444;        /* Use for backgrounds with dark text */
   --color-error-light: #fee2e2;
 
   /* Shadows */

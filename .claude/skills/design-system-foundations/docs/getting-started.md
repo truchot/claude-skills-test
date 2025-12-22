@@ -196,7 +196,7 @@ design-system/
 
 /* ✅ Bon - palette limitée + sémantique */
 --color-primary, --color-primary-hover, --color-primary-light
---color-success, --color-success-dark, --color-success-light
+--color-success, --color-success-bg, --color-success-light
 /* = 15-20 tokens max */
 ```
 
