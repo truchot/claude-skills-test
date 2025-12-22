@@ -48,8 +48,9 @@ HUMAIN (supervision)
 |-------|-------------|--------|--------|
 | [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
+| [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
 
-**Total : 132 agents spécialisés**
+**Total : 153 agents spécialisés**
 
 ## Architecture
 
@@ -81,9 +82,18 @@ HUMAIN (supervision)
 │   ├── SKILL.md
 │   └── agents/                    # 61 agents (7 phases)
 │
-└── wordpress-gutenberg-expert/    # Skill technique : WordPress
+├── wordpress-gutenberg-expert/    # Skill technique : WordPress
+│   ├── SKILL.md
+│   └── agents/                    # 41 agents (6 domaines)
+│
+└── design-system-foundations/     # Skill technique : Design System
     ├── SKILL.md
-    └── agents/                    # 41 agents (6 domaines)
+    ├── agents/                    # 21 agents (4 niveaux Atomic Design)
+    │   ├── foundations/           # Colors, Typography, Spacing, Shadows
+    │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
+    │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
+    │   └── templates/             # Hero, Layouts, Pages
+    └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
 ```
 
 ## Composition des Skills
@@ -99,7 +109,9 @@ web-agency (orchestrateur)
     │   │
     │   ├── web-dev-process (61 agents)
     │   │
-    │   └── wordpress-gutenberg-expert (41 agents)
+    │   ├── wordpress-gutenberg-expert (41 agents)
+    │   │
+    │   └── design-system-foundations (21 agents)
     │
     ├── strategy (planifié)
     ├── design (planifié)
@@ -113,6 +125,7 @@ web-agency (orchestrateur)
 1. project-management  → Brief, estimation, proposition
 2. strategy            → Audit, benchmark, recommandations
 3. design              → DA, maquettes
+   └── design-system-foundations → Tokens, composants, guidelines
 4. content             → Arborescence, contenus
 5. technical           → Specs, estimation technique
    └── web-dev-process → Setup, dev, test, deploy
@@ -150,6 +163,13 @@ git clone https://github.com/truchot/claude-skills-test.git
 # WordPress
 "Comment créer un block Gutenberg ?"
 → wordpress-gutenberg-expert/gutenberg-blocks
+
+# Design System
+"Crée une palette de couleurs WCAG AA"
+→ design-system-foundations/foundations/colors
+
+"Comment structurer mes boutons avec BEM ?"
+→ design-system-foundations/atoms/buttons
 ```
 
 ## Tests
@@ -177,6 +197,7 @@ cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 - [x] technical (6 agents)
 - [x] web-dev-process (61 agents)
 - [x] wordpress-gutenberg-expert (41 agents)
+- [x] design-system-foundations (21 agents)
 
 ### Skills planifiés
 - [ ] strategy
@@ -198,3 +219,4 @@ MIT - Voir [LICENSE](LICENSE)
 
 - [Documentation Claude Code](https://docs.anthropic.com/claude-code)
 - [WordPress Developer Resources](https://developer.wordpress.org/)
+- [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
