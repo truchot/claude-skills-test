@@ -12,6 +12,15 @@ if ! command -v node &> /dev/null; then
     exit 1
 fi
 
+# Install dependencies if package.json has any
+if [ -f "$SCRIPT_DIR/package.json" ]; then
+    # Check if node_modules exists, if not install
+    if [ ! -d "$SCRIPT_DIR/node_modules" ]; then
+        echo "📦 Installing dependencies..."
+        npm install --prefix "$SCRIPT_DIR" --silent 2>/dev/null || true
+    fi
+fi
+
 echo "🚀 Running Design System Foundations Skill Tests"
 echo "================================================="
 echo ""
@@ -47,6 +56,11 @@ echo "   Tests run: ${#TESTS[@]}"
 echo "   Passed: $PASSED"
 echo "   Failed: $FAILED"
 echo ""
+
+# Output JSON summary for CI parsing (on a single line for easy grep)
+LEVELS=$(node -e "try { console.log(require('./config.js').LEVEL_COUNT) } catch(e) { console.log(4) }" 2>/dev/null || echo "4")
+AGENTS=$(node -e "try { const c = require('./config.js'); let total = 0; Object.values(c.EXPECTED_AGENTS_PER_LEVEL).forEach(a => total += a.length); console.log(total) } catch(e) { console.log(21) }" 2>/dev/null || echo "21")
+echo "JSON_SUMMARY: {\"levels\":$LEVELS,\"agents\":$AGENTS,\"suites\":${#TESTS[@]},\"passed\":$PASSED,\"failed\":$FAILED}"
 
 if [ $FAILED -gt 0 ]; then
   echo "❌ Some test suites failed"
