@@ -97,42 +97,91 @@ app.use(session({
 
 ### 5. Protection CSRF
 
+La protection CSRF repose sur plusieurs mécanismes modernes :
+
 ```typescript
-// Express avec csurf
-import csrf from 'csurf';
+// 1. SameSite Cookies (défense principale)
+// Configuré dans la session (voir section 4)
+cookie: {
+  sameSite: 'strict', // ou 'lax' pour plus de flexibilité
+}
 
-app.use(csrf({ cookie: true }));
+// 2. Double Submit Cookie Pattern (pour SPAs)
+import crypto from 'crypto';
 
-app.get('/form', (req, res) => {
-  res.render('form', { csrfToken: req.csrfToken() });
+// Générer token CSRF
+app.use((req, res, next) => {
+  if (!req.cookies.csrfToken) {
+    const token = crypto.randomBytes(32).toString('hex');
+    res.cookie('csrfToken', token, {
+      httpOnly: false, // Accessible en JS pour l'envoyer dans headers
+      secure: true,
+      sameSite: 'strict',
+    });
+  }
+  next();
 });
 
-// Dans le template
-// <input type="hidden" name="_csrf" value="{{csrfToken}}">
+// Middleware de validation
+function validateCsrf(req, res, next) {
+  const cookieToken = req.cookies.csrfToken;
+  const headerToken = req.headers['x-csrf-token'];
+
+  if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+    return res.status(403).json({ error: 'Invalid CSRF token' });
+  }
+  next();
+}
+
+// Appliquer aux routes mutantes
+app.post('/api/*', validateCsrf);
+app.put('/api/*', validateCsrf);
+app.delete('/api/*', validateCsrf);
+
+// Côté client (SPA)
+// fetch('/api/data', {
+//   method: 'POST',
+//   headers: { 'X-CSRF-Token': getCookie('csrfToken') },
+//   body: JSON.stringify(data)
+// });
 ```
 
 ### 6. Headers de Sécurité
 
 ```typescript
-// Helmet pour Express
+// Helmet pour Express avec CSP sécurisée (nonce-based)
 import helmet from 'helmet';
+import crypto from 'crypto';
 
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"], // Éviter si possible
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.example.com"],
+// Middleware pour générer un nonce par requête
+app.use((req, res, next) => {
+  res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
+  next();
+});
+
+app.use((req, res, next) => {
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        // Utiliser nonce au lieu de 'unsafe-inline'
+        scriptSrc: ["'self'", `'nonce-${res.locals.cspNonce}'`],
+        styleSrc: ["'self'", `'nonce-${res.locals.cspNonce}'`],
+        imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'", "https://api.example.com"],
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true,
-  },
-}));
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  })(req, res, next);
+});
+
+// Dans les templates, utiliser le nonce :
+// <script nonce="<%= cspNonce %>">...</script>
+// <style nonce="<%= cspNonce %>">...</style>
 ```
 
 ## Vulnérabilités Courantes

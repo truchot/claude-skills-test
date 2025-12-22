@@ -101,7 +101,25 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().startsWith('sk_'),
 });
 
-export const env = envSchema.parse(process.env);
+// ⚠️ IMPORTANT : Ne pas exposer les valeurs de secrets dans les erreurs
+function validateEnv() {
+  try {
+    return envSchema.parse(process.env);
+  } catch (error) {
+    // Sanitiser l'erreur : ne jamais logger les valeurs des secrets
+    if (error instanceof z.ZodError) {
+      const safeErrors = error.errors.map(e => ({
+        path: e.path.join('.'),
+        message: e.message,
+        // PAS de e.received qui contient la valeur du secret !
+      }));
+      console.error('Environment validation failed:', safeErrors);
+    }
+    throw new Error('Invalid environment configuration - check required variables');
+  }
+}
+
+export const env = validateEnv();
 ```
 
 ## Solutions de Gestion de Secrets

@@ -117,14 +117,27 @@ async function exportUserData(userId: string): Promise<UserDataExport> {
 ### Droit à l'Effacement
 
 ```typescript
-// Suppression des données (avec soft delete initial)
+import crypto from 'crypto';
+
+// Générer un ID anonyme non-réversible (sans lien avec userId)
+function generateAnonymousId(): string {
+  return crypto.randomBytes(16).toString('hex');
+}
+
+// Suppression des données (conforme RGPD)
 async function deleteUserData(userId: string): Promise<void> {
-  // 1. Anonymiser plutôt que supprimer si nécessaire pour stats
+  // Générer un identifiant anonyme SANS lien avec l'userId original
+  const anonymousId = generateAnonymousId();
+
+  // 1. Anonymiser complètement (aucun lien avec l'identité originale)
   await User.updateOne(
     { _id: userId },
     {
-      email: `deleted-${userId}@anonymized.local`,
-      name: 'Utilisateur supprimé',
+      email: `anon-${anonymousId}@deleted.invalid`,
+      name: 'Anonyme',
+      phone: null,
+      address: null,
+      // Supprimer TOUTES les données identifiantes
       deletedAt: new Date(),
     }
   );
@@ -133,16 +146,38 @@ async function deleteUserData(userId: string): Promise<void> {
   await Preferences.deleteByUserId(userId);
   await Consent.deleteByUserId(userId);
 
-  // 3. Anonymiser les commandes (garder pour comptabilité)
+  // 3. Pour les commandes (obligations comptables) :
+  // - Garder uniquement les données fiscales obligatoires
+  // - Supprimer TOUTES les données personnelles
   await Order.updateMany(
     { userId },
-    { $unset: { shippingAddress: 1, billingAddress: 1 } }
+    {
+      $set: {
+        customerName: 'Client anonyme',
+        userId: null, // Casser le lien !
+      },
+      $unset: {
+        shippingAddress: 1,
+        billingAddress: 1,
+        email: 1,
+        phone: 1,
+      }
+    }
   );
 
   // 4. Notifier les sous-traitants
   await notifyDataProcessors(userId, 'deletion');
+
+  // 5. Log d'audit (sans données personnelles)
+  await AuditLog.create({
+    action: 'user_deletion',
+    timestamp: new Date(),
+    // PAS de userId ni données identifiantes dans le log !
+  });
 }
 ```
+
+**Important** : L'anonymisation doit être irréversible. Ne jamais conserver de lien (même hashé) avec l'identité originale.
 
 ### Pseudonymisation / Anonymisation
 
