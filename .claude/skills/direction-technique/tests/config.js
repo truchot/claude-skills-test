@@ -109,16 +109,33 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
 
 /**
  * Agent validation requirements
+ *
+ * ## Content Length Thresholds
+ * These thresholds ensure meaningful content:
+ * - 500 chars ≈ ~100 words (minimum for a useful agent with examples)
+ * - 800 chars ≈ ~150 words (orchestrators need routing tables + decision trees)
+ *
+ * If agents regularly fail these checks, consider:
+ * 1. Adding more examples or code blocks
+ * 2. Expanding decision criteria
+ * 3. OR adjusting thresholds if content is intentionally concise
+ *
  * @const {Object}
  */
 const AGENT_REQUIREMENTS = {
   /** Required frontmatter fields */
   frontmatter: ['name', 'description'],
 
-  /** Minimum content length for orchestrators (characters) - more comprehensive */
+  /**
+   * Minimum content length for orchestrators (characters)
+   * Higher threshold: needs routing table + decision tree + examples
+   */
   minOrchestratorLength: 800,
 
-  /** Minimum content length for specialized agents (characters) */
+  /**
+   * Minimum content length for specialized agents (characters)
+   * Lower threshold: focused content with code examples
+   */
   minAgentLength: 500,
 
   /** Legacy threshold for backwards compatibility */

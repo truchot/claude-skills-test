@@ -53,18 +53,21 @@ function validateCodeBlocks(content) {
   const invalid = [];
 
   const validLanguages = [
-    'bash', 'sh', 'shell', 'zsh',
+    'bash', 'sh', 'shell', 'zsh', 'shell-session',
     'javascript', 'js', 'typescript', 'ts', 'jsx', 'tsx',
     'python', 'py',
     'json', 'yaml', 'yml', 'xml', 'html', 'css', 'scss', 'sql',
     'markdown', 'md', 'mermaid',
     'php', 'ruby', 'go', 'rust', 'java', 'kotlin', 'swift',
-    'dockerfile', 'nginx', 'apache', 'terraform', 'hcl',
-    'graphql', 'prisma',
+    'objective-c', 'objc', 'c', 'cpp', 'c++', 'csharp', 'cs',
+    'dockerfile', 'docker', 'nginx', 'apache', 'terraform', 'hcl',
+    'graphql', 'prisma', 'makefile', 'make', 'promql',
+    'diff', 'patch', 'text', 'txt', 'plain',
     '',
   ];
 
-  const codeBlockPattern = /```(\w*)[ \t]*(?:\n|$)/g;
+  // Pattern supports hyphenated languages like objective-c, shell-session
+  const codeBlockPattern = /```([\w-]*)[ \t]*(?:\n|$)/g;
   let match;
 
   while ((match = codeBlockPattern.exec(content)) !== null) {
@@ -261,7 +264,7 @@ for (const file of allFiles) {
   const { content } = safeReadFile(file);
   if (!content) continue;
 
-  const codeBlockPattern = /```(\w*)[ \t]*(?:\n|$)/g;
+  const codeBlockPattern = /```([\w-]*)[ \t]*(?:\n|$)/g;
   let match;
 
   while ((match = codeBlockPattern.exec(content)) !== null) {

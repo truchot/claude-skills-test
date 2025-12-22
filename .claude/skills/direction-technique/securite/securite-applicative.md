@@ -99,14 +99,26 @@ app.use(session({
 
 La protection CSRF repose sur plusieurs mécanismes modernes :
 
+> **Note** : La bibliothèque `csurf` est dépréciée. Utiliser les approches ci-dessous.
+
+#### Approche 1 : SameSite Cookies (défense principale)
+
 ```typescript
-// 1. SameSite Cookies (défense principale)
 // Configuré dans la session (voir section 4)
 cookie: {
-  sameSite: 'strict', // ou 'lax' pour plus de flexibilité
+  sameSite: 'strict', // Bloque les requêtes cross-site
+  // 'lax' si besoin de liens externes (navigation GET)
+  secure: true,       // HTTPS obligatoire
 }
+```
 
-// 2. Double Submit Cookie Pattern (pour SPAs)
+⚠️ **Limites de SameSite** :
+- Ne protège pas contre les sous-domaines malveillants
+- `Lax` autorise les GET cross-site (attention aux actions sensibles en GET)
+
+#### Approche 2 : Double Submit Cookie (pour SPAs)
+
+```typescript
 import crypto from 'crypto';
 
 // Générer token CSRF
@@ -115,8 +127,9 @@ app.use((req, res, next) => {
     const token = crypto.randomBytes(32).toString('hex');
     res.cookie('csrfToken', token, {
       httpOnly: false, // Accessible en JS pour l'envoyer dans headers
-      secure: true,
+      secure: true,    // ⚠️ OBLIGATOIRE en production
       sameSite: 'strict',
+      path: '/',       // Disponible sur toutes les routes
     });
   }
   next();
@@ -127,7 +140,9 @@ function validateCsrf(req, res, next) {
   const cookieToken = req.cookies.csrfToken;
   const headerToken = req.headers['x-csrf-token'];
 
-  if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+  // Comparaison timing-safe pour éviter timing attacks
+  if (!cookieToken || !headerToken ||
+      !crypto.timingSafeEqual(Buffer.from(cookieToken), Buffer.from(headerToken))) {
     return res.status(403).json({ error: 'Invalid CSRF token' });
   }
   next();
@@ -137,14 +152,42 @@ function validateCsrf(req, res, next) {
 app.post('/api/*', validateCsrf);
 app.put('/api/*', validateCsrf);
 app.delete('/api/*', validateCsrf);
-
-// Côté client (SPA)
-// fetch('/api/data', {
-//   method: 'POST',
-//   headers: { 'X-CSRF-Token': getCookie('csrfToken') },
-//   body: JSON.stringify(data)
-// });
 ```
+
+⚠️ **Pièges à éviter** :
+- Ne jamais comparer les tokens avec `===` (timing attack)
+- Toujours utiliser `secure: true` en production
+- Régénérer le token après login (fixation de session)
+
+#### Côté Client (SPA)
+
+```javascript
+// Lecture du cookie
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+}
+
+// Requête avec token CSRF
+fetch('/api/data', {
+  method: 'POST',
+  credentials: 'same-origin', // Inclure les cookies
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRF-Token': getCookie('csrfToken'),
+  },
+  body: JSON.stringify(data)
+});
+```
+
+#### Alternatives Frameworks
+
+| Framework | Protection CSRF |
+|-----------|----------------|
+| **Next.js** | Middleware custom ou `next-csrf` |
+| **Fastify** | `@fastify/csrf-protection` |
+| **NestJS** | `@nestjs/csrf` ou guards custom |
+| **Express** | Pattern Double Submit (ci-dessus) |
 
 ### 6. Headers de Sécurité
 
