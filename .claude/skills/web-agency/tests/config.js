@@ -6,6 +6,7 @@
  * Agents are now in separate skills (project-management, technical, etc.)
  */
 
+const fs = require('fs');
 const path = require('path');
 
 /** @const {string} Base directory for the web-agency skill */
@@ -19,6 +20,29 @@ const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
 
 /** @const {string} Directory containing templates (in project-management skill) */
 const TEMPLATES_DIR = path.join(PROJECT_MANAGEMENT_DIR, 'templates', 'project-management');
+
+/**
+ * Validate that required external skills exist
+ * @returns {{ valid: boolean, missing: string[] }}
+ */
+function validateRequiredSkills() {
+  const requiredSkills = [
+    { name: 'project-management', path: PROJECT_MANAGEMENT_DIR }
+  ];
+
+  const missing = [];
+  for (const skill of requiredSkills) {
+    try {
+      if (!fs.statSync(skill.path).isDirectory()) {
+        missing.push(skill.name);
+      }
+    } catch {
+      missing.push(skill.name);
+    }
+  }
+
+  return { valid: missing.length === 0, missing };
+}
 
 /** @const {string[]} Sub-domains in project management */
 const PROJECT_MANAGEMENT_SUBDOMAINS = [
@@ -218,5 +242,6 @@ module.exports = {
   AGENT_REFERENCE_PATTERNS,
   WORKFLOWS,
   SAMPLE_DATA,
-  EXPECTED_ROUTING
+  EXPECTED_ROUTING,
+  validateRequiredSkills
 };

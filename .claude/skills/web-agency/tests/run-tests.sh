@@ -9,6 +9,30 @@ echo "🚀 Running Web Agency Skill Tests"
 echo "=================================="
 echo ""
 
+# Validate required skills exist before running tests
+echo "🔍 Checking required skills..."
+VALIDATION_RESULT=$(node -e "
+const { validateRequiredSkills } = require('./config.js');
+const result = validateRequiredSkills();
+if (!result.valid) {
+  console.error('Missing required skills: ' + result.missing.join(', '));
+  process.exit(1);
+}
+console.log('All required skills present');
+" 2>&1)
+VALIDATION_EXIT=$?
+
+if [ $VALIDATION_EXIT -ne 0 ]; then
+  echo "❌ $VALIDATION_RESULT"
+  echo ""
+  echo "Please ensure all required skills are installed:"
+  echo "  - project-management (at .claude/skills/project-management/)"
+  echo ""
+  exit 1
+fi
+echo "✅ $VALIDATION_RESULT"
+echo ""
+
 TESTS=(
   "validate-agents.test.js"
   "validate-routing.test.js"
