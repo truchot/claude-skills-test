@@ -17,16 +17,14 @@ const {
   directoryExists,
   printSeparator
 } = require('./utils');
+const { TEMPLATES_DIR: TEMPLATES_DIR_CONFIG } = require('./config');
 
 // =============================================================================
 // Configuration Constants
 // =============================================================================
 
-/** @const {string} Base directory for skill */
-const SKILL_DIR = path.join(__dirname, '..');
-
-/** @const {string} Directory containing templates */
-const TEMPLATES_DIR = path.join(SKILL_DIR, 'templates/project-management');
+/** @const {string} Directory containing templates (from project-management skill) */
+const TEMPLATES_DIR = TEMPLATES_DIR_CONFIG;
 
 /** @const {number} Minimum number of heading sections required */
 const MIN_HEADING_COUNT = 3;

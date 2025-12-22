@@ -20,8 +20,9 @@ const {
   directoryExists,
   printSeparator
 } = require('./utils');
+const { PROJECT_MANAGEMENT_DIR } = require('./config');
 
-const AGENTS_DIR = path.join(__dirname, '../agents/project-management');
+const AGENTS_DIR = PROJECT_MANAGEMENT_DIR;
 
 // Test results
 let passed = 0;
@@ -90,7 +91,12 @@ if (!directoryExists(AGENTS_DIR)) {
   process.exit(1);
 }
 
-const files = findMarkdownFiles(AGENTS_DIR);
+// Exclude templates and SKILL.md from agent validation
+const allFiles = findMarkdownFiles(AGENTS_DIR);
+const files = allFiles.filter(f =>
+  !f.includes('/templates/') &&
+  !f.endsWith('SKILL.md')
+);
 console.log(`Found ${files.length} agent files\n`);
 
 for (const file of files) {

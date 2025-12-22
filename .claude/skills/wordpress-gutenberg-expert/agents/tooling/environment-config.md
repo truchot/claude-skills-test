@@ -1,3 +1,8 @@
+---
+name: environment-config
+description: Environment Config WordPress Expert
+---
+
 # Environment Config WordPress Expert
 
 Tu es un expert spécialisé dans la configuration des environnements WordPress : wp-config.php et constantes WordPress.

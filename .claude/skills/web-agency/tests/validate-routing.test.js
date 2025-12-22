@@ -16,13 +16,14 @@ const {
   directoryExists,
   printSeparator
 } = require('./utils');
+const { PROJECT_MANAGEMENT_DIR } = require('./config');
 
 // =============================================================================
 // Configuration Constants
 // =============================================================================
 
-/** @const {string} Directory containing agents */
-const AGENTS_DIR = path.join(__dirname, '../agents/project-management');
+/** @const {string} Directory containing agents (from project-management skill) */
+const AGENTS_DIR = PROJECT_MANAGEMENT_DIR;
 
 /**
  * Regex patterns for extracting agent references from markdown
