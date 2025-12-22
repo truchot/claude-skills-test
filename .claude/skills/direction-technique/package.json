@@ -11,6 +11,7 @@
     "test:keywords": "node tests/validate-keywords.test.js",
     "test:markdown": "node tests/validate-markdown.test.js",
     "test:ci": "npm test",
+    "test:json": "OUTPUT_FORMAT=json npm test",
     "test:quick": "npm run test:domains && npm run test:agents",
     "test:quality": "npm run test:markdown && npm run test:routing && npm run test:keywords"
   },

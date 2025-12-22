@@ -1,10 +1,141 @@
 /**
  * Shared utilities for technical skill tests
  * @module tests/utils
+ *
+ * ## Output Modes
+ * Set OUTPUT_FORMAT=json for CI-friendly JSON output.
+ * Default is human-readable console output.
+ *
+ * Example: OUTPUT_FORMAT=json npm test
  */
 
 const fs = require('fs');
 const path = require('path');
+
+/**
+ * Check if JSON output mode is enabled
+ * @returns {boolean}
+ */
+function isJsonMode() {
+  return process.env.OUTPUT_FORMAT === 'json';
+}
+
+/**
+ * Test Reporter class supporting console and JSON output modes
+ */
+class TestReporter {
+  constructor(testName) {
+    this.testName = testName;
+    this.results = [];
+    this.startTime = Date.now();
+    this.passed = 0;
+    this.failed = 0;
+  }
+
+  /**
+   * Record a passing check
+   * @param {string} message - Success message
+   * @param {Object} [meta] - Optional metadata
+   */
+  pass(message, meta = {}) {
+    this.passed++;
+    this.results.push({ status: 'pass', message, ...meta });
+    if (!isJsonMode()) {
+      console.log(`  ✅ ${message}`);
+    }
+  }
+
+  /**
+   * Record a failing check
+   * @param {string} message - Failure message
+   * @param {Object} [meta] - Optional metadata
+   */
+  fail(message, meta = {}) {
+    this.failed++;
+    this.results.push({ status: 'fail', message, ...meta });
+    if (!isJsonMode()) {
+      console.log(`  ❌ ${message}`);
+    }
+  }
+
+  /**
+   * Log a warning (non-fatal)
+   * @param {string} message - Warning message
+   */
+  warn(message) {
+    this.results.push({ status: 'warn', message });
+    if (!isJsonMode()) {
+      console.log(`  ⚠️  ${message}`);
+    }
+  }
+
+  /**
+   * Log an info message
+   * @param {string} message - Info message
+   */
+  info(message) {
+    if (!isJsonMode()) {
+      console.log(`  ℹ️  ${message}`);
+    }
+  }
+
+  /**
+   * Start a new section/group
+   * @param {string} name - Section name
+   */
+  section(name) {
+    if (!isJsonMode()) {
+      console.log(`\n📁 ${name}`);
+    }
+  }
+
+  /**
+   * Print a header
+   * @param {string} title - Header title
+   */
+  header(title) {
+    if (!isJsonMode()) {
+      console.log(`\n🧪 ${title}\n`);
+      printSeparator();
+    }
+  }
+
+  /**
+   * Get the final report
+   * @returns {Object} Test report object
+   */
+  getReport() {
+    return {
+      name: this.testName,
+      duration: Date.now() - this.startTime,
+      passed: this.passed,
+      failed: this.failed,
+      total: this.passed + this.failed,
+      success: this.failed === 0,
+      results: this.results,
+    };
+  }
+
+  /**
+   * Print summary and exit with appropriate code
+   */
+  summarize() {
+    const report = this.getReport();
+
+    if (isJsonMode()) {
+      console.log(JSON.stringify(report, null, 2));
+    } else {
+      printSeparator();
+      console.log(`\n📊 Summary:`);
+      console.log(`   Passed: ${this.passed}`);
+      console.log(`   Failed: ${this.failed}`);
+      console.log(`   Duration: ${report.duration}ms`);
+      console.log(this.failed === 0 ? '\n✅ All checks passed' : '\n❌ Some checks failed');
+    }
+
+    process.exit(this.failed > 0 ? 1 : 0);
+  }
+}
 
 /**
  * Default directories to ignore during file scanning
@@ -247,5 +378,7 @@ module.exports = {
   fileExists,
   printSeparator,
   countTechElements,
+  isJsonMode,
+  TestReporter,
   IGNORED_DIRS
 };
