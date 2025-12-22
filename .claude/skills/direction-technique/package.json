@@ -1,13 +1,16 @@
 {
   "name": "direction-technique-tests",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tests de validation pour le skill direction-technique",
   "scripts": {
-    "test": "npm run test:domains && npm run test:agents && npm run test:skill",
+    "test": "npm run test:domains && npm run test:agents && npm run test:skill && npm run test:routing && npm run test:keywords",
     "test:domains": "node tests/validate-domains.test.js",
     "test:agents": "node tests/validate-agents.test.js",
     "test:skill": "node tests/validate-skill.test.js",
-    "test:ci": "npm test"
+    "test:routing": "node tests/validate-routing.test.js",
+    "test:keywords": "node tests/validate-keywords.test.js",
+    "test:ci": "npm test",
+    "test:quick": "npm run test:domains && npm run test:agents"
   },
   "keywords": ["claude-skills", "direction-technique", "tests"],
   "license": "MIT",
