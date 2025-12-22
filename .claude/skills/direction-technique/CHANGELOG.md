@@ -4,7 +4,7 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
-## [2.1.0] - 2024-12-22
+## [2.1.0] - 2025-12-22
 
 ### Added
 - Infrastructure JSON pour sortie CI (`OUTPUT_FORMAT=json`)
@@ -25,7 +25,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Anonymisation RGPD avec ID aléatoire sans lien userId
 - Sanitisation des erreurs Zod pour éviter l'exposition de secrets
 
-## [2.0.1] - 2024-12-22
+## [2.0.1] - 2025-12-22
 
 ### Added
 - Workflows et diagrammes pour les 7 orchestrators incomplets
@@ -38,7 +38,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Regex pour supporter les chiffres dans les noms (`[a-z0-9-]+`)
 - Validation du routing exclut les sections désambiguïsation
 
-## [2.0.0] - 2024-12-22
+## [2.0.0] - 2025-12-22
 
 ### Added
 - CI workflow GitHub Actions (`.github/workflows/direction-technique-tests.yml`)
@@ -50,7 +50,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Regex code blocks : `/```(\w*)[ \t]*(?:\n|$)/g`
 - Pattern frontmatter plus robuste
 
-## [1.0.0] - 2024-12-22
+## [1.0.0] - 2025-12-22
 
 ### Added
 - Restructuration du skill "technical" en "direction-technique"
