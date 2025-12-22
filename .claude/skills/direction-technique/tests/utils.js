@@ -74,6 +74,11 @@ function safeReadFile(filePath) {
 
 /**
  * Parse YAML frontmatter from markdown content
+ * Supports:
+ * - Single-line values: key: value
+ * - Multi-line values with | or > (literal/folded scalars)
+ * - Arrays (both inline and indented list format)
+ * - Quoted strings
  *
  * @param {string} content - Markdown content with frontmatter
  * @returns {Object|null} Parsed frontmatter or null if not found/invalid
@@ -88,16 +93,78 @@ function parseFrontmatter(content) {
 
   const frontmatter = {};
   const lines = match[1].split('\n');
+  let currentKey = null;
+  let multiLineValue = [];
+  let isMultiLine = false;
+  let multiLineIndent = 0;
 
-  for (const line of lines) {
-    if (!line.trim() || line.trim().startsWith('#')) continue;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Skip empty lines and comments (unless in multi-line mode)
+    if (!isMultiLine && (!trimmed || trimmed.startsWith('#'))) continue;
+
+    // Check if we're in multi-line mode
+    if (isMultiLine) {
+      // Check if this line is still part of the multi-line value
+      const lineIndent = line.match(/^(\s*)/)[1].length;
+
+      if (lineIndent >= multiLineIndent && (trimmed || multiLineValue.length > 0)) {
+        multiLineValue.push(trimmed);
+        continue;
+      } else {
+        // End of multi-line value
+        if (currentKey) {
+          frontmatter[currentKey] = multiLineValue.join('\n').trim();
+        }
+        isMultiLine = false;
+        multiLineValue = [];
+        currentKey = null;
+      }
+    }
+
+    // Check for array item (starts with -)
+    if (trimmed.startsWith('- ') && currentKey) {
+      const arrayValue = trimmed.substring(2).trim();
+      if (!Array.isArray(frontmatter[currentKey])) {
+        frontmatter[currentKey] = [];
+      }
+      // Remove quotes if present
+      const cleanValue = arrayValue.replace(/^["']|["']$/g, '');
+      frontmatter[currentKey].push(cleanValue);
+      continue;
+    }
 
     const colonIndex = line.indexOf(':');
     if (colonIndex > 0) {
       const key = line.substring(0, colonIndex).trim();
       let value = line.substring(colonIndex + 1).trim();
 
-      if (!value) continue;
+      // Check for multi-line scalar indicators
+      if (value === '|' || value === '>' || value === '|-' || value === '>-') {
+        currentKey = key;
+        isMultiLine = true;
+        multiLineIndent = (lines[i + 1]?.match(/^(\s*)/)?.[1]?.length) || 2;
+        multiLineValue = [];
+        continue;
+      }
+
+      // Check for inline array
+      if (value.startsWith('[') && value.endsWith(']')) {
+        const items = value.slice(1, -1).split(',').map(item => {
+          return item.trim().replace(/^["']|["']$/g, '');
+        }).filter(Boolean);
+        frontmatter[key] = items;
+        currentKey = key;
+        continue;
+      }
+
+      // Empty value might be followed by array items
+      if (!value) {
+        currentKey = key;
+        continue;
+      }
 
       // Remove surrounding quotes if present
       if ((value.startsWith('"') && value.endsWith('"')) ||
@@ -106,8 +173,14 @@ function parseFrontmatter(content) {
       }
       if (key) {
         frontmatter[key] = value;
+        currentKey = key;
       }
     }
+  }
+
+  // Handle any remaining multi-line value
+  if (isMultiLine && currentKey && multiLineValue.length > 0) {
+    frontmatter[currentKey] = multiLineValue.join('\n').trim();
   }
 
   return Object.keys(frontmatter).length > 0 ? frontmatter : null;

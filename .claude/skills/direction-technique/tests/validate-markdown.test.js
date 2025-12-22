@@ -74,7 +74,8 @@ function validateCodeBlocks(content) {
   ];
 
   // Match code blocks with optional language
-  const codeBlockPattern = /```(\w*)\n/g;
+  // Handles: ```js, ```js\n, ``` \n, ```js  \n, end of file
+  const codeBlockPattern = /```(\w*)[ \t]*(?:\n|$)/g;
   let match;
 
   while ((match = codeBlockPattern.exec(content)) !== null) {
@@ -305,7 +306,7 @@ for (const file of allFiles) {
   const { content } = safeReadFile(file);
   if (!content) continue;
 
-  const codeBlockPattern = /```(\w*)\n/g;
+  const codeBlockPattern = /```(\w*)[ \t]*(?:\n|$)/g;
   let match;
 
   while ((match = codeBlockPattern.exec(content)) !== null) {
