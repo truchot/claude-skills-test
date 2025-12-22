@@ -1,7 +1,9 @@
 {
   "name": "direction-technique-tests",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Tests de validation pour le skill direction-technique",
+  "private": true,
+  "comment": "Zero external dependencies - uses only Node.js built-ins (fs, path, crypto)",
   "scripts": {
     "test": "npm run test:domains && npm run test:agents && npm run test:skill && npm run test:routing && npm run test:keywords && npm run test:markdown",
     "test:domains": "node tests/validate-domains.test.js",

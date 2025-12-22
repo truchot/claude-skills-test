@@ -13,19 +13,15 @@
 const path = require('path');
 const {
   safeReadFile,
-  printSeparator
+  TestReporter
 } = require('./utils');
 const { SKILL_ROOT, DOMAINS, DOMAIN_KEYWORDS } = require('./config');
 
-let passed = 0;
-let failed = 0;
-const issues = [];
-
-console.log('🧪 Validating Keyword Coverage\n');
-printSeparator();
+const reporter = new TestReporter('validate-keywords');
+reporter.header('Validating Keyword Coverage');
 
 // 1. Check that all domains have keywords defined
-console.log('\n1. Domain Keyword Definitions');
+reporter.section('Domain Keyword Definitions');
 
 let domainsWithKeywords = 0;
 const missingKeywordDomains = [];
@@ -39,19 +35,15 @@ for (const domain of DOMAINS) {
 }
 
 if (missingKeywordDomains.length === 0) {
-  console.log(`   ✅ All ${DOMAINS.length} domains have keywords defined`);
-  passed++;
+  reporter.pass(`All ${DOMAINS.length} domains have keywords defined`, { count: DOMAINS.length });
 } else {
-  console.log(`   ❌ ${missingKeywordDomains.length} domains missing keywords:`);
-  for (const domain of missingKeywordDomains) {
-    console.log(`      - ${domain}`);
-  }
-  issues.push(`Domains without keywords: ${missingKeywordDomains.join(', ')}`);
-  failed++;
+  reporter.fail(`${missingKeywordDomains.length} domains missing keywords: ${missingKeywordDomains.join(', ')}`, {
+    missing: missingKeywordDomains
+  });
 }
 
 // 2. Check for duplicate keywords across domains
-console.log('\n2. Keyword Uniqueness');
+reporter.section('Keyword Uniqueness');
 
 const allKeywords = new Map(); // keyword -> [domains]
 const duplicates = [];
@@ -74,18 +66,13 @@ for (const [keyword, domains] of allKeywords) {
 }
 
 if (duplicates.length === 0) {
-  console.log(`   ✅ No duplicate keywords across domains`);
-  passed++;
+  reporter.pass('No duplicate keywords across domains');
 } else {
-  console.log(`   ⚠️  ${duplicates.length} keywords appear in multiple domains:`);
-  for (const dup of duplicates.slice(0, 5)) {
-    console.log(`      "${dup.keyword}" → ${dup.domains.join(', ')}`);
-  }
-  // This is a warning, not a failure - some overlap may be intentional
+  reporter.warn(`${duplicates.length} keywords appear in multiple domains (may be intentional)`);
 }
 
 // 3. Check SKILL.md contains domain routing keywords
-console.log('\n3. SKILL.md Keyword Coverage');
+reporter.section('SKILL.md Keyword Coverage');
 
 const skillMdPath = path.join(SKILL_ROOT, 'SKILL.md');
 const { content: skillContent } = safeReadFile(skillMdPath);
@@ -105,7 +92,6 @@ if (skillContent) {
       }
     }
 
-    // Also check if domain is mentioned in routing section
     const domainPattern = new RegExp(`\\|.*${domain}.*\\|`, 'i');
     const domainMentioned = domainPattern.test(skillContent);
 
@@ -117,18 +103,14 @@ if (skillContent) {
   }
 
   if (uncoveredDomains.length === 0) {
-    console.log(`   ✅ All domains have keyword coverage in SKILL.md`);
-    passed++;
+    reporter.pass('All domains have keyword coverage in SKILL.md', { covered: coveredDomains });
   } else {
-    console.log(`   ⚠️  ${uncoveredDomains.length} domains may lack keyword coverage:`);
-    for (const domain of uncoveredDomains) {
-      console.log(`      - ${domain}`);
-    }
+    reporter.warn(`${uncoveredDomains.length} domains may lack keyword coverage: ${uncoveredDomains.join(', ')}`);
   }
 }
 
 // 4. Check orchestrators contain their domain keywords
-console.log('\n4. Orchestrator Keyword Coverage');
+reporter.section('Orchestrator Keyword Coverage');
 
 let orchestratorsWithKeywords = 0;
 const orchestratorsMissingKeywords = [];
@@ -151,7 +133,6 @@ for (const domain of DOMAINS) {
     }
   }
 
-  // At least 50% of keywords should be in orchestrator
   const threshold = Math.ceil(keywords.length * 0.5);
   if (keywordsFound >= threshold || keywords.length === 0) {
     orchestratorsWithKeywords++;
@@ -161,52 +142,13 @@ for (const domain of DOMAINS) {
 }
 
 if (orchestratorsMissingKeywords.length === 0) {
-  console.log(`   ✅ All orchestrators have adequate keyword coverage`);
-  passed++;
+  reporter.pass('All orchestrators have adequate keyword coverage', { count: orchestratorsWithKeywords });
 } else {
-  console.log(`   ⚠️  Some orchestrators may need keyword updates:`);
-  for (const item of orchestratorsMissingKeywords.slice(0, 5)) {
-    console.log(`      - ${item}`);
-  }
+  reporter.warn(`Some orchestrators may need keyword updates: ${orchestratorsMissingKeywords.slice(0, 3).join(', ')}`);
 }
 
-// 5. Keyword statistics
-console.log('\n5. Keyword Statistics');
-
+// 5. Keyword statistics (info only)
 const totalKeywords = Array.from(allKeywords.keys()).length;
-const avgKeywordsPerDomain = totalKeywords / DOMAINS.length;
+reporter.info(`Statistics: ${totalKeywords} unique keywords across ${domainsWithKeywords} domains`);
 
-console.log(`   📊 Total unique keywords: ${totalKeywords}`);
-console.log(`   📊 Average per domain: ${avgKeywordsPerDomain.toFixed(1)}`);
-console.log(`   📊 Domains covered: ${domainsWithKeywords}/${DOMAINS.length}`);
-
-// Show keyword distribution
-console.log('\n   Keywords per domain:');
-for (const domain of DOMAINS) {
-  const count = (DOMAIN_KEYWORDS[domain] || []).length;
-  const bar = '█'.repeat(Math.min(count, 10));
-  console.log(`      ${domain.padEnd(15)} ${bar} (${count})`);
-}
-
-console.log('\n');
-printSeparator();
-
-// Summary
-console.log('\n📊 Results:');
-console.log(`   Checks passed: ${passed}`);
-console.log(`   Checks failed: ${failed}`);
-
-if (issues.length > 0) {
-  console.log('\n⚠️  Issues found:');
-  for (const issue of issues) {
-    console.log(`   - ${issue}`);
-  }
-}
-
-if (failed > 0) {
-  console.log('\n❌ Some checks failed');
-  process.exit(1);
-} else {
-  console.log('\n✅ All checks passed');
-  process.exit(0);
-}
+reporter.summarize();

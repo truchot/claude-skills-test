@@ -17,15 +17,12 @@ const {
   safeReadFile,
   parseFrontmatter,
   directoryExists,
-  printSeparator,
-  countTechElements
+  countTechElements,
+  TestReporter
 } = require('./utils');
 const { SKILL_ROOT, DOMAINS, AGENT_REQUIREMENTS } = require('./config');
 
-let passed = 0;
-let failed = 0;
-let warnings = 0;
-let totalAgents = 0;
+const reporter = new TestReporter('validate-agents');
 
 /**
  * Validate a single agent file
@@ -88,19 +85,21 @@ function validateAgent(filePath) {
 }
 
 // Main execution
-console.log('🧪 Validating Direction Technique Agent Structure\n');
-printSeparator();
+reporter.header('Validating Direction Technique Agent Structure');
+
+let totalAgents = 0;
+let totalWarnings = 0;
 
 // Validate domain agents
 for (const domain of DOMAINS) {
   const domainDir = path.join(SKILL_ROOT, domain);
 
   if (!directoryExists(domainDir)) {
-    console.log(`⚠️  Domain directory not found: ${domain}`);
+    reporter.warn(`Domain directory not found: ${domain}`);
     continue;
   }
 
-  console.log(`\n📁 Domain: ${domain}`);
+  reporter.section(`Domain: ${domain}`);
 
   const files = findMarkdownFiles(domainDir);
   totalAgents += files.length;
@@ -111,35 +110,24 @@ for (const domain of DOMAINS) {
 
     if (errors.length === 0) {
       if (fileWarnings.length === 0) {
-        console.log(`  ✅ ${relativePath}`);
+        reporter.pass(relativePath, { domain, file: relativePath });
       } else {
-        console.log(`  ✅ ${relativePath} (${fileWarnings.length} warning${fileWarnings.length > 1 ? 's' : ''})`);
-        warnings += fileWarnings.length;
+        reporter.pass(`${relativePath} (${fileWarnings.length} warning${fileWarnings.length > 1 ? 's' : ''})`, {
+          domain,
+          file: relativePath,
+          warnings: fileWarnings
+        });
+        totalWarnings += fileWarnings.length;
       }
-      passed++;
     } else {
-      console.log(`  ❌ ${relativePath}`);
-      for (const err of errors) {
-        console.log(`     └─ ${err}`);
-      }
-      failed++;
+      reporter.fail(`${relativePath}: ${errors.join(', ')}`, {
+        domain,
+        file: relativePath,
+        errors
+      });
     }
   }
 }
 
-console.log('\n');
-printSeparator();
-console.log(`\n📊 Results: ${passed} passed, ${failed} failed, ${warnings} warnings (${totalAgents} total agents)`);
-
-// Show thresholds used
-console.log('\n📏 Content Length Thresholds:');
-console.log(`   Orchestrators: ${AGENT_REQUIREMENTS.minOrchestratorLength} chars`);
-console.log(`   Agents: ${AGENT_REQUIREMENTS.minAgentLength} chars`);
-
-if (failed > 0) {
-  console.log('\n❌ Some tests failed');
-  process.exit(1);
-} else {
-  console.log('\n✅ All tests passed');
-  process.exit(0);
-}
+reporter.info(`Content thresholds: Orchestrators=${AGENT_REQUIREMENTS.minOrchestratorLength}, Agents=${AGENT_REQUIREMENTS.minAgentLength}`);
+reporter.summarize();

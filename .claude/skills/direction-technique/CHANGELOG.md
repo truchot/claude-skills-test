@@ -11,6 +11,13 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - Classe `TestReporter` pour rapport structuré
 - Script `npm run test:json` pour intégration CI
 - Permissions d'exécution sur les fichiers de test
+- CHANGELOG.md avec historique et guide de migration
+- tests/README.md avec documentation complète
+
+### Changed
+- Migration de tous les tests vers `TestReporter` pour JSON natif
+- Amélioration du contexte d'erreur (chemins complets)
+- package.json: `private: true` et documentation zéro-dépendance
 
 ### Security
 - CSP nonce-based au lieu de `'unsafe-inline'`

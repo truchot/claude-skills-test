@@ -16,60 +16,46 @@ const {
   safeReadFile,
   parseFrontmatter,
   fileExists,
-  printSeparator
+  TestReporter
 } = require('./utils');
 const { SKILL_ROOT, DOMAINS, getTotalExpectedAgents } = require('./config');
 
-let passed = 0;
-let failed = 0;
-const issues = [];
-
-console.log('🧪 Validating Direction Technique SKILL.md\n');
-printSeparator();
+const reporter = new TestReporter('validate-skill');
+reporter.header('Validating Direction Technique SKILL.md');
 
 const skillMdPath = path.join(SKILL_ROOT, 'SKILL.md');
 
 if (!fileExists(skillMdPath)) {
-  console.log('❌ SKILL.md not found');
-  process.exit(1);
+  reporter.fail('SKILL.md not found', { path: skillMdPath });
+  reporter.summarize();
 }
 
 const { content, error } = safeReadFile(skillMdPath);
 if (error) {
-  console.log(`❌ Cannot read SKILL.md: ${error}`);
-  process.exit(1);
+  reporter.fail(`Cannot read SKILL.md: ${error}`, { path: skillMdPath });
+  reporter.summarize();
 }
 
-console.log('\n📄 SKILL.md Validation');
-
-// Check frontmatter
-console.log('\n1. Frontmatter');
+reporter.section('Frontmatter');
 const frontmatter = parseFrontmatter(content);
 if (!frontmatter) {
-  console.log('   ❌ Missing or invalid frontmatter');
-  issues.push('Missing frontmatter');
-  failed++;
+  reporter.fail('Missing or invalid frontmatter');
 } else {
   const requiredFields = ['name', 'description', 'version'];
   for (const field of requiredFields) {
     if (frontmatter[field]) {
-      console.log(`   ✅ ${field}: ${frontmatter[field]}`);
-      passed++;
+      reporter.pass(`${field}: ${frontmatter[field]}`, { field, value: frontmatter[field] });
     } else {
-      console.log(`   ❌ Missing ${field}`);
-      issues.push(`Missing frontmatter field: ${field}`);
-      failed++;
+      reporter.fail(`Missing ${field}`, { field });
     }
   }
 }
 
-// Check domain documentation - stricter pattern matching
-console.log('\n2. Domain Documentation');
+reporter.section('Domain Documentation');
 let documentedDomains = 0;
 const missingDomains = [];
 
 for (const domain of DOMAINS) {
-  // Check for domain in heading format "### N. domain/" or in table format "`domain/`"
   const headingPattern = new RegExp(`###\\s+\\d+\\.\\s+${domain}\\/`, 'i');
   const tablePattern = new RegExp(`\\|\\s*\`${domain}\\/`, 'i');
   const pathPattern = new RegExp(`${domain}\\/[a-z-]+`, 'i');
@@ -82,17 +68,16 @@ for (const domain of DOMAINS) {
 }
 
 if (documentedDomains === DOMAINS.length) {
-  console.log(`   ✅ All ${DOMAINS.length} domains documented`);
-  passed++;
+  reporter.pass(`All ${DOMAINS.length} domains documented`, { count: DOMAINS.length });
 } else {
-  console.log(`   ❌ ${documentedDomains}/${DOMAINS.length} domains documented`);
-  console.log(`      Missing: ${missingDomains.join(', ')}`);
-  issues.push(`Missing domain documentation: ${missingDomains.join(', ')}`);
-  failed++;
+  reporter.fail(`${documentedDomains}/${DOMAINS.length} domains documented - Missing: ${missingDomains.join(', ')}`, {
+    documented: documentedDomains,
+    total: DOMAINS.length,
+    missing: missingDomains
+  });
 }
 
-// Check essential sections - stricter patterns
-console.log('\n3. Essential Sections');
+reporter.section('Essential Sections');
 const essentialSections = [
   { name: 'Règles de Routage', pattern: /^##\s+Règles de Routage\s*$/im },
   { name: 'Arbre de Décision', pattern: /^##\s+Arbre de Décision\s*$/im },
@@ -102,68 +87,33 @@ const essentialSections = [
 
 for (const section of essentialSections) {
   if (section.pattern.test(content)) {
-    console.log(`   ✅ ${section.name}`);
-    passed++;
+    reporter.pass(section.name);
   } else {
-    console.log(`   ❌ ${section.name} missing`);
-    issues.push(`Missing section: ${section.name}`);
-    failed++;
+    reporter.fail(`${section.name} missing`);
   }
 }
 
-// Check agent count - use computed value only
-console.log('\n4. Agent Count');
+reporter.section('Metadata');
 const expectedCount = getTotalExpectedAgents();
 const agentCountPattern = new RegExp(`${expectedCount}\\s+agents?`, 'i');
 const parenPattern = new RegExp(`\\(${expectedCount}\\)`, 'i');
 
 if (agentCountPattern.test(content) || parenPattern.test(content) || content.includes(String(expectedCount))) {
-  console.log(`   ✅ Total agent count mentioned (${expectedCount})`);
-  passed++;
+  reporter.pass(`Total agent count mentioned (${expectedCount})`, { expectedAgents: expectedCount });
 } else {
-  console.log(`   ⚠️  Agent count may be outdated (expected ${expectedCount})`);
-  console.log(`      Update SKILL.md if agent count has changed`);
+  reporter.warn(`Agent count may be outdated (expected ${expectedCount})`);
 }
 
-// Check version 2.0+
-console.log('\n5. Version');
 if (frontmatter && frontmatter.version && frontmatter.version.startsWith('2')) {
-  console.log(`   ✅ Version 2.x confirmed (${frontmatter.version})`);
-  passed++;
+  reporter.pass(`Version 2.x confirmed (${frontmatter.version})`, { version: frontmatter.version });
 } else {
-  console.log(`   ⚠️  Expected version 2.x`);
+  reporter.warn('Expected version 2.x');
 }
 
-// Check skill name matches directory
-console.log('\n6. Skill Name');
 if (frontmatter && frontmatter.name === 'direction-technique') {
-  console.log(`   ✅ Skill name matches directory`);
-  passed++;
+  reporter.pass('Skill name matches directory');
 } else {
-  console.log(`   ❌ Skill name should be 'direction-technique'`);
-  issues.push('Skill name mismatch');
-  failed++;
+  reporter.fail('Skill name should be \'direction-technique\'');
 }
 
-console.log('\n');
-printSeparator();
-
-// Summary
-console.log('\n📊 Results:');
-console.log(`   Checks passed: ${passed}`);
-console.log(`   Checks failed: ${failed}`);
-
-if (issues.length > 0) {
-  console.log('\n⚠️  Issues found:');
-  for (const issue of issues) {
-    console.log(`   - ${issue}`);
-  }
-}
-
-if (failed > 0) {
-  console.log('\n❌ Some checks failed');
-  process.exit(1);
-} else {
-  console.log('\n✅ All checks passed');
-  process.exit(0);
-}
+reporter.summarize();

@@ -14,109 +14,65 @@ const path = require('path');
 const {
   directoryExists,
   fileExists,
-  printSeparator
+  TestReporter
 } = require('./utils');
 const { SKILL_ROOT, DOMAINS, EXPECTED_AGENTS_PER_DOMAIN, getTotalExpectedAgents } = require('./config');
 
-let passed = 0;
-let failed = 0;
-const issues = [];
-
-console.log('🧪 Validating Technical Domain Structure\n');
-printSeparator();
+const reporter = new TestReporter('validate-domains');
+reporter.header('Validating Technical Domain Structure');
 
 // Check each domain
 for (const domain of DOMAINS) {
-  console.log(`\n📁 Domain: ${domain}`);
+  reporter.section(`Domain: ${domain}`);
 
   const domainDir = path.join(SKILL_ROOT, domain);
 
   // Check domain directory exists
   if (!directoryExists(domainDir)) {
-    console.log(`  ❌ Directory missing: ${domain}/`);
-    issues.push(`Domain ${domain}: directory missing`);
-    failed++;
+    reporter.fail(`Directory missing: ${domain}/`, { domain, path: domainDir });
     continue;
   }
-  console.log(`  ✅ Directory exists`);
-  passed++;
+  reporter.pass('Directory exists', { domain });
 
   // Check orchestrator exists
   const orchestratorPath = path.join(domainDir, 'orchestrator.md');
   if (!fileExists(orchestratorPath)) {
-    console.log(`  ❌ Orchestrator missing: ${domain}/orchestrator.md`);
-    issues.push(`Domain ${domain}: orchestrator missing`);
-    failed++;
+    reporter.fail(`Orchestrator missing: ${domain}/orchestrator.md`, { domain, path: orchestratorPath });
   } else {
-    console.log(`  ✅ Orchestrator exists`);
-    passed++;
+    reporter.pass('Orchestrator exists', { domain });
   }
 
   // Check expected agents
   const expectedAgents = EXPECTED_AGENTS_PER_DOMAIN[domain] || [];
-  let agentsPassed = 0;
   let agentsMissing = [];
 
   for (const agent of expectedAgents) {
     if (agent === 'orchestrator') continue;
 
     const agentPath = path.join(domainDir, `${agent}.md`);
-    if (fileExists(agentPath)) {
-      agentsPassed++;
-    } else {
+    if (!fileExists(agentPath)) {
       agentsMissing.push(agent);
     }
   }
 
   const expectedCount = expectedAgents.length - 1; // -1 for orchestrator
   if (agentsMissing.length === 0) {
-    console.log(`  ✅ All ${expectedCount} expected agents present`);
-    passed++;
+    reporter.pass(`All ${expectedCount} expected agents present`, { domain, count: expectedCount });
   } else {
-    console.log(`  ❌ ${agentsPassed}/${expectedCount} expected agents present`);
-    if (agentsMissing.length <= 3) {
-      console.log(`     Missing: ${agentsMissing.join(', ')}`);
-    } else {
-      console.log(`     Missing: ${agentsMissing.length} agents`);
-    }
-    issues.push(`Domain ${domain}: missing agents - ${agentsMissing.join(', ')}`);
-    failed++;
+    reporter.fail(`Missing ${agentsMissing.length}/${expectedCount} agents: ${agentsMissing.join(', ')}`, {
+      domain,
+      missing: agentsMissing
+    });
   }
 }
 
 // Check SKILL.md exists
-console.log(`\n📄 Main Files`);
+reporter.section('Main Files');
 const skillMdPath = path.join(SKILL_ROOT, 'SKILL.md');
 if (fileExists(skillMdPath)) {
-  console.log(`  ✅ SKILL.md exists`);
-  passed++;
+  reporter.pass('SKILL.md exists');
 } else {
-  console.log(`  ❌ SKILL.md missing`);
-  issues.push('SKILL.md missing');
-  failed++;
+  reporter.fail('SKILL.md missing', { path: skillMdPath });
 }
 
-console.log('\n');
-printSeparator();
-
-// Summary
-console.log('\n📊 Domain Summary:');
-console.log(`   Domains: ${DOMAINS.length}`);
-console.log(`   Expected agents: ${getTotalExpectedAgents()}`);
-console.log(`   Checks passed: ${passed}`);
-console.log(`   Checks failed: ${failed}`);
-
-if (issues.length > 0) {
-  console.log('\n⚠️  Issues found:');
-  for (const issue of issues) {
-    console.log(`   - ${issue}`);
-  }
-}
-
-if (failed > 0) {
-  console.log('\n❌ Some checks failed');
-  process.exit(1);
-} else {
-  console.log('\n✅ All checks passed');
-  process.exit(0);
-}
+reporter.summarize();
