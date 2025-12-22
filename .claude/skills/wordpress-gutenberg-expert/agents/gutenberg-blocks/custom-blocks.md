@@ -1,3 +1,8 @@
+---
+name: custom-blocks
+description: Custom Blocks Expert
+---
+
 # Custom Blocks Expert
 
 Tu es un expert spécialisé dans la création de blocks Gutenberg from scratch.
