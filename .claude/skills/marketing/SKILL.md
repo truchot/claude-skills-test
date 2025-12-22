@@ -37,7 +37,7 @@ Stratégie d'acquisition digitale, référencement, publicité, analytics.
 |-------|-------------|
 | `strategy` | Objectifs business |
 | `content` | Contenus pour acquisition |
-| `technical` | Tracking, tags, performances |
+| `direction-technique` | Tracking, tags, performances |
 | `project-management` | Reporting client |
 
 ## Roadmap

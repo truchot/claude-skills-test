@@ -1,6 +1,6 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, technical, strategy, design, content, marketing)
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, strategy, design, content, marketing)
 version: 2.0.0
 ---
 
@@ -21,9 +21,9 @@ CLIENT
 │              (Orchestrateur de Skills)                  │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ project │ │technical│ │strategy │ │ design  │       │
-│  │-manage- │ │         │ │         │ │         │       │
-│  │  ment   │ │         │ │         │ │         │       │
+│  │ project │ │direction│ │strategy │ │ design  │       │
+│  │-manage- │ │-techni- │ │         │ │         │       │
+│  │  ment   │ │   que   │ │         │ │         │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────────────────────┐   │
@@ -41,13 +41,13 @@ HUMAIN (supervision)
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
 | `project-management` | Gestion de projet & relation client | 24 | 🟢 Actif |
-| `technical` | Pont métier → développement | 6 | 🟢 Actif |
+| `direction-technique` | Pilotage technique stratégique | 52 | 🟢 Actif |
 | `strategy` | Stratégie & conseil | - | 🔴 Planifié |
 | `design` | Design & création graphique | - | 🔴 Planifié |
 | `content` | Contenu & rédaction | - | 🔴 Planifié |
 | `marketing` | Marketing digital | - | 🔴 Planifié |
 
-### Skills Techniques (via `technical`)
+### Skills Techniques (via `direction-technique`)
 
 | Skill | Description | Agents |
 |-------|-------------|--------|
@@ -61,7 +61,7 @@ HUMAIN (supervision)
 | Mots-clés | Skill |
 |-----------|-------|
 | brief, devis, estimation, planning, suivi, client, facture, recette | `project-management` |
-| stack, architecture, specs techniques, estimation dev, qualité code | `technical` |
+| stack, architecture, specs techniques, estimation dev, qualité code | `direction-technique` |
 | audit, benchmark, stratégie, recommandation, KPI | `strategy` |
 | maquette, logo, charte, DA, branding, UI, wireframe | `design` |
 | rédaction, copywriting, contenu, SEO éditorial, article | `content` |
@@ -76,7 +76,7 @@ Requête utilisateur
 │  └─ → skill project-management
 │
 ├─ Concerne la technique ou le développement ?
-│  └─ → skill technical
+│  └─ → skill direction-technique
 │     │
 │     ├─ Process générique → web-dev-process
 │     └─ WordPress → wordpress-gutenberg-expert
@@ -111,7 +111,7 @@ Requête utilisateur
 4. content
    → Arborescence, contenus
 
-5. technical
+5. direction-technique
    → Specs techniques, estimation dev
    → web-dev-process (setup, dev, test, deploy)
    → wordpress-gutenberg-expert (si WP)
@@ -141,7 +141,7 @@ Requête utilisateur
 3. project-management/avant-projet
    → Brief, estimation, proposition
 
-4. design + content + technical
+4. design + content + direction-technique
    → En parallèle selon planning
 
 5. project-management/livraison
@@ -157,11 +157,11 @@ Quand une requête nécessite plusieurs skills :
 
 ### Skills impliqués :
 1. `project-management/avant-projet` - Brief et estimation commerciale
-2. `technical/estimation-technique` - Estimation technique
-3. `technical` → `wordpress-gutenberg-expert` - Spécificités WP/WooCommerce
+2. `direction-technique/estimation` - Estimation technique
+3. `direction-technique` → `wordpress-gutenberg-expert` - Spécificités WP/WooCommerce
 
 ### Workflow :
-project-management ──► technical ──► wordpress-gutenberg-expert
+project-management ──► direction-technique ──► wordpress-gutenberg-expert
      │                    │                    │
      ▼                    ▼                    ▼
   Brief client    Specs techniques      Détail WP/Woo
@@ -204,6 +204,9 @@ Chaque livrable de skill est validé par un humain avant passage au suivant.
 - Refactoring en méta-orchestrateur
 - Skills métiers extraits en skills autonomes
 - Architecture de composition
+
+### v2.0.1
+- Renommage `technical` → `direction-technique` (52 agents)
 
 ### v1.1.0
 - Ajout du domaine Technique (6 agents)
