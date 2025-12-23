@@ -1,8 +1,183 @@
 # Analyse SRP (Single Responsibility Principle) des Skills
 
-**Date** : 2024-12-22
-**Version** : 1.0
+**Date** : 2024-12-23
+**Version** : 2.0
 **Auteur** : Claude (Analyse automatisée)
+
+---
+
+## 🔴 NOUVELLE ANALYSE v2.0 : Prisme POURQUOI / QUOI / COMMENT
+
+Cette section analyse chaque skill à travers la grille de lecture établie par ADR-005.
+
+### Rappel du Framework
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique)                          │
+│  → "Pourquoi on fait ça ? Quels objectifs ? Quelles politiques ?"   │
+│  → Output: Justifications, ADRs, Politiques, Standards, Objectifs   │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                                  │
+│  → "Quoi mettre en place ? Quelles étapes ? Quels outils ?"         │
+│  → Output: Process, Templates, Checklists, Guides, Structures       │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (wordpress-*, design-system-*)                  │
+│  → "Comment l'implémenter concrètement ? Quel code ?"               │
+│  → Output: Code, Configurations, Scripts, Commandes                 │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### ⚠️ VIOLATIONS CRITIQUES IDENTIFIÉES
+
+#### 1. direction-technique (Niveau POURQUOI) - Contient du COMMENT
+
+| Agent | Contenu problématique | Devrait contenir |
+|-------|----------------------|------------------|
+| `securite/securite-applicative.md` | ~250 lignes de CODE TypeScript, PHP (validation, CSRF, sanitization) | POURQUOI la sécurité est critique, QUELS objectifs OWASP viser |
+| `architecture/architecture-systeme.md` | Configs Docker-compose YAML, Kubernetes YAML | POURQUOI cette topologie, QUELS SLA viser |
+| `performance/optimisation-frontend.md` | Probablement du code d'optimisation | POURQUOI optimiser (Core Web Vitals), QUELS seuils définir |
+| `performance/optimisation-backend.md` | Probablement du code d'optimisation | POURQUOI la latence compte, QUELS SLOs définir |
+
+**Exemple concret - `securite-applicative.md` :**
+```typescript
+// ACTUELLEMENT PRÉSENT (niveau COMMENT) ❌
+const passwordSchema = z.string()
+  .min(12, 'Minimum 12 caractères')
+  .regex(/[A-Z]/, 'Au moins une majuscule');
+
+// DEVRAIT ÊTRE (niveau POURQUOI) ✅
+## Politique de Mot de Passe
+
+| Critère | Standard | Justification |
+|---------|----------|---------------|
+| Longueur min | 12 caractères | NIST SP 800-63B recommandation |
+| Complexité | Majuscule + minuscule + chiffre | Entropie suffisante |
+
+→ Implémentation : Voir `web-dev-process/testing/security`
+```
+
+#### 2. web-dev-process (Niveau QUOI) - Contient du COMMENT
+
+| Agent | Contenu problématique | Devrait contenir |
+|-------|----------------------|------------------|
+| `testing/security.md` | ~50 lignes de CODE TypeScript (tests injection, auth) | QUOI tester (OWASP Top 10), QUELS outils utiliser |
+
+**Exemple concret - `testing/security.md` :**
+```typescript
+// ACTUELLEMENT PRÉSENT (niveau COMMENT) ❌
+const payloads = [
+  "'; DROP TABLE users; --",
+  '<script>alert("XSS")</script>',
+];
+
+// DEVRAIT ÊTRE (niveau QUOI) ✅
+## Tests de Sécurité à Implémenter
+
+| Catégorie OWASP | Test | Outil recommandé |
+|-----------------|------|------------------|
+| A03 - Injection | Payloads SQL/XSS | Semgrep, OWASP ZAP |
+| A07 - Auth | Rate limiting | Custom tests |
+
+→ Code concret : Voir `wordpress-*/testing/` ou créer agent spécifique
+```
+
+#### 3. Incohérence dans web-dev-process/SKILL.md
+
+**Problème :**
+Le SKILL.md de web-dev-process déclare :
+> "Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase"
+
+Mais selon ADR-005, il devrait UNIQUEMENT faire du QUOI.
+Le POURQUOI appartient à direction-technique.
+
+---
+
+### ✅ CONFORMITÉS CONSTATÉES
+
+| Skill | Niveau Attendu | Conformité | Notes |
+|-------|---------------|------------|-------|
+| `wordpress-gutenberg-expert/tooling/cicd-pipelines.md` | COMMENT | ✅ 100% | Code YAML complet, scripts bash |
+| `direction-technique/qualite/code-review.md` | POURQUOI | ✅ 95% | Politiques d'approbation, délais (post-refactoring) |
+| `direction-technique/infrastructure/strategie-cicd.md` | POURQUOI | ✅ 90% | Quality gates, objectifs DORA (post-refactoring) |
+| `web-dev-process/agents/setup/cicd.md` | QUOI | ✅ 85% | Structure pipeline, étapes, bonnes pratiques |
+| `web-dev-process/agents/design/architecture.md` | QUOI | ✅ 90% | Patterns, structures, critères de choix (pas de code) |
+
+---
+
+### 📊 Matrice de Conformité par Domaine
+
+| Domaine | POURQUOI (direction-technique) | QUOI (web-dev-process) | COMMENT (wordpress-*) |
+|---------|-------------------------------|----------------------|----------------------|
+| **CI/CD** | ✅ strategie-cicd refactoré | ✅ setup/cicd générique | ✅ cicd-pipelines code |
+| **Code Review** | ✅ policies uniquement | ✅ process complet | N/A |
+| **Sécurité** | ❌ securite-applicative = CODE | ⚠️ testing/security = CODE | À créer |
+| **Architecture** | ⚠️ architecture-systeme = YAML | ✅ design/architecture | Spécifique WP OK |
+| **Performance** | ⚠️ Probablement CODE | À vérifier | À créer si besoin |
+
+---
+
+### 🔧 Actions Correctives Recommandées
+
+#### Haute Priorité
+
+1. **Refactorer `direction-technique/securite/securite-applicative.md`**
+   - Supprimer tout le code TypeScript/PHP
+   - Garder uniquement : politiques OWASP, objectifs sécurité, standards
+   - Créer références vers `web-dev-process/testing/security` pour le QUOI
+
+2. **Refactorer `direction-technique/architecture/architecture-systeme.md`**
+   - Supprimer les configs Docker/Kubernetes YAML
+   - Garder : justifications architecturales, SLA, topologies (diagrammes ASCII OK)
+   - Créer références vers `web-dev-process` ou skills d'implémentation
+
+3. **Corriger `web-dev-process/SKILL.md`**
+   - Supprimer "POURQUOI" de la description
+   - Garder uniquement "Ce skill définit le **QUOI** de chaque phase"
+
+4. **Refactorer `web-dev-process/testing/security.md`**
+   - Supprimer le code TypeScript des payloads
+   - Garder : checklists OWASP, outils recommandés, workflow de test
+   - Le code concret devrait être dans un skill d'implémentation
+
+#### Moyenne Priorité
+
+5. **Auditer `direction-technique/performance/`**
+   - Vérifier si optimisation-frontend/backend contiennent du code
+   - Si oui, extraire vers web-dev-process ou skill d'implémentation
+
+6. **Créer skill ou domaine pour le code sécurité générique**
+   - Option A : `web-dev-process/agents/security/` (agents de process)
+   - Option B : Laisser dans les skills d'implémentation (WordPress, React, etc.)
+
+---
+
+### 📐 Règle de Validation
+
+Pour chaque agent, appliquer ce test :
+
+```markdown
+## Test POURQUOI/QUOI/COMMENT
+
+1. L'agent contient-il du CODE (TypeScript, PHP, YAML, bash) ?
+   - Si Niveau 1 (POURQUOI) → ❌ VIOLATION
+   - Si Niveau 2 (QUOI) → ⚠️ À ÉVALUER
+   - Si Niveau 3 (COMMENT) → ✅ CONFORME
+
+2. L'agent répond-il à quelle question ?
+   - "Pourquoi faire X ?" → Niveau 1
+   - "Quoi mettre en place ?" → Niveau 2
+   - "Comment coder X ?" → Niveau 3
+
+3. Quel est l'OUTPUT principal ?
+   - Politiques, standards, objectifs → Niveau 1
+   - Process, templates, checklists → Niveau 2
+   - Code, configs, scripts → Niveau 3
+```
+
+---
 
 ---
 
