@@ -192,29 +192,24 @@ Les fichiers suivants ont été refactorés pour respecter le SRP :
 
 ---
 
-## Fichiers Restants à Refactorer (Phase 2)
+## Fichiers Refactorés (Phase 2) ✅
 
-Les fichiers suivants contiennent encore du code et doivent être refactorés :
+Tous les fichiers ont été refactorés pour respecter le SRP. Phase 2 terminée.
 
-### Priorité Haute
+### Fichiers Refactorés
 
-| Fichier | Violation | Action Recommandée |
-|---------|-----------|-------------------|
-| `architecture/patterns-design.md` | 9 blocks TypeScript | Garder les patterns, supprimer le code |
-| `securite/conformite-rgpd.md` | 5 blocks TypeScript | Garder les politiques RGPD, supprimer le code |
-| `securite/gestion-secrets.md` | 4 blocks TypeScript/PHP | Garder les politiques, supprimer le code |
-
-### Priorité Moyenne
-
-| Fichier | Violation | Action Recommandée |
-|---------|-----------|-------------------|
-| `specification/specification-api.md` | Code JS + bash | Garder le design d'API, supprimer les exemples de code |
-| `specification/specification-technique.md` | 1 block SQL | Supprimer les requêtes SQL |
-| `qualite/conventions-code.md` | 2 blocks TS/PHP | Garder les conventions, exemples sans code |
-| `performance/monitoring-perf.md` | 3 blocks TypeScript | Garder les métriques, supprimer le code |
-| `infrastructure/strategie-deploiement.md` | TS + K8s YAML | Garder les stratégies, supprimer les configs |
-| `infrastructure/architecture-infra.md` | 1 block TypeScript | Supprimer le code |
-| `architecture/architecture-applicative.md` | 1 block TypeScript | Supprimer le code |
+| Fichier | Code Supprimé | Contenu Préservé |
+|---------|---------------|------------------|
+| `architecture/patterns-design.md` | 9 blocks TypeScript | Critères de choix, principes SOLID |
+| `securite/conformite-rgpd.md` | 5 blocks TypeScript | Politiques RGPD, droits, procédures |
+| `securite/gestion-secrets.md` | 4 blocks TS/PHP | Politiques de rotation, stockage |
+| `specification/specification-api.md` | Code JS + bash | Standards REST, versioning |
+| `specification/specification-technique.md` | 1 block SQL | Standards de spécification |
+| `qualite/conventions-code.md` | 2 blocks TS/PHP | Conventions de nommage, structure |
+| `performance/monitoring-perf.md` | 6 blocks TS/YAML/PromQL | Golden Signals, seuils d'alerte |
+| `infrastructure/strategie-deploiement.md` | 7 blocks TS/K8s/Bash | Stratégies, critères de choix |
+| `infrastructure/architecture-infra.md` | 3 blocks HCL/TS/K8s | Patterns, bonnes pratiques |
+| `architecture/architecture-applicative.md` | Template TypeScript | Critères de choix, standards |
 
 ### Validation
 
@@ -224,6 +219,8 @@ Exécutez le script de validation pour vérifier la conformité :
 cd .claude/skills/direction-technique
 npm run test:srp
 ```
+
+Résultat attendu : **36 passed, 0 failed**
 
 ---
 

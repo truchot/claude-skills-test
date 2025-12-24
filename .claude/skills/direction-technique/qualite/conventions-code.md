@@ -1,222 +1,197 @@
 ---
 name: conventions-code
-description: Standards et conventions de code
+description: Politique et standards des conventions de code (Niveau POURQUOI)
 ---
 
-# Conventions de Code
+# Politique des Conventions de Code
 
-Tu définis et maintiens les **standards de code** pour assurer cohérence et qualité.
+Tu définis les **politiques et standards** pour les conventions de code.
 
-## Contexte
+## Rôle de cet Agent (Niveau POURQUOI)
 
-Intervient pour :
-- Définir les conventions d'un projet
-- Configurer les outils de linting
-- Résoudre les questions de style
-- Onboarder sur les standards
-
-## Conventions par Langage
-
-### JavaScript / TypeScript
-
-```json
-// .eslintrc.json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "no-console": "warn",
-    "no-unused-vars": "error",
-    "@typescript-eslint/explicit-function-return-type": "warn",
-    "@typescript-eslint/no-explicit-any": "error"
-  }
-}
-```
-
-```json
-// .prettierrc
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "printWidth": 80
-}
-```
-
-#### Nommage
-
-| Élément | Convention | Exemple |
-|---------|------------|---------|
-| Variables | camelCase | `userName`, `isActive` |
-| Constantes | UPPER_SNAKE | `MAX_RETRY`, `API_URL` |
-| Fonctions | camelCase | `getUserById`, `handleClick` |
-| Classes | PascalCase | `UserService`, `OrderController` |
-| Interfaces | PascalCase (I prefix optionnel) | `User`, `IUserService` |
-| Types | PascalCase | `UserRole`, `OrderStatus` |
-| Fichiers | kebab-case | `user-service.ts`, `order.types.ts` |
-| Dossiers | kebab-case | `user-management/`, `api-clients/` |
-
-### PHP
-
-```php
-// phpcs.xml
-<?xml version="1.0"?>
-<ruleset name="Project">
-    <rule ref="PSR12"/>
-    <rule ref="WordPress-Extra"/>
-    <file>./src</file>
-    <exclude-pattern>./vendor/*</exclude-pattern>
-</ruleset>
-```
-
-#### Nommage PHP
-
-| Élément | Convention | Exemple |
-|---------|------------|---------|
-| Variables | camelCase ou snake_case | `$userName` ou `$user_name` |
-| Constantes | UPPER_SNAKE | `MAX_RETRY` |
-| Fonctions | camelCase (OOP) / snake_case (WP) | `getUserById` / `get_user_by_id` |
-| Classes | PascalCase | `UserService` |
-| Méthodes | camelCase | `findById` |
-| Fichiers classe | PascalCase | `UserService.php` |
-
-### CSS / SCSS
-
-```scss
-// Ordre des propriétés (CSScomb)
-.component {
-  // 1. Positionnement
-  position: relative;
-  top: 0;
-
-  // 2. Box model
-  display: flex;
-  width: 100%;
-  padding: 1rem;
-
-  // 3. Typographie
-  font-size: 1rem;
-  color: #333;
-
-  // 4. Visuel
-  background: white;
-  border: 1px solid #ccc;
-
-  // 5. Autres
-  cursor: pointer;
-  transition: all 0.3s;
-}
-```
-
-#### Convention BEM
-
-```scss
-// Block
-.card { }
-
-// Element
-.card__header { }
-.card__body { }
-.card__footer { }
-
-// Modifier
-.card--featured { }
-.card--disabled { }
-.card__header--large { }
-```
-
-## Structure de Projet
-
-### Frontend (React/Vue)
+> **Ce que tu fais** : Définir les RÈGLES de style et les standards à respecter
+> **Ce que tu ne fais pas** : Configurer les outils ou écrire du code
+>
+> → Process de setup : `web-dev-process/agents/setup/quality-tools`
+> → Implémentation : Skills technologiques spécialisés
 
 ```
-src/
-├── components/           # Composants UI
-│   ├── common/          # Composants réutilisables
-│   │   └── Button/
-│   │       ├── Button.tsx
-│   │       ├── Button.test.tsx
-│   │       ├── Button.styles.ts
-│   │       └── index.ts
-│   └── features/        # Composants par feature
-├── hooks/               # Custom hooks
-├── services/            # API calls
-├── stores/              # State management
-├── types/               # TypeScript types
-├── utils/               # Helpers
-└── pages/               # Pages/Routes
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces conventions ? Pour cohérence et maintenabilité"│
+│  → "Standards : nommage, structure, documentation"              │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quels outils ? ESLint, Prettier, Husky, lint-staged"        │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Fichiers de config, règles spécifiques, CI setup"           │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Backend (Node.js)
+---
 
-```
-src/
-├── modules/             # Feature modules
-│   └── user/
-│       ├── user.controller.ts
-│       ├── user.service.ts
-│       ├── user.repository.ts
-│       ├── user.entity.ts
-│       ├── user.dto.ts
-│       └── user.module.ts
-├── common/              # Shared code
-│   ├── decorators/
-│   ├── filters/
-│   ├── guards/
-│   └── pipes/
-├── config/              # Configuration
-└── database/            # DB related
-```
+## Principes Fondamentaux
 
-## Configuration Complète
+### Objectifs des Conventions
 
-### package.json (scripts)
+| Objectif | Justification |
+|----------|---------------|
+| **Cohérence** | Code uniforme, facile à lire |
+| **Maintenabilité** | Modifications aisées |
+| **Onboarding** | Nouveaux devs productifs rapidement |
+| **Review efficace** | Focus sur la logique, pas le style |
+| **Qualité** | Moins de bugs, meilleure lisibilité |
 
-```json
-{
-  "scripts": {
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "type-check": "tsc --noEmit",
-    "validate": "npm run type-check && npm run lint && npm run format:check"
-  }
-}
-```
+### Principes Directeurs
 
-### Git Hooks (Husky + lint-staged)
+| Principe | Description |
+|----------|-------------|
+| **Explicite > Implicite** | Noms clairs, pas d'abréviations cryptiques |
+| **Consistance > Préférence** | Suivre les conventions, même si pas d'accord |
+| **Automatisation** | Linters et formatters, pas de vérification manuelle |
+| **Documentation minimale** | Code auto-documenté, commentaires pour le "pourquoi" |
 
-```json
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-    "*.{css,scss}": ["stylelint --fix", "prettier --write"],
-    "*.md": ["prettier --write"]
-  }
-}
-```
+---
+
+## Standards de Nommage
+
+### Règles Universelles
+
+| Élément | Convention | Exemple Correct | Exemple Incorrect |
+|---------|------------|-----------------|-------------------|
+| **Variables** | camelCase | `userName` | `user_name`, `UserName` |
+| **Constantes** | UPPER_SNAKE_CASE | `MAX_RETRY` | `maxRetry`, `MaxRetry` |
+| **Fonctions** | camelCase | `getUserById` | `GetUserById`, `get_user` |
+| **Classes** | PascalCase | `UserService` | `userService`, `user_service` |
+| **Fichiers** | kebab-case | `user-service.ts` | `userService.ts`, `UserService.ts` |
+| **Dossiers** | kebab-case | `user-management/` | `userManagement/` |
+
+### Standards par Langage
+
+| Langage | Standard de Référence |
+|---------|----------------------|
+| **JavaScript/TypeScript** | Airbnb Style Guide + Prettier |
+| **PHP** | PSR-12 + WordPress Coding Standards (si WP) |
+| **CSS/SCSS** | BEM + CSScomb order |
+| **Python** | PEP 8 |
+| **Go** | gofmt |
+
+### Nommage Sémantique
+
+| Type de Nom | Convention | Exemples |
+|-------------|------------|----------|
+| **Boolean** | Préfixe `is`, `has`, `can`, `should` | `isActive`, `hasPermission` |
+| **Tableau** | Pluriel | `users`, `items` |
+| **Fonction getter** | `get` + nom | `getUserById` |
+| **Fonction setter** | `set` + nom | `setUserName` |
+| **Event handler** | `handle` + event | `handleClick`, `handleSubmit` |
+| **Callback** | `on` + action | `onSuccess`, `onError` |
+
+---
+
+## Standards de Structure
+
+### Longueur Maximale
+
+| Élément | Limite | Action si Dépassée |
+|---------|--------|-------------------|
+| **Ligne de code** | 80-120 caractères | Wrapper |
+| **Fonction** | 20-30 lignes | Extraire |
+| **Classe/Module** | 200-300 lignes | Découper |
+| **Fichier** | 400 lignes | Réorganiser |
+| **Paramètres de fonction** | 3-4 max | Object parameter |
+| **Niveaux d'imbrication** | 3 max | Early return, extraire |
+
+### Organisation du Code
+
+| Ordre dans un Fichier | Contenu |
+|-----------------------|---------|
+| 1. Imports/Requires | Groupés par type |
+| 2. Types/Interfaces | Si TypeScript |
+| 3. Constantes | Module-level |
+| 4. Code principal | Fonctions, classes |
+| 5. Exports | En fin de fichier |
+
+### Structure de Projet
+
+| Principe | Description |
+|----------|-------------|
+| **Feature-based** | Organiser par fonctionnalité, pas par type |
+| **Colocation** | Tests à côté du code |
+| **Index files** | Exporter proprement depuis un dossier |
+| **Flat is better** | Éviter l'imbrication profonde |
+
+---
+
+## Standards de Documentation
+
+### Quand Documenter
+
+| Situation | Documentation |
+|-----------|---------------|
+| **API publique** | Obligatoire (JSDoc, PHPDoc) |
+| **Logique complexe** | Commentaire expliquant le "pourquoi" |
+| **Workaround** | Commentaire + lien issue |
+| **TODO** | `// TODO(nom): description` |
+| **Code évident** | Aucune documentation |
+
+### Format des Commentaires
+
+| Type | Format |
+|------|--------|
+| **Ligne unique** | `// Commentaire` |
+| **Multi-lignes** | `/* Commentaire */` |
+| **Documentation** | `/** @param @returns */` |
+| **TODO** | `// TODO(author): description` |
+| **FIXME** | `// FIXME(author): description` |
+
+---
+
+## Standards de Qualité
+
+### Règles Obligatoires
+
+| Règle | Justification |
+|-------|---------------|
+| **Pas de `any`** (TypeScript) | Type safety |
+| **Pas de `var`** (JavaScript) | Scope prévisible |
+| **Pas de console.log** en prod | Logs propres |
+| **Pas de code commenté** | Git pour l'historique |
+| **Pas de magic numbers** | Constantes nommées |
+| **Pas de dead code** | Suppression immédiate |
+
+### Règles Recommandées
+
+| Règle | Justification |
+|-------|---------------|
+| **Fonctions pures** quand possible | Testabilité |
+| **Immutabilité** préférée | Prévisibilité |
+| **Early returns** | Lisibilité |
+| **Destructuring** | Concision |
+| **Optional chaining** | Sécurité null |
+
+---
+
+## Politique d'Automatisation
+
+### Outils Obligatoires
+
+| Outil | Usage | Moment |
+|-------|-------|--------|
+| **Linter** | Vérification des règles | Dev + CI |
+| **Formatter** | Formatage automatique | Pre-commit |
+| **Type checker** | Vérification des types | Dev + CI |
+
+### Git Hooks
+
+| Hook | Action |
+|------|--------|
+| **pre-commit** | lint-staged (lint + format) |
+| **commit-msg** | Validation format commit |
+| **pre-push** | Tests + type check |
 
 ### Conventional Commits
-
-```
-type(scope): subject
-
-body
-
-footer
-```
 
 | Type | Usage |
 |------|-------|
@@ -228,51 +203,75 @@ footer
 | `test` | Ajout/modification de tests |
 | `chore` | Maintenance (deps, config) |
 
-Exemples :
-```
-feat(auth): add password reset functionality
-fix(api): handle null response from external service
-docs(readme): update installation instructions
-refactor(user): extract validation logic to separate module
-```
+---
 
-## Bonnes Pratiques
+## Checklist par Projet
 
-### Code
+### Setup Initial
 
-- ✅ Fonctions courtes (< 20 lignes)
-- ✅ Un fichier = une responsabilité
-- ✅ Noms explicites (pas d'abréviations)
-- ✅ Éviter les commentaires inutiles (code auto-documenté)
-- ✅ DRY mais pas prématurément
-- ❌ Magic numbers
-- ❌ God classes
-- ❌ Deeply nested code
+- [ ] Linter configuré avec règles projet
+- [ ] Formatter configuré
+- [ ] Git hooks installés
+- [ ] CI vérifie lint + format + types
+- [ ] README documente les conventions
 
-### TypeScript
+### Onboarding Développeur
 
-```typescript
-// ✅ Bon
-interface User {
-  id: string;
-  email: string;
-  createdAt: Date;
-}
+- [ ] Extensions IDE recommandées
+- [ ] Format on save activé
+- [ ] Conventions lues et comprises
+- [ ] Première PR reviewée pour style
 
-function findUserById(id: string): Promise<User | null> {
-  // ...
-}
+### Maintenance
 
-// ❌ Mauvais
-function findUser(id: any): any {
-  // ...
-}
-```
+- [ ] Règles mises à jour avec l'équipe
+- [ ] Dépendances outils à jour
+- [ ] Pas de règles désactivées sans justification
+
+---
+
+## Dérogations
+
+### Procédure de Dérogation
+
+| Étape | Action |
+|-------|--------|
+| 1 | Justifier techniquement la dérogation |
+| 2 | Documenter dans le code (commentaire) |
+| 3 | Valider avec Tech Lead |
+| 4 | Désactiver la règle localement (pas globalement) |
+
+### Dérogations Acceptables
+
+| Situation | Exemple |
+|-----------|---------|
+| **Librairie tierce** | Signature imposée |
+| **Performance critique** | Optimisation justifiée |
+| **Legacy code** | Migration progressive |
+
+---
+
+## Points d'Escalade
+
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Désaccord sur convention | Discussion en rétrospective | Équipe |
+| Règle bloquante | Évaluer la règle | Tech Lead |
+| Nouveau langage/framework | Définir conventions avant de coder | Tech Lead |
+
+---
 
 ## Références
 
-| Aspect | Agent de référence |
+| Aspect | Agent de Référence |
 |--------|-------------------|
-| Review de code | `qualite/code-review` |
-| Principes généraux | `web-dev-process/development/coding-standards` |
-| Setup outils | `web-dev-process/setup/quality-tools` |
+| Code review | `qualite/code-review` |
+| Setup outils | `web-dev-process/agents/setup/quality-tools` |
+| Standards dev | `web-dev-process/agents/development/coding-standards` |
+
+### Ressources Externes
+
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html)
+- [PSR-12 PHP](https://www.php-fig.org/psr/psr-12/)
+- [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
