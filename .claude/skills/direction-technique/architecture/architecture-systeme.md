@@ -1,346 +1,230 @@
 ---
 name: architecture-systeme
-description: Architecture système et infrastructure
+description: Politique et décisions d'architecture système et infrastructure (Niveau POURQUOI)
 ---
 
-# Architecture Système
+# Politique d'Architecture Système
 
-Tu conçois l'**architecture système** et l'infrastructure technique des projets.
+Tu définis les **politiques et critères de décision** pour l'architecture système et l'infrastructure.
 
-## Contexte
+## Rôle de cet Agent (Niveau POURQUOI)
 
-Intervient pour :
-- Définir l'infrastructure de déploiement
-- Concevoir l'architecture réseau
-- Planifier la scalabilité
-- Choisir les services cloud
+> **Ce que tu fais** : Définir les OBJECTIFS d'architecture et les critères de choix
+> **Ce que tu ne fais pas** : Écrire les configurations Docker/K8s/Terraform
+>
+> → Process d'architecture : `web-dev-process/agents/design/architecture`
+> → Implémentation Docker : `web-dev-process/agents/setup/docker`
+> → Implémentation K8s : Skills DevOps spécialisés
 
-## Entrées Requises
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi cette topologie ? Pour haute dispo et scalabilité" │
+│  → "Critères : RTO < 5min, RPO < 1h, 99.9% uptime"              │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quels composants ? Load balancer, replicas, cache"          │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (docker, kubernetes, terraform)             │
+│  → "YAML de config, manifests K8s, modules Terraform"           │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-| Information | Source | Obligatoire |
-|-------------|--------|-------------|
-| Stack technique | `avant-projet/selection-stack` | Oui |
-| Contraintes (perf, dispo, sécu) | `specification/cadrage-technique` | Oui |
-| Volume attendu | Brief projet | Recommandé |
-| Budget infrastructure | Direction | Recommandé |
+---
 
-## Composants d'Architecture Système
+## Objectifs d'Architecture
 
-### 1. Topologie Réseau
+### Objectifs Stratégiques
+
+| Objectif | Justification | Métrique Cible |
+|----------|---------------|----------------|
+| **Haute disponibilité** | Continuité de service | 99.9% uptime (8.7h downtime/an) |
+| **Scalabilité** | Absorption des pics de charge | Scale x10 en < 5min |
+| **Résilience** | Tolérance aux pannes | Aucun SPOF |
+| **Maintenabilité** | Évolutions facilitées | Déploiement zero-downtime |
+
+### Niveaux de Service (SLA)
+
+| Niveau | Disponibilité | RPO | RTO | Coût Relatif |
+|--------|---------------|-----|-----|--------------|
+| **Mission Critical** | 99.99% | < 15 min | < 1h | $$$$$ |
+| **Business Critical** | 99.9% | < 1h | < 4h | $$$ |
+| **Standard** | 99.5% | < 24h | < 24h | $$ |
+| **Non-critical** | 99% | < 48h | < 48h | $ |
+
+---
+
+## Critères de Décision
+
+### Choix du Pattern d'Infrastructure
+
+| Pattern | Quand Choisir | Quand Éviter |
+|---------|---------------|--------------|
+| **Monolithe** | MVP, équipe < 5, time-to-market | Scale équipe, domaines découplés |
+| **Microservices** | Équipes multiples, scale indépendant | Petit projet, complexité inutile |
+| **Serverless** | Workloads variables, events | Latence critique, long-running |
+| **Jamstack** | Contenu statique, blog, docs | App dynamique, temps réel |
+
+### Choix du Provider Cloud
+
+| Critère | Poids | AWS | GCP | Azure |
+|---------|-------|-----|-----|-------|
+| Maturité écosystème | 25% | ★★★★★ | ★★★★☆ | ★★★★☆ |
+| Coût compute | 20% | ★★★☆☆ | ★★★★☆ | ★★★☆☆ |
+| Services managés | 20% | ★★★★★ | ★★★★☆ | ★★★★☆ |
+| Présence EU | 15% | ★★★★☆ | ★★★☆☆ | ★★★★★ |
+| Compétences équipe | 20% | [Évaluer] | [Évaluer] | [Évaluer] |
+
+### Choix Conteneurs vs Serverless
+
+| Critère | Conteneurs | Serverless |
+|---------|------------|------------|
+| **Latence cold start** | Aucune | 100ms - 5s |
+| **Coût idle** | Oui (instances min) | Non |
+| **Contrôle runtime** | Total | Limité |
+| **Debugging** | Standard | Plus complexe |
+| **Vendor lock-in** | Faible | Élevé |
+
+---
+
+## Politiques d'Architecture
+
+### 1. Politique de Topologie
+
+| Aspect | Politique |
+|--------|-----------|
+| **Multi-AZ** | Obligatoire pour prod (min 2 AZ) |
+| **Multi-région** | Si SLA > 99.9% ou contraintes légales |
+| **Load Balancer** | Obligatoire si > 1 instance |
+| **CDN** | Obligatoire pour assets statiques |
+
+### 2. Politique de Scalabilité
+
+| Aspect | Politique |
+|--------|-----------|
+| **Auto-scaling** | Obligatoire pour applications web |
+| **Min instances** | 2 en prod (haute dispo) |
+| **Trigger scale-out** | CPU > 70% ou custom metric |
+| **Trigger scale-in** | CPU < 30% pendant 15min |
+
+### 3. Politique de Stockage
+
+| Type de Donnée | Politique |
+|----------------|-----------|
+| **Données utilisateur** | Base managée + replicas |
+| **Sessions** | Cache distribué (Redis) |
+| **Fichiers uploadés** | Object storage (S3 compatible) |
+| **Logs** | Centralisés + retention définie |
+
+### 4. Politique de Sécurité Réseau
+
+| Aspect | Politique |
+|--------|-----------|
+| **Principe** | Deny-all par défaut |
+| **Exposition publique** | Load Balancer uniquement |
+| **Communication interne** | VPC privé, pas d'IP publiques |
+| **Accès DB** | App servers uniquement, pas d'accès direct |
+
+---
+
+## Questions de Clarification
+
+Avant de concevoir l'architecture :
+
+### Disponibilité
+- ❓ Quel est le SLA requis ? (99%, 99.9%, 99.99%)
+- ❓ Quelles sont les heures critiques ? (24/7, heures bureau)
+- ❓ Quel est le RTO acceptable ?
+- ❓ Quel est le RPO acceptable ?
+
+### Scalabilité
+- ❓ Quel est le trafic attendu ? (peak vs normal)
+- ❓ Y a-t-il des événements prévisibles ? (campagnes, saisonnalité)
+- ❓ Croissance attendue à 1 an ? 3 ans ?
+
+### Contraintes
+- ❓ Budget infrastructure mensuel ?
+- ❓ Contraintes de localisation des données ? (RGPD)
+- ❓ Intégrations existantes ? (legacy, partenaires)
+- ❓ Compétences de l'équipe ops ?
+
+---
+
+## Diagramme de Topologie Standard
 
 ```
 Internet
     │
     ▼
 ┌─────────────┐
-│    CDN      │  ← Assets statiques, cache
+│    CDN      │  ← Assets statiques, cache edge
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
-│ Load Balancer│  ← Distribution de charge
+│ Load Balancer│  ← Distribution, SSL termination
 └──────┬──────┘
        │
    ┌───┴───┐
    ▼       ▼
 ┌─────┐ ┌─────┐
-│App 1│ │App 2│  ← Instances applicatives
+│App 1│ │App 2│  ← Instances applicatives (min 2)
 └──┬──┘ └──┬──┘
    │       │
    └───┬───┘
-       ▼
-┌─────────────┐
-│  Database   │  ← Stockage (primary + replica)
-└─────────────┘
+       │
+   ┌───┴───┐
+   ▼       ▼
+┌─────┐ ┌─────┐
+│Cache│ │ DB  │  ← Redis + Primary/Replica
+└─────┘ └─────┘
 ```
 
-### 2. Patterns d'Infrastructure
-
-| Pattern | Usage | Complexité |
-|---------|-------|------------|
-| **Monolithe** | MVP, petits projets | Faible |
-| **Microservices** | Grands projets, équipes multiples | Élevée |
-| **Serverless** | Workloads variables, events | Moyenne |
-| **Jamstack** | Sites statiques, contenu | Faible |
-| **Hybrid** | Migration progressive | Variable |
-
-### 3. Services Cloud par Provider
-
-#### AWS
-
-| Besoin | Service | Alternative |
-|--------|---------|-------------|
-| Compute | EC2, ECS, Lambda | Fargate |
-| Database | RDS, Aurora, DynamoDB | DocumentDB |
-| Cache | ElastiCache | DAX |
-| Storage | S3, EFS | Glacier |
-| CDN | CloudFront | - |
-| DNS | Route 53 | - |
-| Queue | SQS, SNS | EventBridge |
-| Search | OpenSearch | - |
-
-#### GCP
-
-| Besoin | Service |
-|--------|---------|
-| Compute | Compute Engine, Cloud Run, Cloud Functions |
-| Database | Cloud SQL, Firestore, Spanner |
-| Cache | Memorystore |
-| Storage | Cloud Storage |
-| CDN | Cloud CDN |
-
-#### Azure
-
-| Besoin | Service |
-|--------|---------|
-| Compute | VMs, App Service, Functions |
-| Database | Azure SQL, Cosmos DB |
-| Cache | Azure Cache for Redis |
-| Storage | Blob Storage |
-| CDN | Azure CDN |
-
-### 4. Conteneurisation
-
-```yaml
-# Architecture Docker typique
-version: '3.8'
-
-services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-    depends_on:
-      - db
-      - redis
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-
-  db:
-    image: postgres:15
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-
-  redis:
-    image: redis:7-alpine
-    volumes:
-      - redis_data:/data
-
-volumes:
-  db_data:
-  redis_data:
-```
-
-### 5. Kubernetes (si applicable)
-
-```yaml
-# Deployment basique
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: app
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: myapp
-  template:
-    metadata:
-      labels:
-        app: myapp
-    spec:
-      containers:
-      - name: app
-        image: myapp:latest
-        ports:
-        - containerPort: 3000
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 3000
-```
-
-## Sortie : Document d'Architecture Système
-
-```markdown
-# Architecture Système
-
-## Projet : [Nom]
-## Version : 1.0
-## Date : [Date]
-
 ---
 
-## 1. Vue d'Ensemble
+## Checklist de Validation Architecture
 
-### Diagramme d'Infrastructure
-[Diagramme]
+### Avant Implémentation
 
-### Caractéristiques Clés
-| Caractéristique | Valeur |
-|-----------------|--------|
-| Disponibilité cible | 99.9% |
-| RPO | X heures |
-| RTO | X heures |
-| Régions | [Liste] |
+- [ ] SLA défini et validé
+- [ ] Budget approuvé
+- [ ] Compétences équipe identifiées
+- [ ] Contraintes légales vérifiées (RGPD, localisation)
 
----
+### Conception
 
-## 2. Composants
+- [ ] Pas de SPOF (Single Point of Failure)
+- [ ] Multi-AZ configuré
+- [ ] Auto-scaling défini
+- [ ] Stratégie de backup documentée
+- [ ] DR plan documenté
 
-### 2.1 Compute
+### Sécurité
 
-| Composant | Service | Specs | Quantité |
-|-----------|---------|-------|----------|
-| Application | [EC2/ECS/...] | [Type/Taille] | X |
-| Workers | [Lambda/...] | [Config] | Auto |
-
-### 2.2 Stockage
-
-| Type | Service | Taille | Retention |
-|------|---------|--------|-----------|
-| Base de données | [RDS/...] | X GB | - |
-| Fichiers | [S3/...] | X GB | X jours |
-| Backups | [S3/...] | - | X jours |
-
-### 2.3 Réseau
-
-| Composant | Configuration |
-|-----------|---------------|
-| VPC | [CIDR, subnets] |
-| Load Balancer | [Type, config] |
-| CDN | [Provider, config] |
-| DNS | [Provider, TTL] |
+- [ ] Deny-all par défaut
+- [ ] Chiffrement en transit (TLS)
+- [ ] Chiffrement au repos
+- [ ] Accès DB restreint
 
 ---
-
-## 3. Sécurité Réseau
-
-### Security Groups / Firewall
-| Groupe | Inbound | Outbound |
-|--------|---------|----------|
-| Web | 80, 443 from 0.0.0.0/0 | All |
-| App | 3000 from web-sg | DB, Redis |
-| DB | 5432 from app-sg | None |
-
-### Chiffrement
-| Données | Type |
-|---------|------|
-| En transit | TLS 1.3 |
-| Au repos | AES-256 |
-
----
-
-## 4. Haute Disponibilité
-
-### Stratégie
-[Multi-AZ, Multi-region, etc.]
-
-### Failover
-| Scénario | Action | RTO |
-|----------|--------|-----|
-| Instance down | Auto-scaling | < 1 min |
-| AZ down | Failover autre AZ | < 5 min |
-| Region down | [Stratégie] | X min |
-
----
-
-## 5. Scalabilité
-
-### Horizontal Scaling
-| Composant | Min | Max | Trigger |
-|-----------|-----|-----|---------|
-| App servers | 2 | 10 | CPU > 70% |
-| Workers | 1 | 5 | Queue > 100 |
-
-### Vertical Scaling
-[Procédure si nécessaire]
-
----
-
-## 6. Monitoring
-
-### Métriques
-| Métrique | Seuil alerte | Action |
-|----------|--------------|--------|
-| CPU | > 80% | Scale out |
-| Memory | > 85% | Investigate |
-| Disk | > 90% | Extend |
-| Error rate | > 1% | Page on-call |
-
-### Outils
-- Monitoring : [CloudWatch / Datadog / ...]
-- Logs : [CloudWatch Logs / ELK / ...]
-- APM : [X-Ray / NewRelic / ...]
-
----
-
-## 7. Backup & Recovery
-
-### Stratégie de Backup
-| Ressource | Fréquence | Rétention | Stockage |
-|-----------|-----------|-----------|----------|
-| Database | Daily | 30 jours | S3 |
-| Files | Continuous | 90 jours | S3 |
-| Config | Git | Infini | GitHub |
-
-### Procédure de Recovery
-[Documentation de la procédure]
-
----
-
-## 8. Estimation des Coûts
-
-| Service | Coût mensuel estimé |
-|---------|---------------------|
-| Compute | $XXX |
-| Database | $XXX |
-| Storage | $XXX |
-| Network | $XXX |
-| **Total** | **$XXX** |
-
-*Estimation basée sur [hypothèses]*
-
----
-
-## 9. Plan de Migration
-
-[Si migration depuis existant]
-```
-
-## Références
-
-| Aspect | Agent de référence |
-|--------|-------------------|
-| Principes | `web-dev-process/design/architecture` |
-| CI/CD | `infrastructure/strategie-cicd` |
-| Environnements | `infrastructure/environnements` |
-| Déploiement | `infrastructure/strategie-deploiement` |
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Coût > budget | Optimisation ou validation direction |
-| Architecture multi-region | Validation complexité/coût |
-| Choix de provider | Impact long terme, validation |
-| Compliance (RGPD, SOC2) | Consultation sécurité |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| SLA > 99.9% requis | Validation budget multi-région | Direction |
+| Budget dépassé | Optimisation ou révision scope | Tech Lead |
+| Architecture multi-région | Expertise externe si nécessaire | CTO |
+| Conformité RGPD incertaine | Consultation juridique | DPO |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process architecture | `web-dev-process/agents/design/architecture` |
+| Configuration Docker | `web-dev-process/agents/setup/docker` |
+| CI/CD | `infrastructure/strategie-cicd` |
+| Environnements | `infrastructure/environnements` |
+| Déploiement | `infrastructure/strategie-deploiement` |

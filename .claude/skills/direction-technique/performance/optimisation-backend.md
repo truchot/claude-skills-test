@@ -1,328 +1,237 @@
 ---
 name: optimisation-backend
-description: Optimisation des performances backend et API
+description: Objectifs et politiques d'optimisation des performances backend (Niveau POURQUOI)
 ---
 
-# Optimisation Backend
+# Politique de Performance Backend
 
-Tu guides l'**optimisation des performances backend** pour des APIs rapides et scalables.
+Tu définis les **objectifs et standards** de performance backend et API.
 
-## Diagnostic des Problèmes
+## Rôle de cet Agent (Niveau POURQUOI)
 
-### Identifier les Goulots
+> **Ce que tu fais** : Définir les OBJECTIFS de performance et les standards à atteindre
+> **Ce que tu ne fais pas** : Implémenter les optimisations (code, requêtes, cache)
+>
+> → Process d'optimisation : `web-dev-process/agents/testing/performance`
+> → Implémentation Node.js : Skills backend spécialisés
+> → Implémentation WordPress : `wordpress-gutenberg-expert/agents/performance/*`
 
-```sql
--- PostgreSQL: Requêtes lentes
-SELECT query, calls, mean_time, total_time
-FROM pg_stat_statements
-ORDER BY mean_time DESC
-LIMIT 20;
-
--- MySQL: Slow query log
-SET GLOBAL slow_query_log = 'ON';
-SET GLOBAL long_query_time = 1;
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces cibles ? Scalabilité et UX"                    │
+│  → "Standards : p95 < 200ms, throughput > 1000 RPS"             │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi optimiser ? Requêtes, cache, pooling"                  │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (frameworks spécifiques)                    │
+│  → "Code : Redis, query optimization, batch processing..."      │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### APM (Application Performance Monitoring)
+---
 
-```typescript
-// OpenTelemetry setup
-import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
+## Objectifs de Performance
 
-const provider = new NodeTracerProvider();
-provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
-provider.register();
-
-// Tracer manuel
-const tracer = trace.getTracer('my-service');
-const span = tracer.startSpan('database-query');
-// ... opération
-span.end();
-```
+### Latence API - Cibles
+
+| Percentile | Cible | Acceptable | Alerte |
+|------------|-------|------------|--------|
+| **p50** (médiane) | < 50ms | < 100ms | > 200ms |
+| **p95** | < 200ms | < 500ms | > 1s |
+| **p99** | < 500ms | < 1s | > 2s |
+| **p99.9** | < 2s | < 5s | > 10s |
 
-## Optimisation Base de Données
+### Throughput - Cibles
 
-### N+1 Queries
+| Contexte | Cible | Justification |
+|----------|-------|---------------|
+| **API standard** | > 1000 RPS | Charge normale |
+| **API lecture** | > 5000 RPS | Endpoints GET simples |
+| **API écriture** | > 500 RPS | Endpoints mutants |
+| **Batch/Import** | > 10000 items/min | Traitements bulk |
 
-```typescript
-// ❌ N+1 Problem
-const users = await User.findAll();
-for (const user of users) {
-  const orders = await Order.findAll({ where: { userId: user.id } });
-  // N requêtes supplémentaires !
-}
-
-// ✅ Eager Loading (Sequelize)
-const users = await User.findAll({
-  include: [{ model: Order }]
-});
-
-// ✅ Prisma
-const users = await prisma.user.findMany({
-  include: { orders: true }
-});
-
-// ✅ TypeORM
-const users = await userRepository.find({
-  relations: ['orders']
-});
-```
-
-### Index Stratégiques
-
-```sql
--- Index sur colonnes de recherche/filtre
-CREATE INDEX idx_users_email ON users(email);
-
--- Index composite pour requêtes fréquentes
-CREATE INDEX idx_orders_user_status ON orders(user_id, status);
-
--- Index partiel pour subset fréquent
-CREATE INDEX idx_orders_pending ON orders(created_at)
-WHERE status = 'pending';
-
--- Analyser l'utilisation
-EXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 123;
-```
-
-### Pagination Efficace
-
-```typescript
-// ❌ OFFSET pagination (lent pour grandes pages)
-SELECT * FROM orders OFFSET 10000 LIMIT 20;
-
-// ✅ Cursor-based pagination
-SELECT * FROM orders
-WHERE id > :lastId
-ORDER BY id
-LIMIT 20;
-
-// Implémentation
-async function getOrders(cursor?: string, limit = 20) {
-  const query = Order.query().orderBy('id').limit(limit);
-
-  if (cursor) {
-    query.where('id', '>', cursor);
-  }
-
-  const orders = await query;
-  const nextCursor = orders.length === limit
-    ? orders[orders.length - 1].id
-    : null;
-
-  return { orders, nextCursor };
-}
-```
-
-## Caching
-
-### Cache Applicatif (Redis)
-
-```typescript
-import Redis from 'ioredis';
-
-const redis = new Redis(process.env.REDIS_URL);
-
-// Pattern Cache-Aside
-async function getUserById(id: string): Promise<User> {
-  const cacheKey = `user:${id}`;
-
-  // Check cache
-  const cached = await redis.get(cacheKey);
-  if (cached) {
-    return JSON.parse(cached);
-  }
-
-  // Fetch from DB
-  const user = await db.user.findById(id);
-
-  // Store in cache (1 hour TTL)
-  await redis.setex(cacheKey, 3600, JSON.stringify(user));
-
-  return user;
-}
-
-// Invalidation
-async function updateUser(id: string, data: UserUpdate): Promise<User> {
-  const user = await db.user.update(id, data);
-  await redis.del(`user:${id}`);
-  return user;
-}
-```
-
-### Cache HTTP
-
-```typescript
-// Express middleware
-app.get('/api/products', (req, res) => {
-  res.set({
-    'Cache-Control': 'public, max-age=300', // 5 minutes
-    'ETag': generateETag(products),
-  });
-  res.json(products);
-});
-
-// Stale-while-revalidate
-res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
-```
-
-### Cache Database (Query Cache)
-
-```typescript
-// Prisma avec cache
-import { createPrismaRedisCache } from 'prisma-redis-middleware';
-
-prisma.$use(
-  createPrismaRedisCache({
-    storage: { type: 'redis', options: { client: redis } },
-    cacheTime: 300,
-    excludeModels: ['AuditLog'],
-  })
-);
-```
-
-## Optimisation API
-
-### Compression
-
-```typescript
-import compression from 'compression';
-
-app.use(compression({
-  level: 6,
-  threshold: 1024, // Ne pas compresser < 1KB
-  filter: (req, res) => {
-    if (req.headers['x-no-compression']) {
-      return false;
-    }
-    return compression.filter(req, res);
-  }
-}));
-```
-
-### Éviter Over-fetching
-
-```typescript
-// ❌ Retourner tout
-app.get('/api/users/:id', async (req, res) => {
-  const user = await User.findById(req.params.id);
-  res.json(user); // Tous les champs
-});
-
-// ✅ Sélection de champs
-app.get('/api/users/:id', async (req, res) => {
-  const fields = (req.query.fields as string)?.split(',') || ['id', 'name', 'email'];
-  const user = await User.findById(req.params.id).select(fields);
-  res.json(user);
-});
-
-// ✅ GraphQL pour flexibilité
-query {
-  user(id: "123") {
-    id
-    name
-    orders(first: 5) {
-      id
-      total
-    }
-  }
-}
-```
-
-### Connection Pooling
-
-```typescript
-// PostgreSQL avec pg-pool
-import { Pool } from 'pg';
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: 20,              // Max connections
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-});
-
-// Prisma
-// Configuré automatiquement, ajuster dans connection string
-// ?connection_limit=20&pool_timeout=10
-```
-
-## Async Processing
-
-### Queues (Bull)
-
-```typescript
-import Queue from 'bull';
-
-const emailQueue = new Queue('emails', process.env.REDIS_URL);
-
-// Ajouter à la queue (ne bloque pas l'API)
-app.post('/api/orders', async (req, res) => {
-  const order = await Order.create(req.body);
-
-  // Process async
-  await emailQueue.add('order-confirmation', {
-    orderId: order.id,
-    email: req.user.email,
-  });
-
-  res.status(201).json(order);
-});
-
-// Worker (process séparé)
-emailQueue.process('order-confirmation', async (job) => {
-  await sendEmail(job.data.email, 'Order Confirmation', ...);
-});
-```
-
-### Batch Processing
-
-```typescript
-// ❌ Un par un
-for (const item of items) {
-  await db.insert(item);
-}
-
-// ✅ Batch insert
-await db.insertMany(items);
-
-// ✅ Batch avec chunks
-const BATCH_SIZE = 1000;
-for (let i = 0; i < items.length; i += BATCH_SIZE) {
-  const batch = items.slice(i, i + BATCH_SIZE);
-  await db.insertMany(batch);
-}
-```
-
-## Checklist Backend Performance
-
-### Base de Données
-
-- [ ] Pas de N+1 queries
-- [ ] Index sur colonnes filtrées/triées
-- [ ] Pagination cursor-based pour grandes collections
-- [ ] Connection pooling configuré
-- [ ] Query logging en dev
-
-### Caching
-
-- [ ] Redis pour données fréquentes
-- [ ] Cache HTTP pour ressources statiques
-- [ ] Invalidation maîtrisée
-- [ ] TTL appropriés
-
-### API
-
-- [ ] Compression activée
-- [ ] Sélection de champs possible
-- [ ] Rate limiting
-- [ ] Timeout configurés
+### Base de Données - Cibles
+
+| Métrique | Cible | Alerte | Action |
+|----------|-------|--------|--------|
+| Query time (p95) | < 50ms | > 200ms | Optimisation index |
+| Connection pool usage | < 70% | > 90% | Scaling pool |
+| Slow queries (> 1s) | 0 | > 5/min | Investigation urgente |
+| N+1 queries | 0 | > 0 | Refactoring |
+
+---
+
+## Politiques de Performance
+
+### 1. Politique de Requêtes DB
+
+| Aspect | Politique |
+|--------|-----------|
+| **N+1 queries** | Interdit (eager loading obligatoire) |
+| **Index** | Obligatoire sur colonnes filtrées/triées |
+| **Pagination** | Cursor-based pour collections > 100 items |
+| **Timeout** | Max 5s pour requêtes normales |
+| **Query logging** | Activé en dev, slow-log en prod |
+
+### 2. Politique de Cache
+
+| Donnée | Stratégie | TTL Recommandé |
+|--------|-----------|----------------|
+| **Données statiques** | Cache-aside | 24h |
+| **Sessions** | Write-through | 1h |
+| **Résultats API** | Cache-aside + SWR | 5min |
+| **Compteurs/Stats** | Write-behind | 1min |
+| **Full-page** | CDN edge | Variable |
+
+### Invalidation
+
+| Stratégie | Quand Utiliser |
+|-----------|----------------|
+| **TTL-based** | Données peu sensibles à la fraîcheur |
+| **Event-driven** | Données critiques, cohérence requise |
+| **Versioned keys** | Déploiements, changements de schéma |
+
+### 3. Politique de Connection Pooling
+
+| Ressource | Min Pool | Max Pool | Idle Timeout |
+|-----------|----------|----------|--------------|
+| **Database** | 5 | 20 | 30s |
+| **Redis** | 5 | 50 | 60s |
+| **External APIs** | 2 | 10 | 30s |
+
+### 4. Politique de Traitement Asynchrone
+
+| Opération | Stratégie |
+|-----------|-----------|
+| **Emails** | Queue obligatoire |
+| **Notifications** | Queue obligatoire |
+| **Imports > 100 items** | Background job |
+| **Rapports** | Background job + notification |
+| **Webhooks** | Queue avec retry |
+
+### 5. Politique de Rate Limiting
+
+| Endpoint | Limite | Fenêtre | Action dépassement |
+|----------|--------|---------|-------------------|
+| **Auth/login** | 5 | 15 min | Block IP |
+| **API standard** | 1000 | 1 min | 429 + Retry-After |
+| **API heavy** | 100 | 1 min | 429 + Retry-After |
+| **Webhooks incoming** | 10000 | 1 min | Queue overflow |
+
+---
+
+## Questions de Clarification
+
+Avant d'optimiser :
+
+### Contexte
+- ❓ Quel est le profil de charge ? (lecture/écriture ratio)
+- ❓ Quels sont les endpoints les plus utilisés ?
+- ❓ Y a-t-il des SLA contractuels ?
+
+### État Actuel
+- ❓ Quelles sont les latences actuelles (p50, p95, p99) ?
+- ❓ Y a-t-il un APM en place ?
+- ❓ Quelles sont les requêtes les plus lentes ?
+
+### Contraintes
+- ❓ Budget infrastructure ? (instances, Redis, CDN)
+- ❓ Contraintes de cohérence des données ?
+- ❓ Legacy systems à intégrer ?
+
+---
+
+## Checklist par Phase
+
+### Phase Conception
+
+- [ ] SLA définis
+- [ ] Profil de charge estimé
+- [ ] Stratégie de cache définie
+- [ ] Architecture async identifiée
+
+### Phase Développement
+
+- [ ] N+1 queries éliminées
+- [ ] Index créés sur colonnes requises
+- [ ] Cache implémenté pour données fréquentes
+- [ ] Jobs async pour opérations longues
+
+### Phase Review
+
+- [ ] Load tests passés
+- [ ] Aucune requête > 1s
+- [ ] Rate limiting configuré
+- [ ] Timeouts configurés
+
+### Phase Production
+
+- [ ] APM configuré
+- [ ] Slow query log activé
+- [ ] Alertes latence configurées
+- [ ] Dashboard métriques
+
+---
+
+## Anti-Patterns à Éviter
+
+| Anti-Pattern | Problème | Solution |
+|--------------|----------|----------|
+| **N+1 queries** | O(n) requêtes au lieu de O(1) | Eager loading |
+| **SELECT *** | Données inutiles transférées | Sélection explicite |
+| **OFFSET pagination** | Lent pour grandes pages | Cursor pagination |
+| **Sync processing** | Blocage de l'API | Async/queue |
+| **Cache sans TTL** | Stale data indéfinie | TTL obligatoire |
+| **No connection pool** | Overhead connexions | Pooling |
+
+---
+
+## Métriques de Suivi
+
+| Métrique | Cible | Alerte | Action |
+|----------|-------|--------|--------|
+| API latency p95 | < 200ms | > 500ms | Optimisation urgente |
+| DB query p95 | < 50ms | > 200ms | Index/query review |
+| Error rate | < 0.1% | > 1% | Investigation |
+| Cache hit ratio | > 90% | < 70% | Stratégie cache |
+| Queue backlog | < 100 | > 1000 | Scale workers |
+
+---
+
+## Outils de Diagnostic (Recommandés)
+
+| Type | Outil | Usage |
+|------|-------|-------|
+| **APM** | Datadog, New Relic, Sentry | Tracing distribué |
+| **Profiling** | Flamegraph, pprof | Hotspots |
+| **DB Analysis** | EXPLAIN ANALYZE, pg_stat_statements | Requêtes |
+| **Load Testing** | k6, Artillery, JMeter | Validation |
+
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Query > 1s | Optimisation requête/index urgent |
-| API p95 > 2s | Investigation + cache |
-| DB CPU > 80% | Scaling vertical ou read replicas |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| p95 > 1s | War room optimisation | Tech Lead |
+| DB CPU > 80% | Scaling vertical/horizontal | DevOps |
+| Queue backlog croissant | Scale workers | DevOps |
+| Cache miss > 50% | Review stratégie cache | Tech Lead |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process performance | `web-dev-process/agents/testing/performance` |
+| Architecture | `architecture/architecture-systeme` |
+| Implémentation cache | Skills backend spécialisés |
+| Performance WordPress | `wordpress-gutenberg-expert/agents/performance/*` |
+
+### Ressources Externes
+
+- [High Scalability](http://highscalability.com/) - Patterns à grande échelle
+- [Martin Fowler - Patterns](https://martinfowler.com/) - Architecture patterns

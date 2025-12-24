@@ -1,309 +1,217 @@
 ---
 name: optimisation-frontend
-description: Optimisation des performances frontend
+description: Objectifs et politiques d'optimisation des performances frontend (Niveau POURQUOI)
 ---
 
-# Optimisation Frontend
+# Politique de Performance Frontend
 
-Tu guides l'**optimisation des performances frontend** pour améliorer l'expérience utilisateur.
+Tu définis les **objectifs et standards** de performance frontend.
 
-## Core Web Vitals
+## Rôle de cet Agent (Niveau POURQUOI)
 
-### LCP (Largest Contentful Paint)
+> **Ce que tu fais** : Définir les OBJECTIFS de performance et les standards à atteindre
+> **Ce que tu ne fais pas** : Implémenter les optimisations (code, config)
+>
+> → Process d'optimisation : `web-dev-process/agents/testing/performance`
+> → Implémentation React/Next : Skills frontend spécialisés
+> → Implémentation WordPress : `wordpress-gutenberg-expert/agents/performance/*`
 
-**Cible** : < 2.5s
-
-```typescript
-// Précharger les ressources critiques
-<link rel="preload" href="/hero.webp" as="image" />
-<link rel="preload" href="/font.woff2" as="font" crossorigin />
-
-// Prioriser le LCP element
-<img
-  src="/hero.webp"
-  fetchpriority="high"
-  loading="eager"
-  alt="Hero"
-/>
-
-// Éviter lazy-load sur LCP
-// ❌ <img loading="lazy" ... /> pour l'image principale
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces cibles ? UX et SEO"                            │
+│  → "Standards : LCP < 2.5s, FID < 100ms, CLS < 0.1"             │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi optimiser ? Images, bundle, fonts, cache"              │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (frameworks spécifiques)                    │
+│  → "Code : lazy(), preload, srcset, service worker..."          │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### FID / INP (Interactivity)
+---
 
-**Cible** : < 100ms
+## Objectifs de Performance
 
-```typescript
-// Différer les scripts non critiques
-<script src="/analytics.js" defer></script>
+### Core Web Vitals - Cibles
 
-// Code splitting
-const HeavyComponent = lazy(() => import('./HeavyComponent'));
+| Métrique | Bon | À améliorer | Mauvais | Impact |
+|----------|-----|-------------|---------|--------|
+| **LCP** (Largest Contentful Paint) | < 2.5s | 2.5s - 4s | > 4s | UX + SEO |
+| **FID** (First Input Delay) | < 100ms | 100ms - 300ms | > 300ms | Interactivité |
+| **INP** (Interaction to Next Paint) | < 200ms | 200ms - 500ms | > 500ms | Réactivité |
+| **CLS** (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 | Stabilité visuelle |
 
-// Éviter les long tasks
-// ❌ Boucle synchrone de 100ms+
-// ✅ Utiliser requestIdleCallback ou Web Workers
-requestIdleCallback(() => {
-  // Travail non urgent
-});
-```
+### Autres Métriques Cibles
 
-### CLS (Cumulative Layout Shift)
+| Métrique | Cible | Justification |
+|----------|-------|---------------|
+| **TTFB** | < 600ms | Réponse serveur |
+| **FCP** (First Contentful Paint) | < 1.8s | Feedback visuel initial |
+| **TTI** (Time to Interactive) | < 3.8s | Page utilisable |
+| **Speed Index** | < 3.4s | Progression perçue |
 
-**Cible** : < 0.1
+### Budget Performance
 
-```css
-/* Toujours définir les dimensions */
-img, video, iframe {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-}
+| Ressource | Budget | Justification |
+|-----------|--------|---------------|
+| **JavaScript total** | < 200KB gzippé | Temps de parse/exec |
+| **CSS total** | < 50KB gzippé | Render blocking |
+| **Images above-fold** | < 200KB | LCP |
+| **Fonts** | < 100KB | FOIT/FOUT |
+| **Total page** | < 1.5MB | Expérience mobile |
 
-/* Réserver l'espace pour le contenu dynamique */
-.ad-container {
-  min-height: 250px;
-}
+---
 
-/* Éviter les insertions au-dessus du contenu */
-.notification {
-  position: fixed;
-  bottom: 0; /* Pas en haut */
-}
-```
+## Politiques de Performance
 
-## Optimisation des Images
+### 1. Politique d'Images
 
-### Formats Modernes
+| Aspect | Politique |
+|--------|-----------|
+| **Format** | WebP/AVIF obligatoire (avec fallback) |
+| **Compression** | Quality 75-85 pour JPEG/WebP |
+| **Responsive** | srcset obligatoire pour images > 300px |
+| **Lazy loading** | Obligatoire pour images below-fold |
+| **Above-fold** | Preload + eager loading |
 
-```html
-<!-- Picture avec fallback -->
-<picture>
-  <source srcset="image.avif" type="image/avif">
-  <source srcset="image.webp" type="image/webp">
-  <img src="image.jpg" alt="Description" loading="lazy">
-</picture>
-```
+### 2. Politique de JavaScript
 
-### Responsive Images
+| Aspect | Politique |
+|--------|-----------|
+| **Code splitting** | Obligatoire par route |
+| **Tree shaking** | Build prod uniquement |
+| **Third-party** | Defer/async obligatoire |
+| **Bundle critique** | < 50KB pour first paint |
+| **Long tasks** | Aucune tâche > 50ms sur main thread |
 
-```html
-<img
-  srcset="
-    image-320.webp 320w,
-    image-640.webp 640w,
-    image-1280.webp 1280w
-  "
-  sizes="(max-width: 640px) 100vw, 50vw"
-  src="image-640.webp"
-  alt="Description"
-/>
-```
+### 3. Politique de CSS
 
-### Lazy Loading
+| Aspect | Politique |
+|--------|-----------|
+| **Critical CSS** | Inline pour above-fold |
+| **Non-critical** | Async loading |
+| **Unused CSS** | Purge en production |
+| **Frameworks** | Utility-first préféré (tree-shaking) |
 
-```html
-<!-- Native lazy loading -->
-<img src="image.jpg" loading="lazy" alt="...">
+### 4. Politique de Fonts
 
-<!-- Intersection Observer pour plus de contrôle -->
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src;
-      observer.unobserve(img);
-    }
-  });
-});
-</script>
-```
+| Aspect | Politique |
+|--------|-----------|
+| **Format** | WOFF2 uniquement (support universel) |
+| **Subset** | Caractères utilisés uniquement |
+| **Loading** | font-display: swap |
+| **Preload** | Fonts critiques uniquement |
+| **Quantité** | Max 2 familles, 4 poids |
 
-## Optimisation JavaScript
+### 5. Politique de Cache
 
-### Code Splitting
+| Ressource | Cache Strategy | TTL |
+|-----------|----------------|-----|
+| **Assets versionnés** | Cache immutable | 1 an |
+| **HTML** | Must-revalidate | 1 heure |
+| **API dynamique** | No-cache ou SWR | Variable |
+| **Images CDN** | Public | 1 mois |
 
-```typescript
-// React
-const Dashboard = lazy(() => import('./Dashboard'));
-const Settings = lazy(() => import('./Settings'));
+---
 
-// Routes-based splitting
-<Suspense fallback={<Loading />}>
-  <Routes>
-    <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/settings" element={<Settings />} />
-  </Routes>
-</Suspense>
-```
+## Questions de Clarification
 
-### Tree Shaking
+Avant d'optimiser :
 
-```typescript
-// ❌ Import everything
-import _ from 'lodash';
-_.debounce(fn, 300);
+### Contexte
+- ❓ Quel est l'audience cible ? (mobile, desktop, marchés)
+- ❓ Quelles sont les connexions types ? (4G, fibre)
+- ❓ Y a-t-il un score Lighthouse actuel ?
 
-// ✅ Import specific
-import debounce from 'lodash/debounce';
-debounce(fn, 300);
+### Priorités
+- ❓ Quel est l'objectif principal ? (SEO, conversion, UX)
+- ❓ Quelles pages sont critiques ? (accueil, landing, checkout)
+- ❓ Budget pour CDN/infrastructure ?
 
-// ✅ Ou avec ES modules
-import { debounce } from 'lodash-es';
-```
+### Contraintes
+- ❓ Y a-t-il des third-party non négociables ? (analytics, chat)
+- ❓ Contraintes de design ? (fonts custom, animations)
+- ❓ Support navigateurs ? (IE11, Safari ancien)
 
-### Bundle Analysis
+---
 
-```bash
-# Next.js
-npm run build
-npx @next/bundle-analyzer
+## Checklist par Phase
 
-# Webpack
-npm install webpack-bundle-analyzer
-# Dans webpack.config.js
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-plugins: [new BundleAnalyzerPlugin()]
-```
+### Phase Conception
 
-## Optimisation CSS
+- [ ] Budget performance défini
+- [ ] Métriques cibles validées
+- [ ] Fonts limitées (max 2 familles)
+- [ ] Third-party inventoriés et justifiés
 
-### CSS Critique
+### Phase Développement
 
-```html
-<!-- Inline critical CSS -->
-<style>
-  /* CSS critique pour le rendu initial */
-  header { ... }
-  .hero { ... }
-</style>
+- [ ] Images optimisées (format, compression, srcset)
+- [ ] Lazy loading implémenté
+- [ ] Code splitting configuré
+- [ ] Critical CSS identifié
 
-<!-- Charger le reste en async -->
-<link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/styles.css"></noscript>
-```
+### Phase Review
 
-### Purge CSS
+- [ ] Lighthouse score > 90
+- [ ] Core Web Vitals dans le vert
+- [ ] Bundle analysé (pas de dépendances inutiles)
+- [ ] Service worker fonctionnel (si PWA)
 
-```javascript
-// tailwind.config.js
-module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    './public/index.html',
-  ],
-  // PurgeCSS automatique en production
-};
+### Phase Monitoring
 
-// PostCSS manual
-// postcss.config.js
-const purgecss = require('@fullhuman/postcss-purgecss');
-module.exports = {
-  plugins: [
-    purgecss({
-      content: ['./src/**/*.html', './src/**/*.js'],
-    }),
-  ],
-};
-```
+- [ ] RUM (Real User Monitoring) configuré
+- [ ] Alertes sur dégradation
+- [ ] Rapports automatiques (CrUX, PageSpeed)
 
-## Optimisation des Fonts
+---
 
-```html
-<!-- Preload fonts critiques -->
-<link
-  rel="preload"
-  href="/fonts/inter.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
+## Outils de Mesure (Recommandés)
 
-<style>
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter.woff2') format('woff2');
-  font-display: swap; /* Évite FOIT */
-  font-weight: 400;
-}
+| Type | Outil | Usage |
+|------|-------|-------|
+| **Lab testing** | Lighthouse, WebPageTest | CI/CD, audit |
+| **Field data** | CrUX, RUM | Données réelles |
+| **Bundle analysis** | Webpack Bundle Analyzer | Optimisation |
+| **Monitoring** | SpeedCurve, Calibre | Suivi continu |
 
-/* Subset pour les caractères utilisés */
-/* unicode-range: U+0000-00FF; */
-</style>
-```
+---
 
-## Caching Stratégies
+## Métriques de Suivi
 
-### HTTP Headers
+| Métrique | Cible | Alerte | Action |
+|----------|-------|--------|--------|
+| Lighthouse Performance | > 90 | < 70 | Audit urgent |
+| LCP p75 | < 2.5s | > 4s | Optimiser LCP element |
+| CLS p75 | < 0.1 | > 0.25 | Fix layout shifts |
+| JS Bundle | < 200KB | > 300KB | Code splitting |
 
-```nginx
-# nginx.conf
-location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2)$ {
-    expires 1y;
-    add_header Cache-Control "public, immutable";
-}
-
-location ~* \.html$ {
-    expires 1h;
-    add_header Cache-Control "public, must-revalidate";
-}
-```
-
-### Service Worker
-
-```javascript
-// sw.js
-const CACHE_NAME = 'v1';
-const STATIC_ASSETS = [
-  '/',
-  '/styles.css',
-  '/app.js',
-];
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(STATIC_ASSETS))
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
-  );
-});
-```
-
-## Checklist Optimisation
-
-### Critique
-
-- [ ] LCP < 2.5s
-- [ ] FID < 100ms
-- [ ] CLS < 0.1
-- [ ] Bundle JS < 200KB gzippé
-
-### Important
-
-- [ ] Images en WebP/AVIF
-- [ ] Lazy loading images
-- [ ] Code splitting par route
-- [ ] CSS critique inline
-- [ ] Fonts avec display: swap
-
-### Nice to Have
-
-- [ ] Service Worker
-- [ ] Prefetch des pages probables
-- [ ] Image placeholders (blur-up)
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| LCP > 4s | Audit complet + priorisation |
-| Bundle > 500KB | Refactoring code splitting |
-| CLS > 0.25 | Review layout stability |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Lighthouse < 50 | Plan d'action immédiat | Tech Lead |
+| Third-party bloquant | Négociation ou alternative | Product + Tech |
+| Performance mobile dégradée | Priorité mobile-first | Équipe |
+| Budget perf impossible | Revue design/scope | Product + Design |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process performance | `web-dev-process/agents/testing/performance` |
+| Tests visuels | `web-dev-process/agents/testing/visual-regression` |
+| Implémentation images | Skills frontend spécialisés |
+| Performance WordPress | `wordpress-gutenberg-expert/agents/performance/*` |
+
+### Ressources Externes
+
+- [web.dev/vitals](https://web.dev/vitals/) - Core Web Vitals
+- [PageSpeed Insights](https://pagespeed.web.dev/) - Audit
+- [WebPageTest](https://www.webpagetest.org/) - Tests avancés

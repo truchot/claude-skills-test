@@ -177,6 +177,82 @@ Pour l'implémentation CSRF : voir `wordpress-gutenberg-expert/wp-core/security-
 
 ---
 
+## Fichiers Refactorés (Phase 1)
+
+Les fichiers suivants ont été refactorés pour respecter le SRP :
+
+| Fichier | Avant | Après |
+|---------|-------|-------|
+| `securite/securite-applicative.md` | ~250 lignes TS/PHP | Politiques OWASP uniquement |
+| `architecture/architecture-systeme.md` | Docker/K8s YAML | Politiques et critères de décision |
+| `performance/optimisation-frontend.md` | Code TS/CSS/HTML | Objectifs et standards Core Web Vitals |
+| `performance/optimisation-backend.md` | Code SQL/TS | Objectifs et politiques de performance |
+| `infrastructure/environnements.md` | Docker/TypeScript | Politiques d'environnement |
+| `specification/modelisation-donnees.md` | SQL/migrations | Critères de décision |
+
+---
+
+## Fichiers Restants à Refactorer (Phase 2)
+
+Les fichiers suivants contiennent encore du code et doivent être refactorés :
+
+### Priorité Haute
+
+| Fichier | Violation | Action Recommandée |
+|---------|-----------|-------------------|
+| `architecture/patterns-design.md` | 9 blocks TypeScript | Garder les patterns, supprimer le code |
+| `securite/conformite-rgpd.md` | 5 blocks TypeScript | Garder les politiques RGPD, supprimer le code |
+| `securite/gestion-secrets.md` | 4 blocks TypeScript/PHP | Garder les politiques, supprimer le code |
+
+### Priorité Moyenne
+
+| Fichier | Violation | Action Recommandée |
+|---------|-----------|-------------------|
+| `specification/specification-api.md` | Code JS + bash | Garder le design d'API, supprimer les exemples de code |
+| `specification/specification-technique.md` | 1 block SQL | Supprimer les requêtes SQL |
+| `qualite/conventions-code.md` | 2 blocks TS/PHP | Garder les conventions, exemples sans code |
+| `performance/monitoring-perf.md` | 3 blocks TypeScript | Garder les métriques, supprimer le code |
+| `infrastructure/strategie-deploiement.md` | TS + K8s YAML | Garder les stratégies, supprimer les configs |
+| `infrastructure/architecture-infra.md` | 1 block TypeScript | Supprimer le code |
+| `architecture/architecture-applicative.md` | 1 block TypeScript | Supprimer le code |
+
+### Validation
+
+Exécutez le script de validation pour vérifier la conformité :
+
+```bash
+cd .claude/skills/direction-technique
+npm run test:srp
+```
+
+---
+
+## Notices de Dépréciation
+
+### Code Déplacé - Références
+
+Si vous utilisiez les agents POURQUOI pour du code d'implémentation, voici les nouvelles références :
+
+| Ancien Usage | Nouveau Emplacement | Notes |
+|--------------|---------------------|-------|
+| Code CSRF dans `securite-applicative.md` | `wordpress-gutenberg-expert/wp-core/security-validation` | Spécifique WordPress |
+| Code bcrypt/hashage | `web-dev-process/agents/testing/security` | Process générique |
+| Config Docker | `web-dev-process/agents/setup/docker` | Process de setup |
+| Manifests K8s | Skills DevOps spécialisés | À créer si nécessaire |
+| Requêtes SQL | `wordpress-gutenberg-expert/agents/data-modeling/*` | Spécifique WordPress |
+| Code TypeScript backend | Skills Node.js spécialisés | À créer si nécessaire |
+
+### Pattern de Migration
+
+Pour chaque fichier POURQUOI contenant du code :
+
+1. **Identifier le code** : Repérer les blocks ```typescript```, ```php```, etc.
+2. **Extraire les politiques** : Garder uniquement les règles, critères, objectifs
+3. **Créer les références** : Pointer vers les agents QUOI/COMMENT appropriés
+4. **Valider** : Exécuter `npm run test:srp`
+
+---
+
 ## Support
 
 Pour toute question sur cette migration :
@@ -184,3 +260,4 @@ Pour toute question sur cette migration :
 1. Consulter `docs/adr/005-skill-responsibility-boundaries.md`
 2. Consulter `docs/analysis/SRP-ANALYSIS.md`
 3. Utiliser les templates dans `web-agency/templates/`
+4. Exécuter `npm run test:srp` pour valider la conformité

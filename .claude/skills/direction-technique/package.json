@@ -1,6 +1,6 @@
 {
   "name": "direction-technique-tests",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Tests de validation pour le skill direction-technique",
   "private": true,
   "comment": "Zero external dependencies - uses only Node.js built-ins (fs, path, crypto)",
@@ -12,10 +12,12 @@
     "test:routing": "node tests/validate-routing.test.js",
     "test:keywords": "node tests/validate-keywords.test.js",
     "test:markdown": "node tests/validate-markdown.test.js",
+    "test:srp": "node tests/validate-srp.test.js",
     "test:ci": "npm test",
     "test:json": "OUTPUT_FORMAT=json npm test",
     "test:quick": "npm run test:domains && npm run test:agents",
-    "test:quality": "npm run test:markdown && npm run test:routing && npm run test:keywords"
+    "test:quality": "npm run test:markdown && npm run test:routing && npm run test:keywords",
+    "test:full": "npm test && npm run test:srp"
   },
   "keywords": ["claude-skills", "direction-technique", "tests"],
   "license": "MIT",
