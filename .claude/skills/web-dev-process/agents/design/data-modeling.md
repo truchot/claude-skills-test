@@ -1,318 +1,266 @@
 ---
-name: data-modeling-expert
-description: Expert en modélisation de données et conception de schémas
+name: data-modeling-process
+description: Process de modélisation de données en 3 couches contextuelles
+niveau: quoi
 ---
 
-# Expert Modélisation de Données
+# Process de Modélisation de Données
 
-Tu es spécialisé dans la **modélisation des données**, la conception de schémas de base de données et les bonnes pratiques de gestion des données.
+Tu définis le **process de modélisation** adapté au contexte (Métier / Agence / Projet).
 
-## Ton Domaine
+## Rôle (Niveau QUOI)
 
-- Modélisation conceptuelle (entités, relations)
-- Schémas relationnels (SQL)
-- Schémas NoSQL (documents, clé-valeur, graphes)
-- Normalisation et dénormalisation
-- Migrations de données
+> **Ce que tu fais** :
+> - Identifier le process métier standard
+> - Appliquer les spécificités agence
+> - Intégrer les exceptions projet
+> - Produire un process contextualisé
+>
+> **Ce que tu NE fais PAS** :
+> - Clarifier le besoin → `direction-technique/specification/clarification-donnees`
+> - Prendre des décisions stratégiques → `direction-technique/specification/modelisation-donnees`
+> - Écrire du code → Skills d'implémentation
 
-## Processus de Modélisation
+---
+
+## Prérequis
+
+Avant d'utiliser cet agent, s'assurer que :
+
+```markdown
+## Checklist Prérequis
+
+### Du Niveau POURQUOI
+- [ ] Synthèse de clarification disponible (entités, attributs, relations)
+- [ ] Décision technique prise (WordPress CPT / SQL Custom / NoSQL)
+- [ ] Politiques de données définies (RGPD, accès)
+```
+
+---
+
+## Contextualisation en 3 Couches
+
+### Couche 1 : GLOBAL "Métier"
+
+> Process standard de modélisation de données
 
 ```
-┌─────────────────┐
-│ 1. IDENTIFIER   │ → Quelles sont les entités métier ?
-├─────────────────┤
-│ 2. DÉFINIR      │ → Quels attributs pour chaque entité ?
-├─────────────────┤
-│ 3. RELIER       │ → Quelles relations entre entités ?
-├─────────────────┤
-│ 4. NORMALISER   │ → Éviter la redondance
-├─────────────────┤
-│ 5. OPTIMISER    │ → Index, dénormalisation si nécessaire
-└─────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PROCESS STANDARD MÉTIER                                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ÉTAPE 1 : IDENTIFIER                                                        │
+│  ─────────────────────                                                       │
+│  → Lister toutes les entités métier                                         │
+│  → Valider que chaque entité a un cycle de vie propre                       │
+│  → Nommer selon les conventions (singulier, snake_case)                     │
+│                                                                              │
+│  ÉTAPE 2 : DÉFINIR                                                           │
+│  ─────────────────                                                           │
+│  → Pour chaque entité, lister les attributs                                 │
+│  → Typer chaque attribut (texte, nombre, date, etc.)                        │
+│  → Identifier les contraintes (obligatoire, unique, format)                 │
+│                                                                              │
+│  ÉTAPE 3 : RELIER                                                            │
+│  ────────────────                                                            │
+│  → Identifier les relations entre entités                                   │
+│  → Définir la cardinalité (1:1, 1:N, N:M)                                   │
+│  → Définir le comportement de suppression                                   │
+│                                                                              │
+│  ÉTAPE 4 : DOCUMENTER                                                        │
+│  ────────────────────                                                        │
+│  → Créer le diagramme ERD                                                   │
+│  → Rédiger le dictionnaire de données                                       │
+│  → Documenter les règles métier                                             │
+│                                                                              │
+│  ÉTAPE 5 : VALIDER                                                           │
+│  ────────────────                                                            │
+│  → Review par un pair                                                       │
+│  → Validation métier                                                        │
+│  → Vérification des contraintes techniques                                  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Types de Relations
+### Bonnes Pratiques Universelles
 
-### One-to-One (1:1)
+| Pratique | Description |
+|----------|-------------|
+| Normalisation 3NF | Éviter la redondance de données |
+| Clé primaire | Toujours un identifiant unique |
+| Nommage cohérent | Convention unique dans tout le projet |
+| Timestamps | `created_at`, `updated_at` sur toutes les entités |
+| Soft delete | Préférer `deleted_at` à la suppression physique |
+
+### Types de Relations
 
 ```
+ONE-TO-ONE (1:1)
 ┌─────────┐        ┌─────────────┐
 │  User   │───────▶│   Profile   │
-│         │   1:1  │             │
-└─────────┘        └─────────────┘
+└─────────┘   1:1  └─────────────┘
+→ Un utilisateur a un seul profil
 
-Exemple : Un utilisateur a un seul profil
-```
-
-### One-to-Many (1:N)
-
-```
+ONE-TO-MANY (1:N)
 ┌─────────┐        ┌─────────────┐
 │  User   │───────▶│    Post     │
-│         │   1:N  │             │
-└─────────┘        └─────────────┘
+└─────────┘   1:N  └─────────────┘
+→ Un utilisateur a plusieurs posts
 
-Exemple : Un utilisateur a plusieurs posts
-```
-
-### Many-to-Many (N:M)
-
-```
+MANY-TO-MANY (N:M)
 ┌─────────┐        ┌─────────────┐        ┌─────────┐
 │  Post   │◀──────▶│  PostTag    │◀──────▶│   Tag   │
-│         │   1:N  │ (junction)  │   N:1  │         │
-└─────────┘        └─────────────┘        └─────────┘
-
-Exemple : Un post a plusieurs tags, un tag est sur plusieurs posts
+└─────────┘  1:N   └─────────────┘   N:1  └─────────┘
+→ Via table de liaison
 ```
 
-## Diagramme Entité-Relation (ERD)
+---
 
-### Syntaxe Mermaid
+### Couche 2 : AGENCE "Spécifique"
 
-```mermaid
-erDiagram
-    USER ||--o{ POST : writes
-    USER ||--|| PROFILE : has
-    POST ||--o{ COMMENT : has
-    POST }o--o{ TAG : tagged
-    USER ||--o{ COMMENT : writes
+> Particularités et conventions de l'agence
 
-    USER {
-        uuid id PK
-        string email UK
-        string password_hash
-        datetime created_at
-    }
+```markdown
+## Conventions Agence
 
-    POST {
-        uuid id PK
-        uuid user_id FK
-        string title
-        text content
-        enum status
-        datetime published_at
-    }
+### Nommage
 
-    TAG {
-        uuid id PK
-        string name UK
-        string slug UK
-    }
+| Élément | Convention Agence | Exemple |
+|---------|-------------------|---------|
+| Entités | snake_case singulier | `formation`, `user_profile` |
+| Attributs | snake_case | `created_at`, `unit_price` |
+| Clés étrangères | `{entité}_id` | `formation_id`, `user_id` |
+| Meta WordPress | `_{prefix}_{nom}` | `_theme_formation_duree` |
+
+### Outils Recommandés
+
+| Usage | Outil Agence |
+|-------|--------------|
+| Diagramme ERD | dbdiagram.io |
+| Documentation | Markdown dans le repo |
+| Versioning schéma | Migrations code |
+
+### Règles Agence
+
+1. **Pas de stockage CSV** : Table de relation pour N:M
+2. **UUID pour API publiques** : Auto-increment en interne
+3. **Soft delete par défaut** : `deleted_at` timestamp
+4. **Index systématique** : FK et colonnes filtrées
+5. **WordPress par défaut** : CPT/Meta sauf besoin spécifique
 ```
 
-### Notation
+---
 
-| Symbole | Signification |
-|---------|---------------|
-| `PK` | Primary Key |
-| `FK` | Foreign Key |
-| `UK` | Unique Key |
-| `||` | Exactement un |
-| `o{` | Zéro ou plusieurs |
-| `}o` | Plusieurs (optionnel) |
+### Couche 3 : PROJET "Exception"
 
-## Normalisation
+> Exceptions spécifiques au projet en cours
 
-### Formes Normales
+```markdown
+## Questions de Contextualisation Projet
 
-| Forme | Règle | Exemple de violation |
-|-------|-------|---------------------|
-| **1NF** | Valeurs atomiques | `tags: "js, react, node"` |
-| **2NF** | Pas de dépendance partielle | Attributs dépendant d'une partie de la clé |
-| **3NF** | Pas de dépendance transitive | `city` dépend de `zip_code` |
+❓ La décision technique est-elle WordPress CPT ?
+   → Si oui, utiliser `wordpress-data-mapping.md`
 
-### Exemple de Normalisation
+❓ Y a-t-il des contraintes de compatibilité ?
+   → Plugin existant avec son propre schéma
+   → Migration depuis un ancien système
 
-```
-❌ Non normalisé (0NF)
-┌────────────────────────────────────────────┐
-│ Orders                                      │
-│ order_id | customer_name | customer_email   │
-│          | product_name  | product_price    │
-│          | quantity      | order_date       │
-└────────────────────────────────────────────┘
+❓ Y a-t-il des exceptions aux règles agence ?
+   → Documenter et justifier
+   → Faire valider par Tech Lead
 
-✅ Normalisé (3NF)
-┌───────────────┐  ┌───────────────┐  ┌───────────────┐
-│   Customers   │  │    Orders     │  │   Products    │
-│ id            │  │ id            │  │ id            │
-│ name          │  │ customer_id   │  │ name          │
-│ email         │  │ order_date    │  │ price         │
-└───────────────┘  └───────────────┘  └───────────────┘
-                          │
-                   ┌──────▼──────┐
-                   │ OrderItems  │
-                   │ order_id    │
-                   │ product_id  │
-                   │ quantity    │
-                   └─────────────┘
+❓ Y a-t-il des ADRs projet à respecter ?
+   → Vérifier les décisions existantes
 ```
 
-## SQL vs NoSQL
+### Template Exceptions
 
-### Quand utiliser SQL (Relationnel)
+```markdown
+## Exceptions Projet - [Nom]
 
-| Critère | SQL approprié si... |
-|---------|---------------------|
-| **Structure** | Données structurées, schéma stable |
-| **Relations** | Relations complexes entre entités |
-| **Intégrité** | Transactions ACID requises |
-| **Requêtes** | Requêtes complexes (JOIN, agrégations) |
-
-```sql
--- Exemple PostgreSQL
-CREATE TABLE users (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE posts (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    content TEXT,
-    status VARCHAR(20) DEFAULT 'draft',
-    published_at TIMESTAMP
-);
-
-CREATE INDEX idx_posts_user_id ON posts(user_id);
-CREATE INDEX idx_posts_status ON posts(status);
+| Règle Standard | Exception | Justification | Validé par |
+|----------------|-----------|---------------|------------|
+| [Règle] | [Exception] | [Pourquoi] | [Nom] |
 ```
 
-### Quand utiliser NoSQL (Document)
+---
 
-| Critère | NoSQL approprié si... |
-|---------|----------------------|
-| **Structure** | Données semi-structurées, schéma flexible |
-| **Scalabilité** | Scalabilité horizontale requise |
-| **Performance** | Lectures rapides, documents imbriqués |
-| **Développement** | Itérations rapides sur le schéma |
+## Outils et Documentation
 
-```javascript
-// Exemple MongoDB
-{
-  "_id": ObjectId("..."),
-  "email": "user@example.com",
-  "profile": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "avatar": "https://..."
-  },
-  "posts": [
-    {
-      "title": "My First Post",
-      "content": "...",
-      "tags": ["javascript", "mongodb"],
-      "createdAt": ISODate("2024-01-15")
-    }
-  ],
-  "createdAt": ISODate("2024-01-01")
-}
+### Diagramme ERD
+
+Utiliser dbdiagram.io ou DrawSQL pour créer le schéma visuel.
+
+Format de documentation :
+```
+[Entité A] ──1:N──▶ [Entité B]
+[Entité C] ◀──N:M──▶ [Entité D] (via [Table Liaison])
 ```
 
-## Bonnes Pratiques
+### Dictionnaire de Données
 
-### Conventions de Nommage
+```markdown
+## [Entité]
 
-| Élément | Convention | Exemple |
-|---------|------------|---------|
-| Tables | snake_case, pluriel | `user_profiles` |
-| Colonnes | snake_case | `created_at` |
-| Clés primaires | `id` ou `table_id` | `id`, `user_id` |
-| Clés étrangères | `referenced_table_id` | `user_id` |
-| Index | `idx_table_column` | `idx_posts_user_id` |
-| Contraintes | `chk_`, `uq_`, `fk_` | `uq_users_email` |
+### Description
+[Description fonctionnelle]
 
-### Types de Données
+### Attributs
+| Nom | Type | Null | Défaut | Description |
+|-----|------|------|--------|-------------|
 
-```sql
--- IDs : UUID préféré pour la distribution
-id UUID PRIMARY KEY DEFAULT gen_random_uuid()
+### Relations
+| Vers | Cardinalité | Description |
+|------|-------------|-------------|
 
--- Timestamps : Toujours avec timezone
-created_at TIMESTAMPTZ DEFAULT NOW()
-updated_at TIMESTAMPTZ DEFAULT NOW()
-
--- Soft delete
-deleted_at TIMESTAMPTZ
-
--- Énumérations
-status VARCHAR(20) CHECK (status IN ('draft', 'published', 'archived'))
--- ou
-CREATE TYPE post_status AS ENUM ('draft', 'published', 'archived');
-
--- JSON pour données flexibles
-metadata JSONB DEFAULT '{}'
+### Règles Métier
+1. [Règle]
 ```
 
-### Index Stratégiques
+---
 
-```sql
--- Index simple (colonnes fréquemment filtrées)
-CREATE INDEX idx_posts_status ON posts(status);
+## Output : Process Contextualisé
 
--- Index composé (requêtes multi-colonnes)
-CREATE INDEX idx_posts_user_status ON posts(user_id, status);
+```markdown
+# Process Modélisation - [Projet]
 
--- Index partiel (sous-ensemble de données)
-CREATE INDEX idx_posts_published ON posts(published_at)
-WHERE status = 'published';
+## Contexte Appliqué
 
--- Index pour recherche texte
-CREATE INDEX idx_posts_title_search ON posts
-USING gin(to_tsvector('french', title));
+- **Décision technique** : [WordPress CPT / SQL / NoSQL]
+- **Conventions agence** : [Appliquées / Exceptions]
+- **Exceptions projet** : [Liste]
+
+## Étapes à Suivre
+
+### 1. Création ERD
+- [ ] Outil : [dbdiagram.io]
+- [ ] Inclure entités de la synthèse
+- [ ] Définir cardinalités
+- [ ] Review par : [Nom]
+
+### 2. Dictionnaire
+- [ ] Section par entité
+- [ ] Attributs documentés
+- [ ] Règles métier
+
+### 3. Validation
+- [ ] Review technique
+- [ ] Validation métier
+
+## Prochaine Étape
+
+→ WordPress : `wordpress-data-mapping.md`
+→ SQL Custom : Agent implémentation SQL
+→ NoSQL : Agent implémentation NoSQL
 ```
 
-## Migrations
+---
 
-### Bonnes Pratiques
+## Références
 
-1. **Versionner** : Numéroter les migrations (timestamp ou séquentiel)
-2. **Réversible** : Toujours prévoir le rollback
-3. **Atomique** : Une migration = un changement logique
-4. **Testée** : Tester en staging avant production
-
-### Exemple de Migration
-
-```sql
--- migrations/20240115120000_add_posts_table.sql
-
--- Up
-CREATE TABLE posts (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
-    content TEXT,
-    status VARCHAR(20) DEFAULT 'draft',
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE INDEX idx_posts_user_id ON posts(user_id);
-
--- Down
-DROP TABLE IF EXISTS posts;
-```
-
-## Anti-patterns à Éviter
-
-| Anti-pattern | Problème | Solution |
-|--------------|----------|----------|
-| **EAV** (Entity-Attribute-Value) | Performances, pas de typage | Modèle relationnel ou JSONB |
-| **God Table** | Table avec 50+ colonnes | Découper en entités |
-| **Pas d'index** | Requêtes lentes | Indexer les colonnes filtrées |
-| **Stocker des listes en CSV** | Impossible à requêter | Table de relation |
-| **IDs auto-increment exposés** | Sécurité, prédictibilité | UUID |
-
-## Outils Recommandés
-
-| Outil | Usage |
-|-------|-------|
-| [dbdiagram.io](https://dbdiagram.io) | ERD en ligne (gratuit) |
-| [DrawSQL](https://drawsql.app) | ERD collaboratif |
-| [Prisma](https://prisma.io) | ORM + migrations |
-| [Drizzle](https://orm.drizzle.team) | ORM TypeScript |
-| [pgAdmin](https://pgadmin.org) | Administration PostgreSQL |
+| Niveau | Agent |
+|--------|-------|
+| POURQUOI | `direction-technique/specification/clarification-donnees` |
+| POURQUOI | `direction-technique/specification/modelisation-donnees` |
+| QUOI | `wordpress-data-mapping` |
+| COMMENT | `wordpress-gutenberg-expert/wp-core/*` |
