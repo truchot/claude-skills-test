@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * SRP Validation Tests
  *
@@ -10,10 +11,13 @@
  * - Checklists (without code)
  * - Questions for clarification
  * - References to QUOI/COMMENT levels
+ *
+ * @module tests/validate-srp
  */
 
 const fs = require('fs');
 const path = require('path');
+const { directoryExists, fileExists } = require('./utils');
 
 const SKILL_ROOT = path.resolve(__dirname, '..');
 
@@ -54,22 +58,40 @@ const POURQUOI_DOMAINS = [
   'infrastructure',
 ];
 
+/**
+ * Get all agent files in a domain directory
+ * @param {string} domain - Domain name
+ * @returns {string[]} Array of file paths
+ */
 function getAgentFiles(domain) {
   const domainPath = path.join(SKILL_ROOT, domain);
-  if (!fs.existsSync(domainPath)) {
+
+  if (!directoryExists(domainPath)) {
     return [];
   }
 
-  const files = fs.readdirSync(domainPath);
-  return files
-    .filter(f => f.endsWith('.md') && f !== 'orchestrator.md')
-    .map(f => path.join(domainPath, f));
+  try {
+    const entries = fs.readdirSync(domainPath, { withFileTypes: true });
+    return entries
+      .filter(entry => entry.isFile() && entry.name.endsWith('.md') && entry.name !== 'orchestrator.md')
+      .map(entry => path.join(domainPath, entry.name));
+  } catch (err) {
+    console.error(`Warning: Cannot read directory ${domainPath}: ${err.message}`);
+    return [];
+  }
 }
 
-function isAllowedCodeBlock(content, match) {
-  // Check if this code block matches any allowed pattern
-  const codeBlockStart = content.lastIndexOf('```', match.index);
-  const codeBlockEnd = content.indexOf('```', match.index + match[0].length);
+/**
+ * Check if a code block match is allowed (ASCII diagrams, templates, etc.)
+ * @param {string} content - File content
+ * @param {number} matchIndex - Index of the match
+ * @param {string} matchText - Matched text
+ * @returns {boolean} True if allowed
+ */
+function isAllowedCodeBlock(content, matchIndex, matchText) {
+  // Find the code block boundaries
+  const codeBlockStart = content.lastIndexOf('```', matchIndex);
+  const codeBlockEnd = content.indexOf('```', matchIndex + matchText.length);
 
   if (codeBlockStart === -1 || codeBlockEnd === -1) return false;
 
@@ -78,18 +100,30 @@ function isAllowedCodeBlock(content, match) {
   return ALLOWED_PATTERNS.some(pattern => pattern.test(codeBlock));
 }
 
+/**
+ * Validate a file for SRP violations using matchAll
+ * @param {string} filePath - Path to file
+ * @returns {Object[]} Array of violations
+ */
 function validateFile(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8');
+  let content;
+  try {
+    content = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    console.error(`Warning: Cannot read file ${filePath}: ${err.message}`);
+    return [];
+  }
+
   const fileName = path.basename(filePath);
   const violations = [];
 
   for (const pattern of FORBIDDEN_CODE_PATTERNS) {
-    pattern.lastIndex = 0; // Reset regex state
-    let match;
+    // Use matchAll for cleaner iteration (reset not needed)
+    const matches = content.matchAll(new RegExp(pattern.source, pattern.flags));
 
-    while ((match = pattern.exec(content)) !== null) {
+    for (const match of matches) {
       // Check if this is an allowed pattern
-      if (!isAllowedCodeBlock(content, match)) {
+      if (!isAllowedCodeBlock(content, match.index, match[0])) {
         const lineNumber = content.substring(0, match.index).split('\n').length;
         violations.push({
           file: fileName,

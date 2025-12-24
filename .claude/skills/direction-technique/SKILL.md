@@ -370,6 +370,8 @@ direction-technique/qualite ──► project-management/pilotage
 
 ### v3.0.0 ⚠️ BREAKING CHANGES
 
+> **📖 [Guide de Migration](../../../docs/analysis/MIGRATION.md)** - Consultez ce guide avant de mettre à jour
+
 **Refactoring SRP complet** : Tous les agents POURQUOI sont désormais sans code d'implémentation.
 
 #### Breaking Changes

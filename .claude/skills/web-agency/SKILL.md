@@ -104,8 +104,13 @@ NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
 ## Changelog
 
 ### v2.2.0
-- **Breaking** : `direction-technique` v3.0.0 - tous agents POURQUOI sans code
-- Voir `docs/analysis/MIGRATION.md` pour guide de migration
+
+> **📖 [Guide de Migration](./docs/analysis/MIGRATION.md)** - Consultez ce guide avant de mettre à jour
+
+- **Breaking** : Intègre `direction-technique` v3.0.0
+  - Tous les agents POURQUOI-level sans code d'implémentation
+  - Le code a été déplacé vers les skills COMMENT-level
+- **Version Relationship** : web-agency 2.x → direction-technique 3.x (voir ADR-005)
 
 ### v2.1.0
 - **Refactoring SRP** : Séparation routage/composition/escalade
