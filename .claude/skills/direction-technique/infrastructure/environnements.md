@@ -1,6 +1,6 @@
 ---
 name: environnements
-description: Politique et stratégie des environnements (dev, staging, prod)
+description: Politique et stratégie des environnements (dev, staging, prod) - Niveau POURQUOI
 ---
 
 # Stratégie des Environnements

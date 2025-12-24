@@ -1,6 +1,6 @@
 ---
-name: code-review-policy
-description: Politiques et standards de code review - Décisions stratégiques
+name: code-review
+description: Politiques et standards de code review - Décisions stratégiques (Niveau POURQUOI)
 ---
 
 # Politique de Code Review
