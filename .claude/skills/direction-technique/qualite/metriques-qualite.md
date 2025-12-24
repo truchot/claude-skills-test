@@ -1,209 +1,112 @@
 ---
 name: metriques-qualite
-description: Suivi des métriques de qualité technique
+description: Politique de métriques qualité (Niveau POURQUOI)
 ---
 
-# Métriques de Qualité
+# Politique de Métriques Qualité
 
-Tu assures le **suivi des métriques de qualité** technique tout au long du projet.
+Tu définis les **politiques et standards** de suivi des métriques de qualité technique.
+
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Définir les MÉTRIQUES à suivre et les seuils cibles
+> **Ce que tu ne fais pas** : Configurer SonarQube ou écrire les scripts de collecte
+>
+> → Process de qualité : `web-dev-process/agents/testing/*`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi mesurer ? Pour garantir et améliorer la qualité"   │
+│  → "Standards : métriques, seuils, actions"                     │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi mesurer ? Coverage, smells, vulnérabilités"            │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : SonarQube config, GitHub Actions, scripts"           │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Catégories de Métriques
 
 ### 1. Couverture de Tests
 
-| Métrique | Cible | Outil |
-|----------|-------|-------|
-| Coverage global | > 80% | Jest, PHPUnit |
-| Coverage branches | > 70% | Idem |
-| Coverage fonctions | > 85% | Idem |
-| Coverage lignes | > 80% | Idem |
-
-```bash
-# Générer rapport de coverage
-npm run test -- --coverage
-```
+| Métrique | Cible | Minimum | Outil |
+|----------|-------|---------|-------|
+| Coverage global | > 80% | 70% | Jest, PHPUnit |
+| Coverage branches | > 70% | 60% | Idem |
+| Coverage fonctions | > 85% | 75% | Idem |
+| Coverage lignes | > 80% | 70% | Idem |
 
 ### 2. Qualité du Code
 
-| Métrique | Cible | Outil |
-|----------|-------|-------|
-| Code smells | < 5/kloc | SonarQube |
-| Duplication | < 3% | SonarQube |
-| Complexité cyclomatique | < 10/fonction | ESLint, SonarQube |
-| Maintainability Index | > 20 | SonarQube |
-| Technical Debt Ratio | < 5% | SonarQube |
+| Métrique | Cible | Alerte | Outil |
+|----------|-------|--------|-------|
+| Code smells | < 5/kloc | > 10/kloc | SonarQube |
+| Duplication | < 3% | > 5% | SonarQube |
+| Complexité cyclomatique | < 10/fonction | > 15 | ESLint, SonarQube |
+| Maintainability Index | > 20 | < 10 | SonarQube |
+| Technical Debt Ratio | < 5% | > 10% | SonarQube |
 
 ### 3. Sécurité
 
-| Métrique | Cible | Outil |
-|----------|-------|-------|
-| Vulnérabilités critiques | 0 | Snyk, npm audit |
-| Vulnérabilités hautes | 0 | Snyk, npm audit |
-| Security Hotspots | Reviewed | SonarQube |
-| Dépendances outdated | < 20% | Renovate |
+| Métrique | Cible | Action si Non-Conforme |
+|----------|-------|------------------------|
+| Vulnérabilités critiques | 0 | Bloquer deploy |
+| Vulnérabilités hautes | 0 | Bloquer deploy |
+| Vulnérabilités moyennes | < 5 | Corriger sous 1 semaine |
+| Security Hotspots | 100% reviewed | Review obligatoire |
+| Dépendances outdated | < 20% | Mise à jour mensuelle |
 
 ### 4. Performance (Core Web Vitals)
 
-| Métrique | Cible | Outil |
-|----------|-------|-------|
-| LCP (Largest Contentful Paint) | < 2.5s | Lighthouse |
-| FID (First Input Delay) | < 100ms | Lighthouse |
-| CLS (Cumulative Layout Shift) | < 0.1 | Lighthouse |
-| TTFB (Time To First Byte) | < 600ms | WebPageTest |
-| Score Lighthouse | > 90 | Lighthouse |
+| Métrique | Bon | À Améliorer | Mauvais |
+|----------|-----|-------------|---------|
+| LCP (Largest Contentful Paint) | < 2.5s | 2.5-4s | > 4s |
+| FID (First Input Delay) | < 100ms | 100-300ms | > 300ms |
+| CLS (Cumulative Layout Shift) | < 0.1 | 0.1-0.25 | > 0.25 |
+| TTFB (Time To First Byte) | < 600ms | 600-1000ms | > 1000ms |
+| Score Lighthouse | > 90 | 70-90 | < 70 |
 
 ### 5. Fiabilité
 
 | Métrique | Cible | Outil |
 |----------|-------|-------|
 | Bugs en production | < 5/mois | Jira, Sentry |
-| MTTR (Mean Time To Recovery) | < 4h | Incident tracking |
+| MTTR | < 4h | Incident tracking |
 | Disponibilité | > 99.9% | Monitoring |
 | Taux d'erreur API | < 0.1% | APM |
 
-## Dashboard de Qualité
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  QUALITÉ TECHNIQUE                          │
-│                  Projet: [Nom] - Sprint [X]                 │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Code Coverage    [████████░░] 82%  ✅                      │
-│  Tests Passing    [██████████] 100% ✅                      │
-│  Code Smells      [█░░░░░░░░░] 12   🟠 (target: <10)       │
-│  Duplication      [░░░░░░░░░░] 1.5% ✅                      │
-│  Security Issues  [░░░░░░░░░░] 0    ✅                      │
-│  Lighthouse       [████████░░] 87   🟠 (target: 90)        │
-│  Tech Debt        [██░░░░░░░░] 15h  🟠                      │
-│                                                             │
-│  Trend: ↗️ Amélioration vs sprint précédent                 │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Configuration SonarQube
-
-### Quality Gate
-
-```yaml
-# sonar-project.properties
-sonar.projectKey=my-project
-sonar.organization=my-org
-
-sonar.sources=src
-sonar.tests=src
-sonar.test.inclusions=**/*.test.ts,**/*.spec.ts
-sonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts
-
-sonar.javascript.lcov.reportPaths=coverage/lcov.info
-
-# Quality Gate (à configurer dans SonarQube)
-# - Coverage on New Code >= 80%
-# - Duplicated Lines on New Code <= 3%
-# - Maintainability Rating = A
-# - Reliability Rating = A
-# - Security Rating = A
-```
-
-### GitHub Action
-
-```yaml
-name: SonarQube Analysis
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  sonarqube:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-```
-
-## Rapports de Qualité
-
-### Rapport Hebdomadaire
-
-```markdown
-# Rapport Qualité - Semaine [X]
-
-## Résumé
-
-| Indicateur | Semaine N-1 | Semaine N | Trend |
-|------------|-------------|-----------|-------|
-| Coverage | 78% | 82% | ↗️ +4% |
-| Code Smells | 15 | 12 | ↗️ -3 |
-| Bugs | 2 | 0 | ↗️ |
-| Vulnérabilités | 0 | 0 | → |
-| Tech Debt | 18h | 15h | ↗️ -3h |
-
-## Highlights
-
-### Améliorations
-- Couverture augmentée sur module Auth
-- 3 code smells résolus
-
-### Points d'attention
-- Module Order sous les 70% de coverage
-- 2 nouveaux code smells introduits
-
-## Actions
-
-| Action | Responsable | Deadline |
-|--------|-------------|----------|
-| Augmenter coverage Order | @dev1 | Sprint +1 |
-| Review code smells | @team | Sprint +1 |
-```
-
-### Rapport de Sprint
-
-```markdown
-# Rapport Qualité - Sprint [X]
+---
 
 ## Quality Gate
-Status: ✅ PASSED / ❌ FAILED
 
-## Métriques
+### Critères Obligatoires
 
-### Coverage
-| Module | Coverage | Trend |
-|--------|----------|-------|
-| Auth | 92% | ↗️ |
-| User | 85% | → |
-| Order | 68% | ↘️ |
-| **Global** | **82%** | ↗️ |
+| Condition | Seuil | Action si Échec |
+|-----------|-------|-----------------|
+| Coverage on New Code | ≥ 80% | Bloquer merge |
+| Duplicated Lines on New Code | ≤ 3% | Bloquer merge |
+| Maintainability Rating | A | Warning |
+| Reliability Rating | A | Bloquer merge |
+| Security Rating | A | Bloquer merge |
+| Security Hotspots Reviewed | 100% | Bloquer merge |
 
-### Code Quality
-- Nouveaux bugs : 0
-- Code smells résolus : 5
-- Code smells introduits : 2
-- Duplication : 1.5% (stable)
+### Niveaux de Rating
 
-### Performance
-| Page | LCP | FID | CLS | Score |
-|------|-----|-----|-----|-------|
-| Home | 1.8s | 45ms | 0.05 | 95 |
-| Product | 2.2s | 60ms | 0.08 | 88 |
-| Checkout | 2.8s | 80ms | 0.12 | 78 |
+| Rating | Description |
+|--------|-------------|
+| A | Optimal |
+| B | Acceptable |
+| C | À améliorer |
+| D | Problématique |
+| E | Critique |
 
-## Recommandations
-
-1. **Priorité haute** : Améliorer coverage module Order
-2. **Moyenne** : Optimiser page Checkout (LCP, CLS)
-3. **Basse** : Réduire code smells restants
-```
+---
 
 ## Seuils d'Alerte
 
@@ -215,11 +118,99 @@ Status: ✅ PASSED / ❌ FAILED
 | Lighthouse | < 80 | < 60 | Investigation |
 | Tech Debt | > 10% sprint | > 20% sprint | Escalade |
 
+---
+
+## Reporting Qualité
+
+### Contenu Rapport Hebdomadaire
+
+| Section | Éléments |
+|---------|----------|
+| **Résumé** | Comparaison semaine N vs N-1 |
+| **Highlights** | Améliorations et points d'attention |
+| **Tendances** | Graphique évolution |
+| **Actions** | Responsable et deadline |
+
+### Contenu Rapport Sprint
+
+| Section | Éléments |
+|---------|----------|
+| **Quality Gate** | PASSED/FAILED |
+| **Coverage par module** | Table avec tendances |
+| **Code Quality** | Bugs, smells, duplication |
+| **Performance** | Métriques par page |
+| **Recommandations** | Priorités haute/moyenne/basse |
+
+---
+
+## Dashboard de Qualité
+
+### Panneaux Obligatoires
+
+| Panneau | Contenu |
+|---------|---------|
+| **Coverage** | Gauge avec tendance |
+| **Tests** | Passing/failing count |
+| **Code Smells** | Nombre et tendance |
+| **Duplication** | Pourcentage |
+| **Security** | Issues par sévérité |
+| **Lighthouse** | Score par page |
+| **Tech Debt** | Estimation en heures |
+
+### Indicateurs Visuels
+
+| Status | Description |
+|--------|-------------|
+| ✅ | Dans la cible |
+| 🟠 | Attention (proche du seuil) |
+| 🔴 | Critique (hors cible) |
+| ↗️ | Amélioration |
+| → | Stable |
+| ↘️ | Dégradation |
+
+---
+
+## Checklist Qualité
+
+### Par PR
+
+- [ ] Tests ajoutés pour nouveau code
+- [ ] Coverage maintenue ou améliorée
+- [ ] Pas de nouveaux bugs
+- [ ] Pas de nouvelles vulnérabilités
+- [ ] Complexité acceptable
+
+### Par Sprint
+
+- [ ] Quality Gate passé
+- [ ] Tech debt stable ou en diminution
+- [ ] Rapport qualité produit
+- [ ] Actions identifiées et assignées
+
+---
+
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Quality Gate failed | Bloquer merge, corriger |
-| Coverage en chute libre | Rétrospective + plan |
-| Vulnérabilité critique | Patch immédiat |
-| Performance dégradée | Investigation urgente |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Quality Gate failed | Bloquer merge, corriger | Développeur |
+| Coverage en chute libre | Rétrospective + plan | Tech Lead |
+| Vulnérabilité critique | Patch immédiat | Équipe |
+| Performance dégradée | Investigation urgente | Tech Lead |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process de test | `web-dev-process/agents/testing/*` |
+| Code review | `qualite/code-review` |
+| Conventions | `qualite/conventions-code` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [SonarQube Quality Gates](https://docs.sonarqube.org/latest/user-guide/quality-gates/)
+- [Google Core Web Vitals](https://web.dev/vitals/)
+- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)

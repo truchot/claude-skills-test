@@ -1,355 +1,232 @@
 ---
 name: reporting-technique
-description: Rapports et synthèses techniques pour les parties prenantes
+description: Politique de reporting technique (Niveau POURQUOI)
 ---
 
-# Reporting Technique
+# Politique de Reporting Technique
 
-Tu produis des **rapports et synthèses techniques** adaptés aux différentes parties prenantes.
+Tu définis les **politiques et standards** de reporting technique.
 
-## Types de Rapports
+## Rôle de cet Agent (Niveau POURQUOI)
 
-### Matrice Public/Format
+> **Ce que tu fais** : Définir les STANDARDS de reporting et les métriques à communiquer
+> **Ce que tu ne fais pas** : Rédiger les rapports ou configurer les dashboards
+>
+> → Process de reporting : `web-dev-process/agents/communication/*`
+> → Implémentation : Skills technologiques spécialisés
 
-| Public | Fréquence | Format | Contenu |
-|--------|-----------|--------|---------|
-| Direction | Mensuel | Executive Summary | Risques, coûts, avancement |
-| Product | Hebdo | Synthèse | Vélocité, blocages, prévisions |
-| Tech Lead | Quotidien | Dashboard | Métriques, incidents |
-| Équipe | Sprint | Rétrospective | Actions, améliorations |
-
-## Executive Summary (Direction)
-
-### Template
-
-```markdown
-# Rapport Technique - [Mois/Trimestre]
-
-## Résumé Exécutif
-
-| Indicateur | Statut | Tendance |
-|------------|--------|----------|
-| Qualité | 🟢 Bon | ↑ |
-| Performance | 🟡 À surveiller | → |
-| Sécurité | 🟢 Bon | → |
-| Dette technique | 🟡 Modérée | ↓ |
-
-### Points Clés
-- **Réalisé** : Migration base de données terminée (-30% coûts)
-- **En cours** : Refactoring module paiement
-- **Attention** : Latence API en hausse (+15%)
-
-## Métriques
-
-### Disponibilité
-- Uptime : 99.95% (SLA : 99.9%)
-- Incidents majeurs : 0
-- Incidents mineurs : 2
-
-### Performance
-- Temps de réponse P95 : 450ms (cible : <500ms)
-- Taux d'erreur : 0.02%
-
-### Coûts Infrastructure
-- Budget : 15 000€/mois
-- Réel : 14 200€/mois
-- Projection annuelle : -5% vs N-1
-
-## Risques
-
-| Risque | Impact | Probabilité | Mitigation |
-|--------|--------|-------------|------------|
-| Dépendance lib X obsolète | Moyen | Haute | Migration prévue Q2 |
-| Capacité équipe | Moyen | Moyenne | Recrutement en cours |
-
-## Prochaines Étapes
-
-1. Finaliser refactoring paiement (fin mars)
-2. Audit sécurité annuel (avril)
-3. Migration vers nouvelle version Node.js (mai)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi reporter ? Pour visibilité et décisions éclairées" │
+│  → "Standards : audiences, fréquences, métriques"               │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi reporter ? Executive summary, dashboards, post-mortems"│
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : Scripts génération, intégration Slack, dashboards"   │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ---
-*Rapport préparé par [Nom] - [Date]*
-```
 
-## Rapport Hebdo (Product)
+## Types de Rapports par Audience
 
-### Template
+| Public | Fréquence | Format | Contenu Clé |
+|--------|-----------|--------|-------------|
+| **Direction** | Mensuel | Executive Summary | Risques, coûts, avancement |
+| **Product** | Hebdomadaire | Synthèse | Vélocité, blocages, prévisions |
+| **Tech Lead** | Quotidien | Dashboard | Métriques, incidents |
+| **Équipe** | Sprint | Rétrospective | Actions, améliorations |
 
-```markdown
-# Sync Tech-Product - Semaine [N]
+---
 
-## Sprint en Cours
+## Standards Executive Summary (Direction)
 
-**Sprint** : Sprint 23 (J8/10)
-**Vélocité prévue** : 34 points
-**Réalisé** : 28 points (82%)
+### Contenu Obligatoire
 
-### État des US
+| Section | Éléments |
+|---------|----------|
+| **Résumé exécutif** | Status par domaine (qualité, perf, sécu, dette) |
+| **Points clés** | Réalisé, en cours, attention |
+| **Métriques** | Uptime, incidents, performance |
+| **Coûts** | Budget vs réel, projection |
+| **Risques** | Impact, probabilité, mitigation |
+| **Prochaines étapes** | Jalons à venir |
 
-| US | Points | Status | Blocker |
-|----|--------|--------|---------|
-| US-123 | 5 | ✅ Done | - |
-| US-124 | 8 | ✅ Done | - |
-| US-125 | 13 | 🔄 In Progress | API externe lente |
-| US-126 | 8 | ⏸️ Blocked | En attente specs |
+### Indicateurs de Status
 
-### Blocages
+| Indicateur | Signification |
+|------------|---------------|
+| 🟢 Bon | Dans les cibles |
+| 🟡 À surveiller | Risque identifié |
+| 🔴 Critique | Action urgente requise |
 
-1. **US-125** : L'API du partenaire répond en 3s
-   - Impact : Risque de dépassement sprint
-   - Action : Call avec partenaire demain
+### Tendances
 
-2. **US-126** : Maquettes edge cases manquantes
-   - Impact : Développement en pause
-   - Action : À clarifier avec designer
+| Symbole | Signification |
+|---------|---------------|
+| ↑ | Amélioration |
+| → | Stable |
+| ↓ | Dégradation |
 
-## Métriques Qualité
+---
 
-- Couverture de tests : 78% (+2%)
-- Bugs en prod cette semaine : 0
-- Temps moyen de review PR : 4h
+## Standards Rapport Hebdo (Product)
 
-## Prévisions
+### Contenu Obligatoire
 
-| Sprint | Contenu prévu | Confiance |
-|--------|---------------|-----------|
-| Sprint 24 | Features X, Y | 🟢 Haute |
-| Sprint 25 | Feature Z | 🟡 Moyenne |
+| Section | Éléments |
+|---------|----------|
+| **Sprint status** | Jour X/Y, vélocité prévue vs réalisée |
+| **État des US** | Liste avec points, status, blockers |
+| **Blocages** | Description, impact, action |
+| **Métriques qualité** | Coverage, bugs, temps review |
+| **Prévisions** | Sprints à venir avec confiance |
+| **Questions** | Points à clarifier avec Product |
 
-## Questions pour Product
+### Status des US
 
-1. Priorité entre US-130 et US-131 ?
-2. Deadline flexible pour Feature Z ?
-```
+| Status | Description |
+|--------|-------------|
+| ✅ Done | Terminé et validé |
+| 🔄 In Progress | En cours de développement |
+| ⏸️ Blocked | Bloqué (raison indiquée) |
+| ⏳ Pending | Non commencé |
 
-## Dashboard Technique (Tech Lead)
+---
+
+## Standards Dashboard Technique (Tech Lead)
 
 ### Métriques Temps Réel
 
-```markdown
-# Dashboard Technique
+| Catégorie | Métriques |
+|-----------|-----------|
+| **Santé systèmes** | Status, latence, erreurs par service |
+| **Alertes** | Liste 24h avec sévérité et résolution |
+| **Performance** | P50, P95, P99, req/min |
+| **Infrastructure** | CPU, mémoire, connexions DB, queue |
+| **Qualité code** | Build status, tests, coverage, vulnérabilités |
 
-## Santé Systèmes
+### Seuils d'Affichage
 
-| Service | Status | Latence | Erreurs |
-|---------|--------|---------|---------|
-| API | 🟢 UP | 120ms | 0.01% |
-| Web | 🟢 UP | 45ms | 0% |
-| Workers | 🟢 UP | - | 0.02% |
-| Database | 🟢 UP | 8ms | 0% |
+| Métrique | Vert | Orange | Rouge |
+|----------|------|--------|-------|
+| **Latence P95** | < 200ms | 200-500ms | > 500ms |
+| **Error rate** | < 0.1% | 0.1-1% | > 1% |
+| **CPU** | < 60% | 60-80% | > 80% |
+| **Coverage** | > 80% | 70-80% | < 70% |
 
-## Alertes Dernières 24h
+---
 
-| Heure | Sévérité | Message | Résolu |
-|-------|----------|---------|--------|
-| 14:32 | ⚠️ Warning | CPU > 80% (worker-1) | ✅ 14:45 |
+## Standards Post-Mortem
 
-## Métriques Clés
+### Contenu Obligatoire
 
-### Performance
-- P50 Latency: 85ms
-- P95 Latency: 234ms
-- P99 Latency: 567ms
-- Requests/min: 12,450
+| Section | Éléments |
+|---------|----------|
+| **Métadonnées** | Date, durée, impact, sévérité |
+| **Timeline** | Événements chronologiques |
+| **Cause racine** | Explication technique détaillée |
+| **Impact** | Utilisateurs, requêtes, pertes |
+| **Actions correctives** | Responsable, deadline, status |
+| **Lessons learned** | Ce qu'on a appris |
+| **Prévention** | Actions futures |
 
-### Infrastructure
-- CPU moyen: 45%
-- Mémoire: 62%
-- Connexions DB: 45/100
-- Queue backlog: 12
+### Délai de Production
 
-### Qualité Code
-- Build status: ✅ Passing
-- Tests: 1,234 passing, 0 failing
-- Coverage: 78.5%
-- Vulnérabilités: 0 critical, 2 medium
-```
+| Sévérité | Délai Post-Mortem |
+|----------|-------------------|
+| P1 | < 48h |
+| P2 | < 1 semaine |
+| P3+ | Optionnel |
 
-### Grafana/Datadog Panels
+---
 
-```
-┌─────────────────────────────────────────────────────────┐
-│ Requests per Second                                      │
-│ ▃▅▇█▇▅▃▂▃▅▆▇█▇▅▄▃▂▁▂▃▄▅▆▇█▇▆▅▄▃▂                       │
-│ 0    4h    8h    12h    16h    20h    24h               │
-└─────────────────────────────────────────────────────────┘
+## Standards Rétrospective Sprint
 
-┌─────────────────────────────────────────────────────────┐
-│ Error Rate (%)                   Latency P95 (ms)        │
-│    0.02%                              234ms              │
-│    ▂▁▁▁▂▁▁▁▁▁▂▁                       ▃▅▃▄▃▄▃▄▃▄▃▄      │
-└─────────────────────────────────────────────────────────┘
-```
+### Contenu Obligatoire
 
-## Rapport Post-Mortem
+| Section | Éléments |
+|---------|----------|
+| **Métriques sprint** | Vélocité, completion, bugs, cycle time |
+| **Feedback équipe** | Ce qui a marché, à améliorer, idées |
+| **Actions** | Responsable, sprint cible |
+| **Humeur équipe** | Indicateur visuel |
 
-### Template
+### Métriques à Comparer
 
-```markdown
-# Post-Mortem: [Titre Incident]
+| Métrique | Comparaison |
+|----------|-------------|
+| Vélocité | vs moyenne des 5 derniers sprints |
+| Completion rate | vs cible (90%) |
+| Bugs créés | vs sprint précédent |
+| Cycle time | vs moyenne équipe |
 
-**Date de l'incident** : YYYY-MM-DD
-**Durée** : Xh Xmin
-**Impact** : [Description impact utilisateurs]
-**Sévérité** : P1 / P2 / P3
+---
 
-## Timeline
+## Politique d'Automatisation
 
-| Heure | Événement |
-|-------|-----------|
-| 10:00 | Alerte CPU détectée |
-| 10:05 | Investigation démarrée |
-| 10:15 | Cause identifiée |
-| 10:30 | Fix déployé |
-| 10:35 | Service restauré |
+### Rapports à Automatiser
 
-## Cause Racine
+| Rapport | Automatisation | Outil Recommandé |
+|---------|----------------|------------------|
+| Dashboard temps réel | 100% | Grafana, Datadog |
+| Rapport hebdo | Génération données | Script + template |
+| Executive summary | Collecte métriques | API + template |
+| Alertes | 100% | PagerDuty, OpsGenie |
 
-[Explication technique détaillée]
+### Intégrations Obligatoires
 
-## Impact
+| Intégration | Usage |
+|-------------|-------|
+| **Slack** | Notifications automatiques |
+| **Jira** | Extraction métriques sprint |
+| **CI/CD** | Status build/deploy |
+| **APM** | Métriques performance |
 
-- Utilisateurs affectés : ~500
-- Requêtes en erreur : 1,200
-- Perte estimée : N/A
+---
 
-## Actions Correctives
+## Checklist Reporting
 
-| Action | Responsable | Deadline | Status |
-|--------|-------------|----------|--------|
-| Ajouter rate limiting | @dev | 15/03 | 🔄 |
-| Alertes plus sensibles | @ops | 12/03 | ✅ |
-| Documentation runbook | @lead | 20/03 | ⏳ |
+### Hebdomadaire
 
-## Lessons Learned
+- [ ] Métriques sprint à jour
+- [ ] Blocages documentés
+- [ ] Prévisions actualisées
+- [ ] Communication Product
 
-1. Le monitoring n'a pas détecté le pattern anormal
-2. Le runbook existant était incomplet
-3. La communication a été efficace
+### Mensuel
 
-## Prévention
+- [ ] Executive summary préparé
+- [ ] Risques mis à jour
+- [ ] Coûts vérifiés
+- [ ] Tendances analysées
 
-- [ ] Implémenter circuit breaker
-- [ ] Ajouter tests de charge réguliers
-- [ ] Former l'équipe au nouveau runbook
-```
-
-## Rapport de Sprint (Rétrospective)
-
-### Template
-
-```markdown
-# Rétrospective Sprint [N]
-
-**Date** : [Date]
-**Participants** : [Liste]
-**Facilitateur** : [Nom]
-
-## Métriques Sprint
-
-| Métrique | Valeur | vs Moyenne |
-|----------|--------|------------|
-| Vélocité | 34 pts | +8% |
-| Stories complétées | 8/9 | 89% |
-| Bugs créés | 2 | -50% |
-| Temps cycle moyen | 3.2j | -15% |
-
-## Feedback Équipe
-
-### 👍 Ce qui a bien marché
-
-1. Pair programming sur feature complexe
-2. Specs claires en début de sprint
-3. CI/CD rapide
-
-### 👎 Ce qui peut s'améliorer
-
-1. Trop d'interruptions (support)
-2. Reviews PR parfois lentes
-3. Estimation US-125 trop optimiste
-
-### 💡 Idées d'amélioration
-
-1. Créneaux sans interruption (Deep Work)
-2. Rotation support plus claire
-3. Poker planning avec plus de discussion
-
-## Actions
-
-| Action | Responsable | Sprint |
-|--------|-------------|--------|
-| Définir créneaux Deep Work | Scrum Master | S24 |
-| Documenter rotation support | Tech Lead | S24 |
-| Template estimation risquée | Équipe | S24 |
-
-## Humeur Équipe
-
-😊😊😊😊😐
-(4 positifs, 1 neutre)
-```
-
-## Automatisation
-
-### Script de Génération
-
-```typescript
-// scripts/generate-weekly-report.ts
-interface WeeklyReport {
-  sprint: SprintInfo;
-  metrics: Metrics;
-  blockers: Blocker[];
-  forecast: Forecast[];
-}
-
-async function generateWeeklyReport(): Promise<string> {
-  const sprint = await fetchSprintData();
-  const metrics = await fetchMetrics();
-  const blockers = await fetchBlockers();
-
-  return formatMarkdown({
-    sprint,
-    metrics,
-    blockers,
-    forecast: calculateForecast(sprint, metrics),
-  });
-}
-```
-
-### Intégration Slack
-
-```typescript
-// Notification automatique
-async function sendWeeklyReportToSlack() {
-  const report = await generateWeeklyReport();
-
-  await slack.postMessage({
-    channel: '#tech-sync',
-    blocks: [
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: `*📊 Rapport Hebdo - Semaine ${getWeekNumber()}*`,
-        },
-      },
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: report,
-        },
-      },
-    ],
-  });
-}
-```
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Métrique dans le rouge | Rapport immédiat + plan d'action |
-| Incident majeur | Post-mortem sous 48h |
-| Dérive significative | Alerte proactive aux stakeholders |
-| Questions sans réponse | Escalade au Tech Lead |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Métrique dans le rouge | Rapport immédiat + plan d'action | Tech Lead |
+| Incident majeur | Post-mortem sous 48h | IC |
+| Dérive significative | Alerte proactive aux stakeholders | Tech Lead |
+| Questions sans réponse | Escalade au Tech Lead | Équipe |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Monitoring | `performance/monitoring-perf` |
+| Incidents | `support/gestion-incidents` |
+| Métriques qualité | `qualite/metriques-qualite` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [Atlassian Incident Management](https://www.atlassian.com/incident-management)
+- [Google SRE - Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
