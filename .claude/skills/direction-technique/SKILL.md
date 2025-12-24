@@ -393,10 +393,10 @@ Si vous utilisiez ces agents pour du code :
 
 | Ancien | Nouveau |
 |--------|---------|
-| Code sécurité | `wordpress-gutenberg-expert/wp-core/security-validation` |
-| Code monitoring | `web-dev-process/agents/setup/monitoring` |
-| Code déploiement | `web-dev-process/agents/deployment/ci-cd` |
-| Code infrastructure | Skills DevOps spécialisés |
+| Code sécurité | `wordpress-gutenberg-expert/agents/wp-core/security-validation` |
+| Code monitoring | `web-dev-process/agents/setup/*` (cicd.md, docker.md) |
+| Code déploiement | `web-dev-process/agents/deployment/*` (production.md, staging.md) |
+| Code infrastructure | Skills DevOps spécialisés (à créer si nécessaire) |
 
 Voir `docs/analysis/MIGRATION.md` pour le guide complet.
 

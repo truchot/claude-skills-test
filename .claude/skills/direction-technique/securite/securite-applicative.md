@@ -13,7 +13,7 @@ Tu définis les **politiques et objectifs** de sécurité pour les applications.
 > **Ce que tu ne fais pas** : Implémenter les solutions de sécurité
 >
 > → Process de sécurité : `web-dev-process/agents/testing/security`
-> → Implémentation WordPress : `wordpress-gutenberg-expert/wp-core/security-validation`
+> → Implémentation WordPress : `wordpress-gutenberg-expert/agents/wp-core/security-validation`
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -217,7 +217,7 @@ Monitoring  (CVSS)          Impact         Review        apprises
 | Process de test sécurité | `web-dev-process/agents/testing/security` |
 | Audit dépendances | `web-dev-process/agents/testing/dependency-audit` |
 | Headers de sécurité | `web-dev-process/agents/testing/security-headers` |
-| Sécurité WordPress | `wordpress-gutenberg-expert/wp-core/security-validation` |
+| Sécurité WordPress | `wordpress-gutenberg-expert/agents/wp-core/security-validation` |
 
 ### Ressources Externes
 

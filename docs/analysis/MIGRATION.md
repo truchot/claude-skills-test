@@ -91,7 +91,7 @@ Le code d'implémentation a été **supprimé** des agents POURQUOI. Si vous uti
 
 | Ancien Emplacement | Nouveau Emplacement |
 |--------------------|---------------------|
-| `securite-applicative.md` (code TypeScript CSRF, bcrypt) | `wordpress-gutenberg-expert/wp-core/security-validation` (WP) ou agents setup du niveau COMMENT |
+| `securite-applicative.md` (code TypeScript CSRF, bcrypt) | `wordpress-gutenberg-expert/agents/wp-core/security-validation` (WP) ou agents setup du niveau COMMENT |
 | `environnements.md` (Docker, Makefile) | `web-dev-process/agents/setup/docker.md` |
 | `modelisation-donnees.md` (SQL, migrations) | `wordpress-gutenberg-expert/agents/data-modeling/*` |
 
@@ -105,7 +105,7 @@ Pour implémenter CSRF : voir `direction-technique/securite/securite-applicative
 
 # Après (correct)
 Pour les politiques CSRF : voir `direction-technique/securite/securite-applicative.md`
-Pour l'implémentation CSRF : voir `wordpress-gutenberg-expert/wp-core/security-validation`
+Pour l'implémentation CSRF : voir `wordpress-gutenberg-expert/agents/wp-core/security-validation`
 ```
 
 ---
@@ -232,7 +232,7 @@ Si vous utilisiez les agents POURQUOI pour du code d'implémentation, voici les 
 
 | Ancien Usage | Nouveau Emplacement | Notes |
 |--------------|---------------------|-------|
-| Code CSRF dans `securite-applicative.md` | `wordpress-gutenberg-expert/wp-core/security-validation` | Spécifique WordPress |
+| Code CSRF dans `securite-applicative.md` | `wordpress-gutenberg-expert/agents/wp-core/security-validation` | Spécifique WordPress |
 | Code bcrypt/hashage | `web-dev-process/agents/testing/security` | Process générique |
 | Config Docker | `web-dev-process/agents/setup/docker` | Process de setup |
 | Manifests K8s | Skills DevOps spécialisés | À créer si nécessaire |
