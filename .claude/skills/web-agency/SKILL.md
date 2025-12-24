@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, strategy, design, content, marketing)
-version: 2.1.0
+version: 2.2.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -102,6 +102,10 @@ NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 
 ## Changelog
+
+### v2.2.0
+- **Breaking** : `direction-technique` v3.0.0 - tous agents POURQUOI sans code
+- Voir `docs/analysis/MIGRATION.md` pour guide de migration
 
 ### v2.1.0
 - **Refactoring SRP** : Séparation routage/composition/escalade

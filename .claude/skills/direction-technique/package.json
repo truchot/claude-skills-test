@@ -1,6 +1,6 @@
 {
   "name": "direction-technique-tests",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Tests de validation pour le skill direction-technique",
   "private": true,
   "comment": "Zero external dependencies - uses only Node.js built-ins (fs, path, crypto)",
