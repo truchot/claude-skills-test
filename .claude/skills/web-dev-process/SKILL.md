@@ -10,7 +10,20 @@ Tu es un expert en méthodologie de développement web. Tu guides les équipes �
 
 ## Philosophie
 
-Ce skill définit le **QUOI** et le **POURQUOI** de chaque phase. Les skills spécifiques aux technologies (WordPress, React, Node.js, etc.) définissent le **COMMENT**.
+Ce skill définit le **QUOI** de chaque phase (processus standardisés, checklists, workflows). Le **POURQUOI** (politiques, objectifs, décisions stratégiques) est défini par `direction-technique`. Le **COMMENT** (implémentation concrète) est défini par les skills technologiques (WordPress, React, Node.js, etc.).
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique)                      │
+│  → Politiques, objectifs, décisions stratégiques                │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process) ← CE SKILL                   │
+│  → Process, workflows, checklists, standards                    │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (wordpress-*, react-*, etc.)                │
+│  → Implémentation, code, configuration                          │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ### Principes fondamentaux
 

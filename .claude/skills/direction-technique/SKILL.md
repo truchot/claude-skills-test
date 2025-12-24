@@ -1,7 +1,7 @@
 ---
 name: direction-technique
 description: Direction Technique - Pilotage stratégique des choix techniques, de l'architecture à la qualité. Orchestre web-dev-process et wordpress-gutenberg-expert.
-version: 2.0.1
+version: 3.0.0
 ---
 
 # Direction Technique
@@ -367,6 +367,50 @@ direction-technique/qualite ──► project-management/pilotage
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 |
 
 ## Changelog
+
+### v3.0.0 ⚠️ BREAKING CHANGES
+
+> **📖 [Guide de Migration](../../../docs/analysis/MIGRATION.md)** - Consultez ce guide avant de mettre à jour
+
+**Refactoring SRP complet** : Tous les agents POURQUOI sont désormais sans code d'implémentation.
+
+#### Breaking Changes
+
+| Fichier | Ce qui a été supprimé |
+|---------|----------------------|
+| `patterns-design.md` | 9 blocks TypeScript (patterns) |
+| `conformite-rgpd.md` | 5 blocks TypeScript (RGPD) |
+| `gestion-secrets.md` | 4 blocks TS/PHP (secrets) |
+| `specification-api.md` | Exemples JS/bash |
+| `specification-technique.md` | Requêtes SQL |
+| `conventions-code.md` | Configs ESLint/Prettier |
+| `monitoring-perf.md` | 6 blocks TS/YAML/PromQL |
+| `strategie-deploiement.md` | 7 blocks TS/K8s/Bash |
+| `architecture-infra.md` | 3 blocks HCL/TS/K8s |
+| `architecture-applicative.md` | Template TypeScript |
+
+#### Migration
+
+Si vous utilisiez ces agents pour du code :
+
+| Ancien | Nouveau |
+|--------|---------|
+| Code sécurité | `wordpress-gutenberg-expert/agents/wp-core/security-validation` |
+| Code monitoring | `web-dev-process/agents/setup/*` (cicd.md, docker.md) |
+| Code déploiement | `web-dev-process/agents/deployment/*` (production.md, staging.md) |
+| Code infrastructure | Skills DevOps spécialisés (à créer si nécessaire) |
+
+Voir `docs/analysis/MIGRATION.md` pour le guide complet.
+
+#### Améliorations
+
+- Tous les agents suivent le modèle POURQUOI/QUOI/COMMENT
+- Ajout de tables de politiques au lieu de code
+- Ajout de checklists et points d'escalade
+- Références croisées vers les agents d'implémentation
+- Test de validation SRP (`npm run test:srp`) : 36/36 passed
+
+---
 
 ### v2.0.1
 

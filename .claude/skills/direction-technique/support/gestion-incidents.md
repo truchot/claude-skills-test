@@ -1,79 +1,80 @@
 ---
 name: gestion-incidents
-description: Gestion des incidents en production selon les bonnes pratiques
+description: Politique de gestion des incidents (Niveau POURQUOI)
 ---
 
-# Gestion des Incidents
+# Politique de Gestion des Incidents
 
-Tu gères les **incidents en production** de manière structurée pour minimiser l'impact et restaurer le service.
+Tu définis les **politiques et standards** de gestion des incidents en production.
+
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Définir les RÈGLES de gestion d'incidents et les processus
+> **Ce que tu ne fais pas** : Configurer PagerDuty ou écrire les runbooks
+>
+> → Process incident response : `web-dev-process/agents/support/incident-response`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ce process ? Pour minimiser impact et restaurer"   │
+│  → "Standards : classification, rôles, communication"           │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi faire ? Triage, investigation, mitigation"             │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : scripts diagnostic, configs alerting, runbooks"      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Classification des Incidents
 
 ### Matrice de Sévérité
 
-| Sévérité | Impact | Exemples |
-|----------|--------|----------|
-| **P1 - Critique** | Service complètement down | Site inaccessible, perte de données |
-| **P2 - Majeur** | Fonctionnalité majeure impactée | Paiements KO, login impossible |
-| **P3 - Modéré** | Fonctionnalité secondaire | Export PDF cassé, lenteurs |
-| **P4 - Mineur** | Impact limité | Bug cosmétique, edge case |
+| Sévérité | Impact | Exemples | SLA Réponse |
+|----------|--------|----------|-------------|
+| **P1 - Critique** | Service complètement down | Site inaccessible, perte de données | 5 min |
+| **P2 - Majeur** | Fonctionnalité majeure impactée | Paiements KO, login impossible | 15 min |
+| **P3 - Modéré** | Fonctionnalité secondaire | Export PDF cassé, lenteurs | 1h |
+| **P4 - Mineur** | Impact limité | Bug cosmétique, edge case | 4h |
 
-### Critères de Priorité
+### Matrice Urgence/Impact
 
-```
-                    Impact Utilisateurs
-                    Low    Medium    High
-Urgence    High     P3       P2       P1
-           Medium   P4       P3       P2
-           Low      P4       P4       P3
-```
+|  | Impact Low | Impact Medium | Impact High |
+|--|------------|---------------|-------------|
+| **Urgence High** | P3 | P2 | P1 |
+| **Urgence Medium** | P4 | P3 | P2 |
+| **Urgence Low** | P4 | P4 | P3 |
 
-## Processus de Gestion
+---
 
-### Cycle de Vie
+## Cycle de Vie des Incidents
 
-```
-Detection → Triage → Investigation → Mitigation → Resolution → Post-Mortem
-    │         │           │              │            │            │
-    ▼         ▼           ▼              ▼            ▼            ▼
-  Alerte   Classify    Debug        Restore      Fix Root      Document
-           Assign                   Service       Cause        Learn
-```
+| Phase | Objectif | Durée Max (P1) |
+|-------|----------|----------------|
+| **Détection** | Identifier l'incident | Automatique |
+| **Triage** | Classifier et assigner | 5 min |
+| **Investigation** | Identifier la cause | 30 min |
+| **Mitigation** | Restaurer le service | 1h |
+| **Résolution** | Fix définitif | Variable |
+| **Post-Mortem** | Documenter et apprendre | 48h |
 
-### Phase 1: Détection
+### Sources de Détection
 
-| Source | Type |
-|--------|------|
-| Monitoring | Alertes automatiques (CPU, erreurs, latence) |
-| Utilisateurs | Tickets support, signalements |
-| Équipe | Observation lors de tests |
-| Partenaires | Signalement API down |
+| Source | Type | Fiabilité |
+|--------|------|-----------|
+| **Monitoring** | Alertes automatiques | Haute |
+| **Utilisateurs** | Tickets support | Moyenne |
+| **Équipe** | Observation | Variable |
+| **Partenaires** | Signalement API | Moyenne |
 
-### Phase 2: Triage
-
-```markdown
-## Checklist Triage
-
-1. [ ] Confirmer que c'est un vrai incident (pas false positive)
-2. [ ] Évaluer l'impact (scope, utilisateurs, business)
-3. [ ] Assigner la sévérité (P1-P4)
-4. [ ] Identifier l'Incident Commander
-5. [ ] Créer le canal de communication (#incident-YYYY-MM-DD)
-6. [ ] Notifier les parties prenantes appropriées
-```
-
-### Phase 3: Investigation & Mitigation
-
-| Action | Objectif |
-|--------|----------|
-| Containment | Limiter la propagation |
-| Mitigation | Restaurer le service (workaround OK) |
-| Root Cause | Identifier la vraie cause |
-| Fix | Résoudre définitivement |
+---
 
 ## Rôles Incident Response
-
-### RACI
 
 | Rôle | Responsabilité |
 |------|----------------|
@@ -83,211 +84,139 @@ Detection → Triage → Investigation → Mitigation → Resolution → Post-Mo
 | **Scribe** | Documente la timeline |
 | **Subject Matter Expert** | Expertise domaine spécifique |
 
-### Incident Commander
+### Responsabilités IC
 
-```markdown
-## Responsabilités IC
+| Responsabilité | Description |
+|----------------|-------------|
+| Déclarer début/fin | Formalise l'incident |
+| Coordonner | Organise les efforts |
+| Décider | Priorités et actions |
+| Autoriser | Actions risquées |
+| Communiquer | Updates réguliers |
+| Escalader | Si nécessaire |
 
-- Déclarer le début et la fin de l'incident
-- Coordonner les efforts de résolution
-- Prendre les décisions de priorisation
-- Autoriser les actions risquées
-- Assurer la communication régulière
-- Décider quand escalader
-```
+---
 
-## Communication
+## Politique de Communication
 
-### Template Notification Initiale
+### Fréquence des Updates
 
-```markdown
-🚨 **INCIDENT P1 - [Titre Court]**
+| Sévérité | Fréquence Update | Canal |
+|----------|------------------|-------|
+| P1 | Toutes les 15 min | Slack + Status Page |
+| P2 | Toutes les 30 min | Slack |
+| P3 | À chaque changement | Slack |
+| P4 | Résolution | Ticket |
 
-**Statut**: En cours d'investigation
-**Début**: HH:MM UTC
-**Impact**: [Description impact utilisateurs]
-**Affectés**: [Scope - tous, région, segment]
+### Contenu des Notifications
 
-**Équipe assignée**: @on-call @tech-lead
-**Canal**: #incident-2024-01-15
+| Type | Éléments Obligatoires |
+|------|----------------------|
+| **Initiale** | Sévérité, titre, impact, scope, équipe assignée, canal |
+| **Update** | Status, durée, progrès, prochaines étapes |
+| **Résolution** | Durée totale, cause, résolution, impact final, date post-mortem |
 
-Prochain update dans 15 minutes.
-```
+---
 
-### Template Update
+## Politique Runbooks
 
-```markdown
-📊 **UPDATE INCIDENT P1 - [Titre]**
+### Structure Obligatoire
 
-**Statut**: [En cours / Mitigé / Résolu]
-**Durée**: Xh Xmin
+| Section | Contenu |
+|---------|---------|
+| **Symptômes** | Alertes et comportements observés |
+| **Diagnostic rapide** | Commandes de vérification |
+| **Actions de mitigation** | Options ordonnées par risque |
+| **Vérification** | Comment confirmer la résolution |
+| **Escalade** | Quand et vers qui |
 
-**Progrès**:
-- 10:15 - Cause identifiée : [cause]
-- 10:20 - Mitigation en cours : [action]
+### Maintenance des Runbooks
 
-**Prochaines étapes**: [actions planifiées]
+| Trigger | Action |
+|---------|--------|
+| Nouvel incident type | Créer runbook |
+| Post-mortem | Mettre à jour runbook |
+| Changement d'architecture | Reviewer runbooks |
+| Trimestriel | Audit runbooks |
 
-Prochain update dans [X] minutes.
-```
+---
 
-### Template Résolution
+## Politique War Room (P1)
 
-```markdown
-✅ **RÉSOLU - INCIDENT P1 - [Titre]**
+### Critères d'Activation
 
-**Durée totale**: Xh Xmin
-**Cause**: [résumé cause racine]
-**Résolution**: [action qui a résolu]
+| Critère | Description |
+|---------|-------------|
+| Sévérité P1 | Automatique |
+| P2 > 30 min | Escalade |
+| Impact business majeur | Sur décision |
 
-**Impact final**:
-- Utilisateurs affectés: ~X
-- Durée d'indisponibilité: Xh Xmin
-
-Post-mortem prévu: [date]
-```
-
-## Runbooks
-
-### Structure
-
-```markdown
-# Runbook: [Nom du Scénario]
-
-## Symptômes
-- Alerte X déclenchée
-- Logs montrent Y
-- Utilisateurs rapportent Z
-
-## Diagnostic Rapide
-
-\`\`\`bash
-# Vérifier le service
-curl -I https://api.example.com/health
-
-# Vérifier les logs
-kubectl logs -f deployment/api --tail=50
-
-# Vérifier la DB
-psql -c "SELECT count(*) FROM pg_stat_activity;"
-\`\`\`
-
-## Actions de Mitigation
-
-### Option 1: Restart Service
-\`\`\`bash
-kubectl rollout restart deployment/api
-kubectl rollout status deployment/api
-\`\`\`
-
-### Option 2: Rollback
-\`\`\`bash
-kubectl rollout undo deployment/api
-\`\`\`
-
-### Option 3: Scale Up
-\`\`\`bash
-kubectl scale deployment/api --replicas=5
-\`\`\`
-
-## Vérification
-
-\`\`\`bash
-# Confirmer le retour à la normale
-curl https://api.example.com/health
-# Vérifier les métriques dans Grafana
-\`\`\`
-
-## Escalade
-
-Si non résolu après 15 minutes:
-- Escalader à @tech-lead
-- Contacter le support [fournisseur]
-```
-
-## Outils
-
-### PagerDuty / OpsGenie
-
-```yaml
-# Configuration alerte
-alert:
-  name: High Error Rate
-  condition: error_rate > 1%
-  duration: 5m
-  severity: P2
-  notify:
-    - on-call-primary
-    - slack:#alerts
-  runbook: https://wiki.example.com/runbooks/high-error-rate
-```
-
-### Slack Integration
-
-```typescript
-// Incident bot commands
-/incident create "API Down" P1
-/incident update "Identified - DB connection pool exhausted"
-/incident resolve "Fixed - Increased pool size"
-/incident postmortem create
-```
-
-## War Room (P1)
-
-### Setup
-
-```markdown
-## Checklist War Room
-
-- [ ] Créer le bridge call (Zoom/Meet permanent)
-- [ ] Inviter IC, Tech Lead, SMEs
-- [ ] Partager le lien dans #incident
-- [ ] Scribe prêt à documenter
-- [ ] Dashboard monitoring partagé
-- [ ] Accès aux environnements confirmés
-```
-
-### Règles
+### Règles War Room
 
 | Règle | Raison |
 |-------|--------|
 | IC mène les discussions | Éviter le chaos |
 | Un speaker à la fois | Clarté |
-| Focus sur la mitigation d'abord | Restaurer le service |
-| Pas de blame | Psychologie sécurité |
+| Focus mitigation d'abord | Restaurer le service |
+| Pas de blame | Sécurité psychologique |
 | Documenter en temps réel | Post-mortem facilité |
 
-## Métriques
+---
 
-### KPIs Incident Management
+## KPIs Incident Management
 
 | Métrique | Définition | Cible |
 |----------|------------|-------|
 | **MTTA** | Mean Time To Acknowledge | < 5 min |
 | **MTTD** | Mean Time To Detect | < 2 min |
-| **MTTR** | Mean Time To Resolve | P1: < 1h |
+| **MTTR** | Mean Time To Resolve | P1: < 1h, P2: < 4h |
 | **MTBF** | Mean Time Between Failures | > 30 jours |
 
-### Tracking
+---
 
-```sql
--- Dashboard incidents
-SELECT
-  date_trunc('month', created_at) as month,
-  severity,
-  count(*) as total,
-  avg(extract(epoch from resolved_at - created_at)/60) as avg_mttr_minutes
-FROM incidents
-WHERE created_at > now() - interval '6 months'
-GROUP BY 1, 2
-ORDER BY 1 DESC, 2;
-```
+## Checklist Incident
+
+### Triage
+
+- [ ] Confirmer que c'est un vrai incident
+- [ ] Évaluer l'impact (scope, utilisateurs, business)
+- [ ] Assigner la sévérité (P1-P4)
+- [ ] Identifier l'Incident Commander
+- [ ] Créer le canal de communication
+- [ ] Notifier les parties prenantes
+
+### Résolution
+
+- [ ] Service restauré
+- [ ] Cause racine identifiée
+- [ ] Fix permanent planifié
+- [ ] Post-mortem programmé
+- [ ] Communication finale envoyée
+
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| P1 > 30 min sans mitigation | Escalade management |
-| Besoin rollback risqué | Approbation IC + backup |
-| Impact financier majeur | CFO/CEO informé |
-| Fuite de données suspectée | RSSI + légal |
+| Situation | Action | Délai |
+|-----------|--------|-------|
+| P1 > 30 min sans mitigation | Escalade management | Immédiat |
+| Besoin rollback risqué | Approbation IC + backup | Immédiat |
+| Impact financier majeur | CFO/CEO informé | < 1h |
+| Fuite de données suspectée | RSSI + légal | Immédiat |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process incident response | `web-dev-process/agents/support/incident-response` |
+| Post-mortem | `support/post-mortem` |
+| Monitoring | `performance/monitoring-perf` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [Google SRE - Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+- [PagerDuty Incident Response Guide](https://response.pagerduty.com/)
+- [Atlassian Incident Management Handbook](https://www.atlassian.com/incident-management/handbook)

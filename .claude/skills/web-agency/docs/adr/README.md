@@ -10,6 +10,7 @@ Ce dossier contient les ADRs (Architecture Decision Records) documentant les dé
 | [002](002-hierarchical-orchestrators.md) | Orchestrateurs hiérarchiques | Accepté |
 | [003](003-markdown-agent-format.md) | Format Markdown pour les agents | Accepté |
 | [004](004-human-supervision.md) | Supervision humaine obligatoire | Accepté |
+| [005](005-skill-responsibility-boundaries.md) | Frontières de responsabilités entre skills | Accepté |
 
 ## Format ADR
 

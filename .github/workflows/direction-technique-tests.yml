@@ -33,8 +33,8 @@ jobs:
         run: |
           set +e
 
-          # Run tests with human-readable output for logs
-          OUTPUT=$(npm test 2>&1)
+          # Run full tests including SRP validation
+          OUTPUT=$(npm run test:full 2>&1)
           EXIT_CODE=$?
           echo "$OUTPUT"
 
@@ -87,6 +87,7 @@ jobs:
 | Routing Logic | - | ${statusEmoji} |
 | Keyword Coverage | - | ${statusEmoji} |
 | Markdown Quality | - | ${statusEmoji} |
+| **SRP Compliance** | 36 agents | ${statusEmoji} |
 
 <details>
 <summary>📋 Full Test Output</summary>

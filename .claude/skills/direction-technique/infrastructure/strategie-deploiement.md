@@ -1,11 +1,35 @@
 ---
 name: strategie-deploiement
-description: Stratégies de déploiement et release
+description: Politique de stratégies de déploiement (Niveau POURQUOI)
 ---
 
-# Stratégie de Déploiement
+# Politique de Stratégie de Déploiement
 
-Tu définis et implémentes les **stratégies de déploiement** pour des releases sûres et rapides.
+Tu définis les **politiques et standards** pour les stratégies de déploiement.
+
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Définir les RÈGLES de déploiement et critères de choix de stratégie
+> **Ce que tu ne fais pas** : Écrire les scripts de déploiement ou configurer Kubernetes/CI
+>
+> → Process de déploiement : `web-dev-process/agents/deployment/ci-cd`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces stratégies ? Pour releases sûres et rapides"   │
+│  → "Politiques : rollback, blue-green, canary"                  │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi configurer ? Pipeline CI/CD, health checks"            │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : Kubernetes YAML, Terraform, scripts bash"            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Stratégies de Déploiement
 
@@ -57,199 +81,91 @@ Instance 3: v1 ─────────────────→ v2 (3/3)
 
 ### 4. Feature Flags
 
-```typescript
-// Déployer le code, activer progressivement
-if (featureFlags.isEnabled('new-checkout', { userId })) {
-  return <NewCheckout />;
-} else {
-  return <OldCheckout />;
-}
-```
-
 **Avantages** : Découplage deploy/release, rollback instantané
 **Inconvénients** : Code plus complexe, cleanup nécessaire
 
-## Implémentation
+---
 
-### Kubernetes Rolling Update
+## Critères de Choix de Stratégie
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: api
-spec:
-  replicas: 3
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1        # 1 pod en plus pendant update
-      maxUnavailable: 0  # Toujours 3 pods disponibles
-  template:
-    spec:
-      containers:
-      - name: api
-        image: myapp:v2
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-```
+| Critère | Rolling | Blue-Green | Canary | Feature Flags |
+|---------|---------|------------|--------|---------------|
+| **Ressources nécessaires** | Minimales | Doublées | +10-20% | Aucune infra |
+| **Rollback** | Progressif | Instantané | Instantané | Instantané |
+| **Complexité** | Faible | Moyenne | Élevée | Code |
+| **Test en prod** | Non | Non | Oui | Oui |
+| **Downtime** | ~0 | 0 | 0 | 0 |
 
-### AWS ECS Blue-Green
+### Recommandations par Contexte
 
-```hcl
-# Terraform
-resource "aws_codedeploy_deployment_group" "app" {
-  app_name               = aws_codedeploy_app.app.name
-  deployment_group_name  = "production"
-  service_role_arn       = aws_iam_role.codedeploy.arn
+| Contexte | Stratégie Recommandée |
+|----------|----------------------|
+| **Startup / MVP** | Rolling + Feature Flags |
+| **Application critique** | Blue-Green |
+| **Grande échelle** | Canary |
+| **Changement risqué** | Feature Flags + Canary |
+| **Hotfix urgent** | Rolling (fast) |
 
-  deployment_style {
-    deployment_option = "WITH_TRAFFIC_CONTROL"
-    deployment_type   = "BLUE_GREEN"
-  }
+## Politique de Rollback
 
-  blue_green_deployment_config {
-    deployment_ready_option {
-      action_on_timeout = "CONTINUE_DEPLOYMENT"
-    }
+### Procédure Standard
 
-    terminate_blue_instances_on_deployment_success {
-      action                           = "TERMINATE"
-      termination_wait_time_in_minutes = 5
-    }
-  }
+| Étape | Action | Responsable | Délai Max |
+|-------|--------|-------------|-----------|
+| 1 | Détecter le problème | Monitoring/On-call | Automatique |
+| 2 | Évaluer l'impact | On-call | 5 min |
+| 3 | Décision rollback | On-call + Tech Lead | 5 min |
+| 4 | Exécuter rollback | On-call | 5 min |
+| 5 | Vérifier le service | On-call | 5 min |
+| 6 | Post-mortem | Équipe | < 48h |
 
-  ecs_service {
-    cluster_name = aws_ecs_cluster.main.name
-    service_name = aws_ecs_service.app.name
-  }
-}
-```
+### Critères de Déclenchement Automatique
 
-### Canary avec Istio
+| Métrique | Seuil | Action |
+|----------|-------|--------|
+| **Error rate** | > 5% pendant 2 min | Rollback auto |
+| **Latence p99** | > 5s pendant 5 min | Pause + alerte |
+| **Health check** | 3 échecs consécutifs | Rollback auto |
 
-```yaml
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: api
-spec:
-  hosts:
-  - api.example.com
-  http:
-  - match:
-    - headers:
-        canary:
-          exact: "true"
-    route:
-    - destination:
-        host: api
-        subset: canary
-  - route:
-    - destination:
-        host: api
-        subset: stable
-      weight: 90
-    - destination:
-        host: api
-        subset: canary
-      weight: 10
-```
+### Délais de Rollback par Stratégie
 
-## Rollback
+| Stratégie | Délai de Rollback |
+|-----------|-------------------|
+| Rolling | 5-15 min (progressif) |
+| Blue-Green | < 1 min |
+| Canary | < 1 min |
+| Feature Flags | Instantané |
 
-### Procédure de Rollback
+---
 
-```
-1. Détecter le problème
-   ↓
-2. Décision de rollback
-   ↓
-3. Exécuter le rollback
-   ↓
-4. Vérifier le service
-   ↓
-5. Post-mortem
-```
+## Politique de Migrations Base de Données
 
-### Script de Rollback
+### Règles de Compatibilité
 
-```bash
-#!/bin/bash
-# scripts/rollback.sh
+| Type de Changement | Compatible Backward ? | Procédure |
+|--------------------|----------------------|-----------|
+| **Ajouter colonne nullable** | ✅ Oui | Deploy normal |
+| **Ajouter colonne avec défaut** | ✅ Oui | Deploy normal |
+| **Supprimer colonne** | ❌ Non | Expand-Contract |
+| **Renommer colonne** | ❌ Non | Expand-Contract |
+| **Changer type de colonne** | ❌ Non | Expand-Contract |
 
-set -e
+### Pattern Expand-Contract
 
-ENVIRONMENT=$1
-PREVIOUS_VERSION=$2
+| Phase | Description | Durée |
+|-------|-------------|-------|
+| **Expand** | Ajouter nouvelle structure, écrire aux deux | 1 deploy |
+| **Migrate** | Migrer données en background | Variable |
+| **Contract** | Supprimer ancienne structure | 1 deploy après vérification |
 
-echo "🔄 Rolling back to version $PREVIOUS_VERSION on $ENVIRONMENT"
+### Règles Obligatoires
 
-# Kubernetes
-kubectl set image deployment/api api=myapp:$PREVIOUS_VERSION
-kubectl rollout status deployment/api --timeout=5m
-
-# OU Docker
-docker-compose -f docker-compose.$ENVIRONMENT.yml pull
-docker-compose -f docker-compose.$ENVIRONMENT.yml up -d
-
-# Vérification
-echo "✅ Verifying rollback..."
-curl -f https://api.$ENVIRONMENT.example.com/health || exit 1
-
-echo "✅ Rollback completed successfully"
-```
-
-### Kubernetes Rollback
-
-```bash
-# Voir l'historique
-kubectl rollout history deployment/api
-
-# Rollback vers version précédente
-kubectl rollout undo deployment/api
-
-# Rollback vers version spécifique
-kubectl rollout undo deployment/api --to-revision=2
-
-# Status
-kubectl rollout status deployment/api
-```
-
-## Database Migrations
-
-### Migrations Compatibles
-
-```typescript
-// ✅ Migration rétrocompatible
-// 1. Ajouter nouvelle colonne nullable
-ALTER TABLE users ADD COLUMN new_email VARCHAR(255);
-
-// 2. Migrer les données (en background)
-UPDATE users SET new_email = email WHERE new_email IS NULL;
-
-// 3. (Next deploy) Utiliser nouvelle colonne
-// 4. (Later) Supprimer ancienne colonne
-```
-
-### Expand-Contract Pattern
-
-```
-v1 (before):  [email column]
-
-v2 (expand):  [email column] + [new_email column]
-              ← Code writes to both
-
-v3 (migrate): [email column] + [new_email column]
-              ← Background migration
-
-v4 (contract): [new_email column only]
-              ← Old column dropped
-```
+| Règle | Justification |
+|-------|---------------|
+| Migrations réversibles | Permettre rollback |
+| Pas de transactions longues | Éviter les locks |
+| Tester en staging | Valider avant prod |
+| Backup avant migration | Sécurité |
 
 ## Checklist Déploiement
 
@@ -275,11 +191,32 @@ v4 (contract): [new_email column only]
 - [ ] Pas d'alertes
 - [ ] Communication à l'équipe
 
+---
+
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Erreurs > seuil | Rollback automatique |
-| Latence dégradée | Pause et investigation |
-| Rollback échoue | Escalade + war room |
-| Migration bloquée | Ne pas forcer, analyser |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Erreurs > seuil | Rollback automatique | Système |
+| Latence dégradée | Pause et investigation | On-call |
+| Rollback échoue | Escalade + war room | Tech Lead + DevOps |
+| Migration bloquée | Ne pas forcer, analyser | DBA + Tech Lead |
+| Incident client | Communication + priorité | Tech Lead + Product |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process CI/CD | `web-dev-process/agents/deployment/ci-cd` |
+| Architecture infra | `infrastructure/architecture-infra` |
+| Environnements | `infrastructure/environnements` |
+| Monitoring | `performance/monitoring-perf` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [Martin Fowler - Blue Green Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+- [Google SRE - Release Engineering](https://sre.google/sre-book/release-engineering/)
+- [Feature Flags Best Practices](https://launchdarkly.com/blog/feature-flag-best-practices/)

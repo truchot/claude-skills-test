@@ -1,328 +1,201 @@
 ---
 name: patterns-design
-description: Patterns de conception et bonnes pratiques architecturales
+description: Politique et critères de choix des patterns de conception (Niveau POURQUOI)
 ---
 
-# Patterns de Design
+# Politique des Patterns de Design
 
-Tu guides l'application des **patterns de conception** et des bonnes pratiques architecturales.
+Tu définis les **critères de choix** des patterns de conception et les bonnes pratiques architecturales.
 
-## Contexte
+## Rôle de cet Agent (Niveau POURQUOI)
 
-Intervient pour :
-- Recommander des patterns adaptés
-- Expliquer l'application de patterns
-- Résoudre des problèmes de design
-- Éviter les anti-patterns
+> **Ce que tu fais** : Définir QUAND et POURQUOI utiliser chaque pattern
+> **Ce que tu ne fais pas** : Implémenter les patterns (code)
+>
+> → Process d'architecture : `web-dev-process/agents/design/architecture`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ce pattern ? Pour découpler les responsabilités"   │
+│  → "Critères : complexité, maintenabilité, testabilité"         │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quels patterns utiliser ? Repository, Factory, Strategy"    │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code TypeScript/PHP implémentant le pattern"                │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Catégories de Patterns
 
-### 1. Patterns Créationnels
+### Patterns Créationnels
 
-| Pattern | Problème résolu | Quand l'utiliser |
-|---------|-----------------|------------------|
-| **Factory** | Création d'objets sans exposer la logique | Objets complexes, familles d'objets |
-| **Abstract Factory** | Familles d'objets liés | Thèmes UI, configurations multi-env |
-| **Builder** | Construction étape par étape | Objets avec beaucoup de paramètres |
-| **Singleton** | Instance unique | Config, connexion DB, logger |
-| **Prototype** | Clonage d'objets | Objets coûteux à créer |
+| Pattern | Problème Résolu | Quand l'Utiliser | Quand l'Éviter |
+|---------|-----------------|------------------|----------------|
+| **Factory** | Création d'objets sans exposer la logique | Familles d'objets, config dynamique | Objet simple, peu de variations |
+| **Abstract Factory** | Familles d'objets liés | Thèmes UI, multi-provider | Peu de variations |
+| **Builder** | Construction étape par étape | Objets avec beaucoup de paramètres | Objet simple |
+| **Singleton** | Instance unique | Config, connexion DB, logger | État mutable partagé (danger) |
+| **Prototype** | Clonage d'objets | Objets coûteux à créer | Objets simples |
 
-#### Exemple : Factory
+### Patterns Structurels
 
-```typescript
-// Factory Pattern
-interface PaymentProcessor {
-  process(amount: number): Promise<PaymentResult>;
-}
+| Pattern | Problème Résolu | Quand l'Utiliser | Quand l'Éviter |
+|---------|-----------------|------------------|----------------|
+| **Adapter** | Interface incompatible | Intégration de librairies tierces | API déjà compatible |
+| **Decorator** | Ajouter des comportements | Logging, caching, validation | Peu de variations de comportement |
+| **Facade** | Interface simplifiée | API complexe à simplifier | API déjà simple |
+| **Proxy** | Contrôle d'accès | Lazy loading, caching, sécurité | Accès direct acceptable |
+| **Composite** | Structures arborescentes | Menus, fichiers, organisations | Structure plate |
 
-class StripeProcessor implements PaymentProcessor {
-  async process(amount: number): Promise<PaymentResult> {
-    // Stripe implementation
-  }
-}
+### Patterns Comportementaux
 
-class PayPalProcessor implements PaymentProcessor {
-  async process(amount: number): Promise<PaymentResult> {
-    // PayPal implementation
-  }
-}
+| Pattern | Problème Résolu | Quand l'Utiliser | Quand l'Éviter |
+|---------|-----------------|------------------|----------------|
+| **Strategy** | Algorithmes interchangeables | Calculs variables, pricing, sorting | Un seul algorithme |
+| **Observer** | Notification de changements | Events, UI réactif | Peu d'abonnés |
+| **Command** | Encapsuler des actions | Undo/redo, queues, macro | Action simple unique |
+| **State** | Comportement selon état | Workflows, state machines | Peu d'états |
+| **Chain of Responsibility** | Chaîne de handlers | Middleware, validation | Handler unique |
 
-class PaymentProcessorFactory {
-  static create(type: 'stripe' | 'paypal'): PaymentProcessor {
-    switch (type) {
-      case 'stripe': return new StripeProcessor();
-      case 'paypal': return new PayPalProcessor();
-      default: throw new Error('Unknown processor');
-    }
-  }
-}
-```
+### Patterns Architecturaux
 
-### 2. Patterns Structurels
+| Pattern | Usage | Complexité | Justification |
+|---------|-------|------------|---------------|
+| **MVC** | Applications web traditionnelles | Faible | Séparation claire |
+| **MVVM** | Applications réactives | Moyenne | Binding data |
+| **Repository** | Abstraction de la persistance | Faible | Testabilité |
+| **Unit of Work** | Transactions cohérentes | Moyenne | Cohérence des données |
+| **CQRS** | Séparation lecture/écriture | Élevée | Scale asymétrique |
+| **Event Sourcing** | Historique complet | Élevée | Audit, replay |
+| **Saga** | Transactions distribuées | Élevée | Microservices |
 
-| Pattern | Problème résolu | Quand l'utiliser |
-|---------|-----------------|------------------|
-| **Adapter** | Interface incompatible | Intégration de librairies tierces |
-| **Decorator** | Ajouter des comportements | Logging, caching, validation |
-| **Facade** | Interface simplifiée | API complexe à simplifier |
-| **Proxy** | Contrôle d'accès | Lazy loading, caching, sécurité |
-| **Composite** | Structures arborescentes | Menus, fichiers, organisations |
-
-#### Exemple : Adapter
-
-```typescript
-// Adapter Pattern - Intégration API tierce
-interface InternalUser {
-  id: string;
-  fullName: string;
-  email: string;
-}
-
-// API externe avec format différent
-interface ExternalUserResponse {
-  user_id: number;
-  first_name: string;
-  last_name: string;
-  email_address: string;
-}
-
-class ExternalUserAdapter {
-  static toInternal(external: ExternalUserResponse): InternalUser {
-    return {
-      id: String(external.user_id),
-      fullName: `${external.first_name} ${external.last_name}`,
-      email: external.email_address
-    };
-  }
-}
-```
-
-### 3. Patterns Comportementaux
-
-| Pattern | Problème résolu | Quand l'utiliser |
-|---------|-----------------|------------------|
-| **Strategy** | Algorithmes interchangeables | Calculs variables, sorting |
-| **Observer** | Notification de changements | Events, UI réactif |
-| **Command** | Encapsuler des actions | Undo/redo, queues |
-| **State** | Comportement selon état | Workflows, state machines |
-| **Chain of Responsibility** | Chaîne de handlers | Middleware, validation |
-
-#### Exemple : Strategy
-
-```typescript
-// Strategy Pattern
-interface PricingStrategy {
-  calculate(basePrice: number, quantity: number): number;
-}
-
-class RegularPricing implements PricingStrategy {
-  calculate(basePrice: number, quantity: number): number {
-    return basePrice * quantity;
-  }
-}
-
-class BulkPricing implements PricingStrategy {
-  calculate(basePrice: number, quantity: number): number {
-    if (quantity >= 10) return basePrice * quantity * 0.9;
-    return basePrice * quantity;
-  }
-}
-
-class PremiumPricing implements PricingStrategy {
-  calculate(basePrice: number, quantity: number): number {
-    return basePrice * quantity * 0.8;
-  }
-}
-
-class Order {
-  constructor(private pricingStrategy: PricingStrategy) {}
-
-  getTotal(basePrice: number, quantity: number): number {
-    return this.pricingStrategy.calculate(basePrice, quantity);
-  }
-}
-```
-
-### 4. Patterns Architecturaux
-
-| Pattern | Usage | Complexité |
-|---------|-------|------------|
-| **MVC** | Applications web traditionnelles | Faible |
-| **MVVM** | Applications réactives | Moyenne |
-| **Repository** | Abstraction de la persistance | Faible |
-| **Unit of Work** | Transactions cohérentes | Moyenne |
-| **CQRS** | Séparation lecture/écriture | Élevée |
-| **Event Sourcing** | Historique complet | Élevée |
-| **Saga** | Transactions distribuées | Élevée |
-
-#### Exemple : Repository
-
-```typescript
-// Repository Pattern
-interface UserRepository {
-  findById(id: string): Promise<User | null>;
-  findByEmail(email: string): Promise<User | null>;
-  save(user: User): Promise<void>;
-  delete(id: string): Promise<void>;
-}
-
-class PostgresUserRepository implements UserRepository {
-  constructor(private db: Database) {}
-
-  async findById(id: string): Promise<User | null> {
-    const row = await this.db.query('SELECT * FROM users WHERE id = $1', [id]);
-    return row ? this.mapToUser(row) : null;
-  }
-
-  // ... autres méthodes
-}
-
-// En test
-class InMemoryUserRepository implements UserRepository {
-  private users = new Map<string, User>();
-
-  async findById(id: string): Promise<User | null> {
-    return this.users.get(id) ?? null;
-  }
-
-  // ... autres méthodes
-}
-```
+---
 
 ## Principes SOLID
 
-### S - Single Responsibility
+### Critères d'Évaluation
 
-```typescript
-// ❌ Mauvais
-class User {
-  save() { /* DB logic */ }
-  sendEmail() { /* Email logic */ }
-  generateReport() { /* Report logic */ }
-}
+| Principe | Question à se Poser | Signal d'Alerte |
+|----------|---------------------|-----------------|
+| **S** - Single Responsibility | "Cette classe a-t-elle une seule raison de changer ?" | Classe > 200 lignes, multiples méthodes non liées |
+| **O** - Open/Closed | "Peut-on étendre sans modifier ?" | Modification du code existant pour chaque nouveau cas |
+| **L** - Liskov Substitution | "Les sous-types sont-ils interchangeables ?" | Exceptions dans les sous-classes |
+| **I** - Interface Segregation | "L'interface est-elle minimale ?" | Méthodes non implémentées, `NotImplementedException` |
+| **D** - Dependency Inversion | "Dépend-on d'abstractions ?" | `new` de classes concrètes dans le code métier |
 
-// ✅ Bon
-class User { /* Données utilisateur */ }
-class UserRepository { save(user: User) { } }
-class EmailService { send(to: string, content: string) { } }
-class ReportGenerator { generate(user: User) { } }
-```
+### Applicabilité par Taille de Projet
 
-### O - Open/Closed
+| Taille | SOLID Prioritaire | Patterns Recommandés |
+|--------|-------------------|----------------------|
+| **Petit** (< 5K lignes) | S, D | Factory, Repository |
+| **Moyen** (5K-50K lignes) | Tous | + Strategy, Observer |
+| **Grand** (> 50K lignes) | Tous + Architecture | + CQRS, Event Sourcing si justifié |
 
-```typescript
-// ✅ Extensible sans modification
-interface Discount {
-  apply(price: number): number;
-}
-
-class PercentageDiscount implements Discount {
-  constructor(private percent: number) {}
-  apply(price: number) { return price * (1 - this.percent / 100); }
-}
-
-class FixedDiscount implements Discount {
-  constructor(private amount: number) {}
-  apply(price: number) { return price - this.amount; }
-}
-```
-
-### L - Liskov Substitution
-
-```typescript
-// ❌ Viole LSP
-class Bird { fly() { } }
-class Penguin extends Bird { fly() { throw new Error("Can't fly"); } }
-
-// ✅ Respecte LSP
-interface Bird { move(): void; }
-class FlyingBird implements Bird { move() { /* fly */ } }
-class SwimmingBird implements Bird { move() { /* swim */ } }
-```
-
-### I - Interface Segregation
-
-```typescript
-// ❌ Interface trop large
-interface Worker {
-  work(): void;
-  eat(): void;
-  sleep(): void;
-}
-
-// ✅ Interfaces séparées
-interface Workable { work(): void; }
-interface Eatable { eat(): void; }
-interface Sleepable { sleep(): void; }
-
-class Human implements Workable, Eatable, Sleepable { }
-class Robot implements Workable { }
-```
-
-### D - Dependency Inversion
-
-```typescript
-// ❌ Dépendance concrète
-class OrderService {
-  private repo = new MySQLOrderRepository();
-}
-
-// ✅ Dépendance abstraite (injection)
-class OrderService {
-  constructor(private repo: OrderRepository) {}
-}
-```
+---
 
 ## Anti-Patterns à Éviter
 
-| Anti-Pattern | Problème | Solution |
-|--------------|----------|----------|
-| **God Object** | Classe qui fait tout | Découper en classes spécialisées |
-| **Spaghetti Code** | Code non structuré | Appliquer des patterns |
-| **Copy-Paste** | Duplication | Extraire en fonctions/classes |
-| **Magic Numbers** | Valeurs en dur | Constantes nommées |
-| **Premature Optimization** | Optimiser trop tôt | Mesurer puis optimiser |
-| **Over-Engineering** | Trop de complexité | YAGNI, KISS |
-| **Leaky Abstraction** | Détails qui fuient | Meilleure encapsulation |
+| Anti-Pattern | Symptômes | Impact | Solution |
+|--------------|-----------|--------|----------|
+| **God Object** | Classe > 500 lignes, fait tout | Maintenance impossible | Découper en classes spécialisées |
+| **Spaghetti Code** | Dépendances circulaires, pas de structure | Bugs, régressions | Appliquer des patterns |
+| **Copy-Paste** | Code dupliqué | Incohérences, bugs | Extraire en fonctions/classes |
+| **Magic Numbers** | Valeurs en dur | Incompréhensible | Constantes nommées |
+| **Premature Optimization** | Optimiser sans mesurer | Complexité inutile | Mesurer puis optimiser |
+| **Over-Engineering** | Patterns partout | Time-to-market, maintenance | YAGNI, KISS |
+| **Leaky Abstraction** | Détails qui fuient | Couplage fort | Meilleure encapsulation |
 
-## Guide de Sélection
+---
+
+## Guide de Sélection des Patterns
+
+### Arbre de Décision
 
 ```
-Quel problème ?
+Quel est le problème ?
 │
 ├─ Créer des objets ?
-│  ├─ Objets complexes → Builder
-│  ├─ Familles d'objets → Abstract Factory
-│  └─ Instance unique → Singleton
+│  ├─ Objets avec beaucoup de paramètres → Builder
+│  ├─ Familles d'objets liés → Abstract Factory
+│  ├─ Objet unique global → Singleton (avec précaution)
+│  └─ Logique de création complexe → Factory
 │
 ├─ Structurer le code ?
-│  ├─ Interface incompatible → Adapter
-│  ├─ Ajouter des comportements → Decorator
-│  └─ Simplifier une API → Facade
+│  ├─ Adapter une API tierce → Adapter
+│  ├─ Ajouter des comportements dynamiques → Decorator
+│  ├─ Simplifier une API complexe → Facade
+│  └─ Contrôler l'accès → Proxy
 │
 ├─ Gérer des comportements ?
-│  ├─ Algorithmes variables → Strategy
-│  ├─ Notifications → Observer
-│  └─ États multiples → State
+│  ├─ Plusieurs algorithmes interchangeables → Strategy
+│  ├─ Notifier des changements → Observer
+│  ├─ Plusieurs états avec transitions → State
+│  └─ Chaîne de traitements → Chain of Responsibility
 │
 └─ Architecturer l'application ?
-   ├─ Accès données → Repository
-   ├─ Lecture/écriture différents → CQRS
-   └─ Historique complet → Event Sourcing
+   ├─ Abstraire l'accès données → Repository
+   ├─ Lecture/écriture à scaler différemment → CQRS
+   └─ Historique complet requis → Event Sourcing
 ```
 
-## Références
+### Critères de Choix
 
-| Aspect | Agent de référence |
-|--------|-------------------|
-| Architecture | `architecture/architecture-applicative` |
-| Décisions | `architecture/adr` |
-| Principes généraux | `web-dev-process/design/architecture` |
+| Critère | Questions |
+|---------|-----------|
+| **Complexité ajoutée** | Le pattern justifie-t-il sa complexité ? |
+| **Compétences équipe** | L'équipe connaît-elle ce pattern ? |
+| **Évolutivité** | Va-t-on avoir besoin d'étendre ce comportement ? |
+| **Testabilité** | Le pattern facilite-t-il les tests ? |
+| **Performance** | Y a-t-il un impact performance significatif ? |
+
+---
+
+## Checklist avant Adoption
+
+### Pour un Nouveau Pattern
+
+- [ ] Le problème est clairement identifié
+- [ ] Le pattern résout effectivement ce problème
+- [ ] L'équipe comprend le pattern
+- [ ] La complexité ajoutée est justifiée
+- [ ] Documentation/ADR créée
+
+### Pour Éviter l'Over-Engineering
+
+- [ ] YAGNI : En a-t-on vraiment besoin maintenant ?
+- [ ] KISS : Y a-t-il une solution plus simple ?
+- [ ] Le code existant a-t-il prouvé le besoin ?
+- [ ] Moins de 3 variations actuellement ?
+
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Pattern complexe (CQRS, ES) | Formation équipe + POC |
-| Hésitation entre patterns | ADR pour documenter le choix |
-| Anti-pattern détecté | Planifier refactoring |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Pattern complexe (CQRS, ES) | Formation équipe + POC | Tech Lead |
+| Hésitation entre patterns | ADR pour documenter le choix | Tech Lead |
+| Anti-pattern détecté | Planifier refactoring | Équipe |
+| Over-engineering suspectée | Review architecture | Tech Lead |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Architecture applicative | `architecture/architecture-applicative` |
+| Décisions architecturales | `architecture/adr` |
+| Process design | `web-dev-process/agents/design/architecture` |
+| Implémentation patterns | Skills technologiques (TypeScript, PHP, etc.) |
+
+### Ressources Externes
+
+- [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns)
+- [Martin Fowler - Patterns of Enterprise Application Architecture](https://martinfowler.com/eaaCatalog/)

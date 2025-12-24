@@ -1,225 +1,108 @@
 ---
 name: gestion-secrets
-description: Gestion sécurisée des secrets et credentials
+description: Politique de gestion sécurisée des secrets et credentials (Niveau POURQUOI)
 ---
 
-# Gestion des Secrets
+# Politique de Gestion des Secrets
 
-Tu encadres la **gestion sécurisée des secrets** (API keys, passwords, tokens, etc.).
+Tu définis les **politiques et objectifs** de gestion sécurisée des secrets.
+
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Définir les RÈGLES de gestion des secrets et les standards
+> **Ce que tu ne fais pas** : Implémenter les solutions de gestion de secrets (code)
+>
+> → Process de sécurité : `web-dev-process/agents/setup/secrets-management`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces règles ? Pour protéger les accès"              │
+│  → "Politiques : rotation, stockage, accès"                     │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi mettre en place ? Vault, env vars, CI/CD secrets"      │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : AWS Secrets Manager, Vault API, Zod validation..."   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Principes Fondamentaux
 
-### Ce qu'il ne faut JAMAIS faire
+### Règles Absolues
 
-```bash
-# ❌ JAMAIS dans le code
-const API_KEY = "sk_live_abc123...";
+| Règle | Impact si Violée |
+|-------|------------------|
+| **Jamais de secrets dans le code source** | Fuite si repo exposé |
+| **Jamais de secrets commités** | Historique Git permanent |
+| **Jamais de secrets dans les logs** | Exposition via logs |
+| **Jamais de secrets dans les URLs** | Exposition dans historique navigateur, logs serveur |
+| **Jamais de secrets en clair en prod** | Accès non autorisé |
 
-# ❌ JAMAIS commité
-# .env avec vrais secrets
-API_KEY=sk_live_abc123
+### Classification des Secrets
 
-# ❌ JAMAIS dans les logs
-console.log("Connecting with key:", apiKey);
+| Type | Exemples | Criticité |
+|------|----------|-----------|
+| **Credentials de production** | DB prod, API keys live | Critique |
+| **Clés de chiffrement** | JWT secret, encryption keys | Critique |
+| **Credentials d'infrastructure** | AWS, GCP, Azure credentials | Haute |
+| **Tokens d'intégration** | Stripe, Twilio, SendGrid | Haute |
+| **Credentials de dev/test** | DB locale, API keys test | Moyenne |
+| **Credentials de CI/CD** | Deploy tokens, registry | Haute |
 
-# ❌ JAMAIS dans les URLs
-https://api.example.com?apiKey=sk_live_abc123
-```
+---
 
-### Bonnes Pratiques
+## Politique de Stockage
 
-```bash
-# ✅ Variables d'environnement
-API_KEY=${API_KEY}
+### Méthodes Autorisées
 
-# ✅ Fichiers .env ignorés
-# .gitignore
-.env
-.env.local
-.env.*.local
+| Méthode | Usage | Sécurité |
+|---------|-------|----------|
+| **Secret Manager Cloud** | Production | ★★★★★ |
+| **HashiCorp Vault** | Multi-cloud, on-premise | ★★★★★ |
+| **Variables CI/CD** | Déploiement | ★★★★☆ |
+| **Variables d'environnement** | Runtime | ★★★☆☆ |
+| **Fichiers .env (ignorés)** | Développement local | ★★☆☆☆ |
 
-# ✅ Exemple de config (sans secrets)
-# .env.example
-API_KEY=your_api_key_here
-DATABASE_URL=postgresql://user:password@localhost:5432/db
-```
+### Méthodes Interdites
 
-## Configuration par Environnement
+| Méthode | Raison |
+|---------|--------|
+| Code source (hardcoded) | Commité, visible |
+| Fichiers .env commités | Historique permanent |
+| Fichiers de config commités | Idem |
+| Base de données en clair | Accessible si DB compromise |
+| Variables d'env non chiffrées en prod | Visible dans process list |
 
-### Structure des Fichiers
+### Structure de Fichiers
 
 ```
 project/
-├── .env.example        # Template (commité)
-├── .env.development    # Local dev (ignoré)
-├── .env.test           # Tests (ignoré)
-├── .env.production     # Prod (ignoré, ou géré par vault)
-└── .gitignore
+├── .env.example        # Template SANS secrets (commité)
+├── .env.development    # Secrets locaux (ignoré)
+├── .env.test           # Secrets de test (ignoré)
+├── .env.production     # N'existe PAS - utiliser secret manager
+└── .gitignore          # DOIT contenir .env*
 ```
 
-### .env.example
+---
 
-```bash
-# Application
-NODE_ENV=development
-PORT=3000
-APP_URL=http://localhost:3000
+## Politique de Rotation
 
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/myapp
+### Fréquences Obligatoires
 
-# Authentication
-JWT_SECRET=your-secret-key-min-32-chars
-SESSION_SECRET=another-secret-key
-
-# External APIs
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-
-# Email
-SMTP_HOST=smtp.example.com
-SMTP_USER=
-SMTP_PASSWORD=
-
-# Storage
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_S3_BUCKET=
-```
-
-### Validation avec Zod
-
-```typescript
-// config/env.ts
-import { z } from 'zod';
-
-const envSchema = z.object({
-  NODE_ENV: z.enum(['development', 'test', 'production']),
-  PORT: z.string().transform(Number),
-  DATABASE_URL: z.string().url(),
-  JWT_SECRET: z.string().min(32),
-  STRIPE_SECRET_KEY: z.string().startsWith('sk_'),
-});
-
-// ⚠️ IMPORTANT : Ne pas exposer les valeurs de secrets dans les erreurs
-function validateEnv() {
-  try {
-    return envSchema.parse(process.env);
-  } catch (error) {
-    // Sanitiser l'erreur : ne jamais logger les valeurs des secrets
-    if (error instanceof z.ZodError) {
-      const safeErrors = error.errors.map(e => ({
-        path: e.path.join('.'),
-        message: e.message,
-        // PAS de e.received qui contient la valeur du secret !
-      }));
-      console.error('Environment validation failed:', safeErrors);
-    }
-    throw new Error('Invalid environment configuration - check required variables');
-  }
-}
-
-export const env = validateEnv();
-```
-
-## Solutions de Gestion de Secrets
-
-### 1. Variables d'Environnement CI/CD
-
-#### GitHub Actions
-
-```yaml
-# .github/workflows/deploy.yml
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          API_KEY: ${{ secrets.API_KEY }}
-        run: |
-          npm run deploy
-```
-
-#### GitLab CI
-
-```yaml
-# .gitlab-ci.yml
-deploy:
-  script:
-    - echo "Deploying with secrets from CI/CD variables"
-  variables:
-    DATABASE_URL: $DATABASE_URL  # Défini dans Settings > CI/CD > Variables
-```
-
-### 2. Secret Managers Cloud
-
-#### AWS Secrets Manager
-
-```typescript
-import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
-
-const client = new SecretsManagerClient({ region: "eu-west-1" });
-
-async function getSecret(secretName: string): Promise<string> {
-  const command = new GetSecretValueCommand({ SecretId: secretName });
-  const response = await client.send(command);
-  return response.SecretString!;
-}
-
-// Usage
-const dbCredentials = JSON.parse(await getSecret("prod/database"));
-```
-
-#### HashiCorp Vault
-
-```typescript
-import Vault from "node-vault";
-
-const vault = Vault({
-  endpoint: process.env.VAULT_ADDR,
-  token: process.env.VAULT_TOKEN,
-});
-
-async function getSecret(path: string): Promise<Record<string, string>> {
-  const result = await vault.read(path);
-  return result.data.data;
-}
-
-// Usage
-const secrets = await getSecret("secret/data/myapp/database");
-```
-
-### 3. Doppler (SaaS)
-
-```bash
-# Installation
-brew install dopplerhq/cli/doppler
-
-# Configuration
-doppler setup
-
-# Run avec injection de secrets
-doppler run -- npm start
-
-# Dans CI/CD
-doppler run --token $DOPPLER_TOKEN -- npm run deploy
-```
-
-## Rotation des Secrets
-
-### Politique de Rotation
-
-| Type de Secret | Fréquence | Déclencheur |
-|----------------|-----------|-------------|
-| Mots de passe DB | 90 jours | Automatique |
-| API Keys | 180 jours | Automatique |
-| JWT Secrets | 30 jours | Automatique |
-| Service Accounts | 365 jours | Automatique |
-| Après incident | Immédiat | Manuel |
+| Type de Secret | Fréquence | Justification |
+|----------------|-----------|---------------|
+| **Mots de passe DB production** | 90 jours | Limiter l'exposition |
+| **API Keys production** | 180 jours | Limiter l'exposition |
+| **JWT Secrets** | 30 jours | Sessions courtes |
+| **Service Accounts** | 365 jours | Rotation annuelle |
+| **Après incident** | Immédiat | Compromission possible |
+| **Après départ employé** | Immédiat | Révocation d'accès |
 
 ### Procédure de Rotation
 
@@ -227,76 +110,113 @@ doppler run --token $DOPPLER_TOKEN -- npm run deploy
 1. Générer nouveau secret
          │
          ▼
-2. Déployer avec les deux secrets valides
+2. Configurer le nouveau (sans supprimer l'ancien)
          │
          ▼
-3. Migrer les dépendances vers nouveau secret
+3. Déployer avec les deux secrets valides
          │
          ▼
-4. Invalider l'ancien secret
+4. Migrer tous les services vers nouveau secret
          │
          ▼
-5. Supprimer l'ancien secret du config
+5. Vérifier qu'aucun service n'utilise l'ancien
+         │
+         ▼
+6. Invalider l'ancien secret
+         │
+         ▼
+7. Supprimer l'ancien du secret manager
 ```
 
-## Détection de Secrets Exposés
+---
 
-### Git Hooks (pre-commit)
+## Politique d'Accès
 
-```yaml
-# .pre-commit-config.yaml
-repos:
-  - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
-    hooks:
-      - id: detect-secrets
-        args: ['--baseline', '.secrets.baseline']
-```
+### Principe du Moindre Privilège
 
-### GitHub Secret Scanning
+| Environnement | Qui a Accès | Type d'Accès |
+|---------------|-------------|--------------|
+| **Production** | DevOps/SRE séniors uniquement | Lecture via secret manager |
+| **Staging** | Développeurs + DevOps | Lecture via CI/CD |
+| **Développement** | Développeurs | Fichiers locaux personnels |
+| **CI/CD** | Pipelines automatisés | Variables d'environnement |
 
-Activé automatiquement sur les repos publics GitHub.
+### Audit d'Accès
 
-### Gitleaks
+| Événement | Logging Requis |
+|-----------|----------------|
+| Lecture d'un secret | Oui, avec identité |
+| Création d'un secret | Oui, avec identité |
+| Modification d'un secret | Oui, avec identité |
+| Suppression d'un secret | Oui, avec identité |
+| Accès refusé | Oui, avec alerte |
 
-```bash
-# Installation
-brew install gitleaks
+---
 
-# Scan du repo
-gitleaks detect --source . --verbose
+## Politique de Détection
 
-# Dans CI
-gitleaks detect --source . --redact --exit-code 1
-```
+### Outils Obligatoires
 
-## Secrets WordPress
+| Niveau | Outil | Objectif |
+|--------|-------|----------|
+| **Pre-commit** | gitleaks, detect-secrets | Bloquer avant commit |
+| **CI** | gitleaks en pipeline | Bloquer avant merge |
+| **Repo** | GitHub Secret Scanning | Alertes temps réel |
+| **Audit** | Scans réguliers | Détecter l'historique |
 
-```php
-// wp-config.php - Ne pas commiter les vrais secrets
+### Réponse à une Exposition
 
-// ✅ Charger depuis l'environnement
-define('DB_NAME', getenv('DB_NAME'));
-define('DB_USER', getenv('DB_USER'));
-define('DB_PASSWORD', getenv('DB_PASSWORD'));
+| Étape | Action | Délai |
+|-------|--------|-------|
+| 1 | Révoquer le secret exposé | Immédiat |
+| 2 | Générer un nouveau secret | < 15 min |
+| 3 | Déployer le nouveau secret | < 1h |
+| 4 | Nettoyer l'historique Git (si possible) | < 24h |
+| 5 | Auditer les accès potentiels | < 48h |
+| 6 | Documenter l'incident | < 1 semaine |
 
-// ✅ Salts - régénérer pour chaque install
-define('AUTH_KEY', getenv('AUTH_KEY'));
-define('SECURE_AUTH_KEY', getenv('SECURE_AUTH_KEY'));
-// etc.
+---
 
-// Générer les salts : https://api.wordpress.org/secret-key/1.1/salt/
-```
+## Politique par Environnement
+
+### Développement Local
+
+| Règle | Détail |
+|-------|--------|
+| Fichier `.env.example` | Template commité, sans vraies valeurs |
+| Fichier `.env` | Ignoré par Git, secrets personnels |
+| Secrets de dev | Différents de staging/prod |
+| Accès limité | Chaque dev a ses propres credentials |
+
+### CI/CD
+
+| Règle | Détail |
+|-------|--------|
+| Secrets dans variables CI | Pas dans le code |
+| Masquage dans logs | Activé par défaut |
+| Accès restreint | Seuls les admins configurent |
+| Rotation | Après changement d'équipe |
+
+### Production
+
+| Règle | Détail |
+|-------|--------|
+| Secret Manager obligatoire | AWS Secrets Manager, Vault, etc. |
+| Rotation automatique | Configurée pour secrets critiques |
+| Audit d'accès | Logs centralisés |
+| Chiffrement | At-rest et in-transit |
+
+---
 
 ## Checklist Secrets
 
 ### Setup Projet
 
-- [ ] .env.example créé et commité
-- [ ] .env dans .gitignore
-- [ ] Validation des env vars au démarrage
-- [ ] Secret manager configuré (si prod)
-- [ ] Gitleaks/detect-secrets en pre-commit
+- [ ] `.env.example` créé et commité (sans secrets)
+- [ ] `.env*` dans `.gitignore`
+- [ ] Validation des variables au démarrage
+- [ ] Secret manager configuré pour prod
+- [ ] gitleaks/detect-secrets en pre-commit
 
 ### Déploiement
 
@@ -304,19 +224,41 @@ define('SECURE_AUTH_KEY', getenv('SECURE_AUTH_KEY'));
 - [ ] Pas de secrets en dur dans le code
 - [ ] Pas de secrets dans les logs
 - [ ] Rotation configurée si applicable
+- [ ] Accès audités
 
 ### Incident
 
-- [ ] Identifier les secrets exposés
-- [ ] Révoquer immédiatement
-- [ ] Générer nouveaux secrets
-- [ ] Redéployer
-- [ ] Auditer les accès
+- [ ] Secret exposé identifié
+- [ ] Révocation immédiate effectuée
+- [ ] Nouveau secret généré et déployé
+- [ ] Historique Git nettoyé (si applicable)
+- [ ] Audit des accès réalisé
+- [ ] Incident documenté
+
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Secret commité | Révoquer, nettoyer historique, nouveau secret |
-| Secret en prod exposé | Rotation immédiate, audit accès |
-| Accès secret compromis | Rotation + investigation |
+| Situation | Action | Délai | Responsable |
+|-----------|--------|-------|-------------|
+| Secret commité | Révoquer, nettoyer, nouveau secret | Immédiat | Dev + DevOps |
+| Secret de prod exposé | War room, rotation, audit | < 1h | CTO + DevOps |
+| Accès suspect détecté | Investigation + rotation | < 2h | Security + DevOps |
+| Doute sur exposition | Rotation préventive | < 24h | DevOps |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process de setup secrets | `web-dev-process/agents/setup/secrets-management` |
+| Variables d'environnement | `web-dev-process/agents/setup/env-variables` |
+| Sécurité applicative | `securite/securite-applicative` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- [HashiCorp Vault](https://www.vaultproject.io/)
+- [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)

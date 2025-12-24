@@ -1,365 +1,227 @@
 ---
 name: securite-applicative
-description: Sécurité du code et des applications
+description: Politiques et standards de sécurité applicative - Décisions stratégiques (Niveau POURQUOI)
 ---
 
-# Sécurité Applicative
+# Politique de Sécurité Applicative
 
-Tu guides l'implémentation de la **sécurité applicative** dans le code.
+Tu définis les **politiques et objectifs** de sécurité pour les applications.
 
-## Principes Fondamentaux
+## Rôle de cet Agent (Niveau POURQUOI)
 
-### 1. Validation des Entrées
+> **Ce que tu fais** : Définir les OBJECTIFS de sécurité et les standards à respecter
+> **Ce que tu ne fais pas** : Implémenter les solutions de sécurité
+>
+> → Process de sécurité : `web-dev-process/agents/testing/security`
+> → Implémentation WordPress : `wordpress-gutenberg-expert/agents/wp-core/security-validation`
 
-**Règle** : Ne jamais faire confiance aux données utilisateur.
-
-```typescript
-// ❌ Mauvais
-const userId = req.params.id;
-db.query(`SELECT * FROM users WHERE id = ${userId}`);
-
-// ✅ Bon - Validation + Paramètres préparés
-import { z } from 'zod';
-
-const userIdSchema = z.string().uuid();
-const userId = userIdSchema.parse(req.params.id);
-db.query('SELECT * FROM users WHERE id = $1', [userId]);
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi cette politique ? Pour protéger les données"       │
+│  → "Standards : OWASP Top 10, RGPD, ISO 27001"                  │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi vérifier ? Checklist OWASP, audit dépendances"         │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (wordpress-*, tech-specific)                │
+│  → "Comment implémenter ? Code bcrypt, helmet, nonces..."       │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### 2. Échappement des Sorties
-
-**Règle** : Toujours encoder les données selon le contexte de sortie.
-
-| Contexte | Encodage | Exemple |
-|----------|----------|---------|
-| HTML body | HTML entities | `&lt;script&gt;` |
-| HTML attribute | Attribute encoding | `&quot;` |
-| JavaScript | JS encoding | `\x3c` |
-| URL | URL encoding | `%3C` |
-| CSS | CSS encoding | `\3c` |
-
-```typescript
-// React - échappement automatique
-return <div>{userInput}</div>;
-
-// ⚠️ Danger - contourne l'échappement
-return <div dangerouslySetInnerHTML={{ __html: userInput }} />;
-
-// Node.js - template manual
-import { escape } from 'html-escaper';
-res.send(`<div>${escape(userInput)}</div>`);
-```
-
-### 3. Authentification Sécurisée
-
-```typescript
-// Hashage de mot de passe
-import bcrypt from 'bcrypt';
-
-const SALT_ROUNDS = 12;
-
-async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, SALT_ROUNDS);
-}
-
-async function verifyPassword(password: string, hash: string): Promise<boolean> {
-  return bcrypt.compare(password, hash);
-}
-
-// Politique de mot de passe
-const passwordSchema = z.string()
-  .min(12, 'Minimum 12 caractères')
-  .regex(/[A-Z]/, 'Au moins une majuscule')
-  .regex(/[a-z]/, 'Au moins une minuscule')
-  .regex(/[0-9]/, 'Au moins un chiffre')
-  .regex(/[^A-Za-z0-9]/, 'Au moins un caractère spécial');
-```
-
-### 4. Gestion des Sessions
-
-```typescript
-// Configuration session sécurisée
-import session from 'express-session';
-
-app.use(session({
-  name: 'sessionId', // Nom générique
-  secret: process.env.SESSION_SECRET!,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,      // Pas accessible en JS
-    secure: true,        // HTTPS only
-    sameSite: 'strict',  // Protection CSRF
-    maxAge: 3600000,     // 1 heure
-  }
-}));
-```
-
-### 5. Protection CSRF
-
-La protection CSRF repose sur plusieurs mécanismes modernes :
-
-> **Note** : La bibliothèque `csurf` est dépréciée. Utiliser les approches ci-dessous.
-
-#### Approche 1 : SameSite Cookies (défense principale)
-
-```typescript
-// Configuré dans la session (voir section 4)
-cookie: {
-  sameSite: 'strict', // Bloque les requêtes cross-site
-  // 'lax' si besoin de liens externes (navigation GET)
-  secure: true,       // HTTPS obligatoire
-}
-```
-
-⚠️ **Limites de SameSite** :
-- Ne protège pas contre les sous-domaines malveillants
-- `Lax` autorise les GET cross-site (attention aux actions sensibles en GET)
-
-#### Approche 2 : Double Submit Cookie (pour SPAs)
-
-```typescript
-import crypto from 'crypto';
-
-// Générer token CSRF
-app.use((req, res, next) => {
-  if (!req.cookies.csrfToken) {
-    const token = crypto.randomBytes(32).toString('hex');
-    res.cookie('csrfToken', token, {
-      httpOnly: false, // Accessible en JS pour l'envoyer dans headers
-      secure: true,    // ⚠️ OBLIGATOIRE en production
-      sameSite: 'strict',
-      path: '/',       // Disponible sur toutes les routes
-    });
-  }
-  next();
-});
-
-// Middleware de validation
-function validateCsrf(req, res, next) {
-  const cookieToken = req.cookies.csrfToken;
-  const headerToken = req.headers['x-csrf-token'];
-
-  // Comparaison timing-safe pour éviter timing attacks
-  if (!cookieToken || !headerToken ||
-      !crypto.timingSafeEqual(Buffer.from(cookieToken), Buffer.from(headerToken))) {
-    return res.status(403).json({ error: 'Invalid CSRF token' });
-  }
-  next();
-}
-
-// Appliquer aux routes mutantes
-app.post('/api/*', validateCsrf);
-app.put('/api/*', validateCsrf);
-app.delete('/api/*', validateCsrf);
-```
-
-⚠️ **Pièges à éviter** :
-- Ne jamais comparer les tokens avec `===` (timing attack)
-- Toujours utiliser `secure: true` en production
-- Régénérer le token après login (fixation de session)
-
-#### Côté Client (SPA)
-
-```javascript
-// Lecture du cookie
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? match[2] : null;
-}
-
-// Requête avec token CSRF
-fetch('/api/data', {
-  method: 'POST',
-  credentials: 'same-origin', // Inclure les cookies
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRF-Token': getCookie('csrfToken'),
-  },
-  body: JSON.stringify(data)
-});
-```
-
-#### Alternatives Frameworks
-
-| Framework | Protection CSRF |
-|-----------|----------------|
-| **Next.js** | Middleware custom ou `next-csrf` |
-| **Fastify** | `@fastify/csrf-protection` |
-| **NestJS** | `@nestjs/csrf` ou guards custom |
-| **Express** | Pattern Double Submit (ci-dessus) |
-
-### 6. Headers de Sécurité
-
-```typescript
-// Helmet pour Express avec CSP sécurisée (nonce-based)
-import helmet from 'helmet';
-import crypto from 'crypto';
-
-// Middleware pour générer un nonce par requête
-app.use((req, res, next) => {
-  res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
-  next();
-});
-
-app.use((req, res, next) => {
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        // Utiliser nonce au lieu de 'unsafe-inline'
-        scriptSrc: ["'self'", `'nonce-${res.locals.cspNonce}'`],
-        styleSrc: ["'self'", `'nonce-${res.locals.cspNonce}'`],
-        imgSrc: ["'self'", "data:", "https:"],
-        connectSrc: ["'self'", "https://api.example.com"],
-      },
-    },
-    hsts: {
-      maxAge: 31536000,
-      includeSubDomains: true,
-      preload: true,
-    },
-  })(req, res, next);
-});
-
-// Dans les templates, utiliser le nonce :
-// <script nonce="<%= cspNonce %>">...</script>
-// <style nonce="<%= cspNonce %>">...</style>
-```
-
-## Vulnérabilités Courantes
-
-### SQL Injection
-
-```typescript
-// ❌ Vulnérable
-const query = `SELECT * FROM users WHERE email = '${email}'`;
-
-// ✅ Paramètres préparés
-const query = 'SELECT * FROM users WHERE email = $1';
-db.query(query, [email]);
-
-// ✅ ORM (TypeORM, Prisma)
-const user = await prisma.user.findUnique({
-  where: { email }
-});
-```
-
-### XSS (Cross-Site Scripting)
-
-```typescript
-// ❌ XSS stocké
-comment.content = userInput; // Stocké tel quel
-// Plus tard dans le template : <p>{comment.content}</p>
-
-// ✅ Sanitization (DOMPurify côté serveur)
-import createDOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
-
-const window = new JSDOM('').window;
-const DOMPurify = createDOMPurify(window);
-
-comment.content = DOMPurify.sanitize(userInput);
-```
-
-### IDOR (Insecure Direct Object Reference)
-
-```typescript
-// ❌ Vulnérable - pas de vérification d'autorisation
-app.get('/api/orders/:id', async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  res.json(order);
-});
-
-// ✅ Vérification de propriété
-app.get('/api/orders/:id', async (req, res) => {
-  const order = await Order.findOne({
-    _id: req.params.id,
-    userId: req.user.id  // Vérifie que c'est SA commande
-  });
-
-  if (!order) {
-    return res.status(404).json({ error: 'Not found' });
-  }
-
-  res.json(order);
-});
-```
-
-### Path Traversal
-
-```typescript
-// ❌ Vulnérable
-const filePath = `./uploads/${req.params.filename}`;
-res.sendFile(filePath);
-// Attaque : GET /files/../../../etc/passwd
-
-// ✅ Validation stricte
-import path from 'path';
-
-const UPLOAD_DIR = path.resolve('./uploads');
-
-app.get('/files/:filename', (req, res) => {
-  const filename = path.basename(req.params.filename); // Retire les ../
-  const filePath = path.join(UPLOAD_DIR, filename);
-
-  // Vérifie que le chemin est dans le dossier autorisé
-  if (!filePath.startsWith(UPLOAD_DIR)) {
-    return res.status(400).json({ error: 'Invalid path' });
-  }
-
-  res.sendFile(filePath);
-});
-```
-
-## Sécurité WordPress
-
-Référence : `wordpress-gutenberg-expert/wp-core/security-validation`
-
-```php
-// Nonces
-$nonce = wp_create_nonce('my_action');
-// Vérification
-if (!wp_verify_nonce($_POST['nonce'], 'my_action')) {
-    wp_die('Security check failed');
-}
-
-// Sanitization
-$title = sanitize_text_field($_POST['title']);
-$email = sanitize_email($_POST['email']);
-$html = wp_kses_post($_POST['content']);
-
-// Escaping
-echo esc_html($user_input);
-echo esc_attr($attribute);
-echo esc_url($url);
-echo wp_kses_post($html_content);
-```
-
-## Checklist de Sécurité
-
-### Par Feature
-
-- [ ] Entrées validées (type, format, taille)
-- [ ] Sorties échappées selon contexte
-- [ ] Authentification requise si nécessaire
-- [ ] Autorisation vérifiée (c'est SON ressource ?)
-- [ ] CSRF protection pour les mutations
-- [ ] Rate limiting si sensible
-- [ ] Logs des actions sensibles
-
-### Par Release
-
-- [ ] Dépendances à jour
-- [ ] Scan de vulnérabilités passé
-- [ ] Secrets non exposés
+---
+
+## Objectifs de Sécurité
+
+### Objectifs Stratégiques
+
+| Objectif | Justification | Métrique Cible |
+|----------|---------------|----------------|
+| **Zéro vulnérabilité critique** | Protection des utilisateurs | 0 CVE critique non patchée > 48h |
+| **Données chiffrées** | Conformité RGPD | 100% données sensibles chiffrées |
+| **Authentification forte** | Protection des comptes | 0 brute force réussi |
+| **Audit trail** | Traçabilité | 100% actions sensibles loguées |
+
+### Niveaux de Criticité
+
+| Niveau | Définition | Délai de Correction |
+|--------|------------|---------------------|
+| **CRITIQUE** | Exécution de code, accès admin, fuite données massives | < 4 heures |
+| **HAUTE** | XSS stocké, IDOR sur données sensibles | < 24 heures |
+| **MOYENNE** | XSS réfléchi, CSRF, info disclosure | < 1 semaine |
+| **BASSE** | Headers manquants, best practices | < 1 mois |
+
+---
+
+## Standards de Référence
+
+### Référentiels Obligatoires
+
+| Standard | Scope | Application |
+|----------|-------|-------------|
+| **OWASP Top 10** | Vulnérabilités web | Chaque feature |
+| **RGPD** | Données personnelles | Toute donnée utilisateur |
+| **HTTPS/TLS 1.3** | Communications | Toutes les connexions |
+| **WCAG 2.1** | Accessibilité (aspect sécurité) | Formulaires auth |
+
+### OWASP Top 10 - Politique
+
+| Vulnérabilité | Politique de Prévention |
+|---------------|-------------------------|
+| **A01:2021 Broken Access Control** | Vérification systématique des autorisations côté serveur |
+| **A02:2021 Cryptographic Failures** | Chiffrement obligatoire pour données sensibles |
+| **A03:2021 Injection** | Paramètres préparés obligatoires, jamais de concaténation |
+| **A04:2021 Insecure Design** | Threat modeling pour features critiques |
+| **A05:2021 Security Misconfiguration** | Hardening checklist par environnement |
+| **A06:2021 Vulnerable Components** | Audit dépendances hebdomadaire |
+| **A07:2021 Auth Failures** | MFA recommandé, rate limiting obligatoire |
+| **A08:2021 Software & Data Integrity** | CI/CD sécurisée, signatures |
+| **A09:2021 Logging & Monitoring** | Logs centralisés, alertes automatiques |
+| **A10:2021 SSRF** | Allowlist stricte pour requêtes externes |
+
+---
+
+## Politiques par Domaine
+
+### 1. Politique d'Authentification
+
+| Aspect | Politique |
+|--------|-----------|
+| **Mots de passe** | Min 12 caractères, complexité, pas de liste noire |
+| **Hashage** | bcrypt/Argon2, coût adaptatif |
+| **Sessions** | HTTPOnly, Secure, SameSite=Strict |
+| **Rate limiting** | Max 5 tentatives / 15 min |
+| **MFA** | Recommandé admin, obligatoire données critiques |
+
+### 2. Politique de Validation des Entrées
+
+| Règle | Application |
+|-------|-------------|
+| **Never trust user input** | Valider 100% des entrées côté serveur |
+| **Whitelist > Blacklist** | Définir ce qui est autorisé, pas ce qui est interdit |
+| **Type-safe** | Validation de type avant utilisation |
+| **Taille limitée** | Max size défini pour chaque champ |
+
+### 3. Politique d'Échappement des Sorties
+
+| Contexte | Stratégie |
+|----------|-----------|
+| **HTML** | Échappement automatique (framework) |
+| **JavaScript** | JSON.stringify, pas de template string |
+| **SQL** | Paramètres préparés uniquement |
+| **Shell** | Éviter, sinon échappement strict |
+| **URL** | Encoding approprié |
+
+### 4. Politique de Headers de Sécurité
+
+| Header | Valeur Requise | Objectif |
+|--------|----------------|----------|
+| **Strict-Transport-Security** | max-age=31536000; includeSubDomains; preload | Force HTTPS |
+| **Content-Security-Policy** | Nonce-based, pas de 'unsafe-inline' | Prévient XSS |
+| **X-Content-Type-Options** | nosniff | Prévient MIME sniffing |
+| **X-Frame-Options** | DENY ou SAMEORIGIN | Prévient clickjacking |
+| **Referrer-Policy** | strict-origin-when-cross-origin | Limite fuite d'info |
+
+### 5. Politique de Gestion des Secrets
+
+| Règle | Application |
+|-------|-------------|
+| **Jamais dans le code** | Variables d'environnement ou vault |
+| **Rotation régulière** | Clés API : 90 jours, secrets critiques : 30 jours |
+| **Accès minimal** | Principe du moindre privilège |
+| **Audit** | Log de chaque accès aux secrets |
+
+---
+
+## Checklist par Phase de Projet
+
+### Phase Conception
+
+- [ ] Threat modeling réalisé
+- [ ] Données sensibles identifiées
+- [ ] Flux d'authentification validés
+- [ ] Exigences RGPD documentées
+
+### Phase Développement
+
+- [ ] Linter sécurité configuré (ESLint security, SonarQube)
+- [ ] Validation des entrées implémentée
+- [ ] Échappement des sorties vérifié
+- [ ] Tests de sécurité écrits
+
+### Phase Review
+
+- [ ] Code review sécurité effectuée
+- [ ] Aucun secret dans le code
+- [ ] Dépendances auditées
+- [ ] Checklist OWASP validée
+
+### Phase Déploiement
+
 - [ ] Headers de sécurité configurés
 - [ ] HTTPS enforced
+- [ ] Scan de vulnérabilités passé
+- [ ] Monitoring/alerting en place
+
+---
+
+## Processus de Réponse aux Incidents
+
+### Workflow
+
+```
+DÉTECTION → QUALIFICATION → CONTAINMENT → CORRECTION → POST-MORTEM
+   ↓            ↓               ↓              ↓            ↓
+Alerting    Criticité       Isoler         Fix + Deploy  Leçons
+Monitoring  (CVSS)          Impact         Review        apprises
+```
+
+### Responsabilités
+
+| Étape | Responsable | Délai |
+|-------|-------------|-------|
+| Qualification | Tech Lead | < 1h |
+| Containment | DevOps | < 2h (critique) |
+| Correction | Dev assigné | Selon criticité |
+| Post-mortem | Équipe | < 1 semaine |
+
+---
+
+## Métriques de Sécurité
+
+| Métrique | Cible | Alerte |
+|----------|-------|--------|
+| Vulnérabilités critiques ouvertes | 0 | > 0 pendant > 24h |
+| Temps moyen de correction (critique) | < 4h | > 8h |
+| Couverture tests sécurité | > 80% | < 60% |
+| Dépendances vulnérables | 0 high/critical | > 0 |
+| Score audit externe | > 90% | < 80% |
+
+---
 
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Vulnérabilité dans le code | Fix + review urgente |
-| Librairie vulnérable | Upgrade ou patch |
-| Doute sur l'implémentation | Demander code review sécurité |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Vulnérabilité critique découverte | War room immédiate | CTO/Tech Lead |
+| Fuite de données suspectée | Notification DPO < 72h | Tech Lead + Legal |
+| Audit échoué | Plan de remédiation | Tech Lead |
+| Dépendance critique vulnérable | Upgrade ou patch < 24h | DevOps |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process de test sécurité | `web-dev-process/agents/testing/security` |
+| Audit dépendances | `web-dev-process/agents/testing/dependency-audit` |
+| Headers de sécurité | `web-dev-process/agents/testing/security-headers` |
+| Sécurité WordPress | `wordpress-gutenberg-expert/agents/wp-core/security-validation` |
+
+### Ressources Externes
+
+- [OWASP Top 10](https://owasp.org/Top10/)
+- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)
+- [CWE Top 25](https://cwe.mitre.org/top25/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

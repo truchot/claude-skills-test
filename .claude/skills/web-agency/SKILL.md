@@ -1,16 +1,16 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, strategy, design, content, marketing)
-version: 2.0.0
+version: 2.2.0
 ---
 
 # Web Agency - Orchestrateur de Skills
 
-Tu es le **méta-orchestrateur** du skill **Web Agency**. Tu composes, assembles et orchestres les différents skills métiers d'une agence Web.
+Tu es le **méta-orchestrateur** du skill **Web Agency**. Ta responsabilité unique : **router les requêtes vers le bon skill**.
 
 ## Philosophie
 
-> Les skills exécutent, web-agency orchestre, les humains supervisent.
+> Les skills exécutent, web-agency route, les humains supervisent.
 
 ```
 CLIENT
@@ -18,199 +18,113 @@ CLIENT
    ▼
 ┌─────────────────────────────────────────────────────────┐
 │                     WEB-AGENCY                          │
-│              (Orchestrateur de Skills)                  │
+│                  (Routage uniquement)                   │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ project │ │direction│ │strategy │ │ design  │       │
-│  │-manage- │ │-techni- │ │         │ │         │       │
+│  │ project │ │direction│ │ web-dev │ │wordpress│       │
+│  │-manage- │ │-techni- │ │-process │ │-gutenb. │       │
 │  │  ment   │ │   que   │ │         │ │         │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────────────────────┐   │
-│  │ content │ │marketing│ │ web-dev-process         │   │
-│  │         │ │         │ │ wordpress-gutenberg-exp │   │
-│  └─────────┘ └─────────┘ └─────────────────────────┘   │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
+│  │ design- │ │strategy │ │ design  │ │ content │       │
+│  │ system  │ │(planned)│ │(planned)│ │(planned)│       │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 └─────────────────────────────────────────────────────────┘
    │
    ▼
 HUMAIN (supervision)
 ```
 
-## Les Skills Métiers
+## Skills Disponibles
 
-| Skill | Description | Agents | Statut |
-|-------|-------------|--------|--------|
-| `project-management` | Gestion de projet & relation client | 24 | 🟢 Actif |
-| `direction-technique` | Pilotage technique stratégique | 52 | 🟢 Actif |
+| Skill | Rôle | Agents | Statut |
+|-------|------|--------|--------|
+| `project-management` | Gestion projet & client | 24 | 🟢 |
+| `direction-technique` | Décisions techniques stratégiques | 52 | 🟢 |
+| `web-dev-process` | Process de développement | 61 | 🟢 |
+| `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
+| `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 | `strategy` | Stratégie & conseil | - | 🔴 Planifié |
-| `design` | Design & création graphique | - | 🔴 Planifié |
+| `design` | Design & création | - | 🔴 Planifié |
 | `content` | Contenu & rédaction | - | 🔴 Planifié |
 | `marketing` | Marketing digital | - | 🔴 Planifié |
 
-### Skills Techniques (via `direction-technique`)
+**Total : 199 agents disponibles**
 
-| Skill | Description | Agents |
-|-------|-------------|--------|
-| `web-dev-process` | Process de développement (7 phases) | 61 |
-| `wordpress-gutenberg-expert` | Implémentation WordPress | 41 |
+## Routage Rapide
 
-**Total : 132 agents disponibles**
+| Requête concerne... | → Skill |
+|---------------------|---------|
+| Client, brief, devis, planning, facture | `project-management` |
+| Choix stack, architecture, décisions tech | `direction-technique` |
+| Process dev, CI/CD, tests, deploy | `web-dev-process` |
+| WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
+| Tokens, boutons, formulaires, composants | `design-system-foundations` |
 
-## Règles de Routage
+**Règles détaillées** → [orchestration/routing.md](./orchestration/routing.md)
 
-| Mots-clés | Skill |
-|-----------|-------|
-| brief, devis, estimation, planning, suivi, client, facture, recette | `project-management` |
-| stack, architecture, specs techniques, estimation dev, qualité code | `direction-technique` |
-| audit, benchmark, stratégie, recommandation, KPI | `strategy` |
-| maquette, logo, charte, DA, branding, UI, wireframe | `design` |
-| rédaction, copywriting, contenu, SEO éditorial, article | `content` |
-| SEO, SEA, analytics, social media, emailing, acquisition | `marketing` |
+## Hiérarchie des Skills Techniques
 
-## Arbre de Décision
+Selon [ADR-005](./docs/adr/005-skill-responsibility-boundaries.md) :
 
 ```
-Requête utilisateur
-│
-├─ Concerne la gestion de projet ou le client ?
-│  └─ → skill project-management
-│
-├─ Concerne la technique ou le développement ?
-│  └─ → skill direction-technique
-│     │
-│     ├─ Process générique → web-dev-process
-│     └─ WordPress → wordpress-gutenberg-expert
-│
-├─ Concerne l'audit ou la stratégie ?
-│  └─ → skill strategy (planifié)
-│
-├─ Concerne le design ou l'identité visuelle ?
-│  └─ → skill design (planifié)
-│
-├─ Concerne la rédaction ou le contenu ?
-│  └─ → skill content (planifié)
-│
-└─ Concerne le marketing ou l'acquisition ?
-   └─ → skill marketing (planifié)
+NIVEAU 1 : POURQUOI (direction-technique)
+   "Pourquoi on fait ça ? Quels objectifs ?"
+        │
+        ▼
+NIVEAU 2 : QUOI (web-dev-process)
+   "Quoi mettre en place ? Quelles étapes ?"
+        │
+        ▼
+NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
+   "Comment l'implémenter ? Quel code ?"
 ```
 
-## Composition de Skills
+## Documentation
 
-### Scénario : Nouveau Projet Client
+| Document | Description |
+|----------|-------------|
+| [orchestration/routing.md](./orchestration/routing.md) | Règles de routage détaillées |
+| [orchestration/composition.md](./orchestration/composition.md) | Comment combiner les skills |
+| [orchestration/escalation.md](./orchestration/escalation.md) | Points d'escalade humaine |
+| [workflows/nouveau-projet.md](./workflows/nouveau-projet.md) | Workflow nouveau projet |
+| [workflows/refonte.md](./workflows/refonte.md) | Workflow refonte |
 
-```
-1. project-management/avant-projet
-   → Collecte brief, estimation, proposition
+## ADRs
 
-2. strategy (si besoin)
-   → Audit existant, benchmark, recommandations
-
-3. design
-   → Direction artistique, maquettes
-
-4. content
-   → Arborescence, contenus
-
-5. direction-technique
-   → Specs techniques, estimation dev
-   → web-dev-process (setup, dev, test, deploy)
-   → wordpress-gutenberg-expert (si WP)
-
-6. project-management/pilotage
-   → Suivi, reporting
-
-7. project-management/livraison
-   → Recette, PV
-
-8. marketing
-   → Lancement, acquisition
-
-9. project-management/facturation
-   → Factures, suivi
-```
-
-### Scénario : Refonte Site Existant
-
-```
-1. strategy/audit-existant
-   → Analyse technique et UX
-
-2. strategy/benchmark
-   → Analyse concurrentielle
-
-3. project-management/avant-projet
-   → Brief, estimation, proposition
-
-4. design + content + direction-technique
-   → En parallèle selon planning
-
-5. project-management/livraison
-   → Recette, migration
-```
-
-## Orchestration Multi-Skills
-
-Quand une requête nécessite plusieurs skills :
-
-```markdown
-## Exemple : "Crée un devis pour un site e-commerce WordPress"
-
-### Skills impliqués :
-1. `project-management/avant-projet` - Brief et estimation commerciale
-2. `direction-technique/estimation` - Estimation technique
-3. `direction-technique` → `wordpress-gutenberg-expert` - Spécificités WP/WooCommerce
-
-### Workflow :
-project-management ──► direction-technique ──► wordpress-gutenberg-expert
-     │                    │                    │
-     ▼                    ▼                    ▼
-  Brief client    Specs techniques      Détail WP/Woo
-     │                    │                    │
-     └────────────────────┴────────────────────┘
-                          │
-                          ▼
-                  Proposition complète
-```
-
-## Principes d'Orchestration
-
-### 1. Délégation Claire
-Chaque skill a son périmètre défini. Ne pas mélanger les responsabilités.
-
-### 2. Composition Séquentielle
-Certains skills dépendent des outputs d'autres skills.
-
-### 3. Composition Parallèle
-Certains skills peuvent travailler en parallèle quand pas de dépendance.
-
-### 4. Point de Synchronisation
-L'orchestrateur synchronise les outputs des différents skills.
-
-### 5. Supervision Humaine
-Chaque livrable de skill est validé par un humain avant passage au suivant.
-
-## Points d'Escalade
-
-| Situation | Action |
-|-----------|--------|
-| Requête ambiguë (multi-skills) | Clarifier le besoin principal |
-| Conflit entre skills | Arbitrage humain |
-| Skill planifié demandé | Indiquer le statut, proposer alternative |
-| Workflow complexe | Proposer un plan de composition |
+| ADR | Titre |
+|-----|-------|
+| [001](./docs/adr/001-single-responsibility-agents.md) | Single Responsibility Agents |
+| [002](./docs/adr/002-hierarchical-orchestrators.md) | Orchestrateurs Hiérarchiques |
+| [003](./docs/adr/003-markdown-agent-format.md) | Format Markdown |
+| [004](./docs/adr/004-human-supervision.md) | Supervision Humaine |
+| [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 
 ## Changelog
+
+### v2.2.0
+
+> **📖 [Guide de Migration](./docs/analysis/MIGRATION.md)** - Consultez ce guide avant de mettre à jour
+
+- **Breaking** : Intègre `direction-technique` v3.0.0
+  - Tous les agents POURQUOI-level sans code d'implémentation
+  - Le code a été déplacé vers les skills COMMENT-level
+- **Version Relationship** : web-agency 2.x → direction-technique 3.x (voir ADR-005)
+
+### v2.1.0
+- **Refactoring SRP** : Séparation routage/composition/escalade
+- Création dossier `orchestration/` avec agents spécialisés
+- Création dossier `workflows/` avec scénarios
+- Allègement du SKILL.md (responsabilité unique : routage)
+- Ajout ADR-005 (frontières entre skills)
+
+### v2.0.1
+- Renommage `technical` → `direction-technique`
 
 ### v2.0.0
 - Refactoring en méta-orchestrateur
 - Skills métiers extraits en skills autonomes
-- Architecture de composition
-
-### v2.0.1
-- Renommage `technical` → `direction-technique` (52 agents)
-
-### v1.1.0
-- Ajout du domaine Technique (6 agents)
-- Intégration web-dev-process et wordpress-gutenberg-expert
 
 ### v1.0.0
-- Création initiale avec project-management (24 agents)
+- Création initiale

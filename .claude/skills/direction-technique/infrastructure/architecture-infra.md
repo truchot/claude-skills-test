@@ -1,95 +1,56 @@
 ---
 name: architecture-infra
-description: Conception d'infrastructure cloud
+description: Politique d'architecture infrastructure cloud (Niveau POURQUOI)
 ---
 
-# Architecture Infrastructure
+# Politique d'Architecture Infrastructure
 
-Tu conçois l'**architecture d'infrastructure** pour héberger les applications de manière fiable et scalable.
+Tu définis les **politiques et standards** pour l'architecture d'infrastructure cloud.
 
-## Infrastructure as Code (IaC)
+## Rôle de cet Agent (Niveau POURQUOI)
 
-### Terraform
+> **Ce que tu fais** : Définir les STANDARDS d'architecture infra et les critères de choix
+> **Ce que tu ne fais pas** : Écrire le code Terraform/Pulumi ou configurer les services cloud
+>
+> → Process de setup infra : `web-dev-process/agents/setup/infrastructure`
+> → Implémentation : Skills technologiques spécialisés
 
-```hcl
-# main.tf
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-  backend "s3" {
-    bucket = "terraform-state-bucket"
-    key    = "prod/terraform.tfstate"
-    region = "eu-west-1"
-  }
-}
-
-# VPC
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
-  tags = {
-    Name        = "${var.project}-vpc"
-    Environment = var.environment
-  }
-}
-
-# Subnets
-resource "aws_subnet" "public" {
-  count             = 2
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.${count.index + 1}.0/24"
-  availability_zone = data.aws_availability_zones.available.names[count.index]
-
-  tags = {
-    Name = "${var.project}-public-${count.index + 1}"
-  }
-}
-
-# ECS Cluster
-resource "aws_ecs_cluster" "main" {
-  name = "${var.project}-cluster"
-
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  }
-}
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces choix ? Pour fiabilité, scalabilité, coût"     │
+│  → "Standards : patterns, composants, bonnes pratiques"         │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi déployer ? VPC, ECS, RDS, CDN"                         │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : Terraform HCL, Pulumi TypeScript, CloudFormation"    │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Pulumi (TypeScript)
+---
 
-```typescript
-import * as aws from "@pulumi/aws";
-import * as pulumi from "@pulumi/pulumi";
+## Politique Infrastructure as Code (IaC)
 
-const config = new pulumi.Config();
-const environment = config.require("environment");
+### Outils Recommandés
 
-// VPC
-const vpc = new aws.ec2.Vpc("main", {
-  cidrBlock: "10.0.0.0/16",
-  enableDnsHostnames: true,
-  tags: { Environment: environment },
-});
+| Outil | Cas d'Usage | Complexité |
+|-------|-------------|------------|
+| **Terraform** | Multi-cloud, équipes matures | Moyenne |
+| **Pulumi** | Développeurs TypeScript/Python | Moyenne |
+| **CloudFormation** | AWS-only, équipes AWS | Faible |
+| **CDK** | AWS + TypeScript | Moyenne |
 
-// ECS Cluster
-const cluster = new aws.ecs.Cluster("app", {
-  name: `${pulumi.getProject()}-${environment}`,
-  settings: [{
-    name: "containerInsights",
-    value: "enabled",
-  }],
-});
+### Principes IaC Obligatoires
 
-export const vpcId = vpc.id;
-export const clusterId = cluster.id;
-```
+| Principe | Description |
+|----------|-------------|
+| **Tout en code** | Aucune configuration manuelle en prod |
+| **Versionné** | Git avec historique complet |
+| **Reviewé** | PR obligatoire pour changements |
+| **Testé** | Validation en staging avant prod |
+| **Immutable** | Pas de modifications in-place |
 
 ## Patterns d'Architecture
 
@@ -136,57 +97,14 @@ export const clusterId = cluster.id;
     └───────────────┘
 ```
 
-### Microservices on Kubernetes
+### Critères de Choix d'Architecture
 
-```yaml
-# deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: api
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: api
-  template:
-    metadata:
-      labels:
-        app: api
-    spec:
-      containers:
-      - name: api
-        image: myregistry/api:v1.0.0
-        ports:
-        - containerPort: 3000
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        envFrom:
-        - secretRef:
-            name: api-secrets
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: api
-spec:
-  selector:
-    app: api
-  ports:
-  - port: 80
-    targetPort: 3000
-```
+| Architecture | Taille Équipe | Complexité | Scalabilité |
+|--------------|---------------|------------|-------------|
+| **Three-Tier** | 1-10 devs | Faible | Verticale |
+| **Serverless** | 1-5 devs | Moyenne | Automatique |
+| **Microservices** | 10+ devs | Élevée | Horizontale |
+| **Monolithe modulaire** | 5-15 devs | Moyenne | Verticale |
 
 ## Composants par Provider
 
@@ -240,11 +158,52 @@ spec:
 - [ ] Monitoring des coûts (AWS Cost Explorer)
 - [ ] Tags pour allocation
 
+---
+
+## Checklist Infrastructure
+
+### Setup Initial
+
+- [ ] IaC outil choisi et configuré
+- [ ] Environnements définis (dev, staging, prod)
+- [ ] VPC et réseau configurés
+- [ ] Sécurité : IAM, Security Groups
+- [ ] Monitoring et alerting
+- [ ] Backup et DR
+
+### Par Déploiement
+
+- [ ] Review IaC avant apply
+- [ ] Plan vérifié
+- [ ] Rollback plan prêt
+- [ ] Tests post-déploiement
+
+---
+
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Besoin multi-region | Architecture + coûts à valider |
-| Compliance spécifique | Consultation sécurité/légal |
-| Migration cloud | Plan détaillé + POC |
-| Coût > budget | Optimisation ou arbitrage |
+| Situation | Action | Responsable |
+|-----------|--------|-------------|
+| Besoin multi-region | Architecture + coûts à valider | Tech Lead + CTO |
+| Compliance spécifique | Consultation sécurité/légal | Security + Legal |
+| Migration cloud | Plan détaillé + POC | DevOps + Tech Lead |
+| Coût > budget | Optimisation ou arbitrage | Tech Lead + Finance |
+| Incident infra | War room, communication | On-call + Management |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Process setup infra | `web-dev-process/agents/setup/infrastructure` |
+| Environnements | `infrastructure/environnements` |
+| Déploiement | `infrastructure/strategie-deploiement` |
+| Sécurité | `securite/securite-applicative` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+- [Terraform Best Practices](https://www.terraform-best-practices.com/)
+- [The Twelve-Factor App](https://12factor.net/)

@@ -1,320 +1,195 @@
 ---
 name: conformite-rgpd
-description: Conformité RGPD et protection des données personnelles
+description: Politique de conformité RGPD et protection des données personnelles (Niveau POURQUOI)
 ---
 
-# Conformité RGPD
+# Politique de Conformité RGPD
 
-Tu guides la mise en conformité **RGPD** (Règlement Général sur la Protection des Données).
+Tu définis les **politiques et objectifs** de conformité RGPD.
+
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Définir les OBJECTIFS de conformité et les règles à respecter
+> **Ce que tu ne fais pas** : Implémenter les fonctionnalités RGPD (code)
+>
+> → Process de conformité : `web-dev-process/agents/testing/security`
+> → Implémentation : Skills technologiques spécialisés
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique) ← ICI                │
+│  → "Pourquoi ces règles ? Conformité légale, droits utilisateurs│
+│  → "Politiques : consentement, conservation, droits"            │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → "Quoi implémenter ? Registre, export, effacement"            │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (skills technologiques)                     │
+│  → "Code : endpoints API, logique d'anonymisation..."           │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
 
 ## Principes Fondamentaux du RGPD
 
-| Principe | Description |
-|----------|-------------|
-| **Licéité** | Base légale pour le traitement |
-| **Limitation des finalités** | Données pour un objectif précis |
-| **Minimisation** | Collecter le strict nécessaire |
-| **Exactitude** | Données à jour et correctes |
-| **Limitation de conservation** | Durée définie de stockage |
-| **Intégrité et confidentialité** | Sécurité des données |
-| **Responsabilité** | Prouver la conformité |
+| Principe | Description | Objectif |
+|----------|-------------|----------|
+| **Licéité** | Base légale pour le traitement | Justifier chaque collecte |
+| **Limitation des finalités** | Données pour un objectif précis | Pas de réutilisation abusive |
+| **Minimisation** | Collecter le strict nécessaire | Réduire l'exposition |
+| **Exactitude** | Données à jour et correctes | Qualité des données |
+| **Limitation de conservation** | Durée définie de stockage | Pas de stockage éternel |
+| **Intégrité et confidentialité** | Sécurité des données | Protection technique |
+| **Responsabilité** | Prouver la conformité | Documentation et audit |
+
+---
 
 ## Bases Légales
 
-| Base | Usage | Exemple |
-|------|-------|---------|
-| **Consentement** | Marketing, cookies non essentiels | Newsletter |
-| **Contrat** | Nécessaire pour le service | Livraison |
-| **Obligation légale** | Loi l'impose | Factures (10 ans) |
-| **Intérêt vital** | Urgence médicale | Rare |
-| **Mission publique** | Organismes publics | - |
-| **Intérêt légitime** | Équilibre intérêts | Analytics basique |
+| Base | Usage Typique | Conditions |
+|------|---------------|------------|
+| **Consentement** | Marketing, cookies non essentiels | Libre, spécifique, éclairé, révocable |
+| **Contrat** | Données nécessaires au service | Strictement nécessaire |
+| **Obligation légale** | Données imposées par la loi | Référence légale obligatoire |
+| **Intérêt vital** | Urgence médicale | Cas exceptionnels |
+| **Mission publique** | Organismes publics | Cadre défini |
+| **Intérêt légitime** | Analytics basique | Balance des intérêts documentée |
 
-## Données Personnelles
+---
 
-### Types de Données
+## Politique de Classification des Données
 
-| Catégorie | Exemples | Sensibilité |
-|-----------|----------|-------------|
-| **Identifiantes** | Nom, email, téléphone, IP | Standard |
-| **Sensibles** | Santé, origine, religion, orientation | Très haute |
-| **Financières** | CB, IBAN, revenus | Haute |
-| **Comportementales** | Navigation, préférences | Moyenne |
-| **Techniques** | Device, navigateur | Basse |
+### Niveaux de Sensibilité
 
-### Inventaire des Données
+| Catégorie | Exemples | Sensibilité | Mesures Requises |
+|-----------|----------|-------------|------------------|
+| **Données sensibles** | Santé, origine, religion, orientation | Très haute | Consentement explicite, chiffrement, accès restreint |
+| **Données financières** | CB, IBAN, revenus | Haute | Chiffrement, PCI-DSS si applicable |
+| **Données identifiantes** | Nom, email, téléphone, IP | Standard | Protection basique, consentement |
+| **Données comportementales** | Navigation, préférences | Moyenne | Consentement cookies |
+| **Données techniques** | Device, navigateur | Basse | Anonymisation possible |
 
-```markdown
-## Registre des Traitements
+### Durées de Conservation
 
-### Traitement : [Nom]
+| Type de Donnée | Durée | Base Légale |
+|----------------|-------|-------------|
+| **Compte utilisateur actif** | Durée du compte | Contrat |
+| **Compte inactif** | 3 ans après dernière activité | Intérêt légitime |
+| **Données de facturation** | 10 ans | Obligation légale (Code de commerce) |
+| **Logs de connexion** | 1 an | Obligation légale (LCEN) |
+| **Cookies marketing** | 13 mois maximum | CNIL |
+| **Données après demande d'effacement** | Suppression immédiate (sauf obligation légale) | RGPD Art. 17 |
 
-| Champ | Valeur |
-|-------|--------|
-| **Finalité** | [Pourquoi on collecte] |
-| **Base légale** | [Consentement/Contrat/...] |
-| **Catégories de données** | [Types collectés] |
-| **Destinataires** | [Qui a accès] |
-| **Transferts hors UE** | [Oui/Non - Garanties] |
-| **Durée de conservation** | [Durée] |
-| **Mesures de sécurité** | [Chiffrement, accès...] |
+---
+
+## Politique des Droits des Personnes
+
+### Droits à Implémenter
+
+| Droit | Délai de Réponse | Conditions |
+|-------|------------------|------------|
+| **Accès** | 1 mois | Gratuit, format lisible |
+| **Rectification** | 1 mois | Sans justification |
+| **Effacement** | 1 mois | Sauf obligation légale |
+| **Portabilité** | 1 mois | Format structuré (JSON, CSV) |
+| **Opposition** | 1 mois | Marketing : sans justification |
+| **Limitation** | 1 mois | Pendant vérification |
+
+### Procédure de Traitement des Demandes
+
+```
+Demande reçue
+     │
+     ▼
+┌──────────────────┐
+│ Vérifier identité │  ← Obligatoire avant action
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ Qualifier le droit│  ← Accès, effacement, etc.
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ Exécuter (< 1 mois)│
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ Confirmer par écrit│
+└──────────────────┘
 ```
 
-## Implémentation Technique
+---
 
-### Consentement
+## Politique de Consentement
 
-```typescript
-// Modèle de consentement
-interface Consent {
-  userId: string;
-  purpose: 'marketing' | 'analytics' | 'personalization';
-  granted: boolean;
-  timestamp: Date;
-  source: 'banner' | 'settings' | 'form';
-  version: string; // Version de la politique
-}
+### Règles de Collecte du Consentement
 
-// Vérification avant traitement
-async function canSendMarketing(userId: string): Promise<boolean> {
-  const consent = await getConsent(userId, 'marketing');
-  return consent?.granted === true;
-}
-
-// Cookies - wp_has_consent (WordPress)
-if (wp_has_consent('marketing')) {
-  // Charger scripts marketing
-}
-```
-
-### Droit d'Accès (Portabilité)
-
-```typescript
-// Export des données utilisateur
-async function exportUserData(userId: string): Promise<UserDataExport> {
-  const user = await User.findById(userId);
-  const orders = await Order.findByUserId(userId);
-  const preferences = await Preferences.findByUserId(userId);
-
-  return {
-    profile: {
-      email: user.email,
-      name: user.name,
-      createdAt: user.createdAt,
-    },
-    orders: orders.map(o => ({
-      id: o.id,
-      date: o.date,
-      total: o.total,
-    })),
-    preferences: preferences,
-    exportedAt: new Date(),
-    format: 'JSON',
-  };
-}
-```
-
-### Droit à l'Effacement
-
-```typescript
-import crypto from 'crypto';
-
-// Générer un ID anonyme non-réversible (sans lien avec userId)
-function generateAnonymousId(): string {
-  return crypto.randomBytes(16).toString('hex');
-}
-
-// Suppression des données (conforme RGPD)
-async function deleteUserData(userId: string): Promise<void> {
-  // Générer un identifiant anonyme SANS lien avec l'userId original
-  const anonymousId = generateAnonymousId();
-
-  // 1. Anonymiser complètement (aucun lien avec l'identité originale)
-  await User.updateOne(
-    { _id: userId },
-    {
-      email: `anon-${anonymousId}@deleted.invalid`,
-      name: 'Anonyme',
-      phone: null,
-      address: null,
-      // Supprimer TOUTES les données identifiantes
-      deletedAt: new Date(),
-    }
-  );
-
-  // 2. Supprimer les données non nécessaires
-  await Preferences.deleteByUserId(userId);
-  await Consent.deleteByUserId(userId);
-
-  // 3. Pour les commandes (obligations comptables) :
-  // - Garder uniquement les données fiscales obligatoires
-  // - Supprimer TOUTES les données personnelles
-  await Order.updateMany(
-    { userId },
-    {
-      $set: {
-        customerName: 'Client anonyme',
-        userId: null, // Casser le lien !
-      },
-      $unset: {
-        shippingAddress: 1,
-        billingAddress: 1,
-        email: 1,
-        phone: 1,
-      }
-    }
-  );
-
-  // 4. Notifier les sous-traitants
-  await notifyDataProcessors(userId, 'deletion');
-
-  // 5. Log d'audit (sans données personnelles)
-  await AuditLog.create({
-    action: 'user_deletion',
-    timestamp: new Date(),
-    // PAS de userId ni données identifiantes dans le log !
-  });
-}
-```
-
-**Important** : L'anonymisation doit être irréversible. Ne jamais conserver de lien (même hashé) avec l'identité originale.
-
-### Pseudonymisation / Anonymisation
-
-```typescript
-// Pseudonymisation (réversible avec clé)
-function pseudonymize(data: string, key: string): string {
-  return crypto.createHmac('sha256', key).update(data).digest('hex');
-}
-
-// Anonymisation (irréversible)
-function anonymizeIP(ip: string): string {
-  // Masquer le dernier octet
-  return ip.replace(/\.\d+$/, '.0');
-}
-
-// Anonymisation pour analytics
-function anonymizeForAnalytics(user: User): AnonymousUser {
-  return {
-    id: pseudonymize(user.id, ANALYTICS_KEY),
-    ageRange: getAgeRange(user.birthDate), // "25-34" au lieu de la date
-    region: user.city ? getRegion(user.city) : null, // Région au lieu de ville
-    // Pas d'email, nom, adresse...
-  };
-}
-```
-
-## Cookies & Trackers
+| Aspect | Règle |
+|--------|-------|
+| **Clarté** | Langage simple, pas de jargon juridique |
+| **Spécificité** | Un consentement par finalité |
+| **Opt-in** | Case non pré-cochée |
+| **Révocabilité** | Aussi facile de retirer que de donner |
+| **Preuve** | Horodatage, source, version de la politique |
+| **Renouvellement** | Si politique change, re-demander |
 
 ### Catégories de Cookies
 
-| Catégorie | Consentement | Exemples |
-|-----------|--------------|----------|
-| **Essentiels** | Non requis | Session, panier, auth |
-| **Fonctionnels** | Recommandé | Langue, préférences |
-| **Analytics** | Requis | Google Analytics, Matomo |
-| **Marketing** | Requis | Facebook Pixel, Google Ads |
+| Catégorie | Consentement Requis | Exemples |
+|-----------|---------------------|----------|
+| **Essentiels** | Non | Session, panier, CSRF, auth |
+| **Fonctionnels** | Recommandé | Langue, préférences UI |
+| **Analytics** | Oui | Google Analytics, Matomo |
+| **Marketing** | Oui | Facebook Pixel, Google Ads, retargeting |
 
-### Implémentation Cookie Banner
+---
 
-```typescript
-// Configuration cookies
-const cookieConfig = {
-  essential: {
-    name: 'Cookies essentiels',
-    required: true,
-    cookies: ['session_id', 'csrf_token', 'cart'],
-  },
-  analytics: {
-    name: 'Cookies analytiques',
-    required: false,
-    cookies: ['_ga', '_gid'],
-    scripts: ['https://www.googletagmanager.com/gtag/js'],
-  },
-  marketing: {
-    name: 'Cookies marketing',
-    required: false,
-    cookies: ['_fbp', '_gcl_au'],
-    scripts: ['https://connect.facebook.net/en_US/fbevents.js'],
-  },
-};
+## Politique de Sécurité des Données
 
-// Charger les scripts selon consentement
-function loadConsentedScripts(consent: ConsentPreferences): void {
-  Object.entries(cookieConfig).forEach(([category, config]) => {
-    if (config.required || consent[category]) {
-      config.scripts?.forEach(loadScript);
-    }
-  });
-}
-```
+### Mesures Techniques Obligatoires
 
-## Sécurité des Données
-
-### Mesures Techniques
-
-| Mesure | Implémentation |
-|--------|----------------|
-| **Chiffrement transit** | TLS 1.3 |
-| **Chiffrement repos** | AES-256 |
-| **Hashage passwords** | bcrypt (cost 12+) |
-| **Accès authentifié** | JWT, sessions sécurisées |
-| **Logs d'accès** | Audit trail |
-| **Backup chiffré** | Backups réguliers chiffrés |
+| Mesure | Standard Minimum |
+|--------|------------------|
+| **Chiffrement en transit** | TLS 1.2 minimum (1.3 recommandé) |
+| **Chiffrement au repos** | AES-256 pour données sensibles |
+| **Hashage mots de passe** | bcrypt (cost 12+) ou Argon2 |
+| **Authentification** | Sessions sécurisées, MFA pour admins |
+| **Logs d'accès** | Audit trail des accès aux données |
+| **Backups** | Chiffrés, testés régulièrement |
 
 ### Mesures Organisationnelles
 
-- Formation des équipes
-- Politique d'accès (besoin d'en connaître)
-- Procédure de violation de données
-- Nomination DPO si nécessaire
+- [ ] Formation des équipes à la protection des données
+- [ ] Politique d'accès : principe du moindre privilège
+- [ ] Procédure de violation de données documentée
+- [ ] DPO nommé si requis (> 250 employés ou données sensibles)
 
-## Notification de Violation
+---
 
-### Procédure
+## Politique de Notification de Violation
 
-```
-Détection de violation
-         │
-         ▼
-┌─────────────────────┐
-│ Évaluer le risque   │ < 72h pour notifier CNIL
-└──────────┬──────────┘
-           │
-    ┌──────┴──────┐
-    ▼             ▼
- Risque       Risque
- faible       élevé
-    │             │
-    ▼             ▼
-Documenter    Notifier CNIL
- interne      + personnes
-                concernées
-```
+### Délais Obligatoires
 
-### Template Notification
+| Notification | Délai | Condition |
+|--------------|-------|-----------|
+| **CNIL** | < 72 heures | Toute violation avec risque |
+| **Personnes concernées** | Sans délai | Si risque élevé pour leurs droits |
+| **Documentation interne** | Immédiat | Toutes les violations |
 
-```markdown
-## Notification de Violation de Données
+### Critères d'Évaluation du Risque
 
-**Date de détection** : [Date]
-**Date de l'incident** : [Date estimée]
-**Nature de la violation** : [Description]
+| Critère | Risque Faible | Risque Élevé |
+|---------|---------------|--------------|
+| **Type de données** | Emails seuls | Données sensibles, financières |
+| **Volume** | < 100 personnes | > 1000 personnes |
+| **Chiffrement** | Données chiffrées | Données en clair |
+| **Impact potentiel** | Désagrément | Préjudice financier/moral |
 
-### Données concernées
-- Types : [Email, nom, ...]
-- Volume : [Nombre de personnes]
-
-### Risques potentiels
-[Description des risques pour les personnes]
-
-### Mesures prises
-1. [Mesure immédiate 1]
-2. [Mesure corrective 2]
-
-### Contact
-[DPO ou responsable]
-```
+---
 
 ## Checklist RGPD
 
@@ -323,29 +198,55 @@ Documenter    Notifier CNIL
 - [ ] Registre des traitements à jour
 - [ ] Politique de confidentialité publiée
 - [ ] Mentions légales complètes
-- [ ] Consentement cookies implémenté
-- [ ] Formulaire de contact DPO
+- [ ] Consentement cookies implémenté (bandeau)
+- [ ] Formulaire de contact DPO accessible
 
 ### Droits des Personnes
 
-- [ ] Droit d'accès implémenté
-- [ ] Droit de rectification implémenté
-- [ ] Droit à l'effacement implémenté
-- [ ] Droit à la portabilité (export)
+- [ ] Droit d'accès : export des données disponible
+- [ ] Droit de rectification : modification possible
+- [ ] Droit à l'effacement : suppression fonctionnelle
+- [ ] Droit à la portabilité : export en format standard
 - [ ] Procédure de demande documentée
 
 ### Sécurité
 
-- [ ] Données chiffrées en transit
+- [ ] Données chiffrées en transit (TLS)
 - [ ] Données sensibles chiffrées au repos
 - [ ] Accès logués et audités
 - [ ] Procédure de violation documentée
 
+### Sous-traitants
+
+- [ ] Clause RGPD dans les contrats
+- [ ] Liste des sous-traitants maintenue
+- [ ] Vérification des garanties
+
+---
+
 ## Points d'Escalade
 
-| Situation | Action |
-|-----------|--------|
-| Violation de données | Procédure incident, notification CNIL < 72h |
-| Demande d'exercice de droit | Répondre < 1 mois |
-| Doute sur conformité | Consultation DPO |
-| Nouveau traitement | Privacy by design |
+| Situation | Action | Délai | Responsable |
+|-----------|--------|-------|-------------|
+| Violation de données | Procédure incident + notification CNIL | < 72h | DPO/Tech Lead |
+| Demande d'exercice de droit | Traitement de la demande | < 1 mois | DPO |
+| Doute sur conformité | Consultation DPO/juridique | ASAP | Tech Lead |
+| Nouveau traitement | Privacy by Design | Avant dev | DPO + Tech Lead |
+| Plainte CNIL | Réponse avec documentation | Selon délai CNIL | DPO + Direction |
+
+---
+
+## Références
+
+| Aspect | Agent de Référence |
+|--------|-------------------|
+| Sécurité applicative | `securite/securite-applicative` |
+| Gestion des secrets | `securite/gestion-secrets` |
+| Audit sécurité | `securite/audit-securite` |
+| Implémentation | Skills technologiques spécialisés |
+
+### Ressources Externes
+
+- [CNIL - Guide RGPD](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on)
+- [CNIL - Analyse d'impact (AIPD)](https://www.cnil.fr/fr/RGPD-analyse-impact-protection-des-donnees-aipd)
+- [RGPD - Texte officiel](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
