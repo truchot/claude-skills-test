@@ -1,6 +1,16 @@
 # Frontend Developer Skill
 
-Expert en développement front-end moderne couvrant l'ensemble des compétences nécessaires pour créer des interfaces utilisateur modernes, performantes et accessibles.
+Skill d'**implémentation** (NIVEAU 3 : COMMENT) pour le développement front-end moderne.
+
+## Position dans l'Architecture
+
+```
+NIVEAU 1 : POURQUOI → direction-technique (décisions stratégiques)
+NIVEAU 2 : QUOI     → web-dev-process (processus, workflows)
+NIVEAU 3 : COMMENT  → frontend-developer (ce skill - code, config)
+```
+
+Ce skill fournit le **code et les configurations** pour implémenter les décisions de `direction-technique` selon les processus de `web-dev-process`.
 
 ## Vue d'ensemble
 
@@ -50,13 +60,18 @@ frontend-developer/
 └── templates/            # Templates réutilisables
 ```
 
-## Principes
+## Ce que ce skill fournit
 
-1. **User-First** - L'expérience utilisateur prime sur tout
-2. **Performance** - Chaque milliseconde compte
-3. **Accessibilité** - Le web est pour tout le monde (WCAG AA minimum)
-4. **Maintenabilité** - Code propre, testable et documenté
-5. **Progressive Enhancement** - Fonctionnel d'abord, enrichi ensuite
+- ✅ **Code** : React, Vue, TypeScript, CSS, animations
+- ✅ **Configurations** : Vite, Webpack, ESLint, Prettier, Tailwind
+- ✅ **Patterns** : Hooks, composables, patterns de composants
+- ✅ **Exemples** : Prêts à copier-coller
+
+## Ce que ce skill ne fournit PAS
+
+- ❌ **Décisions stratégiques** → `direction-technique`
+- ❌ **Processus d'équipe** → `web-dev-process`
+- ❌ **Conventions organisationnelles** → `direction-technique`
 
 ## Exemples de questions
 

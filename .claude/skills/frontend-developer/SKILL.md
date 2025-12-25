@@ -1,232 +1,313 @@
 ---
 name: frontend-developer
 description: Expert en développement front-end moderne - HTML, CSS, JavaScript, TypeScript, frameworks, testing, performance et tooling
-version: 1.0.0
+version: 1.1.0
 status: active
 ---
 
 # Frontend Developer Skill
 
+## Position dans l'Architecture
+
+Ce skill est un skill de **NIVEAU 3 : COMMENT** (implémentation). Il fournit le code et les configurations concrètes pour le développement front-end.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique)                      │
+│  → Décisions stratégiques, choix de stack, ADRs                 │
+│  → Quand utiliser React vs Vue ? Quel framework CSS ?           │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process)                              │
+│  → Process, workflows, checklists, standards                    │
+│  → Comment organiser les tests ? Quel workflow Git ?            │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (frontend-developer) ← CE SKILL             │
+│  → Implémentation, code, configuration                          │
+│  → Comment écrire ce hook React ? Configurer Tailwind ?         │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Philosophie
 
-Ce skill incarne l'expertise d'un développeur front-end senior. Il couvre l'ensemble des compétences nécessaires pour créer des interfaces utilisateur modernes, performantes et accessibles.
+Ce skill fournit l'**implémentation concrète** pour le développement front-end. Il contient :
+- ✅ Du code (React, Vue, TypeScript, CSS...)
+- ✅ Des configurations (Vite, ESLint, Tailwind...)
+- ✅ Des patterns d'implémentation
+- ✅ Des exemples concrets et prêts à l'emploi
 
-### Principes fondamentaux
-
-1. **User-First** - L'expérience utilisateur prime sur tout
-2. **Performance** - Chaque milliseconde compte
-3. **Accessibilité** - Le web est pour tout le monde (WCAG AA minimum)
-4. **Maintenabilité** - Code propre, testable et documenté
-5. **Progressive Enhancement** - Fonctionnel d'abord, enrichi ensuite
+Il ne contient PAS :
+- ❌ Des décisions stratégiques → `direction-technique`
+- ❌ Des processus de travail → `web-dev-process`
+- ❌ Des politiques d'équipe → `direction-technique`
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    FRONTEND-DEVELOPER                           │
-│                     (Orchestrateur)                             │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-        ┌─────────────────────┼─────────────────────┐
-        │                     │                     │
-        ▼                     ▼                     ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│  FOUNDATIONS  │    │  JAVASCRIPT   │    │  FRAMEWORKS   │
-│  HTML/CSS/A11y│    │  JS/TS Modern │    │  React/Vue/etc│
-└───────────────┘    └───────────────┘    └───────────────┘
-        │                     │                     │
-        ▼                     ▼                     ▼
-┌───────────────┐    ┌───────────────┐    ┌───────────────┐
-│    STYLING    │    │    STATE      │    │   TESTING     │
-│  CSS/Tailwind │    │  Management   │    │  Jest/RTL/E2E │
-└───────────────┘    └───────────────┘    └───────────────┘
-        │                     │                     │
-        └─────────────────────┼─────────────────────┘
-                              │
-                ┌─────────────┴─────────────┐
-                │                           │
-                ▼                           ▼
-        ┌───────────────┐          ┌───────────────┐
-        │  PERFORMANCE  │          │    TOOLING    │
-        │  Core Web     │          │  Build/Bundle │
-        │  Vitals       │          │  Lint/Format  │
-        └───────────────┘          └───────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              direction-technique                             │
+│                         (POURQUOI - 52 agents)                              │
+│                     Décisions stratégiques frontend                          │
+│                                                                              │
+│  avant-projet/selection-stack → Choix React/Vue/Angular                     │
+│  architecture/patterns-design → Patterns d'architecture front               │
+│  performance/optimisation-frontend → Stratégie perf (politique)             │
+│  qualite/conventions-code → Standards de code (politique)                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              web-dev-process                                 │
+│                          (QUOI - 61 agents)                                 │
+│                      Process de développement                                │
+│                                                                              │
+│  design/ui-ux → Principes UX, responsive, accessibility                     │
+│  setup/quality-tools → Workflow linting, formatting                         │
+│  development/coding-standards → Process de code review                      │
+│  testing/orchestrator → Stratégie de test (pyramide)                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            frontend-developer                                │
+│                         (COMMENT - 40 agents)                               │
+│                      Implémentation concrète                                 │
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                          8 DOMAINES                                   │   │
+│  │                                                                       │   │
+│  │  foundations/       javascript/       frameworks/      styling/      │   │
+│  │      (5)               (5)               (5)             (4)         │   │
+│  │                                                                       │   │
+│  │  state-management/   testing/        performance/     tooling/       │   │
+│  │      (3)               (4)               (3)            (3)          │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Domaines et Agents
+## Domaines et Agents (40 agents)
 
-### 1. Foundations (5 agents)
+### 1. foundations/ - Implémentation HTML/CSS (5 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `html-semantique` | Structure HTML5 sémantique et SEO |
-| `css-moderne` | CSS moderne, Grid, Flexbox, variables |
-| `accessibilite` | WCAG, ARIA, tests d'accessibilité |
-| `responsive-design` | Mobile-first, breakpoints, media queries |
-| `orchestrator` | Coordination des agents foundations |
+Code et patterns pour les fondamentaux web.
 
-**Mots-clés:** HTML, sémantique, SEO, CSS, Grid, Flexbox, a11y, WCAG, ARIA, responsive, mobile-first
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `html-semantique` | Structure HTML5, SEO | Code HTML, balises, métadonnées |
+| `css-moderne` | Grid, Flexbox, variables | Code CSS, layouts |
+| `accessibilite` | WCAG, ARIA | Code a11y, attributs ARIA |
+| `responsive-design` | Mobile-first | Media queries, clamp() |
 
-### 2. JavaScript (5 agents)
+### 2. javascript/ - Implémentation JS/TS (5 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `javascript-moderne` | ES6+, async/await, modules, patterns |
-| `typescript` | Typage, interfaces, generics, utility types |
-| `dom-manipulation` | DOM API, événements, delegation |
-| `api-integration` | Fetch, REST, GraphQL, WebSockets |
-| `orchestrator` | Coordination des agents JavaScript |
+Code JavaScript et TypeScript moderne.
 
-**Mots-clés:** JavaScript, ES6, TypeScript, async, Promise, DOM, fetch, API, REST, GraphQL
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `javascript-moderne` | ES6+, async/await | Code JS, patterns |
+| `typescript` | Typage, generics | Types, interfaces, configs |
+| `dom-manipulation` | DOM API, événements | Code DOM, handlers |
+| `api-integration` | Fetch, REST, WS | Code API, clients HTTP |
 
-### 3. Frameworks (6 agents)
+### 3. frameworks/ - Implémentation React/Vue (5 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `react-expert` | Composants, hooks, patterns React |
-| `vue-expert` | Composition API, Pinia, Vue patterns |
-| `nextjs-expert` | SSR, SSG, App Router, API routes |
-| `nuxt-expert` | Nuxt 3, auto-imports, Nitro |
-| `component-patterns` | Patterns communs (HOC, Render Props, etc.) |
-| `orchestrator` | Coordination des agents frameworks |
+Code spécifique aux frameworks front-end.
 
-**Mots-clés:** React, Vue, Next.js, Nuxt, hooks, composants, SSR, SSG, hydration
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `react-expert` | Hooks, composants React | Code React, custom hooks |
+| `vue-expert` | Composition API, Pinia | Code Vue, composables |
+| `nextjs-expert` | SSR, App Router | Code Next.js, Server Components |
+| `component-patterns` | HOC, Render Props | Patterns réutilisables |
 
-### 4. Styling (5 agents)
+### 4. styling/ - Implémentation CSS (4 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `tailwind-expert` | Configuration, plugins, best practices |
-| `css-in-js` | Styled-components, Emotion, CSS Modules |
-| `scss-sass` | Variables, mixins, architecture SCSS |
-| `animations` | CSS transitions, animations, Framer Motion |
-| `orchestrator` | Coordination des agents styling |
+Code et configuration styling.
 
-**Mots-clés:** Tailwind, CSS-in-JS, styled-components, SCSS, Sass, animations, transitions
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `tailwind-expert` | Configuration Tailwind | Config, plugins, classes |
+| `css-in-js` | styled-components, Emotion | Code CSS-in-JS |
+| `animations` | Transitions, Framer Motion | Code animations |
 
-### 5. State Management (4 agents)
+### 5. state-management/ - Implémentation State (3 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `react-state` | useState, useReducer, Context, Zustand, Redux |
-| `vue-state` | Pinia, Vuex, composables |
-| `server-state` | React Query, SWR, Apollo Client |
-| `orchestrator` | Coordination des agents state |
+Code de gestion d'état.
 
-**Mots-clés:** state, Redux, Zustand, Pinia, Context, React Query, SWR, cache
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `react-state` | useState, Zustand, Redux | Code stores, slices |
+| `server-state` | React Query, SWR | Code queries, mutations |
 
-### 6. Testing (5 agents)
+### 6. testing/ - Implémentation Tests (4 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `unit-testing` | Jest, Vitest, mocking, coverage |
-| `component-testing` | React Testing Library, Vue Test Utils |
-| `e2e-testing` | Playwright, Cypress, tests d'intégration |
-| `visual-testing` | Storybook, Chromatic, snapshot testing |
-| `orchestrator` | Coordination des agents testing |
+Code de tests front-end.
 
-**Mots-clés:** Jest, Vitest, Testing Library, Playwright, Cypress, Storybook, coverage
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `unit-testing` | Jest, Vitest | Code tests unitaires |
+| `component-testing` | RTL, Vue Test Utils | Code tests composants |
+| `e2e-testing` | Playwright, Cypress | Code tests E2E |
 
-### 7. Performance (5 agents)
+### 7. performance/ - Implémentation Perf (3 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `core-web-vitals` | LCP, FID, CLS, INP, optimisation |
-| `bundle-optimization` | Code splitting, tree shaking, lazy loading |
-| `image-optimization` | Formats modernes, responsive images, CDN |
-| `runtime-performance` | Profiling, memoization, virtualization |
-| `orchestrator` | Coordination des agents performance |
+Code et configuration performance.
 
-**Mots-clés:** performance, Core Web Vitals, LCP, CLS, bundle, lazy loading, images, profiling
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `core-web-vitals` | LCP, CLS, INP | Code optimisation |
+| `bundle-optimization` | Code splitting, lazy | Config bundler |
 
-### 8. Tooling (5 agents)
+### 8. tooling/ - Configuration Outils (3 agents)
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `build-tools` | Vite, Webpack, esbuild, configuration |
-| `linting-formatting` | ESLint, Prettier, Stylelint, règles |
-| `package-management` | npm, pnpm, yarn, monorepos |
-| `devtools` | Browser DevTools, debugging, profiling |
-| `orchestrator` | Coordination des agents tooling |
+Configuration des outils de développement.
 
-**Mots-clés:** Vite, Webpack, ESLint, Prettier, npm, pnpm, DevTools, debugging
+| Agent | Responsabilité | Produit |
+|-------|----------------|---------|
+| `orchestrator` | Coordination | Routage |
+| `build-tools` | Vite, Webpack | Fichiers config |
+| `linting-formatting` | ESLint, Prettier | Fichiers config |
 
 ## Règles de Routage
 
+### Depuis direction-technique (POURQUOI)
+
+| Question stratégique | Ce skill fournit |
+|---------------------|------------------|
+| "Quel framework choisir ?" | → direction-technique décide, puis ce skill implémente |
+| "Architecture micro-frontend ?" | → direction-technique décide, puis ce skill code |
+| "Stratégie de performance ?" | → direction-technique définit, ce skill optimise |
+
+### Depuis web-dev-process (QUOI)
+
+| Process défini | Ce skill implémente |
+|----------------|---------------------|
+| "Pyramide de tests" | → Code des tests (unit, component, e2e) |
+| "Code review checklist" | → Implémente les bonnes pratiques |
+| "Workflow CI/CD" | → Configure les outils |
+
+### Routage interne par mots-clés
+
 ```
-SI question contient [HTML, sémantique, SEO, balises]
-   → agents/foundations/orchestrator.md
+SI question contient [code HTML, balises, SEO on-page]
+   → agents/foundations/html-semantique.md
 
-SI question contient [CSS, Grid, Flexbox, responsive, mobile]
-   → agents/foundations/orchestrator.md
+SI question contient [code CSS, Grid, Flexbox, layout]
+   → agents/foundations/css-moderne.md
 
-SI question contient [accessibilité, a11y, WCAG, ARIA, screen reader]
+SI question contient [code ARIA, attributs a11y, lecteur écran]
    → agents/foundations/accessibilite.md
 
-SI question contient [JavaScript, ES6, TypeScript, async, Promise]
-   → agents/javascript/orchestrator.md
+SI question contient [code JS, ES6, async, Promise, modules]
+   → agents/javascript/javascript-moderne.md
 
-SI question contient [React, hooks, useState, useEffect, composant React]
+SI question contient [code TypeScript, types, interface, generic]
+   → agents/javascript/typescript.md
+
+SI question contient [code React, hook, composant, useState]
    → agents/frameworks/react-expert.md
 
-SI question contient [Vue, Composition API, Pinia, composant Vue]
+SI question contient [code Vue, ref, reactive, composable]
    → agents/frameworks/vue-expert.md
 
-SI question contient [Next.js, SSR, SSG, App Router]
-   → agents/frameworks/nextjs-expert.md
-
-SI question contient [Tailwind, classes utilitaires]
+SI question contient [config Tailwind, classes, plugin]
    → agents/styling/tailwind-expert.md
 
-SI question contient [CSS-in-JS, styled-components, Emotion]
-   → agents/styling/css-in-js.md
+SI question contient [code store, Zustand, Redux, slice]
+   → agents/state-management/react-state.md
 
-SI question contient [state, Redux, Zustand, Context, Pinia]
-   → agents/state-management/orchestrator.md
+SI question contient [code test, Jest, Vitest, expect]
+   → agents/testing/unit-testing.md
 
-SI question contient [test, Jest, Vitest, Testing Library, Playwright]
-   → agents/testing/orchestrator.md
-
-SI question contient [performance, Core Web Vitals, LCP, CLS, optimisation]
-   → agents/performance/orchestrator.md
-
-SI question contient [Vite, Webpack, ESLint, Prettier, build]
-   → agents/tooling/orchestrator.md
+SI question contient [config Vite, Webpack, bundler]
+   → agents/tooling/build-tools.md
 ```
 
-## Points d'Escalation
+## Composition avec Autres Skills
+
+### Exemple 1 : Nouvelle feature React
+
+```
+1. direction-technique/architecture/patterns-design
+   → Décide : "Utiliser le pattern Container/Presenter"
+
+2. web-dev-process/development/coding-standards
+   → Définit : "Convention de nommage, structure fichiers"
+
+3. frontend-developer/frameworks/react-expert
+   → Implémente : Code React avec le pattern
+```
+
+### Exemple 2 : Optimisation performance
+
+```
+1. direction-technique/performance/optimisation-frontend
+   → Décide : "Prioriser LCP, budget < 2.5s"
+
+2. web-dev-process/testing/performance
+   → Définit : "Process de mesure, outils, seuils"
+
+3. frontend-developer/performance/core-web-vitals
+   → Implémente : Code d'optimisation LCP
+```
+
+### Exemple 3 : Tests composants
+
+```
+1. direction-technique/qualite/metriques-qualite
+   → Décide : "Coverage minimum 80%"
+
+2. web-dev-process/testing/unit-tests
+   → Définit : "Pyramide de tests, quoi tester"
+
+3. frontend-developer/testing/component-testing
+   → Implémente : Code des tests RTL
+```
+
+## Points d'Escalade
+
+### Vers direction-technique
+
+- Choix de framework (React vs Vue vs Angular)
+- Architecture globale (monolith vs micro-frontend)
+- Décisions impactant toute l'équipe
+- Trade-offs majeurs (performance vs maintenabilité)
+
+### Vers web-dev-process
+
+- Organisation du workflow de test
+- Process de code review
+- Standards de documentation
+- Conventions d'équipe
 
 ### Vers l'humain
 
-- Choix d'architecture majeur (framework, stack)
-- Décisions impactant la sécurité (auth, données sensibles)
-- Trade-offs performance vs maintenabilité
 - Intégration avec systèmes legacy non documentés
+- Contraintes techniques inhabituelles
+- Bugs complexes sans solution évidente
 
-### Vers d'autres skills
+## Skills Associés
 
-- `direction-technique` : Décisions stratégiques, ADRs
-- `design-system-foundations` : Tokens, composants design system
-- `web-dev-process` : Processus de développement, CI/CD
-- `wordpress-gutenberg-expert` : Blocks Gutenberg, thèmes WP
+| Skill | Niveau | Relation |
+|-------|--------|----------|
+| `direction-technique` | POURQUOI | Définit les décisions stratégiques |
+| `web-dev-process` | QUOI | Définit les processus |
+| `design-system-foundations` | COMMENT | Tokens et composants design |
+| `wordpress-gutenberg-expert` | COMMENT | Implémentation WordPress |
 
-## Ressources
+## Changelog
 
-### Agents
-- [Foundations](./agents/foundations/orchestrator.md)
-- [JavaScript](./agents/javascript/orchestrator.md)
-- [Frameworks](./agents/frameworks/orchestrator.md)
-- [Styling](./agents/styling/orchestrator.md)
-- [State Management](./agents/state-management/orchestrator.md)
-- [Testing](./agents/testing/orchestrator.md)
-- [Performance](./agents/performance/orchestrator.md)
-- [Tooling](./agents/tooling/orchestrator.md)
+### v1.1.0
+- Clarification du positionnement POURQUOI/QUOI/COMMENT
+- Ajout des règles de composition avec direction-technique et web-dev-process
+- Suppression des overlaps avec les autres skills
+- Documentation des flux de travail inter-skills
 
-### Templates
-- [Component Template](./templates/component.md)
-- [Hook Template](./templates/hook.md)
-- [Test Template](./templates/test.md)
-
-### Documentation
-- [Best Practices](./docs/best-practices.md)
-- [Code Style Guide](./docs/code-style.md)
+### v1.0.0
+- Création initiale avec 8 domaines et 40 agents

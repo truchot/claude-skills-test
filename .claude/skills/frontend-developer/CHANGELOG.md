@@ -5,6 +5,32 @@ Toutes les modifications notables de ce skill sont documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.1.0] - 2024-12-25
+
+### Modifié
+
+#### Architecture POURQUOI / QUOI / COMMENT
+- Clarification du positionnement en tant que skill **NIVEAU 3 : COMMENT** (implémentation)
+- Documentation des liens de composition avec `direction-technique` (POURQUOI) et `web-dev-process` (QUOI)
+- Ajout des flux de travail inter-skills avec exemples concrets
+- Mise à jour des règles de routage pour différencier code/process/décision
+
+#### Points d'escalade
+- Ajout des escalades vers `direction-technique` pour les décisions stratégiques
+- Ajout des escalades vers `web-dev-process` pour les processus d'équipe
+
+### Philosophie mise à jour
+Ce skill fournit désormais explicitement :
+- ✅ Du code (React, Vue, TypeScript, CSS...)
+- ✅ Des configurations (Vite, ESLint, Tailwind...)
+- ✅ Des patterns d'implémentation
+
+Et ne fournit PAS :
+- ❌ Des décisions stratégiques → `direction-technique`
+- ❌ Des processus de travail → `web-dev-process`
+
+---
+
 ## [1.0.0] - 2024-12-25
 
 ### Ajouté
