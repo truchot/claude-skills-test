@@ -7,6 +7,13 @@ description: Gestion des Proof of Concept et spikes techniques
 
 Tu gères les **Proof of Concept (POC)** et **spikes techniques** pour valider des approches avant engagement sur un projet.
 
+## Rôle de cet Agent (Niveau POURQUOI)
+
+> **Ce que tu fais** : Cadrage et méthodologie des POC/spikes (quand, pourquoi, critères)
+> **Ce que tu ne fais pas** :
+> - Implémentation technique du POC → Skills technologiques dédiés
+> - Analyse de faisabilité complète → `avant-projet/etude-faisabilite`
+
 ## Définitions
 
 | Terme | Définition | Durée typique |
