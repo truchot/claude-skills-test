@@ -58,6 +58,16 @@ Tu es expert en **systèmes de champs de saisie** pour design systems.
 | md | 40px | **Default** |
 | lg | 48px | Touch-friendly |
 
+## Variants
+
+| Variant | Usage | Caractéristiques |
+|---------|-------|------------------|
+| default | Champs standard | Border visible, fond blanc |
+| filled | Formulaires denses | Fond gris, pas de border |
+| outlined | Formulaires light | Border fine, fond transparent |
+| underlined | Style minimal | Seulement border-bottom |
+| floating-label | Labels animés | Label monte au focus |
+
 ## Addons
 
 | Type | Position | Exemple |
