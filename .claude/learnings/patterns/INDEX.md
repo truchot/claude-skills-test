@@ -16,7 +16,7 @@
 | Pattern | Description | Usage | Status |
 |---------|-------------|-------|--------|
 | [wp-env-optimal](./wp-env-optimal.md) | Configuration wp-env optimale | 12 projets | ✅ |
-| multi-env-config | Gestion multi-environnement | 8 projets | 📝 |
+| [multi-env-config](./multi-env-config.md) | Gestion multi-environnement | 8 projets | ✅ |
 
 ### CI/CD & Déploiement
 
@@ -29,14 +29,14 @@
 
 | Pattern | Description | Usage | Status |
 |---------|-------------|-------|--------|
-| block-theme-structure | Structure block theme FSE | 6 projets | 📝 |
-| cpt-with-capabilities | CPT avec permissions custom | 9 projets | 📝 |
+| [block-theme-structure](./block-theme-structure.md) | Structure block theme FSE | 6 projets | ✅ |
+| [cpt-with-capabilities](./cpt-with-capabilities.md) | CPT avec permissions custom | 9 projets | ✅ |
 
 ### Testing
 
 | Pattern | Description | Usage | Status |
 |---------|-------------|-------|--------|
-| e2e-critical-paths | Tests E2E des parcours critiques | 7 projets | 📝 |
+| [e2e-critical-paths](./e2e-critical-paths.md) | Tests E2E des parcours critiques | 7 projets | ✅ |
 
 ### Sécurité
 
@@ -50,16 +50,16 @@
 
 ### WordPress
 - [wp-env-optimal](./wp-env-optimal.md) ✅
-- block-theme-structure 📝
-- cpt-with-capabilities 📝
+- [block-theme-structure](./block-theme-structure.md) ✅
+- [cpt-with-capabilities](./cpt-with-capabilities.md) ✅
 
 ### DevOps
 - [github-actions-wp](./github-actions-wp.md) ✅
-- multi-env-config 📝
+- [multi-env-config](./multi-env-config.md) ✅
 - [staging-protection](./staging-protection.md) ✅
 
 ### Testing
-- e2e-critical-paths 📝
+- [e2e-critical-paths](./e2e-critical-paths.md) ✅
 
 ### Sécurité
 - [secrets-management](./secrets-management.md) ✅
@@ -77,8 +77,8 @@
 
 ## Statistiques
 
-- **Total patterns** : 8 (4 documentés, 4 planifiés)
-- **Patterns validés** : 4
+- **Total patterns** : 8 (8 documentés)
+- **Patterns validés** : 8
 - **Utilisations ce mois** : -
 - **Dernière mise à jour** : 2024-12-25
 

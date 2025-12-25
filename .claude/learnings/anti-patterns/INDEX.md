@@ -30,16 +30,16 @@
 
 | Anti-Pattern | Description | Occurrences | Status |
 |--------------|-------------|-------------|--------|
-| cors-misconfigured | CORS mal configuré staging/prod | 6 | 📝 |
-| missing-error-handling | Erreurs non gérées | 4 | 📝 |
-| n-plus-one-queries | Requêtes N+1 en boucle | 3 | 📝 |
+| [cors-misconfigured](./cors-misconfigured.md) | CORS mal configuré staging/prod | 6 | ✅ |
+| [missing-error-handling](./missing-error-handling.md) | Erreurs non gérées | 4 | ✅ |
+| [n-plus-one-queries](./n-plus-one-queries.md) | Requêtes N+1 en boucle | 3 | ✅ |
 
 ### Low
 
 | Anti-Pattern | Description | Occurrences | Status |
 |--------------|-------------|-------------|--------|
-| inconsistent-naming | Nommage incohérent | 8 | 📝 |
-| missing-docs | Documentation absente | 7 | 📝 |
+| [inconsistent-naming](./inconsistent-naming.md) | Nommage incohérent | 8 | ✅ |
+| [missing-docs](./missing-docs.md) | Documentation absente | 7 | ✅ |
 
 ---
 
@@ -48,7 +48,7 @@
 ### Configuration
 
 - [env-hardcoded](./env-hardcoded.md) ✅
-- cors-misconfigured 📝
+- [cors-misconfigured](./cors-misconfigured.md) ✅
 - [secrets-in-repo](./secrets-in-repo.md) ✅
 
 ### Déploiement
@@ -59,13 +59,13 @@
 
 ### Code
 
-- missing-error-handling 📝
-- n-plus-one-queries 📝
-- inconsistent-naming 📝
+- [missing-error-handling](./missing-error-handling.md) ✅
+- [n-plus-one-queries](./n-plus-one-queries.md) ✅
+- [inconsistent-naming](./inconsistent-naming.md) ✅
 
 ### Documentation
 
-- missing-docs 📝
+- [missing-docs](./missing-docs.md) ✅
 
 ---
 
@@ -93,7 +93,7 @@ Comment détecter ces anti-patterns avant qu'ils ne causent des problèmes :
 
 ## Statistiques
 
-- **Total anti-patterns** : 10 (5 documentés, 5 planifiés)
+- **Total anti-patterns** : 10 (10 documentés)
 - **Évités ce mois** : -
 - **Nouvelle occurrence** : -
 - **Dernière mise à jour** : 2024-12-25
