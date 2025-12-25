@@ -4,15 +4,18 @@
 
 ## Métriques Learning Loop
 
+> **Baseline** : Les métriques ci-dessous seront mesurées après 1 mois d'utilisation du système.
+> La colonne "Actuel" sera remplie lors de la première revue mensuelle.
+
 ### Indicateurs Clés
 
-| Métrique | Description | Cible | Actuel |
-|----------|-------------|-------|--------|
-| **Pattern Usage Rate** | % de tâches utilisant un pattern existant | > 60% | - |
-| **Antipattern Repeat Rate** | % d'erreurs répétées après documentation | < 10% | - |
-| **Avg Resolution Time** | Temps moyen de résolution des issues | ↓ 20% | - |
-| **Promotion Rate** | % d'issues projet promues en global | 10-20% | - |
-| **Learning Consultation Rate** | % de tâches consultant les learnings | > 80% | - |
+| Métrique | Description | Cible | Actuel | Baseline Date |
+|----------|-------------|-------|--------|---------------|
+| **Pattern Usage Rate** | % de tâches utilisant un pattern existant | > 60% | - | À mesurer |
+| **Antipattern Repeat Rate** | % d'erreurs répétées après documentation | < 10% | - | À mesurer |
+| **Avg Resolution Time** | Temps moyen de résolution des issues | ↓ 20% | - | À mesurer |
+| **Promotion Rate** | % d'issues projet promues en global | 10-20% | - | À mesurer |
+| **Learning Consultation Rate** | % de tâches consultant les learnings | > 80% | - | À mesurer |
 
 ### Calcul des Métriques
 

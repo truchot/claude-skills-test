@@ -2,37 +2,44 @@
 
 > Erreurs à éviter, documentées pour ne pas les reproduire.
 
+## Légende Status
+
+| Status | Signification |
+|--------|---------------|
+| ✅ | Documenté et validé |
+| 📝 | Planifié (à documenter) |
+
 ## Par Sévérité
 
 ### Critical
 
-| Anti-Pattern | Description | Occurrences |
-|--------------|-------------|-------------|
-| [secrets-in-repo](./secrets-in-repo.md) | Secrets committés dans le repo | 2 |
-| [prod-without-backup](./prod-without-backup.md) | Déploiement prod sans backup | 1 |
+| Anti-Pattern | Description | Occurrences | Status |
+|--------------|-------------|-------------|--------|
+| secrets-in-repo | Secrets committés dans le repo | 2 | 📝 |
+| prod-without-backup | Déploiement prod sans backup | 1 | 📝 |
 
 ### High
 
-| Anti-Pattern | Description | Occurrences |
-|--------------|-------------|-------------|
-| [env-hardcoded](./env-hardcoded.md) | Configurations hardcodées | 5 |
-| [no-staging](./no-staging.md) | Déploiement direct en prod | 3 |
-| [skip-tests-ci](./skip-tests-ci.md) | Tests désactivés en CI | 4 |
+| Anti-Pattern | Description | Occurrences | Status |
+|--------------|-------------|-------------|--------|
+| [env-hardcoded](./env-hardcoded.md) | Configurations hardcodées | 5 | ✅ |
+| no-staging | Déploiement direct en prod | 3 | 📝 |
+| skip-tests-ci | Tests désactivés en CI | 4 | 📝 |
 
 ### Medium
 
-| Anti-Pattern | Description | Occurrences |
-|--------------|-------------|-------------|
-| [cors-misconfigured](./cors-misconfigured.md) | CORS mal configuré staging/prod | 6 |
-| [missing-error-handling](./missing-error-handling.md) | Erreurs non gérées | 4 |
-| [n-plus-one-queries](./n-plus-one-queries.md) | Requêtes N+1 en boucle | 3 |
+| Anti-Pattern | Description | Occurrences | Status |
+|--------------|-------------|-------------|--------|
+| cors-misconfigured | CORS mal configuré staging/prod | 6 | 📝 |
+| missing-error-handling | Erreurs non gérées | 4 | 📝 |
+| n-plus-one-queries | Requêtes N+1 en boucle | 3 | 📝 |
 
 ### Low
 
-| Anti-Pattern | Description | Occurrences |
-|--------------|-------------|-------------|
-| [inconsistent-naming](./inconsistent-naming.md) | Nommage incohérent | 8 |
-| [missing-docs](./missing-docs.md) | Documentation absente | 7 |
+| Anti-Pattern | Description | Occurrences | Status |
+|--------------|-------------|-------------|--------|
+| inconsistent-naming | Nommage incohérent | 8 | 📝 |
+| missing-docs | Documentation absente | 7 | 📝 |
 
 ---
 
@@ -40,25 +47,25 @@
 
 ### Configuration
 
-- [env-hardcoded](./env-hardcoded.md)
-- [cors-misconfigured](./cors-misconfigured.md)
-- [secrets-in-repo](./secrets-in-repo.md)
+- [env-hardcoded](./env-hardcoded.md) ✅
+- cors-misconfigured 📝
+- secrets-in-repo 📝
 
 ### Déploiement
 
-- [no-staging](./no-staging.md)
-- [prod-without-backup](./prod-without-backup.md)
-- [skip-tests-ci](./skip-tests-ci.md)
+- no-staging 📝
+- prod-without-backup 📝
+- skip-tests-ci 📝
 
 ### Code
 
-- [missing-error-handling](./missing-error-handling.md)
-- [n-plus-one-queries](./n-plus-one-queries.md)
-- [inconsistent-naming](./inconsistent-naming.md)
+- missing-error-handling 📝
+- n-plus-one-queries 📝
+- inconsistent-naming 📝
 
 ### Documentation
 
-- [missing-docs](./missing-docs.md)
+- missing-docs 📝
 
 ---
 
@@ -86,7 +93,9 @@ Comment détecter ces anti-patterns avant qu'ils ne causent des problèmes :
 
 ## Statistiques
 
-- **Total anti-patterns** : 10
-- **Évités ce mois** : 23
-- **Nouvelle occurrence** : 2
-- **Dernière mise à jour** : 2024-12-24
+- **Total anti-patterns** : 10 (1 documenté, 9 planifiés)
+- **Évités ce mois** : -
+- **Nouvelle occurrence** : -
+- **Dernière mise à jour** : 2024-12-25
+
+> Les métriques seront collectées une fois le système en production.
