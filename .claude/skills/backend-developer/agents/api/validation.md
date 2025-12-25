@@ -42,8 +42,8 @@ array, object, date, enum
 email: "user@example.com"
 url: "https://example.com"
 uuid: "550e8400-e29b-41d4-a716-446655440000"
-date: "2024-01-15"
-datetime: "2024-01-15T10:30:00Z"
+date: "2025-01-15"
+datetime: "2025-01-15T10:30:00Z"
 phone: "+33612345678"
 ```
 

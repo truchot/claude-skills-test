@@ -38,8 +38,8 @@ Réversible   : up() + down(), permet rollback direct
 
 ```
 YYYYMMDDHHMMSS_description.sql
-20240115120000_add_phone_to_users.sql
-20240115120001_create_orders_table.sql
+20250115120000_add_phone_to_users.sql
+20250115120001_create_orders_table.sql
 ```
 
 ### 3. Zero Downtime Migrations
@@ -147,7 +147,7 @@ npx prisma migrate deploy
 
 ### Knex.js
 ```javascript
-// migrations/20240115120000_add_phone_to_users.js
+// migrations/20250115120000_add_phone_to_users.js
 exports.up = function(knex) {
   return knex.schema.alterTable('users', table => {
     table.string('phone', 20).nullable();
@@ -163,7 +163,7 @@ exports.down = function(knex) {
 
 ### Alembic (Python)
 ```python
-# migrations/versions/20240115_add_phone.py
+# migrations/versions/20250115_add_phone.py
 def upgrade():
     op.add_column('users',
         sa.Column('phone', sa.String(20), nullable=True)
@@ -175,7 +175,7 @@ def downgrade():
 
 ### Flyway (Java/SQL)
 ```sql
--- V20240115120000__add_phone_to_users.sql
+-- V20250115120000__add_phone_to_users.sql
 ALTER TABLE users ADD COLUMN phone VARCHAR(20);
 ```
 

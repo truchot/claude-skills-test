@@ -136,7 +136,7 @@ SELECT * FROM orders ORDER BY created_at DESC LIMIT 20 OFFSET 10000;
 
 -- ✅ Keyset pagination (rapide)
 SELECT * FROM orders
-WHERE created_at < '2024-01-15T10:30:00Z'
+WHERE created_at < '2025-01-15T10:30:00Z'
 ORDER BY created_at DESC
 LIMIT 20;
 

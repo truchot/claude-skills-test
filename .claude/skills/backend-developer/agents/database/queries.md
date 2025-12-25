@@ -245,7 +245,7 @@ from sqlalchemy.orm import joinedload
 stmt = (
     select(User)
     .where(User.status == 'active')
-    .where(User.created_at >= datetime(2024, 1, 1))
+    .where(User.created_at >= datetime(2025, 1, 1))
     .order_by(User.created_at.desc())
     .limit(20)
 )
