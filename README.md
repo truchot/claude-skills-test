@@ -49,8 +49,10 @@ HUMAIN (supervision)
 | [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
 | [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
+| [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 32 | 🟢 Actif |
+| [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 27 | 🟢 Actif |
 
-**Total : 153 agents spécialisés**
+**Total : 182 agents spécialisés**
 
 ## Architecture
 

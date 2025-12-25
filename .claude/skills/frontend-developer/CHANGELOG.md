@@ -95,12 +95,9 @@ Et ne fournit PAS :
 
 ## Roadmap
 
-### [1.1.0] - À venir
+### Prochaines versions
 - Agent `nuxt-expert.md` pour Nuxt 3
 - Agent `vue-state.md` pour Pinia/Vuex
 - Agent `image-optimization.md`
 - Agent `runtime-performance.md`
-- Agent `package-management.md`
-- Agent `devtools.md`
-- Agent `visual-testing.md`
-- Agent `scss-sass.md`
+- Intégration avec skill `nextjs-expert` (à créer)
