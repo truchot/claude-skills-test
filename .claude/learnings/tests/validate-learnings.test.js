@@ -61,9 +61,14 @@ describe('Learning Files Validation', () => {
               });
             }
 
-            if (frontmatter.category && !Array.isArray(frontmatter.category)) {
+            if (frontmatter.category) {
               test('has valid category', () => {
-                expect(VALID_CATEGORIES).toContain(frontmatter.category);
+                const categories = Array.isArray(frontmatter.category)
+                  ? frontmatter.category
+                  : [frontmatter.category];
+                categories.forEach(cat => {
+                  expect(VALID_CATEGORIES).toContain(cat);
+                });
               });
             }
 

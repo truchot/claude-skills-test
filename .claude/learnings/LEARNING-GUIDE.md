@@ -1,7 +1,26 @@
 # Learning Loop - Guide d'Utilisation
 
-> **Version** : 1.0.0
-> **Date** : 2024-12-24
+> **Version** : 1.1.0
+> **Date** : 2025-12-25
+
+## Quick Start (5 minutes)
+
+1. **Read** `patterns/INDEX.md` - See available solutions
+2. **Search** for your use case in patterns and anti-patterns
+3. **Copy** template from `templates/` if creating new documentation
+4. **Run** `npm test` to validate your changes
+
+```bash
+# Install and validate
+cd .claude/learnings
+npm install
+npm test
+
+# Check metrics
+npm run metrics
+```
+
+---
 
 ## Philosophie
 
@@ -110,6 +129,49 @@ Un learning projet devient global quand :
 | Occurrence | Rencontré dans >= 2 projets |
 | Impact | Économie >= 2h de travail |
 | Généricité | Applicable à >= 50% des projets |
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        PROMOTION FLOWCHART                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│   ┌──────────────────┐                                              │
+│   │ Project Learning │                                              │
+│   │ (in .learnings/) │                                              │
+│   └────────┬─────────┘                                              │
+│            │                                                         │
+│            ▼                                                         │
+│   ┌──────────────────┐     NO                                       │
+│   │ Seen in >= 2     ├────────────────┐                             │
+│   │ projects?        │                │                             │
+│   └────────┬─────────┘                │                             │
+│            │ YES                      │                             │
+│            ▼                          │                             │
+│   ┌──────────────────┐     NO         │                             │
+│   │ Saves >= 2h of   ├───────────────►│                             │
+│   │ work?            │                │                             │
+│   └────────┬─────────┘                │                             │
+│            │ YES                      │                             │
+│            ▼                          ▼                             │
+│   ┌──────────────────┐     NO    ┌─────────────┐                    │
+│   │ Applies to >= 50%├──────────►│ Keep as     │                    │
+│   │ of projects?     │           │ project-    │                    │
+│   └────────┬─────────┘           │ specific    │                    │
+│            │ YES                 └─────────────┘                    │
+│            ▼                                                         │
+│   ┌──────────────────┐                                              │
+│   │ Tech Lead Review │                                              │
+│   └────────┬─────────┘                                              │
+│            │ APPROVED                                               │
+│            ▼                                                         │
+│   ┌──────────────────┐                                              │
+│   │ Global Learning  │                                              │
+│   │ (.claude/        │                                              │
+│   │  learnings/)     │                                              │
+│   └──────────────────┘                                              │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -327,21 +389,32 @@ wpenv, docker, github-actions, gitlab-ci, composer, npm
   run: node tests/validate-learning-hooks.test.js
 ```
 
-### Hooks Git (Phase 2)
+### Hooks Git (Phase 2 - NOT YET IMPLEMENTED)
 
-> **Status** : Non implémentés. À implémenter dans une future itération.
+> **⚠️ STATUS: NOT IMPLEMENTED**
+>
+> Git hooks are planned for a future iteration. Currently, validation is performed
+> exclusively through CI pipeline and manual test runs.
 
-Hooks suggérés pour automatisation future :
-
-| Hook | Fonction | Priorité |
-|------|----------|----------|
-| `pre-commit` | Valider le format des learnings | Moyenne |
-| `post-merge` | Rappeler de consulter les nouveaux learnings | Basse |
-
-Pour l'instant, utiliser les tests CI pour validation :
+**Current validation method:**
 ```bash
-npm test -- --grep "Learning"
+cd .claude/learnings
+npm test                    # Run all validation tests
+npm run test:learnings      # Validate file formats only
+npm run test:hooks          # Check agent integration
 ```
+
+**Planned hooks for future implementation:**
+
+| Hook | Fonction | Priorité | Status |
+|------|----------|----------|--------|
+| `pre-commit` | Valider le format des learnings | Moyenne | 📝 Planned |
+| `post-merge` | Rappeler de consulter les nouveaux learnings | Basse | 📝 Planned |
+
+**Why not implemented yet:**
+- CI validation provides equivalent protection
+- Git hooks require manual setup per developer
+- Focus is on establishing patterns first, automation second
 
 ---
 

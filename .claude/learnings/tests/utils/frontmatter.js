@@ -10,7 +10,8 @@
  * @returns {object|null} Parsed frontmatter object or null if not found
  */
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  // Handle both regular and empty frontmatter (---\n---)
+  const match = content.match(/^---\n([\s\S]*?)(?:\n)?---/);
   if (!match) return null;
 
   const frontmatter = {};

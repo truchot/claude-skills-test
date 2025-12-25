@@ -6,6 +6,14 @@ first_occurrence: YYYY-MM-DD
 occurrence_count: 1
 ---
 
+<!--
+SEVERITY LEVELS:
+- low: Minor issue, cosmetic or style problem. Impact: <30min debug time.
+- medium: Functional issue, workaround exists. Impact: 30min-2h debug time.
+- high: Significant issue, affects feature stability. Impact: 2h-1 day debug time.
+- critical: Security vulnerability or production-breaking. Impact: >1 day or incident.
+-->
+
 # Anti-Pattern: [Nom de l'Anti-Pattern]
 
 ## Symptôme

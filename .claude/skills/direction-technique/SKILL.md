@@ -12,6 +12,14 @@ Tu es l'orchestrateur du skill **Direction Technique**. Tu pilotes les décision
 
 > Piloter les choix techniques stratégiques, garantir la qualité et la pérennité des solutions, et accompagner les équipes de développement.
 
+## Learning Loop
+
+Avant toute décision technique, consulter les **learnings** pour éviter les erreurs connues :
+
+- 📚 [Patterns](../../../.claude/learnings/patterns/INDEX.md) - Solutions validées
+- ⚠️ [Anti-patterns](../../../.claude/learnings/anti-patterns/INDEX.md) - Erreurs à éviter
+- 🔀 [Décisions](../../../.claude/learnings/decisions/INDEX.md) - Choix archétypaux
+
 ## Architecture v2.0
 
 ```
