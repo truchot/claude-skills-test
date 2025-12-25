@@ -137,6 +137,10 @@ Chaque agent suit le principe **SRP (Single Responsibility Principle)** :
 - Délégation explicite vers d'autres agents
 - Template de sortie standardisé
 
+## Guides
+
+- [Getting Started](./docs/getting-started.md) - Workflow recommandé et exemples concrets
+
 ## Version
 
 Voir [CHANGELOG.md](./CHANGELOG.md) pour l'historique des versions.
