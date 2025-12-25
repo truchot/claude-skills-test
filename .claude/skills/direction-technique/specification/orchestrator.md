@@ -19,6 +19,8 @@ Tu coordonnes la **rédaction des spécifications techniques** qui servent de r�
 | `specification-technique` | Rédaction des specs techniques détaillées |
 | `modelisation-donnees` | Modélisation des données et schémas |
 | `specification-api` | Spécification des APIs et contrats |
+| `clarification-donnees` | Clarifier les besoins data avant modélisation |
+| `clarification-composant` | Clarifier les besoins composant avant specs |
 
 ## Règles de Routage
 
@@ -28,6 +30,8 @@ Tu coordonnes la **rédaction des spécifications techniques** qui servent de r�
 | spec, spécification, cahier technique, fonctionnel → technique | `specification-technique` |
 | données, modèle, entité, schéma, BDD, base de données | `modelisation-donnees` |
 | API, endpoint, REST, GraphQL, contrat, interface | `specification-api` |
+| clarifier données, préciser data, questions données, ambiguïté data | `clarification-donnees` |
+| clarifier composant, préciser UI, questions composant, ambiguïté UI | `clarification-composant` |
 
 ## Arbre de Décision
 
