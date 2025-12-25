@@ -15,16 +15,16 @@
 
 | Anti-Pattern | Description | Occurrences | Status |
 |--------------|-------------|-------------|--------|
-| secrets-in-repo | Secrets committés dans le repo | 2 | 📝 |
-| prod-without-backup | Déploiement prod sans backup | 1 | 📝 |
+| [secrets-in-repo](./secrets-in-repo.md) | Secrets committés dans le repo | 2 | ✅ |
+| [prod-without-backup](./prod-without-backup.md) | Déploiement prod sans backup | 1 | ✅ |
 
 ### High
 
 | Anti-Pattern | Description | Occurrences | Status |
 |--------------|-------------|-------------|--------|
 | [env-hardcoded](./env-hardcoded.md) | Configurations hardcodées | 5 | ✅ |
-| no-staging | Déploiement direct en prod | 3 | 📝 |
-| skip-tests-ci | Tests désactivés en CI | 4 | 📝 |
+| [no-staging](./no-staging.md) | Déploiement direct en prod | 3 | ✅ |
+| [skip-tests-ci](./skip-tests-ci.md) | Tests désactivés en CI | 4 | ✅ |
 
 ### Medium
 
@@ -49,13 +49,13 @@
 
 - [env-hardcoded](./env-hardcoded.md) ✅
 - cors-misconfigured 📝
-- secrets-in-repo 📝
+- [secrets-in-repo](./secrets-in-repo.md) ✅
 
 ### Déploiement
 
-- no-staging 📝
-- prod-without-backup 📝
-- skip-tests-ci 📝
+- [no-staging](./no-staging.md) ✅
+- [prod-without-backup](./prod-without-backup.md) ✅
+- [skip-tests-ci](./skip-tests-ci.md) ✅
 
 ### Code
 
@@ -93,7 +93,7 @@ Comment détecter ces anti-patterns avant qu'ils ne causent des problèmes :
 
 ## Statistiques
 
-- **Total anti-patterns** : 10 (1 documenté, 9 planifiés)
+- **Total anti-patterns** : 10 (5 documentés, 5 planifiés)
 - **Évités ce mois** : -
 - **Nouvelle occurrence** : -
 - **Dernière mise à jour** : 2024-12-25

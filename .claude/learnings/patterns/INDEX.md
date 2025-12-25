@@ -22,8 +22,8 @@
 
 | Pattern | Description | Usage | Status |
 |---------|-------------|-------|--------|
-| github-actions-wp | Pipeline GitHub Actions WordPress | 10 projets | 📝 |
-| staging-protection | Protection staging avec htpasswd | 15 projets | 📝 |
+| [github-actions-wp](./github-actions-wp.md) | Pipeline GitHub Actions WordPress | 10 projets | ✅ |
+| [staging-protection](./staging-protection.md) | Protection staging avec htpasswd | 15 projets | ✅ |
 
 ### Architecture & Code
 
@@ -42,7 +42,7 @@
 
 | Pattern | Description | Usage | Status |
 |---------|-------------|-------|--------|
-| secrets-management | Gestion des secrets | 12 projets | 📝 |
+| [secrets-management](./secrets-management.md) | Gestion des secrets | 12 projets | ✅ |
 
 ---
 
@@ -54,12 +54,15 @@
 - cpt-with-capabilities 📝
 
 ### DevOps
-- github-actions-wp 📝
+- [github-actions-wp](./github-actions-wp.md) ✅
 - multi-env-config 📝
-- staging-protection 📝
+- [staging-protection](./staging-protection.md) ✅
 
 ### Testing
 - e2e-critical-paths 📝
+
+### Sécurité
+- [secrets-management](./secrets-management.md) ✅
 
 ---
 
@@ -74,8 +77,8 @@
 
 ## Statistiques
 
-- **Total patterns** : 8 (1 documenté, 7 planifiés)
-- **Patterns validés** : 1
+- **Total patterns** : 8 (4 documentés, 4 planifiés)
+- **Patterns validés** : 4
 - **Utilisations ce mois** : -
 - **Dernière mise à jour** : 2024-12-25
 
