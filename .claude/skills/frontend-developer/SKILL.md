@@ -69,14 +69,14 @@ Il ne contient PAS :
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            frontend-developer                                │
-│                         (COMMENT - 32 agents)                               │
+│                         (COMMENT - 33 agents)                               │
 │                      Implémentation concrète                                 │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │                          8 DOMAINES                                   │   │
 │  │                                                                       │   │
 │  │  foundations/       javascript/       frameworks/      styling/      │   │
-│  │      (5)               (5)               (5)             (4)         │   │
+│  │      (5)               (5)               (6)             (4)         │   │
 │  │                                                                       │   │
 │  │  state-management/   testing/        performance/     tooling/       │   │
 │  │      (3)               (4)               (3)            (3)          │   │
@@ -84,7 +84,7 @@ Il ne contient PAS :
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Domaines et Agents (32 agents)
+## Domaines et Agents (33 agents)
 
 ### 1. foundations/ - Implémentation HTML/CSS (5 agents)
 
@@ -110,7 +110,7 @@ Code JavaScript et TypeScript moderne.
 | `dom-manipulation` | DOM API, événements | Code DOM, handlers |
 | `api-integration` | Fetch, REST, WS | Code API, clients HTTP |
 
-### 3. frameworks/ - Implémentation React/Vue (5 agents)
+### 3. frameworks/ - Implémentation React/Vue/WordPress (6 agents)
 
 Code spécifique aux frameworks front-end.
 
@@ -120,9 +120,10 @@ Code spécifique aux frameworks front-end.
 | `react-expert` | **Délégation** vers skill `react-expert` | → 28 agents spécialisés |
 | `vue-expert` | Composition API, Pinia | Code Vue, composables |
 | `nextjs-expert` | SSR, App Router | Code Next.js, Server Components |
+| `wordpress-expert` | **Délégation** vers skill `wordpress-gutenberg-expert` | → 41 agents spécialisés |
 | `component-patterns` | HOC, Render Props | Patterns réutilisables |
 
-> **Note** : L'agent `react-expert` délègue au skill autonome `react-expert` pour une couverture approfondie de React (28 agents spécialisés).
+> **Note** : Les agents `react-expert` et `wordpress-expert` délèguent vers leurs skills autonomes respectifs pour une couverture approfondie.
 
 ### 4. styling/ - Implémentation CSS (4 agents)
 
@@ -307,7 +308,8 @@ SI question contient [config Vite, Webpack, bundler]
 ## Changelog
 
 ### v1.0.0
-- Création initiale avec 8 domaines et 32 agents
+- Création initiale avec 8 domaines et 33 agents
 - Positionnement POURQUOI/QUOI/COMMENT
 - Règles de composition avec direction-technique et web-dev-process
 - Délégation React vers skill `react-expert` (28 agents)
+- Délégation WordPress vers skill `wordpress-gutenberg-expert` (41 agents)

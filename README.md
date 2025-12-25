@@ -49,12 +49,12 @@ HUMAIN (supervision)
 | [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
 | [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
-| [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 32 | 🟢 Actif |
+| [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
 | [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
 
-> **Note** : `frontend-developer` délègue à `react-expert` pour les questions React approfondies.
+> **Note** : `frontend-developer` délègue à `react-expert` (React) et `wordpress-gutenberg-expert` (WordPress) pour les questions approfondies.
 
-**Total : 183 agents spécialisés**
+**Total : 184 agents spécialisés**
 
 ## Architecture
 
@@ -117,9 +117,11 @@ web-agency (orchestrateur)
     │   │
     │   ├── design-system-foundations (21 agents)
     │   │
-    │   └── frontend-developer (32 agents)
+    │   └── frontend-developer (33 agents)
     │       │
-    │       └── react-expert (28 agents) ← délégation
+    │       ├── react-expert (28 agents) ← délégation
+    │       │
+    │       └── wordpress-gutenberg-expert (41 agents) ← délégation
     │
     ├── strategy (planifié)
     ├── design (planifié)
@@ -208,7 +210,7 @@ cd .claude/skills/react-expert/tests && node validate-skill.test.js
 - [x] web-dev-process (61 agents)
 - [x] wordpress-gutenberg-expert (41 agents)
 - [x] design-system-foundations (21 agents)
-- [x] frontend-developer (32 agents)
+- [x] frontend-developer (33 agents)
 - [x] react-expert (28 agents)
 
 ### Skills planifiés
