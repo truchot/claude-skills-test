@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { glob } = require('glob');
+const { parseFrontmatter } = require('./utils/frontmatter');
 
 const LEARNINGS_DIR = path.join(__dirname, '..');
 
@@ -19,25 +19,6 @@ const REQUIRED_FRONTMATTER = {
 
 const VALID_SEVERITIES = ['low', 'medium', 'high', 'critical'];
 const VALID_CATEGORIES = ['setup', 'development', 'deployment', 'testing', 'security', 'architecture', 'tooling', 'process'];
-
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return null;
-
-  const frontmatter = {};
-  match[1].split('\n').forEach(line => {
-    const [key, ...valueParts] = line.split(':');
-    if (key && valueParts.length) {
-      let value = valueParts.join(':').trim();
-      // Parse arrays
-      if (value.startsWith('[') && value.endsWith(']')) {
-        value = value.slice(1, -1).split(',').map(v => v.trim());
-      }
-      frontmatter[key.trim()] = value;
-    }
-  });
-  return frontmatter;
-}
 
 describe('Learning Files Validation', () => {
   const learningTypes = ['patterns', 'anti-patterns', 'decisions'];

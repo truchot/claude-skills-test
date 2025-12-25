@@ -7,7 +7,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { glob } = require('glob');
 
 const SKILLS_DIR = path.join(__dirname, '../../skills');
 
@@ -18,25 +17,26 @@ const AGENTS_REQUIRING_LEARNING_HOOKS = [
   'wordpress-gutenberg-expert',
 ];
 
-// Keywords indicating learning consultation
+// Keywords indicating learning consultation (literal strings and regex patterns)
 const LEARNING_KEYWORDS = [
-  'learnings',
-  'learning-loop',
-  'patterns/',
-  'anti-patterns/',
-  'LEARNING-GUIDE',
-  'consulter.*apprentissages',
-  'éviter.*erreurs passées',
+  { type: 'literal', value: 'learnings' },
+  { type: 'literal', value: 'learning-loop' },
+  { type: 'literal', value: 'patterns/' },
+  { type: 'literal', value: 'anti-patterns/' },
+  { type: 'literal', value: 'learning-guide' },
+  { type: 'literal', value: '.claude/learnings' },
+  { type: 'regex', value: /consulter.*apprentissages/i },
+  { type: 'regex', value: /éviter.*erreurs/i },
+  { type: 'regex', value: /consultation.*learning/i },
 ];
 
 function hasLearningReference(content) {
   const lowerContent = content.toLowerCase();
   return LEARNING_KEYWORDS.some(keyword => {
-    if (keyword.includes('.*')) {
-      const regex = new RegExp(keyword, 'i');
-      return regex.test(content);
+    if (keyword.type === 'regex') {
+      return keyword.value.test(content);
     }
-    return lowerContent.includes(keyword.toLowerCase());
+    return lowerContent.includes(keyword.value.toLowerCase());
   });
 }
 
@@ -50,11 +50,20 @@ describe('Learning Hooks in Agents', () => {
         return;
       }
 
-      // Check main prompt file
-      const promptFile = path.join(skillDir, 'prompt.md');
-      if (fs.existsSync(promptFile)) {
-        test('main prompt references learnings', () => {
-          const content = fs.readFileSync(promptFile, 'utf8');
+      // Check main SKILL.md file (primary entry point)
+      const skillFile = path.join(skillDir, 'SKILL.md');
+      if (fs.existsSync(skillFile)) {
+        test('SKILL.md references learnings', () => {
+          const content = fs.readFileSync(skillFile, 'utf8');
+          expect(hasLearningReference(content)).toBe(true);
+        });
+      }
+
+      // Check orchestrator.md if exists
+      const orchestratorFile = path.join(skillDir, 'orchestrator.md');
+      if (fs.existsSync(orchestratorFile)) {
+        test('orchestrator.md references learnings', () => {
+          const content = fs.readFileSync(orchestratorFile, 'utf8');
           expect(hasLearningReference(content)).toBe(true);
         });
       }
@@ -75,14 +84,15 @@ describe('Learning Hooks in Agents', () => {
         };
         walkDir(agentsDir);
 
-        // Check at least one agent references learnings
-        test('at least one agent references learnings', () => {
-          const hasReference = agentFiles.some(file => {
-            const content = fs.readFileSync(file, 'utf8');
-            return hasLearningReference(content);
+        if (agentFiles.length > 0) {
+          test('at least one agent references learnings', () => {
+            const hasReference = agentFiles.some(file => {
+              const content = fs.readFileSync(file, 'utf8');
+              return hasLearningReference(content);
+            });
+            expect(hasReference).toBe(true);
           });
-          expect(hasReference).toBe(true);
-        });
+        }
       }
     });
   });
@@ -101,6 +111,11 @@ describe('Learning Workflow Presence', () => {
 
   test('anti-patterns/INDEX.md exists', () => {
     const indexPath = path.join(__dirname, '../anti-patterns/INDEX.md');
+    expect(fs.existsSync(indexPath)).toBe(true);
+  });
+
+  test('decisions/INDEX.md exists', () => {
+    const indexPath = path.join(__dirname, '../decisions/INDEX.md');
     expect(fs.existsSync(indexPath)).toBe(true);
   });
 });

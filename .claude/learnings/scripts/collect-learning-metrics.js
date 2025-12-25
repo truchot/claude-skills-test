@@ -3,55 +3,52 @@
  * Collect Learning Metrics
  *
  * Collects metrics from learning files for dashboard and reporting.
- * Run: node scripts/collect-learning-metrics.js
+ * Run: node scripts/collect-learning-metrics.js [json|summary]
  */
 
 const fs = require('fs');
 const path = require('path');
+const { parseFrontmatter } = require('../tests/utils/frontmatter');
 
 const LEARNINGS_DIR = path.join(__dirname, '..');
 
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-
-  const frontmatter = {};
-  match[1].split('\n').forEach(line => {
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) return;
-
-    const key = line.slice(0, colonIdx).trim();
-    let value = line.slice(colonIdx + 1).trim();
-
-    // Parse arrays
-    if (value.startsWith('[') && value.endsWith(']')) {
-      value = value.slice(1, -1).split(',').map(v => v.trim());
-    }
-    // Parse numbers
-    else if (/^\d+$/.test(value)) {
-      value = parseInt(value, 10);
-    }
-    // Parse booleans
-    else if (value === 'true') value = true;
-    else if (value === 'false') value = false;
-
-    frontmatter[key] = value;
-  });
-  return frontmatter;
-}
-
+/**
+ * Collect all learning files from a directory
+ * @param {string} dir - Directory path
+ * @returns {Array} Array of parsed file objects
+ */
 function collectFiles(dir) {
-  if (!fs.existsSync(dir)) return [];
+  try {
+    if (!fs.existsSync(dir)) {
+      console.warn(`Warning: Directory not found: ${dir}`);
+      return [];
+    }
 
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.md') && f !== 'INDEX.md')
-    .map(f => {
-      const content = fs.readFileSync(path.join(dir, f), 'utf8');
-      return {
-        file: f,
-        ...parseFrontmatter(content),
-      };
-    });
+    const files = fs.readdirSync(dir);
+    const results = [];
+
+    for (const f of files) {
+      if (!f.endsWith('.md') || f === 'INDEX.md') continue;
+
+      try {
+        const filePath = path.join(dir, f);
+        const content = fs.readFileSync(filePath, 'utf8');
+        const frontmatter = parseFrontmatter(content);
+
+        results.push({
+          file: f,
+          ...frontmatter,
+        });
+      } catch (err) {
+        console.error(`Error reading file ${f}: ${err.message}`);
+      }
+    }
+
+    return results;
+  } catch (err) {
+    console.error(`Error reading directory ${dir}: ${err.message}`);
+    return [];
+  }
 }
 
 function collectMetrics() {
@@ -127,25 +124,35 @@ function collectMetrics() {
 
 // Main execution
 if (require.main === module) {
-  const metrics = collectMetrics();
+  try {
+    const metrics = collectMetrics();
 
-  // Output format based on argument
-  const format = process.argv[2] || 'json';
+    // Output format based on argument
+    const format = process.argv[2] || 'json';
 
-  if (format === 'json') {
-    console.log(JSON.stringify(metrics, null, 2));
-  } else if (format === 'summary') {
-    console.log('=== Learning Loop Metrics ===\n');
-    console.log(`Patterns: ${metrics.summary.total_patterns} (${metrics.summary.validated_patterns} validated)`);
-    console.log(`Anti-patterns: ${metrics.summary.total_antipatterns} (${metrics.summary.critical_antipatterns} critical, ${metrics.summary.high_antipatterns} high)`);
-    console.log(`Decisions: ${metrics.summary.total_decisions}`);
-    console.log(`\nTotal pattern uses: ${metrics.usage.total_pattern_uses}`);
-    console.log(`Total antipattern occurrences: ${metrics.usage.total_antipattern_occurrences}`);
-    console.log(`\nTop tags: ${metrics.distribution.top_tags.map(t => t.tag).join(', ')}`);
-  } else {
-    console.error(`Unknown format: ${format}. Use 'json' or 'summary'.`);
+    if (format === 'json') {
+      console.log(JSON.stringify(metrics, null, 2));
+    } else if (format === 'summary') {
+      console.log('=== Learning Loop Metrics ===\n');
+      console.log(`Patterns: ${metrics.summary.total_patterns} (${metrics.summary.validated_patterns} validated)`);
+      console.log(`Anti-patterns: ${metrics.summary.total_antipatterns} (${metrics.summary.critical_antipatterns} critical, ${metrics.summary.high_antipatterns} high)`);
+      console.log(`Decisions: ${metrics.summary.total_decisions}`);
+      console.log(`\nTotal pattern uses: ${metrics.usage.total_pattern_uses}`);
+      console.log(`Total antipattern occurrences: ${metrics.usage.total_antipattern_occurrences}`);
+      console.log(`\nTop tags: ${metrics.distribution.top_tags.map(t => t.tag).join(', ')}`);
+    } else if (format === 'help' || format === '--help' || format === '-h') {
+      console.log('Usage: node collect-learning-metrics.js [format]');
+      console.log('\nFormats:');
+      console.log('  json     Output full metrics as JSON (default)');
+      console.log('  summary  Output human-readable summary');
+    } else {
+      console.error(`Unknown format: ${format}. Use 'json', 'summary', or 'help'.`);
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error(`Error collecting metrics: ${err.message}`);
     process.exit(1);
   }
 }
 
-module.exports = { collectMetrics, parseFrontmatter };
+module.exports = { collectMetrics, collectFiles };
