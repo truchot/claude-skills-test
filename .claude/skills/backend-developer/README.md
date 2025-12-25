@@ -25,7 +25,7 @@ Invoquez ce skill quand vous avez besoin d'aide sur :
 | [Testing](#testing) | 5 | Unit, integration, API tests |
 | [DevOps](#devops) | 6 | CI/CD, Docker, Kubernetes |
 
-**Total : 38 agents spécialisés**
+**Total : 38 agents spécialisés** *(+ 7 orchestrateurs de domaine)*
 
 ## API Development
 

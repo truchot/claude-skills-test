@@ -33,7 +33,7 @@ Tu NE fais PAS :
 SELECT id, name, email
 FROM users
 WHERE status = 'active'
-  AND created_at > '2024-01-01'
+  AND created_at > '2025-01-01'
 ORDER BY created_at DESC
 LIMIT 20 OFFSET 0;
 
@@ -169,7 +169,7 @@ FROM orders;
 const users = await prisma.user.findMany({
   where: {
     status: 'active',
-    createdAt: { gte: new Date('2024-01-01') }
+    createdAt: { gte: new Date('2025-01-01') }
   },
   select: {
     id: true,

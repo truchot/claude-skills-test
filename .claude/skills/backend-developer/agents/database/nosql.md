@@ -79,7 +79,7 @@ Tu NE fais PAS :
 // Find avec filtres
 db.users.find({
   "profile.firstName": "John",
-  createdAt: { $gte: ISODate("2024-01-01") }
+  createdAt: { $gte: ISODate("2025-01-01") }
 }).sort({ createdAt: -1 }).limit(20);
 
 // Aggregation

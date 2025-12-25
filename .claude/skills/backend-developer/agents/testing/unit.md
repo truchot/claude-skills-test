@@ -79,7 +79,7 @@ jest.mock('./emailService', () => ({
 // Mock partiel
 jest.mock('./utils', () => ({
   ...jest.requireActual('./utils'),
-  formatDate: jest.fn().mockReturnValue('2024-01-01')
+  formatDate: jest.fn().mockReturnValue('2025-01-15')
 }));
 
 // Mock inline

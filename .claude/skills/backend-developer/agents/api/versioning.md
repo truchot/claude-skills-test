@@ -151,8 +151,8 @@ Link: <https://docs.example.com/migration>; rel="deprecation"
     {
       "code": "DEPRECATED_FIELD",
       "message": "Field 'user_name' is deprecated, use 'name' instead",
-      "deprecated_at": "2024-01-01",
-      "sunset_at": "2025-01-01",
+      "deprecated_at": "YYYY-MM-DD",
+      "sunset_at": "YYYY-MM-DD",
       "migration_guide": "https://docs.example.com/v2-migration"
     }
   ]
