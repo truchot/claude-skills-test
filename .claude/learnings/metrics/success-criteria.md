@@ -163,22 +163,20 @@ repeat_rate = (occurrences_après_documentation / occurrences_totales) * 100
 
 ### Script de Collecte
 
-```javascript
-// scripts/collect-learning-metrics.js
-// À implémenter pour automatiser la collecte
+Le script `scripts/collect-learning-metrics.js` est disponible pour collecter les métriques :
 
-const collectMetrics = async () => {
-  const patterns = await countPatternsUsed();
-  const antipatterns = await countAntipatternRepeats();
-  const issues = await countIssuesResolved();
+```bash
+# Output JSON complet
+node .claude/learnings/scripts/collect-learning-metrics.js json
 
-  return {
-    pattern_usage_rate: patterns.used / patterns.total,
-    antipattern_repeat_rate: antipatterns.repeated / antipatterns.total,
-    avg_resolution_time: issues.totalTime / issues.count
-  };
-};
+# Output résumé lisible
+node .claude/learnings/scripts/collect-learning-metrics.js summary
 ```
+
+Le script collecte :
+- Nombre de patterns/anti-patterns/décisions
+- Taux d'utilisation et d'occurrence
+- Distribution par catégorie et tags
 
 ### Intégration CI
 

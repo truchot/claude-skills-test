@@ -327,11 +327,20 @@ wpenv, docker, github-actions, gitlab-ci, composer, npm
   run: node tests/validate-learning-hooks.test.js
 ```
 
-### Hooks Git suggérés
+### Hooks Git (Phase 2)
 
+> **Status** : Non implémentés. À implémenter dans une future itération.
+
+Hooks suggérés pour automatisation future :
+
+| Hook | Fonction | Priorité |
+|------|----------|----------|
+| `pre-commit` | Valider le format des learnings | Moyenne |
+| `post-merge` | Rappeler de consulter les nouveaux learnings | Basse |
+
+Pour l'instant, utiliser les tests CI pour validation :
 ```bash
-# pre-commit: Vérifier le format des learnings
-# post-merge: Rappeler de consulter les nouveaux learnings
+npm test -- --grep "Learning"
 ```
 
 ---

@@ -40,6 +40,19 @@ Tu es le **point d'entrée principal** pour toutes les questions de direction te
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## Consultation des Learnings
+
+> **AVANT de commencer** toute tâche, consulte les apprentissages pour éviter les erreurs passées.
+
+```
+.claude/learnings/
+├── patterns/INDEX.md      → Solutions réutilisables
+├── anti-patterns/INDEX.md → Erreurs à éviter
+└── decisions/INDEX.md     → Décisions archétypales
+```
+
+Si un projet existant a un dossier `.learnings/`, consulte-le également.
+
 ## Arbre de Décision Rapide
 
 ```

@@ -117,10 +117,12 @@ STRIPE_SECRET_KEY=
 | gitleaks | Secrets génériques | Pre-commit + CI |
 | PHPCS | Custom sniff | Pre-commit |
 
-### Test Automatisé
+### Test Automatisé (Template Projet)
+
+> **Note** : Ce test est un template à implémenter dans chaque projet client, pas dans ce repo.
 
 ```javascript
-// tests/no-secrets.test.js
+// À créer dans le projet client : tests/no-secrets.test.js
 const fs = require('fs');
 const path = require('path');
 
