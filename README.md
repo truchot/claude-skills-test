@@ -50,9 +50,11 @@ HUMAIN (supervision)
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
 | [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
 | [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 32 | 🟢 Actif |
-| [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 27 | 🟢 Actif |
+| [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
 
-**Total : 182 agents spécialisés**
+> **Note** : `frontend-developer` délègue à `react-expert` pour les questions React approfondies.
+
+**Total : 183 agents spécialisés**
 
 ## Architecture
 
@@ -113,7 +115,11 @@ web-agency (orchestrateur)
     │   │
     │   ├── wordpress-gutenberg-expert (41 agents)
     │   │
-    │   └── design-system-foundations (21 agents)
+    │   ├── design-system-foundations (21 agents)
+    │   │
+    │   └── frontend-developer (32 agents)
+    │       │
+    │       └── react-expert (28 agents) ← délégation
     │
     ├── strategy (planifié)
     ├── design (planifié)
@@ -181,6 +187,8 @@ git clone https://github.com/truchot/claude-skills-test.git
 cd .claude/skills/web-agency/tests && bash run-tests.sh
 cd .claude/skills/web-dev-process/tests && bash run-tests.sh
 cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
+cd .claude/skills/frontend-developer/tests && node validate-skill.test.js
+cd .claude/skills/react-expert/tests && node validate-skill.test.js
 ```
 
 ## Principes de Conception
@@ -200,6 +208,8 @@ cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 - [x] web-dev-process (61 agents)
 - [x] wordpress-gutenberg-expert (41 agents)
 - [x] design-system-foundations (21 agents)
+- [x] frontend-developer (32 agents)
+- [x] react-expert (28 agents)
 
 ### Skills planifiés
 - [ ] strategy
@@ -211,6 +221,8 @@ cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 - [x] Tests web-agency
 - [x] Tests web-dev-process
 - [x] Tests wordpress-gutenberg-expert
+- [x] Tests frontend-developer
+- [x] Tests react-expert
 - [x] CI/CD workflows
 
 ## Licence

@@ -1,6 +1,6 @@
 # React Expert Skill
 
-Skill spécialisé dans l'écosystème React moderne avec 27 agents couvrant les hooks, composants, state management, data fetching, testing, styling et performance.
+Skill spécialisé dans l'écosystème React moderne avec **28 agents** couvrant les hooks, composants, state management, data fetching, testing, styling et performance.
 
 ## Position dans l'Architecture
 
@@ -122,10 +122,23 @@ OUTPUT_FORMAT=json node validate-skill.test.js
 
 ## Relation avec frontend-developer
 
-Le skill `frontend-developer` contient un agent de délégation (`frameworks/react-expert.md`) qui redirige vers ce skill pour les questions approfondies sur React.
+```
+frontend-developer                          react-expert
+      │                                           │
+      ├── frameworks/                             │
+      │      └── react-expert.md ──DÉLÈGUE──►     │ (28 agents)
+      │         (agent léger)                     │
+      │                                           │
+      └── (32 agents)                             └── Skill autonome
+```
 
-- **Questions rapides** → `frontend-developer/frameworks/react-expert.md`
-- **Questions approfondies** → `react-expert` (ce skill)
+Le skill `frontend-developer` contient un **agent de délégation** (`frameworks/react-expert.md`) qui redirige automatiquement vers ce skill pour toute question approfondie sur React.
+
+| Type de question | Où ça va |
+|------------------|----------|
+| Questions rapides React | `frontend-developer/frameworks/react-expert.md` (résumé) |
+| Questions approfondies React | `react-expert` (ce skill - 28 agents) |
+| Questions JS/TS/CSS | `frontend-developer` (reste dans le skill) |
 
 ## Next.js
 
@@ -138,7 +151,7 @@ Ce skill ne couvre **pas** Next.js. Un skill séparé `nextjs-expert` est prévu
 
 ## Version
 
-**1.0.0** - 27 agents sur 7 domaines
+**1.0.0** - 28 agents sur 7 domaines
 
 ## Changelog
 

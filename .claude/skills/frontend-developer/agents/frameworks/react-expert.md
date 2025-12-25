@@ -19,7 +19,7 @@ Cet agent délègue au skill `react-expert` pour une couverture complète de Rea
 
 ## Quand utiliser le skill react-expert
 
-Pour toute question approfondie, invoquer directement le skill `react-expert` qui contient **27 agents spécialisés** :
+Pour toute question approfondie, invoquer directement le skill `react-expert` qui contient **28 agents spécialisés** :
 
 | Domaine | Agents | Spécialités |
 |---------|--------|-------------|

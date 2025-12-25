@@ -1,7 +1,7 @@
 ---
 name: frontend-developer
 description: Expert en développement front-end moderne - HTML, CSS, JavaScript, TypeScript, frameworks, testing, performance et tooling
-version: 1.1.0
+version: 1.0.0
 status: active
 ---
 
@@ -69,7 +69,7 @@ Il ne contient PAS :
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            frontend-developer                                │
-│                         (COMMENT - 40 agents)                               │
+│                         (COMMENT - 32 agents)                               │
 │                      Implémentation concrète                                 │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
@@ -84,7 +84,7 @@ Il ne contient PAS :
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Domaines et Agents (40 agents)
+## Domaines et Agents (32 agents)
 
 ### 1. foundations/ - Implémentation HTML/CSS (5 agents)
 
@@ -117,10 +117,12 @@ Code spécifique aux frameworks front-end.
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
-| `react-expert` | Hooks, composants React | Code React, custom hooks |
+| `react-expert` | **Délégation** vers skill `react-expert` | → 28 agents spécialisés |
 | `vue-expert` | Composition API, Pinia | Code Vue, composables |
 | `nextjs-expert` | SSR, App Router | Code Next.js, Server Components |
 | `component-patterns` | HOC, Render Props | Patterns réutilisables |
+
+> **Note** : L'agent `react-expert` délègue au skill autonome `react-expert` pour une couverture approfondie de React (28 agents spécialisés).
 
 ### 4. styling/ - Implémentation CSS (4 agents)
 
@@ -298,16 +300,14 @@ SI question contient [config Vite, Webpack, bundler]
 |-------|--------|----------|
 | `direction-technique` | POURQUOI | Définit les décisions stratégiques |
 | `web-dev-process` | QUOI | Définit les processus |
+| `react-expert` | COMMENT | Implémentation React (28 agents) - délégation |
 | `design-system-foundations` | COMMENT | Tokens et composants design |
 | `wordpress-gutenberg-expert` | COMMENT | Implémentation WordPress |
 
 ## Changelog
 
-### v1.1.0
-- Clarification du positionnement POURQUOI/QUOI/COMMENT
-- Ajout des règles de composition avec direction-technique et web-dev-process
-- Suppression des overlaps avec les autres skills
-- Documentation des flux de travail inter-skills
-
 ### v1.0.0
-- Création initiale avec 8 domaines et 40 agents
+- Création initiale avec 8 domaines et 32 agents
+- Positionnement POURQUOI/QUOI/COMMENT
+- Règles de composition avec direction-technique et web-dev-process
+- Délégation React vers skill `react-expert` (28 agents)

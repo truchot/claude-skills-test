@@ -46,7 +46,7 @@ Il ne fournit PAS :
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              react-expert                                    │
-│                           (27 agents)                                        │
+│                           (28 agents)                                        │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │                          7 DOMAINES                                  │   │
@@ -266,14 +266,14 @@ SI question contient [lazy, code splitting, dynamic import]
 |-------|--------|----------|
 | `direction-technique` | POURQUOI | Décisions architecture React |
 | `web-dev-process` | QUOI | Process de développement |
-| `frontend-developer` | COMMENT | JS/TS/CSS génériques |
+| `frontend-developer` | COMMENT | JS/TS/CSS génériques (délègue ici pour React) |
 | `design-system-foundations` | COMMENT | Tokens et composants design |
 | `nextjs-expert` | COMMENT | Implémentation Next.js (à créer) |
 
 ## Changelog
 
 ### v1.0.0
-- Création initiale avec 7 domaines et 27 agents
+- Création initiale avec 7 domaines et 28 agents
 - Focus sur React 18+ (hooks, Suspense, concurrent features)
 - Architecture POURQUOI/QUOI/COMMENT
 - Next.js extrait vers skill séparé (à créer)

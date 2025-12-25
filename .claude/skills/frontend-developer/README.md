@@ -14,13 +14,13 @@ Ce skill fournit le **code et les configurations** pour implémenter les décisi
 
 ## Vue d'ensemble
 
-Ce skill est organisé en **8 domaines** avec **40 agents spécialisés** :
+Ce skill est organisé en **8 domaines** avec **32 agents** (+ délégation vers `react-expert` avec 28 agents) :
 
 | Domaine | Agents | Description |
 |---------|--------|-------------|
 | Foundations | 5 | HTML, CSS, accessibilité, responsive |
 | JavaScript | 5 | ES6+, TypeScript, DOM, API |
-| Frameworks | 5 | React, Vue, Next.js, patterns |
+| Frameworks | 5 | React (→ délégation), Vue, Next.js, patterns |
 | Styling | 4 | Tailwind, CSS-in-JS, animations |
 | State Management | 3 | React state, server state |
 | Testing | 4 | Unit, component, E2E |
