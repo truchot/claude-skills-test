@@ -37,6 +37,19 @@ Ce skill **implémente** le process de développement générique (`web-dev-proc
 - **Tooling** : wp-env, @wordpress/scripts, WP-CLI
 - **Testing** : PHPUnit + WP_UnitTestCase, @wordpress/e2e-test-utils
 
+## Consultation des Learnings
+
+> **AVANT de commencer**, consulte les apprentissages pour éviter les erreurs connues.
+
+```
+.claude/learnings/
+├── patterns/INDEX.md      → wp-env-optimal, etc.
+├── anti-patterns/INDEX.md → env-hardcoded, etc.
+└── decisions/INDEX.md     → when-wpenv-vs-docker, etc.
+```
+
+Si le projet a un dossier `.learnings/`, consulte `context.md` et `issues/` récents.
+
 ## Architecture Hiérarchique
 
 ```

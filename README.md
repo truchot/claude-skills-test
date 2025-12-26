@@ -51,10 +51,7 @@ HUMAIN (supervision)
 | [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
 | [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
 | [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
-
-> **Note** : `frontend-developer` délègue à `react-expert` (React) et `wordpress-gutenberg-expert` (WordPress) pour les questions approfondies.
-
-**Total : 184 agents spécialisés**
+| [backend-developer](.claude/skills/backend-developer/) | Backend - APIs, databases, architecture, DevOps | 38 | 🟢 Actif |
 
 ## Architecture
 
@@ -90,14 +87,26 @@ HUMAIN (supervision)
 │   ├── SKILL.md
 │   └── agents/                    # 41 agents (6 domaines)
 │
-└── design-system-foundations/     # Skill technique : Design System
+├── design-system-foundations/     # Skill technique : Design System
+│   ├── SKILL.md
+│   ├── agents/                    # 21 agents (4 niveaux Atomic Design)
+│   │   ├── foundations/           # Colors, Typography, Spacing, Shadows
+│   │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
+│   │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
+│   │   └── templates/             # Hero, Layouts, Pages
+│   └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
+│
+└── backend-developer/             # Skill technique : Backend Development
     ├── SKILL.md
-    ├── agents/                    # 21 agents (4 niveaux Atomic Design)
-    │   ├── foundations/           # Colors, Typography, Spacing, Shadows
-    │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
-    │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
-    │   └── templates/             # Hero, Layouts, Pages
-    └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
+    ├── agents/                    # 38 agents (7 domaines)
+    │   ├── api/                   # REST, GraphQL, OpenAPI, validation
+    │   ├── database/              # Modeling, migrations, queries, NoSQL
+    │   ├── auth-security/         # JWT, OAuth, OWASP, cryptography
+    │   ├── architecture/          # Patterns, microservices, DDD
+    │   ├── performance/           # Caching, profiling, optimization
+    │   ├── testing/               # Unit, integration, API tests
+    │   └── devops/                # CI/CD, Docker, Kubernetes
+    └── tests/                     # Validation tests
 ```
 
 ## Composition des Skills
@@ -116,6 +125,8 @@ web-agency (orchestrateur)
     │   ├── wordpress-gutenberg-expert (41 agents)
     │   │
     │   ├── design-system-foundations (21 agents)
+    │   │
+    │   ├── backend-developer (38 agents)
     │   │
     │   └── frontend-developer (33 agents)
     │       │
@@ -180,6 +191,13 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 "Comment structurer mes boutons avec BEM ?"
 → design-system-foundations/atoms/buttons
+
+# Backend
+"Comment concevoir une API REST pour les utilisateurs ?"
+→ backend-developer/api/rest-design
+
+"Mes requêtes SQL sont lentes, comment optimiser ?"
+→ backend-developer/database/optimization
 ```
 
 ## Tests
@@ -191,6 +209,7 @@ cd .claude/skills/web-dev-process/tests && bash run-tests.sh
 cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 cd .claude/skills/frontend-developer/tests && node validate-skill.test.js
 cd .claude/skills/react-expert/tests && node validate-skill.test.js
+cd .claude/skills/backend-developer/tests && bash run-tests.sh
 ```
 
 ## Principes de Conception
@@ -212,6 +231,7 @@ cd .claude/skills/react-expert/tests && node validate-skill.test.js
 - [x] design-system-foundations (21 agents)
 - [x] frontend-developer (33 agents)
 - [x] react-expert (28 agents)
+- [x] backend-developer (38 agents)
 
 ### Skills planifiés
 - [ ] strategy
@@ -225,6 +245,7 @@ cd .claude/skills/react-expert/tests && node validate-skill.test.js
 - [x] Tests wordpress-gutenberg-expert
 - [x] Tests frontend-developer
 - [x] Tests react-expert
+- [x] Tests backend-developer
 - [x] CI/CD workflows
 
 ## Licence

@@ -12,7 +12,8 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
 | **WP-CLI Commands** | `wp-cli-commands.md` | Créer des commandes WP-CLI custom |
-| **Project Init** | `project-init.md` | Structure projet, Git, branches, Composer, package.json |
+| **Project Init** | `project-init.md` | Structure projet standard, Composer, package.json, .wp-env |
+| **Bedrock Setup** | `bedrock-setup.md` | Architecture Bedrock, WordPress as Composer dependency |
 | **Environment Config** | `environment-config.md` | .env, wp-config.php multi-environnement, constantes WP |
 | **Local Dev** | `local-dev.md` | wp-env, Local by Flywheel, Docker, base de données locale |
 | **Staging Setup** | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
@@ -31,7 +32,8 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 | Mots-clés | Agent |
 |-----------|-------|
 | WP-CLI, commande, command, cli, wp command | WP-CLI Commands |
-| projet, init, bootstrap, setup, structure, composer, package.json, bedrock | Project Init |
+| projet, init, bootstrap, setup, structure, composer, package.json, .wp-env | Project Init |
+| bedrock, roots, wordpress as dependency, multi-env bedrock | Bedrock Setup |
 | .env, wp-config, environment, constantes, config, WP_DEBUG, salts, keys | Environment Config |
 | wp-env, docker, local, localhost, database locale, import, export, sync, Local by Flywheel | Local Dev |
 | staging, serveur staging, .htaccess, .htpasswd, protection, utilisateur WP, user, role, notification client, email | Staging Setup |
@@ -45,10 +47,11 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 
 ## Différences Clés
 
-### Repository Setup vs Project Init
+### Repository Setup vs Project Init vs Bedrock Setup
 
 - **Repository Setup** : Création du repo, git init, remotes, .gitignore, structure Git
-- **Project Init** : Structure des fichiers du projet, composer.json, package.json, architecture
+- **Project Init** : Structure standard, composer.json, package.json, .wp-env
+- **Bedrock Setup** : Architecture Bedrock, WordPress as dependency, config multi-env Bedrock
 
 ### CI/CD Pipelines vs GitLab CI/CD vs Deployment SSH
 
@@ -71,8 +74,17 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 ```
 "Quelle structure pour un projet WordPress ?"
 "Comment configurer le composer.json ?"
-"Comment structurer un projet Bedrock ?"
+"Comment configurer .wp-env.json ?"
 → project-init.md
+```
+
+### Bedrock Setup
+
+```
+"Comment créer un projet Bedrock ?"
+"Comment configurer les environnements Bedrock ?"
+"WordPress as Composer dependency ?"
+→ bedrock-setup.md
 ```
 
 ### Environment Config
@@ -156,8 +168,11 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 ## Combinaisons Fréquentes
 
 ```
-"Initialiser un projet complet"
+"Initialiser un projet standard"
 → repository-setup.md + project-init.md + environment-config.md
+
+"Initialiser un projet Bedrock"
+→ repository-setup.md + bedrock-setup.md
 
 "Nouveau projet avec CI/CD"
 → repository-setup.md + project-init.md + cicd-pipelines.md

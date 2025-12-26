@@ -1,11 +1,31 @@
 ---
 name: cicd-orchestrator
-description: Orchestrateur pour les principes CI/CD et automatisation
+description: Orchestrateur pour les principes CI/CD et automatisation (Niveau QUOI)
 ---
 
 # Orchestrateur CI/CD
 
 Ce module coordonne la mise en place de l'intégration et du déploiement continus.
+
+## Rôle de cet Agent (Niveau QUOI)
+
+> **Ce que tu fais** : Définir QUOI mettre en place (stages, workflows, process)
+> **Ce que tu ne fais pas** :
+> - Décisions stratégiques → `direction-technique/infrastructure/strategie-cicd`
+> - Code YAML spécifique → Skills technologiques (`wordpress-*/tooling/cicd-pipelines`)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : POURQUOI (direction-technique/infrastructure)       │
+│  → Politiques, quality gates, seuils, critères de succès       │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : QUOI (web-dev-process/setup/cicd) ← ICI            │
+│  → Stages, workflows, bonnes pratiques génériques              │
+├─────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : COMMENT (wordpress-*/tooling/cicd-pipelines)       │
+│  → YAML GitHub Actions/GitLab CI, scripts, configurations      │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ## Agents Spécialisés
 
@@ -35,17 +55,16 @@ Ce module coordonne la mise en place de l'intégration et du déploiement contin
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Pipeline Type Recommandé
+## Stages Recommandés
 
-```yaml
-stages:
-  - setup      # Préparation
-  - build      # Compilation
-  - test       # Tests (parallel)
-  - quality    # Lint, typecheck
-  - security   # Audit, SAST
-  - deploy     # Staging → Prod
-```
+| Stage | Objectif | Contenu |
+|-------|----------|---------|
+| `setup` | Préparation | Install deps, restore cache |
+| `build` | Compilation | Transpile, bundle |
+| `test` | Validation | Unit, integration (parallel) |
+| `quality` | Qualité | Lint, typecheck, coverage |
+| `security` | Sécurité | Audit deps, SAST |
+| `deploy` | Livraison | Staging → Prod |
 
 ## Bonnes Pratiques
 
@@ -63,17 +82,13 @@ stages:
 3. **Secrets en clair** : Dans le code ou les logs
 4. **Déployer le vendredi** : Sans capacité de réaction
 
-## Métriques Clés (DORA)
+## Références
 
-| Métrique | Elite | Good |
-|----------|-------|------|
-| Deploy Frequency | Plusieurs/jour | 1/semaine |
-| Lead Time | < 1 heure | < 1 semaine |
-| Change Failure Rate | < 15% | < 30% |
-| Time to Restore | < 1 heure | < 1 jour |
-
-## Agents à Consulter
-
-- Pour les pipelines de build/test → `ci-principles.md`
-- Pour le déploiement → `cd-principles.md`
-- Pour les stratégies de deploy → `deployment-strategies.md`
+| Aspect | Où trouver |
+|--------|------------|
+| Seuils qualité, politiques | `direction-technique/infrastructure/strategie-cicd` |
+| YAML GitHub Actions WordPress | `wordpress-gutenberg-expert/agents/tooling/cicd-pipelines` |
+| YAML GitLab CI WordPress | `wordpress-gutenberg-expert/agents/tooling/gitlab-ci` |
+| Principes CI détaillés | `ci-principles.md` |
+| Principes CD détaillés | `cd-principles.md` |
+| Stratégies de déploiement | `deployment-strategies.md` |
