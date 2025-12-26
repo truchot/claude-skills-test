@@ -39,6 +39,21 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | sécurité, OWASP, RGPD, vulnérabilité | `direction-technique/securite` |
 | performance, optimisation, SLO | `direction-technique/performance` |
 
+### Lead Dev (Coordination)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| PR, pull request, review code, merge request | `lead-dev/code-review` |
+| qualité code, sécurité code, performance code | `lead-dev/code-review` |
+| tâche, assignation, daily, standup, blocage | `lead-dev/team-coordination` |
+| sprint support, débloquer dev | `lead-dev/team-coordination` |
+| choix librairie, quel pattern, refactoring | `lead-dev/technical-decisions` |
+| dette technique priorisation | `lead-dev/technical-decisions` |
+| feedback code, onboarding dev, formation | `lead-dev/mentoring` |
+| bonnes pratiques, évaluation niveau | `lead-dev/mentoring` |
+| release, deploy check, hotfix, changelog | `lead-dev/delivery` |
+| merge strategy, stratégie branches | `lead-dev/delivery` |
+
 ### Web Dev Process (Processus)
 
 | Mots-clés | Skill |
@@ -87,11 +102,24 @@ Requête utilisateur
 ├─ Concerne le CLIENT ou le PROJET ?
 │  └─ → project-management
 │
-├─ Concerne une DÉCISION technique ?
+├─ Concerne une DÉCISION technique STRATÉGIQUE ?
 │  └─ → direction-technique
+│
+├─ Concerne la COORDINATION d'équipe dev ?
+│  ├─ Code review, PR, qualité ? → lead-dev/code-review
+│  ├─ Tâches, daily, blocage ? → lead-dev/team-coordination
+│  ├─ Choix lib, pattern ? → lead-dev/technical-decisions
+│  ├─ Formation, mentoring ? → lead-dev/mentoring
+│  └─ Release, deploy, hotfix ? → lead-dev/delivery
 │
 ├─ Concerne un PROCESSUS de dev ?
 │  └─ → web-dev-process
+│
+├─ Concerne l'implémentation FRONTEND ?
+│  └─ → frontend-developer (ou react-expert)
+│
+├─ Concerne l'implémentation BACKEND ?
+│  └─ → backend-developer
 │
 ├─ Concerne WordPress/Gutenberg ?
 │  └─ → wordpress-gutenberg-expert
