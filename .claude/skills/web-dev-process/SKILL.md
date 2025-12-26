@@ -34,6 +34,19 @@ Ce skill définit le **QUOI** de chaque phase (processus standardisés, checklis
 
 ---
 
+## Consultation des Learnings
+
+> **AVANT chaque phase**, consulte les apprentissages pour capitaliser sur l'expérience passée.
+
+| Ressource | Contenu |
+|-----------|---------|
+| `.claude/learnings/patterns/` | Solutions réutilisables |
+| `.claude/learnings/anti-patterns/` | Erreurs à éviter |
+| `.claude/learnings/decisions/` | Décisions archétypales |
+| `.learnings/` (projet) | Contexte et historique projet |
+
+---
+
 ## Les 7 Phases du Développement Web
 
 ```

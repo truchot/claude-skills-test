@@ -1,0 +1,43 @@
+name: Validate Learnings
+
+on:
+  push:
+    paths:
+      - '.claude/learnings/**'
+  pull_request:
+    paths:
+      - '.claude/learnings/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .claude/learnings
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: .claude/learnings/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Run validation tests
+        run: npm test
+
+      - name: Collect metrics
+        run: npm run metrics
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: .claude/learnings/coverage/
+          retention-days: 7
