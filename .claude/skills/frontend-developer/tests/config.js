@@ -42,6 +42,7 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'react-expert',
     'vue-expert',
     'nextjs-expert',
+    'wordpress-expert',
     'component-patterns'
   ],
   'styling': [
@@ -93,7 +94,7 @@ const AGENT_REQUIREMENTS = {
 const DOMAIN_KEYWORDS = {
   'foundations': ['html', 'css', 'accessibilité', 'a11y', 'responsive', 'sémantique'],
   'javascript': ['javascript', 'typescript', 'ES6', 'DOM', 'API', 'fetch', 'async'],
-  'frameworks': ['react', 'vue', 'next', 'nuxt', 'composant', 'component'],
+  'frameworks': ['react', 'vue', 'next', 'nuxt', 'wordpress', 'gutenberg', 'composant', 'component'],
   'styling': ['tailwind', 'styled', 'emotion', 'animation', 'CSS-in-JS'],
   'state-management': ['state', 'context', 'zustand', 'redux', 'react-query'],
   'testing': ['test', 'vitest', 'jest', 'playwright', 'cypress', 'RTL'],

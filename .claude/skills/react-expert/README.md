@@ -129,7 +129,7 @@ frontend-developer                          react-expert
       │      └── react-expert.md ──DÉLÈGUE──►     │ (28 agents)
       │         (agent léger)                     │
       │                                           │
-      └── (32 agents)                             └── Skill autonome
+      └── (33 agents)                             └── Skill autonome
 ```
 
 Le skill `frontend-developer` contient un **agent de délégation** (`frameworks/react-expert.md`) qui redirige automatiquement vers ce skill pour toute question approfondie sur React.
