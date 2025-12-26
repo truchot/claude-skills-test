@@ -49,8 +49,9 @@ HUMAIN (supervision)
 | [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
 | [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
 | [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
+| [backend-developer](.claude/skills/backend-developer/) | Backend - APIs, databases, architecture, DevOps | 38 | 🟢 Actif |
 
-**Total : 153 agents spécialisés**
+**Total : 191 agents spécialisés**
 
 ## Architecture
 
@@ -86,14 +87,26 @@ HUMAIN (supervision)
 │   ├── SKILL.md
 │   └── agents/                    # 41 agents (6 domaines)
 │
-└── design-system-foundations/     # Skill technique : Design System
+├── design-system-foundations/     # Skill technique : Design System
+│   ├── SKILL.md
+│   ├── agents/                    # 21 agents (4 niveaux Atomic Design)
+│   │   ├── foundations/           # Colors, Typography, Spacing, Shadows
+│   │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
+│   │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
+│   │   └── templates/             # Hero, Layouts, Pages
+│   └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
+│
+└── backend-developer/             # Skill technique : Backend Development
     ├── SKILL.md
-    ├── agents/                    # 21 agents (4 niveaux Atomic Design)
-    │   ├── foundations/           # Colors, Typography, Spacing, Shadows
-    │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
-    │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
-    │   └── templates/             # Hero, Layouts, Pages
-    └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
+    ├── agents/                    # 38 agents (7 domaines)
+    │   ├── api/                   # REST, GraphQL, OpenAPI, validation
+    │   ├── database/              # Modeling, migrations, queries, NoSQL
+    │   ├── auth-security/         # JWT, OAuth, OWASP, cryptography
+    │   ├── architecture/          # Patterns, microservices, DDD
+    │   ├── performance/           # Caching, profiling, optimization
+    │   ├── testing/               # Unit, integration, API tests
+    │   └── devops/                # CI/CD, Docker, Kubernetes
+    └── tests/                     # Validation tests
 ```
 
 ## Composition des Skills
@@ -111,7 +124,9 @@ web-agency (orchestrateur)
     │   │
     │   ├── wordpress-gutenberg-expert (41 agents)
     │   │
-    │   └── design-system-foundations (21 agents)
+    │   ├── design-system-foundations (21 agents)
+    │   │
+    │   └── backend-developer (38 agents)
     │
     ├── strategy (planifié)
     ├── design (planifié)
@@ -170,6 +185,13 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 "Comment structurer mes boutons avec BEM ?"
 → design-system-foundations/atoms/buttons
+
+# Backend
+"Comment concevoir une API REST pour les utilisateurs ?"
+→ backend-developer/api/rest-design
+
+"Mes requêtes SQL sont lentes, comment optimiser ?"
+→ backend-developer/database/optimization
 ```
 
 ## Tests
@@ -179,6 +201,7 @@ git clone https://github.com/truchot/claude-skills-test.git
 cd .claude/skills/web-agency/tests && bash run-tests.sh
 cd .claude/skills/web-dev-process/tests && bash run-tests.sh
 cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
+cd .claude/skills/backend-developer/tests && bash run-tests.sh
 ```
 
 ## Principes de Conception
@@ -198,6 +221,7 @@ cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 - [x] web-dev-process (61 agents)
 - [x] wordpress-gutenberg-expert (41 agents)
 - [x] design-system-foundations (21 agents)
+- [x] backend-developer (38 agents)
 
 ### Skills planifiés
 - [ ] strategy
@@ -209,6 +233,7 @@ cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 - [x] Tests web-agency
 - [x] Tests web-dev-process
 - [x] Tests wordpress-gutenberg-expert
+- [x] Tests backend-developer
 - [x] CI/CD workflows
 
 ## Licence
