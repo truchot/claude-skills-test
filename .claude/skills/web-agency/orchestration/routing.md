@@ -39,6 +39,21 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | sécurité, OWASP, RGPD, vulnérabilité | `direction-technique/securite` |
 | performance, optimisation, SLO | `direction-technique/performance` |
 
+### Lead Dev (Coordination)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| PR, pull request, review code, merge request | `lead-dev/code-review` |
+| qualité code, sécurité code, performance code | `lead-dev/code-review` |
+| tâche, assignation, daily, standup, blocage | `lead-dev/team-coordination` |
+| sprint support, débloquer dev | `lead-dev/team-coordination` |
+| choix librairie, quel pattern, refactoring | `lead-dev/technical-decisions` |
+| dette technique priorisation | `lead-dev/technical-decisions` |
+| feedback code, onboarding dev, formation | `lead-dev/mentoring` |
+| bonnes pratiques, évaluation niveau | `lead-dev/mentoring` |
+| release, deploy check, hotfix, changelog | `lead-dev/delivery` |
+| merge strategy, stratégie branches | `lead-dev/delivery` |
+
 ### Web Dev Process (Processus)
 
 | Mots-clés | Skill |
@@ -50,6 +65,18 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | test unitaire, e2e, accessibilité | `web-dev-process/testing` |
 | deploy, staging, production, rollback | `web-dev-process/deployment` |
 | monitoring, logs, alerting, bug | `web-dev-process/maintenance` |
+
+### Next.js (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| Next.js, App Router, page.tsx, layout.tsx | `nextjs-expert/app-router` |
+| Server Component, Client Component, RSC | `nextjs-expert/server-components` |
+| Server Action, revalidation, fetch cache | `nextjs-expert/data` |
+| SSR, SSG, ISR, middleware, Edge | `nextjs-expert/rendering` |
+| next/image, next/font, bundle | `nextjs-expert/optimization` |
+| Vercel, Docker, next.config.js | `nextjs-expert/deployment` |
+| Playwright Next.js, Vitest Next.js | `nextjs-expert/testing` |
 
 ### WordPress (Implémentation)
 
@@ -87,11 +114,27 @@ Requête utilisateur
 ├─ Concerne le CLIENT ou le PROJET ?
 │  └─ → project-management
 │
-├─ Concerne une DÉCISION technique ?
+├─ Concerne une DÉCISION technique STRATÉGIQUE ?
 │  └─ → direction-technique
+│
+├─ Concerne la COORDINATION d'équipe dev ?
+│  ├─ Code review, PR, qualité ? → lead-dev/code-review
+│  ├─ Tâches, daily, blocage ? → lead-dev/team-coordination
+│  ├─ Choix lib, pattern ? → lead-dev/technical-decisions
+│  ├─ Formation, mentoring ? → lead-dev/mentoring
+│  └─ Release, deploy, hotfix ? → lead-dev/delivery
 │
 ├─ Concerne un PROCESSUS de dev ?
 │  └─ → web-dev-process
+│
+├─ Concerne l'implémentation FRONTEND ?
+│  └─ → frontend-developer (ou react-expert)
+│
+├─ Concerne Next.js spécifiquement ?
+│  └─ → nextjs-expert
+│
+├─ Concerne l'implémentation BACKEND ?
+│  └─ → backend-developer
 │
 ├─ Concerne WordPress/Gutenberg ?
 │  └─ → wordpress-gutenberg-expert

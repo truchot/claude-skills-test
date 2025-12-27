@@ -1,7 +1,7 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, strategy, design, content, marketing)
-version: 2.2.0
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, strategy, design, content, marketing)
+version: 2.4.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -21,14 +21,14 @@ CLIENT
 │                  (Routage uniquement)                   │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ project │ │direction│ │ web-dev │ │wordpress│       │
-│  │-manage- │ │-techni- │ │-process │ │-gutenb. │       │
+│  │ project │ │direction│ │lead-dev │ │ web-dev │       │
+│  │-manage- │ │-techni- │ │         │ │-process │       │
 │  │  ment   │ │   que   │ │         │ │         │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ design- │ │strategy │ │ design  │ │ content │       │
-│  │ system  │ │(planned)│ │(planned)│ │(planned)│       │
+│  │frontend │ │ backend │ │wordpress│ │ design- │       │
+│  │-dev     │ │-dev     │ │-gutenb. │ │ system  │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 └─────────────────────────────────────────────────────────┘
    │
@@ -42,23 +42,32 @@ HUMAIN (supervision)
 |-------|------|--------|--------|
 | `project-management` | Gestion projet & client | 24 | 🟢 |
 | `direction-technique` | Décisions techniques stratégiques | 52 | 🟢 |
+| `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
 | `web-dev-process` | Process de développement | 61 | 🟢 |
+| `frontend-developer` | Implémentation frontend | 33 | 🟢 |
+| `backend-developer` | Implémentation backend | 38 | 🟢 |
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
+| `react-expert` | Implémentation React | 28 | 🟢 |
+| `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 | `strategy` | Stratégie & conseil | - | 🔴 Planifié |
 | `design` | Design & création | - | 🔴 Planifié |
 | `content` | Contenu & rédaction | - | 🔴 Planifié |
 | `marketing` | Marketing digital | - | 🔴 Planifié |
 
-**Total : 199 agents disponibles**
+**Total : 360 agents disponibles**
 
 ## Routage Rapide
 
 | Requête concerne... | → Skill |
 |---------------------|---------|
 | Client, brief, devis, planning, facture | `project-management` |
-| Choix stack, architecture, décisions tech | `direction-technique` |
+| Choix stack, architecture, décisions stratégiques | `direction-technique` |
+| Code review, coordination équipe, mentoring, release | `lead-dev` |
 | Process dev, CI/CD, tests, deploy | `web-dev-process` |
+| Implémentation frontend, React, CSS, TypeScript | `frontend-developer` |
+| Next.js, App Router, Server Components, SSR | `nextjs-expert` |
+| API, bases de données, Node.js, PHP backend | `backend-developer` |
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 
@@ -70,14 +79,18 @@ Selon [ADR-005](./docs/adr/005-skill-responsibility-boundaries.md) :
 
 ```
 NIVEAU 1 : POURQUOI (direction-technique)
-   "Pourquoi on fait ça ? Quels objectifs ?"
+   "Pourquoi on fait ça ? Quels objectifs stratégiques ?"
+        │
+        ▼
+COORDINATION (lead-dev)
+   "Comment coordonner l'équipe ? Valider la qualité ?"
         │
         ▼
 NIVEAU 2 : QUOI (web-dev-process)
    "Quoi mettre en place ? Quelles étapes ?"
         │
         ▼
-NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
+NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
    "Comment l'implémenter ? Quel code ?"
 ```
 
@@ -102,6 +115,23 @@ NIVEAU 3 : COMMENT (wordpress-*, design-system-*)
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 
 ## Changelog
+
+### v2.4.0
+
+- **Nouveau** : Ajout du skill `nextjs-expert` (35 agents)
+  - Implémentation Next.js 14+ avec App Router
+  - Domaines : app-router, server-components, data, rendering, optimization, deployment, testing
+  - Position : NIVEAU 3 COMMENT (implémentation)
+- **Total agents** : 360 (vs 325 en v2.3.0)
+
+### v2.3.0
+
+- **Nouveau** : Ajout du skill `lead-dev` (27 agents)
+  - Coordination technique opérationnelle
+  - Domaines : code-review, team-coordination, technical-decisions, mentoring, delivery
+  - Position : entre direction-technique (stratégique) et développeurs (implémentation)
+- **Mise à jour** : Hiérarchie des skills avec niveau COORDINATION
+- **Total agents** : 325 (vs 199 en v2.2.0)
 
 ### v2.2.0
 
