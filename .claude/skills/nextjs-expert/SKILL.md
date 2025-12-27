@@ -107,10 +107,10 @@ Data fetching, mutations et caching.
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
+| `data-fetching` | fetch, cache côté serveur | Code fetching |
 | `server-actions` | Server Actions, mutations | Code actions |
-| `data-fetching` | fetch, cache, revalidate | Code fetching |
-| `caching` | Cache strategies, tags | Config cache |
-| `database` | Prisma, Drizzle intégration | Code DB |
+| `revalidation` | Cache strategies, tags, ISR | Config cache |
+| `client-fetching` | SWR, React Query | Code client |
 
 ### 4. rendering/ - Stratégies de Rendu (5 agents)
 
@@ -119,10 +119,10 @@ SSR, SSG, ISR et rendu dynamique.
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
-| `static-generation` | SSG, generateStaticParams | Code static |
-| `dynamic-rendering` | SSR, dynamic routes | Code dynamic |
-| `incremental-static` | ISR, revalidation | Config ISR |
-| `middleware` | Middleware, Edge Runtime | Code middleware |
+| `ssr-ssg` | SSR vs SSG, generateStaticParams | Code rendu |
+| `isr` | ISR, revalidation périodique | Config ISR |
+| `middleware` | Middleware, redirections | Code middleware |
+| `edge-runtime` | Edge Functions, config | Code Edge |
 
 ### 5. optimization/ - Optimisation (5 agents)
 
@@ -131,10 +131,10 @@ Performance et Core Web Vitals.
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
-| `image-optimization` | next/image, formats | Code images |
-| `font-optimization` | next/font, loading | Code fonts |
-| `bundle-analysis` | @next/bundle-analyzer | Config analyse |
-| `core-web-vitals` | LCP, CLS, INP | Code optimisation |
+| `images` | next/image, formats, placeholder | Code images |
+| `fonts` | next/font, loading, subsets | Code fonts |
+| `bundle` | @next/bundle-analyzer, code split | Config analyse |
+| `caching` | Cache strategies, headers | Config cache |
 
 ### 6. deployment/ - Déploiement (5 agents)
 
@@ -144,9 +144,9 @@ Déploiement et configuration production.
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
 | `vercel` | Déploiement Vercel | Config Vercel |
-| `docker` | Containerisation | Dockerfile |
-| `self-hosted` | Déploiement custom | Scripts deploy |
-| `environment` | Variables d'env, configs | Config env |
+| `docker` | Containerisation, self-hosted | Dockerfile, compose |
+| `environment` | Variables d'env, secrets | Config env |
+| `ci-cd` | Pipelines GitHub/GitLab | Workflows CI |
 
 ### 7. testing/ - Tests (5 agents)
 
@@ -156,9 +156,9 @@ Tests unitaires, intégration et E2E.
 |-------|----------------|---------|
 | `orchestrator` | Coordination | Routage |
 | `unit-testing` | Jest, Vitest pour Next.js | Code tests |
-| `component-testing` | Testing Library + Next | Code tests composants |
+| `integration-testing` | Testing Library + Next | Code tests composants |
 | `e2e-testing` | Playwright pour Next.js | Code tests E2E |
-| `api-testing` | Tests API routes | Code tests API |
+| `mocking` | MSW, mocks API | Code mocks |
 
 **Total : 35 agents spécialisés**
 
@@ -307,6 +307,82 @@ Ce skill est optimisé pour **Next.js 14+** avec App Router.
 | Partial Prerendering | 14.0+ | Expérimental |
 | Turbopack | 14.0+ | Stable en dev |
 
+## Tests de Validation
+
+Le skill inclut des tests automatisés pour valider sa structure.
+
+```bash
+# Exécuter les tests
+cd .claude/skills/nextjs-expert/tests
+npm test
+
+# Mode verbose
+npm run test:verbose
+```
+
+Les tests vérifient :
+- ✅ Existence de tous les domaines
+- ✅ Présence de tous les agents attendus
+- ✅ Frontmatter YAML valide (name, description)
+- ✅ Structure des agents (sections requises)
+- ✅ Références croisées (escalades)
+
+## Exemples de Workflows End-to-End
+
+### Workflow 1 : Développeur crée une nouvelle page avec data
+
+```
+1. 🧑‍💻 Développeur demande : "Créer une page produits avec SSG"
+
+2. → nextjs-expert/rendering/ssr-ssg
+   Répond : Code generateStaticParams + page.tsx
+
+3. → nextjs-expert/data/data-fetching
+   Répond : Code fetch avec cache
+
+4. → nextjs-expert/server-components/async-components
+   Répond : Pattern composant async
+
+5. 🧑‍💻 PR créée → lead-dev/code-review/pr-review
+   Valide : Structure, patterns, performance
+```
+
+### Workflow 2 : Optimisation performance après audit
+
+```
+1. 🧑‍💻 Demande : "LCP trop lent, optimiser"
+
+2. → nextjs-expert/optimization/images
+   Répond : Config next/image, priority, sizes
+
+3. → nextjs-expert/optimization/fonts
+   Répond : next/font avec display: swap
+
+4. → nextjs-expert/optimization/bundle
+   Répond : Dynamic imports, analyze bundle
+
+5. → lead-dev/code-review/performance-review
+   Valide : Impact Core Web Vitals
+```
+
+### Workflow 3 : Implémentation Server Actions
+
+```
+1. 🧑‍💻 Demande : "Formulaire de contact avec Server Action"
+
+2. → nextjs-expert/data/server-actions
+   Répond : Code "use server", form action
+
+3. → nextjs-expert/data/revalidation
+   Répond : revalidatePath après mutation
+
+4. → nextjs-expert/app-router/error-handling
+   Répond : Gestion erreurs useFormState
+
+5. → nextjs-expert/testing/integration-testing
+   Répond : Tests avec Testing Library
+```
+
 ## Changelog
 
 ### v1.0.0
@@ -314,3 +390,4 @@ Ce skill est optimisé pour **Next.js 14+** avec App Router.
 - Focus sur App Router et Server Components
 - Positionnement COMMENT dans la hiérarchie
 - Intégration avec frontend-developer
+- Tests de validation inclus
