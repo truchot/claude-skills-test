@@ -97,6 +97,17 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | formulaire, card, modal, navigation | `design-system-foundations/molecules` |
 | layout, page template, hero | `design-system-foundations/templates` |
 
+### DevOps (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| GitHub Actions, GitLab CI, workflow, pipeline | `devops/cicd` |
+| Dockerfile, docker-compose, image, container | `devops/containers` |
+| Kubernetes, K8s, Helm, pod, deployment | `devops/kubernetes` |
+| Terraform, AWS, GCP, VPC, IaC | `devops/infrastructure` |
+| Prometheus, Grafana, logs, alerting | `devops/monitoring` |
+| Blue-Green, Canary, rollback, feature flag | `devops/deployment` |
+
 ### ⚠️ Domaines Non Couverts (Skills Planifiés - Non Disponibles)
 
 Ces domaines ne sont **pas encore implémentés**. Ne pas router vers ces skills.
@@ -141,6 +152,9 @@ Requête utilisateur
 ├─ Concerne l'implémentation BACKEND ?
 │  └─ → backend-developer
 │
+├─ Concerne DevOps (CI/CD, containers, K8s, IaC, monitoring) ?
+│  └─ → devops
+│
 ├─ Concerne WordPress/Gutenberg ?
 │  └─ → wordpress-gutenberg-expert
 │
@@ -184,10 +198,16 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | | Checklist/release → `lead-dev/delivery` | Si "prêt à déployer ?" |
 | | Process → `web-dev-process/deployment` | Si "comment déployer ?" |
 | | Config Next.js → `nextjs-expert/deployment` | Si Vercel, Docker Next |
-| | Config backend → `backend-developer/devops` | Si CI/CD, K8s |
+| | Config DevOps → `devops/deployment` | Si Blue-Green, Canary, K8s |
 | **CI/CD** | Politique → `direction-technique/infrastructure/strategie-cicd` | Si "quelle stratégie ?" |
 | | Process → `web-dev-process/setup/cicd` | Si principes, étapes |
-| | Config → `backend-developer/devops/cicd` | Si GitHub Actions, code |
+| | Config → `devops/cicd` | Si GitHub Actions, GitLab CI |
+| **containers** | Dockerfile, images → `devops/containers` | Si Docker, registry |
+| | Orchestration → `devops/kubernetes` | Si K8s, Helm |
+| **monitoring** | Politique → `direction-technique/infrastructure` | Si objectifs SLO |
+| | Config → `devops/monitoring` | Si Prometheus, Grafana |
+| **infrastructure** | Stratégie → `direction-technique/infrastructure` | Si choix cloud |
+| | IaC → `devops/infrastructure` | Si Terraform, AWS, GCP |
 
 ### Règle de Décision en 4 Étapes
 
@@ -218,11 +238,14 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | Architecture | direction-technique | web-dev-process | lead-dev | skills techniques |
 | Code review | direction-technique | web-dev-process | lead-dev | - |
 | Tests | direction-technique | web-dev-process | lead-dev | skills techniques |
-| CI/CD | direction-technique | web-dev-process | lead-dev | backend-developer |
+| CI/CD | direction-technique | web-dev-process | lead-dev | devops |
 | Performance | direction-technique | web-dev-process | lead-dev | skills techniques |
 | Sécurité | direction-technique | web-dev-process | lead-dev | backend-developer |
-| Deploy | direction-technique | lead-dev | lead-dev | skills techniques |
-| Monitoring | direction-technique | web-dev-process | lead-dev | backend-developer |
+| Deploy | direction-technique | lead-dev | lead-dev | devops |
+| Monitoring | direction-technique | web-dev-process | lead-dev | devops |
+| Infrastructure | direction-technique | web-dev-process | lead-dev | devops |
+| Containers | direction-technique | devops | lead-dev | devops |
+| Kubernetes | direction-technique | devops | lead-dev | devops |
 
 ## Priorité en Cas d'Ambiguïté
 

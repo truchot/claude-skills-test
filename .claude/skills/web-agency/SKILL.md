@@ -1,7 +1,7 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, etc.)
-version: 2.6.0
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, devops, etc.)
+version: 2.7.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -27,9 +27,14 @@ CLIENT
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │frontend │ │ backend │ │wordpress│ │ design- │       │
-│  │-dev     │ │-dev     │ │-gutenb. │ │ system  │       │
+│  │frontend │ │ backend │ │ devops  │ │wordpress│       │
+│  │-dev     │ │-dev     │ │         │ │-gutenb. │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
+│                                                         │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐                   │
+│  │  react  │ │ nextjs  │ │ design- │                   │
+│  │ -expert │ │ -expert │ │ system  │                   │
+│  └─────────┘ └─────────┘ └─────────┘                   │
 └─────────────────────────────────────────────────────────┘
    │
    ▼
@@ -45,13 +50,14 @@ HUMAIN (supervision)
 | `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
 | `web-dev-process` | Process de développement | 61 | 🟢 |
 | `frontend-developer` | Implémentation frontend | 33 | 🟢 |
-| `backend-developer` | Implémentation backend | 38 | 🟢 |
+| `backend-developer` | Implémentation backend | 32 | 🟢 |
+| `devops` | CI/CD, containers, K8s, IaC, monitoring | 30 | 🟢 |
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 
-**Total : 360 agents disponibles**
+**Total : 384 agents disponibles**
 
 > **Note** : Les skills `strategy`, `design`, `content` et `marketing` sont prévus mais **non implémentés**.
 > Ne pas router vers ces skills - demander clarification à l'utilisateur si besoin dans ces domaines.
@@ -63,10 +69,11 @@ HUMAIN (supervision)
 | Client, brief, devis, planning, facture | `project-management` |
 | Choix stack, architecture, décisions stratégiques | `direction-technique` |
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
-| Process dev, CI/CD, tests, deploy | `web-dev-process` |
+| Process dev, méthodologie, checklists | `web-dev-process` |
 | Implémentation frontend, React, CSS, TypeScript | `frontend-developer` |
 | Next.js, App Router, Server Components, SSR | `nextjs-expert` |
 | API, bases de données, Node.js, PHP backend | `backend-developer` |
+| CI/CD, Docker, Kubernetes, Terraform, monitoring | `devops` |
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 
@@ -93,7 +100,8 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 ├─────────────────────────────────────────────────────────────────────┤
 │  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
 │  → COMMENT : Code, configuration, patterns                          │
-│  frontend-dev, backend-dev, react-expert, nextjs-expert, wordpress  │
+│  frontend-dev, backend-dev, devops, react-expert, nextjs-expert,    │
+│  wordpress-gutenberg-expert, design-system-foundations              │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -123,6 +131,15 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 | [006](./docs/adr/006-hierarchy-clarification.md) | Clarification Hiérarchie lead-dev/web-dev-process |
 
 ## Changelog
+
+### v2.7.0
+
+- **Nouveau skill** : Ajout de `devops` (30 agents) comme skill autonome
+  - CI/CD, containers, Kubernetes, Infrastructure as Code, monitoring, deployment
+  - Extraction depuis backend-developer/devops
+  - Position : NIVEAU 3 IMPLÉMENTATION
+- **backend-developer** : v1.1.0 - Domaine DevOps redirigé vers skill `devops`
+- **Total agents** : 384 (vs 360 en v2.6.0)
 
 ### v2.6.0
 
