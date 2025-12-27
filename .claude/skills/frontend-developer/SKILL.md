@@ -119,11 +119,11 @@ Code spécifique aux frameworks front-end.
 | `orchestrator` | Coordination | Routage |
 | `react-expert` | **Délégation** vers skill `react-expert` | → 28 agents spécialisés |
 | `vue-expert` | Composition API, Pinia | Code Vue, composables |
-| `nextjs-expert` | SSR, App Router | Code Next.js, Server Components |
+| `nextjs-expert` | **Délégation** vers skill `nextjs-expert` | → 35 agents spécialisés |
 | `wordpress-expert` | **Délégation** vers skill `wordpress-gutenberg-expert` | → 41 agents spécialisés |
 | `component-patterns` | HOC, Render Props | Patterns réutilisables |
 
-> **Note** : Les agents `react-expert` et `wordpress-expert` délèguent vers leurs skills autonomes respectifs pour une couverture approfondie.
+> **Note** : Les agents `react-expert`, `nextjs-expert` et `wordpress-expert` délèguent vers leurs skills autonomes respectifs pour une couverture approfondie.
 
 ### 4. styling/ - Implémentation CSS (4 agents)
 
@@ -302,10 +302,15 @@ SI question contient [config Vite, Webpack, bundler]
 | `direction-technique` | POURQUOI | Définit les décisions stratégiques |
 | `web-dev-process` | QUOI | Définit les processus |
 | `react-expert` | COMMENT | Implémentation React (28 agents) - délégation |
+| `nextjs-expert` | COMMENT | Implémentation Next.js (35 agents) - délégation |
 | `design-system-foundations` | COMMENT | Tokens et composants design |
 | `wordpress-gutenberg-expert` | COMMENT | Implémentation WordPress |
 
 ## Changelog
+
+### v1.1.0
+- Délégation Next.js vers skill `nextjs-expert` (35 agents)
+- 7 domaines Next.js : app-router, server-components, data, rendering, optimization, deployment, testing
 
 ### v1.0.0
 - Création initiale avec 8 domaines et 33 agents

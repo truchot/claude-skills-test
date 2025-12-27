@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, strategy, design, content, marketing)
-version: 2.3.0
+version: 2.4.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -48,13 +48,14 @@ HUMAIN (supervision)
 | `backend-developer` | Implémentation backend | 38 | 🟢 |
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
 | `react-expert` | Implémentation React | 28 | 🟢 |
+| `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 | `strategy` | Stratégie & conseil | - | 🔴 Planifié |
 | `design` | Design & création | - | 🔴 Planifié |
 | `content` | Contenu & rédaction | - | 🔴 Planifié |
 | `marketing` | Marketing digital | - | 🔴 Planifié |
 
-**Total : 325 agents disponibles**
+**Total : 360 agents disponibles**
 
 ## Routage Rapide
 
@@ -65,6 +66,7 @@ HUMAIN (supervision)
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
 | Process dev, CI/CD, tests, deploy | `web-dev-process` |
 | Implémentation frontend, React, CSS, TypeScript | `frontend-developer` |
+| Next.js, App Router, Server Components, SSR | `nextjs-expert` |
 | API, bases de données, Node.js, PHP backend | `backend-developer` |
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
@@ -113,6 +115,14 @@ NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 
 ## Changelog
+
+### v2.4.0
+
+- **Nouveau** : Ajout du skill `nextjs-expert` (35 agents)
+  - Implémentation Next.js 14+ avec App Router
+  - Domaines : app-router, server-components, data, rendering, optimization, deployment, testing
+  - Position : NIVEAU 3 COMMENT (implémentation)
+- **Total agents** : 360 (vs 325 en v2.3.0)
 
 ### v2.3.0
 

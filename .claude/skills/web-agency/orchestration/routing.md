@@ -66,6 +66,18 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | deploy, staging, production, rollback | `web-dev-process/deployment` |
 | monitoring, logs, alerting, bug | `web-dev-process/maintenance` |
 
+### Next.js (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| Next.js, App Router, page.tsx, layout.tsx | `nextjs-expert/app-router` |
+| Server Component, Client Component, RSC | `nextjs-expert/server-components` |
+| Server Action, revalidation, fetch cache | `nextjs-expert/data` |
+| SSR, SSG, ISR, middleware, Edge | `nextjs-expert/rendering` |
+| next/image, next/font, bundle | `nextjs-expert/optimization` |
+| Vercel, Docker, next.config.js | `nextjs-expert/deployment` |
+| Playwright Next.js, Vitest Next.js | `nextjs-expert/testing` |
+
 ### WordPress (Implémentation)
 
 | Mots-clés | Skill |
@@ -117,6 +129,9 @@ Requête utilisateur
 │
 ├─ Concerne l'implémentation FRONTEND ?
 │  └─ → frontend-developer (ou react-expert)
+│
+├─ Concerne Next.js spécifiquement ?
+│  └─ → nextjs-expert
 │
 ├─ Concerne l'implémentation BACKEND ?
 │  └─ → backend-developer
