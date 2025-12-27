@@ -312,12 +312,17 @@ Ce skill est optimisé pour **Next.js 14+** avec App Router.
 Le skill inclut des tests automatisés pour valider sa structure.
 
 ```bash
-# Exécuter les tests
-cd .claude/skills/nextjs-expert/tests
+# Exécuter les tests (depuis le dossier du skill)
+cd .claude/skills/nextjs-expert
 npm test
 
 # Mode verbose
 npm run test:verbose
+
+# Tests individuels
+npm run test:domains
+npm run test:agents
+npm run test:skill
 ```
 
 Les tests vérifient :
