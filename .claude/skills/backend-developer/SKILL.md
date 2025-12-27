@@ -1,7 +1,7 @@
 ---
 name: backend-developer
-description: Expert en développement backend - APIs, bases de données, architecture, sécurité, performance et DevOps
-version: 1.0.0
+description: Expert en développement backend - APIs, bases de données, architecture, sécurité et performance
+version: 1.1.0
 status: active
 ---
 
@@ -19,9 +19,11 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 | **Architecture** | Patterns, microservices, design système | 5 |
 | **Performance** | Caching, profiling, optimisation | 5 |
 | **Testing** | Tests unitaires, intégration, E2E backend | 5 |
-| **DevOps** | CI/CD, containers, déploiement, monitoring | 6 |
 
-**Total : 38 agents spécialisés**
+**Total : 32 agents spécialisés**
+
+> **Note** : Le domaine DevOps a été extrait dans le skill dédié `devops`.
+> Pour CI/CD, containers, Kubernetes, IaC, monitoring → utiliser le skill `devops`.
 
 ## Routing
 
@@ -81,15 +83,18 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 | fixture, factory, seed | `testing/fixtures` |
 | coverage, mutation testing | `testing/coverage` |
 
-### DevOps
-| Mots-clés | Agent |
-|-----------|-------|
-| CI/CD, pipeline, GitHub Actions | `devops/cicd` |
-| Docker, container, image | `devops/containers` |
-| Kubernetes, K8s, orchestration | `devops/kubernetes` |
-| deploy, release, rollback | `devops/deployment` |
-| monitoring, alerting, logs | `devops/monitoring` |
-| infrastructure, IaC, Terraform | `devops/infrastructure` |
+### DevOps (→ skill dédié)
+
+> **Redirection** : Les requêtes DevOps sont maintenant gérées par le skill `devops`.
+
+| Mots-clés | Redirection |
+|-----------|-------------|
+| CI/CD, pipeline, GitHub Actions | → `devops` skill |
+| Docker, container, image | → `devops` skill |
+| Kubernetes, K8s, orchestration | → `devops` skill |
+| deploy, release, rollback | → `devops` skill |
+| monitoring, alerting, logs | → `devops` skill |
+| infrastructure, IaC, Terraform | → `devops` skill |
 
 ## Principes Directeurs
 

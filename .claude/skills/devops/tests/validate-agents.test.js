@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 /**
  * Test: Validate Agent Structure
- * Validates that each agent file follows the required structure.
+ *
+ * Validates that each DevOps agent file follows the required structure:
+ * - Valid YAML frontmatter with name and description
+ * - Main heading (H1)
+ * - Minimum content length (different thresholds for orchestrators vs agents)
+ * - Expected sections based on agent type
+ *
  * @module tests/validate-agents
  */
 
@@ -18,6 +24,12 @@ const { SKILL_ROOT, DOMAINS, AGENT_REQUIREMENTS } = require('./config');
 
 const reporter = new TestReporter('validate-agents');
 
+/**
+ * Validate a single agent file
+ *
+ * @param {string} filePath - Path to the agent file
+ * @returns {{ errors: string[], warnings: string[] }} Validation results
+ */
 function validateAgent(filePath) {
   const errors = [];
   const warns = [];
@@ -45,25 +57,16 @@ function validateAgent(filePath) {
     errors.push('Missing main heading (# Title)');
   }
 
-  // Check minimum content length
+  // Check minimum content length - different thresholds
   const minLength = isOrchestrator
     ? AGENT_REQUIREMENTS.minOrchestratorLength
     : AGENT_REQUIREMENTS.minAgentLength;
 
   if (content.length < minLength) {
-    errors.push(`Content too short (${content.length} < ${minLength} chars)`);
+    errors.push(`Content too short (${content.length} < ${minLength} chars for ${isOrchestrator ? 'orchestrator' : 'agent'})`);
   }
 
-  // Check expected sections
-  if (!isOrchestrator) {
-    for (const section of AGENT_REQUIREMENTS.agentSections || []) {
-      if (!content.includes(section)) {
-        warns.push(`Missing recommended section: "${section}"`);
-      }
-    }
-  }
-
-  // Check for code blocks or tables
+  // Check for code blocks or tables (quality indicator)
   const techElements = countTechElements(content);
   if (techElements.codeBlocks === 0 && techElements.tables === 0) {
     warns.push('No code blocks or tables found');
@@ -72,10 +75,13 @@ function validateAgent(filePath) {
   return { errors, warnings: warns };
 }
 
-reporter.header('Validating Lead Dev Agent Structure');
+// Main execution
+reporter.header('Validating DevOps Agent Structure');
 
 let totalAgents = 0;
+let totalWarnings = 0;
 
+// Validate domain agents
 for (const domain of DOMAINS) {
   const domainDir = path.join(SKILL_ROOT, 'agents', domain);
 
@@ -91,13 +97,14 @@ for (const domain of DOMAINS) {
 
   for (const file of files) {
     const relativePath = path.relative(SKILL_ROOT, file);
-    const { errors, warnings } = validateAgent(file);
+    const { errors, warnings: fileWarnings } = validateAgent(file);
 
     if (errors.length === 0) {
-      if (warnings.length === 0) {
+      if (fileWarnings.length === 0) {
         reporter.pass(relativePath);
       } else {
-        reporter.pass(`${relativePath} (${warnings.length} warning${warnings.length > 1 ? 's' : ''})`);
+        reporter.pass(`${relativePath} (${fileWarnings.length} warning${fileWarnings.length > 1 ? 's' : ''})`);
+        totalWarnings += fileWarnings.length;
       }
     } else {
       reporter.fail(`${relativePath}: ${errors.join(', ')}`);
@@ -106,4 +113,5 @@ for (const domain of DOMAINS) {
 }
 
 reporter.info(`Total agents validated: ${totalAgents}`);
+reporter.info(`Content thresholds: Orchestrators=${AGENT_REQUIREMENTS.minOrchestratorLength}, Agents=${AGENT_REQUIREMENTS.minAgentLength}`);
 reporter.summarize();

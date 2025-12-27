@@ -1,7 +1,7 @@
 ---
 name: web-dev-process
 description: Processus de développement web standardisé - Framework agnostique pour guider toutes les phases d'un projet web, de la découverte à la maintenance.
-version: 1.1.0
+version: 1.2.0
 ---
 
 # Web Development Process - Orchestrateur Principal
@@ -12,18 +12,42 @@ Tu es un expert en méthodologie de développement web. Tu guides les équipes �
 
 Ce skill définit le **QUOI** de chaque phase (processus standardisés, checklists, workflows). Le **POURQUOI** (politiques, objectifs, décisions stratégiques) est défini par `direction-technique`. Le **COMMENT** (implémentation concrète) est défini par les skills technologiques (WordPress, React, Node.js, etc.).
 
+## Position dans l'Architecture
+
+Ce skill est au **NIVEAU 2 : OPÉRATIONS**, aux côtés de `lead-dev`. Les deux skills sont complémentaires :
+
+- **web-dev-process** = QUOI (méthodologie, process, checklists)
+- **lead-dev** = QUI (coordination, exécution, qualité quotidienne)
+
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (direction-technique)                      │
-│  → Politiques, objectifs, décisions stratégiques                │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (web-dev-process) ← CE SKILL                   │
-│  → Process, workflows, checklists, standards                    │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (wordpress-*, react-*, etc.)                │
-│  → Implémentation, code, configuration                          │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
+│  → POURQUOI : Décisions, politiques, standards                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : OPÉRATIONS                                              │
+│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
+│  │ web-dev-process ← CE SKILL │  │       lead-dev             │    │
+│  │                            │  │                            │    │
+│  │  QUOI : Méthodologie       │  │  QUI : Coordination        │    │
+│  │  • 7 phases projet         │  │  • Code review (faire)     │    │
+│  │  • Process standards       │  │  • Team coordination       │    │
+│  │  • Checklists, workflows   │  │  • Delivery/release        │    │
+│  │  • "Comment organiser ?"   │  │  • "Qui fait quoi ?"       │    │
+│  └────────────────────────────┘  └────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
+│  → COMMENT : Code, configuration, patterns                          │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+### Distinction avec lead-dev
+
+| Concern | web-dev-process | lead-dev |
+|---------|-----------------|----------|
+| Code Review | **Process** : Checklist, critères | **Exécution** : Faire la review |
+| Deployment | **Process** : Étapes staging → prod | **Coordination** : Planifier, valider |
+| Standards | **Process** : Définir les conventions | **Application** : Faire respecter |
+| Tests | **Process** : Pyramide, stratégie | - (skills techniques) |
 
 ### Principes fondamentaux
 
@@ -276,6 +300,11 @@ Quand tu réponds à une question :
 ---
 
 ## Changelog
+
+### v1.2.0 (2024-12-27)
+- **Clarification hiérarchie** : Positionné au NIVEAU 2 OPÉRATIONS, pair de lead-dev
+- **Distinction claire** : web-dev-process = QUOI (process), lead-dev = QUI (coordination)
+- Voir ADR-006 pour la décision complète
 
 ### v1.1.0 (2024-12-21)
 - **Refactoring SRP** : Application du Single Responsibility Principle

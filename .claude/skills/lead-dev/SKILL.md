@@ -1,7 +1,7 @@
 ---
 name: lead-dev
-description: Lead Développeur - Coordination technique opérationnelle, code review, mentoring et livraison. Fait le pont entre direction-technique et les développeurs.
-version: 1.0.0
+description: Lead Développeur - Coordination technique opérationnelle, code review, mentoring et livraison. Pair de web-dev-process au niveau OPÉRATIONS.
+version: 1.1.0
 status: active
 ---
 
@@ -11,9 +11,9 @@ status: active
 
 ```bash
 # 1. Navigation rapide vers un agent
-lead-dev/code-review/pr-review          # Valider une PR
-lead-dev/team-coordination/task-delegation   # Répartir les tâches
-lead-dev/delivery/deployment-check      # Vérifier avant deploy
+lead-dev/agents/code-review/pr-review          # Valider une PR
+lead-dev/agents/team-coordination/task-delegation   # Répartir les tâches
+lead-dev/agents/delivery/deployment-check      # Vérifier avant deploy
 
 # 2. Exécuter les tests de validation
 cd .claude/skills/lead-dev && npm test
@@ -28,27 +28,40 @@ cd .claude/skills/lead-dev && npm test
 
 ## Position dans l'Architecture
 
-Ce skill est un skill de **NIVEAU INTERMÉDIAIRE : COORDINATION**. Il fait le pont entre les décisions stratégiques (direction-technique) et l'implémentation (développeurs).
+Ce skill est au **NIVEAU 2 : OPÉRATIONS**, aux côtés de `web-dev-process`. Les deux skills sont complémentaires :
+
+- **web-dev-process** = QUOI (méthodologie, process, checklists)
+- **lead-dev** = QUI (coordination, exécution, qualité quotidienne)
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (direction-technique)                      │
-│  → Décisions stratégiques, choix de stack, ADRs                 │
-│  → Quelle architecture ? Quelle stack ? Quels standards ?       │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU INTERMÉDIAIRE : COORDINATION (lead-dev) ← CE SKILL      │
-│  → Coordination opérationnelle, qualité quotidienne             │
-│  → Comment découper les tâches ? Valider les PRs ? Former ?     │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (web-dev-process)                              │
-│  → Process, workflows, checklists, standards                    │
-│  → Comment organiser les tests ? Quel workflow Git ?            │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (frontend-dev, backend-dev, react-expert)   │
-│  → Implémentation, code, configuration                          │
-│  → Comment écrire ce composant ? Configurer cette API ?         │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
+│  → POURQUOI : Décisions, politiques, standards                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : OPÉRATIONS                                              │
+│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
+│  │     web-dev-process        │  │       lead-dev ← CE SKILL  │    │
+│  │                            │  │                            │    │
+│  │  QUOI : Méthodologie       │  │  QUI : Coordination        │    │
+│  │  • 7 phases projet         │  │  • Code review (faire)     │    │
+│  │  • Process standards       │  │  • Team coordination       │    │
+│  │  • Checklists, workflows   │  │  • Delivery/release        │    │
+│  │  • "Comment organiser ?"   │  │  • "Qui fait quoi ?"       │    │
+│  └────────────────────────────┘  └────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
+│  → COMMENT : Code, configuration, patterns                          │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+### Distinction avec web-dev-process
+
+| Concern | web-dev-process | lead-dev |
+|---------|-----------------|----------|
+| Code Review | **Process** : Checklist, critères | **Exécution** : Faire la review |
+| Deployment | **Process** : Étapes staging → prod | **Coordination** : Planifier, valider |
+| Standards | **Process** : Définir les conventions | **Application** : Faire respecter |
+| Tests | **Process** : Pyramide, stratégie | - (skills techniques) |
 
 ## Philosophie
 
@@ -170,10 +183,10 @@ Formation et montée en compétence.
 Garantie de livraisons de qualité : **processus et coordination**.
 
 > **Note : Différence avec nextjs-expert/deployment/**
-> - `lead-dev/delivery/` = **Processus de release** : planification, vérifications, coordination, documentation
+> - `lead-dev/agents/delivery/` = **Processus de release** : planification, vérifications, coordination, documentation
 > - `nextjs-expert/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
 >
-> Exemple : `lead-dev/delivery/deployment-check` vérifie qu'on est prêt à déployer (tests OK, checklist),
+> Exemple : `lead-dev/agents/delivery/deployment-check` vérifie qu'on est prêt à déployer (tests OK, checklist),
 > puis `nextjs-expert/deployment/vercel` effectue le déploiement technique sur Vercel.
 
 | Agent | Responsabilité | Produit |
@@ -274,18 +287,18 @@ Requête Lead Dev
 ### Flux Entrants
 
 ```
-direction-technique/qualite ──► lead-dev/code-review
-direction-technique/estimation ──► lead-dev/team-coordination
-project-management/pilotage ──► lead-dev/delivery
+direction-technique/qualite ──► lead-dev/agents/code-review
+direction-technique/estimation ──► lead-dev/agents/team-coordination
+project-management/pilotage ──► lead-dev/agents/delivery
 ```
 
 ### Flux Sortants
 
 ```
-lead-dev/code-review ──► frontend-developer (feedback → implémentation)
-lead-dev/code-review ──► backend-developer (feedback → implémentation)
-lead-dev/technical-decisions ──► direction-technique (escalade stratégique)
-lead-dev/delivery ──► project-management (status livraison)
+lead-dev/agents/code-review ──► frontend-developer (feedback → implémentation)
+lead-dev/agents/code-review ──► backend-developer (feedback → implémentation)
+lead-dev/agents/technical-decisions ──► direction-technique (escalade stratégique)
+lead-dev/agents/delivery ──► project-management (status livraison)
 ```
 
 ## Points d'Escalade
@@ -367,6 +380,11 @@ npm test
 ```
 
 ## Changelog
+
+### v1.1.0
+- **Clarification hiérarchie** : Positionné au NIVEAU 2 OPÉRATIONS, pair de web-dev-process
+- **Distinction claire** : lead-dev = QUI (coordination), web-dev-process = QUOI (process)
+- Voir ADR-006 pour la décision complète
 
 ### v1.0.0
 - Création initiale avec 5 domaines et 27 agents

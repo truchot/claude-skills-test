@@ -64,7 +64,7 @@ const POURQUOI_DOMAINS = [
  * @returns {string[]} Array of file paths
  */
 function getAgentFiles(domain) {
-  const domainPath = path.join(SKILL_ROOT, domain);
+  const domainPath = path.join(SKILL_ROOT, 'agents', domain);
 
   if (!directoryExists(domainPath)) {
     return [];

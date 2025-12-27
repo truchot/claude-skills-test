@@ -1,7 +1,7 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, strategy, design, content, marketing)
-version: 2.4.0
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, devops, etc.)
+version: 2.7.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -27,9 +27,14 @@ CLIENT
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │frontend │ │ backend │ │wordpress│ │ design- │       │
-│  │-dev     │ │-dev     │ │-gutenb. │ │ system  │       │
+│  │frontend │ │ backend │ │ devops  │ │wordpress│       │
+│  │-dev     │ │-dev     │ │         │ │-gutenb. │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
+│                                                         │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐                   │
+│  │  react  │ │ nextjs  │ │ design- │                   │
+│  │ -expert │ │ -expert │ │ system  │                   │
+│  └─────────┘ └─────────┘ └─────────┘                   │
 └─────────────────────────────────────────────────────────┘
    │
    ▼
@@ -45,17 +50,17 @@ HUMAIN (supervision)
 | `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
 | `web-dev-process` | Process de développement | 61 | 🟢 |
 | `frontend-developer` | Implémentation frontend | 33 | 🟢 |
-| `backend-developer` | Implémentation backend | 38 | 🟢 |
+| `backend-developer` | Implémentation backend | 32 | 🟢 |
+| `devops` | CI/CD, containers, K8s, IaC, monitoring | 30 | 🟢 |
 | `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
-| `strategy` | Stratégie & conseil | - | 🔴 Planifié |
-| `design` | Design & création | - | 🔴 Planifié |
-| `content` | Contenu & rédaction | - | 🔴 Planifié |
-| `marketing` | Marketing digital | - | 🔴 Planifié |
 
-**Total : 360 agents disponibles**
+**Total : 384 agents disponibles**
+
+> **Note** : Les skills `strategy`, `design`, `content` et `marketing` sont prévus mais **non implémentés**.
+> Ne pas router vers ces skills - demander clarification à l'utilisateur si besoin dans ces domaines.
 
 ## Routage Rapide
 
@@ -64,10 +69,11 @@ HUMAIN (supervision)
 | Client, brief, devis, planning, facture | `project-management` |
 | Choix stack, architecture, décisions stratégiques | `direction-technique` |
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
-| Process dev, CI/CD, tests, deploy | `web-dev-process` |
+| Process dev, méthodologie, checklists | `web-dev-process` |
 | Implémentation frontend, React, CSS, TypeScript | `frontend-developer` |
 | Next.js, App Router, Server Components, SSR | `nextjs-expert` |
 | API, bases de données, Node.js, PHP backend | `backend-developer` |
+| CI/CD, Docker, Kubernetes, Terraform, monitoring | `devops` |
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 
@@ -75,24 +81,33 @@ HUMAIN (supervision)
 
 ## Hiérarchie des Skills Techniques
 
-Selon [ADR-005](./docs/adr/005-skill-responsibility-boundaries.md) :
+Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 
 ```
-NIVEAU 1 : POURQUOI (direction-technique)
-   "Pourquoi on fait ça ? Quels objectifs stratégiques ?"
-        │
-        ▼
-COORDINATION (lead-dev)
-   "Comment coordonner l'équipe ? Valider la qualité ?"
-        │
-        ▼
-NIVEAU 2 : QUOI (web-dev-process)
-   "Quoi mettre en place ? Quelles étapes ?"
-        │
-        ▼
-NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
-   "Comment l'implémenter ? Quel code ?"
+┌─────────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
+│  → POURQUOI : Décisions, politiques, standards                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : OPÉRATIONS                                              │
+│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
+│  │     web-dev-process        │  │       lead-dev             │    │
+│  │                            │  │                            │    │
+│  │  QUOI : Méthodologie       │  │  QUI : Coordination        │    │
+│  │  • 7 phases projet         │  │  • Code review (faire)     │    │
+│  │  • Process standards       │  │  • Team coordination       │    │
+│  │  • Checklists, workflows   │  │  • Delivery/release        │    │
+│  └────────────────────────────┘  └────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
+│  → COMMENT : Code, configuration, patterns                          │
+│  frontend-dev, backend-dev, devops, react-expert, nextjs-expert,    │
+│  wordpress-gutenberg-expert, design-system-foundations              │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+**Distinction NIVEAU 2** :
+- `web-dev-process` = **QUOI** (méthodologie, process, checklists)
+- `lead-dev` = **QUI** (coordination, exécution, qualité quotidienne)
 
 ## Documentation
 
@@ -113,8 +128,31 @@ NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
 | [003](./docs/adr/003-markdown-agent-format.md) | Format Markdown |
 | [004](./docs/adr/004-human-supervision.md) | Supervision Humaine |
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
+| [006](./docs/adr/006-hierarchy-clarification.md) | Clarification Hiérarchie lead-dev/web-dev-process |
 
 ## Changelog
+
+### v2.7.0
+
+- **Nouveau skill** : Ajout de `devops` (30 agents) comme skill autonome
+  - CI/CD, containers, Kubernetes, Infrastructure as Code, monitoring, deployment
+  - Extraction depuis backend-developer/devops
+  - Position : NIVEAU 3 IMPLÉMENTATION
+- **backend-developer** : v1.1.0 - Domaine DevOps redirigé vers skill `devops`
+- **Total agents** : 384 (vs 360 en v2.6.0)
+
+### v2.6.0
+
+- **Clarification hiérarchie** : lead-dev et web-dev-process sont au même niveau (NIVEAU 2: OPÉRATIONS)
+- **Distinction claire** : web-dev-process = QUOI (process), lead-dev = QUI (coordination)
+- **ADR-006** : Documentation de la décision d'architecture
+
+### v2.5.0
+
+- **Clarification** : Skills planifiés (strategy, design, content, marketing) clairement marqués comme non disponibles
+- **Amélioration** : Matrice de désambiguïsation ajoutée dans `orchestration/routing.md`
+- **Amélioration** : Règles de priorité RACI pour les mots-clés ambigus
+- **Documentation** : Règle de décision en 4 étapes pour le routage
 
 ### v2.4.0
 
