@@ -340,18 +340,18 @@ Requête Technique
 ### Flux Entrants
 
 ```
-project-management/avant-projet ──► direction-technique/avant-projet
-project-management/pilotage ──► direction-technique/qualite
-strategy/audit ──► direction-technique/avant-projet/audit-existant
+project-management/avant-projet ──► direction-technique/agents/avant-projet
+project-management/pilotage ──► direction-technique/agents/qualite
+strategy/audit ──► direction-technique/agents/avant-projet/audit-existant
 ```
 
 ### Flux Sortants
 
 ```
-direction-technique/specification ──► web-dev-process/development
-direction-technique/architecture ──► web-dev-process/architecture
-direction-technique/estimation ──► project-management/planning
-direction-technique/qualite ──► project-management/pilotage
+direction-technique/agents/specification ──► web-dev-process/development
+direction-technique/agents/architecture ──► web-dev-process/architecture
+direction-technique/agents/estimation ──► project-management/planning
+direction-technique/agents/qualite ──► project-management/pilotage
 ```
 
 ## Points d'Escalade Humaine

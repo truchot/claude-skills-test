@@ -11,9 +11,9 @@ status: active
 
 ```bash
 # 1. Navigation rapide vers un agent
-lead-dev/code-review/pr-review          # Valider une PR
-lead-dev/team-coordination/task-delegation   # Répartir les tâches
-lead-dev/delivery/deployment-check      # Vérifier avant deploy
+lead-dev/agents/code-review/pr-review          # Valider une PR
+lead-dev/agents/team-coordination/task-delegation   # Répartir les tâches
+lead-dev/agents/delivery/deployment-check      # Vérifier avant deploy
 
 # 2. Exécuter les tests de validation
 cd .claude/skills/lead-dev && npm test
@@ -170,10 +170,10 @@ Formation et montée en compétence.
 Garantie de livraisons de qualité : **processus et coordination**.
 
 > **Note : Différence avec nextjs-expert/deployment/**
-> - `lead-dev/delivery/` = **Processus de release** : planification, vérifications, coordination, documentation
+> - `lead-dev/agents/delivery/` = **Processus de release** : planification, vérifications, coordination, documentation
 > - `nextjs-expert/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
 >
-> Exemple : `lead-dev/delivery/deployment-check` vérifie qu'on est prêt à déployer (tests OK, checklist),
+> Exemple : `lead-dev/agents/delivery/deployment-check` vérifie qu'on est prêt à déployer (tests OK, checklist),
 > puis `nextjs-expert/deployment/vercel` effectue le déploiement technique sur Vercel.
 
 | Agent | Responsabilité | Produit |
@@ -274,18 +274,18 @@ Requête Lead Dev
 ### Flux Entrants
 
 ```
-direction-technique/qualite ──► lead-dev/code-review
-direction-technique/estimation ──► lead-dev/team-coordination
-project-management/pilotage ──► lead-dev/delivery
+direction-technique/qualite ──► lead-dev/agents/code-review
+direction-technique/estimation ──► lead-dev/agents/team-coordination
+project-management/pilotage ──► lead-dev/agents/delivery
 ```
 
 ### Flux Sortants
 
 ```
-lead-dev/code-review ──► frontend-developer (feedback → implémentation)
-lead-dev/code-review ──► backend-developer (feedback → implémentation)
-lead-dev/technical-decisions ──► direction-technique (escalade stratégique)
-lead-dev/delivery ──► project-management (status livraison)
+lead-dev/agents/code-review ──► frontend-developer (feedback → implémentation)
+lead-dev/agents/code-review ──► backend-developer (feedback → implémentation)
+lead-dev/agents/technical-decisions ──► direction-technique (escalade stratégique)
+lead-dev/agents/delivery ──► project-management (status livraison)
 ```
 
 ## Points d'Escalade

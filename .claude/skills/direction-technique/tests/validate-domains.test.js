@@ -25,7 +25,7 @@ reporter.header('Validating Technical Domain Structure');
 for (const domain of DOMAINS) {
   reporter.section(`Domain: ${domain}`);
 
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
 
   // Check domain directory exists
   if (!directoryExists(domainDir)) {
