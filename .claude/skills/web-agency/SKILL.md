@@ -1,7 +1,7 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, strategy, design, content, marketing)
-version: 2.4.0
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, etc.)
+version: 2.5.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -50,12 +50,11 @@ HUMAIN (supervision)
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
-| `strategy` | Stratégie & conseil | - | 🔴 Planifié |
-| `design` | Design & création | - | 🔴 Planifié |
-| `content` | Contenu & rédaction | - | 🔴 Planifié |
-| `marketing` | Marketing digital | - | 🔴 Planifié |
 
 **Total : 360 agents disponibles**
+
+> **Note** : Les skills `strategy`, `design`, `content` et `marketing` sont prévus mais **non implémentés**.
+> Ne pas router vers ces skills - demander clarification à l'utilisateur si besoin dans ces domaines.
 
 ## Routage Rapide
 
@@ -115,6 +114,13 @@ NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 
 ## Changelog
+
+### v2.5.0
+
+- **Clarification** : Skills planifiés (strategy, design, content, marketing) clairement marqués comme non disponibles
+- **Amélioration** : Matrice de désambiguïsation ajoutée dans `orchestration/routing.md`
+- **Amélioration** : Règles de priorité RACI pour les mots-clés ambigus
+- **Documentation** : Règle de décision en 4 étapes pour le routage
 
 ### v2.4.0
 
