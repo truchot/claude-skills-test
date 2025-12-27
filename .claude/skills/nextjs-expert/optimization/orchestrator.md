@@ -54,6 +54,58 @@ Question Optimisation ?
 | CLS | < 0.1 | images, fonts |
 | TTFB | < 600ms | caching, rendering |
 
+## Performance Budgets
+
+### Bundle Size Budgets
+
+| Type | Budget | Seuil Alerte |
+|------|--------|--------------|
+| First Load JS (shared) | < 100 KB | > 80 KB |
+| Per-page JS | < 50 KB | > 40 KB |
+| Total JS (initial) | < 200 KB | > 160 KB |
+| CSS (total) | < 50 KB | > 40 KB |
+
+### Image Budgets
+
+| Type | Budget | Format |
+|------|--------|--------|
+| Hero image | < 200 KB | AVIF/WebP |
+| Thumbnail | < 30 KB | AVIF/WebP |
+| Icon/Logo | < 10 KB | SVG/WebP |
+| Total above-fold | < 500 KB | - |
+
+### Font Budgets
+
+| Type | Budget | Notes |
+|------|--------|-------|
+| Per font file | < 50 KB | Subset latin |
+| Total fonts | < 150 KB | Max 3 families |
+| Variable font | < 100 KB | Préféré |
+
+### Timing Budgets
+
+| Métrique | Budget Mobile | Budget Desktop |
+|----------|---------------|----------------|
+| TTFB | < 600ms | < 200ms |
+| FCP | < 1.8s | < 1.0s |
+| LCP | < 2.5s | < 1.5s |
+| TTI | < 3.8s | < 2.5s |
+| TBT | < 200ms | < 100ms |
+
+### Vérification des Budgets
+
+```bash
+# Avec next build
+npm run build
+# Vérifier les tailles dans le rapport
+
+# Avec @next/bundle-analyzer
+ANALYZE=true npm run build
+
+# Avec Lighthouse CI
+npx lhci autorun
+```
+
 ## Checklist Performance
 
 ```

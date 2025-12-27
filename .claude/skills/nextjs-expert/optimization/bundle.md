@@ -290,7 +290,58 @@ module.exports = {
 }
 ```
 
-## Métriques Cibles
+## Performance Budgets
+
+### Budgets Stricts
+
+| Métrique | Budget | Alerte | Bloquant |
+|----------|--------|--------|----------|
+| First Load JS (shared) | < 100 KB | > 80 KB | > 120 KB |
+| JS par page | < 50 KB | > 40 KB | > 70 KB |
+| Total JS initial | < 200 KB | > 160 KB | > 250 KB |
+| Largest chunk | < 100 KB | > 80 KB | > 150 KB |
+
+### Configuration Lighthouse CI
+
+```js
+// lighthouserc.js
+module.exports = {
+  ci: {
+    assert: {
+      assertions: {
+        'resource-summary:script:size': ['error', { maxNumericValue: 200000 }],
+        'first-contentful-paint': ['warn', { maxNumericValue: 1800 }],
+        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
+        'total-blocking-time': ['warn', { maxNumericValue: 200 }],
+      },
+    },
+  },
+};
+```
+
+### Script de Vérification
+
+```bash
+#!/bin/bash
+# check-bundle-budget.sh
+
+MAX_SHARED=102400  # 100KB
+BUILD_OUTPUT=$(npm run build 2>&1)
+
+SHARED_SIZE=$(echo "$BUILD_OUTPUT" | grep "First Load JS shared" | awk '{print $NF}')
+echo "First Load JS shared: $SHARED_SIZE"
+
+# Alerte si dépassement
+if [[ "$SHARED_SIZE" =~ ([0-9]+) ]]; then
+  SIZE_KB="${BASH_REMATCH[1]}"
+  if [ "$SIZE_KB" -gt 100 ]; then
+    echo "⚠️  ALERTE: Bundle partagé dépasse 100KB"
+    exit 1
+  fi
+fi
+```
+
+### Métriques Cibles (Résumé)
 
 ```
 First Load JS partagé: < 100KB

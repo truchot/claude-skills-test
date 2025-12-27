@@ -7,6 +7,25 @@ status: active
 
 # Lead Développeur Skill
 
+## Quick Start
+
+```bash
+# 1. Navigation rapide vers un agent
+lead-dev/code-review/pr-review          # Valider une PR
+lead-dev/team-coordination/task-delegation   # Répartir les tâches
+lead-dev/delivery/deployment-check      # Vérifier avant deploy
+
+# 2. Exécuter les tests de validation
+cd .claude/skills/lead-dev && npm test
+
+# 3. Questions fréquentes
+"Valider cette PR ?"                → code-review/pr-review
+"Répartir les tâches du sprint ?"   → team-coordination/task-delegation
+"Débloquer un développeur ?"        → team-coordination/blocker-resolution
+"Quelle librairie choisir ?"        → technical-decisions/library-selection
+"Préparer une release ?"            → delivery/release-planning
+```
+
 ## Position dans l'Architecture
 
 Ce skill est un skill de **NIVEAU INTERMÉDIAIRE : COORDINATION**. Il fait le pont entre les décisions stratégiques (direction-technique) et l'implémentation (développeurs).
@@ -148,7 +167,14 @@ Formation et montée en compétence.
 
 ### 5. delivery/ - Livraison Technique (6 agents)
 
-Garantie de livraisons de qualité.
+Garantie de livraisons de qualité : **processus et coordination**.
+
+> **Note : Différence avec nextjs-expert/deployment/**
+> - `lead-dev/delivery/` = **Processus de release** : planification, vérifications, coordination, documentation
+> - `nextjs-expert/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
+>
+> Exemple : `lead-dev/delivery/deployment-check` vérifie qu'on est prêt à déployer (tests OK, checklist),
+> puis `nextjs-expert/deployment/vercel` effectue le déploiement technique sur Vercel.
 
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
@@ -301,6 +327,44 @@ lead-dev/delivery ──► project-management (status livraison)
 | `backend-developer` | COMMENT | Coordonne les devs back |
 | `react-expert` | COMMENT | Coordonne sur React |
 | `project-management` | GESTION | Remonte les status |
+
+## Tests de Validation
+
+Le skill inclut des tests automatisés pour valider sa structure.
+
+```bash
+# Exécuter les tests (depuis le dossier du skill)
+cd .claude/skills/lead-dev
+npm test
+
+# Mode verbose
+npm run test:verbose
+```
+
+Les tests vérifient :
+- ✅ Existence de tous les domaines (5)
+- ✅ Présence de tous les agents attendus (27)
+- ✅ Frontmatter YAML valide (name, description)
+- ✅ Structure des agents (sections requises)
+- ✅ Références vers les learnings
+
+## Intégration CI
+
+Les tests sont automatiquement exécutés via GitHub Actions :
+
+- **Workflow** : `.github/workflows/lead-dev-tests.yml`
+- **Déclenchement** : Push sur `main` ou PR modifiant `.claude/skills/lead-dev/**`
+- **Rapport** : Commentaire automatique sur la PR avec les résultats
+
+| Badge | Description |
+|-------|-------------|
+| ✅ Pass | Tous les tests passent |
+| ❌ Fail | Au moins un test échoue |
+
+```bash
+# Vérifier le status localement avant de push
+npm test
+```
 
 ## Changelog
 

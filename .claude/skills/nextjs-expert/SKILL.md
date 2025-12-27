@@ -7,6 +7,25 @@ status: active
 
 # Next.js Expert Skill
 
+## Quick Start
+
+```bash
+# 1. Navigation rapide vers un agent
+nextjs-expert/app-router/routing      # Routes et structure
+nextjs-expert/data/server-actions     # Mutations avec Server Actions
+nextjs-expert/optimization/images     # Optimiser les images
+
+# 2. Exécuter les tests de validation
+cd .claude/skills/nextjs-expert && npm test
+
+# 3. Questions fréquentes
+"Comment créer une route dynamique ?"    → app-router/routing
+"Server vs Client Component ?"            → server-components/server-vs-client
+"Comment fetcher des données ?"           → data/data-fetching
+"Optimiser le LCP ?"                      → optimization/images + fonts
+"Déployer sur Vercel ?"                   → deployment/vercel
+```
+
 ## Position dans l'Architecture
 
 Ce skill est un skill de **NIVEAU 3 : COMMENT** (implémentation). Il fournit le code et les configurations concrètes pour le développement Next.js.
@@ -138,7 +157,14 @@ Performance et Core Web Vitals.
 
 ### 6. deployment/ - Déploiement (5 agents)
 
-Déploiement et configuration production.
+Déploiement et configuration production **spécifique Next.js**.
+
+> **Note : Différence avec lead-dev/delivery/**
+> - `nextjs-expert/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
+> - `lead-dev/delivery/` = **Processus de release** : planification, vérifications, hotfixes, release notes
+>
+> Exemple : `lead-dev/delivery/deployment-check` vérifie qu'on est prêt à déployer,
+> puis `nextjs-expert/deployment/vercel` effectue le déploiement technique.
 
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
@@ -331,6 +357,24 @@ Les tests vérifient :
 - ✅ Frontmatter YAML valide (name, description)
 - ✅ Structure des agents (sections requises)
 - ✅ Références croisées (escalades)
+
+## Intégration CI
+
+Les tests sont automatiquement exécutés via GitHub Actions :
+
+- **Workflow** : `.github/workflows/nextjs-expert-tests.yml`
+- **Déclenchement** : Push sur `main` ou PR modifiant `.claude/skills/nextjs-expert/**`
+- **Rapport** : Commentaire automatique sur la PR avec les résultats
+
+| Badge | Description |
+|-------|-------------|
+| ✅ Pass | Tous les tests passent |
+| ❌ Fail | Au moins un test échoue |
+
+```yaml
+# Vérifier le status localement avant de push
+npm test
+```
 
 ## Exemples de Workflows End-to-End
 
