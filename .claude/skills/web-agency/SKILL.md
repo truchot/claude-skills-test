@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, etc.)
-version: 2.5.0
+version: 2.6.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -74,24 +74,32 @@ HUMAIN (supervision)
 
 ## Hiérarchie des Skills Techniques
 
-Selon [ADR-005](./docs/adr/005-skill-responsibility-boundaries.md) :
+Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 
 ```
-NIVEAU 1 : POURQUOI (direction-technique)
-   "Pourquoi on fait ça ? Quels objectifs stratégiques ?"
-        │
-        ▼
-COORDINATION (lead-dev)
-   "Comment coordonner l'équipe ? Valider la qualité ?"
-        │
-        ▼
-NIVEAU 2 : QUOI (web-dev-process)
-   "Quoi mettre en place ? Quelles étapes ?"
-        │
-        ▼
-NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
-   "Comment l'implémenter ? Quel code ?"
+┌─────────────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
+│  → POURQUOI : Décisions, politiques, standards                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : OPÉRATIONS                                              │
+│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
+│  │     web-dev-process        │  │       lead-dev             │    │
+│  │                            │  │                            │    │
+│  │  QUOI : Méthodologie       │  │  QUI : Coordination        │    │
+│  │  • 7 phases projet         │  │  • Code review (faire)     │    │
+│  │  • Process standards       │  │  • Team coordination       │    │
+│  │  • Checklists, workflows   │  │  • Delivery/release        │    │
+│  └────────────────────────────┘  └────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
+│  → COMMENT : Code, configuration, patterns                          │
+│  frontend-dev, backend-dev, react-expert, nextjs-expert, wordpress  │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+**Distinction NIVEAU 2** :
+- `web-dev-process` = **QUOI** (méthodologie, process, checklists)
+- `lead-dev` = **QUI** (coordination, exécution, qualité quotidienne)
 
 ## Documentation
 
@@ -112,8 +120,15 @@ NIVEAU 3 : COMMENT (frontend-dev, backend-dev, wordpress-*, react-*)
 | [003](./docs/adr/003-markdown-agent-format.md) | Format Markdown |
 | [004](./docs/adr/004-human-supervision.md) | Supervision Humaine |
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
+| [006](./docs/adr/006-hierarchy-clarification.md) | Clarification Hiérarchie lead-dev/web-dev-process |
 
 ## Changelog
+
+### v2.6.0
+
+- **Clarification hiérarchie** : lead-dev et web-dev-process sont au même niveau (NIVEAU 2: OPÉRATIONS)
+- **Distinction claire** : web-dev-process = QUOI (process), lead-dev = QUI (coordination)
+- **ADR-006** : Documentation de la décision d'architecture
 
 ### v2.5.0
 
