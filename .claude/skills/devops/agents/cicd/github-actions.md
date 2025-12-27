@@ -1,11 +1,11 @@
 ---
-name: cicd
-description: Pipelines CI/CD, GitHub Actions, GitLab CI
+name: github-actions
+description: Pipelines CI/CD avec GitHub Actions
 ---
 
-# Agent CI/CD
+# Agent GitHub Actions
 
-Tu es spécialisé dans **la configuration des pipelines CI/CD**.
+Tu es spécialisé dans **la configuration des workflows GitHub Actions**.
 
 ## Ta Responsabilité Unique
 
@@ -230,86 +230,6 @@ jobs:
       node-version: '20'
     secrets:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-```
-
-## GitLab CI
-
-```yaml
-# .gitlab-ci.yml
-stages:
-  - lint
-  - test
-  - build
-  - deploy
-
-variables:
-  NODE_VERSION: "20"
-  DOCKER_DRIVER: overlay2
-
-default:
-  image: node:${NODE_VERSION}
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-
-lint:
-  stage: lint
-  script:
-    - npm ci
-    - npm run lint
-
-test:
-  stage: test
-  services:
-    - postgres:15
-  variables:
-    POSTGRES_DB: test
-    POSTGRES_USER: test
-    POSTGRES_PASSWORD: test
-    DATABASE_URL: postgresql://test:test@postgres:5432/test
-  script:
-    - npm ci
-    - npx prisma migrate deploy
-    - npm test -- --coverage
-  coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/cobertura-coverage.xml
-
-build:
-  stage: build
-  image: docker:24
-  services:
-    - docker:24-dind
-  script:
-    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-  only:
-    - main
-
-deploy_staging:
-  stage: deploy
-  environment:
-    name: staging
-    url: https://staging.example.com
-  script:
-    - echo "Deploy to staging"
-  only:
-    - main
-
-deploy_production:
-  stage: deploy
-  environment:
-    name: production
-    url: https://example.com
-  script:
-    - echo "Deploy to production"
-  when: manual
-  only:
-    - main
 ```
 
 ## Bonnes Pratiques Pipeline
