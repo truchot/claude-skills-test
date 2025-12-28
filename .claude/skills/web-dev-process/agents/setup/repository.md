@@ -16,6 +16,13 @@ Ce module coordonne la configuration des repositories Git et workflows collabora
 | `branch-protection.md` | Règles de protection, CODEOWNERS |
 | `pr-templates.md` | Templates PR/Issues, labels |
 
+## Tu NE fais PAS
+
+- ❌ Configurer Git sur les machines → devops
+- ❌ Créer les repositories → devops
+- ❌ Gérer les permissions → devops
+- ❌ Écrire du code applicatif → frontend-developer, backend-developer
+
 ## Voir aussi
 
 | Agent | Phase |

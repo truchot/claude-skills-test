@@ -15,6 +15,13 @@ Ce module coordonne la configuration des environnements de développement et pro
 | `docker.md` | Dockerfile, docker-compose, conteneurisation |
 | `secrets-management.md` | Gestion sécurisée des secrets |
 
+## Tu NE fais PAS
+
+- ❌ Provisionner l'infrastructure → devops
+- ❌ Configurer les serveurs → devops
+- ❌ Gérer les secrets en production → devops
+- ❌ Écrire le code applicatif → frontend-developer, backend-developer
+
 ## Environnements Standards
 
 ```

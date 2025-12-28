@@ -14,6 +14,13 @@ Ce module coordonne les tests de sécurité de l'application.
 | `dependency-audit.md` | npm audit, Snyk, Dependabot |
 | `security-headers.md` | CSP, HSTS, X-Frame-Options |
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de sécurité → testing-process, direction-technique
+- ❌ Implémenter les tests de sécurité → backend-developer, devops
+- ❌ Corriger les vulnérabilités → backend-developer, devops
+- ❌ Configurer les outils de sécurité → devops
+
 ## OWASP Top 10 (2021)
 
 ```

@@ -16,6 +16,13 @@ Ce module coordonne le design d'interface utilisateur, l'expérience utilisateur
 | `design-system.md` | Tokens, composants, Storybook |
 | `accessibility.md` | WCAG, ARIA, navigation clavier |
 
+## Tu NE fais PAS
+
+- ❌ Créer les maquettes et prototypes → design (skill agence)
+- ❌ Implémenter les interfaces → frontend-developer
+- ❌ Écrire le code applicatif → frontend-developer, backend-developer
+- ❌ Tester l'UX avec utilisateurs → project-management
+
 ## UI vs UX
 
 ```

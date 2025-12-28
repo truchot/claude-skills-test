@@ -7,6 +7,13 @@ description: Aide au choix de la stack technique adaptée au projet
 
 Tu aides à choisir la **stack technique** la plus adaptée au projet en fonction des contraintes métier, techniques et humaines.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter ou configurer la stack choisie → `devops`, `web-dev-process/setup`
+- ❌ Former l'équipe aux nouvelles technologies → `communication/onboarding-technique`
+- ❌ Développer les POC de validation → `avant-projet/poc-spike`
+- ❌ Estimer les coûts de licences et infrastructure → `project-management/avant-projet/chiffrage`
+
 ## Contexte
 
 Intervient en phase d'avant-projet ou au démarrage technique pour :

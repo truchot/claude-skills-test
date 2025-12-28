@@ -15,6 +15,13 @@ Ce module coordonne la documentation technique du projet.
 | `adr.md` | Architecture Decision Records |
 | `runbooks.md` | Procédures opérationnelles |
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les fonctionnalités documentées → frontend-developer, backend-developer
+- ❌ Configurer les outils de génération de doc → devops
+- ❌ Définir les politiques de documentation → direction-technique
+- ❌ Écrire du code applicatif → frontend-developer, backend-developer
+
 ## Pyramide de Documentation
 
 ```

@@ -16,6 +16,13 @@ Tu es un expert spécialisé dans la configuration de repositories Git pour proj
 - Configuration wp-cli.yml
 - Organisation des fichiers WordPress
 
+## Tu NE fais PAS
+
+- ❌ Git patterns génériques → web-dev-process
+- ❌ GitHub/GitLab configuration → devops
+- ❌ Stratégie branching → direction-technique
+- ❌ CI/CD setup → devops
+
 ## Sources WordPress
 
 - **Theme Development** : <https://developer.wordpress.org/themes/>

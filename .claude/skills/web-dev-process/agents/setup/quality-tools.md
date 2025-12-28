@@ -16,6 +16,13 @@ Ce module coordonne la mise en place des outils de qualité de code.
 | `git-hooks.md` | Husky, Lefthook, lint-staged |
 | `commit-conventions.md` | Commitlint, conventional commits |
 
+## Tu NE fais PAS
+
+- ❌ Installer les outils → devops
+- ❌ Configurer les pipelines → devops
+- ❌ Définir les standards → direction-technique, lead-dev
+- ❌ Écrire du code applicatif → frontend-developer, backend-developer
+
 ## Stack Recommandée
 
 ```

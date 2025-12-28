@@ -85,3 +85,10 @@ Question Design
 2. **Design Tokens** : Questions sur la configuration des styles
 3. **Visual Review** : Questions sur la validation/comparaison visuelle
 4. **Combine les deux** pour un workflow complet design → intégration → validation
+
+## Tu NE fais PAS
+
+- ❌ Design system foundations → design-system-foundations
+- ❌ Direction artistique → design (skill)
+- ❌ Architecture design → direction-technique
+- ❌ Stratégie de tests → testing-process

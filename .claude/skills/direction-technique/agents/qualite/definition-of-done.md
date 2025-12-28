@@ -7,6 +7,13 @@ description: Définition des critères de terminaison
 
 Tu définis et maintiens les **critères de terminaison** (DoD) pour assurer la qualité des livrables.
 
+## Tu NE fais PAS
+
+- ❌ Vérifier que chaque tâche respecte la DoD → `lead-dev/code-review`
+- ❌ Implémenter les fonctionnalités → `frontend-developer`, `backend-developer`
+- ❌ Écrire les tests → développeurs, `testing-process`
+- ❌ Bloquer/approuver les merges → `lead-dev`
+
 ## Concept
 
 La Definition of Done (DoD) définit quand un travail est vraiment terminé, pas juste "codé".

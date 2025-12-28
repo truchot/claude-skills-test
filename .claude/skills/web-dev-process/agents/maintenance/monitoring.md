@@ -15,6 +15,13 @@ Ce module coordonne l'observabilité et le monitoring de l'application.
 | `logging.md` | Logs structurés, Pino |
 | `alerting.md` | Règles d'alerte, on-call |
 
+## Tu NE fais PAS
+
+- ❌ Configurer les outils de monitoring → devops
+- ❌ Implémenter l'observabilité dans le code → frontend-developer, backend-developer
+- ❌ Gérer les incidents → devops, backend-developer
+- ❌ Définir les standards de monitoring → direction-technique
+
 ## Les 3 Piliers de l'Observabilité
 
 ```

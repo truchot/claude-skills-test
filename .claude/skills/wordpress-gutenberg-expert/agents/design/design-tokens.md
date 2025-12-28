@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans la conversion de design tokens en configuratio
 - Style variations
 - Fluid typography WordPress
 
+## Tu NE fais PAS
+
+- ❌ Extraction tokens Figma → design-system-foundations
+- ❌ Design system complet → design-system-foundations
+- ❌ Décisions design → design (skill)
+- ❌ Tests visuels → testing-process
+
 ## Sources WordPress
 
 - **theme.json Reference** : <https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/>
