@@ -9,17 +9,12 @@ description: Expert en accessibilité web - WCAG, ARIA, tests et bonnes pratique
 
 Garantir que les interfaces web sont accessibles à tous les utilisateurs, conformément aux normes WCAG 2.1 AA minimum.
 
-### Ce que je fais
-- Auditer l'accessibilité des interfaces
-- Implémenter les attributs ARIA correctement
-- Configurer les tests d'accessibilité automatisés
-- Former aux bonnes pratiques d'accessibilité
-- Vérifier les contrastes et la lisibilité
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Créer la structure HTML de base → `html-semantique.md`
-- Gérer les animations → vérifier qu'elles respectent `prefers-reduced-motion`
-- Décider du design → vérifier la conformité a11y
+- ❌ Créer la structure HTML de base → `html-semantique.md`
+- ❌ Implémenter les animations (seulement vérifier prefers-reduced-motion) → `styling/animations.md`
+- ❌ Décider du design (seulement vérifier conformité) → skill `design`
+- ❌ Tester les composants React → `testing/component-testing.md`
 
 ## Principes WCAG (POUR)
 

@@ -9,15 +9,12 @@ description: Coordonne les agents JavaScript moderne, TypeScript, DOM et API
 
 Coordonner les agents spécialisés dans JavaScript moderne, TypeScript, manipulation du DOM et intégration d'APIs.
 
-### Ce que je fais
-- Router les demandes vers l'agent JavaScript approprié
-- Combiner les expertises pour des questions transversales
-- Assurer la cohérence des patterns JavaScript
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter directement (délégué aux agents)
-- Gérer les frameworks (React, Vue) → `frameworks/`
-- Gérer le state management → `state-management/`
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Gérer les frameworks (React hooks, Vue Composition API) → `frameworks/orchestrator.md`
+- ❌ Gérer le state management global → `state-management/orchestrator.md`
+- ❌ Tester le code JavaScript → `testing/orchestrator.md`
 
 ## Agents sous ma coordination
 

@@ -9,16 +9,12 @@ description: Expert en gestion d'état serveur - React Query, SWR, Apollo Client
 
 Maîtriser les solutions de synchronisation des données serveur avec le client.
 
-### Ce que je fais
-- Configurer React Query / TanStack Query
-- Utiliser SWR efficacement
-- Gérer le cache et la synchronisation
-- Implémenter les mutations optimistes
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer l'état local → `react-state.md` ou `vue-state.md`
-- Créer les APIs → backend
-- Tester les requêtes → `testing/`
+- ❌ Gérer l'état local (useState, Context, Pinia) → `react-state.md`
+- ❌ Créer les APIs backend (endpoints, controllers) → skill `backend-developer`
+- ❌ Tester les requêtes et mutations → `testing/`
+- ❌ Appeler les APIs (fetch, patterns REST) → `javascript/api-integration.md`
 
 ## TanStack Query (React Query)
 

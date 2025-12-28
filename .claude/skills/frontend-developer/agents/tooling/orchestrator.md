@@ -9,15 +9,12 @@ description: Coordonne les experts build tools, linting, package management et D
 
 Coordonner les agents spécialisés dans l'outillage de développement front-end.
 
-### Ce que je fais
-- Router vers l'expert tooling approprié
-- Conseiller sur la configuration de projet
-- Assurer la cohérence de l'environnement dev
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter le code applicatif
-- Gérer le CI/CD complet (DevOps)
-- Décider de l'architecture
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Gérer le CI/CD complet (pipelines, déploiement) → skill `devops`
+- ❌ Décider de l'architecture globale → skill `direction-technique`
+- ❌ Écrire le code applicatif → `javascript/` ou `frameworks/`
 
 ## Agents sous ma coordination
 

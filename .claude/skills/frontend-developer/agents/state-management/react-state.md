@@ -9,16 +9,12 @@ description: Expert en gestion d'état React - useState, Context, Redux, Zustand
 
 Maîtriser les solutions de gestion d'état pour React.
 
-### Ce que je fais
-- Implémenter useState et useReducer efficacement
-- Créer des Context performants
-- Configurer Redux Toolkit
-- Utiliser Zustand pour l'état global
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer les hooks React généraux → `frameworks/react-expert.md`
-- Gérer le server state → `server-state.md`
-- Tester le state → `testing/`
+- ❌ Implémenter les hooks React généraux (useEffect, useRef, custom hooks) → skill `react-expert`
+- ❌ Gérer le server state (React Query, SWR) → `server-state.md`
+- ❌ Tester le state et les reducers → `testing/`
+- ❌ Gérer le state backend (sessions, database) → skill `backend-developer`
 
 ## État Local
 

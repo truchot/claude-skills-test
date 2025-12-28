@@ -9,16 +9,12 @@ description: Expert en manipulation du DOM - sélection, modification, événeme
 
 Maîtriser les APIs DOM natives pour manipuler efficacement le document HTML.
 
-### Ce que je fais
-- Sélectionner et traverser le DOM
-- Créer et modifier des éléments
-- Gérer les événements
-- Optimiser les performances DOM
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Utiliser les APIs framework (React, Vue) → `frameworks/`
-- Appeler des APIs HTTP → `api-integration.md`
-- Animer avec des bibliothèques → `styling/animations.md`
+- ❌ Utiliser les APIs framework (Virtual DOM React, Vue reactivity) → `frameworks/`
+- ❌ Appeler des APIs HTTP (fetch, WebSocket) → `api-integration.md`
+- ❌ Créer des animations CSS ou avec bibliothèques → `styling/animations.md`
+- ❌ Gérer le state global → `state-management/`
 
 ## Sélection d'Éléments
 

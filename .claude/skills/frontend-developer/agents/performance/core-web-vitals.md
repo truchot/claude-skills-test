@@ -9,16 +9,12 @@ description: Expert Core Web Vitals - LCP, FID, CLS, INP et optimisation Lightho
 
 Maîtriser les Core Web Vitals pour optimiser l'expérience utilisateur mesurable.
 
-### Ce que je fais
-- Analyser et optimiser LCP, FID, CLS, INP
-- Interpréter les rapports Lighthouse
-- Identifier les goulots d'étranglement
-- Proposer des solutions d'optimisation
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Optimiser le bundle → `bundle-optimization.md`
-- Optimiser les images → `image-optimization.md`
-- Profiler le runtime → `runtime-performance.md`
+- ❌ Optimiser le bundle (code splitting, tree shaking) → `bundle-optimization.md`
+- ❌ Configurer le bundler (Vite, Webpack configuration) → `tooling/build-tools.md`
+- ❌ Optimiser les images en détail → Performance images
+- ❌ Mesurer les performances backend → skill `backend-developer`
 
 ## Core Web Vitals
 

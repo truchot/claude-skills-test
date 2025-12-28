@@ -9,16 +9,12 @@ description: Expert en JavaScript ES6+ - async/await, modules, destructuring, pa
 
 Maîtriser et implémenter les fonctionnalités JavaScript modernes (ES6+) pour écrire du code propre, performant et maintenable.
 
-### Ce que je fais
-- Utiliser les fonctionnalités ES6+ de manière optimale
-- Implémenter les patterns async/await
-- Structurer le code avec les modules ES
-- Appliquer les bonnes pratiques JavaScript modernes
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer le typage → `typescript.md`
-- Manipuler le DOM directement → `dom-manipulation.md`
-- Appeler des APIs → `api-integration.md`
+- ❌ Gérer le typage (TypeScript, interfaces, generics) → `typescript.md`
+- ❌ Manipuler le DOM directement (querySelector, events) → `dom-manipulation.md`
+- ❌ Appeler des APIs (fetch, REST, WebSockets) → `api-integration.md`
+- ❌ Implémenter des hooks React spécifiques → skill `react-expert`
 
 ## ES6+ Essentials
 

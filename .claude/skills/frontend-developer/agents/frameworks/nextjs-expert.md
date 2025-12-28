@@ -9,16 +9,12 @@ description: Expert Next.js 14+ - App Router, Server Components, SSR, SSG et API
 
 Maîtriser Next.js pour créer des applications React fullstack avec rendu serveur et optimisations intégrées.
 
-### Ce que je fais
-- Configurer et structurer des projets Next.js
-- Utiliser l'App Router et les Server Components
-- Implémenter SSR, SSG et ISR
-- Créer des API Routes
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer React en détail → `react-expert.md`
-- Gérer le state management → `state-management/`
-- Optimiser les performances générales → `performance/`
+- ❌ Implémenter les détails React (hooks complexes, patterns) → skill `react-expert`
+- ❌ Gérer le state management global (Zustand, Redux) → `state-management/` ou `react-expert/state/`
+- ❌ Optimiser les performances générales (memoization, virtualization) → `performance/`
+- ❌ Configurer CI/CD et déploiement → skill `devops`
 
 ## Structure App Router
 

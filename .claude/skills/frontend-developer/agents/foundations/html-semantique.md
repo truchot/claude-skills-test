@@ -9,17 +9,12 @@ description: Expert en structure HTML5 sémantique, SEO et métadonnées
 
 Créer et optimiser la structure HTML des pages web en utilisant les balises sémantiques appropriées pour améliorer l'accessibilité, le SEO et la maintenabilité.
 
-### Ce que je fais
-- Structurer les pages avec les balises HTML5 sémantiques
-- Optimiser les métadonnées pour le SEO
-- Configurer les balises Open Graph et Twitter Cards
-- Créer des formulaires accessibles et valides
-- Utiliser les microdata et JSON-LD pour le structured data
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Styliser les éléments (CSS)
-- Ajouter de l'interactivité (JavaScript)
-- Gérer l'accessibilité avancée (ARIA complexe)
+- ❌ Styliser les éléments (CSS) → `css-moderne.md`
+- ❌ Ajouter de l'interactivité (JavaScript) → `javascript/`
+- ❌ Gérer l'accessibilité avancée (ARIA complexe) → `accessibilite.md`
+- ❌ Créer des animations ou transitions → `styling/animations.md`
 
 ## Balises Sémantiques HTML5
 

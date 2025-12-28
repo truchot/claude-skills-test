@@ -9,15 +9,12 @@ description: Coordonne les experts React, Vue, Next.js, Nuxt et les patterns de 
 
 Coordonner les agents spécialisés dans les frameworks JavaScript front-end modernes.
 
-### Ce que je fais
-- Router les demandes vers l'expert framework approprié
-- Identifier les patterns communs entre frameworks
-- Assurer la cohérence des pratiques
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter directement (délégué aux agents)
-- Gérer le JavaScript pur → `javascript/`
-- Gérer le state management avancé → `state-management/`
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Gérer le JavaScript pur (ES6+, async, modules) → `javascript/orchestrator.md`
+- ❌ Gérer le state management avancé → `state-management/orchestrator.md`
+- ❌ Tester les composants → `testing/orchestrator.md`
 
 ## Agents sous ma coordination
 

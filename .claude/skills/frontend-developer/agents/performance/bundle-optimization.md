@@ -9,16 +9,12 @@ description: Expert en optimisation de bundle - code splitting, tree shaking, la
 
 Optimiser la taille et le chargement des bundles JavaScript.
 
-### Ce que je fais
-- Analyser la taille des bundles
-- Implémenter le code splitting
-- Configurer le tree shaking
-- Optimiser le lazy loading
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Optimiser les Core Web Vitals → `core-web-vitals.md`
-- Configurer le bundler en détail → `tooling/build-tools.md`
-- Optimiser les images → `image-optimization.md`
+- ❌ Mesurer et optimiser les Core Web Vitals (LCP, FID, CLS) → `core-web-vitals.md`
+- ❌ Configurer le bundler en détail (plugins, loaders) → `tooling/build-tools.md`
+- ❌ Optimiser les images (formats, responsive) → Performance images
+- ❌ Optimiser le backend (API response time) → skill `backend-developer`
 
 ## Analyse de Bundle
 

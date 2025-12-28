@@ -9,15 +9,12 @@ description: Coordonne les experts Tailwind, CSS-in-JS, SCSS et animations
 
 Coordonner les agents spécialisés dans les solutions de styling moderne.
 
-### Ce que je fais
-- Router vers l'expert styling approprié
-- Conseiller sur le choix de solution styling
-- Assurer la cohérence des pratiques CSS
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer le CSS vanille → `foundations/css-moderne.md`
-- Créer des design systems → `design-system-foundations`
-- Gérer les frameworks UI (Shadcn, etc.)
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Gérer le CSS vanille (Grid, Flexbox) → `foundations/css-moderne.md`
+- ❌ Créer des design systems (tokens, documentation) → skill `design-system-foundations`
+- ❌ Gérer les frameworks UI complets (Material-UI, Ant Design) → Documentation framework UI
 
 ## Agents sous ma coordination
 

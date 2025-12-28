@@ -9,16 +9,12 @@ description: Expert en tests end-to-end - Playwright, Cypress
 
 Maîtriser les outils de tests end-to-end pour valider les parcours utilisateur complets.
 
-### Ce que je fais
-- Configurer Playwright et Cypress
-- Écrire des tests E2E robustes
-- Gérer les fixtures et données de test
-- Optimiser la fiabilité des tests
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Écrire des tests unitaires → `unit-testing.md`
-- Tester des composants isolés → `component-testing.md`
-- Gérer le CI/CD → `tooling/`
+- ❌ Écrire des tests unitaires (Jest, Vitest) → `unit-testing.md`
+- ❌ Tester des composants isolés (RTL) → `component-testing.md`
+- ❌ Configurer le CI/CD pour les tests → skill `devops`
+- ❌ Définir la stratégie de test → skill `testing-process`
 
 ## Playwright
 

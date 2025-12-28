@@ -9,15 +9,12 @@ description: Coordonne les experts en tests unitaires, composants, E2E et visuel
 
 Coordonner les agents spécialisés dans les différents types de tests front-end.
 
-### Ce que je fais
-- Router vers l'expert testing approprié
-- Conseiller sur la stratégie de test
-- Assurer la cohérence des pratiques de test
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter directement les tests
-- Gérer le code de production
-- Décider de l'architecture
+- ❌ Implémenter directement les tests (déléguer aux agents) → agents sous coordination
+- ❌ Définir la stratégie de test globale → skill `testing-process`
+- ❌ Configurer le CI/CD → skill `devops`
+- ❌ Tester le backend → skill `backend-developer`
 
 ## Agents sous ma coordination
 

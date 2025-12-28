@@ -9,16 +9,12 @@ description: Expert en tests unitaires - Jest, Vitest, mocking, coverage
 
 Maîtriser les outils et patterns de tests unitaires JavaScript/TypeScript.
 
-### Ce que je fais
-- Configurer Jest et Vitest
-- Écrire des tests unitaires efficaces
-- Créer des mocks et stubs
-- Analyser la couverture de code
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Tester les composants UI → `component-testing.md`
-- Écrire des tests E2E → `e2e-testing.md`
-- Gérer le code de production
+- ❌ Tester les composants UI (render, interactions) → `component-testing.md`
+- ❌ Écrire des tests E2E (browser, Playwright) → `e2e-testing.md`
+- ❌ Définir la stratégie de test globale → skill `testing-process`
+- ❌ Configurer le CI/CD pour les tests → skill `devops`
 
 ## Configuration Vitest
 

@@ -64,13 +64,14 @@ add_action('init', function() {
 });
 ```
 
-## Points d'Escalade
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Créer des blocks complexes → `wordpress-gutenberg-expert/gutenberg-blocks/`
-- Configurer le tooling WP → `wordpress-gutenberg-expert/tooling/`
-- Tests PHPUnit/E2E → `wordpress-gutenberg-expert/testing/`
-- REST API avancée → `wordpress-gutenberg-expert/agents/wp-rest-api-expert.md`
+- ❌ Créer des blocks Gutenberg complexes → skill `wordpress-gutenberg-expert/gutenberg-blocks/`
+- ❌ Configurer le tooling WordPress (WP-CLI, Local, déploiement) → skill `wordpress-gutenberg-expert/tooling/`
+- ❌ Tester avec PHPUnit ou E2E → skill `wordpress-gutenberg-expert/testing/`
+- ❌ Implémenter REST API avancée → skill `wordpress-gutenberg-expert/wp-rest-api-expert.md`
+
+## Points d'Escalade
 
 ## Délégation
 

@@ -9,15 +9,12 @@ description: Coordonne les experts en gestion d'état React, Vue et server state
 
 Coordonner les agents spécialisés dans la gestion d'état front-end.
 
-### Ce que je fais
-- Router vers l'expert state approprié
-- Conseiller sur le choix de solution
-- Assurer la cohérence des patterns d'état
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter directement
-- Gérer les frameworks → `frameworks/`
-- Gérer le backend
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Gérer les frameworks (React hooks basics, Vue composables) → `frameworks/orchestrator.md`
+- ❌ Gérer le backend (state serveur, sessions) → skill `backend-developer`
+- ❌ Tester le state management → `testing/orchestrator.md`
 
 ## Agents sous ma coordination
 
