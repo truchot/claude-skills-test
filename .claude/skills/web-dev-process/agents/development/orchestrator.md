@@ -20,6 +20,33 @@ La phase Development est le cœur du projet. De bonnes pratiques de développeme
 - ❌ Faire la code review → lead-dev
 - ❌ Configurer les outils de dev → devops
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour le développement logiciel.
+
+Les principes de développement (Clean Code, SOLID, DRY, YAGNI, KISS) sont universels. Les pratiques de commits atomiques, conventional commits, feature branch workflow, pull requests avec review, et l'organisation du code (separation of concerns, single responsibility) sont des standards de l'industrie reconnus.
+
+### Couche Agence (Spécifique)
+> Adaptations selon les processus et outils agence.
+
+**Questions à poser :**
+- Quelle convention de commits utiliser ? (conventional commits, autre format)
+- Quel workflow Git adopter ? (Git Flow, GitHub Flow, Trunk-Based)
+- Combien d'approbations pour merger ? (1, 2, selon taille PR)
+- Quels sont les outils de review ? (GitHub, GitLab, Bitbucket)
+- Y a-t-il un guide de style agence ? (naming, structure, patterns préférés)
+
+### Couche Projet (Exception)
+> Exceptions selon contraintes et besoins projet.
+
+**Questions à poser :**
+- Y a-t-il des conventions client imposées ? (code style spécifique)
+- Faut-il adapter le workflow Git ? (processus de validation client)
+- Y a-t-il des contraintes de review ? (approbation externe, audit)
+- Des outils spécifiques sont-ils requis ? (SonarQube, linters particuliers)
+- Y a-t-il un niveau de documentation particulier ? (code comments, JSDoc obligatoire)
+
 ## Tes Agents Spécialisés
 
 | Agent | Quand le solliciter |

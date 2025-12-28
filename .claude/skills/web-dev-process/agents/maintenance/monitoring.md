@@ -22,6 +22,33 @@ Ce module coordonne l'observabilité et le monitoring de l'application.
 - ❌ Gérer les incidents → devops, backend-developer
 - ❌ Définir les standards de monitoring → direction-technique
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour le monitoring applicatif.
+
+Les 3 piliers de l'observabilité (metrics, logs, traces), Golden Signals (latence, traffic, erreurs, saturation), métriques RED (Rate, Errors, Duration) et USE (Utilization, Saturation, Errors), dashboards pour visualisation, et alerting pour détection proactive sont des standards universels (SRE, DevOps, méthode USE/RED).
+
+### Couche Agence (Spécifique)
+> Adaptations selon stack et outils agence.
+
+**Questions à poser :**
+- Quelle solution de monitoring ? (Datadog, New Relic, Prometheus/Grafana, Sentry)
+- Y a-t-il des dashboards standards ? (templates agence, métriques communes)
+- Comment sont configurées les alertes ? (canaux Slack, PagerDuty, seuils)
+- Y a-t-il un process on-call ? (rotations, escalades)
+- Quelles métriques business tracer ? (conversions, revenus, KPIs métier)
+
+### Couche Projet (Exception)
+> Exceptions selon SLA et besoins métier.
+
+**Questions à poser :**
+- Y a-t-il des SLA contractuels ? (uptime, latence, disponibilité)
+- Des métriques business spécifiques ? (e-commerce, SaaS, FinTech)
+- Y a-t-il des exigences de traçabilité ? (audit, compliance, RGPD)
+- Faut-il du real-user monitoring ? (RUM pour performance utilisateur)
+- Y a-t-il des contraintes de rétention ? (logs, métriques, durée conservation)
+
 ## Les 3 Piliers de l'Observabilité
 
 ```

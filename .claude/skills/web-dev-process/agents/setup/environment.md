@@ -22,6 +22,33 @@ Ce module coordonne la configuration des environnements de développement et pro
 - ❌ Gérer les secrets en production → devops
 - ❌ Écrire le code applicatif → frontend-developer, backend-developer
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour la gestion d'environnements.
+
+Les environnements standards (local, dev, staging, production) avec variables d'environnement (.env, .env.example), conteneurisation Docker pour la reproductibilité, séparation des secrets du code, et validation des variables (Zod, dotenv-safe) sont des pratiques universelles. Le principe "12-factor app" est un standard reconnu.
+
+### Couche Agence (Spécifique)
+> Adaptations selon l'infrastructure et outils agence.
+
+**Questions à poser :**
+- Quels environnements sont standards ? (local, dev, staging, prod, ou autres)
+- Quel outil de gestion de secrets ? (Vault, AWS Secrets Manager, 1Password)
+- Docker est-il systématique ? (docker-compose pour dev local)
+- Y a-t-il un template .env.example agence ? (variables communes)
+- Comment sont validées les variables ? (Zod, dotenv-safe, scripts custom)
+
+### Couche Projet (Exception)
+> Exceptions selon besoins et contraintes projet.
+
+**Questions à poser :**
+- Y a-t-il des environnements spécifiques ? (pré-prod, demo, UAT)
+- Des contraintes de sécurité particulières ? (secteur régulé, données sensibles)
+- Faut-il supporter plusieurs régions ? (multi-cloud, geo-distribution)
+- Y a-t-il des services externes à intégrer ? (APIs tierces, legacy systems)
+- Des outils de développement imposés ? (IDE, versions spécifiques)
+
 ## Environnements Standards
 
 ```

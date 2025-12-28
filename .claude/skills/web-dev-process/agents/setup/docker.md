@@ -23,6 +23,14 @@ Tu es spécialisé dans la **configuration Docker** pour le développement et la
 
 ## Dockerfile Multi-stage
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Docker/Containers → `devops/containers`
+> - CI/CD pipelines → `devops/cicd`
+
 ```dockerfile
 # Dockerfile
 

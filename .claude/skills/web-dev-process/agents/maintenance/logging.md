@@ -21,6 +21,33 @@ Tu es spécialisé dans les **logs structurés** et les bonnes pratiques de logg
 - ❌ Gérer les outils d'agrégation → devops
 - ❌ Définir les standards de logging → direction-technique
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour le logging applicatif.
+
+Les logs structurés (JSON), niveaux de log (ERROR, WARN, INFO, DEBUG, TRACE), correlation ID pour traçabilité des requêtes, log aggregation (ELK, Loki, CloudWatch), et ce qu'il faut logger (requêtes, erreurs, métriques business, audits) sont des standards universels documentés (12-factor app, SRE).
+
+### Couche Agence (Spécifique)
+> Adaptations selon infrastructure et outils agence.
+
+**Questions à poser :**
+- Quel système d'agrégation de logs ? (ELK, Loki, CloudWatch, Datadog)
+- Y a-t-il un format de log standard ? (Pino, Winston, config partagée)
+- Comment sont gérés les correlation IDs ? (headers, middleware)
+- Quelle rétention de logs ? (jours, semaines, compliance)
+- Y a-t-il des logs sensibles à masquer ? (RGPD, PII)
+
+### Couche Projet (Exception)
+> Exceptions selon réglementation et audit.
+
+**Questions à poser :**
+- Y a-t-il des exigences de conformité ? (RGPD, SOC2, ISO 27001)
+- Faut-il logger des événements métier spécifiques ? (transactions, audits)
+- Y a-t-il des contraintes de rétention ? (légales, contractuelles)
+- Des logs doivent-ils être chiffrés ? (données sensibles, secteur régulé)
+- Y a-t-il des obligations d'audit trail ? (traçabilité complète)
+
 ## Format JSON Structuré
 
 ```typescript

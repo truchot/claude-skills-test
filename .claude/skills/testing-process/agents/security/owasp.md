@@ -39,6 +39,15 @@ Tu es expert en **vulnérabilités OWASP** et tests de sécurité applicative.
 
 ## A01 - Broken Access Control
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Sécurité applicative → `backend-developer/security`, `frontend-developer/security`
+> - Tests de sécurité → `backend-developer/testing`, `devops/security-testing`
+> - Configuration OWASP ZAP → `devops/security-scanning`
+
 ### Vulnérabilité
 
 ```javascript

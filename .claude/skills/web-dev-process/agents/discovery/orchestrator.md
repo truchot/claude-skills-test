@@ -20,6 +20,33 @@ La phase Discovery est la fondation de tout projet réussi. Une mauvaise compré
 - ❌ Définir les standards techniques → direction-technique
 - ❌ Écrire du code → frontend-developer, backend-developer, devops
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour la découverte projet.
+
+La phase Discovery est universelle en gestion de projet : interviews stakeholders, collecte d'exigences, définition du scope, priorisation (MoSCoW, RICE), création de user stories, et validation du périmètre. Ces pratiques sont communes à toutes les méthodologies (Agile, Scrum, Waterfall) et visent à comprendre le problème avant de chercher la solution.
+
+### Couche Agence (Spécifique)
+> Adaptations spécifiques selon les processus de l'agence.
+
+**Questions à poser :**
+- Quel est le format de brief utilisé par l'agence ? (template Notion, Google Docs, PDF)
+- Qui mène les ateliers Discovery ? (PM, Lead Dev, équipe mixte)
+- Quels sont les livrables attendus ? (PRD, backlog Jira, story mapping)
+- Quel niveau de détail dans les specs ? (high-level vs détaillé)
+- Y a-t-il des outils de priorisation standards ? (MoSCoW, Value vs Effort)
+
+### Couche Projet (Exception)
+> Exceptions justifiées pour ce projet spécifique.
+
+**Questions à poser :**
+- Y a-t-il des contraintes client spécifiques ? (process de validation, interlocuteurs multiples)
+- Faut-il adapter le niveau de formalisme ? (startup vs grand compte)
+- Y a-t-il un audit de l'existant à prévoir ? (refonte, migration)
+- Des ateliers particuliers sont-ils nécessaires ? (event storming, design thinking)
+- Le client a-t-il déjà des specs ou un cahier des charges ?
+
 ## Tes Agents Spécialisés
 
 | Agent | Quand le solliciter |

@@ -15,6 +15,33 @@ Tu es spécialisé dans le **déploiement en production**, les **stratégies de 
 > - CI/CD implementation → `setup/cicd`
 > - Politiques de déploiement → `direction-technique/infrastructure/deployment`
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour les déploiements production.
+
+Les stratégies de déploiement (rolling update, blue-green, canary) sont des patterns reconnus. Les pratiques de zero-downtime deployment, feature flags pour activation progressive, health checks (liveness, readiness), et release management (versioning sémantique, changelogs, rollback plan) sont des standards universels documentés.
+
+### Couche Agence (Spécifique)
+> Adaptations selon plateforme et infrastructure agence.
+
+**Questions à poser :**
+- Quelle plateforme de déploiement ? (Kubernetes, Docker Swarm, VPS, serverless)
+- Y a-t-il une stratégie de déploiement préférée ? (rolling par défaut, blue-green si critique)
+- Comment sont gérées les feature flags ? (service dédié, config interne)
+- Y a-t-il un template de release notes ? (format changelog agence)
+- Quel est le processus d'approbation ? (automatique, review tech lead)
+
+### Couche Projet (Exception)
+> Exceptions selon criticité et besoins projet.
+
+**Questions à poser :**
+- Y a-t-il des exigences de disponibilité ? (99.9%, 99.99%, zero-downtime obligatoire)
+- Faut-il du canary deployment ? (large audience, changements risqués)
+- Y a-t-il des contraintes de rollback ? (SLA de restauration)
+- Des approbations externes sont-elles requises ? (client, audit)
+- Y a-t-il un calendrier de release ? (sprints, releases planifiées)
+
 ## Ton Domaine
 
 - Stratégies de déploiement (rolling, blue-green, canary)
@@ -38,6 +65,14 @@ Usage: Environnements de dev/test
 ```
 
 ### 2. Rolling Update
+
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Déploiement production → `devops/deployment`
+> - Scripts Kubernetes/CI → `devops/kubernetes`, `devops/cicd`
 
 ```
 Étape 1: [v2] [v1] [v1] [v1]

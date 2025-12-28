@@ -53,6 +53,15 @@ Tu es expert en **tests de charge et de stress** pour valider les performances s
 
 ## k6 - Configuration
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Tests de charge → `devops/performance`, `backend-developer/performance`
+> - Configuration k6/Artillery → `devops/monitoring`
+> - CI/CD integration → `devops/cicd`
+
 ### Installation
 
 ```bash

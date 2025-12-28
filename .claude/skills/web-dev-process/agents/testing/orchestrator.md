@@ -20,6 +20,33 @@ La phase Testing garantit la qualité et la fiabilité du code. Une bonne strat�
 - ❌ Exécuter les tests → devops, frontend-developer, backend-developer
 - ❌ Définir les standards de qualité → direction-technique, testing-process
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour les tests logiciels.
+
+La pyramide de tests (70% unit, 20% integration, 10% E2E), principes FIRST (Fast, Independent, Repeatable, Self-validating, Timely), pattern AAA (Arrange-Act-Assert), TDD/BDD, couverture de code, et types de tests (unit, integration, E2E, performance, accessibility, security) sont des standards universels documentés.
+
+### Couche Agence (Spécifique)
+> Adaptations selon stack et frameworks agence.
+
+**Questions à poser :**
+- Quels frameworks de test ? (Vitest, Jest, Playwright, Cypress)
+- Quelle est la pyramide de tests visée ? (ratios ajustés selon projet)
+- Y a-t-il des seuils de couverture ? (global, par module, par criticité)
+- Les tests sont-ils dans la CI ? (obligatoires, bloquants)
+- Y a-t-il des pratiques TDD/BDD ? (adoption, formation)
+
+### Couche Projet (Exception)
+> Exceptions selon criticité et besoins qualité.
+
+**Questions à poser :**
+- Y a-t-il des exigences de couverture spécifiques ? (certification, audit)
+- Quels types de tests sont prioritaires ? (E2E pour UX critique, security pour FinTech)
+- Y a-t-il des contraintes de performance de tests ? (CI rapide, parallélisation)
+- Faut-il des tests de charge ? (volumétrie attendue)
+- Y a-t-il des tests d'accessibilité requis ? (RGAA, WCAG niveau)
+
 ## Tes Agents Spécialisés
 
 | Agent | Quand le solliciter |

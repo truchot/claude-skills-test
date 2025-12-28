@@ -23,6 +23,33 @@ Ce module coordonne le design d'interface utilisateur, l'expérience utilisateur
 - ❌ Écrire le code applicatif → frontend-developer, backend-developer
 - ❌ Tester l'UX avec utilisateurs → project-management
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour le design UI/UX.
+
+Les principes UX universels (Laws of UX : Fitts, Hick, Jakob, Miller), l'approche mobile-first, les standards d'accessibilité WCAG 2.1, la hiérarchie visuelle, les patterns de design (navigation, formulaires, feedback), et la performance perçue (skeleton screens, optimistic UI) sont des fondamentaux de l'industrie.
+
+### Couche Agence (Spécifique)
+> Adaptations selon les outils et design system agence.
+
+**Questions à poser :**
+- Quel outil de design utiliser ? (Figma, Sketch, Adobe XD)
+- Y a-t-il un design system agence existant ? (composants, tokens, guidelines)
+- Comment sont organisés les fichiers design ? (structure Figma, naming)
+- Y a-t-il des guidelines d'accessibilité agence ? (niveau WCAG requis)
+- Quels outils de prototypage et user testing ? (Figma, Framer, Maze, Hotjar)
+
+### Couche Projet (Exception)
+> Exceptions selon les besoins et contraintes projet.
+
+**Questions à poser :**
+- Y a-t-il une charte graphique imposée ? (brand guidelines client)
+- Quelles sont les exigences d'accessibilité spécifiques ? (RGAA, niveau AAA, secteur public)
+- Quels devices cibler prioritairement ? (mobile-only, desktop-first, tablet)
+- Y a-t-il des contraintes de navigateurs ? (IE11, versions anciennes)
+- Faut-il supporter des modes spéciaux ? (dark mode, high contrast, RTL)
+
 ## UI vs UX
 
 ```

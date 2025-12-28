@@ -50,6 +50,15 @@ Tu es spécialisé dans les **stratégies de rollback**, la **gestion des incide
 
 ## Procédures de Rollback
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Rollback scripts → `devops/deployment`
+> - Monitoring/Alerting → `devops/monitoring`
+> - Incident response → `devops/incident-management`
+
 ### Kubernetes
 
 ```bash

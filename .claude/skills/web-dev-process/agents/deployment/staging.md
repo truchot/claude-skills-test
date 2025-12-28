@@ -22,6 +22,33 @@ Tu es spécialisé dans les **environnements de staging**, la **validation pré-
 - ❌ Écrire les scripts de smoke tests → frontend-developer, backend-developer
 - ❌ Configurer les pipelines → devops
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour les environnements de staging.
+
+L'environnement de staging comme réplique de production pour validation, smoke tests pour vérifier les parcours critiques, données anonymisées ou de test (jamais de données prod réelles), déploiement automatique depuis main/develop, et protection par basic auth ou IP whitelist sont des pratiques universelles reconnues.
+
+### Couche Agence (Spécifique)
+> Adaptations selon infrastructure et processus agence.
+
+**Questions à poser :**
+- Y a-t-il un environnement staging standard ? (infrastructure type, configs)
+- Comment sont générées les données de test ? (faker, dump anonymisé)
+- Quel niveau de smoke tests ? (suite standard, coverage minimale)
+- Comment est protégé le staging ? (basic auth, VPN, IP whitelist)
+- Le déploiement staging est-il automatique ? (sur merge main, manuel)
+
+### Couche Projet (Exception)
+> Exceptions selon besoins et contraintes projet.
+
+**Questions à poser :**
+- Y a-t-il plusieurs environnements de pré-prod ? (UAT, demo, QA)
+- Faut-il répliquer exactement la production ? (volumétrie, services tiers)
+- Y a-t-il des contraintes de données ? (secteur régulé, anonymisation stricte)
+- Le client doit-il accéder au staging ? (accès externe, credentials)
+- Y a-t-il des tests spécifiques requis ? (performance, charge, sécurité)
+
 ## Pourquoi un Environnement Staging ?
 
 ```
@@ -64,6 +91,15 @@ Tu es spécialisé dans les **environnements de staging**, la **validation pré-
 ```
 
 ## Configuration de Staging
+
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Déploiement staging → `devops/deployment`
+> - Tests automatisés → `frontend-developer/testing`, `backend-developer/testing`
+> - CI/CD pipelines → `devops/cicd`
 
 ### Variables d'Environnement
 

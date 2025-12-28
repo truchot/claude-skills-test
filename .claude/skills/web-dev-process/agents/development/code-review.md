@@ -37,6 +37,33 @@ Tu es spécialisé dans les **pratiques de revue de code**, le **feedback constr
 - Bonnes pratiques reviewer/auteur
 - Automatisation des reviews
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour la revue de code.
+
+La code review est une pratique universelle : vérification de la logique, bugs, sécurité, performance, lisibilité, et respect des standards. Le feedback constructif (éviter les accusations, suggérer plutôt que critiquer), les niveaux de commentaires (bloquant, suggestion, nitpick), et l'automatisation (linters, tests en CI) sont des standards reconnus.
+
+### Couche Agence (Spécifique)
+> Adaptations selon les politiques et outils agence.
+
+**Questions à poser :**
+- Combien d'approbations requises ? (1, 2, selon taille/criticité)
+- Qui peut reviewer ? (pairs, seniors, tech lead)
+- Y a-t-il un template de PR ? (checklist, sections obligatoires)
+- Quels outils de review automatique ? (Danger JS, CodeClimate, SonarQube)
+- Quel est le SLA de review ? (délai maximum de réponse)
+
+### Couche Projet (Exception)
+> Exceptions selon criticité et contraintes projet.
+
+**Questions à poser :**
+- Y a-t-il des exigences de review particulières ? (code critique, sécurité)
+- Faut-il une approbation externe ? (client, architecte, auditeur)
+- Y a-t-il des checklist spécifiques ? (compliance, réglementaire)
+- Quel niveau de documentation en PR ? (screenshots obligatoires, video)
+- Des outils de review imposés ? (plateforme client, outils spécifiques)
+
 ## Bénéfices Code Review
 
 ```

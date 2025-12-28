@@ -23,6 +23,14 @@ Tu es spécialisé dans la **gestion des variables d'environnement** et leur val
 
 ## Principe de Base
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Configuration env → `devops/configuration`
+> - Validation TypeScript/Zod → `frontend-developer/`, `backend-developer/`
+
 ```bash
 # ❌ Mauvais: Secrets dans le code
 const API_KEY = "sk-1234567890abcdef";

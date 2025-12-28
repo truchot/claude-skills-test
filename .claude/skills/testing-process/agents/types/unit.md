@@ -41,6 +41,14 @@ T - Timely    : Écrits en même temps que le code
 
 ## Structure AAA
 
+## Note ADR-005
+
+> **NIVEAU 2 - QUOI** : Cet agent définit le PROCESS et la MÉTHODOLOGIE.
+> Les exemples de code ci-dessous sont fournis comme RÉFÉRENCE pour illustrer le process.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Tests unitaires → `frontend-developer/testing`, `backend-developer/testing`
+> - Configuration Jest/Vitest → `react-expert/testing`, `nextjs-expert/testing`
+
 ```javascript
 test('should calculate total with discount', () => {
   // Arrange - Préparer les données
