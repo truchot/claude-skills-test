@@ -1,0 +1,13 @@
+{
+  "name": "testing-process-tests",
+  "version": "1.0.0",
+  "description": "Validation tests for Testing Process skill",
+  "scripts": {
+    "test": "npm run test:agents && npm run test:structure && npm run test:content",
+    "test:agents": "node validate-agents.js",
+    "test:structure": "node validate-structure.js",
+    "test:content": "node validate-content.js"
+  },
+  "author": "Testing Team",
+  "license": "MIT"
+}

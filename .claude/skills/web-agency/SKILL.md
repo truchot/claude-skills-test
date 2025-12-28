@@ -1,7 +1,7 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, frontend-developer, backend-developer, devops, etc.)
-version: 2.7.0
+description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, testing-process, frontend-developer, backend-developer, devops, etc.)
+version: 2.8.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -27,14 +27,14 @@ CLIENT
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │frontend │ │ backend │ │ devops  │ │wordpress│       │
-│  │-dev     │ │-dev     │ │         │ │-gutenb. │       │
+│  │testing- │ │frontend │ │ backend │ │ devops  │       │
+│  │process  │ │-dev     │ │-dev     │ │         │       │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 │                                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐                   │
-│  │  react  │ │ nextjs  │ │ design- │                   │
-│  │ -expert │ │ -expert │ │ system  │                   │
-│  └─────────┘ └─────────┘ └─────────┘                   │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
+│  │wordpress│ │  react  │ │ nextjs  │ │ design- │       │
+│  │-gutenb. │ │ -expert │ │ -expert │ │ system  │       │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
 └─────────────────────────────────────────────────────────┘
    │
    ▼
@@ -49,6 +49,7 @@ HUMAIN (supervision)
 | `direction-technique` | Décisions techniques stratégiques | 52 | 🟢 |
 | `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
 | `web-dev-process` | Process de développement | 61 | 🟢 |
+| `testing-process` | Stratégie et méthodologie de tests | 25 | 🟢 |
 | `frontend-developer` | Implémentation frontend | 33 | 🟢 |
 | `backend-developer` | Implémentation backend | 32 | 🟢 |
 | `devops` | CI/CD, containers, K8s, IaC, monitoring | 30 | 🟢 |
@@ -57,7 +58,7 @@ HUMAIN (supervision)
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 
-**Total : 384 agents disponibles**
+**Total : 409 agents disponibles**
 
 > **Note** : Les skills `strategy`, `design`, `content` et `marketing` sont prévus mais **non implémentés**.
 > Ne pas router vers ces skills - demander clarification à l'utilisateur si besoin dans ces domaines.
@@ -70,6 +71,7 @@ HUMAIN (supervision)
 | Choix stack, architecture, décisions stratégiques | `direction-technique` |
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
 | Process dev, méthodologie, checklists | `web-dev-process` |
+| Stratégie tests, TDD/BDD, pyramide, coverage, sécurité, accessibilité | `testing-process` |
 | Implémentation frontend, React, CSS, TypeScript | `frontend-developer` |
 | Next.js, App Router, Server Components, SSR | `nextjs-expert` |
 | API, bases de données, Node.js, PHP backend | `backend-developer` |
@@ -88,15 +90,15 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 │  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
 │  → POURQUOI : Décisions, politiques, standards                      │
 ├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : OPÉRATIONS                                              │
-│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
-│  │     web-dev-process        │  │       lead-dev             │    │
-│  │                            │  │                            │    │
-│  │  QUOI : Méthodologie       │  │  QUI : Coordination        │    │
-│  │  • 7 phases projet         │  │  • Code review (faire)     │    │
-│  │  • Process standards       │  │  • Team coordination       │    │
-│  │  • Checklists, workflows   │  │  • Delivery/release        │    │
-│  └────────────────────────────┘  └────────────────────────────┘    │
+│  NIVEAU 2 : OPÉRATIONS (PROCESSUS)                                  │
+│  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐    │
+│  │  web-dev-process │ │  testing-process │ │     lead-dev     │    │
+│  │                  │ │                  │ │                  │    │
+│  │ QUOI: Méthodo    │ │ QUOI: Tests      │ │ QUI: Coordination│    │
+│  │ • 7 phases       │ │ • Stratégie      │ │ • Code review    │    │
+│  │ • Checklists     │ │ • Types tests    │ │ • Team coord     │    │
+│  │ • Workflows      │ │ • Qualité/Perf   │ │ • Delivery       │    │
+│  └──────────────────┘ └──────────────────┘ └──────────────────┘    │
 ├─────────────────────────────────────────────────────────────────────┤
 │  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
 │  → COMMENT : Code, configuration, patterns                          │
@@ -107,6 +109,7 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 
 **Distinction NIVEAU 2** :
 - `web-dev-process` = **QUOI** (méthodologie, process, checklists)
+- `testing-process` = **QUOI** (stratégie tests, types, qualité, sécurité, accessibilité)
 - `lead-dev` = **QUI** (coordination, exécution, qualité quotidienne)
 
 ## Documentation
@@ -131,6 +134,15 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 | [006](./docs/adr/006-hierarchy-clarification.md) | Clarification Hiérarchie lead-dev/web-dev-process |
 
 ## Changelog
+
+### v2.8.0
+
+- **Nouveau skill** : Ajout de `testing-process` (25 agents) comme skill autonome
+  - Consolidation des 34 agents testing dispersés dans 6 skills
+  - Domaines : strategy, types, quality, performance, security, accessibility
+  - Position : NIVEAU 2 PROCESSUS (peer de web-dev-process et lead-dev)
+  - Distinction claire : PROCESS (quoi/quand tester) vs IMPLEMENTATION (comment coder les tests)
+- **Total agents** : 409 (vs 384 en v2.7.0)
 
 ### v2.7.0
 
