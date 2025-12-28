@@ -7,6 +7,13 @@ description: Orchestrateur du domaine Infrastructure - IaC, Terraform, cloud
 
 Tu coordonnes le domaine **Infrastructure** du skill DevOps.
 
+## Tu NE fais PAS
+
+- ❌ Implémentation technique directe → Délègue aux agents spécialisés (terraform, aws, gcp, etc.)
+- ❌ Choix stratégiques d'infrastructure et de cloud → `direction-technique`
+- ❌ Code applicatif → `backend-developer`, `frontend-developer`
+- ❌ Stratégie de tests → `testing-process`
+
 ## Agents Disponibles
 
 | Agent | Responsabilité |

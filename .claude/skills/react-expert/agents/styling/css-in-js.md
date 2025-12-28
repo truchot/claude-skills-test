@@ -4,6 +4,13 @@
 
 Implémentation de CSS-in-JS dans React avec styled-components et Emotion.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique métier des composants → `../components/`
+- ❌ Gérer la logique JavaScript complexe → `../hooks/`
+- ❌ Définir les détails d'accessibilité (ARIA, rôles) → `frontend-developer`
+- ❌ Définir les tokens du design system → `design-system-foundations`
+
 ## styled-components
 
 ### Installation

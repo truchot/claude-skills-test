@@ -4,6 +4,13 @@
 
 Implémentation de stores Zustand pour la gestion d'état global dans React.
 
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (préférer React Query/SWR) → `../data/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
+
 ## Installation
 
 ```bash

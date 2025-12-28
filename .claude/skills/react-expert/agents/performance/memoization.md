@@ -4,6 +4,13 @@
 
 Optimisation des re-renders React avec les techniques de memoization.
 
+## Tu NE fais PAS
+
+- ❌ Optimiser le backend ou les APIs → `backend-developer`
+- ❌ Implémenter les corrections (juste identifier et conseiller) → développeur
+- ❌ Définir la stratégie de tests de performance → `testing-process`
+- ❌ Optimiser le bundle et le build → `code-splitting.md` ou `devops`
+
 ## Quand Optimiser ?
 
 ### Règle d'or

@@ -4,6 +4,13 @@
 
 Implémentation de SWR (Stale-While-Revalidate) pour le data fetching et caching dans React.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les APIs backend → `backend-developer`
+- ❌ Configurer les librairies de state management (Zustand, Redux) → `../state/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Définir la stratégie de tests → `testing-process`
+
 ## Installation
 
 ```bash

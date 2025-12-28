@@ -4,6 +4,13 @@
 
 Coordonne les agents du domaine **testing** et route vers l'agent spécialisé approprié.
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de test globale → `testing-process`
+- ❌ Implémenter le code directement (déléguer aux agents spécialisés) → agents du domaine
+- ❌ Implémenter les tests E2E → `frontend-developer`
+- ❌ Définir les processus de test → `web-dev-process`
+
 ## Agents Disponibles
 
 | Agent | Fichier | Spécialité |

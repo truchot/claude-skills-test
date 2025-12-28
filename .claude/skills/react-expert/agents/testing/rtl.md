@@ -4,6 +4,13 @@
 
 Implémentation de tests de composants React avec React Testing Library (RTL).
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests (pyramide, couverture) → `testing-process`
+- ❌ Écrire le code applicatif à tester → développeur
+- ❌ Définir les processus de CI/CD → `devops`
+- ❌ Implémenter des tests E2E → `frontend-developer`
+
 ## Installation
 
 ```bash

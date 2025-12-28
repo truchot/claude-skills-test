@@ -4,6 +4,13 @@
 
 Implémentation de React Suspense pour le lazy loading, le code splitting et le data fetching.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les APIs backend → `backend-developer`
+- ❌ Configurer les librairies de state management → `../state/`
+- ❌ Gérer la gestion d'erreurs (utiliser Error Boundaries) → `../components/error-boundaries.md`
+- ❌ Optimiser le bundle côté build → `../performance/code-splitting.md`
+
 ## Suspense pour Code Splitting
 
 ### React.lazy

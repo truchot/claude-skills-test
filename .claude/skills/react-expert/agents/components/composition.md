@@ -4,6 +4,13 @@
 
 Patterns avancés de composition de composants React.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique complexe des hooks → `../hooks/custom-hooks.md`
+- ❌ Gérer l'état avec Context, Zustand ou Redux → `../state/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter des solutions de styling → `../styling/`
+
 ## Compound Components
 
 ### Principe

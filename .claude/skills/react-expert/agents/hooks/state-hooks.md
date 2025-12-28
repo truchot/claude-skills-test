@@ -4,6 +4,13 @@
 
 Implémentation des hooks de gestion d'état local : `useState` et `useReducer`.
 
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter les tests (donner des exemples uniquement) → `../testing/hooks-testing.md`
+
 ## useState
 
 ### Syntaxe de base

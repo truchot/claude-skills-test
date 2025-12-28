@@ -4,6 +4,13 @@
 
 Implémentation des hooks d'effets de bord : `useEffect` et `useLayoutEffect`.
 
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Gérer le server state (préférer React Query/SWR) → `../data/`
+
 ## useEffect
 
 ### Syntaxe

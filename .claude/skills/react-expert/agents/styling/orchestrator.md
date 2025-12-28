@@ -4,6 +4,13 @@
 
 Coordonne les agents du domaine **styling** et route vers l'agent spécialisé approprié.
 
+## Tu NE fais PAS
+
+- ❌ Décider de la solution de styling à adopter → `direction-technique`
+- ❌ Implémenter le code directement (déléguer aux agents spécialisés) → agents du domaine
+- ❌ Définir les tokens du design system → `design-system-foundations`
+- ❌ Implémenter la logique métier des composants → `../components/`
+
 ## Agents Disponibles
 
 | Agent | Fichier | Spécialité |

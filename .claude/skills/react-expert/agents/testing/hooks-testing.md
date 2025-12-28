@@ -4,6 +4,13 @@
 
 Implémentation de tests pour les custom hooks React avec `@testing-library/react`.
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Écrire le code applicatif (hooks) à tester → développeur
+- ❌ Tester les composants (utiliser RTL) → `rtl.md`
+- ❌ Définir les processus de CI/CD → `devops`
+
 ## Installation
 
 ```bash

@@ -4,6 +4,13 @@
 
 Création et patterns de composants fonctionnels React avec TypeScript.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique des hooks personnalisés → `../hooks/custom-hooks.md`
+- ❌ Gérer l'état global ou les patterns de state management → `../state/`
+- ❌ Définir la stratégie de tests des composants → `testing-process`
+- ❌ Implémenter les tests (donner des exemples uniquement) → `../testing/rtl.md`
+
 ## Syntaxe de Base
 
 ### Composant simple

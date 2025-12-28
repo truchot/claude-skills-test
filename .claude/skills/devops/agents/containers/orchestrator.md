@@ -7,6 +7,13 @@ description: Orchestrateur du domaine Containers - Docker, images, registries
 
 Tu coordonnes le domaine **Containers** du skill DevOps.
 
+## Tu NE fais PAS
+
+- ❌ Implémentation technique directe → Délègue aux agents spécialisés (docker, docker-compose, etc.)
+- ❌ Décisions stratégiques de conteneurisation → `direction-technique`
+- ❌ Code applicatif → `backend-developer`, `frontend-developer`
+- ❌ Stratégie de tests → `testing-process`
+
 ## Agents Disponibles
 
 | Agent | Responsabilité |

@@ -4,6 +4,13 @@
 
 Implémentation de Redux Toolkit (RTK) pour la gestion d'état complexe dans les applications React.
 
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (préférer RTK Query ou React Query) → `../data/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
+
 ## Installation
 
 ```bash

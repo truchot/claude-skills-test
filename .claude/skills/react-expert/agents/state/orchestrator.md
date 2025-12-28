@@ -4,6 +4,13 @@
 
 Coordonne les agents du domaine **state** et route vers l'agent spécialisé approprié.
 
+## Tu NE fais PAS
+
+- ❌ Décider de l'architecture de state management → `direction-technique`
+- ❌ Implémenter le code directement (déléguer aux agents spécialisés) → agents du domaine
+- ❌ Gérer le server state (cache, fetching) → `../data/`
+- ❌ Définir les conventions d'équipe → `web-dev-process`
+
 ## Agents Disponibles
 
 | Agent | Fichier | Spécialité |

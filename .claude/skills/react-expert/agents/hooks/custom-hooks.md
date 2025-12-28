@@ -4,6 +4,13 @@
 
 Création de hooks réutilisables pour extraire et partager la logique entre composants.
 
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants qui utilisent ces hooks → `../components/`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter le backend des APIs → `backend-developer`
+
 ## Principes
 
 1. **Nom commence par `use`** - Convention obligatoire

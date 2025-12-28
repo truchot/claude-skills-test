@@ -4,6 +4,13 @@
 
 Implémentation de mocks pour les tests React : modules, providers, API avec MSW.
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Écrire le code applicatif à tester → développeur
+- ❌ Implémenter le backend réel → `backend-developer`
+- ❌ Définir les processus de CI/CD → `devops`
+
 ## Vitest/Jest Mocks
 
 ### Mock de module

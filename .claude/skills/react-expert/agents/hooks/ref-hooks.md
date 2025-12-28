@@ -4,6 +4,13 @@
 
 Implémentation des hooks de références : `useRef`, `forwardRef`, et `useImperativeHandle`.
 
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Gérer l'état qui doit causer un re-render (utiliser useState) → `state-hooks.md`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter des solutions de styling → `../styling/`
+
 ## useRef
 
 ### Deux usages principaux

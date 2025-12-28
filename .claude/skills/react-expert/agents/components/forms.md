@@ -4,6 +4,13 @@
 
 Implémentation de formulaires React : controlled, uncontrolled, validation, librairies.
 
+## Tu NE fais PAS
+
+- ❌ Créer des hooks personnalisés complexes de validation → `../hooks/custom-hooks.md`
+- ❌ Gérer l'état du formulaire dans un store global → `../state/`
+- ❌ Définir la stratégie de tests de formulaires → `testing-process`
+- ❌ Implémenter le backend de validation → `backend-developer`
+
 ## Controlled Components
 
 ### Principe

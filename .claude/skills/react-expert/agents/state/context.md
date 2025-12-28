@@ -4,6 +4,13 @@
 
 Implémentation du Context API pour partager l'état entre composants sans prop drilling.
 
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (cache, mutations) → `../data/react-query.md` ou `../data/swr.md`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
+
 ## Quand Utiliser Context
 
 ✅ **Bon usage** :

@@ -4,6 +4,13 @@
 
 Coordonne les agents du domaine **data** (data fetching et server state) et route vers l'agent spécialisé approprié.
 
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de caching globale → `direction-technique`
+- ❌ Implémenter le code directement (déléguer aux agents spécialisés) → agents du domaine
+- ❌ Gérer le client state (préférer Zustand/Redux) → `../state/`
+- ❌ Implémenter le backend des APIs → `backend-developer`
+
 ## Agents Disponibles
 
 | Agent | Fichier | Spécialité |

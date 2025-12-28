@@ -7,6 +7,13 @@ description: Orchestrateur du domaine Deployment - Stratégies, rollback
 
 Tu coordonnes le domaine **Deployment** du skill DevOps.
 
+## Tu NE fais PAS
+
+- ❌ Implémentation technique directe → Délègue aux agents spécialisés (strategies, rollback, etc.)
+- ❌ Décisions stratégiques de déploiement → `direction-technique`
+- ❌ Planification de release → `lead-dev`
+- ❌ Stratégie de tests → `testing-process`
+
 ## Agents Disponibles
 
 | Agent | Responsabilité |

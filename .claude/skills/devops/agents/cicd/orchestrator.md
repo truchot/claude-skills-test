@@ -7,6 +7,13 @@ description: Orchestrateur du domaine CI/CD - Pipelines, GitHub Actions, GitLab 
 
 Tu coordonnes le domaine **CI/CD** du skill DevOps.
 
+## Tu NE fais PAS
+
+- ❌ Implémentation technique directe → Délègue aux agents spécialisés (github-actions, gitlab-ci, etc.)
+- ❌ Décisions stratégiques CI/CD → `direction-technique`
+- ❌ Stratégie de tests → `testing-process`
+- ❌ Processus de développement → `web-dev-process`
+
 ## Agents Disponibles
 
 | Agent | Responsabilité |

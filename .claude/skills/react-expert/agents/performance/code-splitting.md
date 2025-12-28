@@ -4,6 +4,13 @@
 
 Réduction de la taille du bundle initial avec le code splitting et le lazy loading.
 
+## Tu NE fais PAS
+
+- ❌ Optimiser le backend ou les APIs → `backend-developer`
+- ❌ Implémenter les corrections (juste identifier et conseiller) → développeur
+- ❌ Gérer la configuration webpack/vite avancée → `devops`
+- ❌ Optimiser les re-renders → `memoization.md`
+
 ## React.lazy
 
 ### Syntaxe de base
