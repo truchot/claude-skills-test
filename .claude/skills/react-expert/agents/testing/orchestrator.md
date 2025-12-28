@@ -62,3 +62,11 @@ SI question contient [mock, jest.mock, vi.mock, MSW, provider mock, spy]
 
 - Stratégie de test globale → `web-dev-process/testing/`
 - Tests E2E → `frontend-developer/testing/e2e-testing`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification du type de test approprié |
+| Recommandation | Conseil sur RTL/hooks-testing/mocking selon le contexte |
+| Délégation | Transmission à l'agent spécialisé identifié |

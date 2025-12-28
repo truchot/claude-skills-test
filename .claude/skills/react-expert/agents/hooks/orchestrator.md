@@ -46,3 +46,11 @@ SI question contient [custom hook, créer un hook, extraire, réutilisable, use*
 - Questions sur l'architecture des hooks → `direction-technique`
 - Conventions d'équipe sur les hooks → `web-dev-process`
 - Hooks spécifiques Next.js → `nextjs/` domain
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification de l'agent hooks spécialisé |
+| Délégation | Transmission du contexte à l'agent identifié |
+| Escalade | Orientation vers skill parent si hors périmètre |

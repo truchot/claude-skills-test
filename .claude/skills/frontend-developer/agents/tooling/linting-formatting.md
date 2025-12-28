@@ -323,3 +323,11 @@ npx --no -- commitlint --edit $1
 ## Mots-clés de routage
 
 `ESLint`, `Prettier`, `Stylelint`, `linting`, `formatting`, `règles`, `husky`, `lint-staged`, `commitlint`, `Biome`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration ESLint | eslint.config.js avec règles adaptées au projet |
+| Configuration Prettier | .prettierrc avec formatage standardisé |
+| Setup Git hooks | Husky + lint-staged pour validation pre-commit |

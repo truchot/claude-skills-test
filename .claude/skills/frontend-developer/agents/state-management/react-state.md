@@ -456,3 +456,11 @@ export const selectActiveTodos = (state: RootState) =>
 ## Mots-clés de routage
 
 `state`, `useState`, `useReducer`, `Context`, `Redux`, `Redux Toolkit`, `Zustand`, `Jotai`, `Recoil`, `store`, `dispatch`, `reducer`, `slice`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Store de state global | Configuration Zustand ou Redux avec slices et selectors |
+| Context providers | Providers React Context pour state partagé localement |
+| Hooks de state management | Custom hooks pour accès au state et actions |

@@ -328,3 +328,11 @@ function useFocusTrap(ref: RefObject<HTMLElement>) {
 ## Mots-clés de routage
 
 `accessibilité`, `a11y`, `WCAG`, `ARIA`, `screen reader`, `lecteur d'écran`, `contraste`, `focus`, `clavier`, `skip link`, `alt text`, `aria-label`, `aria-describedby`, `role`, `tabindex`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit d'accessibilité | Rapport WCAG 2.1 AA avec violations identifiées et recommandations |
+| Patterns ARIA documentés | Composants accessibles avec attributs ARIA appropriés |
+| Tests d'accessibilité | Configuration axe-core et scripts de validation automatisée |

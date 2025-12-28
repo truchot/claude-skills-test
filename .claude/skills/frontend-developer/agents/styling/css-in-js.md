@@ -462,3 +462,11 @@ export const IconWrapper = styled.span`
 ## Mots-clés de routage
 
 `CSS-in-JS`, `styled-components`, `Emotion`, `CSS Modules`, `css prop`, `ThemeProvider`, `createGlobalStyle`, `composes`, `scoped CSS`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de thème | ThemeProvider avec tokens et variants configurés |
+| Composants stylés | Bibliothèque de styled-components ou Emotion |
+| Configuration CSS Modules | Setup et conventions de nommage pour CSS Modules |

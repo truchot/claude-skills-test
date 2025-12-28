@@ -494,3 +494,11 @@ function IconButton(props: Omit<ButtonProps, 'children'> & { icon: ReactNode }) 
 ## Mots-clés de routage
 
 `pattern`, `compound components`, `render props`, `headless`, `renderless`, `controlled`, `uncontrolled`, `slot`, `provider`, `composition`, `HOC`, `higher-order component`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bibliothèque de patterns | Implémentations des patterns (Compound, Headless, Render Props) |
+| Composants génériques | Composants réutilisables framework-agnostic |
+| Guide des patterns | Documentation des use cases et exemples d'implémentation |

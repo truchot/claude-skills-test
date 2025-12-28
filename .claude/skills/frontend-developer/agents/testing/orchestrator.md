@@ -70,3 +70,11 @@ SI question porte sur [Storybook, snapshot, visual regression, Chromatic]
 
 - Vers `frameworks/` pour les patterns spécifiques framework
 - Vers `tooling/` pour la configuration CI/CD
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de test | Plan de test suivant la pyramide (unit, integration, E2E) |
+| Configuration des tests | Setup Jest/Vitest, RTL et Playwright avec coverage |
+| Rapport de tests | Dashboard des résultats et métriques de qualité |

@@ -451,3 +451,11 @@ export const store = configureStore({
 - `zustand.md` - Alternative plus légère
 - `context.md` - Pour état simple
 - `../data/react-query.md` - Alternative à RTK Query
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Store configuration | configureStore avec reducers et middleware |
+| Slices | createSlice avec reducers et types TypeScript |
+| Sélecteurs | createSelector pour données dérivées mémoïsées |

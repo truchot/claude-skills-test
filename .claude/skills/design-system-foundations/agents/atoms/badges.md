@@ -618,3 +618,13 @@ export function AvatarWithStatus({
 - [ ] aria-label pour les badges informatifs
 - [ ] aria-live="polite" pour les counts dynamiques
 - [ ] Contraste texte 4.5:1 minimum
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice de Types | Spécifications count, status, dot, feature badges avec cas d'usage |
+| Tableau des Variants | Documentation variants solid/soft avec codes couleur |
+| Positionnement Guide | Spécifications pour badges notification (overlay, positions) |
+| Checklist Accessibilité | Validation aria-label, aria-live, contraste minimum 4.5:1 |
+| Composant React/Vue | Code source Badge/NotificationBadge/StatusBadge avec animations |

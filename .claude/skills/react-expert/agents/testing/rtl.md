@@ -395,3 +395,11 @@ expect(await screen.findByText('Hello')).toBeInTheDocument();
 - `hooks-testing.md` - Tests de hooks
 - `mocking.md` - Mocks et MSW
 - `../components/forms.md` - Composants formulaire
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests fichiers | Fichiers .test.tsx avec describe/it/expect |
+| Mocks setup | Configuration custom render avec providers |
+| Utilities testing | Helpers pour queries et assertions |

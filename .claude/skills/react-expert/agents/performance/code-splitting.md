@@ -421,3 +421,11 @@ function App() {
 - `memoization.md` - Optimisation runtime
 - `../data/suspense.md` - Data fetching
 - `../components/error-boundaries.md` - Gestion d'erreurs
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration lazy loading | Code React.lazy avec Suspense boundaries |
+| Stratégie de splitting | Plan route-based et component-based |
+| Analyse bundle | Rapport avec webpack-bundle-analyzer ou visualizer |

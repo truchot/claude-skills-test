@@ -398,3 +398,13 @@ module.exports = {
 - [ ] Responsive spacing avec clamp()
 - [ ] Component tokens spécifiques (btn, input, card, modal)
 - [ ] Patterns réutilisables (stack, cluster, auto-grid)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens JSON | Échelle d'espacement complète (0-64+) avec tokens sémantiques |
+| CSS Custom Properties | Variables CSS pour spacing, layout, gaps et border-radius |
+| Tailwind Config | Configuration spacing avec échelle 8pt et tokens sémantiques |
+| Layout Utilities | Classes CSS pour stack, cluster, auto-grid patterns |
+| Documentation Grid System | Guide d'utilisation du système de grille et des espacements |

@@ -442,3 +442,11 @@ describe('useInterval', () => {
 - `rtl.md` - Tests de composants
 - `mocking.md` - Mocks et stubs
 - `../hooks/custom-hooks.md` - Création de hooks
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests fichiers | Fichiers .test.tsx avec renderHook |
+| Wrappers setup | Configuration wrapper avec providers |
+| Patterns d'usage | Best practices act, waitFor, rerender |

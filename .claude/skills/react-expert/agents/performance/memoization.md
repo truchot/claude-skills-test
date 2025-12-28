@@ -365,3 +365,11 @@ const callback = useCallback(() => {
 - `code-splitting.md` - Réduction du bundle
 - `../hooks/custom-hooks.md` - Hooks optimisés
 - `../data/react-query.md` - Caching server state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants optimisés | Code avec React.memo et comparaison personnalisée |
+| Patterns memoization | Implémentation useMemo/useCallback ciblée |
+| Analyse de performance | Identification des bottlenecks avec React DevTools |

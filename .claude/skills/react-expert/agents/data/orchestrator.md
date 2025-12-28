@@ -57,3 +57,11 @@ SI question contient [Suspense, lazy, React.lazy, streaming, concurrent]
 
 - Stratégie de caching globale → `direction-technique`
 - Server state vs client state → `state/` domain
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification de la solution data fetching appropriée |
+| Recommandation | Conseil sur React Query/SWR/Suspense selon le contexte |
+| Délégation | Transmission à l'agent spécialisé identifié |

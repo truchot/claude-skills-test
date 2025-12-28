@@ -112,3 +112,13 @@ module.exports = {
 2. **Sémantique** : Nommer par usage, pas par valeur (`color-success` vs `color-green`)
 3. **Cohérence** : Échelles mathématiques (4px, 1.25 ratio)
 4. **Accessibilité** : Contraste WCAG AA minimum
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens Package | Package NPM complet avec tous les tokens (colors, typography, spacing, shadows) |
+| CSS Variables Bundle | Fichier CSS centralisé avec toutes les custom properties |
+| Tailwind Config Complete | Configuration Tailwind intégrant tous les tokens des foundations |
+| Style Dictionary Config | Configuration Style Dictionary pour générer les tokens multi-plateformes |
+| Documentation Foundations | Guide complet expliquant le système de tokens et son utilisation |

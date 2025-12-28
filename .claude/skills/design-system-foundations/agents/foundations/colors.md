@@ -268,3 +268,13 @@ npx tailwindcss-contrast-checker
 - [ ] Dark mode avec inversion cohérente
 - [ ] Documentation des usages par token
 - [ ] Tests de contraste automatisés en CI
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens JSON | Fichier de tokens avec palettes complètes (primitives, sémantiques, composants) |
+| CSS Custom Properties | Variables CSS pour light/dark modes avec documentation inline |
+| Tailwind Config | Configuration Tailwind avec échelles de couleurs |
+| Rapport de Contraste | Document validant les ratios WCAG AA/AAA pour toutes les combinaisons |
+| Guide d'Usage | Documentation expliquant quand utiliser chaque couleur sémantique |

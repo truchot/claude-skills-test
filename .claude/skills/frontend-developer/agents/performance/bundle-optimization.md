@@ -355,3 +355,11 @@ export default defineConfig({
 ## Mots-clés de routage
 
 `bundle`, `code splitting`, `tree shaking`, `lazy loading`, `dynamic import`, `chunk`, `vendor`, `compression`, `gzip`, `brotli`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse de bundle | Rapport de taille et composition du bundle avec visualisation |
+| Configuration code splitting | Setup des chunks et stratégie de lazy loading |
+| Recommandations d'optimisation | Liste des actions pour réduire la taille du bundle |

@@ -462,3 +462,11 @@ function AccessibleAnimation() {
 ## Mots-clés de routage
 
 `animation`, `transition`, `keyframes`, `Framer Motion`, `motion`, `animate`, `whileHover`, `AnimatePresence`, `variants`, `parallax`, `scroll animation`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bibliothèque d'animations | Keyframes CSS et patterns d'animation réutilisables |
+| Configuration Framer Motion | Variants et animations pour composants interactifs |
+| Guide des animations | Documentation des timing, easing et bonnes pratiques |

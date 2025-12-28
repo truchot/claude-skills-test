@@ -309,3 +309,11 @@ div > * > span { } /* Sélecteur complexe */
 ## Mots-clés de routage
 
 `CSS`, `Grid`, `Flexbox`, `variables CSS`, `custom properties`, `cascade`, `spécificité`, `layout`, `container queries`, `:has()`, `clamp`, `min`, `max`, `logical properties`, `layers`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de variables CSS | Custom properties pour couleurs, espacements, typographie et tokens design |
+| Layouts CSS modernes | Patterns Grid et Flexbox réutilisables et responsive |
+| Documentation CSS | Guide des conventions, nomenclature et architecture CSS du projet |

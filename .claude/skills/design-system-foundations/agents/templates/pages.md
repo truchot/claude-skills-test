@@ -777,3 +777,13 @@ useEffect(() => {
 - [ ] Loading state annoncé (aria-busy)
 - [ ] Focus management après chargement
 - [ ] Responsive mobile-first
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Templates de Pages | Collection de pages complètes (List, Detail, Article, Error, Empty) |
+| Grilles Responsive | Spécifications responsive pour grilles de cartes et layouts de contenu |
+| Patterns de Loading | Skeletons réutilisables (card, table, text, image, avatar) |
+| Guide Error Pages | Spécifications 404, 500 avec messages et actions |
+| Composant React/Vue | Code source ListPage/DetailPage/ErrorPage avec slots et états |

@@ -262,3 +262,11 @@ useEffect(() => {
 - `state-hooks.md` - Pour la gestion d'état
 - `custom-hooks.md` - Pour extraire les effets
 - `../data/react-query.md` - Pour le data fetching
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation effet | Code useEffect/useLayoutEffect avec cleanup |
+| Gestion dépendances | Array de dépendances approprié et justifié |
+| Patterns d'usage | Exemples avec subscriptions, timers, data fetching |

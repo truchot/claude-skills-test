@@ -346,3 +346,11 @@ describe('Form.vue', () => {
 ## Mots-clés de routage
 
 `React Testing Library`, `RTL`, `Vue Test Utils`, `render`, `screen`, `userEvent`, `fireEvent`, `getByRole`, `findBy`, `waitFor`, `component test`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests de composants | Fichiers .test.tsx avec tests d'interactions et intégrations |
+| Utilities de test | Helpers de render avec providers et fixtures |
+| Tests d'accessibilité | Tests axe-core pour validation a11y des composants |

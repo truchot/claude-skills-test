@@ -168,3 +168,13 @@ interface ButtonProps {
 - [ ] Accessibilité (ARIA, focus, keyboard)
 - [ ] Stories Storybook
 - [ ] Tests unitaires
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Library | Package NPM avec tous les atomes (Button, Input, Label, Icon, Badge) |
+| Matrice Complète | Document récapitulatif de tous les variants, tailles et états par atome |
+| Storybook Atoms | Stories interactives pour chaque atome avec tous ses variants |
+| Tests Unitaires | Suite de tests Jest/Vitest couvrant tous les atomes |
+| Documentation Accessibilité | Guide ARIA, focus management et keyboard navigation pour tous les atomes |

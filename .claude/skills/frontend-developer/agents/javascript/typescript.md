@@ -455,3 +455,11 @@ type Params = ExtractParams<'/users/:userId/posts/:postId'>;
 ## Mots-clés de routage
 
 `TypeScript`, `types`, `interface`, `type`, `generic`, `utility types`, `Partial`, `Pick`, `Omit`, `Record`, `conditional types`, `type guard`, `infer`, `tsconfig`, `strict`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Types et interfaces | Définitions TypeScript pour le domaine métier et APIs |
+| Types génériques | Utility types et helpers de typage réutilisables |
+| Configuration tsconfig | Fichier tsconfig.json optimisé avec règles strictes |

@@ -396,3 +396,11 @@ function useManualCache() {
 - `react-query.md` - Alternative plus complète
 - `suspense.md` - Intégration Suspense
 - `../state/context.md` - Pour le client state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| useSWR hooks | Custom hooks avec useSWR/useSWRMutation |
+| Configuration SWR | SWRConfig avec fetcher et options revalidation |
+| Gestion cache | Stratégies de mutate et invalidation |

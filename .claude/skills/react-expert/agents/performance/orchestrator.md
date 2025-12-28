@@ -46,3 +46,11 @@ SI question contient [lazy, code splitting, dynamic import, bundle, chunk, Suspe
 - Stratégie performance globale → `direction-technique`
 - Core Web Vitals → `frontend-developer/performance/`
 - Build optimization → `frontend-developer/tooling/`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification du type d'optimisation nécessaire |
+| Recommandation | Conseil sur memoization vs code-splitting |
+| Délégation | Transmission à l'agent spécialisé identifié |

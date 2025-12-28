@@ -671,3 +671,13 @@ export function SkipLink() {
 - [ ] aria-label sur les nav multiples
 - [ ] Scroll body lock quand sidebar ouverte (mobile)
 - [ ] Focus trap dans sidebar mobile
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Templates Library | Collection de layouts réutilisables (Dashboard, Marketing, Auth, Docs, Settings) |
+| Grilles de Layout | Spécifications CSS Grid/Flexbox pour chaque layout avec breakpoints |
+| Spécifications Responsive | Documentation mobile-first avec breakpoints et comportements adaptatifs |
+| Guide Sidebar Mobile | Patterns toggle, overlay, focus trap pour navigation mobile |
+| Composant React/Vue | Code source DashboardLayout/AuthLayout/DocsLayout avec hooks responsive |

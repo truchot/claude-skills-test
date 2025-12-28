@@ -432,3 +432,11 @@ export default defineConfig({
 ## Mots-clés de routage
 
 `Jest`, `Vitest`, `test unitaire`, `unit test`, `mock`, `spy`, `stub`, `coverage`, `expect`, `describe`, `it`, `beforeEach`, `afterEach`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Suite de tests unitaires | Fichiers .test.ts avec tests pour utils et fonctions métier |
+| Configuration Vitest/Jest | Setup des tests avec coverage et mocks |
+| Rapport de couverture | Coverage report HTML avec seuils configurés |

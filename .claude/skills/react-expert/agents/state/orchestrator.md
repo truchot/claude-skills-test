@@ -58,3 +58,11 @@ SI question contient [Redux, RTK, createSlice, configureStore, thunk, createAsyn
 
 - Choix d'architecture state → `direction-technique`
 - Server state (cache, fetching) → `data/` domain
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification de la solution state appropriée |
+| Recommandation | Conseil sur Context/Zustand/Redux selon le contexte |
+| Délégation | Transmission à l'agent spécialisé identifié |

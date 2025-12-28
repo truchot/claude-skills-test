@@ -581,3 +581,11 @@ class CircuitBreaker {
 ## Mots-clés de routage
 
 `fetch`, `API`, `REST`, `HTTP`, `GET`, `POST`, `PUT`, `DELETE`, `GraphQL`, `WebSocket`, `SSE`, `Server-Sent Events`, `upload`, `FormData`, `AbortController`, `retry`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Client API | Wrapper Fetch ou Axios avec gestion d'erreurs et interceptors |
+| Définitions TypeScript | Interfaces et types pour les réponses API |
+| Documentation API | Guide d'utilisation des endpoints et exemples de calls |

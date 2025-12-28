@@ -57,3 +57,11 @@ SI question porte sur [animation, transition, keyframes, Framer Motion]
 - Vers `foundations/css-moderne.md` pour CSS vanille
 - Vers `performance/` pour optimisation CSS
 - Vers `design-system-foundations` pour tokens et systèmes
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de styling | Choix de la solution CSS et architecture des styles |
+| Guide de styles | Conventions, nomenclature et patterns de styling |
+| Système de thème | Configuration dark mode et tokens de design |

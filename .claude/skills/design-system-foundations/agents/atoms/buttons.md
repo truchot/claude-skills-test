@@ -139,3 +139,13 @@ interface ButtonProps {
 - [ ] Full width option
 - [ ] Focus ring visible
 - [ ] Touch target 44x44px
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice de Variants | Document spécifiant les 5 variants avec codes couleur et usage |
+| Tableau des Tailles | Spécifications height, padding, font-size pour chaque taille (xs à xl) |
+| Guide des États | Documentation des 6 états avec comportements et apparences |
+| Checklist Accessibilité | Liste de vérification WCAG AA (contraste, touch target, focus, ARIA) |
+| Composant React/Vue | Code source du composant Button avec TypeScript et tests unitaires |

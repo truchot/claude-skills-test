@@ -407,3 +407,11 @@ img {
 ## Mots-clés de routage
 
 `responsive`, `mobile-first`, `breakpoints`, `media queries`, `viewport`, `clamp`, `fluid`, `picture`, `srcset`, `hamburger`, `touch`, `tablet`, `desktop`, `adaptive`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de breakpoints | Configuration des points de rupture et media queries standardisés |
+| Composants responsive | Patterns CSS mobile-first pour navigation, grilles et containers |
+| Guide images responsive | Documentation srcset, picture et stratégie d'optimisation images |

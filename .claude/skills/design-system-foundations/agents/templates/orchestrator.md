@@ -336,3 +336,13 @@ export function Page({
 - [ ] Skip links pour accessibilité
 - [ ] SEO-friendly structure
 - [ ] Performance : lazy loading, code splitting ready
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Templates Library | Package NPM complet avec layouts, pages et hero sections |
+| Grilles de Page | Spécifications complètes des grilles responsive pour tous les templates |
+| Spécifications Responsive | Documentation breakpoints, comportements et patterns adaptatifs |
+| Guide de Composition | Documentation expliquant comment composer templates avec molécules |
+| Documentation SEO & Performance | Best practices structure HTML5, lazy loading, code splitting |

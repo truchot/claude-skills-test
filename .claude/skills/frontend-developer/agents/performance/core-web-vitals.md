@@ -282,3 +282,11 @@ clsObserver.observe({ entryTypes: ['layout-shift'] });
 ## Mots-clés de routage
 
 `Core Web Vitals`, `LCP`, `FID`, `CLS`, `INP`, `Lighthouse`, `performance`, `vitesse`, `chargement`, `TTFB`, `Long Task`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit Lighthouse | Rapport complet des Core Web Vitals avec scores et diagnostics |
+| Plan d'optimisation | Recommandations priorisées pour améliorer LCP, INP et CLS |
+| Configuration monitoring | Setup web-vitals.js et tracking des métriques en production |

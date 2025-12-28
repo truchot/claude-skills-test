@@ -88,3 +88,11 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 ## Mots-clés de routage
 
 `React`, `hooks`, `useState`, `useEffect`, `composant`, `JSX`, `props`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants React | Code des composants fonctionnels avec hooks et TypeScript |
+| Custom hooks | Hooks réutilisables pour la logique métier et state management |
+| Documentation composants | Props, exemples d'usage et patterns d'intégration |

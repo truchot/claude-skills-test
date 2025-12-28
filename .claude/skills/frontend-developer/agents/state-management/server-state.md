@@ -419,3 +419,11 @@ export function useUpdateUser() {
 ## Mots-clés de routage
 
 `React Query`, `TanStack Query`, `SWR`, `server state`, `cache`, `invalidate`, `mutation`, `optimistic`, `infinite query`, `stale`, `refetch`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration React Query | Setup QueryClient avec options de cache et retry |
+| Custom hooks de données | Hooks useQuery et useMutation pour les entités du domaine |
+| Documentation des queries | Query keys, stratégies de cache et patterns d'invalidation |

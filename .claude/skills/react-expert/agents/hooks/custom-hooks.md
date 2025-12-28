@@ -378,3 +378,11 @@ function useBadHook() {
 - `state-hooks.md` - useState et useReducer
 - `effect-hooks.md` - useEffect
 - `ref-hooks.md` - useRef
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Hook personnalisé | Fonction use* réutilisable avec types |
+| Documentation | JSDoc avec paramètres et valeur de retour |
+| Exemples d'usage | Cas d'utilisation concrets du hook |

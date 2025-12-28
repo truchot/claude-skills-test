@@ -426,3 +426,11 @@ const calculateWithTax = (amount) => amount * (1 + taxRate); // Impure
 ## Mots-clés de routage
 
 `JavaScript`, `ES6`, `ES2015`, `ES2020`, `async`, `await`, `Promise`, `modules`, `import`, `export`, `destructuring`, `spread`, `arrow function`, `template literal`, `optional chaining`, `nullish coalescing`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Modules JavaScript | Code ES6+ avec imports/exports et structure modulaire |
+| Fonctions async | Implémentations async/await pour opérations asynchrones |
+| Utilitaires modernes | Helpers réutilisables utilisant les features ES6+ |

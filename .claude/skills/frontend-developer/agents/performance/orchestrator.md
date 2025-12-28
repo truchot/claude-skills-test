@@ -53,3 +53,11 @@ SI question porte sur [profiling, React DevTools, memoization, virtualization]
 - Vers `tooling/build-tools.md` pour la configuration bundler
 - Vers `frameworks/` pour les optimisations framework-specific
 - Vers infrastructure pour CDN, caching serveur
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit performance global | Analyse complète des métriques de performance et bottlenecks |
+| Roadmap d'optimisation | Plan d'action priorisé par impact et effort |
+| Rapport de performance | Dashboard des Core Web Vitals et évolution des métriques |

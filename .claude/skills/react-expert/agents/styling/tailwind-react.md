@@ -441,3 +441,11 @@ function ResponsiveGrid() {
 - `css-in-js.md` - Alternative CSS-in-JS
 - `../components/functional.md` - Composants React
 - `design-system-foundations` skill - Tokens design
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Tailwind | Composants React avec classes utilitaires |
+| cn() utility | Helper function avec clsx et tailwind-merge |
+| CVA variants | Configuration class-variance-authority pour variants |

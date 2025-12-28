@@ -186,3 +186,11 @@ useEffect(() => {
 - `effect-hooks.md` - Pour les effets de bord
 - `custom-hooks.md` - Pour extraire la logique
 - `../state/context.md` - Pour l'état partagé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation hook | Code useState ou useReducer avec types |
+| Types d'état | Interfaces TypeScript pour state et actions |
+| Patterns d'usage | Exemples d'utilisation et best practices |

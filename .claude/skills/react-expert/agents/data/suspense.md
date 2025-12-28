@@ -428,3 +428,11 @@ function AppRoutes() {
 - `react-query.md` - Data fetching avec Suspense
 - `../components/error-boundaries.md` - Gestion d'erreurs
 - `../performance/code-splitting.md` - Optimisation bundle
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Suspense boundaries | Composants avec fallbacks appropriés |
+| Skeleton components | UI de chargement représentative du contenu |
+| Code splitting | Configuration lazy loading avec React.lazy |

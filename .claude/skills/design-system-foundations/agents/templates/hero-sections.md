@@ -700,3 +700,13 @@ export function Stats({ stats, background = 'default' }: StatsProps) {
 - [ ] aria-labelledby sur sections
 - [ ] Lazy loading des images
 - [ ] Animation subtle au scroll (optionnel)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Templates Hero | Collection de sections hero (centered, split, background, gradient) |
+| Templates Features | Feature grids, bento grids, icon cards avec spécifications |
+| Templates Social Proof | Testimonials, logo cloud, stats sections réutilisables |
+| Spécifications Responsive | Documentation breakpoints et comportements adaptatifs par section |
+| Composant React/Vue | Code source Hero/Features/Testimonials/Stats avec slots composables |

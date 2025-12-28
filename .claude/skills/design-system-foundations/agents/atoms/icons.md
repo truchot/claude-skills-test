@@ -523,3 +523,13 @@ import * as Icons from '@heroicons/react/24/outline';
 - [ ] Couleurs sémantiques (primary, success, error, etc.)
 - [ ] Tree-shaking configuré
 - [ ] SVGs optimisés (SVGO)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bibliothèque d'Icônes | Set complet d'icônes SVG optimisées par catégorie (navigation, actions, status, objects) |
+| Tableau des Tailles | Spécifications des tailles (12-48px) avec stroke-width correspondants |
+| Icon Component | Composant React/Vue avec props (size, variant, color, spin) |
+| Checklist Accessibilité | Guide aria-hidden, aria-label, et rôles pour icônes décoratives/informatives |
+| Config d'Optimisation | Fichier SVGO config et guide de tree-shaking |

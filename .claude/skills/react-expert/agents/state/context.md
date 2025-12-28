@@ -397,3 +397,11 @@ const user = useContext(UserContext); // Pas de validation
 - `zustand.md` - Alternative légère
 - `redux-toolkit.md` - Pour applications complexes
 - `../hooks/state-hooks.md` - État local
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Context Provider | Provider component avec state management |
+| Types TypeScript | Interfaces pour context value et props |
+| Hook personnalisé | Custom hook use* avec validation |

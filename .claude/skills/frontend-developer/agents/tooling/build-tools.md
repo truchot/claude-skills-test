@@ -317,3 +317,11 @@ console.log('Watching...');
 ## Mots-clés de routage
 
 `Vite`, `Webpack`, `esbuild`, `bundler`, `build`, `config`, `plugin`, `dev server`, `HMR`, `hot reload`, `production build`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration build | vite.config.ts ou webpack.config.js optimisé |
+| Scripts npm | package.json avec scripts dev, build, preview et deploy |
+| Documentation tooling | Guide d'utilisation des outils de build et troubleshooting |

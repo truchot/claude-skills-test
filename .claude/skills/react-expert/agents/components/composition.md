@@ -425,3 +425,11 @@ function MyComponent() {
 - `functional.md` - Composants de base
 - `../hooks/custom-hooks.md` - Alternative aux HOC
 - `../state/context.md` - Pour le state partagé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Pattern de composition | Implémentation Compound/Render Props/HOC |
+| Types TypeScript | Interfaces pour props et contexte |
+| Exemples d'usage | Cas d'utilisation du pattern choisi |

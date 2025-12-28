@@ -65,3 +65,11 @@ SI question est transversale
 - Vers `frameworks/` si composant framework impliqué
 - Vers `performance/` si optimisation CSS requise
 - Vers `styling/` si framework CSS (Tailwind, etc.)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse de besoins fondamentaux | Identification des agents requis et ordre d'exécution |
+| Plan de coordination | Stratégie de composition des agents HTML, CSS, a11y et responsive |
+| Documentation d'architecture | Guide des décisions techniques et patterns fondamentaux adoptés |

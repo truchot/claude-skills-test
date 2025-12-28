@@ -400,3 +400,11 @@ vi.mock('./api');
 - `rtl.md` - Tests de composants
 - `hooks-testing.md` - Tests de hooks
 - `../data/react-query.md` - Data fetching
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| MSW handlers | Configuration mocks API avec handlers MSW |
+| Mock setup | Configuration vi.mock pour modules et hooks |
+| Testing utilities | Helpers pour providers et context mocks |

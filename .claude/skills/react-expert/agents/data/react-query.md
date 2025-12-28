@@ -437,3 +437,11 @@ export function useUpdateUser() {
 - `swr.md` - Alternative légère
 - `suspense.md` - Intégration Suspense
 - `../state/zustand.md` - Pour le client state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Query hooks | Custom hooks avec useQuery/useMutation |
+| Configuration cache | QueryClient setup avec staleTime et gcTime |
+| Gestion d'erreurs | Error handling et retry logic |

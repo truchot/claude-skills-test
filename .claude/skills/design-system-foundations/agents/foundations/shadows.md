@@ -364,3 +364,13 @@ module.exports = {
 - [ ] Dark mode shadows ajustés
 - [ ] Inner shadows pour états enfoncés
 - [ ] Multi-layer shadows pour effet réaliste (optionnel)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens JSON | Échelle d'ombres (none à 2xl) et z-index scale |
+| CSS Custom Properties | Variables CSS pour shadows, elevation et focus rings (light/dark modes) |
+| Tailwind Config | Configuration boxShadow et zIndex |
+| Focus Ring Utilities | Classes CSS pour focus rings accessibles (WCAG AA) |
+| Guide d'Élévation | Documentation expliquant l'utilisation des niveaux d'élévation par composant |

@@ -46,3 +46,11 @@ SI question contient [error boundary, erreur, Suspense, fallback, ErrorBoundary,
 - Architecture des composants → `direction-technique`
 - Conventions de nommage → `web-dev-process`
 - Design system → `design-system-foundations`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification de l'agent spécialisé approprié |
+| Délégation | Transmission du contexte à l'agent identifié |
+| Escalade | Orientation vers skill parent si hors périmètre |

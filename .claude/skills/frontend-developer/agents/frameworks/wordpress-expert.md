@@ -80,3 +80,11 @@ add_action('init', function() {
 ## Mots-clés de routage
 
 `WordPress`, `WP`, `Gutenberg`, `block`, `theme`, `plugin`, `PHP`, `wp-admin`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Blocks Gutenberg | Code des custom blocks avec block.json et composants React |
+| Theme/Plugin WordPress | Structure et fichiers PHP pour thème ou extension |
+| Documentation WordPress | Guide d'installation, configuration et utilisation des composants WP |

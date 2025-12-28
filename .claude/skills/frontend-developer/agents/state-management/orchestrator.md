@@ -54,3 +54,11 @@ SI question porte sur [React Query, SWR, Apollo, TanStack Query, cache, fetching
 - Vers `frameworks/` pour les hooks/composables de base
 - Vers `javascript/api-integration.md` pour les appels API
 - Vers `testing/` pour tester le state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture du state | Stratégie globale de gestion du state (local, global, server) |
+| Documentation state management | Guide des patterns et conventions de state |
+| Diagramme de flux de données | Schéma des flux de state dans l'application |

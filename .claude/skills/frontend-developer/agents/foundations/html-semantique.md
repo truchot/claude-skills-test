@@ -196,3 +196,11 @@ Créer et optimiser la structure HTML des pages web en utilisant les balises sé
 ## Mots-clés de routage
 
 `HTML`, `HTML5`, `sémantique`, `balises`, `structure`, `SEO`, `métadonnées`, `meta`, `title`, `Open Graph`, `Twitter Cards`, `JSON-LD`, `schema.org`, `formulaire`, `form`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Structure HTML complète | Document HTML5 sémantique avec hiérarchie de balises appropriées |
+| Métadonnées SEO | Balises meta, Open Graph, Twitter Cards et JSON-LD configurées |
+| Formulaires accessibles | Forms avec labels, ARIA et validation HTML5 |

@@ -489,3 +489,11 @@ function AccessibleForm() {
 - `../hooks/state-hooks.md` - useState pour les formulaires
 - `../hooks/custom-hooks.md` - Créer useForm
 - `functional.md` - Composants de base
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composant formulaire | Form component avec controlled/uncontrolled inputs |
+| Logique de validation | Fonction de validation avec types d'erreurs |
+| Exemples d'usage | Cas d'utilisation avec React Hook Form ou custom |

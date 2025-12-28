@@ -312,3 +312,11 @@ const [count, setCount] = useState(0);
 - `state-hooks.md` - Pour l'état avec re-render
 - `effect-hooks.md` - Pour les effets de bord
 - `../components/functional.md` - Pour les patterns de composants
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation ref | Code useRef/forwardRef/useImperativeHandle |
+| Types TypeScript | Types pour refs et handles exposés |
+| Patterns d'usage | Exemples DOM refs, valeurs persistantes, API custom |

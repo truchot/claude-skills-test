@@ -52,3 +52,11 @@ SI question contient [styled-components, Emotion, css prop, styled(), css``, the
 
 - Choix de solution styling → `direction-technique`
 - Tokens design system → `design-system-foundations`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décision de routage | Identification de la solution styling appropriée |
+| Recommandation | Conseil sur Tailwind vs CSS-in-JS selon le contexte |
+| Délégation | Transmission à l'agent spécialisé identifié |

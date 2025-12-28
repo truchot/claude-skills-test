@@ -406,3 +406,11 @@ describe('Protected routes', () => {
 ## Mots-clés de routage
 
 `E2E`, `end-to-end`, `Playwright`, `Cypress`, `browser test`, `integration test`, `Page Object`, `fixture`, `visual test`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Suite de tests E2E | Scénarios Playwright/Cypress pour parcours critiques |
+| Page Objects | Classes de Page Object Model pour maintainabilité |
+| Configuration CI | Setup des tests E2E dans le pipeline de déploiement |

@@ -329,3 +329,11 @@ function Good() {
 - `composition.md` - Patterns avancés
 - `forms.md` - Composants de formulaire
 - `../hooks/custom-hooks.md` - Extraction de logique
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Code composant | Composant fonctionnel React avec TypeScript |
+| Interface Props | Types TypeScript pour les props avec documentation |
+| Exemples d'usage | Cas d'utilisation concrets du composant |

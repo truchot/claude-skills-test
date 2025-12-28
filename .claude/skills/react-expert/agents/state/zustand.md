@@ -395,3 +395,11 @@ const unsubscribe = useAuthStore.subscribe(
 - `context.md` - Alternative native React
 - `redux-toolkit.md` - Pour cas très complexes
 - `../data/react-query.md` - Pour le server state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Store Zustand | Configuration store avec types et actions |
+| Types d'état | Interfaces pour state, actions et slices |
+| Sélecteurs | Fonctions sélectrices optimisées avec useShallow |

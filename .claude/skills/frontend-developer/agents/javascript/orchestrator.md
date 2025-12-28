@@ -64,3 +64,11 @@ SI question est transversale
 - Vers `frameworks/` si React/Vue hooks impliqués
 - Vers `state-management/` si gestion d'état globale
 - Vers `testing/` si tests unitaires requis
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture JavaScript | Structure de code ES6+, modules et organisation des fichiers |
+| Stratégie de typage | Plan d'adoption TypeScript et conventions de typage |
+| Documentation technique | Guide des patterns JavaScript et TypeScript du projet |

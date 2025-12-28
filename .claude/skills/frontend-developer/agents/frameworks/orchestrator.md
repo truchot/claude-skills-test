@@ -70,3 +70,11 @@ SI question est transversale ou comparative
 - Vers `state-management/` pour Redux, Zustand, Pinia avancé
 - Vers `testing/` pour testing de composants
 - Vers `performance/` pour optimisations
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture framework | Choix et justification du framework avec patterns adoptés |
+| Plan d'implémentation | Roadmap de développement et coordination des agents frameworks |
+| Guide de migration | Documentation pour migration ou intégration entre frameworks |

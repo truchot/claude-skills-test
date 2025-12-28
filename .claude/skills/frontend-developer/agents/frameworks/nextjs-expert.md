@@ -511,3 +511,11 @@ export function LogoutButton() {
 ## Mots-clés de routage
 
 `Next.js`, `App Router`, `Server Components`, `Client Components`, `SSR`, `SSG`, `ISR`, `API Routes`, `Route Handlers`, `Server Actions`, `middleware`, `generateStaticParams`, `generateMetadata`, `layout`, `loading`, `error`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Application Next.js | Structure App Router avec pages, layouts et composants Server/Client |
+| API Routes & Actions | Route Handlers et Server Actions pour intégration backend |
+| Configuration Next.js | next.config.js avec optimisations et configuration déploiement |

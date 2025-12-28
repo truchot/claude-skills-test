@@ -249,3 +249,13 @@ export function Card({
 - [ ] Stories Storybook avec tous les variants
 - [ ] Tests unitaires et a11y
 - [ ] Documentation d'usage
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Library | Package NPM avec toutes les molécules (Card, Form, Alert, Modal, Navigation) |
+| Spécifications Complètes | Document détaillant anatomie, variants et états de chaque molécule |
+| Patterns d'Usage | Guide d'utilisation avec exemples concrets pour chaque molécule |
+| Storybook Molecules | Stories interactives avec tous les variants et états |
+| Documentation Accessibilité | Guide ARIA roles, focus management, keyboard navigation pour chaque molécule |

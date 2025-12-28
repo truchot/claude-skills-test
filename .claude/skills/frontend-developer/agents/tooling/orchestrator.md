@@ -56,3 +56,11 @@ SI question porte sur [DevTools, debugging, profiling, Chrome, Firefox]
 - Vers `performance/` pour l'optimisation de build
 - Vers `testing/` pour la configuration des tests
 - Vers DevOps pour CI/CD avancé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stack tooling complet | Configuration de tous les outils de développement |
+| Guide du développeur | Documentation des outils, commandes et workflows |
+| Scripts d'automatisation | Outils CLI et scripts pour tâches répétitives |

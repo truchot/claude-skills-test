@@ -486,3 +486,11 @@ declare module '@emotion/react' {
 - `tailwind-react.md` - Alternative utility-first
 - `../components/functional.md` - Composants React
 - `design-system-foundations` skill - Design system
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Styled components | Composants React avec styled-components ou Emotion |
+| Theme setup | Configuration ThemeProvider avec types TypeScript |
+| Utility classes | Helper functions pour variants et responsive |

@@ -393,3 +393,11 @@ function logError(error: Error, info: ErrorInfo) {
 - `functional.md` - Composants de base
 - `../data/suspense.md` - Data fetching avec Suspense
 - `../testing/rtl.md` - Tester les error boundaries
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Error Boundary | Composant ErrorBoundary class ou react-error-boundary |
+| Fallback UI | Composant d'affichage d'erreur avec reset |
+| Pattern de gestion | Stratégie de granularité et logging |

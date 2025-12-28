@@ -425,3 +425,11 @@ document.querySelectorAll('.animate-on-scroll').forEach((el) => {
 ## Mots-clés de routage
 
 `DOM`, `querySelector`, `addEventListener`, `event`, `delegation`, `createElement`, `appendChild`, `innerHTML`, `FormData`, `Intersection Observer`, `debounce`, `throttle`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Modules DOM | Code de manipulation DOM avec sélection et event delegation |
+| Helpers de performance | Fonctions debounce, throttle et optimisation reflows |
+| Scripts d'interaction | Event handlers et logique d'interactivité vanilla JS |

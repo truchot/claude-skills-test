@@ -503,3 +503,11 @@ const { theme, toggleTheme } = themeContext;
 ## Mots-clés de routage
 
 `Vue`, `Vue 3`, `Composition API`, `ref`, `reactive`, `computed`, `watch`, `watchEffect`, `script setup`, `defineProps`, `defineEmits`, `slots`, `provide`, `inject`, `composable`, `v-model`, `v-bind`, `v-on`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Vue 3 | Composants SFC avec Composition API et script setup |
+| Composables réutilisables | Fonctions composables pour logique partagée et state |
+| Documentation Vue | Props typées, events et exemples d'intégration |

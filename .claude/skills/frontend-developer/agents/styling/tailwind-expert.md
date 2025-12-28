@@ -428,3 +428,11 @@ module.exports = {
 ## Mots-clés de routage
 
 `Tailwind`, `Tailwind CSS`, `classes utilitaires`, `@apply`, `tailwind.config`, `dark mode`, `responsive`, `hover`, `focus`, `cn`, `clsx`, `twMerge`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Tailwind | tailwind.config.js avec thème personnalisé et plugins |
+| Composants Tailwind | Classes utilitaires et patterns @layer pour composants |
+| Guide de styles | Documentation des conventions et helper functions (cn) |
