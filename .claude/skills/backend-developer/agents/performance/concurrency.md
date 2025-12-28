@@ -429,3 +429,12 @@ async function callExternalApi(data: any) {
 4. **Backpressure** : Ne pas surcharger les consumers
 5. **Timeout** : Toujours avoir un timeout
 6. **Monitoring** : Queue length, processing time
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation concurrence | Workers, async, parallelization |
+| Configuration | Setup queue et job processing |
+| Documentation | Guide de concurrence |

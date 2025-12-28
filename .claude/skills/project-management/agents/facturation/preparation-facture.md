@@ -191,3 +191,11 @@ Phase Run (Régie) : XXX €/jour
 | Coordonnées obsolètes | Mettre à jour |
 | Montant différent du contrat | Vérifier (avenant ?) |
 | Justificatif manquant | Obtenir avant émission |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Facture préparée | Document de facturation validé |
+| Justificatifs | Temps passé ou livrables associés |
+| Détail des prestations | Ligne par ligne des éléments facturés |

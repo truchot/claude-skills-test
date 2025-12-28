@@ -259,3 +259,11 @@ Points spécifiques à couvrir :
 - [ ] Pas de fautes d'orthographe
 - [ ] Relu par un participant interne
 - [ ] Format PDF propre si nécessaire
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Compte-rendu structuré | Document de synthèse de réunion |
+| Liste des actions | Actions avec responsables et échéances |
+| Décisions documentées | Points validés et arbitrages pris |

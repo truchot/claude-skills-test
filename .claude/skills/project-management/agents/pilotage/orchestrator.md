@@ -116,3 +116,11 @@ L'agent `alertes-projet` DOIT alerter quand :
 - 🟡 Ressource clé indisponible
 - 🟡 Scope creep détecté
 - 🟡 Dépendance externe bloquante
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Planning projet | Gantt avec jalons et dépendances |
+| Reporting hebdomadaire | État d'avancement et KPIs |
+| Alertes et actions | Risques identifiés et plans d'action |

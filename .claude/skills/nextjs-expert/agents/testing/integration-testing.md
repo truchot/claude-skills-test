@@ -386,3 +386,12 @@ await waitFor(() => expect(screen.getByText(/done/i)).toBeInTheDocument())
 | Tests E2E | → `e2e-testing.md` |
 | Mocking API | → `mocking.md` |
 | Server Components | → Voir docs Next.js testing |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration tests intégration | Setup pour tester les routes API |
+| Suite de tests | Tests des API routes et data flow |
+| Documentation | Guide des tests d'intégration |

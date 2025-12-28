@@ -167,3 +167,11 @@ Liste des alertes actives avec niveau et actions recommandées.
 2. **Dédoublonnage** : Pas d'alertes en double
 3. **Historisation** : Garder trace des alertes résolues
 4. **Escalade claire** : Savoir qui prévenir
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'alertes | Liste des alertes avec niveau de criticité |
+| Plan d'action | Actions correctives proposées par alerte |
+| Historique alertes | Suivi des alertes et résolutions |

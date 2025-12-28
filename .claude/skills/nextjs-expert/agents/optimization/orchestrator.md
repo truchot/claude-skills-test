@@ -116,3 +116,12 @@ npx lhci autorun
 □ Code splitting effectif
 □ Préchargement stratégique
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration d'optimisation | Settings pour images, fonts, bundles |
+| Rapport de performance | Métriques et améliorations |
+| Guidelines performance | Best practices pour l'équipe |

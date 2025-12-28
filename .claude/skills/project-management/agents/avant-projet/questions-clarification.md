@@ -154,3 +154,11 @@ Si le client ne répond pas, voici les hypothèses que nous prendrons :
 - "Parmi ces éléments, lequel est prioritaire ?"
 - "Si vous deviez choisir, que garderiez-vous ?"
 - "Qu'est-ce qui est indispensable vs souhaitable ?"
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Liste de questions | Questions structurées à poser au client |
+| Email de clarification | Message prêt à envoyer au client |
+| Points bloquants | Éléments critiques nécessitant réponse |

@@ -117,3 +117,11 @@ OUTPUT (données structurées brutes)
 | Mots "urgent", "critique" | Priorités |
 | Références à des concurrents | Inspirations |
 | Frustrations exprimées | Pain points |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Données brutes structurées | Informations extraites des sources client |
+| Liste des besoins | Fonctionnalités et exigences identifiées |
+| Points à clarifier | Questions à poser au client |

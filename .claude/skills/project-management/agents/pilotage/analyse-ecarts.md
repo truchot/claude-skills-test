@@ -212,3 +212,11 @@ CPI = Valeur acquise / Coût réel
 | SPI < 0.9 | 2 semaines consécutives | Replanification |
 | CPI < 0.9 | 2 semaines consécutives | Revue budget |
 | Vélocité -30% | 1 semaine | Analyser causes |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'écarts | Comparaison prévu vs réalisé |
+| Analyse des causes | Identification des raisons des écarts |
+| Actions correctives | Plan pour revenir sur les rails |

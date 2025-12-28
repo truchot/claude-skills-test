@@ -56,3 +56,12 @@ PRINCIPES :
 3. Progressivité - Adapter au niveau
 4. Autonomisation - Rendre indépendant
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Programme de mentoring | Plans d'onboarding et développement |
+| Feedback individuels | Retours personnalisés pour chaque dev |
+| Documentation guides | Standards et bonnes pratiques équipe |

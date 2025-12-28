@@ -354,3 +354,12 @@ export default function SlowLink({ href, children }) {
 | Structure de routes | → `routing.md` |
 | Loading states | → `layouts.md` |
 | SEO et metadata | → Voir generateMetadata |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration navigation | Setup Link et navigation programmatique |
+| Composants navigation | Nav components optimisés |
+| Documentation | Guide d'utilisation |

@@ -44,3 +44,12 @@ Question App Router ?
 └─ Gestion des erreurs, 404
    └─ → error-handling.md
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Structure App Router | Organisation des routes et layouts |
+| Configuration Next.js 13+ | Setup complet App Router |
+| Documentation App Router | Guide pour l'équipe |

@@ -194,3 +194,11 @@ Exemple : 10 jours × 0.55 = 5.5 jours effectifs
 | Spike nécessaire non planifié | Négocier avec PO |
 | Risque technique majeur | Discussion direction technique |
 | Dépendance bloquante | Coordination avec autres équipes |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de sprint | État d'avancement quotidien du sprint |
+| Identification des risques | Obstacles et dépendances détectés |
+| Support technique | Aide et déblocage pour l'équipe |

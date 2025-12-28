@@ -46,3 +46,12 @@ Requête Containers
 | docker-compose, services | docker |
 | multi-stage, alpine, optimisation | docker |
 | registry, ghcr, ECR | docker |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Images Docker | Conteneurs optimisés et sécurisés |
+| Configuration | Docker Compose et registries |
+| Documentation | Guide de containerisation |

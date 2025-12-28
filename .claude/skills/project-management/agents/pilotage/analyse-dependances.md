@@ -174,3 +174,11 @@ Ensemble des tâches où Marge totale = 0.
 | Marge < 2 jours | 🟡 | Surveiller |
 | Dépendance externe en retard | 🟠 | Relance + plan B |
 | Chemin critique > 80% durée | 🟡 | Peu de flexibilité |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Graphe de dépendances | Visualisation des liens entre tâches |
+| Chemin critique | Identification des tâches critiques |
+| Analyse des marges | Calcul du slack par tâche |

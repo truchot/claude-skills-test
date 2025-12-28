@@ -337,3 +337,12 @@ GET /products/_search
 4. **TTL pour le cache** : Éviter le stale data
 5. **Monitoring** : Mémoire, latence, throughput
 6. **Backup régulier** : Persistence configurée
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Schéma NoSQL | Design MongoDB/DynamoDB/Redis |
+| Configuration | Indexes, sharding, réplication |
+| Documentation | Guide d'utilisation NoSQL |

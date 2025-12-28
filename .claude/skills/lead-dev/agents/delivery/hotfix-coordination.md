@@ -239,3 +239,12 @@ Post-mortem prévu: [Date]
 | Impact client majeur | Communication stakeholders |
 | Fix génère nouveau bug | Rollback + nouvelle approche |
 | Personne disponible | Escalade management |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan de hotfix | Stratégie et étapes de correction urgente |
+| Patch validé | Correctif testé et prêt à déployer |
+| Communication incident | Messages aux stakeholders |

@@ -316,3 +316,12 @@ function decrypt(data: EncryptedData): string {
 4. **Timing-safe** : Comparaisons constantes
 5. **Rotation des clés** : Planifier et supporter
 6. **Secrets hors code** : Env vars ou secret manager
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation cryptographie | Chiffrement, hashing, signatures |
+| Configuration | Algorithmes et gestion des clés |
+| Documentation | Guide d'utilisation sécurisé |

@@ -49,3 +49,12 @@ Requête Infrastructure
 | AWS, EC2, RDS, S3, Lambda | terraform |
 | GCP, GCE, GKE, Cloud SQL | terraform |
 | VPC, subnet, security group | terraform |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Infrastructure as Code | Terraform/Pulumi configs |
+| Configuration cloud | AWS/GCP/Azure setup |
+| Documentation | Guide d'infrastructure |

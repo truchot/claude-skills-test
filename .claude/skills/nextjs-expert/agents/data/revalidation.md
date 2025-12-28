@@ -317,3 +317,12 @@ async function getProduct(id: string) {
 | Mutations | → `server-actions.md` |
 | CDN/Edge | → `deployment/` |
 | Client cache | → `client-fetching.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de revalidation | Configuration ISR et cache tags |
+| Configuration Next.js | Settings de revalidation |
+| Documentation | Guide de revalidation |

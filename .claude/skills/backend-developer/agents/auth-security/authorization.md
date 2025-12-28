@@ -344,3 +344,12 @@ describe('Authorization', () => {
 4. **Centraliser** : Un seul point de décision
 5. **Tester** : Tests exhaustifs des permissions
 6. **Auditer** : Logger les refus d'accès
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système d'autorisation | Implémentation RBAC/ABAC |
+| Configuration permissions | Rôles et permissions définis |
+| Documentation | Guide de gestion des droits |

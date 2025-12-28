@@ -145,3 +145,11 @@ Avant envoi :
 - [ ] Statuts cohérents
 - [ ] Points d'attention documentés
 - [ ] Relu par CDP
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport hebdomadaire | Synthèse de l'avancement projet |
+| Indicateurs KPI | Métriques de suivi (SPI, CPI, vélocité) |
+| Points d'attention | Risques et actions en cours |

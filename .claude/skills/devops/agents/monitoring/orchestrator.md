@@ -49,3 +49,12 @@ Requête Monitoring
 | grafana, dashboard, panels | prometheus |
 | logs, ELK, Loki, Fluentd | prometheus |
 | alertmanager, alerts | prometheus |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stack de monitoring | Prometheus, Grafana, logging |
+| Dashboards | Visualisation des métriques |
+| Alerting | Configuration des alertes |

@@ -57,3 +57,12 @@ Tu coordonnes les agents spécialisés en authentification, autorisation et séc
 3. **Fail Secure** : En cas d'erreur, refuser par défaut
 4. **Don't Trust Input** : Valider toutes les entrées
 5. **Keep Secrets Secret** : Jamais en clair dans le code
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture sécurité | Design auth et autorisation |
+| Implémentation | Code auth complet et sécurisé |
+| Audit sécurité | Rapport et remédiation |

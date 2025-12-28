@@ -350,3 +350,12 @@ if (typeof window !== 'undefined') {
 | Performance bundle | → `bundle.md` |
 | CLS issues | → Vérifier adjustFontFallback |
 | Styling/typographie | → `frontend-developer` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration fonts | Setup next/font optimisé |
+| Fonts optimisées | Polices auto-hébergées et subsettées |
+| Documentation | Guide d'utilisation des fonts |

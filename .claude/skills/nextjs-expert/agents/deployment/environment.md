@@ -309,3 +309,12 @@ export const config = {
 | Secrets Docker | → `docker.md` |
 | CI/CD secrets | → `ci-cd.md` |
 | Vault/KMS | → DevOps |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration environnement | Variables env par environment |
+| Documentation .env | Guide des variables |
+| Secrets management | Gestion sécurisée des secrets |

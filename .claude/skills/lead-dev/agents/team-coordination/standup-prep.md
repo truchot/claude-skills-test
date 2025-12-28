@@ -144,3 +144,11 @@ Quelles tâches peut-on descoper ou reporter ?"
 | Blocage non résolu > 2j | Escalade chef de projet |
 | Sprint à risque | Réunion de descoping |
 | Problème d'équipe récurrent | Discussion 1:1 |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Ordre du jour standup | Points à aborder en daily |
+| Points d'attention | Risques et blocages à surveiller |
+| Actions de suivi | Décisions et déblocages nécessaires |

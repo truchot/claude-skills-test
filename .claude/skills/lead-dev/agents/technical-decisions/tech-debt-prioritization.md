@@ -231,3 +231,12 @@ Recommandation : [action] avec ROI de [X]."
 | Risque sécurité | Escalade immédiate |
 | Dette > 30% du temps | Discussion stratégique |
 | Désaccord sur priorité | Arbitrage avec PO/Tech Lead |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Inventaire dette technique | Liste priorisée des dettes |
+| Matrice impact/effort | Analyse coût/bénéfice par dette |
+| Roadmap remédiation | Planning de résolution progressif |

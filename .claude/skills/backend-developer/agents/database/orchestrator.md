@@ -62,3 +62,12 @@ Tu coordonnes les agents spécialisés dans la modélisation, les requêtes et l
 | Recherche full-text | Elasticsearch |
 | Time series | TimescaleDB, InfluxDB |
 | Graph | Neo4j |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Schéma de base de données | Design optimisé et normalisé |
+| Scripts de migration | Versioning du schéma |
+| Documentation database | Guide pour l'équipe |

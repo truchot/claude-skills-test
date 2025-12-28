@@ -237,3 +237,12 @@ Passage si :
 | Demande de formation lourde | → Budget formation |
 | Évolution de poste souhaitée | → Manager + RH |
 | Réorientation nécessaire | → Manager + RH |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Évaluation de compétences | Analyse des forces et axes d'amélioration |
+| Plan de développement | Objectifs et actions de montée en compétence |
+| Recommandations de formation | Ressources et formations adaptées |

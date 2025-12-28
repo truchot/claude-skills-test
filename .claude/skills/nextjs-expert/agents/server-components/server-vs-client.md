@@ -197,3 +197,12 @@ export default function Page() {
 | Composition complexe | → `composition.md` |
 | State partagé | → `react-expert` |
 | Data fetching | → `data/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture composants | Découpage Server/Client components |
+| Documentation stratégie | Guide de décision Server vs Client |
+| Exemples de code | Patterns d'utilisation |

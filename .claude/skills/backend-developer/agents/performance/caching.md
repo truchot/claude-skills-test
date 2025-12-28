@@ -354,3 +354,12 @@ prisma.$use(async (params, next) => {
 4. **Clés prévisibles** : Naming convention claire
 5. **Monitoring** : Alerter sur évictions élevées
 6. **Graceful degradation** : App fonctionne sans cache
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de cache | Redis, in-memory, CDN |
+| Configuration | Setup cache layers |
+| Documentation | Guide du caching |

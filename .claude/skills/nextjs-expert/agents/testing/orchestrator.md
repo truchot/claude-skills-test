@@ -76,3 +76,12 @@ npm install -D vitest @testing-library/react @testing-library/jest-dom
 npm install -D @playwright/test
 npm install -D msw
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de tests | Plan de tests unitaires/intégration/E2E |
+| Configuration testing | Setup Jest, Playwright, MSW |
+| Documentation | Guide de testing Next.js |

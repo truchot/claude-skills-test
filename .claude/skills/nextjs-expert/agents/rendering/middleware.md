@@ -304,3 +304,12 @@ export const config = {
 | API routes | → `app-router/routing` |
 | Edge runtime | → `edge-runtime.md` |
 | CDN config | → `deployment/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration middleware | Middleware Next.js fonctionnel |
+| Documentation middleware | Use cases et exemples |
+| Tests middleware | Validation du comportement |

@@ -161,3 +161,12 @@ Vérifier que le code respecte les standards de qualité définis et passe les q
 | Standards non clairs | → `direction-technique/qualite/conventions-code` |
 | Outil de lint mal configuré | → `web-dev-process/setup` |
 | Désaccord sur un standard | → Discussion équipe + ADR si nécessaire |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Résultats quality gates | Rapport de conformité aux standards |
+| Configuration quality gates | Seuils et règles définies |
+| Plan de remédiation | Actions pour passer les gates |

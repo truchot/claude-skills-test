@@ -63,3 +63,11 @@ SPRINT PLANNING
 SPRINT REVIEW
 └─ Collecte des retours → amélioration continue
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Planning sprint | Organisation et répartition des tâches |
+| Suivi quotidien | Daily standups et résolution de blocages |
+| Support équipe | Aide technique et déblocage continu |

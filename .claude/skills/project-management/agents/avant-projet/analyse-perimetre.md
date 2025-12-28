@@ -197,3 +197,11 @@ Lot 0 ──→ Lot 1 ──→ Lot 3
 | Lot avec >10 features | Envisager de splitter |
 | Dépendance circulaire | Revoir le découpage |
 | Lot sans dépendance | Vérifier l'isolation |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Découpage en lots | Structure du projet par lots fonctionnels |
+| Matrice de dépendances | Relations et séquencement des lots |
+| Complexités T-shirt | Estimation de complexité par feature |

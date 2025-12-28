@@ -391,3 +391,12 @@ deploy:
 | Docker deploy | → `docker.md` |
 | Tests | → `testing/` |
 | Infrastructure | → DevOps |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Pipeline CI/CD | Workflow de build et déploiement |
+| Configuration GitHub Actions | Scripts de CI/CD |
+| Documentation pipeline | Guide d'utilisation |

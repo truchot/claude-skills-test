@@ -208,3 +208,11 @@ Date fin = Date début + (Charge JH / Capacité équipe)
 - **Mermaid** : Pour Markdown/documentation
 - **Tableau** : Pour reporting client
 - **Texte** : Pour emails
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Planning Gantt | Diagramme avec phases, tâches et jalons |
+| Planning détaillé | Répartition des tâches par semaine/jour |
+| Liste des jalons | Dates clés et conditions de validation |

@@ -169,3 +169,11 @@ Estimation détaillée en jours/homme avec fourchettes.
 | Écart min/max > x2 | Trop d'incertitude |
 | CDP < 10% | Risque de sous-staffing |
 | Dev > 70% | Vérifier le design |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Estimation détaillée | Chiffrage en JH par lot et profil |
+| Fourchette min/max | Estimation avec marge de risque |
+| Répartition par profil | Charge par rôle (Lead, Senior, Junior) |

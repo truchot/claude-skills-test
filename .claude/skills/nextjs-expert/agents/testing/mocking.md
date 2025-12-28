@@ -361,3 +361,12 @@ describe('Config', () => {
 | Tests composants | → `integration-testing.md` |
 | Tests E2E | → `e2e-testing.md` |
 | CI/CD | → `deployment/ci-cd` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration mocking | Setup MSW et mocks pour Next.js |
+| Mocks réutilisables | Mocks d'API et composants |
+| Documentation | Guide du mocking |

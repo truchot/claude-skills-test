@@ -332,3 +332,12 @@ export default async function Page() {
 | Client cache | → `data/client-fetching` |
 | CDN | → `deployment/` |
 | Performance | → `bundle.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de cache | Configuration ISR, SWR et cache tags |
+| Configuration Next.js | Settings de revalidation et cache |
+| Monitoring cache | Métriques de hit rate et performance |

@@ -58,3 +58,11 @@ Tu coordonnes la **qualité du code et les métriques de tests**.
 ## Délégation
 
 Je délègue à l'agent spécialisé approprié selon la problématique de qualité.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de couverture | Analyse de la couverture de code |
+| Rapport mutation testing | Score de mutation et qualité des tests |
+| Plan correction flaky tests | Identification et solutions pour tests instables |

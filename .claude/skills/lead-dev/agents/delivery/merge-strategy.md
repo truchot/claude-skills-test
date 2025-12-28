@@ -279,3 +279,12 @@ git diff --name-only --diff-filter=U
 | Merge cassé en prod | → `hotfix-coordination.md` |
 | Workflow non respecté | Rappel + formation |
 | Besoin de revert | Revert commit propre |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de merge | Workflow Git adapté au projet |
+| Guidelines branches | Convention de nommage et utilisation |
+| Documentation processus | Guide pour l'équipe |

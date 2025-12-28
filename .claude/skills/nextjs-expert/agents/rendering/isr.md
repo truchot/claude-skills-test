@@ -255,3 +255,12 @@ export default async function Page() {
 | Revalidation on-demand | → `data/revalidation` |
 | Edge rendering | → `edge-runtime.md` |
 | Cache strategy | → `optimization/caching` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration ISR | Pages avec revalidation incrémentale |
+| Documentation ISR | Stratégie de revalidation |
+| Monitoring revalidation | Suivi des rebuilds |

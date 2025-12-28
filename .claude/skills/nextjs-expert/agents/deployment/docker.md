@@ -361,3 +361,12 @@ docker-compose up --scale app=3
 | CI/CD | → `ci-cd.md` |
 | Variables env | → `environment.md` |
 | Kubernetes | → DevOps |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dockerfile | Configuration Docker pour Next.js |
+| Docker Compose | Setup complet avec services |
+| Documentation Docker | Guide de containerisation |

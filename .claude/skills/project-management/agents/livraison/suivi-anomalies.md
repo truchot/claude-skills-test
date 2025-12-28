@@ -202,3 +202,11 @@ Tu NE fais PAS :
 | Won't fix | Hors périmètre / Comportement voulu |
 | Duplicata | Déjà reporté |
 | Non reproductible | Impossible à reproduire |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Registre des anomalies | Liste complète des bugs et incidents |
+| Rapport de suivi | État d'avancement des corrections |
+| Plan de résolution | Priorisation et calendrier de correction |

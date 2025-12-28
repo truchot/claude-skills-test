@@ -145,3 +145,11 @@ L'agent `suivi-paiements` génère des alertes :
 | Échéance J+7 | 🟠 Alerte | Déclencher R1 |
 | Échéance J+30 | 🔴 Critique | Escalade |
 | Montant impayé > 10K€ | 🔴 Critique | Escalade direction |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Factures préparées | Documents de facturation prêts à émettre |
+| Tableau de suivi | État des paiements et relances |
+| Rapports financiers | Synthèse facturation par projet |

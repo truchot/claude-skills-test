@@ -397,3 +397,12 @@ module "eks" { ... }
 4. **Secrets** : Vault, SSM, pas dans tfvars
 5. **Plan avant Apply** : Toujours review
 6. **Tags** : Sur toutes les ressources
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Code Terraform | Infrastructure as Code |
+| Configuration | Modules et state management |
+| Documentation | Guide Terraform pour l'équipe |

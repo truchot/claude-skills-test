@@ -377,3 +377,12 @@ const { data } = useQuery({
 | Mutations serveur | → `server-actions.md` |
 | State global | → `react-expert` |
 | WebSockets | → Spécialisé |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration client fetching | Setup SWR/TanStack Query |
+| Hooks de data fetching | Custom hooks réutilisables |
+| Documentation | Guide d'utilisation côté client |

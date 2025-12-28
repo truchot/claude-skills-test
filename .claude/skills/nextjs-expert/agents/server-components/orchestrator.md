@@ -58,3 +58,12 @@ Question Server Components ?
 - Interactivité complète
 - Accès aux APIs navigateur
 - Bundle JS envoyé au client
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture RSC | Structure Server/Client components |
+| Configuration Next.js 13+ | Setup App Router et RSC |
+| Documentation composants | Guidelines pour l'équipe |

@@ -171,3 +171,11 @@ Avant de livrer le brief :
 - [ ] Contraintes clairement identifiées
 - [ ] Pas de contradiction interne
 - [ ] Prêt à être envoyé au client
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Brief structuré | Document formalisé du besoin client |
+| Périmètre fonctionnel | Liste des fonctionnalités attendues |
+| Contraintes projet | Délais, budget et contraintes techniques |

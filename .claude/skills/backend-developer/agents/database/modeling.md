@@ -250,3 +250,12 @@ CREATE INDEX idx_orders_user_created ON orders(user_id, created_at DESC);
 4. **Contraintes** : CHECK, UNIQUE, FK pour l'intégrité
 5. **Index** : Sur les colonnes de recherche et FK
 6. **Normaliser** : Éviter la redondance de données
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Modèle de données | Schéma relationnel normalisé |
+| Diagramme ERD | Entity Relationship Diagram |
+| Documentation | Guide du modèle de données |

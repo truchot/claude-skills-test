@@ -386,3 +386,12 @@ security:
 3. **Descriptions** : Documenter chaque endpoint et paramètre
 4. **Tags** : Grouper les endpoints logiquement
 5. **Versioning** : Inclure la version dans le path ou header
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécification OpenAPI | Documentation API complète |
+| Schéma validé | Spec OpenAPI 3.0+ |
+| Documentation | Guide d'utilisation API |

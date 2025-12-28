@@ -65,3 +65,12 @@ Question Déploiement ?
 □ CSP et headers sécurité
 □ Monitoring configuré
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration déploiement | Setup Vercel/Docker/Custom |
+| Pipeline CI/CD | Automatisation déploiements |
+| Documentation deployment | Procédures et runbooks |

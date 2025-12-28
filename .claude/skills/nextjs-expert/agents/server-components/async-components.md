@@ -304,3 +304,12 @@ export default async function PostPage({
 | Caching avancé | → `optimization/caching` |
 | Revalidation | → `data/revalidation` |
 | Composition SC/CC | → `composition.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Server Components async | Composants avec data fetching serveur |
+| Documentation async | Patterns et best practices |
+| Exemples | Use cases courants |

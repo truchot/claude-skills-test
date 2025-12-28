@@ -231,3 +231,12 @@ export async function GET(
 | Navigation programmatique | → `navigation.md` |
 | Stratégie de rendu | → `rendering/` |
 | Data fetching dans route | → `data/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture de routing | Structure des routes App Router |
+| Configuration routes | Layouts, pages et segments dynamiques |
+| Documentation routing | Guide de navigation |

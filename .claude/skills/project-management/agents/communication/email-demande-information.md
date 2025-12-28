@@ -199,3 +199,11 @@ Bien cordialement,
 - [ ] Date limite mentionnée
 - [ ] Justification du besoin
 - [ ] Méthode de transmission indiquée
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Email de demande | Message structuré de demande d'information |
+| Liste des éléments attendus | Informations nécessaires détaillées |
+| Date limite | Échéance de retour souhaitée |

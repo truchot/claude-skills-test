@@ -240,3 +240,12 @@ Q: "Où je pose mes questions ?"
 | Problème technique majeur | → Formation dédiée |
 | Période d'essai à risque | → Manager + RH |
 | Nouveau autonome rapidement | → Adapter le plan ! |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan d'onboarding | Parcours de formation personnalisé |
+| Documentation d'accueil | Guide du projet et de l'équipe |
+| Suivi d'intégration | Checkpoints et évaluation de progression |

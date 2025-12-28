@@ -31,3 +31,11 @@ Tu coordonnes la **stratégie globale de testing**.
 | TDD, BDD, red-green-refactor, ATDD | `tdd-bdd` |
 | planifier, prioriser, quoi tester | `planning` |
 | documenter, rapport, test plan | `documentation` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de tests | Document définissant l'approche globale de testing |
+| Plan de tests | Planning et priorisation des tests à réaliser |
+| Documentation tests | Guide des standards et conventions de tests |

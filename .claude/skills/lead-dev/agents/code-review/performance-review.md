@@ -207,3 +207,12 @@ useEffect(() => {
 | Memory leak confirmé | Bloquer PR |
 | Besoin d'audit complet | → `direction-technique/performance` |
 | Besoin d'optimisation infra | → `direction-technique/infrastructure` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de performance | Analyse des problèmes de perf détectés |
+| Recommandations d'optimisation | Actions pour améliorer les performances |
+| Benchmark comparatif | Mesures avant/après optimisation |

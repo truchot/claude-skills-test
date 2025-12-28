@@ -171,3 +171,11 @@ DSO = (15 000 / 45 000) × 30 = 10 jours
 | Facture > 45j impayée | Direction |
 | Contestation client | CDP + Direction |
 | Montant > 10K€ impayé | Direction + Juridique |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tableau de suivi paiements | État des factures émises et encaissements |
+| Relances documentées | Historique des actions de recouvrement |
+| Reporting financier | Synthèse créances et impayés |

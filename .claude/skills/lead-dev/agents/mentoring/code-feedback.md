@@ -212,3 +212,12 @@ Focus sur : 'given X, when Y, then Z'"
 | Manque de bases | Formation recommandée |
 | Résistance au feedback | Discussion 1:1 approfondie |
 | Besoin de montée en compétence | → `skill-assessment.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Feedback constructif | Retours structurés et actionnables |
+| Plan d'amélioration | Actions concrètes de progression |
+| Suivi de progression | Évolution des compétences dans le temps |

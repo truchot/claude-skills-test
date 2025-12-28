@@ -177,3 +177,11 @@ Faible│  🟢       │  🟢 R4    │
 - Contenus en retard
 - Validations multiples
 - Traductions non prévues
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Liste des hypothèses | Conditions pour que l'estimation tienne |
+| Registre des risques | Risques identifiés avec impact et probabilité |
+| Plans de mitigation | Actions préventives par risque |

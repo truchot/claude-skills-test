@@ -290,3 +290,12 @@ Build → Test → Stage → Canary (10%) → Full Rollout
 4. **Monitoring actif** : Pendant le déploiement
 5. **Petits déploiements** : Fréquents, moins risqués
 6. **Automation** : Réduire les erreurs humaines
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de déploiement | Blue-green, canary ou rolling |
+| Configuration | Setup de la stratégie choisie |
+| Documentation | Guide de déploiement |

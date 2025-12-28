@@ -321,3 +321,12 @@ export default async function ProtectedLayout({
 | Error boundaries | → `error-handling.md` |
 | Streaming avancé | → `server-components/streaming` |
 | Auth/session | → `data/` ou middleware |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture layouts | Structure de layouts imbriqués |
+| Composants layout.tsx | Layouts réutilisables |
+| Documentation layouts | Patterns et best practices |

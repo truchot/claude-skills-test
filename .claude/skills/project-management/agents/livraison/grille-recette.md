@@ -185,3 +185,11 @@ Tu NE fais PAS :
 | **P1 - Critique** | Parcours business core | Inscription, Achat |
 | **P2 - Important** | Fonctionnalités secondaires | Profil, Favoris |
 | **P3 - Normal** | Détails UI/UX | Animations, hover |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Grille de recette | Tableau des cas de test à valider |
+| Checklist validation | Liste complète des points à vérifier |
+| Critères d'acceptation | Conditions de validation par fonctionnalité |

@@ -64,3 +64,12 @@ Type de review ?
    │
    └─ Approbation ou Feedback
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Reviews de code | Feedback technique sur les PRs |
+| Rapport qualité | Synthèse des métriques de code |
+| Guidelines code | Standards de qualité de l'équipe |

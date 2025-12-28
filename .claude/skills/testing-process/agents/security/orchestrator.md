@@ -62,3 +62,11 @@ Tu coordonnes les **tests de sécurité** de l'application.
 ## Délégation
 
 Je délègue à l'agent spécialisé approprié selon le domaine de sécurité à tester.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit OWASP | Analyse des vulnérabilités Top 10 |
+| Audit des dépendances | Rapport CVE et vulnérabilités npm/yarn |
+| Configuration headers sécurité | Headers HTTP recommandés (CSP, CORS, HSTS) |

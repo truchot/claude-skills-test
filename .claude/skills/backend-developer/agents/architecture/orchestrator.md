@@ -55,3 +55,12 @@ Complexité domaine?
 3. **DRY** : Don't Repeat Yourself
 4. **Separation of Concerns** : Responsabilités isolées
 5. **Loose Coupling** : Couplage faible
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture backend | Design système complet |
+| ADRs | Architecture Decision Records |
+| Documentation | Guide d'architecture pour l'équipe |

@@ -128,3 +128,11 @@ Avant de valider la recette :
 - [ ] Réserves documentées avec engagements
 - [ ] Validation orale du client obtenue
 - [ ] PV de recette signé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan de recette | Organisation et planification des tests |
+| Grille de recette | Cas de test et critères de validation |
+| PV de recette signé | Document officiel de validation |

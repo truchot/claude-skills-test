@@ -130,3 +130,12 @@ Contexte : [Pourquoi tu demandes]
 | Problème d'architecture | → `architecture-check.md` |
 | Problème de performance | → `performance-review.md` |
 | Désaccord technique | → Discussion avec l'équipe |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Commentaires de review | Feedback structuré sur la PR |
+| Checklist de validation | Points validés et points à corriger |
+| Approbation ou changements demandés | Décision sur la PR |

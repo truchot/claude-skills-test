@@ -358,3 +358,12 @@ page.on('console', msg => console.log(msg.text()))
 | Tests composants | → `integration-testing.md` |
 | Mocking API | → `mocking.md` |
 | CI/CD | → `deployment/ci-cd` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration E2E | Setup Playwright/Cypress pour Next.js |
+| Suite de tests E2E | Tests des parcours utilisateur |
+| Documentation | Guide des tests E2E |

@@ -42,3 +42,12 @@ Requête CI/CD
 | GitHub Actions, workflow, jobs | github-actions |
 | GitLab CI, stages, pipeline | github-actions |
 | cache, artifacts, matrix | github-actions |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Pipeline CI/CD complet | Build, test, deploy automatisés |
+| Configuration | GitHub Actions, GitLab CI, etc. |
+| Documentation | Guide CI/CD pour l'équipe |

@@ -279,3 +279,12 @@ gh pr list --state merged --base main --json title,labels
 | Feature complexe à expliquer | Collaboration avec Product |
 | Notes pour presse/marketing | Coordination Communication |
 | Traduction nécessaire | Équipe localisation |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Release notes | Notes de version complètes |
+| Checklist de déploiement | Procédure de mise en production |
+| Annonce release | Communication aux utilisateurs |

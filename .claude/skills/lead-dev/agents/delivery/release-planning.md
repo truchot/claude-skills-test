@@ -224,3 +224,12 @@ Process : Raccourci, validation minimale
 | Scope non prêt | Reporter ou réduire |
 | Risque critique | Validation direction |
 | Incident post-release | → `hotfix-coordination.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Planning de release | Calendrier et jalons de livraison |
+| Liste des features | Contenu de la version |
+| Critères de release | Conditions pour valider la sortie |

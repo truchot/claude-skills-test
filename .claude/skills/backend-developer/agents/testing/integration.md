@@ -406,3 +406,12 @@ describe('[Scenario]', () => {
 4. **Testcontainers** : Pour reproductibilité
 5. **Timeouts appropriés** : Plus longs que les tests unitaires
 6. **Parallel safe** : Ou exécuter séquentiellement
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests d'intégration | Tests multi-composants |
+| Configuration | Setup DB de test et fixtures |
+| Documentation | Guide tests intégration |

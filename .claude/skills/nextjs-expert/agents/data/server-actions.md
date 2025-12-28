@@ -383,3 +383,12 @@ if (!result.success) {
 | Revalidation avancée | → `revalidation.md` |
 | Forms complexes | → `react-expert` |
 | Auth/permissions | → Middleware ou backend |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Server Actions | Actions serveur pour mutations |
+| Configuration | Setup Server Actions et validation |
+| Documentation | Guide d'utilisation et patterns |

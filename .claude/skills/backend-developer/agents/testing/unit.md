@@ -356,3 +356,12 @@ it.each([
 4. **Fast** : Tests unitaires < 100ms
 5. **Pas de I/O** : Mocker toutes les dépendances externes
 6. **DRY avec beforeEach** : Setup commun factorisé
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests unitaires | Suite de tests isolés |
+| Configuration Jest/Vitest | Setup testing framework |
+| Documentation | Guide tests unitaires |

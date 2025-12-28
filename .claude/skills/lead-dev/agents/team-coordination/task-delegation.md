@@ -143,3 +143,11 @@ Dev qui a codé la feature v1
 | Compétence manquante dans l'équipe | Escalade direction technique |
 | Conflit d'assignation | Discussion avec l'équipe |
 | Surcharge généralisée | Alerte sur le scope du sprint |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan d'assignation | Répartition des tâches par développeur |
+| Matrice compétences/tâches | Matching skills et besoins |
+| Charge de travail équilibrée | Distribution équitable des efforts |

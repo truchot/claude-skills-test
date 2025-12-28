@@ -64,3 +64,12 @@ Question Rendering ?
 3. Besoin de données utilisateur ? → SSR
 4. Besoin latence ultra-faible ? → Edge
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture de rendering | Stratégies SSR/SSG/ISR par page |
+| Configuration Next.js | Settings de rendering optimaux |
+| Documentation rendering | Guide pour l'équipe |

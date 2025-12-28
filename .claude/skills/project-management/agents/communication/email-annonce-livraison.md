@@ -173,3 +173,11 @@ Bien cordialement,
 | Fournir les accès | Oublier les credentials |
 | Indiquer les prochaines étapes | Laisser dans le flou |
 | Mentionner ce qui n'est pas inclus | Créer de fausses attentes |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Email d'annonce | Message annonçant la livraison au client |
+| Liste des fonctionnalités | Contenu de la version livrée |
+| Instructions d'accès | URL et credentials si nécessaire |

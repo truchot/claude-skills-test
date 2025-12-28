@@ -161,3 +161,11 @@ Bien cordialement,
 - [ ] Date limite mentionnée
 - [ ] Instructions de validation
 - [ ] Signature complète
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Email de demande validation | Message avec éléments à valider |
+| Liste des points à valider | Checklist claire pour le client |
+| Instructions de retour | Processus de validation explicite |

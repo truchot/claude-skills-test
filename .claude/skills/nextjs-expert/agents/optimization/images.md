@@ -353,3 +353,12 @@ module.exports = {
 | Upload images | → Backend |
 | Fonts | → `fonts.md` |
 | CLS issues | → Layout fixe avec aspect-ratio |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Next.js Image | Setup optimisé pour les images |
+| Images optimisées | Assets convertis et dimensionnés |
+| Documentation usage | Guide d'utilisation du composant Image |

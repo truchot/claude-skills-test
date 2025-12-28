@@ -51,3 +51,11 @@ Tu coordonnes les **différents types de tests** et leur utilisation appropriée
 ## Délégation
 
 Je délègue à l'agent spécialisé approprié selon le type de test demandé.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Suites de tests | Tests unitaires, intégration, E2E et composants |
+| Documentation types | Guide d'utilisation de chaque type de test |
+| Patterns de tests | Exemples et bonnes pratiques par type |

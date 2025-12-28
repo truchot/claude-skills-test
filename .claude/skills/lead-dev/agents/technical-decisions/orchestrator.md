@@ -63,3 +63,12 @@ Type de décision ?
 └─ Décision impactant toute l'équipe ?
    └─ → Escalade direction-technique
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Décisions techniques | Arbitrages et choix techniques documentés |
+| ADRs | Architecture Decision Records |
+| Guidelines techniques | Standards et bonnes pratiques équipe |

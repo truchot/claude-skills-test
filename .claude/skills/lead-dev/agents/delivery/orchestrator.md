@@ -75,3 +75,12 @@ Besoin de delivery ?
 6. POST-DEPLOY
    └─ Monitoring, validation
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Releases planifiées | Calendrier et contenus des versions |
+| Documentation déploiement | Procédures et checklists |
+| Communication releases | Annonces et release notes |

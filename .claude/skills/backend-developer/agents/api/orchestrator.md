@@ -62,3 +62,12 @@ Tu coordonnes les agents spécialisés dans la conception et le développement d
 3. **Documentation** : Toujours documenter avec OpenAPI
 4. **Sécurité** : Valider, authentifier, autoriser
 5. **Performance** : Pagination, filtrage, caching
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| API backend | Endpoints REST/GraphQL |
+| Documentation OpenAPI | Spécification complète |
+| Configuration | Validation, rate limiting, versioning |

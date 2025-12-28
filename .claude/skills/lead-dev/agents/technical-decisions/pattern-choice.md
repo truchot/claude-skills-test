@@ -215,3 +215,12 @@ Nature de la feature ?
 | Nouveau pattern pour l'équipe | → Validation + documentation |
 | Incohérence avec l'existant | → Évaluer migration vs exception |
 | Pattern complexe (DDD, CQRS) | → `direction-technique` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Recommandation de pattern | Pattern adapté au use case |
+| Exemples d'implémentation | Code samples et structure |
+| Documentation pattern | Guide d'utilisation pour l'équipe |

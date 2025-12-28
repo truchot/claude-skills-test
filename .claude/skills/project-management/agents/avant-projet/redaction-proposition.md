@@ -228,3 +228,11 @@ Retourner le bon de commande signé avec l'acompte de 30%.
 - [ ] Pas de fautes
 - [ ] PDF bien formaté
 - [ ] Validé par un senior
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Proposition commerciale | Document de proposition client-ready |
+| Devis détaillé | Chiffrage et conditions commerciales |
+| Planning prévisionnel | Dates et jalons du projet |

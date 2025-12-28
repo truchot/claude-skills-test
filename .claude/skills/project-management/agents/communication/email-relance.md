@@ -154,3 +154,11 @@ Cc : [Responsable côté client si escalade]
 - [ ] Impact/conséquences si R2/R3
 - [ ] Proposition d'aide si R1/R2
 - [ ] Escalade si R3
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Email de relance | Message de rappel adapté au niveau |
+| Historique des demandes | Rappel des échanges précédents |
+| Proposition d'action | Solution ou aide offerte |

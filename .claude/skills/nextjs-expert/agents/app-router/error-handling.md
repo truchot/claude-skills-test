@@ -326,3 +326,12 @@ export default function Error({
 | Erreurs API | → `data/data-fetching` |
 | Monitoring | → Service externe (Sentry) |
 | Auth errors | → `rendering/middleware` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration error handling | Error boundaries et pages d'erreur |
+| Composants error.tsx | Pages d'erreur personnalisées |
+| Documentation errors | Guide de gestion d'erreurs |

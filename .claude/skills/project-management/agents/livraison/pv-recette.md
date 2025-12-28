@@ -228,3 +228,11 @@ Avant génération du PV :
 - [ ] Réserves documentées avec engagements
 - [ ] Validation orale du client obtenue
 - [ ] Signataires identifiés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| PV de recette | Document officiel de validation projet |
+| Bilan des tests | Synthèse des résultats de recette |
+| Réserves documentées | Liste des anomalies et corrections |

@@ -298,3 +298,12 @@ export const runtime = 'nodejs' | 'edge'
 | Redirections/auth | → `middleware.md` |
 | Performance edge | → `edge-runtime.md` |
 | Data fetching | → `data/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration SSR/SSG | Pages avec rendering strategy adapté |
+| Documentation stratégies | Guide de choix SSR vs SSG vs ISR |
+| Performance benchmarks | Comparaison des approches |

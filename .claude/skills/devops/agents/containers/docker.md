@@ -338,3 +338,12 @@ docker build -t myapp:latest .
 4. **Non-root** : Sécurité
 5. **Healthcheck** : Pour orchestration
 6. **.dockerignore** : Exclure l'inutile
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dockerfile optimisé | Image multi-stage et sécurisée |
+| Configuration Docker | Setup pour dev et prod |
+| Documentation | Guide Docker pour l'équipe |

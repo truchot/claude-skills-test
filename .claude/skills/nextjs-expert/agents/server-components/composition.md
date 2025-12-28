@@ -335,3 +335,12 @@ export default function Page() {
 | State global | → `react-expert` |
 | Décision SC/CC | → `server-vs-client.md` |
 | Data fetching | → `data/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture de composition | Structure des composants imbriqués |
+| Patterns de composition | Best practices Server/Client |
+| Exemples | Code samples de composition |

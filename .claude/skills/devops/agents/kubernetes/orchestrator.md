@@ -49,3 +49,12 @@ Requête Kubernetes
 | service, ingress, loadbalancer | deployments |
 | helm, chart, values.yaml | deployments |
 | HPA, autoscaling | deployments |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Kubernetes | Deployments, services, scaling |
+| Manifestes K8s | YAML complets et optimisés |
+| Documentation | Guide Kubernetes pour l'équipe |

@@ -68,3 +68,12 @@ Lecture → Server Component + fetch()
 Mutation → Server Action + revalidation
 Real-time → Client fetching avec polling/WS
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture data layer | Stratégie complète de data fetching |
+| Configuration | Setup Server Actions, SWR, revalidation |
+| Documentation | Guide data fetching pour l'équipe |

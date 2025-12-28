@@ -375,3 +375,12 @@ Jaeger   Slack/PagerDuty
 4. **Request ID** : Corrélation logs/traces
 5. **SLOs définis** : Objectifs clairs
 6. **Runbooks** : Actions documentées
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Prometheus | Scraping et alerting rules |
+| Dashboards | Métriques système et applicatives |
+| Documentation | Guide Prometheus |

@@ -333,3 +333,12 @@ Push → Lint → Test → Build → Deploy Staging → Deploy Prod
 4. **Sécurité** : Secrets dans environments protégés
 5. **Rollback** : Garder les artifacts pour rollback
 6. **Notifications** : Slack/Email sur échec
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Workflows GitHub Actions | Pipelines CI/CD automatisés |
+| Configuration | Setup actions et secrets |
+| Documentation | Guide d'utilisation des workflows |

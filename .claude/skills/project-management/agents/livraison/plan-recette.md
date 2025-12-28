@@ -196,3 +196,11 @@ Avant le lancement de la recette :
 - [ ] Accès envoyés au client
 - [ ] Documentation fournie
 - [ ] Contacts identifiés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan de recette | Organisation des tests et calendrier |
+| Périmètre de tests | Fonctionnalités à valider |
+| Environnement de test | Configuration et accès |

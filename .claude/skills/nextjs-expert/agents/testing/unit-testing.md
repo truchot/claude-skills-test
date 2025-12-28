@@ -380,3 +380,12 @@ describe('generateConfig', () => {
 | Tests E2E | → `e2e-testing.md` |
 | Mocking complexe | → `mocking.md` |
 | CI/CD | → `deployment/ci-cd` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration tests unitaires | Setup Jest/Vitest pour Next.js |
+| Suite de tests | Tests des composants et utils |
+| Documentation testing | Guide des tests unitaires |

@@ -297,3 +297,12 @@ test('calculates total with discount', () => {
 | Nouvelle pratique proposée | → Discussion équipe |
 | Pratique obsolète | → Mise à jour doc |
 | Désaccord sur une pratique | → ADR avec direction technique |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Guide des bonnes pratiques | Documentation des standards de l'équipe |
+| Exemples de code | Patterns et anti-patterns illustrés |
+| Checklist qualité | Points de contrôle pour le code |

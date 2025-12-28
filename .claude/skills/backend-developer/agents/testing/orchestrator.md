@@ -56,3 +56,12 @@ Tu coordonnes les agents spécialisés en tests pour les applications backend.
 3. **Test behavior, not implementation**
 4. **Un assert par test** (idéalement)
 5. **Tests lisibles = documentation**
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de tests | Plan unitaires/intégration/API |
+| Suite de tests | Tests complets avec bon coverage |
+| Documentation testing | Guide pour l'équipe |

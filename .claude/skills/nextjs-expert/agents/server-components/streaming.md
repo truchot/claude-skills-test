@@ -310,3 +310,12 @@ export default function Page() {
 | Loading route-level | → `app-router/layouts` |
 | Composition SC/CC | → `composition.md` |
 | Performance | → `optimization/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration streaming | Setup Suspense et streaming SSR |
+| Composants avec Suspense | Loading states optimisés |
+| Documentation streaming | Guide d'utilisation |

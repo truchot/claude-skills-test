@@ -320,3 +320,12 @@ export const runtime = 'nodejs' // ou 'edge'
 | Client-side data | → `client-fetching.md` |
 | Cache invalidation | → `revalidation.md` |
 | Streaming | → `server-components/streaming` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture data fetching | Stratégie Server/Client data loading |
+| Configuration | Setup fetch avec cache et revalidation |
+| Documentation | Guide des patterns de fetching |

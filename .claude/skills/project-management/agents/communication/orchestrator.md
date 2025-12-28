@@ -109,3 +109,11 @@ Tu coordonnes la **communication avec les clients** tout au long du projet.
 - ⚠️ Documenter tous les échanges importants (traçabilité)
 - ⚠️ Adapter le niveau de détail au destinataire
 - ⚠️ Chaque type d'email a son agent dédié - ne pas mélanger
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Communication client | Emails et messages structurés |
+| Comptes-rendus | Synthèses de réunions et décisions |
+| Documentation échanges | Historique des communications projet |

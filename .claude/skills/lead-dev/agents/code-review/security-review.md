@@ -178,3 +178,12 @@ app.use(helmet());
 | Secret exposé | → `direction-technique/securite/gestion-secrets` + rotation |
 | Doute sur la sécurité | → Audit par `direction-technique/securite` |
 | Incident sécurité | → `direction-technique/support/gestion-incidents` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit de sécurité | Analyse des vulnérabilités potentielles |
+| Recommandations sécurité | Actions correctives prioritaires |
+| Validation sécurité | Approbation ou blocage si critique |

@@ -228,3 +228,12 @@ Tolérance :
 | Risque accepté | Validation direction |
 | No-Go contesté | Réunion stakeholders |
 | Problème post-deploy | → `hotfix-coordination.md` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Checklist de déploiement | Points de contrôle pre-deploy |
+| Rapport Go/No-Go | Décision de déploiement justifiée |
+| Plan de rollback | Procédure de retour arrière |

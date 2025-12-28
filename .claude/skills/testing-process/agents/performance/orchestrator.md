@@ -61,3 +61,11 @@ Tu coordonnes les **tests de performance** de l'application.
 ## Délégation
 
 Je délègue à l'agent spécialisé approprié selon le type de performance à tester.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de charge | Résultats des tests de charge et stress |
+| Audit performance frontend | Core Web Vitals et optimisations Lighthouse |
+| Rapport de profiling | Analyse des bottlenecks et optimisations |

@@ -134,3 +134,12 @@ Vérifier que l'architecture d'une feature respecte les patterns établis et s'i
 | Pattern non documenté | → Discussion avec l'équipe |
 | Violation majeure | → Review avec direction-technique |
 | Nouvelle architecture proposée | → ADR avec direction-technique |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse architecturale | Validation de l'architecture proposée |
+| Recommandations | Améliorations et ajustements suggérés |
+| Validation technique | Approbation ou demandes de modifications |

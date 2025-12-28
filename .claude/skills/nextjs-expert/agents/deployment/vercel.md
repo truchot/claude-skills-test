@@ -390,3 +390,12 @@ export default function RootLayout({ children }) {
 | CI/CD custom | → `ci-cd.md` |
 | Variables env | → `environment.md` |
 | Performance | → `optimization/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Vercel | Déploiement optimisé sur Vercel |
+| Documentation deployment | Guide de déploiement |
+| CI/CD Vercel | Pipeline automatisé |

@@ -193,3 +193,11 @@ Reproduire avec le code minimum
 | Décision d'architecture | → `direction-technique` |
 | Dépendance équipe externe | → Chef de projet pour coordination |
 | Blocage > 1 jour non résolu | Réunion dédiée avec experts |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse des blocages | Identification et catégorisation des obstacles |
+| Plan de résolution | Actions et responsables par blocage |
+| Documentation solutions | Base de connaissance des résolutions |

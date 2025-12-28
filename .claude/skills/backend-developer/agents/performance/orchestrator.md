@@ -58,3 +58,12 @@ Tu coordonnes les agents spécialisés en optimisation des performances des appl
 1. Mesurer avant d'optimiser
 2. Optimiser les bottlenecks réels
 3. Vérifier l'impact après
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit de performance | Rapport de profiling complet |
+| Optimisations | Cache, queries, concurrence |
+| Documentation | Guide performance pour l'équipe |

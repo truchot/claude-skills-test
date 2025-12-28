@@ -174,3 +174,10 @@ Escalade si besoin complexe
 | Aucune option satisfaisante | → Développer en interne ? |
 | Doute sur la sécurité | → Audit avec `direction-technique/securite` |
 | Impact sur l'architecture | → Discussion équipe + ADR |
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse comparative | Comparaison détaillée des options techniques |
+| Recommandation justifiée | Choix technique avec rationale |
+| ADR (Architecture Decision Record) | Documentation de la décision |

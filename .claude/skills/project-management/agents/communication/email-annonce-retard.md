@@ -182,3 +182,11 @@ Bien cordialement,
 - [ ] Nouvelle date réaliste
 - [ ] Proposition d'échange
 - [ ] Validé par le responsable
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Email d'annonce retard | Message expliquant le retard au client |
+| Analyse des causes | Raisons factuelles du retard |
+| Plan de rattrapage | Nouvelle date et actions correctives |

@@ -264,3 +264,12 @@ type Subscription {
 3. **Complexity Analysis** : Calculer et limiter la complexité
 4. **Persisted Queries** : En production, utiliser des queries persistées
 5. **Fragments** : Encourager l'utilisation de fragments côté client
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Schéma GraphQL | Types, queries, mutations |
+| Implémentation resolvers | Resolvers optimisés |
+| Documentation | Guide GraphQL |

@@ -62,3 +62,11 @@ Tu coordonnes les **tests d'accessibilité** de l'application.
 ## Délégation
 
 Je délègue à l'agent spécialisé approprié selon le besoin d'accessibilité.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de conformité WCAG | Niveau de conformité A/AA/AAA |
+| Rapport d'audit accessibilité | Résultats des tests automatisés et manuels |
+| Plan de remédiation | Actions prioritaires pour améliorer l'accessibilité |

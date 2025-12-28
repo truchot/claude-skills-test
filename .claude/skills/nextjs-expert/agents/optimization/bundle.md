@@ -372,3 +372,12 @@ Total TTI: < 3s
 | Images | → `images.md` |
 | Fonts | → `fonts.md` |
 | Architecture | → `react-expert` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Analyse bundle | Rapport de taille des bundles |
+| Configuration webpack | Optimisations et code splitting |
+| Plan d'optimisation | Actions pour réduire la taille |

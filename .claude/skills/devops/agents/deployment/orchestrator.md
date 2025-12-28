@@ -49,3 +49,12 @@ Requête Deployment
 | rollback, recovery | strategies |
 | feature flag, toggle | strategies |
 | ArgoCD, Flux, GitOps | strategies |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de déploiement | Plan blue-green/canary/rolling |
+| Configuration | Automation et rollback |
+| Documentation | Runbooks de déploiement |

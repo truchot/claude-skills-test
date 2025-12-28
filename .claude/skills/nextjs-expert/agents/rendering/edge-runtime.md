@@ -302,3 +302,12 @@ export async function GET() {
 | Middleware | → `middleware.md` |
 | Déploiement | → `deployment/` |
 | Performance | → `optimization/` |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Edge Runtime | Functions déployées sur Edge |
+| Documentation Edge | Use cases et limitations |
+| Benchmarks performance | Mesures de latence Edge vs Node |

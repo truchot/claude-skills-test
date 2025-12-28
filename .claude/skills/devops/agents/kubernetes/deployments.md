@@ -406,3 +406,12 @@ kubectl apply -f k8s/
 4. **HPA** : Autoscaling horizontal
 5. **Secrets** : Pas en clair dans les manifests
 6. **RBAC** : Least privilege
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Manifestes Kubernetes | Deployments, services, ingress |
+| Configuration | YAML optimisés pour K8s |
+| Documentation | Guide de déploiement K8s |

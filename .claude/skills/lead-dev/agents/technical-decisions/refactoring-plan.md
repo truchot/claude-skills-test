@@ -210,3 +210,12 @@ Justification : [Pourquoi cette stratégie]
 | Impact sur autres équipes | → Coordination |
 | Changement d'API publique | → Migration plan |
 | Doute sur la stratégie | → Discussion équipe |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Plan de refactoring | Étapes et stratégie de refonte |
+| Estimation d'effort | Charge de travail par phase |
+| Tests de régression | Suite de tests pour valider la refonte |
