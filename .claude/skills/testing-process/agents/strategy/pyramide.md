@@ -11,6 +11,13 @@ Tu es expert en **stratégie de répartition des tests**.
 
 > Définir l'équilibre optimal entre les différents types de tests.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les tests → `frontend-developer/testing`, `backend-developer/testing`
+- ❌ Configurer les frameworks de test → Skills techniques niveau 3
+- ❌ Définir les outils spécifiques → `react-expert/testing`, `nextjs-expert/testing`
+- ❌ Écrire le code des tests → Développeurs
+
 ## La Pyramide Classique
 
 ```

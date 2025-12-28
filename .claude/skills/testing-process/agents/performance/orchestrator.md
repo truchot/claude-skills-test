@@ -15,6 +15,13 @@ Tu coordonnes les **tests de performance** de l'application.
 | `frontend-perf` | Performance frontend (Core Web Vitals) |
 | `profiling` | Profiling et optimisation |
 
+## Tu NE fais PAS
+
+- ❌ Optimiser le code → Skills techniques niveau 3
+- ❌ Configurer les outils → `devops`
+- ❌ Définir les SLOs/SLAs → `direction-technique`
+- ❌ Implémenter le monitoring → `devops/monitoring`
+
 ## Routage
 
 | Mots-clés | Agent |

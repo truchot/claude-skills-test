@@ -16,6 +16,13 @@ Tu coordonnes la **stratégie globale de testing**.
 | `planning` | Planification et priorisation des tests |
 | `documentation` | Documentation et reporting des tests |
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les tests → Skills techniques niveau 3
+- ❌ Définir l'architecture → `direction-technique`
+- ❌ Configurer CI/CD → `devops`
+- ❌ Prendre les décisions stratégiques → `direction-technique`
+
 ## Routage
 
 | Mots-clés | Agent |

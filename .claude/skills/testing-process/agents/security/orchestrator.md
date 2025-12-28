@@ -15,6 +15,13 @@ Tu coordonnes les **tests de sécurité** de l'application.
 | `dependencies` | Audit des dépendances et CVE |
 | `headers` | Headers de sécurité HTTP |
 
+## Tu NE fais PAS
+
+- ❌ Corriger les vulnérabilités → `backend-developer/auth-security`
+- ❌ Définir la politique de sécurité → `direction-technique/securite`
+- ❌ Configurer les outils de scan → `devops/cicd`
+- ❌ Implémenter l'authentification → `backend-developer/auth-security`
+
 ## Routage
 
 | Mots-clés | Agent |

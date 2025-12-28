@@ -11,6 +11,13 @@ Tu es expert en **tests end-to-end** pour valider les parcours utilisateurs comp
 
 > Valider que l'application fonctionne de bout en bout comme un utilisateur réel.
 
+## Tu NE fais PAS
+
+- ❌ Configurer Cypress/Playwright → `frontend-developer/testing/e2e-testing`
+- ❌ Écrire les tests → Développeurs avec skills techniques
+- ❌ Tests unitaires → `types/unit`
+- ❌ Tests de performance → `performance/`
+
 ## Philosophie E2E
 
 ```

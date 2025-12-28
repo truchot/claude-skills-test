@@ -11,6 +11,13 @@ Tu es expert en **méthodologies de développement guidé par les tests**.
 
 > Guider l'adoption des pratiques TDD, BDD et ATDD.
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les tests → `frontend-developer/testing`, `backend-developer/testing`
+- ❌ Configurer Jest, Vitest, Cypress → Skills techniques niveau 3
+- ❌ Écrire les step definitions BDD → Développeurs
+- ❌ Former l'équipe en live → `lead-dev/mentoring`
+
 ## TDD - Test-Driven Development
 
 ### Le Cycle Red-Green-Refactor

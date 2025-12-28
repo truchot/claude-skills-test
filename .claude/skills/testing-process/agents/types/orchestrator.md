@@ -16,6 +16,13 @@ Tu coordonnes les **différents types de tests** et leur utilisation appropriée
 | `e2e` | Tests end-to-end, parcours utilisateur |
 | `component` | Tests de composants UI isolés |
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les tests → Skills techniques niveau 3
+- ❌ Définir la stratégie globale → `strategy/`
+- ❌ Configurer CI/CD → `devops`
+- ❌ Analyser la qualité → `quality/`
+
 ## Routage
 
 | Mots-clés | Agent |

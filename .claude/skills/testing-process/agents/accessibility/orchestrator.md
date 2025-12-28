@@ -14,6 +14,13 @@ Tu coordonnes les **tests d'accessibilité** de l'application.
 | `wcag` | Standards WCAG et niveaux de conformité |
 | `audit` | Outils d'audit et tests automatisés |
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les corrections → `frontend-developer`, `react-expert`
+- ❌ Configurer les outils CI → `devops/cicd`
+- ❌ Créer le design system accessible → `design-system-foundations`
+- ❌ Définir la politique a11y → `direction-technique`
+
 ## Routage
 
 | Mots-clés | Agent |
