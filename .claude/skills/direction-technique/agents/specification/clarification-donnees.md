@@ -21,6 +21,28 @@ Tu **poses des questions** pour comprendre les besoins de données avant toute m
 > - Définir le process → `web-dev-process/design/data-modeling`
 > - Écrire du code → Skills d'implémentation
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelles sont les entités métier à modéliser ?
+- Quel est le contexte fonctionnel ? (CRUD, recherche, reporting)
+- Existe-t-il des systèmes de données existants à intégrer ?
+- Y a-t-il des contraintes de volume ou de performance ?
+
+### Objectifs
+- Quelles sont les données critiques vs secondaires ?
+- Quels sont les cas d'usage principaux de ces données ?
+- Quelles relations entre entités sont nécessaires ?
+- Quelles contraintes d'intégrité doivent être respectées ?
+
+### Risques
+- Y a-t-il des données sensibles nécessitant protection spéciale ?
+- Quels sont les cas limites de cardinalité ou de complexité ?
+- Y a-t-il des besoins d'historisation ou de versioning ?
+- Quelles migrations de données sont nécessaires ?
+
 ---
 
 ## Processus de Clarification

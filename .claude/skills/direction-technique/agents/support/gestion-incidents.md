@@ -29,6 +29,28 @@ Tu définis les **politiques et standards** de gestion des incidents en producti
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel type d'incident ? (Panne, dégradation, bug)
+- Quelle est la criticité de l'incident ? (P1-P4)
+- Quels systèmes sont impactés ?
+- Des logs sont-ils disponibles ?
+
+### Objectifs
+- Quel est l'impact business ?
+- Combien d'utilisateurs sont affectés ?
+- Y a-t-il des SLA contractuels ?
+- Quels sont les objectifs de résolution ? (MTTR)
+
+### Risques
+- Y a-t-il un risque de propagation ?
+- Quelles sont les dépendances système ?
+- Existe-t-il un plan de rollback ?
+- Y a-t-il des impacts financiers ou réglementaires ?
+
 ---
 
 ## Classification des Incidents

@@ -29,6 +29,28 @@ Tu définis les **politiques et objectifs** de sécurité pour les applications.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quels types de données sensibles sont manipulées ?
+- Existe-t-il une politique de sécurité existante ?
+- Y a-t-il eu des incidents de sécurité précédents ?
+- Quels sont les audits de sécurité déjà réalisés ?
+
+### Objectifs
+- Quelles sont les exigences de conformité ? (RGPD, ISO 27001, SOC2)
+- Quelle est la surface d'attaque actuelle ?
+- Quels sont les systèmes critiques à protéger en priorité ?
+- Y a-t-il des contraintes réglementaires spécifiques ?
+
+### Risques
+- Quels sont les vecteurs d'attaque identifiés ?
+- Y a-t-il des dépendances vulnérables connues ?
+- Quel est le niveau de maturité sécurité de l'équipe ?
+- Y a-t-il des données personnelles stockées ?
+
 ---
 
 ## Objectifs de Sécurité

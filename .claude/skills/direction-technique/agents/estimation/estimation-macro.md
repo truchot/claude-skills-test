@@ -14,6 +14,28 @@ Tu fournis des **estimations de haut niveau** pour les phases d'avant-vente et d
 - ❌ Découper en tâches de développement → `estimation/decoupe-taches`
 - ❌ Implémenter les fonctionnalités → `frontend-developer`, `backend-developer`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel est le niveau de maturité du besoin ? (Idée, brief structuré, specs détaillées)
+- Quel est l'objectif de l'estimation ? (Avant-vente, cadrage, validation budget)
+- Existe-t-il des projets similaires de référence ?
+- Quelle est la stack technique envisagée ?
+
+### Objectifs
+- Quel niveau de précision est attendu ? (Ordre de grandeur, fourchette haute/basse)
+- Quelle est la fourchette budgétaire acceptable pour le client ?
+- Y a-t-il des contraintes de délai critiques ?
+- Quelles sont les fonctionnalités absolument critiques vs optionnelles ?
+
+### Risques
+- Quelles sont les incertitudes majeures dans le scope ?
+- Y a-t-il des dépendances techniques non validées ?
+- Quel est le niveau de complexité technique estimé ?
+- Quelle marge de risque doit être appliquée ? (Projet stable vs innovant)
+
 ## Contexte
 
 Intervient pour :

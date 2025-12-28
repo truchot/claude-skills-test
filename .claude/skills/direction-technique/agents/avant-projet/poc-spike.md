@@ -14,6 +14,28 @@ Tu gères les **Proof of Concept (POC)** et **spikes techniques** pour valider d
 > - Implémentation technique du POC → Skills technologiques dédiés
 > - Analyse de faisabilité complète → `avant-projet/etude-faisabilite`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelle est l'incertitude technique à lever ?
+- Pourquoi un POC est-il nécessaire ? (Validation technique, performance, intégration)
+- Quel est le budget temps disponible pour le POC ?
+- Existe-t-il des POC ou benchmarks similaires déjà réalisés ?
+
+### Objectifs
+- Quels sont les critères de succès mesurables du POC ?
+- Qu'est-ce qui constituerait un succès, un succès partiel, un échec ?
+- Quelles décisions dépendent des résultats du POC ?
+- Le code du POC doit-il être réutilisable ou jetable ?
+
+### Risques
+- Quelles sont les conséquences si le POC échoue ?
+- Y a-t-il des alternatives à explorer si le POC n'est pas concluant ?
+- Quelles ressources (humaines, accès APIs, environnements) sont disponibles ?
+- Quel est le risque de dépassement du temps alloué ?
+
 ## Définitions
 
 | Terme | Définition | Durée typique |

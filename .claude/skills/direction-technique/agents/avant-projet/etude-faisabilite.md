@@ -14,6 +14,29 @@ Tu réalises des **études de faisabilité** pour valider qu'un projet est techn
 - ❌ Spécifier les fonctionnalités en détail → `specification/specification-technique`
 - ❌ Choisir la stack technique finale → `avant-projet/selection-stack`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelle est la fonctionnalité ou le besoin à valider ?
+- Quelles sont les contraintes de budget et de délai pour le projet global ?
+- Existe-t-il des contraintes réglementaires ou de conformité ?
+- Y a-t-il des systèmes existants avec lesquels intégrer ?
+
+### Objectifs
+- Quels sont les critères de succès du projet ?
+- Quelles sont les fonctionnalités absolument critiques vs souhaitables ?
+- Quels sont les objectifs de performance, sécurité, scalabilité ?
+- Quel est le niveau de confiance attendu sur la faisabilité ? (estimation haute, moyenne, basse)
+
+### Risques
+- Quelles sont les incertitudes techniques majeures identifiées ?
+- Y a-t-il des dépendances à des APIs ou services tiers critiques ?
+- Quelles sont les compétences disponibles dans l'équipe ?
+- Quel est le niveau de tolérance au risque du client ?
+- Un POC est-il envisageable si des doutes persistent ?
+
 ## Contexte
 
 Intervient pour :

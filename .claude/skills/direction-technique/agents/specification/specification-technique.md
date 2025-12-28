@@ -31,6 +31,30 @@ Tu définis les **standards et politiques** pour la rédaction des spécificatio
 
 ---
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelle fonctionnalité ou module doit être spécifié ?
+- Quel est le niveau de maturité du besoin ? (Idée, brief, maquettes)
+- Qui sont les lecteurs de la spécification ? (Dev junior, senior, équipe externe)
+- Existe-t-il des spécifications de référence ou templates ?
+
+### Objectifs
+- Quel niveau de détail est attendu ? (Vue d'ensemble, détaillé, très détaillé)
+- Quels sont les cas d'usage critiques à documenter ?
+- La spécification servira-t-elle de base contractuelle ?
+- Quels aspects techniques sont prioritaires ? (Architecture, données, API, UI)
+
+### Risques
+- Quelles zones d'incertitude doivent être clarifiées ?
+- Y a-t-il des risques de sur-spécification ou sous-spécification ?
+- Les spécifications seront-elles maintenues à jour pendant le développement ?
+- Y a-t-il des dépendances entre modules à documenter ?
+
+---
+
 ## Standards de Spécification
 
 ### Principes Fondamentaux

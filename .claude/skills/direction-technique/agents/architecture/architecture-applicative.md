@@ -38,6 +38,28 @@ Tu définis les **politiques et standards** d'architecture logicielle applicativ
 - ❌ Définir les spécifications → `specification/*`
 - ❌ Déployer ou configurer l'infrastructure → `devops`, `infrastructure/*`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelle est la complexité du domaine métier ? (Simple, moyen, complexe)
+- Quelle est la taille de l'équipe de développement ?
+- Quelle est l'expérience de l'équipe avec les patterns architecturaux ?
+- Existe-t-il des contraintes techniques imposées par la stack choisie ?
+
+### Objectifs
+- Quelles sont les priorités ? (Maintenabilité, testabilité, time-to-market, évolutivité)
+- Quels sont les objectifs de couverture de tests ?
+- L'application doit-elle évoluer fréquemment ou est-elle stable ?
+- Y a-t-il des besoins spécifiques de découplage entre équipes ?
+
+### Risques
+- Quel est le risque d'over-engineering vs sous-architecture ?
+- Y a-t-il des risques de couplage fort avec des dépendances externes ?
+- La scalabilité est-elle un enjeu ? (Horizontal, vertical)
+- Quels sont les risques de dette technique si on choisit une architecture trop simple ?
+
 ---
 
 ## Contexte d'Application

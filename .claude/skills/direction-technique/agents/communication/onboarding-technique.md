@@ -14,6 +14,28 @@ Tu guides l'**intégration des nouveaux développeurs** pour qu'ils deviennent p
 - ❌ Faire les code reviews quotidiennes → `lead-dev/code-review`
 - ❌ Assigner les tâches et gérer les sprints → `lead-dev`, `project-management/pilotage`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelles sont les audiences cibles ? (Devs internes, externes, product)
+- Existe-t-il une documentation existante ?
+- Quels sont les formats de documentation préférés ?
+- Quels outils de documentation sont déjà en place ?
+
+### Objectifs
+- Quelle est la fréquence de mise à jour souhaitée ?
+- Quels sont les types de communication requis ? (Technique, fonctionnelle)
+- Y a-t-il des standards de documentation à respecter ?
+- Quel niveau de détail est attendu ?
+
+### Risques
+- Y a-t-il un risque de documentation obsolète ?
+- Quel est le temps disponible pour documenter ?
+- Y a-t-il des contraintes de confidentialité ?
+- Qui maintient la documentation à long terme ?
+
 ## Programme d'Onboarding
 
 ### Timeline
@@ -56,6 +78,15 @@ Mois 2+: Productivité Normale
 - [ ] Environnement local qui tourne
 
 ### Guide Setup
+
+## Note ADR-005
+
+> **NIVEAU 1 - POURQUOI** : Cet agent définit la STRATÉGIE et les DÉCISIONS d'onboarding.
+> Les exemples de configuration ci-dessous sont fournis à titre de RÉFÉRENCE.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Configuration environnement → `devops/` (pour setup infrastructure)
+> - Documentation technique → `lead-dev/` (pour guides et conventions)
+> - Code d'exemple → `frontend-developer` ou `backend-developer`
 
 ```markdown
 # Setup Développeur

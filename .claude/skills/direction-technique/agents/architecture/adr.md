@@ -14,6 +14,28 @@ Tu gères les **ADR** (Architecture Decision Records) pour documenter les décis
 - ❌ Configurer les outils et frameworks → `devops`, `web-dev-process/setup`
 - ❌ Former les développeurs aux patterns → `communication/onboarding-technique`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelle décision technique doit être documentée ?
+- Pourquoi cette décision est-elle suffisamment importante pour un ADR ?
+- Quel est le contexte business et technique qui justifie cette décision ?
+- Existe-t-il des ADR liés ou des décisions précédentes à considérer ?
+
+### Objectifs
+- Quelles options ont été réellement évaluées ?
+- Quels sont les critères de décision utilisés ? (Performance, coût, maintenabilité)
+- Y a-t-il un consensus dans l'équipe ou des points de débat ?
+- Quelles sont les conséquences attendues de cette décision ?
+
+### Risques
+- Quels sont les trade-offs acceptés avec cette décision ?
+- Y a-t-il des conséquences négatives ou des risques identifiés ?
+- La décision est-elle réversible ou irréversible ?
+- Quel est l'impact sur les équipes, le planning, le budget ?
+
 ## Contexte
 
 Les ADR permettent de :

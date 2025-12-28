@@ -25,6 +25,28 @@ Tu définis les **politiques et standards** de code review pour l'équipe.
 
 **Pour le process détaillé** : Voir `web-dev-process/agents/development/code-review.md`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quels sont les standards qualité existants dans l'équipe ?
+- Existe-t-il déjà une Definition of Done ?
+- Quelles sont les métriques qualité actuelles ?
+- Y a-t-il une dette technique documentée ?
+
+### Objectifs
+- Quels sont les objectifs de qualité à atteindre ? (Coverage, complexité)
+- Quelle est la maturité souhaitée de l'équipe ?
+- Y a-t-il des exigences client spécifiques sur la qualité ?
+- Quels sont les critères de release ?
+
+### Risques
+- Quel est le niveau de dette technique actuel ?
+- Y a-t-il des zones de code legacy critiques ?
+- Quels sont les points de non-qualité récurrents ?
+- Y a-t-il des contraintes de délai vs qualité ?
+
 ## Politiques à Définir
 
 ### 1. Politique d'Approbation

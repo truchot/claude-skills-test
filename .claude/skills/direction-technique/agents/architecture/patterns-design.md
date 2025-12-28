@@ -38,6 +38,28 @@ Tu définis les **critères de choix** des patterns de conception et les bonnes 
 - ❌ Définir les standards d'architecture → `architecture/architecture-applicative`
 - ❌ Reviewer le code → `lead-dev/code-review`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel problème technique spécifique cherchons-nous à résoudre ?
+- La solution actuelle pose-t-elle un problème mesurable ? (Duplication, couplage, testabilité)
+- Quelle est la taille et la complexité du code concerné ?
+- L'équipe a-t-elle de l'expérience avec le pattern envisagé ?
+
+### Objectifs
+- Quel est l'objectif principal ? (Testabilité, maintenabilité, flexibilité, performance)
+- Le pattern apporte-t-il une valeur immédiate ou anticipée ?
+- Combien de variations ou d'évolutions futures sont réellement attendues ?
+- Quels sont les critères de succès pour ce pattern ?
+
+### Risques
+- Le pattern ajoute-t-il une complexité justifiée par les bénéfices ?
+- Risque-t-on de l'over-engineering ? (YAGNI, KISS)
+- L'équipe devra-t-elle être formée ? Quel est l'impact sur le time-to-market ?
+- Existe-t-il une solution plus simple qui répond au besoin actuel ?
+
 ---
 
 ## Catégories de Patterns

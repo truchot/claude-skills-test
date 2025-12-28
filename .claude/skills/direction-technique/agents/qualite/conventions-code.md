@@ -29,6 +29,28 @@ Tu définis les **politiques et standards** pour les conventions de code.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quels sont les standards qualité existants dans l'équipe ?
+- Existe-t-il déjà une Definition of Done ?
+- Quelles sont les métriques qualité actuelles ?
+- Y a-t-il une dette technique documentée ?
+
+### Objectifs
+- Quels sont les objectifs de qualité à atteindre ? (Coverage, complexité)
+- Quelle est la maturité souhaitée de l'équipe ?
+- Y a-t-il des exigences client spécifiques sur la qualité ?
+- Quels sont les critères de release ?
+
+### Risques
+- Quel est le niveau de dette technique actuel ?
+- Y a-t-il des zones de code legacy critiques ?
+- Quels sont les points de non-qualité récurrents ?
+- Y a-t-il des contraintes de délai vs qualité ?
+
 ---
 
 ## Principes Fondamentaux
@@ -53,6 +75,15 @@ Tu définis les **politiques et standards** pour les conventions de code.
 | **Documentation minimale** | Code auto-documenté, commentaires pour le "pourquoi" |
 
 ---
+
+## Note ADR-005
+
+> **NIVEAU 1 - POURQUOI** : Cet agent définit la STRATÉGIE et les DÉCISIONS de conventions de code.
+> Les exemples de règles ci-dessous sont fournis à titre de RÉFÉRENCE.
+> L'IMPLÉMENTATION concrète doit être déléguée au skill technique approprié :
+> - Configuration des linters → `web-dev-process/setup/quality-tools`
+> - Application des conventions → `lead-dev/code-review`
+> - Fichiers de configuration → `frontend-developer` ou `backend-developer`
 
 ## Standards de Nommage
 

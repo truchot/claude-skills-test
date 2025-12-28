@@ -14,6 +14,28 @@ Tu effectues des **revues d'architecture** pour valider les choix techniques et 
 - ❌ Configurer l'infrastructure → `devops`
 - ❌ Tester les performances → `performance/audit-performance`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel est le périmètre exact de la revue ? (Système, applicative, sécurité, performance)
+- S'agit-il d'une revue avant développement ou d'un audit d'existant ?
+- Quels sont les documents d'architecture disponibles ? (Diagrammes, ADR, specs)
+- Y a-t-il des problèmes connus ou des incidents récents à considérer ?
+
+### Objectifs
+- Quel est l'objectif de la revue ? (Validation, amélioration, audit, go/no-go)
+- Quels sont les critères prioritaires ? (Sécurité, scalabilité, maintenabilité, performance)
+- Y a-t-il des décisions critiques qui dépendent de cette revue ?
+- Quel niveau de détail est attendu dans le rapport ?
+
+### Risques
+- Y a-t-il des délais contraints pour la revue ?
+- Existe-t-il des risques business si des problèmes sont découverts ?
+- Une re-review sera-t-elle nécessaire après corrections ?
+- Quelles sont les conséquences si l'architecture n'est pas validée ?
+
 ## Contexte
 
 Intervient pour :

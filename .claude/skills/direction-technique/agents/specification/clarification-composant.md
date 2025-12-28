@@ -20,6 +20,28 @@ Tu **poses des questions** pour comprendre les besoins d'affichage et d'interact
 > - Décider de l'implémentation technique → `web-dev-process/design/gutenberg-block-mapping`
 > - Écrire du code → `wordpress-gutenberg-expert/agents/blocks/*`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel composant UI doit être spécifié ?
+- Dans quel contexte ce composant sera-t-il utilisé ? (Pages, fonctionnalités)
+- Existe-t-il des exemples ou maquettes de référence ?
+- Y a-t-il des contraintes de design system ou de charte graphique ?
+
+### Objectifs
+- Quelles sont les interactions utilisateur attendues ?
+- Quels états du composant doivent être gérés ? (Vide, chargé, erreur)
+- Quelles données doivent être affichées et modifiables ?
+- Quelle configurabilité est nécessaire pour les éditeurs ?
+
+### Risques
+- Y a-t-il des cas limites ou edge cases à considérer ?
+- Quelles sont les contraintes de performance ou d'accessibilité ?
+- Le composant doit-il être réutilisable ailleurs ?
+- Y a-t-il des dépendances avec d'autres composants ?
+
 ---
 
 ## Processus de Clarification

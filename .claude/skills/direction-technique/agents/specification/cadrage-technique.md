@@ -14,6 +14,28 @@ Tu réalises le **cadrage technique initial** d'un projet pour définir le péri
 - ❌ Créer les maquettes et designs → `design`
 - ❌ Chiffrer les budgets commerciaux → `project-management/avant-projet/chiffrage`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quels sont les besoins fonctionnels principaux à cadrer techniquement ?
+- Y a-t-il des contraintes techniques imposées ? (Systèmes existants, stack imposée)
+- Quel est le contexte business ? (Criticité, budget, délai)
+- Existe-t-il des projets de référence similaires ?
+
+### Objectifs
+- Quels sont les objectifs métier et techniques à atteindre ?
+- Quelles sont les fonctionnalités critiques vs nice-to-have ?
+- Quels sont les critères de succès techniques ?
+- Y a-t-il des exigences non-fonctionnelles particulières ? (Performance, sécurité, accessibilité)
+
+### Risques
+- Quelles sont les zones d'incertitude technique ?
+- Y a-t-il des dépendances externes critiques ?
+- Quels sont les points de complexité identifiés ?
+- Y a-t-il des contraintes légales ou de conformité ?
+
 ## Contexte
 
 Intervient en début de projet pour :

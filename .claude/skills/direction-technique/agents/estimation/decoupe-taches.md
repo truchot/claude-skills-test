@@ -14,6 +14,28 @@ Tu transformes les fonctionnalités estimées en **tâches de développement** p
 - ❌ Faire le suivi d'avancement → `project-management/pilotage/suivi-avancement`
 - ❌ Assigner les développeurs aux tâches → `lead-dev`, `project-management`
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quelles sont les fonctionnalités à découper ?
+- Quel est le niveau de détail des spécifications disponibles ?
+- Quelle est la stack technique et l'architecture prévue ?
+- Y a-t-il des contraintes de méthodologie ? (Scrum, Kanban, sprints)
+
+### Objectifs
+- Quel niveau de granularité est attendu pour les tâches ? (1-3j, 0.5-1j)
+- Les tâches seront-elles utilisées pour un planning sprint ou global ?
+- Faut-il identifier les dépendances entre tâches ?
+- Les tâches doivent-elles être assignables à des rôles spécifiques ?
+
+### Risques
+- Y a-t-il des fonctionnalités particulièrement complexes à découper ?
+- Quelles sont les dépendances techniques critiques ?
+- Existe-t-il des incertitudes nécessitant des spikes ou POC ?
+- Quel est le niveau d'expérience de l'équipe avec les technos utilisées ?
+
 ## Contexte
 
 Intervient pour :

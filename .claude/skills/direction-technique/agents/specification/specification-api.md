@@ -31,6 +31,30 @@ Tu définis les **standards et politiques** pour la spécification des APIs.
 
 ---
 
+## Questions de Clarification
+
+Avant de décider, pose ces questions :
+
+### Contexte
+- Quel type d'API doit être spécifiée ? (REST, GraphQL, WebSocket)
+- Quels sont les consommateurs de l'API ? (Frontend, mobile, tiers)
+- Existe-t-il des contraintes de compatibilité avec des systèmes existants ?
+- Y a-t-il des standards ou conventions déjà en place dans l'organisation ?
+
+### Objectifs
+- Quels sont les cas d'usage principaux de l'API ?
+- Quels sont les besoins de performance ? (Latence, throughput)
+- L'API doit-elle être publique ou privée ?
+- Quels sont les besoins de versioning et de rétrocompatibilité ?
+
+### Risques
+- Y a-t-il des besoins de sécurité spécifiques ? (Auth, rate limiting)
+- Quelles sont les contraintes de scalabilité ?
+- L'API doit-elle gérer des données sensibles ?
+- Y a-t-il des risques de breaking changes à anticiper ?
+
+---
+
 ## Standards de Design d'API
 
 ### Principes Fondamentaux
