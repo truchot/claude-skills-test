@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, testing-process, frontend-developer, backend-developer, devops, etc.)
-version: 2.8.0
+version: 2.9.0
 ---
 
 # Web Agency - Orchestrateur de Skills
@@ -59,9 +59,6 @@ HUMAIN (supervision)
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 
 **Total : 409 agents disponibles**
-
-> **Note** : Les skills `strategy`, `design`, `content` et `marketing` sont prévus mais **non implémentés**.
-> Ne pas router vers ces skills - demander clarification à l'utilisateur si besoin dans ces domaines.
 
 ## Routage Rapide
 
@@ -132,8 +129,20 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 | [004](./docs/adr/004-human-supervision.md) | Supervision Humaine |
 | [005](./docs/adr/005-skill-responsibility-boundaries.md) | Frontières entre Skills |
 | [006](./docs/adr/006-hierarchy-clarification.md) | Clarification Hiérarchie lead-dev/web-dev-process |
+| [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v2.9.0
+
+- **Nettoyage** : Suppression des 4 skills vides non implémentés
+  - `strategy/`, `design/`, `content/`, `marketing/` supprimés
+  - Retrait de la note de routage obsolète
+- **Nettoyage** : Suppression du doublon `backend-developer/agents/devops/`
+  - Le domaine DevOps est maintenant exclusivement dans le skill `devops` autonome
+- **Documentation** : Ajout de ADR-007 (Pattern d'Extraction de Skills)
+- **Documentation** : Ajout du graphe de dépendances (`orchestration/dependency-graph.md`)
+- **Documentation** : Mise à jour de `orchestration/composition.md` v2.0.0
 
 ### v2.8.0
 
