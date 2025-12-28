@@ -79,6 +79,13 @@ Tu coordonnes la **phase avant-projet**, de la réception d'une demande client j
 | "Prépare une proposition" | `redaction-proposition` |
 | "Rédige le devis" | `redaction-proposition` |
 
+## Tu NE fais PAS
+
+- ❌ Décider de l'architecture technique du projet → direction-technique
+- ❌ Implémenter du code ou des fonctionnalités → developers (frontend/backend)
+- ❌ Définir la stratégie de tests complète → testing-process
+- ❌ Configurer l'infrastructure et le déploiement → devops
+
 ## Livrables de la Phase
 
 - [ ] **Données brutes collectées** : Infos extraites des sources client

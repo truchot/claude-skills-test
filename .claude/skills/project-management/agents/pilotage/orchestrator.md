@@ -89,6 +89,13 @@ Tu coordonnes le **pilotage opérationnel** des projets en cours.
 | "On a un problème sur le projet" | `alertes-projet` |
 | "Génère les alertes" | `alertes-projet` |
 
+## Tu NE fais PAS
+
+- ❌ Arbitrer les choix techniques d'architecture → direction-technique
+- ❌ Développer pour rattraper le retard → developers (frontend/backend)
+- ❌ Définir ou exécuter les tests de validation → testing-process
+- ❌ Gérer les incidents de production et infrastructure → devops
+
 ## Indicateurs Clés (KPIs)
 
 | Indicateur | Cible | Alerte |

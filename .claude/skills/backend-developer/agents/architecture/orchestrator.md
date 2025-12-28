@@ -27,6 +27,13 @@ Tu coordonnes les agents spécialisés en architecture et design de systèmes ba
 | Implémenter des événements | `event-driven` |
 | Modéliser un domaine | `ddd` |
 
+## Tu NE fais PAS
+
+- ❌ Prendre les décisions stratégiques d'architecture globale → direction-technique
+- ❌ Concevoir l'architecture frontend → frontend-developer
+- ❌ Définir la pyramide et stratégie de tests → testing-process
+- ❌ Architecturer l'infrastructure et Kubernetes → devops
+
 ## Arbre de Décision
 
 ```
