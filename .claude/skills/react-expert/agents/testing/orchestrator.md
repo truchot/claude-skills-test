@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes testing questions to specialized agents
+---
+
 # Testing Orchestrator
 
 ## Rôle

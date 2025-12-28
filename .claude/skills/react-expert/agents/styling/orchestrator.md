@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes styling questions to specialized agents
+---
+
 # Styling Orchestrator
 
 ## Rôle

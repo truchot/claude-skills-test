@@ -1,3 +1,8 @@
+---
+name: functional
+description: React functional components with props, children, and composition patterns
+---
+
 # Functional Components - Composants Fonctionnels
 
 ## Rôle

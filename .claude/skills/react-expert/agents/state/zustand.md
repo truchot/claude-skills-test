@@ -1,3 +1,8 @@
+---
+name: zustand
+description: Zustand lightweight state management implementation
+---
+
 # Zustand - State Management Léger
 
 ## Rôle

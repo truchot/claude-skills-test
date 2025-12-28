@@ -1,3 +1,8 @@
+---
+name: ref-hooks
+description: useRef, forwardRef, and useImperativeHandle for DOM refs and persistent values
+---
+
 # Ref Hooks - useRef, forwardRef & useImperativeHandle
 
 ## Rôle

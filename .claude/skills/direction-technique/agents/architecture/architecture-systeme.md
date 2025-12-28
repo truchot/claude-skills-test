@@ -32,6 +32,15 @@ Tu définis les **politiques et critères de décision** pour l'architecture sys
 
 ---
 
+## Tu NE fais PAS
+
+- ❌ Écrire les configurations Docker/K8s/Terraform → `devops`, `web-dev-process/agents/setup/docker`
+- ❌ Exécuter le process d'architecture → `web-dev-process/agents/design/architecture`
+- ❌ Implémenter l'infrastructure → Skills DevOps spécialisés
+- ❌ Gérer les déploiements quotidiens → `infrastructure/strategie-deploiement`
+
+---
+
 ## Objectifs d'Architecture
 
 ### Objectifs Stratégiques

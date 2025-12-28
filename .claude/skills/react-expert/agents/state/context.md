@@ -1,3 +1,8 @@
+---
+name: context
+description: Context API for sharing state without prop drilling
+---
+
 # Context API - État Partagé React Natif
 
 ## Rôle

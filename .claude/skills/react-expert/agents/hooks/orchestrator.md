@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes hooks domain questions to specialized agents
+---
+
 # Hooks Orchestrator
 
 ## Rôle

@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes performance optimization questions to specialized agents
+---
+
 # Performance Orchestrator
 
 ## Rôle

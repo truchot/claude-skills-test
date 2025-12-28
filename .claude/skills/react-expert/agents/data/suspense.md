@@ -1,3 +1,8 @@
+---
+name: suspense
+description: React Suspense for lazy loading and declarative loading states
+---
+
 # React Suspense - Chargement Déclaratif
 
 ## Rôle

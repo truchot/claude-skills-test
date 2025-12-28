@@ -1,3 +1,8 @@
+---
+name: custom-hooks
+description: Creating reusable custom hooks to share logic
+---
+
 # Custom Hooks - Création de Hooks Personnalisés
 
 ## Rôle

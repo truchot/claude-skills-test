@@ -1,3 +1,8 @@
+---
+name: swr
+description: SWR for lightweight data fetching and caching
+---
+
 # SWR - Data Fetching Léger
 
 ## Rôle

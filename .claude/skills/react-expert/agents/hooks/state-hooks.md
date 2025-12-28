@@ -1,3 +1,8 @@
+---
+name: state-hooks
+description: useState and useReducer for local state management
+---
+
 # State Hooks - useState & useReducer
 
 ## Rôle

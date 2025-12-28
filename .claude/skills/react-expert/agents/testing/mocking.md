@@ -1,3 +1,8 @@
+---
+name: mocking
+description: Mocks, spies, and MSW for testing
+---
+
 # Mocking - Mocks, Spies et MSW
 
 ## Rôle

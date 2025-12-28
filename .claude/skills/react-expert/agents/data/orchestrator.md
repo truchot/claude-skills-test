@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes data fetching and server state questions to specialized agents
+---
+
 # Data Orchestrator
 
 ## Rôle

@@ -1,3 +1,8 @@
+---
+name: redux-toolkit
+description: Redux Toolkit for complex state management
+---
+
 # Redux Toolkit - State Management Avancé
 
 ## Rôle

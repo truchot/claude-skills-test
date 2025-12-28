@@ -1,3 +1,8 @@
+---
+name: react-query
+description: TanStack Query for server state management and data fetching
+---
+
 # React Query (TanStack Query) - Server State Management
 
 ## Rôle

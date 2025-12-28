@@ -1,3 +1,8 @@
+---
+name: css-in-js
+description: CSS-in-JS with styled-components and Emotion
+---
+
 # CSS-in-JS - styled-components & Emotion
 
 ## Rôle

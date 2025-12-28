@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes component domain questions to specialized agents
+---
+
 # Components Orchestrator
 
 ## Rôle

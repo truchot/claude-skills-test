@@ -1,3 +1,8 @@
+---
+name: tailwind-react
+description: Tailwind CSS with React using cn and CVA
+---
+
 # Tailwind + React - Styling avec Classes Utilitaires
 
 ## Rôle

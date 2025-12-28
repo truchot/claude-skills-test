@@ -1,3 +1,8 @@
+---
+name: memoization
+description: React.memo, useMemo, and useCallback for optimization
+---
+
 # Memoization - React.memo, useMemo, useCallback
 
 ## Rôle

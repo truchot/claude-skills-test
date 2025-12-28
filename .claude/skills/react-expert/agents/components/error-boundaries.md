@@ -1,3 +1,8 @@
+---
+name: error-boundaries
+description: Error Boundary implementation for React error handling
+---
+
 # Error Boundaries - Gestion d'Erreurs React
 
 ## Rôle

@@ -1,3 +1,8 @@
+---
+name: orchestrator
+description: Routes state management questions to specialized agents
+---
+
 # State Orchestrator
 
 ## Rôle

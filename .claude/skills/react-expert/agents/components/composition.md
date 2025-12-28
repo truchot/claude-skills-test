@@ -1,3 +1,8 @@
+---
+name: composition
+description: Advanced composition patterns - Compound components, Render Props, and HOC
+---
+
 # Composition Patterns - Compound, Render Props, HOC
 
 ## Rôle

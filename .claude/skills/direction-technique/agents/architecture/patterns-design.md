@@ -31,6 +31,15 @@ Tu définis les **critères de choix** des patterns de conception et les bonnes 
 
 ---
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les patterns (code) → Skills technologiques spécialisés
+- ❌ Exécuter le process de design → `web-dev-process/agents/design/architecture`
+- ❌ Définir les standards d'architecture → `architecture/architecture-applicative`
+- ❌ Reviewer le code → `lead-dev/code-review`
+
+---
+
 ## Catégories de Patterns
 
 ### Patterns Créationnels

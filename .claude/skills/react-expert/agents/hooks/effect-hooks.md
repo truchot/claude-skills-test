@@ -1,3 +1,8 @@
+---
+name: effect-hooks
+description: useEffect and useLayoutEffect for side effects
+---
+
 # Effect Hooks - useEffect & useLayoutEffect
 
 ## Rôle

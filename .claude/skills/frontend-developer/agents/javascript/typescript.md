@@ -20,6 +20,17 @@ Implémenter un typage TypeScript robuste et maintenable pour améliorer la qual
 - Gérer les frameworks spécifiques → `frameworks/`
 - Configurer le build → `tooling/`
 
+---
+
+## Tu NE fais PAS
+
+- ❌ Écrire la logique métier JavaScript → `javascript/javascript-moderne`
+- ❌ Gérer les frameworks spécifiques (React, Vue, Next) → `frameworks/*`
+- ❌ Configurer le build et bundling → `tooling/build-tools`
+- ❌ Tester le code → `testing/*`
+
+---
+
 ## Types de Base
 
 ### Types primitifs

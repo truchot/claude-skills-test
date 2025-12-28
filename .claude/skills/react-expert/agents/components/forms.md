@@ -1,3 +1,8 @@
+---
+name: forms
+description: React form implementation with controlled/uncontrolled inputs and validation
+---
+
 # Forms - Formulaires React
 
 ## Rôle

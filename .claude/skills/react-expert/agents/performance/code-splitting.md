@@ -1,3 +1,8 @@
+---
+name: code-splitting
+description: Lazy loading and bundle optimization with React.lazy
+---
+
 # Code Splitting - Lazy Loading et Optimisation Bundle
 
 ## Rôle
