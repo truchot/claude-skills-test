@@ -441,3 +441,13 @@ register_taxonomy( 'portfolio_category', 'portfolio', [
 - [ ] `fetchpriority="high"` sur images importantes
 - [ ] URLs avec `rewrite` slug optimisés
 - [ ] Blocks avec Schema intégré (FAQ, etc.)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| SEO implementation | Code PHP pour meta tags, Open Graph et Schema JSON-LD |
+| Sitemap configuration | Configuration du sitemap WordPress ou plugin |
+| Performance optimization | Code de preload et fetchpriority pour Core Web Vitals |
+| SEO blocks | Blocks Gutenberg avec Schema intégré (FAQ, breadcrumbs) |
+| SEO checklist | Checklist de conformité SEO pour le projet |

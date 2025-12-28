@@ -250,3 +250,11 @@ Demande reçue
 - [CNIL - Guide RGPD](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on)
 - [CNIL - Analyse d'impact (AIPD)](https://www.cnil.fr/fr/RGPD-analyse-impact-protection-des-donnees-aipd)
 - [RGPD - Texte officiel](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Checklist RGPD complétée | Grille de conformité avec statut pour chaque obligation légale |
+| Registre des traitements | Documentation des traitements de données personnelles (Art. 30) |
+| Analyse d'impact (AIPD) | Évaluation risques si traitement à risque élevé avec mesures de protection |

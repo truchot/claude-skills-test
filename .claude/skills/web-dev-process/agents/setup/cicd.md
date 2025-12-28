@@ -92,3 +92,11 @@ Ce module coordonne la mise en place de l'intégration et du déploiement contin
 | Principes CI détaillés | `ci-principles.md` |
 | Principes CD détaillés | `cd-principles.md` |
 | Stratégies de déploiement | `deployment-strategies.md` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CI/CD Configuration Files | Fichiers de configuration GitHub Actions/GitLab CI/Jenkins |
+| Pipeline Documentation | Documentation complète des pipelines CI/CD |
+| Environment Setup Guide | Guide de configuration des environnements et secrets |

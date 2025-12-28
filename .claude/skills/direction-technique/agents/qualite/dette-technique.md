@@ -268,3 +268,11 @@ Sprint de 10 jours (2 semaines)
 | Dette critique non traitée | Bloquer features |
 | Vélocité en chute | Audit technique |
 | Incidents répétés | Prioriser refactoring |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Registre de dette technique | Backlog priorisé des éléments de dette avec effort estimé |
+| Tableau de bord dette | Métriques d'évolution de la dette (ratio, impact sur vélocité) |
+| Plan de remboursement | Stratégie de réduction progressive avec allocation % sprint |

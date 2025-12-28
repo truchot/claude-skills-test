@@ -235,3 +235,11 @@ Avant d'optimiser :
 
 - [High Scalability](http://highscalability.com/) - Patterns à grande échelle
 - [Martin Fowler - Patterns](https://martinfowler.com/) - Architecture patterns
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de cache backend | Document définissant les niveaux de cache et stratégies d'invalidation |
+| Plan d'optimisation requêtes | Analyse des requêtes N+1, index manquants avec plan de correction |
+| Architecture de scalabilité | Stratégies load balancing, sharding, réplication pour montée en charge |

@@ -104,3 +104,11 @@ export function getCorrelationId(): string {
 - [ ] Niveaux de log appropriés
 - [ ] Pas de données sensibles
 - [ ] Rotation des logs configurée
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Logging Configuration | Configuration du système de logging centralisé |
+| Log Format Standards | Standards de format et structure des logs |
+| Log Retention Policy | Politique de rétention et rotation des logs |

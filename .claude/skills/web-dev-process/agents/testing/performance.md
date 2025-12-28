@@ -388,3 +388,11 @@ Mesurer le point de saturation!
 - [ ] Alertes configurées
 - [ ] Budget de performance (bundle size)
 - [ ] CI/CD avec gates de performance
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Performance Test Strategy | Stratégie de tests de performance et benchmarks |
+| Load Testing Suite | Suite de tests de charge avec K6/Artillery |
+| Performance Budgets | Budgets de performance pour bundle size et métriques |

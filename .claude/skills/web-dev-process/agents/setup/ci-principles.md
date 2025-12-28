@@ -163,3 +163,11 @@ test:
 - [ ] Cache des dépendances configuré
 - [ ] Parallélisation des tests
 - [ ] Fail fast (rapide → lent)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CI Pipeline Configuration | Configuration complète des pipelines d'intégration continue |
+| CI Best Practices Guide | Guide des principes et bonnes pratiques CI |
+| Pipeline Optimization Document | Documentation des optimisations de performance du pipeline |

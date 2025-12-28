@@ -212,3 +212,12 @@ Tu es l'orchestrateur des sous-agents Tooling WordPress. Tu analyses la question
 - ❌ Décisions d'architecture → direction-technique
 - ❌ Processus de développement → web-dev-process
 - ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents tooling |
+| Complete tooling setup | Configuration complète des outils de développement |
+| Pipeline configuration | CI/CD pipelines et automatisation |
+| Documentation | Documentation consolidée de l'outillage projet |

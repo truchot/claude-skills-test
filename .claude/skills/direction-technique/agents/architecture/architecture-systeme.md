@@ -226,6 +226,14 @@ Internet
 | Architecture multi-région | Expertise externe si nécessaire | CTO |
 | Conformité RGPD incertaine | Consultation juridique | DPO |
 
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Diagrammes d'architecture système | Vues C4, diagrammes de déploiement et flux de données inter-systèmes |
+| Standards d'intégration | Protocoles, formats et patterns pour communication entre systèmes |
+| Document haute disponibilité | Stratégies de résilience, failover et continuité de service |
+
 ---
 
 ## Références

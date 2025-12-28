@@ -148,3 +148,11 @@ export const Secondary: StoryObj<typeof Button> = {
 - [ ] Storybook configuré
 - [ ] Documentation à jour
 - [ ] Cohérence avec Figma
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens | Fichiers de tokens (couleurs, typographie, espacement, ombres) |
+| Component Library | Bibliothèque de composants réutilisables documentés |
+| Storybook Instance | Instance Storybook configurée avec tous les composants |

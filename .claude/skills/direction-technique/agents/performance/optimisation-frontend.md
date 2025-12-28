@@ -215,3 +215,11 @@ Avant d'optimiser :
 - [web.dev/vitals](https://web.dev/vitals/) - Core Web Vitals
 - [PageSpeed Insights](https://pagespeed.web.dev/) - Audit
 - [WebPageTest](https://www.webpagetest.org/) - Tests avancés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie d'optimisation assets | Plan de compression, lazy loading et CDN pour images/JS/CSS |
+| Budget de performance | Limites de poids par page et par asset type avec monitoring |
+| Guide rendering strategy | Choix SSR/SSG/CSR par type de page avec justifications |

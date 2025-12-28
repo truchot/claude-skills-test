@@ -138,3 +138,11 @@ Demande d'audit
 | Tests de charge | `web-dev-process/agents/testing/performance` |
 | Optimisations frontend | `optimisation-frontend` (dans ce domaine) |
 | Optimisations backend | `optimisation-backend` (dans ce domaine) |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit de performance | Analyse Lighthouse, Core Web Vitals avec scoring et points critiques |
+| Inventaire des bottlenecks | Liste priorisée des goulots d'étranglement identifiés avec impact |
+| Plan d'optimisation | Roadmap des améliorations avec quick wins et chantiers longs terme |

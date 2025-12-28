@@ -136,3 +136,11 @@ Tu définis les **politiques et standards** de code review pour l'équipe.
 - `web-dev-process/agents/development/code-review.md` - Process détaillé
 - `qualite/conventions-code.md` - Standards de code
 - `qualite/metriques-qualite.md` - Métriques qualité
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Guidelines de code review | Document définissant le processus, critères et bonnes pratiques de review |
+| Checklist de review | Grille de validation (fonctionnel, qualité, sécurité, performance, tests) |
+| Templates de commentaires | Exemples de feedbacks constructifs et conventionnés |

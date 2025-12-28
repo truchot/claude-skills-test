@@ -136,3 +136,13 @@ Question Testing
 - ❌ Tests non-WordPress → testing-process
 - ❌ CI/CD configuration → devops
 - ❌ Architecture de tests → direction-technique
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents de test |
+| Complete test suite | Suite de tests complète (PHP + JS + E2E) |
+| Test configuration | Configuration consolidée pour tous les types de tests |
+| Coverage report | Rapport de couverture combiné |
+| Testing documentation | Documentation des stratégies et pratiques de test |

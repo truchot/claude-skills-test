@@ -282,3 +282,11 @@ Pourquoi #1: Le service ne répondait plus
 | Pattern d'incidents similaires | Review architecturale |
 | Cause impliquant processus externe | Escalade cross-team |
 | Actions non implémentées | Bloquer les deployments |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document post-mortem | Analyse complète avec 5 Why, causes racines et actions correctives |
+| Plan d'actions correctives | Liste priorisée des actions avec responsables et deadlines |
+| Learnings partagés | Synthèse des enseignements diffusée à l'équipe |

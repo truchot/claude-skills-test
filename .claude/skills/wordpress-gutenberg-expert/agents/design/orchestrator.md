@@ -92,3 +92,12 @@ Question Design
 - ❌ Direction artistique → design (skill)
 - ❌ Architecture design → direction-technique
 - ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents design |
+| Design implementation | Implémentation complète des tokens et validation visuelle |
+| Design documentation | Documentation des choix design et validation |
+| Visual comparison | Rapports de comparaison visuelle maquette vs code |

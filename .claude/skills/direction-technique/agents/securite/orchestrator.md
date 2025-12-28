@@ -184,3 +184,11 @@ Le mot "audit" peut concerner plusieurs domaines :
 | Audit de **performance/latence** | performance | `audit-performance` |
 
 > **Règle** : Si le contexte mentionne vulnérabilités, OWASP, pentest, ou scan → `audit-securite`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier de sécurité complet | Compilation audit, conformité RGPD, gestion secrets et politiques |
+| Matrice de risques sécurité | Tableau des risques identifiés avec impact, probabilité et traitement |
+| Plan de sécurisation | Roadmap priorisée des mesures de sécurité avec timeline et responsables |

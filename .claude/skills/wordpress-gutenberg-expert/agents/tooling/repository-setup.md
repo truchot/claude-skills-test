@@ -391,3 +391,13 @@ core install:
 4. **Plugins commerciaux** : Ignorer ou gérer via Composer privé
 5. **mu-plugins versionné** : Code custom critique doit être versionné
 6. **wp-cli.yml** : Facilite les déploiements et la synchro
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Git repository | Repository Git initialisé avec branches |
+| .gitignore | Fichier .gitignore adapté à WordPress |
+| Branch structure | Structure de branches (main, develop, feature/*) |
+| Git hooks | Pre-commit hooks pour linting si applicable |
+| Repository documentation | Documentation du workflow Git |

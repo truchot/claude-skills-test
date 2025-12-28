@@ -182,3 +182,11 @@ feature:    D───E (rebasé)
 - [ ] CODEOWNERS configuré
 - [ ] Squash merge recommandé
 - [ ] Auto-delete des branches activé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Branch Protection Rules | Configuration des règles de protection pour main/develop |
+| CODEOWNERS File | Fichier CODEOWNERS avec responsables par module |
+| Protection Documentation | Documentation des politiques de protection des branches |

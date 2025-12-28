@@ -200,3 +200,11 @@ Tu définis les **politiques et standards** de documentation technique.
 - [Diátaxis Documentation Framework](https://diataxis.fr/)
 - [Google Developer Documentation Style Guide](https://developers.google.com/style)
 - [OpenAPI Specification](https://swagger.io/specification/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Documentation technique projet | Guides architecture, API, data model et setup développeur |
+| README et getting started | Guide de démarrage rapide avec prérequis et installation |
+| Base de connaissance | Wiki/docs avec how-to, FAQ et troubleshooting courants |

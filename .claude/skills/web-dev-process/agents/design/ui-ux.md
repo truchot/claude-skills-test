@@ -85,3 +85,11 @@ Ce module coordonne le design d'interface utilisateur, l'expérience utilisateur
 - Pour le responsive → `responsive-design.md`
 - Pour le design system → `design-system.md`
 - Pour l'accessibilité → `accessibility.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Wireframes | Maquettes filaires des interfaces principales |
+| UI Mockups | Maquettes haute fidélité avec design system appliqué |
+| Prototype Interactif | Prototype cliquable pour validation utilisateur |

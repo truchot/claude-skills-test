@@ -426,3 +426,11 @@ tests/
 - [ ] Mobile testé
 - [ ] Screenshots sur échec
 - [ ] Traces pour debugging
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| E2E Test Suite | Suite de tests end-to-end avec Playwright/Cypress |
+| E2E Test Plan | Plan de tests E2E avec scénarios critiques |
+| Test Coverage Requirements | Exigences de couverture pour parcours utilisateurs |

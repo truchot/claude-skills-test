@@ -331,3 +331,11 @@ Une tâche simple pour découvrir le workflow :
 | Blocage technique > 1 jour | Pair programming |
 | Manque d'accès | Escalade aux ops |
 | Feedback négatif sur process | Améliorer la documentation |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Guide d'onboarding technique | Plan semaine 1 avec jalons, ressources et buddy assigné |
+| Checklist premiers pas | Étapes setup environnement, accès et première contribution |
+| Kit de bienvenue | Docs architecture, conventions, outils et contacts utiles |

@@ -170,3 +170,11 @@ infrastructure/strategie-deploiement (mise en prod)
 | **Optimisation** prévue | performance | `optimisation-*` |
 
 > **Règle** : Urgence/incident → `support`. Analyse planifiée → `performance`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier de support complet | Compilation incidents, post-mortems, troubleshooting et veille |
+| Base de connaissance support | Documentation des problèmes courants avec solutions |
+| Métriques de support | Dashboard avec MTTR, taux de résolution et satisfaction |

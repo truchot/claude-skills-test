@@ -208,3 +208,11 @@ docs/
 - [ ] Index des ADRs (README.md)
 - [ ] ADRs pour les décisions majeures
 - [ ] Statut maintenu à jour
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| ADR Template | Template standardisé pour les Architecture Decision Records |
+| ADR Index | Index des ADRs avec statuts et dates de décision |
+| Decision Documentation | Documentation des décisions architecturales majeures du projet |

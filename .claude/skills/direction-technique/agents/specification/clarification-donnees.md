@@ -319,3 +319,11 @@ Tu **poses des questions** pour comprendre les besoins de données avant toute m
 | POURQUOI | `modelisation-donnees.md` | Décisions après clarification |
 | QUOI | `web-dev-process/design/data-modeling` | Process de modélisation |
 | COMMENT | Selon décision | Implémentation |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Questionnaire données complété | Questions/réponses sur nature, volume et besoins métier des données |
+| Inventaire des entités | Liste des objets métier identifiés avec attributs principaux |
+| Matrice de relations | Tableau des relations entre entités avec cardinalités |

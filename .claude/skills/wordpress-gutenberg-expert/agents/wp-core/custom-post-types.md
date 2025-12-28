@@ -94,3 +94,13 @@ register_activation_hook( __FILE__, function() {
 - [ ] `flush_rewrite_rules()` à l'activation uniquement
 - [ ] Préfixer le slug du CPT
 - [ ] Définir les supports appropriés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CPT registration code | Code PHP d'enregistrement du custom post type |
+| Labels configuration | Configuration complète des labels traduits |
+| Capabilities setup | Configuration des capabilities si nécessaire |
+| Template Gutenberg | Configuration du template de blocks par défaut |
+| Documentation | Documentation des supports et archives du CPT |

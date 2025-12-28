@@ -336,3 +336,11 @@ Demande d'audit
 | Score < 25 | Recommander fortement la refonte |
 | Pas d'accès complet | Documenter les limites de l'audit |
 | Client minimise les risques | Formaliser par écrit les réserves |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit technique | Analyse complète avec scoring, points forts/faibles et recommandations priorisées |
+| Inventaire dette technique | Liste détaillée des éléments de dette avec effort estimé et priorités |
+| Scénarios d'évolution | Options d'évolution (maintenance, refactoring, refonte) avec estimations |

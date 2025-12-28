@@ -175,3 +175,13 @@ ssh deploy@example.com "
 | Pipelines GitHub Actions | `tooling/cicd-pipelines` |
 | Pipelines GitLab CI | `tooling/gitlab-ci` |
 | Configuration staging | `tooling/staging-setup` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Deployment scripts | Scripts de déploiement via SSH/rsync |
+| SSH configuration | Configuration SSH et clés d'accès |
+| Deploy documentation | Documentation du processus de déploiement |
+| Rollback scripts | Scripts de rollback en cas de problème |
+| Post-deploy checks | Scripts de vérification post-déploiement |

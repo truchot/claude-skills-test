@@ -277,3 +277,11 @@ Cette DoD sera revue : [fréquence]
 | DoD non respectée | Bloquer le merge/deploy |
 | DoD impossible à atteindre | Réviser avec l'équipe |
 | Conflits sur les critères | Arbitrage Tech Lead/PO |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Definition of Done (DoD) | Checklist des critères requis pour qu'une tâche soit considérée terminée |
+| DoD par type de tâche | Critères spécifiques pour features, bugs, spikes, refactoring |
+| Processus de validation DoD | Workflow de vérification et responsabilités avant merge |

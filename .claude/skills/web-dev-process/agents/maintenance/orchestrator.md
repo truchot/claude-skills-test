@@ -220,3 +220,11 @@ Support/Incidents:     10%
 - [ ] Runbooks pour les incidents courants
 - [ ] Backups vérifiés régulièrement
 - [ ] Revue régulière de la dette technique
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Monitoring Setup | Configuration complète du monitoring, logging et alerting |
+| Incident Runbooks | Runbooks de réponse aux incidents courants |
+| Maintenance Schedule | Planning de maintenance préventive et mises à jour |

@@ -256,3 +256,11 @@ Demande d'audit
 | Fuite de données avérée | Procédure incident + CNIL si RGPD |
 | Attaque active | Isoler + forensics |
 | Besoin d'expertise | Faire appel à un pentester externe |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit de sécurité | Analyse complète des vulnérabilités avec scoring CVSS et priorisation |
+| Plan de remédiation sécurité | Actions correctives priorisées avec effort et timeline de correction |
+| Rapport de scan automatisé | Résultats des outils (OWASP ZAP, Snyk, npm audit) avec recommandations |

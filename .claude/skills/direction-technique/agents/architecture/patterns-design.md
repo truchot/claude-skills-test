@@ -208,3 +208,11 @@ Quel est le problème ?
 
 - [Refactoring Guru - Design Patterns](https://refactoring.guru/design-patterns)
 - [Martin Fowler - Patterns of Enterprise Application Architecture](https://martinfowler.com/eaaCatalog/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Catalogue de patterns recommandés | Liste des design patterns approuvés avec cas d'usage et exemples |
+| Guide anti-patterns | Documentation des anti-patterns à éviter avec alternatives recommandées |
+| Matrice de sélection patterns | Critères et arbre de décision pour choisir le pattern approprié |

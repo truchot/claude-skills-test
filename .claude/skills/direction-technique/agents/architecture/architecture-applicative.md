@@ -339,3 +339,11 @@ src/
 - [Clean Architecture - Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Hexagonal Architecture - Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/)
 - [Domain-Driven Design - Eric Evans](https://domainlanguage.com/ddd/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Standards d'architecture applicative | Document définissant les styles et patterns autorisés avec critères de choix |
+| Guide de layering | Définition des couches (présentation, logique métier, données) et leurs responsabilités |
+| Politique SOLID et principes | Standards d'application des principes SOLID pour maintenabilité et évolutivité |

@@ -181,3 +181,11 @@ LEFTHOOK=0 git commit -m "message"
 - [ ] commit-msg hook avec commitlint
 - [ ] pre-push hook avec tests (optionnel)
 - [ ] Script prepare dans package.json
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Git Hooks Configuration | Configuration Husky/Lefthook avec tous les hooks |
+| Lint-staged Configuration | Configuration lint-staged pour pre-commit |
+| Hooks Documentation | Documentation des hooks Git et leur rôle |

@@ -354,3 +354,13 @@ DISALLOW_FILE_MODS=true
 4. **Debug off en production** : Jamais WP_DEBUG=true en prod
 5. **HTTPS en production** : Toujours FORCE_SSL_ADMIN
 6. **Valeurs par défaut sécurisées** : DISALLOW_FILE_EDIT par défaut
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| .env files | Fichiers .env pour dev, staging, production |
+| .env.example | Template .env sans valeurs sensibles |
+| wp-config.php | Configuration WordPress adaptée aux environnements |
+| Constants documentation | Documentation des constantes WordPress |
+| Security configuration | Configuration de sécurité par environnement |

@@ -351,3 +351,12 @@ domReady( () => {
 3. **Définir le scope** : Ne pas afficher partout si pas nécessaire
 4. **Tester les transformations** : Vérifier que `transform` fonctionne
 5. **Documenter** : Description claire pour les utilisateurs
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Variation registration | Code JavaScript de registration des variations |
+| CSS styles | Styles CSS spécifiques aux variations |
+| innerBlocks templates | Configuration des blocks imbriqués par défaut |
+| Documentation | Guide d'utilisation des variations disponibles |

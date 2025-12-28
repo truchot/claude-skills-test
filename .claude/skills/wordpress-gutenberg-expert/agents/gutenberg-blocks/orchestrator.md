@@ -149,3 +149,11 @@ Question sur Gutenberg
 - ❌ Méthodologie React générique → react-expert
 - ❌ Définition des processus → web-dev-process
 - ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents appropriés |
+| Combined solution | Solution combinant plusieurs agents si nécessaire |
+| Documentation | Documentation consolidée des différents aspects |

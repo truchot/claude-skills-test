@@ -273,3 +273,11 @@ Format de documentation :
 | POURQUOI | `direction-technique/specification/modelisation-donnees` |
 | QUOI | `wordpress-data-mapping` |
 | COMMENT | `wordpress-gutenberg-expert/wp-core/*` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| ERD Diagram | Diagramme entité-relation avec cardinalités et relations |
+| Data Dictionary | Dictionnaire de données complet avec attributs et règles métier |
+| Schema Documentation | Documentation du schéma de base de données avec conventions |

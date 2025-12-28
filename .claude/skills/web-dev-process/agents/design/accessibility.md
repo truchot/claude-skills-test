@@ -173,3 +173,11 @@ Outils de vérification :
 | Tests automatisés | `testing/accessibility` |
 | Implémentation WordPress | `wordpress-gutenberg-expert/agents/accessibility-expert` |
 | Checklist Design System | `design-system-foundations/docs/accessibility-checklist` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Accessibility Guidelines | Guide complet des exigences d'accessibilité WCAG 2.1 AA |
+| ARIA Documentation | Documentation des rôles et attributs ARIA à implémenter |
+| Accessibility Checklist | Checklist de vérification pour le design et développement |

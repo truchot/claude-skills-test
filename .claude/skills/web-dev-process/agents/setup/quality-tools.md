@@ -86,3 +86,11 @@ npx husky init
 - Pour Prettier/EditorConfig → `formatting.md`
 - Pour Husky/Lefthook → `git-hooks.md`
 - Pour Commitlint → `commit-conventions.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Quality Tools Configuration | Configuration complète de tous les outils de qualité |
+| Pre-commit Setup | Setup complet des checks pre-commit |
+| Quality Scripts | Scripts npm pour vérifier la qualité du code |

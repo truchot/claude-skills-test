@@ -82,3 +82,11 @@ git push -u origin main
 - Pour choisir une stratégie de branches → `branching-strategies.md`
 - Pour protéger les branches → `branch-protection.md`
 - Pour les templates → `pr-templates.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Repository Setup Guide | Guide complet de configuration du repository |
+| Repository Templates | Templates PR, Issues et configuration GitHub/GitLab |
+| .gitignore and Config Files | Fichiers de configuration .gitignore, .gitattributes, etc. |

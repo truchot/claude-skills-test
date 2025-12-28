@@ -526,6 +526,16 @@ function my_safe_has_consent( $category ) {
 - [ ] Documentation des cookies dans le readme
 - [ ] Tests avec différents CMP (Complianz, CookieYes, etc.)
 
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| GDPR implementation | Code PHP/JS de gestion du consentement avec WP Consent API |
+| Cookie registry | Enregistrement des cookies avec wp_add_cookie_info() |
+| Consent checks | Code de vérification conditionnelle avec wp_has_consent() |
+| Cleanup handlers | Code de nettoyage des cookies au retrait de consentement |
+| GDPR documentation | Documentation de conformité RGPD et cookies utilisés |
+
 ## Sources
 
 - [WP Consent API Plugin](https://wordpress.org/plugins/wp-consent-api/)

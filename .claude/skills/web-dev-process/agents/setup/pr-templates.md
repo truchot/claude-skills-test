@@ -223,3 +223,11 @@ jobs:
 - [ ] Labels configurés
 - [ ] Auto-labeler (optionnel)
 - [ ] Stale bot (optionnel)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| PR Template | Template de Pull Request avec checklist et sections |
+| Issue Templates | Templates d'issues pour bug reports et feature requests |
+| GitHub Labels | Configuration des labels pour organisation et tri |

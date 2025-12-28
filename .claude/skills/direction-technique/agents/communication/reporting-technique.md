@@ -230,3 +230,11 @@ Tu définis les **politiques et standards** de reporting technique.
 
 - [Atlassian Incident Management](https://www.atlassian.com/incident-management)
 - [Google SRE - Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapports techniques périodiques | Status reports avec métriques, risques et décisions pour stakeholders |
+| Synthèses exécutives | Rapports simplifiés pour non-tech (direction, client) |
+| Compte-rendus incidents | Post-mortems et analyses de problèmes majeurs avec actions correctives |

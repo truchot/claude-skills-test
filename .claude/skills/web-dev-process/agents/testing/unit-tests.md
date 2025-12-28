@@ -451,3 +451,11 @@ export default defineConfig({
 - [ ] Cas d'erreur testés
 - [ ] Pas de dépendances entre tests
 - [ ] Tests rapides (< 100ms chacun)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Unit Test Suite | Suite complète de tests unitaires avec Jest/Vitest |
+| Test Coverage Report | Rapport de couverture de code avec seuils définis |
+| Unit Testing Guidelines | Guide des bonnes pratiques de tests unitaires |

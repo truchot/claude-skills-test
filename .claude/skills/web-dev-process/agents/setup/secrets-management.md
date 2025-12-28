@@ -224,3 +224,11 @@ logger.info({
 - [ ] Rotation planifiée
 - [ ] Audit des accès
 - [ ] .env.local dans .gitignore
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Secrets Management Guide | Guide de gestion sécurisée des secrets par environnement |
+| Secrets Rotation Policy | Politique de rotation des secrets et procédures |
+| Access Audit Log | Configuration de l'audit des accès aux secrets |

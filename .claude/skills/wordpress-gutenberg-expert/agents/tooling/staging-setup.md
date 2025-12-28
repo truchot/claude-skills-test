@@ -177,3 +177,13 @@ Cordialement,
 | Déploiement SSH | `tooling/deployment-ssh` |
 | CI/CD pipelines | `tooling/cicd-pipelines` |
 | Configuration locale | `tooling/local-dev` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Staging environment | Environnement staging configuré et fonctionnel |
+| Staging .env | Configuration .env pour staging |
+| Database setup | Base de données staging avec données de test |
+| Access credentials | Credentials d'accès staging (admin, SSH, BDD) |
+| Staging documentation | Documentation d'accès et utilisation du staging |

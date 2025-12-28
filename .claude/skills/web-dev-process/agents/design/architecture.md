@@ -305,3 +305,11 @@ Pour les structures de dossiers spécifiques par technologie, consulter les skil
 - [Clean Architecture - Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [C4 Model](https://c4model.com/)
 - [ADR GitHub](https://adr.github.io/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture Documentation | Documentation complète de l'architecture avec diagrammes C4 |
+| ADR Template | Template pour les Architecture Decision Records |
+| Decision Matrix | Matrice de décision comparative des options architecturales |

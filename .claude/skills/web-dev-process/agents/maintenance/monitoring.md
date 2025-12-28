@@ -96,3 +96,11 @@ Ce module coordonne l'observabilité et le monitoring de l'application.
 - Pour les métriques → `metrics.md`
 - Pour les logs → `logging.md`
 - Pour les alertes → `alerting.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Monitoring Setup | Configuration complète du monitoring (Datadog, Prometheus, etc.) |
+| Dashboards | Dashboards de monitoring avec métriques clés |
+| Monitoring Documentation | Documentation du système de monitoring et interprétation |

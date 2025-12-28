@@ -109,3 +109,11 @@ test('should prevent IDOR', async ({ request }) => {
 
 - Pour l'audit des dépendances → `dependency-audit.md`
 - Pour les headers HTTP → `security-headers.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Security Test Strategy | Stratégie de tests de sécurité et checklist OWASP |
+| Penetration Test Report | Rapport de tests d'intrusion et vulnérabilités |
+| Security Scanning Setup | Configuration des scans de sécurité automatisés |

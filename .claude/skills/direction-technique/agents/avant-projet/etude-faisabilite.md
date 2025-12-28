@@ -305,3 +305,11 @@ Pour chaque fonctionnalité majeure :
 | Budget/délai irréalistes | Documenter et alerter commercial |
 | Compétences manquantes | Évaluer formation/recrutement |
 | Doute persistant | Recommander POC |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Note de faisabilité technique | Document analysant la viabilité avec recommandation GO/NO-GO |
+| Matrice risques/contraintes | Tableau des contraintes techniques et leurs impacts sur la faisabilité |
+| Scénarios alternatifs | Options techniques envisageables avec avantages/inconvénients |

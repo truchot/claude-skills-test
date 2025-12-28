@@ -275,3 +275,11 @@ Tu définis les **politiques et standards** pour les conventions de code.
 - [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html)
 - [PSR-12 PHP](https://www.php-fig.org/psr/psr-12/)
 - [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de conventions de code | Standards de formatage, nommage et organisation du code |
+| Configuration des linters | Fichiers ESLint, Prettier, PHPCS avec règles projet |
+| Guide de style par langage | Conventions spécifiques TypeScript, PHP, CSS avec exemples |

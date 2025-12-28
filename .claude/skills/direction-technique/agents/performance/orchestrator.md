@@ -153,3 +153,11 @@ support/troubleshooting (si problème détecté)
 | Monitoring **sécurité** | securite | `audit-securite` |
 
 > **Règle** : Monitoring proactif des métriques → `monitoring-perf`, réaction à incident → `support`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier de performance complet | Compilation audit, optimisations frontend/backend et monitoring |
+| Tableau de bord performance | Dashboard consolidé des métriques (Lighthouse, temps réponse, Core Web Vitals) |
+| SLO/SLA performance | Objectifs chiffrés de performance avec seuils d'alerte et engagements |

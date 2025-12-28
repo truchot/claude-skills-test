@@ -207,3 +207,11 @@ Tu définis les **politiques et standards** pour l'architecture d'infrastructure
 - [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
 - [Terraform Best Practices](https://www.terraform-best-practices.com/)
 - [The Twelve-Factor App](https://12factor.net/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Diagramme d'architecture infrastructure | Schémas des composants cloud/serveurs avec flux réseau et dépendances |
+| Document de stratégie infrastructure | Choix de providers, régions, services et justifications |
+| Plan de haute disponibilité | Stratégie de résilience, backup, disaster recovery et RTO/RPO |

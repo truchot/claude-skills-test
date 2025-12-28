@@ -146,3 +146,11 @@ Estimation révisée
 | Incertitude > 30% | POC ou spike recommandé |
 | Écart > 30% en cours de projet | Alerte immédiate |
 | Périmètre flou | Retour specification |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier d'estimation complet | Compilation estimation macro, détaillée, WBS et analyse de risques |
+| Tableau de bord estimation | Vue synthétique avec totaux, risques et niveau de confiance |
+| Plan de contingence | Stratégies d'ajustement en cas de dérive avec seuils d'alerte |

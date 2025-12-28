@@ -146,3 +146,11 @@ Référencer :
 
 - [ADR-005 : Frontières entre skills](../../web-agency/docs/adr/005-skill-responsibility-boundaries.md)
 - `web-dev-process/agents/setup/cicd.md` - Process d'implémentation
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie CI/CD | Document définissant pipeline, gates qualité et workflows de release |
+| Configuration pipeline | Fichiers de config CI/CD avec stages, tests et déploiements automatisés |
+| Politique de branches et tags | Standards Git flow, stratégie de merge et versioning |

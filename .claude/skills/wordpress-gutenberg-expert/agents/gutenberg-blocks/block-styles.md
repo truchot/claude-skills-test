@@ -440,3 +440,12 @@ function my_theme_default_block_style( $block_content, $block ) {
 4. **Responsive** : Tester les styles sur mobile
 5. **Accessibilité** : Vérifier le contraste et la lisibilité
 6. **Performance** : Éviter les animations coûteuses (box-shadow animé, etc.)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Block style registration | Code JavaScript ou PHP de registration des styles |
+| CSS stylesheet | Fichier CSS avec les styles pour chaque variation |
+| block.json updates | Mise à jour du block.json si nécessaire |
+| Documentation | Documentation des styles disponibles et leur usage |

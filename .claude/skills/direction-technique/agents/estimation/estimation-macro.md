@@ -228,3 +228,11 @@ Fourchette = [Estimation × 0.8 ; Estimation × 1.3]
 | Estimation > 100 j | Validation direction + découpage phases |
 | Techno inconnue | Ajouter facteur + recommander POC |
 | Client conteste | Détailler et comparer à des références |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Fourchette d'estimation macro | Estimation haute/basse en jours-homme avec niveau de confiance |
+| Tableau de complexité | Grille d'évaluation de la complexité par domaine fonctionnel |
+| Comparatifs projets similaires | Benchmarks avec projets de référence et facteurs d'ajustement |

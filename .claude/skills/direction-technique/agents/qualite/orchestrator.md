@@ -129,3 +129,11 @@ specification/specification-technique
 | Dette > 20% sprint | Arbitrage priorités |
 | Reviews bloquées | Escalade tech lead |
 | Qualité en dégradation | Rétrospective technique |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier qualité complet | Compilation métriques, DoD, conventions, guidelines review et dette |
+| Standards de qualité projet | Document central définissant les règles et seuils qualité |
+| Dashboard qualité intégré | Tableau de bord consolidé des indicateurs qualité du projet |

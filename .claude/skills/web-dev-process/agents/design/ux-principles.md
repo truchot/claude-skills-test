@@ -79,3 +79,11 @@ Tu es spécialisé dans les **principes d'expérience utilisateur** et les lois 
 
 - [Laws of UX](https://lawsofux.com/)
 - [Nielsen Norman Group](https://www.nngroup.com/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| UX Guidelines | Guide complet des principes UX à appliquer dans le projet |
+| User Flow Diagrams | Diagrammes des parcours utilisateurs principaux |
+| UX Checklist | Checklist de vérification des principes UX |

@@ -307,3 +307,11 @@ docs/
 | Pas de consensus | Réunion d'arbitrage |
 | ADR contesté après acceptance | Nouvelle proposition, pas de modification |
 | Impact cross-équipe | Review par toutes les équipes |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture Decision Records | Documents ADR formatés avec contexte, options évaluées, décision et conséquences |
+| Registre ADR | Index de tous les ADR avec statut et liens de remplacement |
+| Templates ADR | Modèles standardisés pour la création de nouveaux ADR |

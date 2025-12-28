@@ -102,3 +102,12 @@ function my_block_render( $attributes ) {
 - [ ] Block supports natifs
 - [ ] Éviter `!important`
 - [ ] Tester avec différents themes
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Block supports config | Configuration des supports dans block.json |
+| CSS generation code | Code PHP utilisant wp_style_engine_get_styles() |
+| CSS custom properties | Documentation des variables CSS utilisées |
+| Dynamic styles | Code de génération de styles dynamiques pour blocks |

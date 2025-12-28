@@ -166,3 +166,11 @@ Surveiller pendant 30 min après déploiement:
 | **Serverless** | Serverless Framework, SAM |
 | **Static/JAMstack** | Vercel, Netlify, Cloudflare Pages |
 | **VPS/Self-hosted** | Ansible, Docker Compose, Kamal |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Deployment Pipeline | Pipeline de déploiement configuré pour staging et production |
+| Deployment Checklists | Checklists complètes pour déploiements en staging et production |
+| Rollback Procedures | Procédures de rollback documentées et testées |

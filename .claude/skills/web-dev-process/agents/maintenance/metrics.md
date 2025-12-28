@@ -101,3 +101,11 @@ app.get('/metrics', async (req, res) => {
 - [ ] Endpoint /metrics exposé
 - [ ] Dashboards créés
 - [ ] Alertes configurées
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Metrics Implementation | Implémentation des Golden Signals et métriques custom |
+| Metrics Dashboard | Dashboards Grafana/Datadog avec toutes les métriques |
+| Metrics Documentation | Documentation des métriques collectées et leur signification |

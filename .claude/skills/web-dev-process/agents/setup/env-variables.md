@@ -207,3 +207,11 @@ export const config = await import(`./${env}`).then(m => m.config);
 - [ ] Validation des variables au démarrage
 - [ ] Types exportés pour TypeScript
 - [ ] README avec instructions de setup
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| .env.example File | Fichier template avec toutes les variables documentées |
+| Environment Validation | Schema de validation Zod/Joi pour les variables |
+| Environment Setup Guide | Guide de configuration des variables par environnement |

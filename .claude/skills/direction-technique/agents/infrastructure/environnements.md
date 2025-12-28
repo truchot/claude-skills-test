@@ -150,3 +150,11 @@ POURQUOI ?       POURQUOI ?        POURQUOI ?
 | Docker | `web-dev-process/agents/setup/docker` |
 | Secrets | `web-dev-process/agents/setup/secrets-management` |
 | Setup WordPress | `wordpress-gutenberg-expert/agents/tooling/local-dev` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice des environnements | Tableau définissant local, dev, staging, prod avec URLs et accès |
+| Configuration par environnement | Variables d'environnement et paramètres spécifiques à chaque env |
+| Guide de setup développeur | Documentation pour initialiser l'environnement local en < 30 min |

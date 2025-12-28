@@ -348,3 +348,11 @@ Description détaillée de la proposition.
 | Vulnérabilité 0-day | Patch immédiat ou workaround |
 | Blocage adoption décidée | Escalade architecture |
 | Budget formation nécessaire | Validation management |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Technology Radar | Cartographie des technologies (Adopt, Trial, Assess, Hold) mise à jour |
+| Inventaire technologique | Liste des versions utilisées avec dates de fin de support |
+| Rapports d'évaluation | Analyses détaillées de nouvelles technologies avec recommandations |

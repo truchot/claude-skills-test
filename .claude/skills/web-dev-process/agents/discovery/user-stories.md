@@ -221,3 +221,11 @@ Scénario: [Cas nominal]
 | Miro / Mural | Story mapping visuel |
 | Notion | Documentation des personas |
 | StoriesOnBoard | Story mapping dédié |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| User Stories Document | Ensemble des user stories au format Agile avec critères d'acceptation |
+| Story Mapping | Cartographie visuelle du parcours utilisateur et priorisation |
+| Personas | Documentation des personas cibles avec comportements et motivations |

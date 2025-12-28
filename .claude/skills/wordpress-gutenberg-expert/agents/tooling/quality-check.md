@@ -318,3 +318,14 @@ class My_Plugin {
 // ✅ Ou - avec préfixe
 $my_plugin_var = 'value';
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| PHPCS configuration | phpcs.xml avec WordPress Coding Standards |
+| ESLint configuration | .eslintrc.json avec @wordpress/eslint-plugin |
+| Stylelint configuration | .stylelintrc.json pour CSS/SCSS |
+| Pre-commit hooks | Hooks Git pour linting automatique |
+| Quality reports | Rapports de qualité de code |
+| Fix scripts | Scripts pour auto-fix des problèmes courants |

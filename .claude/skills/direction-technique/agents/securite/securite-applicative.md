@@ -225,3 +225,11 @@ Monitoring  (CVSS)          Impact         Review        apprises
 - [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)
 - [CWE Top 25](https://cwe.mitre.org/top25/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Politique de sécurité applicative | Standards et best practices de sécurisation du code (OWASP Top 10) |
+| Checklist de sécurité | Grille de validation par fonctionnalité (auth, inputs, outputs, données) |
+| Configuration headers sécurité | Stratégie CSP, CORS, HSTS et autres headers de protection |

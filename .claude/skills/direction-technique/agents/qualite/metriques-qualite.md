@@ -214,3 +214,11 @@ Tu définis les **politiques et standards** de suivi des métriques de qualité 
 - [SonarQube Quality Gates](https://docs.sonarqube.org/latest/user-guide/quality-gates/)
 - [Google Core Web Vitals](https://web.dev/vitals/)
 - [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tableau de bord qualité | Métriques temps réel (couverture, duplication, complexité, vulns) |
+| Quality gates | Seuils de qualité bloquants configurés dans CI/CD |
+| Rapports d'évolution qualité | Tendances et alertes sur dégradation des métriques |

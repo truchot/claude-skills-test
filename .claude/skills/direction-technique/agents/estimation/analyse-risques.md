@@ -308,3 +308,11 @@ Après mitigation, les risques suivants restent acceptés :
 | Buffer > 30% de l'estimation | Revoir le périmètre |
 | Risque non mitigable | Go/No-Go à décider |
 | Nouveau risque en cours de projet | MAJ analyse + estimation |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice de risques | Tableau des risques identifiés avec probabilité, impact et scoring priorisé |
+| Plan de mitigation | Actions préventives et correctives pour chaque risque avec responsables |
+| Buffer d'estimation | Pourcentage de marge ajouté à l'estimation basé sur l'analyse des risques |

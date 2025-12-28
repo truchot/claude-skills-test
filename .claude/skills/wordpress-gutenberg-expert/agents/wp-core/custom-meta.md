@@ -432,3 +432,13 @@ array_map( 'sanitize_text_field', (array) $input );
 ```
 
 Le underscore `_` au début masque la meta de l'interface "Custom Fields" native.
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Meta registration | Code register_meta pour REST API et Gutenberg |
+| Meta boxes | Code des meta boxes avec UI admin |
+| Save callbacks | Fonctions de sauvegarde sécurisées avec validation |
+| Meta queries | Exemples de WP_Query avec meta_query si applicable |
+| Documentation | Documentation des meta fields disponibles |

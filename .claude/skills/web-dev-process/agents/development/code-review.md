@@ -362,3 +362,11 @@ refactoring pour la prochaine itération."
 | Seuils et métriques équipe | `direction-technique/qualite/code-review` |
 | Escalades et arbitrages | `direction-technique/qualite/code-review` |
 | Conventions de code | `direction-technique/qualite/conventions-code` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Code Review Checklist | Checklist complète pour les reviews de code |
+| PR Review Guidelines | Guide des bonnes pratiques de review avec exemples |
+| Review Process Document | Documentation du processus de review et des responsabilités |

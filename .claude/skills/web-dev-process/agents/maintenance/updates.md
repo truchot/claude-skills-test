@@ -414,3 +414,11 @@ if (age >= LEGAL_AGE) { ... }
 - [ ] Documentation à jour
 - [ ] Métriques de qualité suivies
 - [ ] Revue trimestrielle de l'architecture
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Update Procedures | Procédures de mise à jour des dépendances et du code |
+| Dependency Audit Report | Rapport d'audit des dépendances avec vulnérabilités |
+| Maintenance Schedule | Planning de maintenance et mises à jour régulières |

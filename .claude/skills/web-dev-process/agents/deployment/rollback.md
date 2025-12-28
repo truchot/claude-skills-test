@@ -330,3 +330,11 @@ export async function down(db) {
 - [ ] Exécuter les smoke tests
 - [ ] Mettre à jour la status page
 - [ ] Planifier le post-mortem
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rollback Procedures | Procédures détaillées de rollback automatique et manuel |
+| Emergency Runbook | Runbook d'urgence avec commandes et contacts |
+| Post-mortem Template | Template pour analyser les incidents et rollbacks |

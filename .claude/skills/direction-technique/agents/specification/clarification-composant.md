@@ -348,3 +348,11 @@ Questions clés :
 | POURQUOI | `clarification-donnees.md` (si CPT à créer) |
 | QUOI | `web-dev-process/design/gutenberg-block-mapping` |
 | COMMENT | `wordpress-gutenberg-expert/agents/blocks/*` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Questionnaire composant complété | Questions/réponses structurées définissant le comportement attendu du composant |
+| Spécifications fonctionnelles | Description détaillée des interactions, états et logique du composant |
+| Wireframes annotés | Maquettes avec annotations techniques sur comportements et données |

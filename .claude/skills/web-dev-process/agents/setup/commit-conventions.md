@@ -207,3 +207,11 @@ feat(authentication-module): add a new feature that allows users to login...
 - [ ] Hook commit-msg configuré
 - [ ] Types de commit documentés pour l'équipe
 - [ ] Génération de CHANGELOG automatique (optionnel)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Commitlint Configuration | Configuration de commitlint pour validation des messages |
+| Commit Message Guide | Guide des conventions de commit avec exemples |
+| Changelog Template | Template et processus de génération du changelog |

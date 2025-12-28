@@ -430,3 +430,11 @@ Inconvénient: Réécrit l'historique
 - Branches qui traînent des mois
 - Merge sans review
 - Ignorer les conflits
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Git Workflow Guide | Guide complet du workflow Git avec conventional commits |
+| Branch Naming Conventions | Document des conventions de nommage des branches |
+| PR Template | Template de Pull Request avec checklist |

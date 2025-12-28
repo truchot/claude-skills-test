@@ -110,3 +110,11 @@ Mobile: 1 colonne
 - [ ] Images responsive
 - [ ] Touch targets 44px minimum
 - [ ] Testé sur vrais appareils
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Breakpoint Specifications | Documentation des breakpoints et grilles responsives |
+| Responsive Wireframes | Wireframes pour mobile, tablette et desktop |
+| Mobile-first Guidelines | Guide des principes mobile-first et adaptations |

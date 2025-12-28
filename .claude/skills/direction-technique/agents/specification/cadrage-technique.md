@@ -334,3 +334,11 @@ Brief fonctionnel
 | Contraintes contradictoires | Arbitrage direction |
 | Hypothèses critiques non validées | Bloquer et escalader |
 | Dépendances externes risquées | Plan de contingence |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de cadrage technique | Périmètre, stack, contraintes et hypothèses techniques du projet |
+| Liste des dépendances | Inventaire des services tiers, APIs et intégrations requises |
+| Grille de contraintes | Tableau récapitulatif des contraintes techniques avec impact et priorités |

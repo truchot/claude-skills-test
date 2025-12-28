@@ -423,3 +423,11 @@ See [MIGRATION.md](./MIGRATION.md) for detailed instructions.
 - [ ] Plan de rollback prêt
 - [ ] Communication prévue (changelog)
 - [ ] Fenêtre de déploiement appropriée
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Production Deployment Checklist | Checklist complète de déploiement en production |
+| Rollback Plan | Plan documenté de rollback avec procédures détaillées |
+| Post-deployment Verification | Guide de vérification post-déploiement avec tests |

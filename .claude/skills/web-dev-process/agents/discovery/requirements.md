@@ -168,3 +168,11 @@ Une bonne exigence est :
 | Jira / Linear | Tracking |
 | Miro / FigJam | Ateliers collaboratifs |
 | Google Docs | Collaboration temps réel |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Requirements Document | Document formel des exigences fonctionnelles et non-fonctionnelles |
+| Priorization Matrix | Matrice MoSCoW avec priorisation des exigences |
+| Acceptance Criteria | Critères d'acceptation détaillés et testables pour chaque exigence |

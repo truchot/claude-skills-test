@@ -421,3 +421,11 @@ class OrderService {
 - [ ] Pas de magic numbers
 - [ ] Types explicites (TypeScript)
 - [ ] Commentaires pour le "pourquoi" uniquement
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Coding Standards Document | Document complet des conventions de code et standards de développement |
+| Style Guide | Guide de style avec exemples de code et anti-patterns à éviter |
+| Code Quality Checklist | Checklist de revue de qualité du code |

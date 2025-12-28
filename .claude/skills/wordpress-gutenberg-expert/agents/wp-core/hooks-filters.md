@@ -105,3 +105,12 @@ if ( has_action( 'my_hook' ) ) { /* ... */ }
 - [ ] Nommer les fonctions (pas de closures si besoin de remove)
 - [ ] Même priorité pour remove que pour add
 - [ ] Documenter les hooks custom (PHPDoc)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Hook implementation | Code PHP d'implémentation des hooks et filters |
+| Custom hooks | Documentation des hooks personnalisés créés |
+| Priority documentation | Documentation des priorités et ordre d'exécution |
+| Hook usage examples | Exemples d'utilisation des hooks |

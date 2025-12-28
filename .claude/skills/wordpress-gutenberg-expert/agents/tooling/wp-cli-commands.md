@@ -457,3 +457,13 @@ wp transient delete --all
 wp cron event list
 wp cron event run --all
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| WP-CLI commands | Classes PHP de commandes WP-CLI personnalisées |
+| Command registration | Code d'enregistrement des commandes |
+| Arguments validation | Code de validation des arguments et options |
+| Formatted output | Implémentation de tables, JSON et progress bars |
+| Documentation | Documentation des commandes disponibles et usage |

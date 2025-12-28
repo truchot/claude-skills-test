@@ -243,3 +243,11 @@ Une fois la stack choisie :
 | Stack legacy à maintenir | Évaluer coût maintenance vs refonte → `audit-existant` |
 | Hésitation entre options équivalentes | Proposer POC comparatif → `poc-spike` |
 | Techno émergente/risquée | Demander validation direction technique |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de recommandation stack | Comparatif des options avec scoring, justification et stack détaillée recommandée |
+| Matrice de décision | Évaluation multi-critères des options techniques avec pondération |
+| Plan de compétences | Identification des compétences requises et besoins de formation éventuels |

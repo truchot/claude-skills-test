@@ -262,3 +262,11 @@ project/
 - [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - [HashiCorp Vault](https://www.vaultproject.io/)
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de gestion des secrets | Document définissant la solution choisie (Vault, Secrets Manager, etc.) |
+| Inventaire des secrets | Liste exhaustive des credentials, clés API et certificats avec rotation |
+| Procédures de rotation | Guide de renouvellement périodique des secrets avec fréquence et alertes |

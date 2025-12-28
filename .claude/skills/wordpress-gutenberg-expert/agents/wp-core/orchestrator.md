@@ -105,3 +105,12 @@ Tu es l'orchestrateur des sous-agents WordPress Core. Tu analyses la question et
 - ❌ Définition des processus → web-dev-process
 - ❌ Frontend non-WordPress → frontend-developer
 - ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents appropriés |
+| Combined solution | Solution combinant plusieurs agents WP Core si nécessaire |
+| Integration code | Code PHP intégrant les différents aspects (CPT + meta + roles) |
+| Documentation | Documentation consolidée des fonctionnalités WordPress |

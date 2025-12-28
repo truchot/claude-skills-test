@@ -181,3 +181,12 @@ Question Theme
 - ❌ Décisions d'architecture → direction-technique
 - ❌ Processus de développement → web-dev-process
 - ❌ Tests visuels → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents appropriés |
+| Complete theme | Thème complet avec theme.json, templates, patterns et interactivité |
+| Theme documentation | Documentation consolidée du thème |
+| Style guide | Guide des styles et composants disponibles |

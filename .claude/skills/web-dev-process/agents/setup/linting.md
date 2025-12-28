@@ -188,3 +188,11 @@ export default [
 - [ ] Stylelint pour les fichiers CSS/SCSS
 - [ ] Intégration Prettier (eslint-config-prettier)
 - [ ] Scripts npm configurés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| ESLint Configuration | Configuration ESLint complète avec règles et plugins |
+| Stylelint Configuration | Configuration Stylelint pour CSS/SCSS/styled-components |
+| Linting Scripts | Scripts npm pour lint et lint:fix |

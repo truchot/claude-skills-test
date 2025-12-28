@@ -194,3 +194,11 @@ Tu définis les **politiques et standards** de monitoring de performance.
 - [Google SRE Book - Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [The RED Method](https://grafana.com/blog/2018/08/02/the-red-method-how-to-instrument-your-services/)
 - [USE Method](http://www.brendangregg.com/usemethod.html)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de monitoring | Document définissant métriques, outils et seuils d'alerte (SLO/SLA) |
+| Configuration monitoring | Setup APM, dashboards Grafana/Datadog avec métriques clés |
+| Runbook alertes | Procédures de réaction pour chaque alerte de performance |

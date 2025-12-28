@@ -220,3 +220,11 @@ Tu définis les **politiques et standards** de gestion des incidents en producti
 - [Google SRE - Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - [PagerDuty Incident Response Guide](https://response.pagerduty.com/)
 - [Atlassian Incident Management Handbook](https://www.atlassian.com/incident-management/handbook)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'incident | Document complet avec timeline, impact et actions correctives |
+| Procédure de réponse | Runbook avec étapes de diagnostic et escalation par type d'incident |
+| Tableau de bord incidents | Métriques MTTR, fréquence et patterns d'incidents récurrents |

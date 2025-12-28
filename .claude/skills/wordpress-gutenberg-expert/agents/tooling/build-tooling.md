@@ -284,3 +284,13 @@ import { plus, minus } from '@wordpress/icons';
 
 4. **Structure blocks/** : Un dossier par block avec block.json
 5. **prepare script** : Build automatique avant npm publish
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Build configuration | webpack.config.js ou @wordpress/scripts setup |
+| package.json scripts | Scripts NPM pour build, watch, lint |
+| Compiled assets | Fichiers dans build/ directory |
+| Source maps | Source maps pour debugging |
+| Build documentation | Documentation du processus de build |

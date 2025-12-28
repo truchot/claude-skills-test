@@ -372,3 +372,12 @@ const { posts, hasResolved } = useSelect( ( select ) => {
 
 if ( ! hasResolved ) return <Spinner />;
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Custom store code | Fichiers de définition du store (actions, selectors, reducer) |
+| Store registration | Code d'enregistrement du store avec @wordpress/data |
+| React components | Composants utilisant useSelect/useDispatch |
+| Documentation | Documentation des selectors et actions disponibles |

@@ -196,3 +196,11 @@ refactor/user-service
 - [ ] Convention de nommage définie
 - [ ] Équipe formée au workflow
 - [ ] Protection de branche configurée
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Branching Strategy Document | Documentation de la stratégie de branches choisie |
+| Branch Naming Guide | Guide des conventions de nommage des branches |
+| Workflow Diagram | Diagramme visuel du workflow Git de l'équipe |

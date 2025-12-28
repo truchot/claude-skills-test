@@ -202,3 +202,11 @@ indent_style = tab
 | **PHP** | Composer | PHP_CodeSniffer | PHP CS Fixer |
 | **Go** | go mod | golangci-lint | gofmt |
 | **Rust** | Cargo | Clippy | rustfmt |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Project Setup Guide | Guide complet de configuration initiale du projet |
+| Configuration Files | Tous les fichiers de configuration (.gitignore, .editorconfig, etc.) |
+| Development Environment | Environnement de développement configuré et documenté |

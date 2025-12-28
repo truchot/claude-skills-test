@@ -375,3 +375,13 @@ jobs:
 4. **Script install-wp-tests.sh** : Standard pour setup WordPress test suite
 5. **Bootstrap plugin** : Charger le plugin via `muplugins_loaded`
 6. **Release sans dev** : `composer install --no-dev` pour le build
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CI/CD configuration | Fichiers GitHub Actions ou GitLab CI |
+| Pipeline stages | Stages lint, test, build, deploy configurés |
+| Test matrix | Matrice de tests PHP/WordPress versions |
+| Deployment automation | Automatisation du déploiement |
+| Pipeline documentation | Documentation du pipeline CI/CD |

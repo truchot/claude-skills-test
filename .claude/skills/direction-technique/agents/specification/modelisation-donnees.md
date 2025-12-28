@@ -244,3 +244,11 @@ Tu définis les **politiques** et **objectifs stratégiques** de modélisation d
 | QUOI (Mapping WP) | `web-dev-process/agents/design/wordpress-data-mapping` |
 | COMMENT (SQL) | Skills d'implémentation SQL |
 | COMMENT (WordPress) | `wordpress-gutenberg-expert/agents/wp-core/*` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Modèle de données technique | Schéma entités-relations avec types, contraintes et index |
+| Diagramme ERD | Représentation visuelle des entités et relations (PlantUML, dbdiagram.io) |
+| Décisions de modélisation | Justification des choix techniques (CPT vs taxonomy, normalization, etc.) |

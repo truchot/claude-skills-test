@@ -157,3 +157,11 @@ specification/cadrage-technique
 | Architecture innovante/risquée | Review par expert externe |
 | Conflit technique | Médiation et ADR |
 | Impact budget significatif | Alerte project-management |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier d'architecture complet | Compilation des décisions, diagrammes, patterns et standards du projet |
+| Architecture Decision Records | Collection des ADR documentant les choix structurants |
+| Rapports de revue | Synthèse des validations architecturales avec recommandations |

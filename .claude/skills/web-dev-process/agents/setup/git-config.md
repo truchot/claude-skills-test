@@ -163,3 +163,11 @@ git bisect good v1.0.0
 - [ ] .gitignore adapté au projet
 - [ ] Remote configuré (origin)
 - [ ] Branche par défaut: main
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Git Configuration | Configuration Git globale et locale avec aliases utiles |
+| .gitignore File | Fichier .gitignore complet pour le type de projet |
+| Git Setup Guide | Guide de configuration initiale de Git pour l'équipe |

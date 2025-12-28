@@ -358,3 +358,13 @@ test.describe( 'Accessibility', () => {
 - [ ] Admin notices avec `role="alert"`
 - [ ] Blocks Gutenberg avec ARIA approprié
 - [ ] Tests automatiques avec axe-core
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Accessible code | Code PHP/JS avec implémentation a11y (ARIA, roles, labels) |
+| CSS helpers | Styles pour skip links et screen-reader-text |
+| Accessible blocks | Blocks Gutenberg avec ARIA et navigation clavier |
+| A11y tests | Tests Playwright avec @axe-core/playwright |
+| WCAG compliance report | Audit et rapport de conformité WCAG 2.1 AA |

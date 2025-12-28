@@ -145,3 +145,11 @@ Le mot "audit" peut concerner plusieurs domaines :
 | Audit de **performance/latence** | performance | `audit-performance` |
 
 > **Règle** : Si le contexte n'est pas clair, demander : "S'agit-il d'un audit de code existant, de sécurité, ou de performance ?"
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier d'avant-projet complet | Compilation études de faisabilité, audits, recommandations stack et rapports POC |
+| Synthèse décisionnelle | Document de synthèse avec recommandation GO/NO-GO et risques majeurs |
+| Estimations préliminaires | Fourchettes d'effort et complexité pour alimenter le chiffrage |

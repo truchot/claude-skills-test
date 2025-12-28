@@ -220,3 +220,11 @@ Instance 3: v1 ─────────────────→ v2 (3/3)
 - [Martin Fowler - Blue Green Deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html)
 - [Google SRE - Release Engineering](https://sre.google/sre-book/release-engineering/)
 - [Feature Flags Best Practices](https://launchdarkly.com/blog/feature-flag-best-practices/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de stratégie de déploiement | Méthode choisie (blue/green, canary, rolling) avec justification |
+| Checklist de déploiement | Étapes pré/post déploiement avec validations et rollback |
+| Plan de rollback | Procédures de retour arrière avec RTO et points de décision |

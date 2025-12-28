@@ -92,3 +92,11 @@ test('should not expose sensitive headers', async ({ request }) => {
 - [ ] HSTS en production
 - [ ] X-Powered-By supprimé
 - [ ] Tests automatisés
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Security Headers Configuration | Configuration complète des headers de sécurité HTTP |
+| Security Headers Tests | Tests automatisés de vérification des headers |
+| Security Headers Audit | Rapport d'audit SecurityHeaders.com/Mozilla Observatory |

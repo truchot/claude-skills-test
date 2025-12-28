@@ -316,3 +316,11 @@ Cette estimation est valide si :
 | Écart > 30% avec macro | Justifier ou réviser |
 | Incertitude sur feature | Demander spike → `avant-projet/poc-spike` |
 | Spécifications incomplètes | Bloquer et demander clarification |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tableau d'estimation détaillée | Grille complète tâche par tâche avec effort, complexité et responsables |
+| Récapitulatif par fonctionnalité | Synthèse des estimations groupées par feature avec totaux |
+| Document de justification | Rationale des estimations avec hypothèses et facteurs de complexité |

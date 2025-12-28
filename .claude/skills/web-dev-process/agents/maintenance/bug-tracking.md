@@ -325,3 +325,11 @@ L'équipe MyApp
 - [ ] Processus d'incident documenté
 - [ ] Communication utilisateur prête
 - [ ] Métriques de qualité suivies
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Error Tracking Setup | Configuration Sentry/Bugsnag avec source maps et releases |
+| Incident Response Process | Processus documenté de gestion des incidents |
+| Status Page | Status page configurée avec composants et métriques |

@@ -296,3 +296,11 @@ Cadrage validé
 
 - IEEE 830 - Software Requirements Specifications
 - RFC 2119 - Key words for use in RFCs
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de spécifications techniques | Specs détaillées par fonctionnalité avec critères d'acceptation |
+| User stories techniques | Récits utilisateur avec conditions de réalisation et tests associés |
+| Matrice de traçabilité | Mapping entre besoins fonctionnels et spécifications techniques |

@@ -68,3 +68,11 @@ npm run dev
 - Pour les variables d'environnement → `env-variables.md`
 - Pour Docker et conteneurisation → `docker.md`
 - Pour la gestion des secrets → `secrets-management.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Environment Setup Guide | Guide complet de configuration des environnements (local, dev, staging, prod) |
+| Docker Compose Configuration | Configuration docker-compose pour services locaux |
+| Environment Documentation | Documentation des différences entre environnements |

@@ -392,3 +392,11 @@ jobs:
 - [ ] Bannière visuelle "STAGING"
 - [ ] Pas d'indexation par les moteurs de recherche
 - [ ] Logs accessibles pour debugging
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Staging Deployment Configuration | Configuration du déploiement automatique en staging |
+| Staging Access Control | Configuration des accès et authentification staging |
+| Staging Verification Guide | Guide de vérification et tests en environnement staging |

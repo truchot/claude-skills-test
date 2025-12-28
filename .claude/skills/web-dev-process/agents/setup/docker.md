@@ -231,3 +231,11 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
 - [ ] User non-root en production
 - [ ] Health check configuré
 - [ ] Volumes pour la persistence
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dockerfile | Dockerfile optimisé multi-stage pour production |
+| Docker Compose Files | docker-compose.yml pour développement local |
+| Docker Documentation | Guide de configuration et utilisation de Docker |

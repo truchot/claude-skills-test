@@ -639,3 +639,14 @@ sprintf( __( 'Edit %s', 'my-plugin' ), $type );
 - [ ] Fichiers JSON générés pour JS avec `wp i18n make-json`
 - [ ] Support RTL avec propriétés CSS logiques
 - [ ] Pas de concaténation de chaînes traduites
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Internationalized code | Code PHP/JS avec fonctions de traduction (__(), _e(), etc.) |
+| POT file | Fichier template .pot généré avec wp-cli |
+| Translation files | Fichiers .po et .mo pour langues supportées |
+| JSON translations | Fichiers JSON pour traductions JavaScript |
+| RTL styles | Feuilles de style RTL si applicable |
+| Translation guide | Guide pour traducteurs et processus de localisation |

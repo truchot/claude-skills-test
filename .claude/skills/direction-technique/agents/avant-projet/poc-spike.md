@@ -380,3 +380,11 @@ Si non concluant à cette date, arrêt et analyse.
 | Résultat négatif sur feature critique | Escalader pour décision Go/No-Go |
 | Découverte de complexité majeure | Réévaluer les estimations |
 | Besoin de ressources supplémentaires | Demander validation avant |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Cadrage POC | Document définissant objectifs, critères de succès et planning time-boxé |
+| Rapport POC | Résultats détaillés avec verdict, recommandations et prochaines étapes |
+| Code POC | Repository du prototype avec documentation (jetable ou réutilisable selon résultats) |

@@ -271,3 +271,11 @@ Le service répond-il ?
 | Problème infra/réseau | Escalade ops |
 | Bug dans dépendance tierce | Issue GitHub + workaround |
 | Données corrompues | DBA + backup |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Guide de troubleshooting | Arbres de décision et procédures de diagnostic par catégorie d'erreur |
+| Base de connaissance problèmes | Wiki des erreurs courantes avec symptômes et solutions |
+| Scripts de diagnostic | Outils automatisés pour collecte logs, health checks et debug |

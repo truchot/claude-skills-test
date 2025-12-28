@@ -114,3 +114,11 @@ groups:
 - [ ] Sévérités définies
 - [ ] Canaux de notification configurés
 - [ ] Escalation documentée
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Alerting Rules | Règles d'alerting configurées pour tous les services critiques |
+| Alert Runbooks | Runbooks de réponse aux incidents pour chaque alerte |
+| Escalation Policy | Politique et procédures d'escalation des incidents |

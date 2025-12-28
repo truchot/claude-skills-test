@@ -180,3 +180,11 @@ test('critical user flow', async () => {
 - [ ] Rollback documenté et testé
 - [ ] Notifications configurées
 - [ ] Health checks en place
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CD Pipeline Configuration | Configuration complète des pipelines de déploiement continu |
+| Deployment Approval Process | Processus d'approbation pour les déploiements production |
+| Rollback Procedures | Procédures documentées de rollback automatique et manuel |

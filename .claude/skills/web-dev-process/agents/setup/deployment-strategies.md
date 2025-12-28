@@ -228,3 +228,11 @@ if (featureFlags.isEnabled('new-checkout', { userId })) {
 - [ ] Monitoring des métriques clés
 - [ ] Rollback testé et documenté
 - [ ] Progression définie (pour Canary)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Deployment Strategy Document | Documentation de la stratégie de déploiement choisie |
+| Health Check Configuration | Configuration des health checks pour tous les environnements |
+| Deployment Metrics Dashboard | Dashboard de monitoring des déploiements et métriques clés |

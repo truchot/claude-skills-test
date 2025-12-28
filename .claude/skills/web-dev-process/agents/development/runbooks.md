@@ -239,3 +239,11 @@ docs/
 - [ ] Procédures de rollback documentées
 - [ ] Contacts d'escalation définis
 - [ ] Runbooks testés régulièrement
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Runbook Template | Template standardisé pour créer des runbooks |
+| Deployment Runbooks | Runbooks de déploiement pour staging et production |
+| Incident Runbooks | Procédures documentées pour les incidents courants |

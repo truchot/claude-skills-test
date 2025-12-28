@@ -132,3 +132,11 @@ specification/specification-technique
 | Documentation obsolète | Mise à jour prioritaire |
 | Blocage communication inter-équipes | Facilitation |
 | Nouveau sur technologie complexe | Support renforcé |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier de communication technique | Compilation docs, handoffs, onboarding et rapports |
+| Templates de communication | Modèles standardisés pour rapports, handoffs et documentations |
+| Base de connaissance centralisée | Repository unique de toute la documentation technique |

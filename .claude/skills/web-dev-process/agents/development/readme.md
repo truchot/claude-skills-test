@@ -183,3 +183,11 @@ pnpm test:e2e    # Tests E2E
 - [ ] Structure du projet documentée
 - [ ] CONTRIBUTING.md
 - [ ] LICENSE
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| README Template | Template de README avec toutes les sections standards |
+| CONTRIBUTING Guide | Guide de contribution avec setup et conventions |
+| Project Documentation | Documentation complète du projet pour les nouveaux développeurs |

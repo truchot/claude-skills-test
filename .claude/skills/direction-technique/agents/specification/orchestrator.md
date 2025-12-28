@@ -135,3 +135,11 @@ Tous les documents suivent une structure standard :
 | Complexité technique élevée | Consultation architecture |
 | Impact sur estimation | Alerte estimation |
 | Contrainte sécurité | Consultation sécurité |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier de spécifications complet | Compilation cadrage, modèle de données, APIs et specs techniques |
+| Conventions techniques | Standards de nommage, formatage et organisation du code |
+| Schémas d'architecture | Diagrammes techniques (ERD, API, composants) pour le projet |

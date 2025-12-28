@@ -210,3 +210,11 @@ Questions préliminaires ? Répondez dans ce thread 👇
 | Questions sans réponse | Escalade au PO |
 | Environnement non prêt | Reporter le démarrage |
 | Estimation dépassée | Revoir le scope avec PO |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Document de handoff | Package complet specs, maquettes, ADRs et contexte métier |
+| Session de handoff | Réunion de passation avec Q&A et enregistrement |
+| Checklist de validation | Points de contrôle avant démarrage développement |

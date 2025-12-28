@@ -144,3 +144,11 @@ test('Button hover states', async ({ page }) => {
 - [ ] Contenu dynamique masqué
 - [ ] Tolérance définie
 - [ ] Process de review en place
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Visual Regression Tests | Suite de tests visuels avec Chromatic/Percy/Playwright |
+| Baseline Screenshots | Screenshots de référence pour tous les composants |
+| Visual Testing Workflow | Workflow de review et approbation des changements visuels |

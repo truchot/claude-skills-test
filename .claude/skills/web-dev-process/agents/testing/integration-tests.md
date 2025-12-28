@@ -188,3 +188,11 @@ tests/
 - [ ] Cas d'erreur testés
 - [ ] Authentification testée
 - [ ] Performance acceptable (< 30s)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Integration Test Suite | Suite de tests d'intégration API et composants |
+| Test Database Setup | Configuration de base de données de test avec fixtures |
+| Integration Test Plan | Plan de tests d'intégration avec scénarios |

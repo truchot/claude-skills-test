@@ -254,3 +254,11 @@ test('validateEmail rejects invalid email formats', () => {});
 - [ ] Tests dans la CI
 - [ ] Pas de tests flaky
 - [ ] Documentation des tests
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Test Strategy | Stratégie de tests complète avec pyramide et exigences de couverture |
+| Test Suites | Suites de tests unitaires, intégration et E2E configurées |
+| Test Coverage Report | Rapport de couverture de tests avec seuils par module |

@@ -453,3 +453,11 @@ Retry-After: 60               # Attendre 60 secondes
 | [Insomnia](https://insomnia.rest) | Client API |
 | [GraphQL Playground](https://github.com/graphql/graphql-playground) | IDE GraphQL |
 | [Stoplight](https://stoplight.io) | Design-first API |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| API Specification | Spécification OpenAPI/GraphQL complète avec tous les endpoints |
+| API Documentation | Documentation détaillée avec exemples de requêtes et réponses |
+| Versioning Strategy | Stratégie de versioning et évolution de l'API |

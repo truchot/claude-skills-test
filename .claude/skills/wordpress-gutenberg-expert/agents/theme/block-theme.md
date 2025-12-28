@@ -130,3 +130,13 @@ my-child-theme/
 - [ ] Spacing scale défini
 - [ ] Template parts déclarés
 - [ ] functions.php minimal
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| theme.json | Configuration complète (settings, styles, templates) |
+| functions.php | Fichier PHP minimal avec theme supports |
+| style.css | En-tête du thème avec métadonnées |
+| Directory structure | Structure de dossiers complète (templates/, parts/, patterns/, styles/) |
+| Documentation | Guide d'utilisation du thème et configuration |

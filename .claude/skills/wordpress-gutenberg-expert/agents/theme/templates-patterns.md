@@ -114,3 +114,13 @@ Fichiers JSON dans `styles/` qui redéfinissent les couleurs/typo.
 - [ ] Patterns avec header PHP
 - [ ] Style variations dans `styles/`
 - [ ] Catégories de patterns enregistrées
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Template files | Fichiers HTML de templates (index.html, single.html, page.html, etc.) |
+| Template parts | Fichiers HTML de parts (header.html, footer.html) |
+| Block patterns | Fichiers PHP de patterns avec headers de métadonnées |
+| Style variations | Fichiers JSON dans styles/ pour variantes visuelles |
+| Pattern categories | Code PHP d'enregistrement des catégories de patterns |

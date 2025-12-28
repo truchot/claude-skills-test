@@ -141,3 +141,11 @@ architecture/architecture-systeme
 | Architecture **patterns/design** | architecture | `patterns-design` |
 
 > **Règle** : AWS, GCP, Azure, Terraform, Kubernetes → `architecture-infra`. Code, modules, couches → `architecture-systeme`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Dossier d'infrastructure complet | Compilation architecture infra, environnements, CI/CD et déploiement |
+| Diagrammes d'infrastructure | Schémas des ressources cloud, réseau et flux de déploiement |
+| Runbooks opérationnels | Procédures de déploiement, rollback et gestion des environnements |

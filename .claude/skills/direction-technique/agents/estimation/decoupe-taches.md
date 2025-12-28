@@ -252,3 +252,11 @@ Backlog → Ready → In Progress → Review → Testing → Done
 | Dépendances circulaires | Revoir l'architecture |
 | Tâche non estimable | Créer un spike d'abord |
 | Blocage externe | Créer tâche de suivi |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Work Breakdown Structure (WBS) | Décomposition hiérarchique complète du projet en tâches et sous-tâches |
+| Liste de tâches estimées | Catalogue de tâches avec effort, priorité et dépendances |
+| Graphe de dépendances | Schéma visualisant les relations et chemin critique entre tâches |

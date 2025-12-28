@@ -285,3 +285,11 @@ Tu définis les **standards et politiques** pour la spécification des APIs.
 - [OpenAPI Specification](https://swagger.io/specification/)
 - [REST API Design Best Practices](https://restfulapi.net/)
 - [JSON:API Specification](https://jsonapi.org/)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécification API (OpenAPI/Swagger) | Contrat d'API complet avec endpoints, payloads, codes de retour |
+| Documentation interactive | API docs générée (Swagger UI, Redoc) pour tester les endpoints |
+| Exemples de requêtes/réponses | Cas d'usage concrets avec données réalistes pour chaque endpoint |

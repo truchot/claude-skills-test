@@ -150,3 +150,11 @@ indent_style = tab
 - [ ] EditorConfig pour la cohérence cross-IDE
 - [ ] Format on save activé dans VS Code
 - [ ] Scripts npm pour format et format:check
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Prettier Configuration | Fichiers .prettierrc et .prettierignore configurés |
+| EditorConfig File | Configuration .editorconfig pour cohérence cross-IDE |
+| Formatting Scripts | Scripts npm pour formater et vérifier le formatage |

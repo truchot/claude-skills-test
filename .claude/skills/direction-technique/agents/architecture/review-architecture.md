@@ -294,3 +294,11 @@ Documentation architecture
 | Score < 20 | Réunion avec équipe + direction |
 | Désaccord sur recommandation | ADR pour documenter la décision |
 | Besoin d'expertise externe | Demander review par expert |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de revue d'architecture | Analyse détaillée avec scoring, points forts/faibles et recommandations |
+| Checklist de conformité | Grille d'évaluation complétée pour tous les aspects architecturaux |
+| Plan d'amélioration | Actions priorisées avec effort estimé pour corriger les failles identifiées |
