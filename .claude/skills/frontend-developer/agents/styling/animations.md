@@ -9,16 +9,12 @@ description: Expert en animations web - CSS transitions, keyframes, Framer Motio
 
 Créer des animations fluides et performantes pour améliorer l'expérience utilisateur.
 
-### Ce que je fais
-- Implémenter des transitions CSS
-- Créer des animations keyframes
-- Utiliser Framer Motion pour React
-- Optimiser les performances d'animation
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer le styling général → autres agents styling
-- Créer des animations 3D complexes (Three.js)
-- Gérer les canvas/WebGL
+- ❌ Gérer le styling général (layouts, couleurs) → `tailwind-expert.md` ou `css-in-js.md`
+- ❌ Créer des animations 3D complexes (Three.js, WebGL) → Déléguer à un expert 3D si nécessaire
+- ❌ Gérer les canvas/WebGL → Spécialiste canvas/WebGL
+- ❌ Vérifier l'accessibilité des animations → `foundations/accessibilite.md`
 
 ## Transitions CSS
 
@@ -466,3 +462,11 @@ function AccessibleAnimation() {
 ## Mots-clés de routage
 
 `animation`, `transition`, `keyframes`, `Framer Motion`, `motion`, `animate`, `whileHover`, `AnimatePresence`, `variants`, `parallax`, `scroll animation`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bibliothèque d'animations | Keyframes CSS et patterns d'animation réutilisables |
+| Configuration Framer Motion | Variants et animations pour composants interactifs |
+| Guide des animations | Documentation des timing, easing et bonnes pratiques |

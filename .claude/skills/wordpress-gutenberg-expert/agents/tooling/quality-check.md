@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans le contrôle qualité du code pour projets Wor
 - Validation des préfixes WordPress
 - Text domain et i18n
 
+## Tu NE fais PAS
+
+- ❌ Outils de linting génériques → web-dev-process
+- ❌ CI/CD configuration → devops
+- ❌ Stratégie qualité globale → direction-technique
+- ❌ Tests automatisés → testing-process
+
 ## Sources WordPress
 
 - **WordPress Coding Standards** : <https://developer.wordpress.org/coding-standards/>
@@ -311,3 +318,14 @@ class My_Plugin {
 // ✅ Ou - avec préfixe
 $my_plugin_var = 'value';
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| PHPCS configuration | phpcs.xml avec WordPress Coding Standards |
+| ESLint configuration | .eslintrc.json avec @wordpress/eslint-plugin |
+| Stylelint configuration | .stylelintrc.json pour CSS/SCSS |
+| Pre-commit hooks | Hooks Git pour linting automatique |
+| Quality reports | Rapports de qualité de code |
+| Fix scripts | Scripts pour auto-fix des problèmes courants |

@@ -9,15 +9,12 @@ description: Patterns de composants communs - HOC, Render Props, Compound Compon
 
 Maîtriser les patterns de composants réutilisables applicables à tous les frameworks front-end.
 
-### Ce que je fais
-- Implémenter des patterns de composition avancés
-- Créer des composants réutilisables et flexibles
-- Appliquer les principes SOLID aux composants
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter les spécificités React/Vue → experts dédiés
-- Gérer le state management → `state-management/`
-- Gérer les tests → `testing/`
+- ❌ Implémenter les spécificités React (hooks, Context) → `react-expert.md` ou skill `react-expert`
+- ❌ Implémenter les spécificités Vue (Composition API, Pinia) → `vue-expert.md`
+- ❌ Gérer le state management global → `state-management/`
+- ❌ Tester les composants → `testing/component-testing.md`
 
 ## Compound Components
 
@@ -497,3 +494,11 @@ function IconButton(props: Omit<ButtonProps, 'children'> & { icon: ReactNode }) 
 ## Mots-clés de routage
 
 `pattern`, `compound components`, `render props`, `headless`, `renderless`, `controlled`, `uncontrolled`, `slot`, `provider`, `composition`, `HOC`, `higher-order component`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bibliothèque de patterns | Implémentations des patterns (Compound, Headless, Render Props) |
+| Composants génériques | Composants réutilisables framework-agnostic |
+| Guide des patterns | Documentation des use cases et exemples d'implémentation |

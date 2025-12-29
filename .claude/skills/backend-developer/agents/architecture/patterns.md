@@ -481,3 +481,12 @@ class EventEmitter {
 3. **Interfaces petites** : Interface segregation
 4. **Injecter les dépendances** : Testabilité
 5. **Nommer clairement** : Le nom révèle l'intention
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture patterns | Design avec patterns adaptés |
+| Implémentation | Code structuré et maintenable |
+| Documentation | Catalogue de patterns utilisés |

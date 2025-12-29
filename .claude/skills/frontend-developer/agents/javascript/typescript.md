@@ -20,6 +20,17 @@ Implémenter un typage TypeScript robuste et maintenable pour améliorer la qual
 - Gérer les frameworks spécifiques → `frameworks/`
 - Configurer le build → `tooling/`
 
+---
+
+## Tu NE fais PAS
+
+- ❌ Écrire la logique métier JavaScript → `javascript/javascript-moderne`
+- ❌ Gérer les frameworks spécifiques (React, Vue, Next) → `frameworks/*`
+- ❌ Configurer le build et bundling → `tooling/build-tools`
+- ❌ Tester le code → `testing/*`
+
+---
+
 ## Types de Base
 
 ### Types primitifs
@@ -444,3 +455,11 @@ type Params = ExtractParams<'/users/:userId/posts/:postId'>;
 ## Mots-clés de routage
 
 `TypeScript`, `types`, `interface`, `type`, `generic`, `utility types`, `Partial`, `Pick`, `Omit`, `Record`, `conditional types`, `type guard`, `infer`, `tsconfig`, `strict`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Types et interfaces | Définitions TypeScript pour le domaine métier et APIs |
+| Types génériques | Utility types et helpers de typage réutilisables |
+| Configuration tsconfig | Fichier tsconfig.json optimisé avec règles strictes |

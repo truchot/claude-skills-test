@@ -18,6 +18,7 @@ const {
 } = require('./utils');
 const {
   PROJECT_MANAGEMENT_DIR,
+  PROJECT_MANAGEMENT_AGENTS_DIR,
   PROJECT_MANAGEMENT_SUBDOMAINS
 } = require('./config');
 
@@ -384,7 +385,7 @@ if (!directoryExists(PROJECT_MANAGEMENT_DIR)) {
 let totalAgentsTested = 0;
 
 for (const subdomain of PROJECT_MANAGEMENT_SUBDOMAINS) {
-  const subdomainPath = path.join(PROJECT_MANAGEMENT_DIR, subdomain);
+  const subdomainPath = path.join(PROJECT_MANAGEMENT_AGENTS_DIR, subdomain);
   console.log(`\n📂 ${subdomain}/`);
 
   if (!directoryExists(subdomainPath)) {

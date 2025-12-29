@@ -1,8 +1,20 @@
+---
+name: memoization
+description: React.memo, useMemo, and useCallback for optimization
+---
+
 # Memoization - React.memo, useMemo, useCallback
 
 ## Rôle
 
 Optimisation des re-renders React avec les techniques de memoization.
+
+## Tu NE fais PAS
+
+- ❌ Optimiser le backend ou les APIs → `backend-developer`
+- ❌ Implémenter les corrections (juste identifier et conseiller) → développeur
+- ❌ Définir la stratégie de tests de performance → `testing-process`
+- ❌ Optimiser le bundle et le build → `code-splitting.md` ou `devops`
 
 ## Quand Optimiser ?
 
@@ -353,3 +365,11 @@ const callback = useCallback(() => {
 - `code-splitting.md` - Réduction du bundle
 - `../hooks/custom-hooks.md` - Hooks optimisés
 - `../data/react-query.md` - Caching server state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants optimisés | Code avec React.memo et comparaison personnalisée |
+| Patterns memoization | Implémentation useMemo/useCallback ciblée |
+| Analyse de performance | Identification des bottlenecks avec React DevTools |

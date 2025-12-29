@@ -1,7 +1,7 @@
 ---
 name: backend-developer
-description: Expert en développement backend - APIs, bases de données, architecture, sécurité, performance et DevOps
-version: 1.0.0
+description: Expert en développement backend - APIs, bases de données, architecture, sécurité et performance
+version: 2.0.0
 status: active
 ---
 
@@ -19,9 +19,11 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 | **Architecture** | Patterns, microservices, design système | 5 |
 | **Performance** | Caching, profiling, optimisation | 5 |
 | **Testing** | Tests unitaires, intégration, E2E backend | 5 |
-| **DevOps** | CI/CD, containers, déploiement, monitoring | 6 |
 
-**Total : 38 agents spécialisés**
+**Total : 32 agents spécialisés**
+
+> **Note** : Le domaine DevOps a été extrait dans le skill dédié `devops`.
+> Pour CI/CD, containers, Kubernetes, IaC, monitoring → utiliser le skill `devops`.
 
 ## Routing
 
@@ -81,15 +83,85 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 | fixture, factory, seed | `testing/fixtures` |
 | coverage, mutation testing | `testing/coverage` |
 
-### DevOps
-| Mots-clés | Agent |
-|-----------|-------|
-| CI/CD, pipeline, GitHub Actions | `devops/cicd` |
-| Docker, container, image | `devops/containers` |
-| Kubernetes, K8s, orchestration | `devops/kubernetes` |
-| deploy, release, rollback | `devops/deployment` |
-| monitoring, alerting, logs | `devops/monitoring` |
-| infrastructure, IaC, Terraform | `devops/infrastructure` |
+### DevOps (→ skill dédié)
+
+> **Redirection** : Les requêtes DevOps sont maintenant gérées par le skill `devops`.
+> Voir [ADR-007](../web-agency/docs/adr/007-skill-extraction-pattern.md) pour la rationale d'extraction.
+
+| Mots-clés | Action | Route Cible |
+|-----------|--------|-------------|
+| CI/CD, pipeline, GitHub Actions | `REDIRECT` | `devops/cicd/github-actions` |
+| GitLab CI, stages | `REDIRECT` | `devops/cicd/gitlab-ci` |
+| Docker, Dockerfile, image | `REDIRECT` | `devops/containers/docker` |
+| Docker Compose, services | `REDIRECT` | `devops/containers/docker-compose` |
+| Kubernetes, K8s, pods | `REDIRECT` | `devops/kubernetes/deployments` |
+| Helm, charts | `REDIRECT` | `devops/kubernetes/helm` |
+| deploy, release, blue-green | `REDIRECT` | `devops/deployment/strategies` |
+| rollback, recovery | `REDIRECT` | `devops/deployment/rollback` |
+| Prometheus, metrics | `REDIRECT` | `devops/monitoring/prometheus` |
+| Grafana, dashboards | `REDIRECT` | `devops/monitoring/grafana` |
+| logs, ELK, Loki | `REDIRECT` | `devops/monitoring/logging` |
+| alerting, PagerDuty | `REDIRECT` | `devops/monitoring/alerting` |
+| Terraform, IaC | `REDIRECT` | `devops/infrastructure/terraform` |
+| AWS, EC2, RDS | `REDIRECT` | `devops/infrastructure/aws` |
+| GCP, GKE | `REDIRECT` | `devops/infrastructure/gcp` |
+
+#### Mécanisme de Redirection
+
+**Comment ça marche** : Les redirections sont gérées par l'orchestrateur au niveau routing, pas par le skill lui-même.
+
+```
+Flux de redirection :
+
+1. Requête arrive à backend-developer
+   │
+2. Orchestrateur parse les mots-clés
+   │
+3. Match trouvé dans table REDIRECT ?
+   ├─ NON → Route normale vers agent local
+   └─ OUI → Redirection transparente
+            │
+4. Charger le skill cible (devops)
+   │
+5. Router vers l'agent spécifié
+```
+
+**Implémentation Orchestrateur** :
+
+```javascript
+// Pseudo-code de routage
+function routeRequest(request, skill) {
+  const keywords = extractKeywords(request);
+
+  // Check redirect table first
+  for (const redirect of skill.redirects) {
+    if (matchesKeywords(keywords, redirect.keywords)) {
+      // Log deprecation warning (v2.1.0+)
+      console.warn(`DEPRECATED: ${skill.name} → ${redirect.target}`);
+
+      // Transparent redirect - no user action needed
+      return loadAndRoute(redirect.target, request);
+    }
+  }
+
+  // Normal routing to local agents
+  return routeToLocalAgent(skill, keywords);
+}
+```
+
+**Performance** :
+- Overhead minimal (~1-2ms) pour la lookup table
+- Pas de double-chargement : le skill cible est chargé directement
+- Cache des redirects en mémoire après premier accès
+
+**Dépréciation** (voir [VERSIONING.md](../VERSIONING.md)) :
+| Phase | Version | Comportement |
+|-------|---------|--------------|
+| Actuel | v2.0.0 | Redirections silencieuses |
+| Avertissement | v2.1.0 | Log warning sur chaque redirect |
+| Suppression | v3.0.0 | Erreur "skill not found", routes retirées |
+
+> **Recommandation** : Mettre à jour vos références pour pointer directement vers `devops/*` afin d'éviter les warnings futurs et l'overhead de redirection.
 
 ## Principes Directeurs
 

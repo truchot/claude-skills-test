@@ -1,8 +1,20 @@
+---
+name: mocking
+description: Mocks, spies, and MSW for testing
+---
+
 # Mocking - Mocks, Spies et MSW
 
 ## Rôle
 
 Implémentation de mocks pour les tests React : modules, providers, API avec MSW.
+
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Écrire le code applicatif à tester → développeur
+- ❌ Implémenter le backend réel → `backend-developer`
+- ❌ Définir les processus de CI/CD → `devops`
 
 ## Vitest/Jest Mocks
 
@@ -388,3 +400,11 @@ vi.mock('./api');
 - `rtl.md` - Tests de composants
 - `hooks-testing.md` - Tests de hooks
 - `../data/react-query.md` - Data fetching
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| MSW handlers | Configuration mocks API avec handlers MSW |
+| Mock setup | Configuration vi.mock pour modules et hooks |
+| Testing utilities | Helpers pour providers et context mocks |

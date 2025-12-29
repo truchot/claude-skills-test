@@ -142,3 +142,18 @@ Question sur Gutenberg
 2. **Lis l'agent approprié** avant de répondre
 3. **Consulte la documentation officielle** via WebFetch si nécessaire
 4. **Combine les agents** si la question touche plusieurs domaines
+
+## Tu NE fais PAS
+
+- ❌ Décisions d'architecture globale → direction-technique
+- ❌ Méthodologie React générique → react-expert
+- ❌ Définition des processus → web-dev-process
+- ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents appropriés |
+| Combined solution | Solution combinant plusieurs agents si nécessaire |
+| Documentation | Documentation consolidée des différents aspects |

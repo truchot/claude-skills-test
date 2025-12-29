@@ -130,3 +130,13 @@ useEffect(() => {
 - [ ] Icônes distinctives par variant
 - [ ] Close button avec aria-label
 - [ ] Couleur + icône (pas couleur seule)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécifications Types | Documentation inline, banner, toast, snackbar avec positionnement |
+| Tableau des Variants | Spécifications info, success, warning, error avec icônes et couleurs |
+| Guide Live Regions | Documentation role="alert", aria-live="polite/assertive" par type |
+| Patterns d'Usage | Exemples form errors, success messages, notifications avec durées |
+| Composant React/Vue | Code source Alert/Toast avec auto-dismiss et queue management |

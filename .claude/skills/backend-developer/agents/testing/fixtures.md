@@ -448,3 +448,12 @@ npm run db:seed
 4. **Relations cohérentes** : FK valides, dates logiques
 5. **Réutilisabilité** : Factories génériques avec overrides
 6. **Cleanup** : Supprimer après les tests
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Fixtures de test | Données de test réutilisables |
+| Factories | Générateurs de données |
+| Documentation | Guide des fixtures |

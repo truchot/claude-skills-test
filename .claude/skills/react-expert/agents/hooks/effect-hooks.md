@@ -1,8 +1,20 @@
+---
+name: effect-hooks
+description: useEffect and useLayoutEffect for side effects
+---
+
 # Effect Hooks - useEffect & useLayoutEffect
 
 ## Rôle
 
 Implémentation des hooks d'effets de bord : `useEffect` et `useLayoutEffect`.
+
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Gérer le server state (préférer React Query/SWR) → `../data/`
 
 ## useEffect
 
@@ -250,3 +262,11 @@ useEffect(() => {
 - `state-hooks.md` - Pour la gestion d'état
 - `custom-hooks.md` - Pour extraire les effets
 - `../data/react-query.md` - Pour le data fetching
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation effet | Code useEffect/useLayoutEffect avec cleanup |
+| Gestion dépendances | Array de dépendances approprié et justifié |
+| Patterns d'usage | Exemples avec subscriptions, timers, data fetching |

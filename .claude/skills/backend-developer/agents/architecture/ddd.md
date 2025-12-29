@@ -388,3 +388,12 @@ class [AggregateName] {
 4. **Immutabilité** : Value objects immutables
 5. **Règles dans le domaine** : Pas dans les services applicatifs
 6. **Event Storming** : Pour découvrir le domaine
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture DDD | Design avec bounded contexts |
+| Modèle de domaine | Entités, value objects, aggregates |
+| Documentation | Guide DDD pour l'équipe |

@@ -9,16 +9,12 @@ description: Expert en outils de build - Vite, Webpack, esbuild, configuration
 
 Maîtriser les outils de build pour les applications front-end modernes.
 
-### Ce que je fais
-- Configurer Vite, Webpack, esbuild
-- Optimiser les builds de production
-- Résoudre les problèmes de build
-- Configurer les environnements dev/prod
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Optimiser le code applicatif
-- Gérer le linting → `linting-formatting.md`
-- Déployer → DevOps
+- ❌ Optimiser le code applicatif (refactoring, patterns) → `javascript/` ou `frameworks/`
+- ❌ Configurer le linting et formatting (ESLint, Prettier) → `linting-formatting.md`
+- ❌ Déployer et gérer le CI/CD → skill `devops`
+- ❌ Décider de l'architecture → skill `lead-dev`
 
 ## Vite
 
@@ -321,3 +317,11 @@ console.log('Watching...');
 ## Mots-clés de routage
 
 `Vite`, `Webpack`, `esbuild`, `bundler`, `build`, `config`, `plugin`, `dev server`, `HMR`, `hot reload`, `production build`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration build | vite.config.ts ou webpack.config.js optimisé |
+| Scripts npm | package.json avec scripts dev, build, preview et deploy |
+| Documentation tooling | Guide d'utilisation des outils de build et troubleshooting |

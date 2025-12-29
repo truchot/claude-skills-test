@@ -647,3 +647,13 @@ scheduled:cleanup:
 - [ ] Configurer les règles d'approbation pour les MR
 - [ ] Tester le pipeline sur une branche de test
 - [ ] Documenter la configuration pour l'équipe
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| .gitlab-ci.yml | Configuration GitLab CI avec stages et jobs |
+| CI/CD variables | Variables d'environnement configurées dans GitLab |
+| Pipeline documentation | Documentation du pipeline et déploiement |
+| Environment setup | Configuration des environnements staging/production |
+| Deployment scripts | Scripts de déploiement utilisés par le pipeline |

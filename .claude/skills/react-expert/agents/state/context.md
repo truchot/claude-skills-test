@@ -1,8 +1,20 @@
+---
+name: context
+description: Context API for sharing state without prop drilling
+---
+
 # Context API - État Partagé React Natif
 
 ## Rôle
 
 Implémentation du Context API pour partager l'état entre composants sans prop drilling.
+
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (cache, mutations) → `../data/react-query.md` ou `../data/swr.md`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Quand Utiliser Context
 
@@ -385,3 +397,11 @@ const user = useContext(UserContext); // Pas de validation
 - `zustand.md` - Alternative légère
 - `redux-toolkit.md` - Pour applications complexes
 - `../hooks/state-hooks.md` - État local
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Context Provider | Provider component avec state management |
+| Types TypeScript | Interfaces pour context value et props |
+| Hook personnalisé | Custom hook use* avec validation |

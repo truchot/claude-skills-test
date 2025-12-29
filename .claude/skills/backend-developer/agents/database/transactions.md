@@ -332,3 +332,12 @@ test('concurrent access', async () => {
 4. **Retry logic** : Pour deadlocks et timeouts
 5. **Tester la concurrence** : Simuler accès parallèles
 6. **Monitorer** : Alerter sur deadlocks fréquents
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Gestion des transactions | Implémentation ACID |
+| Configuration isolation | Niveaux d'isolation et rollback |
+| Documentation | Guide des transactions |

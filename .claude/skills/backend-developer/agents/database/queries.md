@@ -326,3 +326,12 @@ const result = await prisma.table.findMany({
 4. **Éviter N+1** : Utiliser JOIN ou eager loading
 5. **Index appropriés** : Vérifier les colonnes WHERE/JOIN
 6. **EXPLAIN** : Analyser les plans d'exécution
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Requêtes optimisées | SQL/ORM queries performantes |
+| Configuration ORM | Setup Prisma/TypeORM/Sequelize |
+| Documentation | Guide de data access |

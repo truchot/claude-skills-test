@@ -138,3 +138,13 @@ interface CardProps {
 - [ ] Hover state pour interactive
 - [ ] Focus visible pour clickable
 - [ ] Keyboard accessible (Enter/Space)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécifications Variants | Document détaillant elevated, outlined, flat avec codes couleur et ombres |
+| Guide des Types | Documentation des 6 types de cartes avec cas d'usage et anatomie |
+| Patterns d'Usage | Exemples product card, user card, stats card avec best practices |
+| Patterns d'Interaction | Spécifications hover, focus, click avec keyboard navigation |
+| Composant React/Vue | Code source Card/ProductCard/StatsCard avec slots composables |

@@ -325,3 +325,12 @@ router.post('/auth/login', async (req, res) => {
 4. **Rate limiting** : Protéger /login
 5. **MFA** : Proposer TOTP
 6. **Logout complet** : Invalider tous les tokens
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système d'authentification | JWT, OAuth, sessions |
+| Configuration sécurité | Tokens, refresh, MFA |
+| Documentation | Guide auth pour l'équipe |

@@ -5,6 +5,44 @@ All notable changes to the backend-developer skill will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-12-29
+
+### Removed
+
+- **BREAKING**: Extracted DevOps domain to standalone `devops` skill (ADR-007)
+  - `cicd` agent → `devops/cicd/github-actions`, `devops/cicd/gitlab-ci`
+  - `containers` agent → `devops/containers/docker`
+  - `kubernetes` agent → `devops/kubernetes/deployments`
+  - `deployment` agent → `devops/deployment/strategies`
+  - `monitoring` agent → `devops/monitoring/prometheus`
+  - `infrastructure` agent → `devops/infrastructure/terraform`
+
+### Changed
+
+- Agent count reduced from 38 to 32 (6 DevOps agents extracted)
+- Domain count reduced from 7 to 6
+
+### Added
+
+- Explicit `REDIRECT` routing table for DevOps queries
+- Reference to ADR-007 for extraction rationale
+- Migration path documentation in routing section
+
+### Migration
+
+Users referencing `backend-developer/devops/*` should update to `devops/*`:
+
+| Old Path | New Path |
+|----------|----------|
+| `backend-developer/devops/cicd` | `devops/cicd/github-actions` |
+| `backend-developer/devops/containers` | `devops/containers/docker` |
+| `backend-developer/devops/kubernetes` | `devops/kubernetes/deployments` |
+| `backend-developer/devops/deployment` | `devops/deployment/strategies` |
+| `backend-developer/devops/monitoring` | `devops/monitoring/prometheus` |
+| `backend-developer/devops/infrastructure` | `devops/infrastructure/terraform` |
+
+See [devops CHANGELOG](../devops/CHANGELOG.md) for the new skill details.
+
 ## [1.0.0] - 2025-12-25
 
 ### Added

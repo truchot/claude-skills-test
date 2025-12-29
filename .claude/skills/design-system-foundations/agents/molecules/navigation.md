@@ -201,3 +201,13 @@ Tu es expert en **composants de navigation** pour design systems.
 - [ ] Pagination : previous/next, aria-current="page"
 - [ ] Focus visible sur tous les items
 - [ ] Responsive (mobile menu)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécifications Navbar | Anatomie navbar avec logo, links, actions et mobile menu |
+| Guide Tabs | Documentation role="tablist/tab/tabpanel" avec arrow navigation |
+| Patterns de Navigation | Breadcrumbs, pagination, stepper avec aria-current |
+| Guide Keyboard Navigation | Spécifications Tab, Arrow keys, Enter/Space par composant |
+| Composant React/Vue | Code source Navbar/Tabs/Breadcrumbs/Pagination avec responsive |

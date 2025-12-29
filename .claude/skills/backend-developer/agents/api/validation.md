@@ -320,3 +320,12 @@ router.post('/users', validate(CreateUserSchema), createUser);
 4. **Whitelist** : Définir ce qui est accepté, rejeter le reste
 5. **Ne jamais faire confiance** : Même aux données "internes"
 6. **Réutiliser** : Partager les schémas entre validation et types
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Schéma de validation | Validation Zod/Joi/Yup |
+| Configuration | Middleware de validation |
+| Documentation | Guide de validation |

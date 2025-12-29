@@ -384,3 +384,12 @@ it('should handle database errors', async () => {
 4. **Pas de coverage pour coverage** : Tests utiles uniquement
 5. **Objectifs réalistes** : 80% est souvent suffisant
 6. **Trend over time** : Éviter la régression
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de couverture | Coverage détaillé |
+| Configuration | Seuils et exclusions |
+| Documentation | Guide de coverage |

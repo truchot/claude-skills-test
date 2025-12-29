@@ -1,8 +1,20 @@
+---
+name: suspense
+description: React Suspense for lazy loading and declarative loading states
+---
+
 # React Suspense - Chargement Déclaratif
 
 ## Rôle
 
 Implémentation de React Suspense pour le lazy loading, le code splitting et le data fetching.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter les APIs backend → `backend-developer`
+- ❌ Configurer les librairies de state management → `../state/`
+- ❌ Gérer la gestion d'erreurs (utiliser Error Boundaries) → `../components/error-boundaries.md`
+- ❌ Optimiser le bundle côté build → `../performance/code-splitting.md`
 
 ## Suspense pour Code Splitting
 
@@ -416,3 +428,11 @@ function AppRoutes() {
 - `react-query.md` - Data fetching avec Suspense
 - `../components/error-boundaries.md` - Gestion d'erreurs
 - `../performance/code-splitting.md` - Optimisation bundle
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Suspense boundaries | Composants avec fallbacks appropriés |
+| Skeleton components | UI de chargement représentative du contenu |
+| Code splitting | Configuration lazy loading avec React.lazy |

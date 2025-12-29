@@ -72,12 +72,14 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 }
 ```
 
-## Points d'Escalade
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer Next.js spécifiquement → `nextjs-expert.md`
-- State global avancé → `state-management/react-state.md` ou `react-expert/state/`
-- Tester les composants → `testing/component-testing.md` ou `react-expert/testing/`
+- ❌ Gérer Next.js spécifiquement (App Router, Server Components) → `nextjs-expert.md`
+- ❌ Implémenter le state global avancé (Redux, Zustand patterns complexes) → skill `react-expert/state/`
+- ❌ Tester les composants et hooks → skill `react-expert/testing/`
+- ❌ Optimiser les performances avancées → skill `react-expert/performance/`
+
+## Points d'Escalade
 
 ## Délégation
 
@@ -86,3 +88,11 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 ## Mots-clés de routage
 
 `React`, `hooks`, `useState`, `useEffect`, `composant`, `JSX`, `props`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants React | Code des composants fonctionnels avec hooks et TypeScript |
+| Custom hooks | Hooks réutilisables pour la logique métier et state management |
+| Documentation composants | Props, exemples d'usage et patterns d'intégration |

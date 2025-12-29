@@ -144,3 +144,13 @@ interface InputProps {
 - [ ] aria-invalid + aria-describedby pour erreurs
 - [ ] Placeholder ≠ label
 - [ ] Contraste 4.5:1
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice de Types | Document listant tous les types d'inputs avec patterns de validation |
+| Tableau des États | Spécifications visuelles et comportementales pour chaque état |
+| Guide d'Addons | Documentation pour icônes, prefix, suffix avec exemples d'usage |
+| Checklist Accessibilité | Validation WCAG AA (labels, erreurs, aria-invalid, aria-describedby) |
+| Composant React/Vue | Code source des composants Input/Textarea avec validation intégrée |

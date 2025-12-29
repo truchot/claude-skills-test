@@ -436,3 +436,12 @@ describe('[Resource] API', () => {
 4. **Tester les edge cases** : Pagination, limites
 5. **Tests de performance** : Temps de réponse
 6. **Isolation** : DB de test ou mocks
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests API | Suite de tests d'endpoints |
+| Configuration testing | Setup Supertest/Postman |
+| Documentation | Guide de testing API |

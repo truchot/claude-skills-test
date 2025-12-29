@@ -330,3 +330,11 @@ blocks/{nom}/
 | QUOI | `wordpress-data-mapping` (si CPT à créer) |
 | COMMENT | `wordpress-gutenberg-expert/agents/blocks/*` |
 | COMMENT | `wordpress-gutenberg-expert/agents/tooling/issue-management` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Block Mapping Document | Documentation du mapping composants vers blocks Gutenberg |
+| Block Specifications | Spécifications techniques de chaque block custom avec attributs |
+| Block Architecture | Architecture des blocks avec dépendances et interactions |

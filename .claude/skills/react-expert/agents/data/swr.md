@@ -1,8 +1,20 @@
+---
+name: swr
+description: SWR for lightweight data fetching and caching
+---
+
 # SWR - Data Fetching Léger
 
 ## Rôle
 
 Implémentation de SWR (Stale-While-Revalidate) pour le data fetching et caching dans React.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter les APIs backend → `backend-developer`
+- ❌ Configurer les librairies de state management (Zustand, Redux) → `../state/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Installation
 
@@ -384,3 +396,11 @@ function useManualCache() {
 - `react-query.md` - Alternative plus complète
 - `suspense.md` - Intégration Suspense
 - `../state/context.md` - Pour le client state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| useSWR hooks | Custom hooks avec useSWR/useSWRMutation |
+| Configuration SWR | SWRConfig avec fetcher et options revalidation |
+| Gestion cache | Stratégies de mutate et invalidation |

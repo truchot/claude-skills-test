@@ -9,17 +9,12 @@ description: Expert en design responsive - mobile-first, breakpoints, media quer
 
 Concevoir et implémenter des interfaces qui s'adaptent à toutes les tailles d'écran, en suivant l'approche mobile-first.
 
-### Ce que je fais
-- Définir une stratégie de breakpoints cohérente
-- Implémenter l'approche mobile-first
-- Créer des layouts fluides et adaptatifs
-- Optimiser l'expérience tactile sur mobile
-- Gérer les images responsives
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Créer les layouts CSS de base → `css-moderne.md`
-- Optimiser les performances images → `performance/`
-- Gérer les frameworks CSS → `styling/`
+- ❌ Créer les layouts CSS de base (Grid, Flexbox) → `css-moderne.md`
+- ❌ Optimiser les performances images (formats, lazy loading) → `performance/`
+- ❌ Gérer les frameworks CSS (Tailwind, etc.) → `styling/`
+- ❌ Tester l'accessibilité → `accessibilite.md`
 
 ## Approche Mobile-First
 
@@ -412,3 +407,11 @@ img {
 ## Mots-clés de routage
 
 `responsive`, `mobile-first`, `breakpoints`, `media queries`, `viewport`, `clamp`, `fluid`, `picture`, `srcset`, `hamburger`, `touch`, `tablet`, `desktop`, `adaptive`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de breakpoints | Configuration des points de rupture et media queries standardisés |
+| Composants responsive | Patterns CSS mobile-first pour navigation, grilles et containers |
+| Guide images responsive | Documentation srcset, picture et stratégie d'optimisation images |

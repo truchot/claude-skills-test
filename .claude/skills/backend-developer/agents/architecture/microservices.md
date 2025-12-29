@@ -336,3 +336,12 @@ const client = new PaymentClient(paymentService.address);
 4. **Circuit breakers** : Résilience
 5. **Distributed tracing** : Observabilité
 6. **Contract testing** : Compatibilité inter-services
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture microservices | Design des services et communication |
+| Configuration | API Gateway, service mesh |
+| Documentation | Guide d'architecture distribuée |

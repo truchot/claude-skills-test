@@ -465,3 +465,12 @@ async function processImage(buffer: Buffer) {
 4. **Lazy loading** : Charger à la demande
 5. **Batch les écritures** : Réduire les I/O
 6. **Worker threads pour CPU** : Ne pas bloquer l'event loop
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Optimisations ressources | CPU, mémoire, I/O optimisés |
+| Configuration | Tuning de l'application |
+| Documentation | Guide d'optimisation |

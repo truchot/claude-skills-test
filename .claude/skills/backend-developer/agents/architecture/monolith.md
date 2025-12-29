@@ -354,3 +354,12 @@ src/
 4. **Events internes** : Pour communication loose-coupled
 5. **Tests isolés** : Chaque module testable indépendamment
 6. **Prêt pour extraction** : Faciliter migration future
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture monolithique | Design modulaire et scalable |
+| Structure de code | Organisation clean et maintenable |
+| Documentation | Guide d'architecture |

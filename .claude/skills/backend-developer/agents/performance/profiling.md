@@ -364,3 +364,12 @@ newrelic.startBackgroundTransaction('processOrder', () => {
 4. **Baseline first** : Mesurer avant d'optimiser
 5. **Alerting** : Sur P99, pas P50
 6. **Sampling** : Ne pas tracer 100% en prod
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport de profiling | Analyse des bottlenecks |
+| Flamegraphs | Visualisation des performances |
+| Plan d'optimisation | Actions prioritaires |

@@ -11,9 +11,9 @@ status: active
 
 ```bash
 # 1. Navigation rapide vers un agent
-nextjs-expert/app-router/routing      # Routes et structure
-nextjs-expert/data/server-actions     # Mutations avec Server Actions
-nextjs-expert/optimization/images     # Optimiser les images
+nextjs-expert/agents/app-router/routing      # Routes et structure
+nextjs-expert/agents/data/server-actions     # Mutations avec Server Actions
+nextjs-expert/agents/optimization/images     # Optimiser les images
 
 # 2. Exécuter les tests de validation
 cd .claude/skills/nextjs-expert && npm test
@@ -160,11 +160,11 @@ Performance et Core Web Vitals.
 Déploiement et configuration production **spécifique Next.js**.
 
 > **Note : Différence avec lead-dev/delivery/**
-> - `nextjs-expert/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
+> - `nextjs-expert/agents/deployment/` = **Implémentation technique** : Vercel, Docker, CI/CD *pour Next.js*
 > - `lead-dev/delivery/` = **Processus de release** : planification, vérifications, hotfixes, release notes
 >
 > Exemple : `lead-dev/delivery/deployment-check` vérifie qu'on est prêt à déployer,
-> puis `nextjs-expert/deployment/vercel` effectue le déploiement technique.
+> puis `nextjs-expert/agents/deployment/vercel` effectue le déploiement technique.
 
 | Agent | Responsabilité | Produit |
 |-------|----------------|---------|
@@ -259,13 +259,13 @@ SI question contient [test, Jest, Playwright, Next.js]
 1. direction-technique/architecture
    → Décide : "Page avec ISR, revalidation 1h"
 
-2. nextjs-expert/rendering/incremental-static
+2. nextjs-expert/agents/rendering/incremental-static
    → Implémente : Config ISR
 
-3. nextjs-expert/data/data-fetching
+3. nextjs-expert/agents/data/data-fetching
    → Implémente : Fetch avec cache
 
-4. nextjs-expert/server-components/async-components
+4. nextjs-expert/agents/server-components/async-components
    → Implémente : Composant async
 ```
 
@@ -275,13 +275,13 @@ SI question contient [test, Jest, Playwright, Next.js]
 1. direction-technique/performance
    → Décide : "Optimiser LCP < 2.5s"
 
-2. nextjs-expert/optimization/image-optimization
+2. nextjs-expert/agents/optimization/image-optimization
    → Implémente : next/image optimisé
 
-3. nextjs-expert/optimization/font-optimization
+3. nextjs-expert/agents/optimization/font-optimization
    → Implémente : next/font
 
-4. nextjs-expert/optimization/core-web-vitals
+4. nextjs-expert/agents/optimization/core-web-vitals
    → Implémente : Autres optimisations
 ```
 
@@ -383,13 +383,13 @@ npm test
 ```
 1. 🧑‍💻 Développeur demande : "Créer une page produits avec SSG"
 
-2. → nextjs-expert/rendering/ssr-ssg
+2. → nextjs-expert/agents/rendering/ssr-ssg
    Répond : Code generateStaticParams + page.tsx
 
-3. → nextjs-expert/data/data-fetching
+3. → nextjs-expert/agents/data/data-fetching
    Répond : Code fetch avec cache
 
-4. → nextjs-expert/server-components/async-components
+4. → nextjs-expert/agents/server-components/async-components
    Répond : Pattern composant async
 
 5. 🧑‍💻 PR créée → lead-dev/code-review/pr-review
@@ -401,13 +401,13 @@ npm test
 ```
 1. 🧑‍💻 Demande : "LCP trop lent, optimiser"
 
-2. → nextjs-expert/optimization/images
+2. → nextjs-expert/agents/optimization/images
    Répond : Config next/image, priority, sizes
 
-3. → nextjs-expert/optimization/fonts
+3. → nextjs-expert/agents/optimization/fonts
    Répond : next/font avec display: swap
 
-4. → nextjs-expert/optimization/bundle
+4. → nextjs-expert/agents/optimization/bundle
    Répond : Dynamic imports, analyze bundle
 
 5. → lead-dev/code-review/performance-review
@@ -419,16 +419,16 @@ npm test
 ```
 1. 🧑‍💻 Demande : "Formulaire de contact avec Server Action"
 
-2. → nextjs-expert/data/server-actions
+2. → nextjs-expert/agents/data/server-actions
    Répond : Code "use server", form action
 
-3. → nextjs-expert/data/revalidation
+3. → nextjs-expert/agents/data/revalidation
    Répond : revalidatePath après mutation
 
-4. → nextjs-expert/app-router/error-handling
+4. → nextjs-expert/agents/app-router/error-handling
    Répond : Gestion erreurs useFormState
 
-5. → nextjs-expert/testing/integration-testing
+5. → nextjs-expert/agents/testing/integration-testing
    Répond : Tests avec Testing Library
 ```
 

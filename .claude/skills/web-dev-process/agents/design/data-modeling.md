@@ -23,6 +23,15 @@ Tu définis le **process de modélisation** adapté au contexte (Métier / Agenc
 
 ---
 
+## Tu NE fais PAS
+
+- ❌ Clarifier le besoin métier → `direction-technique/specification/clarification-donnees`
+- ❌ Prendre des décisions stratégiques de modélisation → `direction-technique/specification/modelisation-donnees`
+- ❌ Écrire le code d'implémentation → Skills technologiques spécialisés
+- ❌ Créer les migrations de base de données → `backend-developer/database`
+
+---
+
 ## Prérequis
 
 Avant d'utiliser cet agent, s'assurer que :
@@ -264,3 +273,11 @@ Format de documentation :
 | POURQUOI | `direction-technique/specification/modelisation-donnees` |
 | QUOI | `wordpress-data-mapping` |
 | COMMENT | `wordpress-gutenberg-expert/wp-core/*` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| ERD Diagram | Diagramme entité-relation avec cardinalités et relations |
+| Data Dictionary | Dictionnaire de données complet avec attributs et règles métier |
+| Schema Documentation | Documentation du schéma de base de données avec conventions |

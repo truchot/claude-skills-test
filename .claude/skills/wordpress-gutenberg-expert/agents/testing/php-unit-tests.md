@@ -130,3 +130,13 @@ vendor/bin/phpunit --filter test_name
 - [ ] Utiliser les factories (pas de données manuelles)
 - [ ] Isoler les tests (pas de dépendances)
 - [ ] Nommer explicitement (`test_action_fires_on_save`)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| PHPUnit test files | Fichiers de tests dans tests/unit/ |
+| Test configuration | phpunit.xml et bootstrap.php |
+| Mocking code | Code de mocking avec Brain Monkey si nécessaire |
+| CI integration | Configuration pour exécution dans CI/CD |
+| Test documentation | Documentation des tests et couverture |

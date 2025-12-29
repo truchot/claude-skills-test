@@ -9,15 +9,12 @@ description: Coordonne les experts Core Web Vitals, bundle, images et runtime
 
 Coordonner les agents spécialisés dans l'optimisation des performances front-end.
 
-### Ce que je fais
-- Router vers l'expert performance approprié
-- Prioriser les optimisations par impact
-- Assurer une approche holistique
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Implémenter directement
-- Gérer le backend
-- Décider de l'architecture
+- ❌ Implémenter directement (déléguer aux agents spécialisés) → agents sous coordination
+- ❌ Optimiser le backend (API, database, server) → skill `backend-developer`
+- ❌ Décider de l'architecture globale → skill `direction-technique`
+- ❌ Mesurer les performances (seulement conseiller) → skill `testing-process`
 
 ## Agents sous ma coordination
 
@@ -56,3 +53,11 @@ SI question porte sur [profiling, React DevTools, memoization, virtualization]
 - Vers `tooling/build-tools.md` pour la configuration bundler
 - Vers `frameworks/` pour les optimisations framework-specific
 - Vers infrastructure pour CDN, caching serveur
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Audit performance global | Analyse complète des métriques de performance et bottlenecks |
+| Roadmap d'optimisation | Plan d'action priorisé par impact et effort |
+| Rapport de performance | Dashboard des Core Web Vitals et évolution des métriques |

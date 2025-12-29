@@ -1,8 +1,20 @@
+---
+name: custom-hooks
+description: Creating reusable custom hooks to share logic
+---
+
 # Custom Hooks - Création de Hooks Personnalisés
 
 ## Rôle
 
 Création de hooks réutilisables pour extraire et partager la logique entre composants.
+
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants qui utilisent ces hooks → `../components/`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter le backend des APIs → `backend-developer`
 
 ## Principes
 
@@ -366,3 +378,11 @@ function useBadHook() {
 - `state-hooks.md` - useState et useReducer
 - `effect-hooks.md` - useEffect
 - `ref-hooks.md` - useRef
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Hook personnalisé | Fonction use* réutilisable avec types |
+| Documentation | JSDoc avec paramètres et valeur de retour |
+| Exemples d'usage | Cas d'utilisation concrets du hook |

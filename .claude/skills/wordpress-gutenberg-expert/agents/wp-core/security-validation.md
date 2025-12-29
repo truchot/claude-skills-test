@@ -523,3 +523,12 @@ $hash = wp_hash_password( $password );
 // Vérifier un hash de mot de passe
 wp_check_password( $password, $hash );
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Secure PHP code | Code PHP sécurisé avec nonces, sanitization et escaping |
+| Validation functions | Fonctions de validation personnalisées si nécessaire |
+| Security checklist | Checklist de sécurité pour le code produit |
+| Documentation | Documentation des pratiques de sécurité implémentées |

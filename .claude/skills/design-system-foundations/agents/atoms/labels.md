@@ -137,3 +137,13 @@ interface ChipProps {
 - [ ] Chip groups : role="group"
 - [ ] Overline pour sections
 - [ ] Contraste 4.5:1
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Matrice de Variants | Spécifications des 3 variants (solid, soft, outline) avec codes couleur |
+| Tableau des Couleurs | Documentation des 5 couleurs sémantiques avec cas d'usage |
+| Guide Chips Interactifs | Spécifications pour chips sélectionnables et removables |
+| Checklist Accessibilité | Validation ARIA (aria-pressed, aria-label, role="group") |
+| Composant React/Vue | Code source Tag/Chip/ChipGroup avec gestion d'état |

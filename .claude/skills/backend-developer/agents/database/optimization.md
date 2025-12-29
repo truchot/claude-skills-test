@@ -263,3 +263,12 @@ EXPLAIN (ANALYZE, BUFFERS) [requête optimisée];
 4. **VACUUM** : Éviter le bloat
 5. **Monitoring** : pg_stat_statements, slow query log
 6. **Test en staging** : Avec données réalistes
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Optimisations database | Index, dénormalisation, partitioning |
+| Benchmarks performance | Mesures avant/après |
+| Documentation | Guide d'optimisation |

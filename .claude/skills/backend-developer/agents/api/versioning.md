@@ -245,3 +245,12 @@ if (response.headers.get('Deprecation')) {
 4. **Documenter** : Maintenir un changelog détaillé
 5. **Automatiser** : Tests de rétrocompatibilité dans CI/CD
 6. **Monitorer** : Tracker l'usage des versions dépréciées
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Stratégie de versioning | Approche v1, v2 API |
+| Documentation versions | Guide de migration |
+| Backward compatibility | Gestion de la rétrocompatibilité |

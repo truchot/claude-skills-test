@@ -15,6 +15,13 @@ Ce module coordonne la documentation technique du projet.
 | `adr.md` | Architecture Decision Records |
 | `runbooks.md` | Procédures opérationnelles |
 
+## Tu NE fais PAS
+
+- ❌ Implémenter les fonctionnalités documentées → frontend-developer, backend-developer
+- ❌ Configurer les outils de génération de doc → devops
+- ❌ Définir les politiques de documentation → direction-technique
+- ❌ Écrire du code applicatif → frontend-developer, backend-developer
+
 ## Pyramide de Documentation
 
 ```
@@ -91,3 +98,11 @@ function calculateTotal(items: CartItem[], couponCode?: string): number
 - Pour les ADRs → `adr.md`
 - Pour les runbooks → `runbooks.md`
 - Pour l'API → `design/api-design.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Documentation Templates | Templates pour README, CONTRIBUTING, changelog et autres docs |
+| Code Documentation | Documentation inline du code avec JSDoc/TSDoc |
+| Project Documentation | Documentation complète du projet avec architecture et guides |

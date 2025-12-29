@@ -1,8 +1,20 @@
+---
+name: zustand
+description: Zustand lightweight state management implementation
+---
+
 # Zustand - State Management Léger
 
 ## Rôle
 
 Implémentation de stores Zustand pour la gestion d'état global dans React.
+
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (préférer React Query/SWR) → `../data/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Installation
 
@@ -383,3 +395,11 @@ const unsubscribe = useAuthStore.subscribe(
 - `context.md` - Alternative native React
 - `redux-toolkit.md` - Pour cas très complexes
 - `../data/react-query.md` - Pour le server state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Store Zustand | Configuration store avec types et actions |
+| Types d'état | Interfaces pour state, actions et slices |
+| Sélecteurs | Fonctions sélectrices optimisées avec useShallow |

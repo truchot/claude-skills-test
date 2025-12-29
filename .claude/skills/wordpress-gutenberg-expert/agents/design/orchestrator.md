@@ -85,3 +85,19 @@ Question Design
 2. **Design Tokens** : Questions sur la configuration des styles
 3. **Visual Review** : Questions sur la validation/comparaison visuelle
 4. **Combine les deux** pour un workflow complet design → intégration → validation
+
+## Tu NE fais PAS
+
+- ❌ Design system foundations → design-system-foundations
+- ❌ Direction artistique → design (skill)
+- ❌ Architecture design → direction-technique
+- ❌ Stratégie de tests → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents design |
+| Design implementation | Implémentation complète des tokens et validation visuelle |
+| Design documentation | Documentation des choix design et validation |
+| Visual comparison | Rapports de comparaison visuelle maquette vs code |

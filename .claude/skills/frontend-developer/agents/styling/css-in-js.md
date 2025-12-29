@@ -9,16 +9,12 @@ description: Expert CSS-in-JS - styled-components, Emotion, CSS Modules
 
 Maîtriser les solutions CSS-in-JS pour créer des styles scopés et dynamiques.
 
-### Ce que je fais
-- Implémenter styled-components et Emotion
-- Configurer et utiliser CSS Modules
-- Créer des thèmes et design tokens
-- Optimiser les performances CSS-in-JS
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer Tailwind → `tailwind-expert.md`
-- Écrire du SCSS → `scss-sass.md`
-- Créer des animations complexes → `animations.md`
+- ❌ Gérer Tailwind CSS (classes utilitaires, configuration) → `tailwind-expert.md`
+- ❌ Écrire du SCSS/Sass (mixins, variables $) → SCSS expertise si nécessaire
+- ❌ Créer des animations complexes (Framer Motion) → `animations.md`
+- ❌ Créer le design system complet → skill `design-system-foundations`
 
 ## Styled-Components
 
@@ -466,3 +462,11 @@ export const IconWrapper = styled.span`
 ## Mots-clés de routage
 
 `CSS-in-JS`, `styled-components`, `Emotion`, `CSS Modules`, `css prop`, `ThemeProvider`, `createGlobalStyle`, `composes`, `scoped CSS`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de thème | ThemeProvider avec tokens et variants configurés |
+| Composants stylés | Bibliothèque de styled-components ou Emotion |
+| Configuration CSS Modules | Setup et conventions de nommage pour CSS Modules |

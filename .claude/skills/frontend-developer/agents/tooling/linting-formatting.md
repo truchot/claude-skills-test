@@ -9,16 +9,12 @@ description: Expert en qualité de code - ESLint, Prettier, Stylelint, règles e
 
 Configurer et maintenir les outils de qualité de code.
 
-### Ce que je fais
-- Configurer ESLint et Prettier
-- Créer des règles personnalisées
-- Intégrer avec les IDE et CI
-- Résoudre les conflits de règles
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Écrire le code applicatif
-- Gérer le build → `build-tools.md`
-- Configurer les tests → `testing/`
+- ❌ Écrire le code applicatif (features, composants) → `javascript/` ou `frameworks/`
+- ❌ Configurer le build (Vite, Webpack) → `build-tools.md`
+- ❌ Configurer les tests (Jest, Vitest) → `testing/`
+- ❌ Faire la code review manuelle → skill `lead-dev`
 
 ## ESLint (Configuration Flat)
 
@@ -327,3 +323,11 @@ npx --no -- commitlint --edit $1
 ## Mots-clés de routage
 
 `ESLint`, `Prettier`, `Stylelint`, `linting`, `formatting`, `règles`, `husky`, `lint-staged`, `commitlint`, `Biome`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration ESLint | eslint.config.js avec règles adaptées au projet |
+| Configuration Prettier | .prettierrc avec formatage standardisé |
+| Setup Git hooks | Husky + lint-staged pour validation pre-commit |

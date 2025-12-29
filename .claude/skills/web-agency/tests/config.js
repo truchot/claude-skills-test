@@ -18,6 +18,9 @@ const SKILLS_ROOT = path.join(SKILL_ROOT, '..');
 /** @const {string} Directory for project management skill (external) */
 const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
 
+/** @const {string} Directory containing agents (in project-management skill) */
+const PROJECT_MANAGEMENT_AGENTS_DIR = path.join(PROJECT_MANAGEMENT_DIR, 'agents');
+
 /** @const {string} Directory containing templates (in project-management skill) */
 const TEMPLATES_DIR = path.join(PROJECT_MANAGEMENT_DIR, 'templates', 'project-management');
 
@@ -234,6 +237,7 @@ module.exports = {
   SKILL_ROOT,
   SKILLS_ROOT,
   PROJECT_MANAGEMENT_DIR,
+  PROJECT_MANAGEMENT_AGENTS_DIR,
   TEMPLATES_DIR,
   PROJECT_MANAGEMENT_SUBDOMAINS,
   AGENT_REQUIREMENTS,

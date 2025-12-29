@@ -286,3 +286,12 @@ end
 4. **Limites différenciées** : Adapter selon endpoint/tier
 5. **Monitoring** : Tracker pour ajuster les limites
 6. **Cache distribué** : Redis pour environnement multi-instances
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration rate limiting | Middleware de limitation |
+| Stratégie de quotas | Limites par endpoint/utilisateur |
+| Documentation | Guide rate limiting |

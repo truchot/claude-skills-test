@@ -402,3 +402,12 @@ const s3LifecycleConfig = {
 4. **Corrélation** : TraceId pour suivre les requêtes
 5. **Immutabilité** : Logs append-only
 6. **Rétention adaptée** : Selon les exigences légales
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit | Analyse complète de la sécurité |
+| Recommandations | Actions d'amélioration prioritaires |
+| Plan de mise en conformité | Roadmap sécurité |

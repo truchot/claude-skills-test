@@ -1,8 +1,20 @@
+---
+name: ref-hooks
+description: useRef, forwardRef, and useImperativeHandle for DOM refs and persistent values
+---
+
 # Ref Hooks - useRef, forwardRef & useImperativeHandle
 
 ## Rôle
 
 Implémentation des hooks de références : `useRef`, `forwardRef`, et `useImperativeHandle`.
+
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Gérer l'état qui doit causer un re-render (utiliser useState) → `state-hooks.md`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter des solutions de styling → `../styling/`
 
 ## useRef
 
@@ -300,3 +312,11 @@ const [count, setCount] = useState(0);
 - `state-hooks.md` - Pour l'état avec re-render
 - `effect-hooks.md` - Pour les effets de bord
 - `../components/functional.md` - Pour les patterns de composants
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation ref | Code useRef/forwardRef/useImperativeHandle |
+| Types TypeScript | Types pour refs et handles exposés |
+| Patterns d'usage | Exemples DOM refs, valeurs persistantes, API custom |

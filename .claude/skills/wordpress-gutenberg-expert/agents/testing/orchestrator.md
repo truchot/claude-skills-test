@@ -129,3 +129,20 @@ Question Testing
 2. **JS Unit Tests** : Composants React, hooks JS, logique frontend
 3. **E2E Tests** : Flows complets, intégration, UX dans le navigateur
 4. **Combine les trois** pour une couverture de test complète
+
+## Tu NE fais PAS
+
+- ❌ Stratégie de tests globale → testing-process
+- ❌ Tests non-WordPress → testing-process
+- ❌ CI/CD configuration → devops
+- ❌ Architecture de tests → direction-technique
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents de test |
+| Complete test suite | Suite de tests complète (PHP + JS + E2E) |
+| Test configuration | Configuration consolidée pour tous les types de tests |
+| Coverage report | Rapport de couverture combiné |
+| Testing documentation | Documentation des stratégies et pratiques de test |

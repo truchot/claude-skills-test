@@ -646,3 +646,13 @@ cp -r .claude/skills/web-dev-process/templates/ISSUE_TEMPLATE/* .github/ISSUE_TE
 - [ ] Templates WordPress ajoutés
 - [ ] Labels WordPress configurés
 - [ ] CONTRIBUTING.md référence les deux sources
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Issue templates | Templates GitHub/GitLab pour bugs, features, questions |
+| PR templates | Templates de pull request |
+| Labels configuration | Labels configurés pour WordPress et général |
+| CONTRIBUTING.md | Guide de contribution au projet |
+| Workflow documentation | Documentation du workflow d'issues et PRs |

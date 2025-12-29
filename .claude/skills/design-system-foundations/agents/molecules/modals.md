@@ -153,3 +153,13 @@ useEffect(() => {
 - [ ] Focus retourne au trigger à la fermeture
 - [ ] Backdrop bloque scroll body
 - [ ] Close button avec aria-label
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécifications Types | Documentation dialog, sheet, popover, alert dialog avec positionnement |
+| Guide Focus Management | Spécifications focus trap, keyboard navigation (Tab, Escape, Enter) |
+| Tableau des Tailles | Spécifications sm, md, lg, xl, full avec max-width |
+| Patterns d'Usage | Exemples confirmation, forms, content modals avec anatomie |
+| Composant React/Vue | Code source Modal/Dialog/Sheet avec focus trap et keyboard handling |

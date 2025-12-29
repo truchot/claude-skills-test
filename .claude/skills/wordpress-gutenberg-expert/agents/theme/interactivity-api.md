@@ -114,3 +114,13 @@ wp_interactivity_state( 'myPlugin', array(
 - [ ] Context pour données par instance
 - [ ] Generators pour async (`*fetchData`)
 - [ ] ARIA avec `wp-bind`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| view.js | Fichier JavaScript avec store, state et actions |
+| render.php | Template PHP avec directives wp-interactive |
+| block.json config | Configuration supports.interactivity et viewScriptModule |
+| Server state | Code PHP wp_interactivity_state() si nécessaire |
+| Documentation | Guide d'utilisation de l'interactivité du block |

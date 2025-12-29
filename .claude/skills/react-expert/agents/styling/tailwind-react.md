@@ -1,8 +1,20 @@
+---
+name: tailwind-react
+description: Tailwind CSS with React using cn and CVA
+---
+
 # Tailwind + React - Styling avec Classes Utilitaires
 
 ## Rôle
 
 Implémentation de Tailwind CSS dans les projets React avec les meilleures pratiques.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique métier des composants → `../components/`
+- ❌ Gérer la logique JavaScript complexe → `../hooks/`
+- ❌ Définir les détails d'accessibilité (ARIA, rôles) → `frontend-developer`
+- ❌ Définir les tokens du design system → `design-system-foundations`
 
 ## Installation
 
@@ -429,3 +441,11 @@ function ResponsiveGrid() {
 - `css-in-js.md` - Alternative CSS-in-JS
 - `../components/functional.md` - Composants React
 - `design-system-foundations` skill - Tokens design
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Tailwind | Composants React avec classes utilitaires |
+| cn() utility | Helper function avec clsx et tailwind-merge |
+| CVA variants | Configuration class-variance-authority pour variants |

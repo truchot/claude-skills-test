@@ -508,3 +508,14 @@ npm run lint:css
 # Format
 npm run format
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Block code (src/) | Fichiers source du block (edit.js, save.js, index.js) |
+| block.json | Configuration complète du block avec métadonnées |
+| Editor styles | Fichiers SCSS pour l'éditeur (editor.scss) |
+| Frontend styles | Fichiers SCSS pour le frontend (style.scss) |
+| Plugin PHP | Fichier de registration du block |
+| Build files | Fichiers compilés dans build/ |

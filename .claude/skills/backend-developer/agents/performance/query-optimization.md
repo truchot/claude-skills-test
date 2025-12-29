@@ -345,3 +345,12 @@ prisma.$use(async (params, next) => {
 4. **DataLoader** : Pour GraphQL et patterns similaires
 5. **Cursor pagination** : Pour listes longues
 6. **Sélection explicite** : Pas de SELECT *
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Requêtes optimisées | Queries avec indexes et explain |
+| Benchmarks | Mesures avant/après optimisation |
+| Documentation | Guide d'optimisation queries |

@@ -77,7 +77,7 @@ reporter.header('Validating Lead Dev Agent Structure');
 let totalAgents = 0;
 
 for (const domain of DOMAINS) {
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
 
   if (!directoryExists(domainDir)) {
     reporter.warn(`Domain directory not found: ${domain}`);

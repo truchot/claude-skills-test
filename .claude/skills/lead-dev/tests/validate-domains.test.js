@@ -19,7 +19,7 @@ let totalFound = 0;
 for (const domain of DOMAINS) {
   reporter.section(`Domain: ${domain}`);
 
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
 
   if (!directoryExists(domainDir)) {
     reporter.fail(`Domain directory not found: ${domain}`);
