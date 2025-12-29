@@ -131,13 +131,61 @@ frontend-developer/        # NIVEAU 3 - IMPLÉMENTATION
 
 ### Correspondances de Routage
 
-| Ancienne Route | Nouvelle Route | Raison |
-|----------------|----------------|--------|
-| `frontend/testing/strategy` | `testing-process/strategy/pyramide` | Processus centralisé |
-| `backend/testing/strategy` | `testing-process/strategy/pyramide` | Idem |
-| `frontend/testing/unit` (méthodologie) | `testing-process/types/unit` | Méthodologie |
-| `frontend/testing/unit` (code) | `frontend-developer/testing/unit` | Implémentation |
-| `devops/*` (dispersé) | `devops/*` | Consolidé en skill dédié |
+| Ancienne Route | Nouvelle Route | Raison | Statut |
+|----------------|----------------|--------|--------|
+| `frontend/testing/strategy` | `testing-process/strategy/pyramide` | Processus centralisé | ⚠️ Deprecated |
+| `backend/testing/strategy` | `testing-process/strategy/pyramide` | Idem | ⚠️ Deprecated |
+| `frontend/testing/unit` (méthodologie) | `testing-process/types/unit` | Méthodologie | ⚠️ Deprecated |
+| `frontend/testing/unit` (code) | `frontend-developer/testing/unit` | Implémentation | ✅ Active |
+| `backend-developer/devops/*` | `devops/*` | Skill dédié extrait | ⚠️ Deprecated |
+
+### Mécanisme de Redirection
+
+Les anciennes routes sont gérées via un mécanisme de **redirection automatique** :
+
+```
+Requête vers ancienne route
+         │
+         ▼
+    ┌─────────────────────┐
+    │ Orchestrateur source │
+    │ (ex: backend-developer)│
+    └──────────┬──────────┘
+               │
+               │ REDIRECT
+               ▼
+    ┌─────────────────────┐
+    │   Nouveau skill     │
+    │   (ex: devops)      │
+    └─────────────────────┘
+```
+
+**Comportement** :
+- Les skills source contiennent des tables de redirection `REDIRECT → skill/domain/agent`
+- Aucune erreur n'est retournée pour les anciennes routes
+- Un avertissement de dépréciation peut être loggé pour faciliter la migration
+
+### Timeline de Dépréciation
+
+| Phase | Version | Action | Date |
+|-------|---------|--------|------|
+| **Annonce** | v2.0.0 | Routes marquées deprecated dans la doc | 2025-12-28 |
+| **Avertissement** | v2.1.0 | Warnings loggés lors de l'usage | Q1 2026 |
+| **Suppression** | v3.0.0 | Anciennes routes supprimées | Q2 2026 |
+
+> **Note** : La suppression effective nécessite une version MAJOR (voir [VERSIONING.md](./VERSIONING.md)).
+
+### Outil de Validation
+
+Un script permet de détecter les références obsolètes dans votre codebase :
+
+```bash
+# Scanner les références deprecated
+node .claude/skills/scripts/validate-migration.js
+
+# Corriger automatiquement (expérimental)
+node .claude/skills/scripts/validate-migration.js --fix
+```
 
 ### Règle Simple
 
