@@ -421,3 +421,76 @@ Points clés :
 2. Suivre le format markdown (ADR-003)
 3. Déclarer les exclusions (ADR-001)
 4. Nommer correctement (ADR-002)
+
+### Standards de Qualité des Agents
+
+Chaque agent (hors orchestrators) doit respecter les critères de qualité suivants :
+
+#### Contenu Minimum
+
+| Critère | Exigence |
+|---------|----------|
+| **Taille** | ≥ 150 lignes de contenu |
+| **Exemples de code** | 2-3 exemples concrets |
+| **Best practices** | Section "Bonnes Pratiques" |
+| **Livrables** | Section décrivant les outputs |
+
+#### Structure Requise
+
+```markdown
+---
+name: agent-name
+description: Description courte
+---
+
+# Titre de l'Agent
+
+## Contexte
+Quand utiliser cet agent
+
+## Responsabilités
+Ce que fait cet agent (et ce qu'il ne fait PAS)
+
+## Exemple d'Utilisation
+
+### Cas 1 : [Scenario]
+\`\`\`language
+// Code example
+\`\`\`
+
+### Cas 2 : [Autre Scenario]
+\`\`\`language
+// Code example
+\`\`\`
+
+## Bonnes Pratiques
+
+| Pratique | Raison |
+|----------|--------|
+| Faire X | Parce que... |
+| Éviter Y | Parce que... |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Output 1 | Ce que l'agent produit |
+| Output 2 | Autre output |
+
+## Références
+- Lien vers documentation
+```
+
+#### Agents Sous le Seuil (à améliorer)
+
+Les agents suivants sont identifiés pour amélioration :
+
+| Skill | Agent | Lignes | Action |
+|-------|-------|--------|--------|
+| `web-dev-process` | `design/ux-principles` | 89 | Ajouter exemples |
+| `frontend-developer` | `frameworks/wordpress-expert` | 90 | Ajouter exemples |
+| `web-dev-process` | `setup/quality-tools` | 96 | Étoffer contenu |
+| `frontend-developer` | `frameworks/react-expert` | 98 | Ajouter best practices |
+| `web-dev-process` | `testing/security-headers` | 102 | Ajouter exemples |
+
+> **Note** : 29 agents au total sont sous le seuil de 150 lignes. Voir `find .claude/skills -path "*/agents/*.md" ! -name "orchestrator.md" -exec wc -l {} \; | awk '$1 < 150'` pour la liste complète.
