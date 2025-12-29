@@ -194,6 +194,31 @@ Question sur le QUOI/POURQUOI/QUAND ?  →  testing-process, web-dev-process
 Question sur le COMMENT/CODE ?          →  skill technique (frontend, backend, etc.)
 ```
 
+## Removed Skills
+
+Les skills suivants ont été supprimés ou déplacés :
+
+### Skills Planifiés Non Implémentés (supprimés v2.9.0)
+
+| Skill | Raison | Alternative |
+|-------|--------|-------------|
+| `strategy` | Jamais implémenté | `direction-technique` |
+| `design` | Jamais implémenté | `design-system-foundations` |
+| `content` | Jamais implémenté | - |
+| `marketing` | Jamais implémenté | - |
+
+### Skills Extraits/Déplacés
+
+| Ancien Emplacement | Nouvel Emplacement | Version | Raison |
+|--------------------|-------------------|---------|--------|
+| `backend-developer/agents/devops/` | `devops/` | v2.0.0 | Skill autonome (ADR-007) |
+
+### Notes de Migration
+
+- **Références à `design (skill)`** : Utiliser `design-system-foundations` pour les design systems
+- **Références à `backend-developer/devops/*`** : Utiliser `devops/*` directement
+- Voir [VERSIONING.md](./VERSIONING.md) pour la matrice de compatibilité
+
 ## Architecture Decision Records (ADR)
 
 | ADR | Titre | Statut |

@@ -11,14 +11,14 @@ const SKILL_DIR = path.join(__dirname, '..');
 const AGENTS_DIR = path.join(SKILL_DIR, 'agents');
 
 // Expected domains and their agent counts
+// Note: DevOps domain was extracted to standalone `devops` skill in v2.0.0
 const EXPECTED_STRUCTURE = {
   'api': ['orchestrator', 'rest-design', 'graphql-design', 'openapi-spec', 'versioning', 'rate-limiting', 'validation'],
   'database': ['orchestrator', 'modeling', 'migrations', 'queries', 'optimization', 'transactions', 'nosql'],
   'auth-security': ['orchestrator', 'authentication', 'authorization', 'vulnerabilities', 'cryptography', 'audit'],
   'architecture': ['orchestrator', 'patterns', 'microservices', 'monolith', 'event-driven', 'ddd'],
   'performance': ['orchestrator', 'caching', 'profiling', 'query-optimization', 'concurrency', 'resource-optimization'],
-  'testing': ['orchestrator', 'unit', 'integration', 'api', 'fixtures', 'coverage'],
-  'devops': ['orchestrator', 'cicd', 'containers', 'kubernetes', 'deployment', 'monitoring', 'infrastructure']
+  'testing': ['orchestrator', 'unit', 'integration', 'api', 'fixtures', 'coverage']
 };
 
 // Required sections in each agent file
