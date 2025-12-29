@@ -16,30 +16,17 @@ const SKILLS_ROOT = path.join(__dirname, '../../skills');
 const OUTPUT_DIR = path.join(__dirname, 'reports');
 
 /**
- * Performance budgets for routing operations
+ * Routing quality thresholds
+ * Focus on ambiguity detection, not arbitrary quotas
  * @const {Object}
  */
-const PERFORMANCE_BUDGETS = {
-  // Maximum acceptable agents per skill before warning
-  maxAgentsPerSkill: 50,
-
-  // Maximum total agents before critical warning
-  maxTotalAgents: 400,
-
-  // Maximum keywords per domain before ambiguity risk
-  maxKeywordsPerDomain: 15,
-
-  // Minimum keyword uniqueness ratio (unique/total)
-  minKeywordUniqueness: 0.7,
-
-  // Maximum routing depth (skill → domain → agent)
-  maxRoutingDepth: 3,
-
-  // Maximum overlapping keywords between skills
+const ROUTING_THRESHOLDS = {
+  // Maximum overlapping keywords between skills before warning
+  // High overlap = high risk of misrouting
   maxKeywordOverlap: 5,
 
-  // Minimum agent coverage (% of keywords with clear routing)
-  minAgentCoverage: 0.85
+  // Minimum keyword uniqueness ratio (unique/total)
+  minKeywordUniqueness: 0.7
 };
 
 /**
@@ -135,7 +122,7 @@ const REPORT_SETTINGS = {
 module.exports = {
   SKILLS_ROOT,
   OUTPUT_DIR,
-  PERFORMANCE_BUDGETS,
+  ROUTING_THRESHOLDS,
   EFFICIENCY_THRESHOLDS,
   MONITORED_SKILLS,
   METRICS_CONFIG,

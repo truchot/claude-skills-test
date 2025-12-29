@@ -22,7 +22,7 @@ const path = require('path');
 const {
   SKILLS_ROOT,
   OUTPUT_DIR,
-  PERFORMANCE_BUDGETS,
+  ROUTING_THRESHOLDS,
   EFFICIENCY_THRESHOLDS,
   MONITORED_SKILLS,
   METRICS_CONFIG
@@ -181,7 +181,7 @@ function analyzeKeywordOverlap(skillKeywords) {
           skills: [skill1, skill2],
           overlappingKeywords: overlap,
           count: overlap.length,
-          severity: overlap.length > PERFORMANCE_BUDGETS.maxKeywordOverlap ? 'high' : 'low'
+          severity: overlap.length > ROUTING_THRESHOLDS.maxKeywordOverlap ? 'high' : 'low'
         });
       }
     }
@@ -192,34 +192,6 @@ function analyzeKeywordOverlap(skillKeywords) {
     highSeverityCount: overlaps.filter(o => o.severity === 'high').length,
     overlaps: overlaps.sort((a, b) => b.count - a.count)
   };
-}
-
-/**
- * Calculate routing complexity score
- * @param {Object} skillMetrics - Metrics for a skill
- * @returns {number} Complexity score 0-1
- */
-function calculateComplexityScore(skillMetrics) {
-  const {
-    agentCount,
-    domainCount,
-    keywordCount,
-    orchestratorCount
-  } = skillMetrics;
-
-  // Factors contributing to complexity
-  const agentFactor = Math.min(agentCount / PERFORMANCE_BUDGETS.maxAgentsPerSkill, 1);
-  const domainFactor = Math.min(domainCount / 10, 1);
-  const keywordDensity = keywordCount > 0 ? Math.min(keywordCount / (agentCount * 3), 1) : 0;
-  const orchestrationFactor = orchestratorCount > 0 ? 0.1 : 0;
-
-  // Weighted average
-  return (
-    agentFactor * 0.4 +
-    domainFactor * 0.2 +
-    keywordDensity * 0.3 +
-    orchestrationFactor * 0.1
-  );
 }
 
 /**
@@ -242,70 +214,51 @@ function calculateAmbiguityScore(overlapAnalysis, totalKeywords) {
 
 /**
  * Generate recommendations based on metrics
+ * Focus on ambiguity - the real risk of misrouting
  * @param {Object} metrics - Collected metrics
  * @returns {string[]} List of recommendations
  */
 function generateRecommendations(metrics) {
   const recommendations = [];
-  const { summary, skills, keywordAnalysis, performanceStatus } = metrics;
+  const { keywordAnalysis, ambiguityStatus } = metrics;
 
-  // Agent count recommendations
-  if (summary.totalAgents > PERFORMANCE_BUDGETS.maxTotalAgents) {
-    recommendations.push({
-      priority: 'high',
-      category: 'scale',
-      message: `Total agent count (${summary.totalAgents}) exceeds budget (${PERFORMANCE_BUDGETS.maxTotalAgents}). Consider consolidating similar agents.`
-    });
-  }
-
-  // Per-skill recommendations
-  for (const [skillName, skill] of Object.entries(skills)) {
-    if (skill.agentCount > PERFORMANCE_BUDGETS.maxAgentsPerSkill) {
-      recommendations.push({
-        priority: 'medium',
-        category: 'scale',
-        skill: skillName,
-        message: `${skillName} has ${skill.agentCount} agents (budget: ${PERFORMANCE_BUDGETS.maxAgentsPerSkill}). Consider splitting into sub-skills.`
-      });
-    }
-  }
-
-  // Keyword overlap recommendations
+  // Keyword overlap recommendations - the main risk for misrouting
   if (keywordAnalysis.overlap.highSeverityCount > 0) {
     recommendations.push({
       priority: 'high',
       category: 'ambiguity',
-      message: `${keywordAnalysis.overlap.highSeverityCount} high-severity keyword overlaps detected. Review routing rules to reduce ambiguity.`
+      message: `${keywordAnalysis.overlap.highSeverityCount} keyword overlaps detected (>${ROUTING_THRESHOLDS.maxKeywordOverlap} shared keywords). High risk of misrouting.`
     });
 
-    // Add specific overlap details
+    // Add specific overlap details with disambiguation suggestions
     keywordAnalysis.overlap.overlaps
       .filter(o => o.severity === 'high')
-      .slice(0, 3)
       .forEach(o => {
         recommendations.push({
           priority: 'medium',
           category: 'ambiguity',
-          message: `Skills "${o.skills[0]}" and "${o.skills[1]}" share ${o.count} keywords: ${o.overlappingKeywords.slice(0, 5).join(', ')}${o.count > 5 ? '...' : ''}`
+          skills: o.skills,
+          sharedKeywords: o.overlappingKeywords,
+          message: `"${o.skills[0]}" ↔ "${o.skills[1]}": ${o.count} shared keywords (${o.overlappingKeywords.slice(0, 5).join(', ')}${o.count > 5 ? '...' : ''}). Add context-based disambiguation rules.`
         });
       });
   }
 
-  // Complexity recommendations
-  if (performanceStatus.averageComplexity > EFFICIENCY_THRESHOLDS.complexity.high) {
-    recommendations.push({
-      priority: 'high',
-      category: 'complexity',
-      message: `Average routing complexity (${performanceStatus.averageComplexity.toFixed(2)}) is high. Consider simplifying routing rules.`
-    });
-  }
-
-  // Ambiguity recommendations
-  if (performanceStatus.ambiguityScore > EFFICIENCY_THRESHOLDS.ambiguity.medium) {
+  // Low uniqueness ratio warning
+  if (keywordAnalysis.uniquenessRatio < ROUTING_THRESHOLDS.minKeywordUniqueness) {
     recommendations.push({
       priority: 'medium',
       category: 'ambiguity',
-      message: `Ambiguity score (${performanceStatus.ambiguityScore.toFixed(2)}) indicates potential misrouting. Add disambiguating keywords.`
+      message: `Keyword uniqueness (${(keywordAnalysis.uniquenessRatio * 100).toFixed(1)}%) below threshold (${ROUTING_THRESHOLDS.minKeywordUniqueness * 100}%). Many keywords appear in multiple skills.`
+    });
+  }
+
+  // Ambiguity score warning
+  if (ambiguityStatus.score > EFFICIENCY_THRESHOLDS.ambiguity.medium) {
+    recommendations.push({
+      priority: 'medium',
+      category: 'ambiguity',
+      message: `Global ambiguity score (${ambiguityStatus.score.toFixed(2)}) indicates potential misrouting risk. Review disambiguation matrix in routing.md.`
     });
   }
 
@@ -314,12 +267,13 @@ function generateRecommendations(metrics) {
 
 /**
  * Collect all routing metrics
+ * Focus on ambiguity analysis for routing quality
  * @returns {Object} Complete metrics collection
  */
 function collectMetrics() {
   const metrics = {
     timestamp: new Date().toISOString(),
-    version: '1.0.0',
+    version: '2.0.0',
     summary: {
       totalSkills: 0,
       totalAgents: 0,
@@ -333,11 +287,9 @@ function collectMetrics() {
       overlap: null,
       uniquenessRatio: 0
     },
-    performanceStatus: {
-      budgetCompliance: true,
-      violations: [],
-      averageComplexity: 0,
-      ambiguityScore: 0
+    ambiguityStatus: {
+      score: 0,
+      level: 'low'
     },
     recommendations: []
   };
@@ -370,22 +322,9 @@ function collectMetrics() {
     // Store skill metrics
     metrics.skills[skillName] = {
       agentCount: agentInfo.total,
-      orchestratorCount: agentInfo.orchestrators,
       domainCount: agentInfo.domains.length,
-      domains: agentInfo.domains,
-      keywordCount: keywords.length,
-      expectedAgents: config.expectedAgents,
-      deviation: agentInfo.total - config.expectedAgents,
-      isMetaOrchestrator: config.isMetaOrchestrator || false
+      keywordCount: keywords.length
     };
-
-    // Calculate complexity
-    metrics.skills[skillName].complexityScore = calculateComplexityScore({
-      agentCount: agentInfo.total,
-      domainCount: agentInfo.domains.length,
-      keywordCount: keywords.length,
-      orchestratorCount: agentInfo.orchestrators
-    });
 
     // Update summary
     metrics.summary.totalAgents += agentInfo.total;
@@ -401,17 +340,6 @@ function collectMetrics() {
       count: keywords.length,
       sample: keywords.slice(0, 10)
     };
-
-    // Check budget compliance
-    if (agentInfo.total > PERFORMANCE_BUDGETS.maxAgentsPerSkill) {
-      metrics.performanceStatus.budgetCompliance = false;
-      metrics.performanceStatus.violations.push({
-        type: 'agent_count',
-        skill: skillName,
-        value: agentInfo.total,
-        budget: PERFORMANCE_BUDGETS.maxAgentsPerSkill
-      });
-    }
   }
 
   // Analyze keyword overlap
@@ -424,31 +352,18 @@ function collectMetrics() {
     ? allKeywords.size / totalKeywordUsages
     : 1;
 
-  // Calculate average complexity
-  const complexityScores = Object.values(metrics.skills)
-    .map(s => s.complexityScore)
-    .filter(s => s !== undefined);
-  metrics.performanceStatus.averageComplexity = complexityScores.length > 0
-    ? complexityScores.reduce((a, b) => a + b, 0) / complexityScores.length
-    : 0;
-
-  // Calculate ambiguity score
-  metrics.performanceStatus.ambiguityScore = calculateAmbiguityScore(
+  // Calculate ambiguity score - the key metric for routing quality
+  const ambiguityScore = calculateAmbiguityScore(
     metrics.keywordAnalysis.overlap,
     allKeywords.size
   );
+  metrics.ambiguityStatus.score = ambiguityScore;
+  metrics.ambiguityStatus.level =
+    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.low ? 'low' :
+    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.medium ? 'medium' :
+    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.high ? 'high' : 'critical';
 
-  // Check total agent budget
-  if (metrics.summary.totalAgents > PERFORMANCE_BUDGETS.maxTotalAgents) {
-    metrics.performanceStatus.budgetCompliance = false;
-    metrics.performanceStatus.violations.push({
-      type: 'total_agents',
-      value: metrics.summary.totalAgents,
-      budget: PERFORMANCE_BUDGETS.maxTotalAgents
-    });
-  }
-
-  // Generate recommendations
+  // Generate recommendations focused on ambiguity
   metrics.recommendations = generateRecommendations(metrics);
 
   return metrics;
@@ -460,58 +375,49 @@ function collectMetrics() {
  * @returns {string} Markdown formatted report
  */
 function formatMarkdown(metrics) {
-  let md = `# Routing Efficiency Report
+  let md = `# Routing Ambiguity Report
 
 Generated: ${metrics.timestamp}
 
-## Executive Summary
+## Summary
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| Total Skills | ${metrics.summary.totalSkills} | ✓ |
-| Total Agents | ${metrics.summary.totalAgents} | ${metrics.summary.totalAgents > PERFORMANCE_BUDGETS.maxTotalAgents ? '⚠️' : '✓'} |
-| Total Orchestrators | ${metrics.summary.totalOrchestrators} | ✓ |
-| Total Domains | ${metrics.summary.totalDomains} | ✓ |
-| Unique Keywords | ${metrics.summary.totalKeywords} | ✓ |
-| Budget Compliant | ${metrics.performanceStatus.budgetCompliance ? 'Yes' : 'No'} | ${metrics.performanceStatus.budgetCompliance ? '✓' : '⚠️'} |
-| Avg Complexity | ${metrics.performanceStatus.averageComplexity.toFixed(2)} | ${metrics.performanceStatus.averageComplexity > EFFICIENCY_THRESHOLDS.complexity.high ? '⚠️' : '✓'} |
-| Ambiguity Score | ${metrics.performanceStatus.ambiguityScore.toFixed(2)} | ${metrics.performanceStatus.ambiguityScore > EFFICIENCY_THRESHOLDS.ambiguity.medium ? '⚠️' : '✓'} |
+| Total Skills | ${metrics.summary.totalSkills} | - |
+| Total Agents | ${metrics.summary.totalAgents} | - |
+| Unique Keywords | ${metrics.summary.totalKeywords} | - |
+| Keyword Uniqueness | ${(metrics.keywordAnalysis.uniquenessRatio * 100).toFixed(1)}% | ${metrics.keywordAnalysis.uniquenessRatio >= ROUTING_THRESHOLDS.minKeywordUniqueness ? '✓' : '⚠️'} |
+| **Ambiguity Score** | ${metrics.ambiguityStatus.score.toFixed(2)} | ${metrics.ambiguityStatus.level.toUpperCase()} |
+| High-Severity Overlaps | ${metrics.keywordAnalysis.overlap.highSeverityCount} | ${metrics.keywordAnalysis.overlap.highSeverityCount > 0 ? '⚠️' : '✓'} |
 
-## Skill Breakdown
-
-| Skill | Agents | Domains | Keywords | Complexity |
-|-------|--------|---------|----------|------------|
-`;
-
-  for (const [name, skill] of Object.entries(metrics.skills)) {
-    const complexityIcon = skill.complexityScore > EFFICIENCY_THRESHOLDS.complexity.high ? '⚠️' :
-                          skill.complexityScore > EFFICIENCY_THRESHOLDS.complexity.medium ? '○' : '✓';
-    md += `| ${name} | ${skill.agentCount} | ${skill.domainCount} | ${skill.keywordCount} | ${skill.complexityScore.toFixed(2)} ${complexityIcon} |\n`;
-  }
-
-  md += `
 ## Keyword Overlap Analysis
 
-**Uniqueness Ratio:** ${(metrics.keywordAnalysis.uniquenessRatio * 100).toFixed(1)}%
-**High-Severity Overlaps:** ${metrics.keywordAnalysis.overlap.highSeverityCount}
+Keywords shared between multiple skills can cause misrouting. High-severity overlaps (>${ROUTING_THRESHOLDS.maxKeywordOverlap} shared keywords) require disambiguation rules.
 
-### Top Overlaps
-
-`;
-
-  metrics.keywordAnalysis.overlap.overlaps.slice(0, 5).forEach(overlap => {
-    md += `- **${overlap.skills[0]}** ↔ **${overlap.skills[1]}**: ${overlap.count} keywords (${overlap.severity})\n`;
-    md += `  - Keywords: ${overlap.overlappingKeywords.slice(0, 5).join(', ')}${overlap.count > 5 ? '...' : ''}\n`;
-  });
-
-  if (metrics.performanceStatus.violations.length > 0) {
-    md += `
-## Budget Violations
+### Overlaps by Severity
 
 `;
-    metrics.performanceStatus.violations.forEach(v => {
-      md += `- **${v.type}**${v.skill ? ` (${v.skill})` : ''}: ${v.value} (budget: ${v.budget})\n`;
+
+  const highOverlaps = metrics.keywordAnalysis.overlap.overlaps.filter(o => o.severity === 'high');
+  const lowOverlaps = metrics.keywordAnalysis.overlap.overlaps.filter(o => o.severity === 'low');
+
+  if (highOverlaps.length > 0) {
+    md += `#### ⚠️ High Severity (needs disambiguation)\n\n`;
+    highOverlaps.forEach(overlap => {
+      md += `- **${overlap.skills[0]}** ↔ **${overlap.skills[1]}**: ${overlap.count} keywords\n`;
+      md += `  - \`${overlap.overlappingKeywords.join('`, `')}\`\n`;
     });
+    md += '\n';
+  }
+
+  if (lowOverlaps.length > 0) {
+    md += `#### Low Severity\n\n`;
+    lowOverlaps.slice(0, 10).forEach(overlap => {
+      md += `- ${overlap.skills[0]} ↔ ${overlap.skills[1]}: ${overlap.count} keywords\n`;
+    });
+    if (lowOverlaps.length > 10) {
+      md += `- ... and ${lowOverlaps.length - 10} more\n`;
+    }
   }
 
   if (metrics.recommendations.length > 0) {
@@ -519,24 +425,10 @@ Generated: ${metrics.timestamp}
 ## Recommendations
 
 `;
-    const grouped = { high: [], medium: [], low: [] };
     metrics.recommendations.forEach(r => {
-      grouped[r.priority] = grouped[r.priority] || [];
-      grouped[r.priority].push(r);
+      const icon = r.priority === 'high' ? '🔴' : r.priority === 'medium' ? '🟡' : '○';
+      md += `${icon} ${r.message}\n\n`;
     });
-
-    if (grouped.high.length > 0) {
-      md += `### High Priority\n\n`;
-      grouped.high.forEach(r => md += `- ${r.message}\n`);
-    }
-    if (grouped.medium.length > 0) {
-      md += `\n### Medium Priority\n\n`;
-      grouped.medium.forEach(r => md += `- ${r.message}\n`);
-    }
-    if (grouped.low && grouped.low.length > 0) {
-      md += `\n### Low Priority\n\n`;
-      grouped.low.forEach(r => md += `- ${r.message}\n`);
-    }
   }
 
   return md;
@@ -548,81 +440,61 @@ Generated: ${metrics.timestamp}
  * @returns {string} Summary text
  */
 function formatSummary(metrics) {
+  const ambiguityIcon = metrics.ambiguityStatus.level === 'low' ? '✓' :
+                        metrics.ambiguityStatus.level === 'medium' ? '○' : '⚠️';
+
   let summary = `
 ╔══════════════════════════════════════════════════════════════════╗
-║            ROUTING EFFICIENCY MONITORING REPORT                  ║
+║            ROUTING AMBIGUITY ANALYSIS                            ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  Generated: ${metrics.timestamp.substring(0, 19).padEnd(42)}     ║
 ╚══════════════════════════════════════════════════════════════════╝
 
-📊 SUMMARY
+📊 INVENTORY
 ────────────────────────────────────────────
-  Total Skills:       ${String(metrics.summary.totalSkills).padStart(5)}
-  Total Agents:       ${String(metrics.summary.totalAgents).padStart(5)} ${metrics.summary.totalAgents > PERFORMANCE_BUDGETS.maxTotalAgents ? '⚠️  EXCEEDS BUDGET' : '✓'}
-  Total Orchestrators:${String(metrics.summary.totalOrchestrators).padStart(5)}
-  Total Domains:      ${String(metrics.summary.totalDomains).padStart(5)}
-  Unique Keywords:    ${String(metrics.summary.totalKeywords).padStart(5)}
+  Skills:             ${String(metrics.summary.totalSkills).padStart(5)}
+  Agents:             ${String(metrics.summary.totalAgents).padStart(5)}
+  Keywords:           ${String(metrics.summary.totalKeywords).padStart(5)}
 
-⚡ PERFORMANCE STATUS
+🎯 AMBIGUITY STATUS
 ────────────────────────────────────────────
-  Budget Compliance:  ${metrics.performanceStatus.budgetCompliance ? '✓ PASS' : '✗ FAIL'}
-  Avg Complexity:     ${metrics.performanceStatus.averageComplexity.toFixed(2)} ${getComplexityLabel(metrics.performanceStatus.averageComplexity)}
-  Ambiguity Score:    ${metrics.performanceStatus.ambiguityScore.toFixed(2)} ${getAmbiguityLabel(metrics.performanceStatus.ambiguityScore)}
+  Ambiguity Score:    ${metrics.ambiguityStatus.score.toFixed(2)} ${ambiguityIcon} ${metrics.ambiguityStatus.level.toUpperCase()}
   Keyword Uniqueness: ${(metrics.keywordAnalysis.uniquenessRatio * 100).toFixed(1)}%
-
-📈 TOP 5 SKILLS BY AGENT COUNT
-────────────────────────────────────────────`;
-
-  const sortedSkills = Object.entries(metrics.skills)
-    .sort((a, b) => b[1].agentCount - a[1].agentCount)
-    .slice(0, 5);
-
-  for (const [name, skill] of sortedSkills) {
-    const bar = '█'.repeat(Math.min(Math.floor(skill.agentCount / 5), 20));
-    summary += `\n  ${name.padEnd(30)} ${String(skill.agentCount).padStart(3)} ${bar}`;
-  }
+  High-Severity:      ${String(metrics.keywordAnalysis.overlap.highSeverityCount).padStart(5)} overlaps`;
 
   if (metrics.keywordAnalysis.overlap.highSeverityCount > 0) {
     summary += `
 
-⚠️  KEYWORD OVERLAP WARNINGS
+⚠️  KEYWORD OVERLAPS (risk of misrouting)
 ────────────────────────────────────────────`;
     metrics.keywordAnalysis.overlap.overlaps
       .filter(o => o.severity === 'high')
-      .slice(0, 3)
       .forEach(o => {
-        summary += `\n  ${o.skills[0]} ↔ ${o.skills[1]}: ${o.count} shared keywords`;
+        summary += `\n  ${o.skills[0]} ↔ ${o.skills[1]}`;
+        summary += `\n    → ${o.overlappingKeywords.slice(0, 5).join(', ')}${o.count > 5 ? '...' : ''}`;
       });
   }
 
-  if (metrics.recommendations.filter(r => r.priority === 'high').length > 0) {
+  if (metrics.recommendations.length > 0) {
     summary += `
 
-🔴 HIGH PRIORITY RECOMMENDATIONS
+📋 ACTIONS
 ────────────────────────────────────────────`;
     metrics.recommendations
       .filter(r => r.priority === 'high')
       .forEach(r => {
-        summary += `\n  • ${r.message}`;
+        summary += `\n  🔴 ${r.message}`;
+      });
+    metrics.recommendations
+      .filter(r => r.priority === 'medium')
+      .slice(0, 3)
+      .forEach(r => {
+        summary += `\n  🟡 ${r.message}`;
       });
   }
 
   summary += '\n';
   return summary;
-}
-
-function getComplexityLabel(score) {
-  if (score <= EFFICIENCY_THRESHOLDS.complexity.low) return '(LOW)';
-  if (score <= EFFICIENCY_THRESHOLDS.complexity.medium) return '(MEDIUM)';
-  if (score <= EFFICIENCY_THRESHOLDS.complexity.high) return '(HIGH)';
-  return '(CRITICAL)';
-}
-
-function getAmbiguityLabel(score) {
-  if (score <= EFFICIENCY_THRESHOLDS.ambiguity.low) return '(LOW)';
-  if (score <= EFFICIENCY_THRESHOLDS.ambiguity.medium) return '(MEDIUM)';
-  if (score <= EFFICIENCY_THRESHOLDS.ambiguity.high) return '(HIGH)';
-  return '(CRITICAL)';
 }
 
 // Main execution
