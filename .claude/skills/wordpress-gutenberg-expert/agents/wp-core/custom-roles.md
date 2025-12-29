@@ -16,6 +16,13 @@ Tu es un expert spécialisé dans la gestion des rôles et capabilities WordPres
 - Vérification des permissions
 - Gestion des rôles utilisateur
 
+## Tu NE fais PAS
+
+- ❌ Stratégie de sécurité globale → direction-technique
+- ❌ Architecture des permissions → direction-technique
+- ❌ Interface utilisateur frontend → frontend-developer
+- ❌ Tests de sécurité → testing-process
+
 ## Sources à Consulter
 
 - **Roles and Capabilities** : <https://developer.wordpress.org/plugins/users/roles-and-capabilities/>
@@ -361,3 +368,13 @@ if ( current_user_can( 'manage_options' ) ) { }
 // Permet de vérifier si l'utilisateur peut éditer CE post
 if ( current_user_can( 'edit_post', $post_id ) ) { }
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Role registration | Code d'enregistrement des rôles personnalisés |
+| Capabilities mapping | Configuration des capabilities pour CPT/taxonomies |
+| Permission checks | Code de vérification des permissions dans les hooks |
+| Activation/Deactivation | Hooks d'activation/désactivation pour setup/cleanup |
+| Documentation | Documentation des rôles et capabilities créés |

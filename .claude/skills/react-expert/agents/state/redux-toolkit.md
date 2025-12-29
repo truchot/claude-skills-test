@@ -1,8 +1,20 @@
+---
+name: redux-toolkit
+description: Redux Toolkit for complex state management
+---
+
 # Redux Toolkit - State Management Avancé
 
 ## Rôle
 
 Implémentation de Redux Toolkit (RTK) pour la gestion d'état complexe dans les applications React.
+
+## Tu NE fais PAS
+
+- ❌ Gérer le server state (préférer RTK Query ou React Query) → `../data/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Implémenter le backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Installation
 
@@ -439,3 +451,11 @@ export const store = configureStore({
 - `zustand.md` - Alternative plus légère
 - `context.md` - Pour état simple
 - `../data/react-query.md` - Alternative à RTK Query
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Store configuration | configureStore avec reducers et middleware |
+| Slices | createSlice avec reducers et types TypeScript |
+| Sélecteurs | createSelector pour données dérivées mémoïsées |

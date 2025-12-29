@@ -1,8 +1,20 @@
+---
+name: css-in-js
+description: CSS-in-JS with styled-components and Emotion
+---
+
 # CSS-in-JS - styled-components & Emotion
 
 ## Rôle
 
 Implémentation de CSS-in-JS dans React avec styled-components et Emotion.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique métier des composants → `../components/`
+- ❌ Gérer la logique JavaScript complexe → `../hooks/`
+- ❌ Définir les détails d'accessibilité (ARIA, rôles) → `frontend-developer`
+- ❌ Définir les tokens du design system → `design-system-foundations`
 
 ## styled-components
 
@@ -474,3 +486,11 @@ declare module '@emotion/react' {
 - `tailwind-react.md` - Alternative utility-first
 - `../components/functional.md` - Composants React
 - `design-system-foundations` skill - Design system
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Styled components | Composants React avec styled-components ou Emotion |
+| Theme setup | Configuration ThemeProvider avec types TypeScript |
+| Utility classes | Helper functions pour variants et responsive |

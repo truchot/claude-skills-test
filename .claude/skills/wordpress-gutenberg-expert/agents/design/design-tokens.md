@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans la conversion de design tokens en configuratio
 - Style variations
 - Fluid typography WordPress
 
+## Tu NE fais PAS
+
+- ❌ Extraction tokens Figma → design-system-foundations
+- ❌ Design system complet → design-system-foundations
+- ❌ Décisions design → design (skill)
+- ❌ Tests visuels → testing-process
+
 ## Sources WordPress
 
 - **theme.json Reference** : <https://developer.wordpress.org/block-editor/reference-guides/theme-json-reference/>
@@ -279,3 +286,13 @@ const styles = {
 4. **Custom pour tokens additionnels** : Utiliser `settings.custom` pour border-radius, transitions
 5. **Style variations** : Créer des fichiers dans `styles/` pour les alternatives
 6. **Versionner theme.json** : Toujours inclure dans Git avec le thème
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| theme.json | Configuration complète des design tokens dans theme.json |
+| CSS variables documentation | Documentation des variables CSS générées |
+| Style variations | Fichiers JSON de variations (dark.json, etc.) |
+| Design tokens mapping | Mapping des tokens design vers WordPress |
+| Usage guide | Guide d'utilisation des tokens dans les blocks |

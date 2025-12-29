@@ -97,14 +97,30 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | formulaire, card, modal, navigation | `design-system-foundations/molecules` |
 | layout, page template, hero | `design-system-foundations/templates` |
 
-### Skills Planifiés
+### DevOps (Implémentation)
 
-| Mots-clés | Skill | Statut |
-|-----------|-------|--------|
-| audit, benchmark, stratégie digitale | `strategy` | Planifié |
-| maquette, logo, charte, branding, DA | `design` | Planifié |
-| rédaction, copywriting, SEO éditorial | `content` | Planifié |
-| SEO, SEA, analytics, social media | `marketing` | Planifié |
+| Mots-clés | Skill |
+|-----------|-------|
+| GitHub Actions, GitLab CI, workflow, pipeline | `devops/cicd` |
+| Dockerfile, docker-compose, image, container | `devops/containers` |
+| Kubernetes, K8s, Helm, pod, deployment | `devops/kubernetes` |
+| Terraform, AWS, GCP, VPC, IaC | `devops/infrastructure` |
+| Prometheus, Grafana, logs, alerting | `devops/monitoring` |
+| Blue-Green, Canary, rollback, feature flag | `devops/deployment` |
+
+### ⚠️ Domaines Non Couverts (Skills Planifiés - Non Disponibles)
+
+Ces domaines ne sont **pas encore implémentés**. Ne pas router vers ces skills.
+
+| Mots-clés | Domaine | Action |
+|-----------|---------|--------|
+| audit, benchmark, stratégie digitale | Strategy | → Demander clarification à l'utilisateur |
+| maquette, logo, charte, branding, DA | Design | → Demander clarification à l'utilisateur |
+| rédaction, copywriting, SEO éditorial | Content | → Demander clarification à l'utilisateur |
+| SEO, SEA, analytics, social media | Marketing | → Demander clarification à l'utilisateur |
+
+> **Si l'utilisateur demande ces domaines** : Expliquer que ces skills sont prévus mais non disponibles.
+> Proposer d'utiliser les skills existants si applicable (ex: `design-system-foundations` pour aspects UI).
 
 ## Arbre de Décision
 
@@ -136,22 +152,108 @@ Requête utilisateur
 ├─ Concerne l'implémentation BACKEND ?
 │  └─ → backend-developer
 │
+├─ Concerne DevOps (CI/CD, containers, K8s, IaC, monitoring) ?
+│  └─ → devops
+│
 ├─ Concerne WordPress/Gutenberg ?
 │  └─ → wordpress-gutenberg-expert
 │
 ├─ Concerne le DESIGN SYSTEM ?
 │  └─ → design-system-foundations
 │
-└─ Autre domaine ?
-   └─ → Vérifier skills planifiés ou demander clarification
+└─ Autre domaine (strategy, design, content, marketing) ?
+   └─ → Ces skills ne sont pas encore disponibles. Demander clarification.
 ```
+
+## Matrice de Désambiguïsation
+
+### Mots-clés Ambigus - Règles de Priorité
+
+Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour router :
+
+| Mot-clé | Contexte → Skill | Règle |
+|---------|------------------|-------|
+| **architecture** | Décision stratégique → `direction-technique/architecture` | Si "quelle architecture ?" |
+| | Process/workflow → `web-dev-process/design/architecture` | Si "comment structurer ?" |
+| | Backend spécifique → `backend-developer/architecture` | Si code/patterns concrets |
+| **performance** | Politique/SLO → `direction-technique/performance` | Si objectifs, budgets |
+| | Process de mesure → `web-dev-process/testing/performance` | Si "comment mesurer ?" |
+| | Code frontend → `frontend-developer/performance` | Si Core Web Vitals, bundle |
+| | Code backend → `backend-developer/performance` | Si cache, profiling |
+| | Next.js → `nextjs-expert/optimization` | Si next/image, next/font |
+| **sécurité** | Politique RGPD/OWASP → `direction-technique/securite` | Si audit, conformité |
+| | Process de test → `web-dev-process/testing/security` | Si "comment tester ?" |
+| | Revue de code → `lead-dev/code-review/security-review` | Si review PR |
+| | Implémentation auth → `backend-developer/auth-security` | Si code JWT, hash |
+| **code review** | Politique équipe → `direction-technique/qualite/code-review` | Si règles d'approbation |
+| | Process/checklist → `web-dev-process/development/code-review` | Si workflow review |
+| | Faire une review → `lead-dev/code-review` | Si "reviewer cette PR" |
+| **tests** | Stratégie globale → `direction-technique/qualite` | Si coverage min, politique |
+| | Process/pyramide → `web-dev-process/testing` | Si "quelle approche ?" |
+| | Code frontend → `frontend-developer/testing` | Si Jest, RTL |
+| | Code backend → `backend-developer/testing` | Si PHPUnit, Supertest |
+| | Code Next.js → `nextjs-expert/testing` | Si Playwright + Next |
+| | Code WordPress → `wordpress-gutenberg-expert/testing` | Si PHPUnit WP |
+| **deploy** | Stratégie globale → `direction-technique/infrastructure` | Si blue-green, politique |
+| | Checklist/release → `lead-dev/delivery` | Si "prêt à déployer ?" |
+| | Process → `web-dev-process/deployment` | Si "comment déployer ?" |
+| | Config Next.js → `nextjs-expert/deployment` | Si Vercel, Docker Next |
+| | Config DevOps → `devops/deployment` | Si Blue-Green, Canary, K8s |
+| **CI/CD** | Politique → `direction-technique/infrastructure/strategie-cicd` | Si "quelle stratégie ?" |
+| | Process → `web-dev-process/setup/cicd` | Si principes, étapes |
+| | Config → `devops/cicd` | Si GitHub Actions, GitLab CI |
+| **containers** | Dockerfile, images → `devops/containers` | Si Docker, registry |
+| | Orchestration → `devops/kubernetes` | Si K8s, Helm |
+| **monitoring** | Politique → `direction-technique/infrastructure` | Si objectifs SLO |
+| | Config → `devops/monitoring` | Si Prometheus, Grafana |
+| **infrastructure** | Stratégie → `direction-technique/infrastructure` | Si choix cloud |
+| | IaC → `devops/infrastructure` | Si Terraform, AWS, GCP |
+
+### Règle de Décision en 4 Étapes
+
+```
+1. SPÉCIFICITÉ : Le mot-clé le plus spécifique gagne
+   "audit sécurité RGPD" → direction-technique/securite/conformite-rgpd
+   "audit sécurité code" → lead-dev/code-review/security-review
+
+2. NIVEAU D'ABSTRACTION : Identifier POURQUOI vs QUOI vs COMMENT
+   "Quelle politique de tests ?" → direction-technique (POURQUOI)
+   "Quelle pyramide de tests ?" → web-dev-process (QUOI)
+   "Comment écrire ce test ?" → skill technique (COMMENT)
+
+3. CONTEXTE TECHNOLOGIQUE : Si techno explicite, router vers skill techno
+   "tests Next.js" → nextjs-expert/testing
+   "tests React" → react-expert/testing
+   "tests backend" → backend-developer/testing
+
+4. EN DERNIER RECOURS : Demander clarification à l'utilisateur
+   "Vous parlez de tests : politique, process, ou implémentation ?"
+```
+
+### Matrice RACI Simplifiée
+
+| Concern | Décide (POURQUOI) | Définit Process (QUOI) | Coordonne | Exécute (COMMENT) |
+|---------|-------------------|------------------------|-----------|-------------------|
+| Stack technique | direction-technique | - | - | - |
+| Architecture | direction-technique | web-dev-process | lead-dev | skills techniques |
+| Code review | direction-technique | web-dev-process | lead-dev | - |
+| Tests | direction-technique | web-dev-process | lead-dev | skills techniques |
+| CI/CD | direction-technique | web-dev-process | lead-dev | devops |
+| Performance | direction-technique | web-dev-process | lead-dev | skills techniques |
+| Sécurité | direction-technique | web-dev-process | lead-dev | backend-developer |
+| Deploy | direction-technique | lead-dev | lead-dev | devops |
+| Monitoring | direction-technique | web-dev-process | lead-dev | devops |
+| Infrastructure | direction-technique | web-dev-process | lead-dev | devops |
+| Containers | direction-technique | devops | lead-dev | devops |
+| Kubernetes | direction-technique | devops | lead-dev | devops |
 
 ## Priorité en Cas d'Ambiguïté
 
 1. **Match exact** : Mot-clé présent dans la table
-2. **Contexte conversation** : Skill déjà utilisé récemment
-3. **Spécificité** : "audit sécurité" → securite (pas avant-projet)
-4. **Demander clarification** : Si vraiment ambigu
+2. **Spécificité** : Mot-clé composé > mot-clé simple
+3. **Niveau d'abstraction** : POURQUOI → QUOI → COMMENT
+4. **Contexte conversation** : Skill déjà utilisé récemment
+5. **Demander clarification** : Si vraiment ambigu
 
 ## Références
 

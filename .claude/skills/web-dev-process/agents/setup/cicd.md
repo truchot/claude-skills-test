@@ -35,6 +35,33 @@ Ce module coordonne la mise en place de l'intégration et du déploiement contin
 | `cd-principles.md` | Déploiement, environnements, rollback |
 | `deployment-strategies.md` | Rolling, Blue-Green, Canary, Feature Flags |
 
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour CI/CD.
+
+Les pipelines CI/CD suivent des standards universels : stages (setup, build, test, quality, deploy), parallélisation pour performance, fail-fast principle, caching des dépendances, artifacts pour traçabilité, et stratégies de déploiement (rolling, blue-green, canary). Les outils (GitHub Actions, GitLab CI, Jenkins) partagent ces concepts fondamentaux.
+
+### Couche Agence (Spécifique)
+> Adaptations selon plateforme et processus agence.
+
+**Questions à poser :**
+- Quelle plateforme CI/CD utiliser ? (GitHub Actions, GitLab CI, Jenkins)
+- Y a-t-il des workflows agence réutilisables ? (templates, actions custom)
+- Quels sont les quality gates standards ? (couverture min, lint obligatoire)
+- Comment sont gérés les secrets en CI ? (GitHub Secrets, GitLab Variables)
+- Y a-t-il un pipeline de référence ? (starter template agence)
+
+### Couche Projet (Exception)
+> Exceptions selon infrastructure et besoins projet.
+
+**Questions à poser :**
+- Y a-t-il des contraintes de déploiement ? (approbations manuelles, horaires)
+- Des tests spécifiques sont-ils requis ? (E2E, performance, sécurité)
+- Faut-il adapter les stages ? (étapes supplémentaires, audits)
+- Y a-t-il des environnements multiples ? (multi-région, A/B testing)
+- Des notifications spécifiques ? (Slack, email, outils client)
+
 ## Vue d'Ensemble
 
 ```
@@ -92,3 +119,11 @@ Ce module coordonne la mise en place de l'intégration et du déploiement contin
 | Principes CI détaillés | `ci-principles.md` |
 | Principes CD détaillés | `cd-principles.md` |
 | Stratégies de déploiement | `deployment-strategies.md` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CI/CD Configuration Files | Fichiers de configuration GitHub Actions/GitLab CI/Jenkins |
+| Pipeline Documentation | Documentation complète des pipelines CI/CD |
+| Environment Setup Guide | Guide de configuration des environnements et secrets |

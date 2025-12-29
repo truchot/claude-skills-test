@@ -1,8 +1,20 @@
+---
+name: code-splitting
+description: Lazy loading and bundle optimization with React.lazy
+---
+
 # Code Splitting - Lazy Loading et Optimisation Bundle
 
 ## Rôle
 
 Réduction de la taille du bundle initial avec le code splitting et le lazy loading.
+
+## Tu NE fais PAS
+
+- ❌ Optimiser le backend ou les APIs → `backend-developer`
+- ❌ Implémenter les corrections (juste identifier et conseiller) → développeur
+- ❌ Gérer la configuration webpack/vite avancée → `devops`
+- ❌ Optimiser les re-renders → `memoization.md`
 
 ## React.lazy
 
@@ -409,3 +421,11 @@ function App() {
 - `memoization.md` - Optimisation runtime
 - `../data/suspense.md` - Data fetching
 - `../components/error-boundaries.md` - Gestion d'erreurs
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration lazy loading | Code React.lazy avec Suspense boundaries |
+| Stratégie de splitting | Plan route-based et component-based |
+| Analyse bundle | Rapport avec webpack-bundle-analyzer ou visualizer |

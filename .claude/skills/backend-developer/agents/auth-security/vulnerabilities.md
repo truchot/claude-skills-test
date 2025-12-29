@@ -327,3 +327,12 @@ app.post('/fetch', async (req, res) => {
 4. **Fail secure** : Erreur = refus
 5. **Keep it simple** : Moins de code = moins de bugs
 6. **Update regularly** : Dépendances à jour
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Rapport d'audit sécurité | Vulnérabilités identifiées |
+| Plan de remédiation | Actions correctives prioritaires |
+| Configuration sécurité | Headers, rate limiting, validation |

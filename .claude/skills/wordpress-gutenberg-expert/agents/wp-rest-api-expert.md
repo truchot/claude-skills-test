@@ -144,3 +144,13 @@ return new WP_Error( 'not_found', 'Item not found', array( 'status' => 404 ) );
 - [ ] Validation des arguments
 - [ ] Schema JSON défini
 - [ ] Utiliser `@wordpress/api-fetch` côté JS
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| REST endpoints | Code PHP d'enregistrement des endpoints REST API |
+| WP_REST_Controller | Classes controller si architecture OOP |
+| Schema definitions | Schémas JSON pour validation et documentation |
+| API client code | Code JavaScript utilisant @wordpress/api-fetch |
+| API documentation | Documentation des endpoints et paramètres |

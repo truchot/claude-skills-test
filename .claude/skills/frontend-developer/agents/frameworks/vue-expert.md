@@ -9,16 +9,12 @@ description: Expert Vue 3 - Composition API, Pinia, Vue patterns et bonnes prati
 
 Maîtriser Vue 3 avec la Composition API pour créer des applications réactives et maintenables.
 
-### Ce que je fais
-- Créer des composants Vue 3 avec script setup
-- Utiliser la Composition API efficacement
-- Appliquer les patterns Vue modernes
-- Intégrer Pinia pour le state management
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer Nuxt spécifiquement → `nuxt-expert.md`
-- Gérer le state Pinia avancé → `state-management/vue-state.md`
-- Tester les composants → `testing/component-testing.md`
+- ❌ Implémenter Nuxt.js spécifiquement (SSR, modules) → Déléguer à un expert Nuxt si disponible
+- ❌ Gérer le state Pinia avancé (patterns complexes, persistence) → `state-management/`
+- ❌ Tester les composants Vue → `testing/component-testing.md`
+- ❌ Optimiser les performances avancées → `performance/`
 
 ## Composants avec Script Setup
 
@@ -507,3 +503,11 @@ const { theme, toggleTheme } = themeContext;
 ## Mots-clés de routage
 
 `Vue`, `Vue 3`, `Composition API`, `ref`, `reactive`, `computed`, `watch`, `watchEffect`, `script setup`, `defineProps`, `defineEmits`, `slots`, `provide`, `inject`, `composable`, `v-model`, `v-bind`, `v-on`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Composants Vue 3 | Composants SFC avec Composition API et script setup |
+| Composables réutilisables | Fonctions composables pour logique partagée et state |
+| Documentation Vue | Props typées, events et exemples d'intégration |

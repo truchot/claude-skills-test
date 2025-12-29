@@ -29,6 +29,13 @@ Tu coordonnes les agents spécialisés dans la modélisation, les requêtes et l
 | Gérer les transactions | `transactions` |
 | Utiliser NoSQL | `nosql` |
 
+## Tu NE fais PAS
+
+- ❌ Choisir la base de données pour le projet → direction-technique
+- ❌ Gérer le state management frontend → frontend-developer
+- ❌ Définir la stratégie de tests de données → testing-process
+- ❌ Configurer les backups, HA et infrastructure BDD → devops
+
 ## Workflow Type
 
 ```
@@ -55,3 +62,12 @@ Tu coordonnes les agents spécialisés dans la modélisation, les requêtes et l
 | Recherche full-text | Elasticsearch |
 | Time series | TimescaleDB, InfluxDB |
 | Graph | Neo4j |
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Schéma de base de données | Design optimisé et normalisé |
+| Scripts de migration | Versioning du schéma |
+| Documentation database | Guide pour l'équipe |

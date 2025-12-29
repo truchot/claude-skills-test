@@ -1,8 +1,20 @@
+---
+name: hooks-testing
+description: Testing custom hooks with renderHook
+---
+
 # Hooks Testing - Tests de Custom Hooks
 
 ## Rôle
 
 Implémentation de tests pour les custom hooks React avec `@testing-library/react`.
+
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Écrire le code applicatif (hooks) à tester → développeur
+- ❌ Tester les composants (utiliser RTL) → `rtl.md`
+- ❌ Définir les processus de CI/CD → `devops`
 
 ## Installation
 
@@ -430,3 +442,11 @@ describe('useInterval', () => {
 - `rtl.md` - Tests de composants
 - `mocking.md` - Mocks et stubs
 - `../hooks/custom-hooks.md` - Création de hooks
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests fichiers | Fichiers .test.tsx avec renderHook |
+| Wrappers setup | Configuration wrapper avec providers |
+| Patterns d'usage | Best practices act, waitFor, rerender |

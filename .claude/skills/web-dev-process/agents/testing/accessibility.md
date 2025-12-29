@@ -422,3 +422,11 @@ test('touch targets should be at least 44x44px', async ({ page }) => {
 | Implémentation WordPress | `wordpress-gutenberg-expert/agents/accessibility-expert` |
 | Checklist Design System | `design-system-foundations/docs/accessibility-checklist` |
 | Tests WordPress spécifiques | `wordpress-gutenberg-expert/agents/testing/` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Accessibility Test Suite | Suite de tests automatisés avec axe-core et testing-library |
+| WCAG Compliance Report | Rapport de conformité WCAG 2.1 AA avec résultats d'audit |
+| Accessibility Testing Guide | Guide de tests manuels et automatisés d'accessibilité |

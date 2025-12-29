@@ -150,3 +150,13 @@ const validate = (values) => {
 - [ ] role="alert" sur les messages d'erreur
 - [ ] aria-required sur les champs obligatoires
 - [ ] Focus sur premier champ en erreur après submit
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Spécifications Form Field | Anatomie label + input + error/helper avec états de validation |
+| Guide Form Group | Documentation fieldset/legend pour groupes de champs |
+| Patterns de Validation | Stratégies de validation (on blur, on submit, real-time) avec exemples |
+| Patterns d'Usage | Formulaires types (login, registration, checkout, settings) |
+| Composant React/Vue | Code source FormField/FormGroup avec validation et gestion d'erreurs |

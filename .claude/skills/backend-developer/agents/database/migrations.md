@@ -246,3 +246,12 @@ ALTER TABLE users DROP COLUMN phone;
 5. **Zero downtime** : Éviter les locks sur grosses tables
 6. **Ordre de déploiement** : Migration d'abord, code ensuite
 7. **Monitoring** : Surveiller les métriques après migration
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Scripts de migration | Migrations versionnées |
+| Configuration | Outil de migration (Prisma/Flyway) |
+| Documentation | Guide des migrations |

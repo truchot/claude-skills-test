@@ -275,3 +275,13 @@ npm run test:e2e -- --grep "can create a new post"
 | Configuration wp-env | `tooling/local-dev` |
 | CI/CD GitHub Actions | `tooling/cicd-pipelines` |
 | Tests unitaires JS | `testing/js-unit-tests` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| E2E test files | Fichiers de tests dans tests/e2e/ |
+| Playwright config | playwright.config.js avec configuration WordPress |
+| Test fixtures | Fixtures et helpers personnalisés |
+| Test data | Scripts de création de données de test |
+| CI integration | Configuration pour exécution dans CI/CD |

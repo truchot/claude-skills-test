@@ -196,3 +196,12 @@ Commandes d'un utilisateur.
 ### POST /users/{id}/orders
 Créer une commande pour un utilisateur.
 ```
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| API RESTful | Endpoints REST bien conçus |
+| Documentation API | Swagger/OpenAPI spec |
+| Conventions | Guide de design API |

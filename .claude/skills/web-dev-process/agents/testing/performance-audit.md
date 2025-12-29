@@ -215,3 +215,11 @@ Tu es spécialisé dans la **réalisation d'audits de performance**, les **check
 | Politiques performance | `direction-technique/performance/audit-performance` |
 | Tests de charge | `testing/performance` |
 | Optimisations frontend | `web-dev-process/agents/development/optimization` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Performance Audit Report | Rapport complet d'audit Lighthouse/PageSpeed Insights |
+| Performance Benchmarks | Benchmarks de performance avec métriques Core Web Vitals |
+| Optimization Recommendations | Recommandations d'optimisation priorisées |

@@ -424,3 +424,12 @@ interface [EventName] {
 4. **Ordering** : Par aggregate ID si nécessaire
 5. **Outbox pattern** : Garantir publication
 6. **Monitoring** : Lag, throughput, erreurs
+
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Architecture event-driven | Design avec events et message queues |
+| Configuration | Kafka, RabbitMQ, événements |
+| Documentation | Guide architecture événementielle |

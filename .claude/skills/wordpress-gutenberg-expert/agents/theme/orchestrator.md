@@ -174,3 +174,19 @@ Question Theme
 3. **Style Engine** : Génération CSS, API PHP, variables, optimisation
 4. **Interactivity API** : Comportements JS, directives, state management
 5. **Combine les agents** pour un thème complet, optimisé et interactif
+
+## Tu NE fais PAS
+
+- ❌ Design system foundations → design-system-foundations
+- ❌ Décisions d'architecture → direction-technique
+- ❌ Processus de développement → web-dev-process
+- ❌ Tests visuels → testing-process
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Agent delegation report | Rapport d'analyse et délégation aux agents appropriés |
+| Complete theme | Thème complet avec theme.json, templates, patterns et interactivité |
+| Theme documentation | Documentation consolidée du thème |
+| Style guide | Guide des styles et composants disponibles |

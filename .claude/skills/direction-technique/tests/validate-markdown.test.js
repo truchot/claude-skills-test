@@ -161,7 +161,7 @@ reporter.header('Validating Markdown Quality');
 // Collect all files
 const allFiles = [];
 for (const domain of DOMAINS) {
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
   if (directoryExists(domainDir)) {
     allFiles.push(...findMarkdownFiles(domainDir));
   }

@@ -9,16 +9,12 @@ description: Expert Tailwind CSS - configuration, plugins, patterns et bonnes pr
 
 Maîtriser Tailwind CSS pour créer des interfaces rapidement avec des classes utilitaires.
 
-### Ce que je fais
-- Configurer Tailwind pour le projet
-- Utiliser efficacement les classes utilitaires
-- Créer des plugins et extensions
-- Appliquer les bonnes pratiques Tailwind
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Écrire du CSS vanille → `foundations/css-moderne.md`
-- Gérer les animations complexes → `animations.md`
-- Créer le design system → `design-system-foundations`
+- ❌ Écrire du CSS vanille (Grid, Flexbox natif) → `foundations/css-moderne.md`
+- ❌ Gérer les animations complexes (Framer Motion, GSAP) → `animations.md`
+- ❌ Créer le design system complet (tokens, documentation) → skill `design-system-foundations`
+- ❌ Gérer les composants React/Vue → `frameworks/`
 
 ## Configuration de Base
 
@@ -432,3 +428,11 @@ module.exports = {
 ## Mots-clés de routage
 
 `Tailwind`, `Tailwind CSS`, `classes utilitaires`, `@apply`, `tailwind.config`, `dark mode`, `responsive`, `hover`, `focus`, `cn`, `clsx`, `twMerge`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Configuration Tailwind | tailwind.config.js avec thème personnalisé et plugins |
+| Composants Tailwind | Classes utilitaires et patterns @layer pour composants |
+| Guide de styles | Documentation des conventions et helper functions (cn) |

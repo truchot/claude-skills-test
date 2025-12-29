@@ -1,8 +1,20 @@
+---
+name: functional
+description: React functional components with props, children, and composition patterns
+---
+
 # Functional Components - Composants Fonctionnels
 
 ## Rôle
 
 Création et patterns de composants fonctionnels React avec TypeScript.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique des hooks personnalisés → `../hooks/custom-hooks.md`
+- ❌ Gérer l'état global ou les patterns de state management → `../state/`
+- ❌ Définir la stratégie de tests des composants → `testing-process`
+- ❌ Implémenter les tests (donner des exemples uniquement) → `../testing/rtl.md`
 
 ## Syntaxe de Base
 
@@ -317,3 +329,11 @@ function Good() {
 - `composition.md` - Patterns avancés
 - `forms.md` - Composants de formulaire
 - `../hooks/custom-hooks.md` - Extraction de logique
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Code composant | Composant fonctionnel React avec TypeScript |
+| Interface Props | Types TypeScript pour les props avec documentation |
+| Exemples d'usage | Cas d'utilisation concrets du composant |

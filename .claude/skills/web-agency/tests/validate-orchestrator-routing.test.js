@@ -18,6 +18,7 @@ const {
 } = require('./utils');
 const {
   PROJECT_MANAGEMENT_DIR,
+  PROJECT_MANAGEMENT_AGENTS_DIR,
   EXPECTED_ROUTING,
   PROJECT_MANAGEMENT_SUBDOMAINS
 } = require('./config');
@@ -191,7 +192,7 @@ function testRoutedAgentsExist(subdomain, routes) {
   const missingAgents = [];
 
   for (const route of routes) {
-    const agentPath = path.join(PROJECT_MANAGEMENT_DIR, subdomain, `${route.agent}.md`);
+    const agentPath = path.join(PROJECT_MANAGEMENT_AGENTS_DIR, subdomain, `${route.agent}.md`);
     if (!fs.existsSync(agentPath)) {
       missingAgents.push(route.agent);
     }
@@ -217,7 +218,7 @@ function testRoutingMatchesCapabilities(subdomain, routes) {
   let mismatches = 0;
 
   for (const route of routes) {
-    const agentPath = path.join(PROJECT_MANAGEMENT_DIR, subdomain, `${route.agent}.md`);
+    const agentPath = path.join(PROJECT_MANAGEMENT_AGENTS_DIR, subdomain, `${route.agent}.md`);
     const capabilities = getAgentCapabilities(agentPath);
 
     if (capabilities && !intentMatchesCapability(route.intent, capabilities)) {
@@ -251,7 +252,7 @@ if (!directoryExists(PROJECT_MANAGEMENT_DIR)) {
 console.log(`Testing ${PROJECT_MANAGEMENT_SUBDOMAINS.length} subdomain orchestrators\n`);
 
 for (const subdomain of PROJECT_MANAGEMENT_SUBDOMAINS) {
-  const orchestratorPath = path.join(PROJECT_MANAGEMENT_DIR, subdomain, 'orchestrator.md');
+  const orchestratorPath = path.join(PROJECT_MANAGEMENT_AGENTS_DIR, subdomain, 'orchestrator.md');
   console.log(`\n📂 ${subdomain}/orchestrator.md`);
 
   if (!fs.existsSync(orchestratorPath)) {

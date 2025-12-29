@@ -278,3 +278,11 @@ Termes initiaux :
 | COMMENT | `wordpress-gutenberg-expert/agents/wp-core/custom-post-types` |
 | COMMENT | `wordpress-gutenberg-expert/agents/wp-core/custom-meta` |
 | COMMENT | `wordpress-gutenberg-expert/agents/wp-core/custom-taxonomies` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| CPT Specifications | Spécifications complètes des Custom Post Types avec meta fields |
+| Taxonomy Mapping | Documentation des taxonomies et leurs relations avec les CPT |
+| WordPress Data Schema | Schéma de données WordPress avec CPT, meta et taxonomies |

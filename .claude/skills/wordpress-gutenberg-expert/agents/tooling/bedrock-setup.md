@@ -452,3 +452,13 @@ echo "=== Projet Bedrock créé ! ==="
 | Configuration Git | `repository-setup` |
 | Variables d'environnement | `environment-config` |
 | Déploiement | `deployment-ssh` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Bedrock project | Structure de projet Bedrock initialisée |
+| composer.json | Configuration Composer avec WordPress core et plugins |
+| .env files | Fichiers .env pour chaque environnement |
+| Config files | Fichiers config/application.php et environments/*.php |
+| Deployment scripts | Scripts de déploiement adaptés à Bedrock |

@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans les environnements de développement WordPress
 - Synchronisation base de données WordPress
 - Configuration .wp-env.json
 
+## Tu NE fais PAS
+
+- ❌ Docker générique non-WordPress → web-dev-process
+- ❌ CI/CD configuration → devops
+- ❌ Architecture infrastructure → direction-technique
+- ❌ Tests automatisés → testing-process
+
 ## Sources WordPress
 
 - **@wordpress/env** : <https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/>
@@ -317,3 +324,13 @@ lsof -i :8888
 3. **Ne pas versionner uploads/** : Toujours dans .gitignore
 4. **Scripts de sync** : Automatiser les échanges dev/staging/prod
 5. **.wp-env.override.json** : Pour config personnelle (dans .gitignore)
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| .wp-env.json | Configuration wp-env pour environnement local |
+| Sync scripts | Scripts de synchronisation BDD et uploads |
+| WP-CLI config | Configuration WP-CLI local |
+| Docker setup | Configuration Docker/docker-compose si applicable |
+| Local documentation | Guide de configuration environnement local |

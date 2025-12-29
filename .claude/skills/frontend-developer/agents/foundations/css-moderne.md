@@ -9,17 +9,12 @@ description: Expert en CSS moderne - Grid, Flexbox, variables CSS, cascade et no
 
 Maîtriser et implémenter les techniques CSS modernes pour créer des layouts flexibles, maintenables et performants.
 
-### Ce que je fais
-- Créer des layouts avec CSS Grid et Flexbox
-- Utiliser les variables CSS (custom properties)
-- Gérer la cascade et la spécificité
-- Implémenter les nouvelles fonctionnalités CSS
-- Optimiser les sélecteurs pour la performance
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Gérer les frameworks CSS (Tailwind, etc.) → `styling/`
-- Créer des animations complexes → `styling/animations.md`
-- Décider de l'architecture SCSS → `styling/scss-sass.md`
+- ❌ Gérer les frameworks CSS (Tailwind, etc.) → `styling/tailwind-expert.md` ou `styling/css-in-js.md`
+- ❌ Créer des animations complexes → `styling/animations.md`
+- ❌ Optimiser les performances de rendu → `performance/`
+- ❌ Gérer le responsive design → `responsive-design.md`
 
 ## CSS Grid
 
@@ -314,3 +309,11 @@ div > * > span { } /* Sélecteur complexe */
 ## Mots-clés de routage
 
 `CSS`, `Grid`, `Flexbox`, `variables CSS`, `custom properties`, `cascade`, `spécificité`, `layout`, `container queries`, `:has()`, `clamp`, `min`, `max`, `logical properties`, `layers`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Système de variables CSS | Custom properties pour couleurs, espacements, typographie et tokens design |
+| Layouts CSS modernes | Patterns Grid et Flexbox réutilisables et responsive |
+| Documentation CSS | Guide des conventions, nomenclature et architecture CSS du projet |

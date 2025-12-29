@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans l'implémentation de l'accessibilité web pour
 - Tests d'accessibilité avec `@wordpress/e2e-test-utils-playwright`
 - Admin WordPress accessible
 
+## Tu NE fais PAS
+
+- ❌ Principes WCAG génériques → web-dev-process
+- ❌ Design accessible → design-system-foundations
+- ❌ Stratégie a11y globale → direction-technique
+- ❌ Tests automatisés a11y → testing-process
+
 ## Sources WordPress
 
 - **WordPress a11y** : <https://developer.wordpress.org/advanced-administration/wordpress-admin/admin-accessibility/>
@@ -351,3 +358,13 @@ test.describe( 'Accessibility', () => {
 - [ ] Admin notices avec `role="alert"`
 - [ ] Blocks Gutenberg avec ARIA approprié
 - [ ] Tests automatiques avec axe-core
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Accessible code | Code PHP/JS avec implémentation a11y (ARIA, roles, labels) |
+| CSS helpers | Styles pour skip links et screen-reader-text |
+| Accessible blocks | Blocks Gutenberg avec ARIA et navigation clavier |
+| A11y tests | Tests Playwright avec @axe-core/playwright |
+| WCAG compliance report | Audit et rapport de conformité WCAG 2.1 AA |

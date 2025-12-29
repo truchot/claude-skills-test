@@ -9,17 +9,12 @@ description: Expert en intégration d'APIs - Fetch, REST, GraphQL et WebSockets
 
 Intégrer efficacement les APIs externes et internes dans les applications front-end.
 
-### Ce que je fais
-- Implémenter les appels API avec Fetch
-- Gérer les patterns REST
-- Intégrer GraphQL côté client
-- Gérer les connexions WebSocket
-- Gérer les erreurs et la résilience
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Créer les APIs backend
-- Gérer le state global → `state-management/`
-- Typer les réponses → `typescript.md`
+- ❌ Créer les APIs backend (Express, Fastify, serveurs) → skill `backend-developer`
+- ❌ Gérer le state global des données (caching, synchronisation) → `state-management/server-state.md`
+- ❌ Typer les réponses API (interfaces, types) → `typescript.md`
+- ❌ Tester les appels API → `testing/`
 
 ## Fetch API
 
@@ -586,3 +581,11 @@ class CircuitBreaker {
 ## Mots-clés de routage
 
 `fetch`, `API`, `REST`, `HTTP`, `GET`, `POST`, `PUT`, `DELETE`, `GraphQL`, `WebSocket`, `SSE`, `Server-Sent Events`, `upload`, `FormData`, `AbortController`, `retry`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Client API | Wrapper Fetch ou Axios avec gestion d'erreurs et interceptors |
+| Définitions TypeScript | Interfaces et types pour les réponses API |
+| Documentation API | Guide d'utilisation des endpoints et exemples de calls |

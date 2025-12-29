@@ -1,8 +1,20 @@
+---
+name: react-query
+description: TanStack Query for server state management and data fetching
+---
+
 # React Query (TanStack Query) - Server State Management
 
 ## Rôle
 
 Implémentation de TanStack Query pour le data fetching, caching et synchronisation avec le serveur.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter les APIs backend → `backend-developer`
+- ❌ Configurer les librairies de state management (Zustand, Redux) → `../state/`
+- ❌ Implémenter l'UI des composants → `../components/`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Installation
 
@@ -425,3 +437,11 @@ export function useUpdateUser() {
 - `swr.md` - Alternative légère
 - `suspense.md` - Intégration Suspense
 - `../state/zustand.md` - Pour le client state
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Query hooks | Custom hooks avec useQuery/useMutation |
+| Configuration cache | QueryClient setup avec staleTime et gcTime |
+| Gestion d'erreurs | Error handling et retry logic |

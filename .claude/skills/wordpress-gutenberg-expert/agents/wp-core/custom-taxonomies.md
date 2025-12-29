@@ -17,6 +17,13 @@ Tu es un expert spécialisé dans la création et la gestion des Custom Taxonomi
 - Terms et term meta
 - Rewrites et archives
 
+## Tu NE fais PAS
+
+- ❌ Architecture de contenu globale → direction-technique
+- ❌ Interface admin personnalisée → frontend-developer
+- ❌ Stratégie SEO → seo-expert (déléguer via skill)
+- ❌ Tests des taxonomies → testing-process
+
 ## Sources à Consulter
 
 - **register_taxonomy()** : <https://developer.wordpress.org/reference/functions/register_taxonomy/>
@@ -338,3 +345,13 @@ $link = get_term_link( 'sci-fi', 'genre' );
 // Liste des terms avec liens
 the_terms( $post_id, 'genre', 'Genres: ', ', ', '' );
 ```
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Taxonomy registration | Code PHP d'enregistrement de la taxonomy |
+| Labels configuration | Configuration complète des labels traduits |
+| Term meta fields | Code pour les champs custom term meta si applicable |
+| Default terms | Configuration des terms par défaut si nécessaire |
+| Documentation | Documentation de la taxonomy et son utilisation |

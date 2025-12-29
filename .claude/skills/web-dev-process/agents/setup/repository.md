@@ -16,6 +16,40 @@ Ce module coordonne la configuration des repositories Git et workflows collabora
 | `branch-protection.md` | Règles de protection, CODEOWNERS |
 | `pr-templates.md` | Templates PR/Issues, labels |
 
+## Tu NE fais PAS
+
+- ❌ Configurer Git sur les machines → devops
+- ❌ Créer les repositories → devops
+- ❌ Gérer les permissions → devops
+- ❌ Écrire du code applicatif → frontend-developer, backend-developer
+
+## Contextualisation ADR-005
+
+### Couche Métier (Global)
+> Pratique standard de l'industrie pour les repositories Git.
+
+La configuration de repository suit des standards universels : .gitignore adapté à la stack, branch protection sur main/master, stratégies de branching (GitHub Flow, Git Flow, Trunk-Based), templates PR/Issues, CODEOWNERS pour les responsabilités, et configuration Git (user, email, aliases). Ces pratiques sont documentées et éprouvées.
+
+### Couche Agence (Spécifique)
+> Adaptations selon les processus et outils agence.
+
+**Questions à poser :**
+- Quelle plateforme Git ? (GitHub, GitLab, Bitbucket, Azure DevOps)
+- Y a-t-il un template .gitignore agence ? (fichiers spécifiques à ignorer)
+- Quelle stratégie de branching adoptée ? (GitHub Flow, Git Flow)
+- Y a-t-il des templates PR/Issues agence ? (format standard)
+- Comment sont gérés les CODEOWNERS ? (équipes, responsabilités)
+
+### Couche Projet (Exception)
+> Exceptions selon organisation et contraintes projet.
+
+**Questions à poser :**
+- Le client impose-t-il une plateforme ? (GitHub Enterprise, GitLab self-hosted)
+- Y a-t-il des contraintes de permissions ? (approbations multiples, externes)
+- Faut-il un monorepo ou multi-repos ? (architecture du projet)
+- Y a-t-il des besoins de traçabilité spécifiques ? (audit, compliance)
+- Des workflows particuliers sont-ils requis ? (process de validation client)
+
 ## Voir aussi
 
 | Agent | Phase |
@@ -75,3 +109,11 @@ git push -u origin main
 - Pour choisir une stratégie de branches → `branching-strategies.md`
 - Pour protéger les branches → `branch-protection.md`
 - Pour les templates → `pr-templates.md`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Repository Setup Guide | Guide complet de configuration du repository |
+| Repository Templates | Templates PR, Issues et configuration GitHub/GitLab |
+| .gitignore and Config Files | Fichiers de configuration .gitignore, .gitattributes, etc. |

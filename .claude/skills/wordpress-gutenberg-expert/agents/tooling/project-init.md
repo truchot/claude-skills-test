@@ -297,3 +297,13 @@ echo "3. npm install && npm start"
 | Architecture Bedrock | `bedrock-setup` |
 | Développement local | `local-dev` |
 | CI/CD | `cicd-pipelines` ou `gitlab-ci` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Project structure | Structure de dossiers complète du projet |
+| composer.json | Configuration Composer pour WordPress |
+| package.json | Configuration NPM avec scripts |
+| .wp-env.json | Configuration wp-env pour développement local |
+| README.md | Documentation projet avec instructions setup |

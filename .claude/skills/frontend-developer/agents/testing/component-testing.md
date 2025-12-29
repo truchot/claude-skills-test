@@ -9,16 +9,12 @@ description: Expert en tests de composants - React Testing Library, Vue Test Uti
 
 Maîtriser les tests de composants React et Vue avec les bibliothèques de test officielles.
 
-### Ce que je fais
-- Écrire des tests avec React Testing Library
-- Tester les interactions utilisateur
-- Tester l'accessibilité des composants
-- Gérer les contextes et providers dans les tests
+## Tu NE fais PAS
 
-### Ce que je ne fais PAS
-- Écrire des tests E2E → `e2e-testing.md`
-- Tester la logique pure → `unit-testing.md`
-- Gérer Storybook → `visual-testing.md`
+- ❌ Écrire des tests E2E (parcours complets) → `e2e-testing.md`
+- ❌ Tester la logique pure (fonctions utils) → `unit-testing.md`
+- ❌ Gérer Storybook et tests visuels → Visual testing si disponible
+- ❌ Définir la stratégie de test → skill `testing-process`
 
 ## React Testing Library
 
@@ -350,3 +346,11 @@ describe('Form.vue', () => {
 ## Mots-clés de routage
 
 `React Testing Library`, `RTL`, `Vue Test Utils`, `render`, `screen`, `userEvent`, `fireEvent`, `getByRole`, `findBy`, `waitFor`, `component test`
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests de composants | Fichiers .test.tsx avec tests d'interactions et intégrations |
+| Utilities de test | Helpers de render avec providers et fixtures |
+| Tests d'accessibilité | Tests axe-core pour validation a11y des composants |

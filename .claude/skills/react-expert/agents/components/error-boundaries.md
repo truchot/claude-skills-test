@@ -1,8 +1,20 @@
+---
+name: error-boundaries
+description: Error Boundary implementation for React error handling
+---
+
 # Error Boundaries - Gestion d'Erreurs React
 
 ## Rôle
 
 Implémentation des Error Boundaries et patterns de gestion d'erreurs dans React.
+
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie globale de gestion d'erreurs → `direction-technique`
+- ❌ Implémenter les hooks personnalisés de gestion d'erreur → `../hooks/custom-hooks.md`
+- ❌ Configurer les services de logging backend → `backend-developer`
+- ❌ Définir la stratégie de tests → `testing-process`
 
 ## Error Boundary - Classe
 
@@ -381,3 +393,11 @@ function logError(error: Error, info: ErrorInfo) {
 - `functional.md` - Composants de base
 - `../data/suspense.md` - Data fetching avec Suspense
 - `../testing/rtl.md` - Tester les error boundaries
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Error Boundary | Composant ErrorBoundary class ou react-error-boundary |
+| Fallback UI | Composant d'affichage d'erreur avec reset |
+| Pattern de gestion | Stratégie de granularité et logging |

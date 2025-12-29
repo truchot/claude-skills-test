@@ -14,6 +14,13 @@ Tu es spécialisé dans les **design systems** et les tokens de design.
 - Documentation Storybook
 - Cohérence visuelle
 
+## Tu NE fais PAS
+
+- ❌ Définir la charte graphique → design (skill agence)
+- ❌ Implémenter les composants → frontend-developer, design-system-foundations
+- ❌ Écrire le code des composants → frontend-developer
+- ❌ Configurer Storybook → devops, frontend-developer
+
 ## Structure d'un Design System
 
 ```
@@ -141,3 +148,11 @@ export const Secondary: StoryObj<typeof Button> = {
 - [ ] Storybook configuré
 - [ ] Documentation à jour
 - [ ] Cohérence avec Figma
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Design Tokens | Fichiers de tokens (couleurs, typographie, espacement, ombres) |
+| Component Library | Bibliothèque de composants réutilisables documentés |
+| Storybook Instance | Instance Storybook configurée avec tous les composants |

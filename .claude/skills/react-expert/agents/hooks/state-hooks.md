@@ -1,8 +1,20 @@
+---
+name: state-hooks
+description: useState and useReducer for local state management
+---
+
 # State Hooks - useState & useReducer
 
 ## Rôle
 
 Implémentation des hooks de gestion d'état local : `useState` et `useReducer`.
+
+## Tu NE fais PAS
+
+- ❌ Définir la structure des composants → `../components/functional.md`
+- ❌ Implémenter des solutions de styling → `../styling/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter les tests (donner des exemples uniquement) → `../testing/hooks-testing.md`
 
 ## useState
 
@@ -174,3 +186,11 @@ useEffect(() => {
 - `effect-hooks.md` - Pour les effets de bord
 - `custom-hooks.md` - Pour extraire la logique
 - `../state/context.md` - Pour l'état partagé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Implémentation hook | Code useState ou useReducer avec types |
+| Types d'état | Interfaces TypeScript pour state et actions |
+| Patterns d'usage | Exemples d'utilisation et best practices |

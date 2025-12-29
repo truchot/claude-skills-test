@@ -1,8 +1,20 @@
+---
+name: composition
+description: Advanced composition patterns - Compound components, Render Props, and HOC
+---
+
 # Composition Patterns - Compound, Render Props, HOC
 
 ## Rôle
 
 Patterns avancés de composition de composants React.
+
+## Tu NE fais PAS
+
+- ❌ Implémenter la logique complexe des hooks → `../hooks/custom-hooks.md`
+- ❌ Gérer l'état avec Context, Zustand ou Redux → `../state/`
+- ❌ Définir la stratégie de tests → `testing-process`
+- ❌ Implémenter des solutions de styling → `../styling/`
 
 ## Compound Components
 
@@ -413,3 +425,11 @@ function MyComponent() {
 - `functional.md` - Composants de base
 - `../hooks/custom-hooks.md` - Alternative aux HOC
 - `../state/context.md` - Pour le state partagé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Pattern de composition | Implémentation Compound/Render Props/HOC |
+| Types TypeScript | Interfaces pour props et contexte |
+| Exemples d'usage | Cas d'utilisation du pattern choisi |

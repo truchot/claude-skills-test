@@ -265,3 +265,13 @@ npm test -- --updateSnapshot       # Mettre à jour snapshots
 | Patterns Jest/Vitest génériques | `web-dev-process/agents/testing/unit-tests` |
 | Tests E2E WordPress | `testing/e2e-tests` |
 | CI/CD GitHub Actions | `tooling/cicd-pipelines` |
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Jest test files | Fichiers de tests dans src/**/*.test.js |
+| Test setup | tests/setup.js avec mocks WordPress |
+| Mock configurations | Mocks des packages @wordpress/* |
+| Coverage reports | Rapports de couverture de code |
+| CI integration | Configuration pour exécution dans CI/CD |

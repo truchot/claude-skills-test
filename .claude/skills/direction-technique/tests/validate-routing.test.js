@@ -27,7 +27,7 @@ reporter.header('Validating Routing Logic');
 const existingAgents = new Set();
 
 for (const domain of DOMAINS) {
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
   if (directoryExists(domainDir)) {
     const files = findMarkdownFiles(domainDir);
     for (const file of files) {
@@ -66,7 +66,7 @@ if (skillError) {
     if (ref.includes('/')) {
       const [domain, agent] = ref.split('/');
       if (DOMAINS.includes(domain)) {
-        const agentPath = path.join(SKILL_ROOT, domain, `${agent}.md`);
+        const agentPath = path.join(SKILL_ROOT, 'agents', domain, `${agent}.md`);
         if (fileExists(agentPath)) {
           validRefs++;
         } else {
@@ -89,7 +89,7 @@ if (skillError) {
 reporter.section('Orchestrator Routing Tables');
 
 for (const domain of DOMAINS) {
-  const orchestratorPath = path.join(SKILL_ROOT, domain, 'orchestrator.md');
+  const orchestratorPath = path.join(SKILL_ROOT, 'agents', domain, 'orchestrator.md');
 
   if (!fileExists(orchestratorPath)) {
     reporter.warn(`${domain}/orchestrator.md not found`);
@@ -123,7 +123,7 @@ for (const domain of DOMAINS) {
   let missingAgents = [];
 
   for (const agentName of referencedAgents) {
-    const agentPath = path.join(SKILL_ROOT, domain, `${agentName}.md`);
+    const agentPath = path.join(SKILL_ROOT, 'agents', domain, `${agentName}.md`);
     if (!fileExists(agentPath)) {
       missingAgents.push(agentName);
     }
@@ -145,7 +145,7 @@ reporter.section('Cross-Domain References');
 let crossDomainIssues = [];
 
 for (const domain of DOMAINS) {
-  const domainDir = path.join(SKILL_ROOT, domain);
+  const domainDir = path.join(SKILL_ROOT, 'agents', domain);
   if (!directoryExists(domainDir)) continue;
 
   const files = findMarkdownFiles(domainDir);
@@ -165,7 +165,7 @@ for (const domain of DOMAINS) {
       const [, refDomain, refAgent] = crossMatch;
 
       if (DOMAINS.includes(refDomain) && refDomain !== domain) {
-        const targetPath = path.join(SKILL_ROOT, refDomain, `${refAgent}.md`);
+        const targetPath = path.join(SKILL_ROOT, 'agents', refDomain, `${refAgent}.md`);
         if (!fileExists(targetPath) && refAgent !== 'orchestrator') {
           const expectedInDomain = EXPECTED_AGENTS_PER_DOMAIN[refDomain] || [];
           if (expectedInDomain.includes(refAgent)) {

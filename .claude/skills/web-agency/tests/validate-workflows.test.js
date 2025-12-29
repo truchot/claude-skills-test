@@ -19,6 +19,7 @@ const {
 } = require('./utils');
 const {
   PROJECT_MANAGEMENT_DIR,
+  PROJECT_MANAGEMENT_AGENTS_DIR,
   WORKFLOWS,
   AGENT_REQUIREMENTS
 } = require('./config');
@@ -43,7 +44,7 @@ const errors = [];
  * @returns {string} Full path to agent file
  */
 function getAgentPath(subdomain, agentName) {
-  return path.join(PROJECT_MANAGEMENT_DIR, subdomain, `${agentName}.md`);
+  return path.join(PROJECT_MANAGEMENT_AGENTS_DIR, subdomain, `${agentName}.md`);
 }
 
 /**

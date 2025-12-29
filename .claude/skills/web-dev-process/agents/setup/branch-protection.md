@@ -14,6 +14,13 @@ Tu es spécialisé dans la **protection des branches** et les règles de qualit�
 - Status checks
 - CODEOWNERS
 
+## Tu NE fais PAS
+
+- ❌ Configurer les protections sur GitHub/GitLab → devops
+- ❌ Définir les politiques de review → direction-technique, lead-dev
+- ❌ Gérer les permissions → devops
+- ❌ Faire les code reviews → lead-dev
+
 ## GitHub Branch Protection
 
 ### Configuration via UI
@@ -175,3 +182,11 @@ feature:    D───E (rebasé)
 - [ ] CODEOWNERS configuré
 - [ ] Squash merge recommandé
 - [ ] Auto-delete des branches activé
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Branch Protection Rules | Configuration des règles de protection pour main/develop |
+| CODEOWNERS File | Fichier CODEOWNERS avec responsables par module |
+| Protection Documentation | Documentation des politiques de protection des branches |

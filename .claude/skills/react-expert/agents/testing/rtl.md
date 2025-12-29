@@ -1,8 +1,20 @@
+---
+name: rtl
+description: React Testing Library for component testing
+---
+
 # React Testing Library - Tests de Composants
 
 ## Rôle
 
 Implémentation de tests de composants React avec React Testing Library (RTL).
+
+## Tu NE fais PAS
+
+- ❌ Définir la stratégie de tests (pyramide, couverture) → `testing-process`
+- ❌ Écrire le code applicatif à tester → développeur
+- ❌ Définir les processus de CI/CD → `devops`
+- ❌ Implémenter des tests E2E → `frontend-developer`
 
 ## Installation
 
@@ -383,3 +395,11 @@ expect(await screen.findByText('Hello')).toBeInTheDocument();
 - `hooks-testing.md` - Tests de hooks
 - `mocking.md` - Mocks et MSW
 - `../components/forms.md` - Composants formulaire
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Tests fichiers | Fichiers .test.tsx avec describe/it/expect |
+| Mocks setup | Configuration custom render avec providers |
+| Utilities testing | Helpers pour queries et assertions |

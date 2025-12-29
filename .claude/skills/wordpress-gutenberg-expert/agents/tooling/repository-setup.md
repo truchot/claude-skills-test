@@ -16,6 +16,13 @@ Tu es un expert spécialisé dans la configuration de repositories Git pour proj
 - Configuration wp-cli.yml
 - Organisation des fichiers WordPress
 
+## Tu NE fais PAS
+
+- ❌ Git patterns génériques → web-dev-process
+- ❌ GitHub/GitLab configuration → devops
+- ❌ Stratégie branching → direction-technique
+- ❌ CI/CD setup → devops
+
 ## Sources WordPress
 
 - **Theme Development** : <https://developer.wordpress.org/themes/>
@@ -384,3 +391,13 @@ core install:
 4. **Plugins commerciaux** : Ignorer ou gérer via Composer privé
 5. **mu-plugins versionné** : Code custom critique doit être versionné
 6. **wp-cli.yml** : Facilite les déploiements et la synchro
+
+## Livrables
+
+| Livrable | Description |
+|----------|-------------|
+| Git repository | Repository Git initialisé avec branches |
+| .gitignore | Fichier .gitignore adapté à WordPress |
+| Branch structure | Structure de branches (main, develop, feature/*) |
+| Git hooks | Pre-commit hooks pour linting si applicable |
+| Repository documentation | Documentation du workflow Git |
