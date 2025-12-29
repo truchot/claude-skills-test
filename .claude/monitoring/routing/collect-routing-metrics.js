@@ -34,20 +34,25 @@ const {
  * @returns {Object} Parsed frontmatter
  */
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
+  try {
+    const match = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!match) return {};
 
-  const frontmatter = {};
-  const lines = match[1].split('\n');
+    const frontmatter = {};
+    const lines = match[1].split('\n');
 
-  for (const line of lines) {
-    const [key, ...valueParts] = line.split(':');
-    if (key && valueParts.length) {
-      frontmatter[key.trim()] = valueParts.join(':').trim();
+    for (const line of lines) {
+      const [key, ...valueParts] = line.split(':');
+      if (key && valueParts.length) {
+        frontmatter[key.trim()] = valueParts.join(':').trim();
+      }
     }
-  }
 
-  return frontmatter;
+    return frontmatter;
+  } catch (err) {
+    console.warn(`Error parsing frontmatter: ${err.message}`);
+    return {};
+  }
 }
 
 /**
@@ -56,34 +61,39 @@ function parseFrontmatter(content) {
  * @returns {string[]} Extracted keywords
  */
 function extractKeywords(content) {
-  const keywords = new Set();
+  try {
+    const keywords = new Set();
 
-  // Match table-based keywords: | keyword1, keyword2 |
-  const tableMatches = content.matchAll(/\|\s*([^|]+?)\s*\|.*?\|/g);
-  for (const match of tableMatches) {
-    const keywordCell = match[1];
-    if (!keywordCell.includes('Mots-clés') && !keywordCell.includes('---')) {
-      keywordCell.split(',').forEach(kw => {
+    // Match table-based keywords: | keyword1, keyword2 |
+    const tableMatches = content.matchAll(/\|\s*([^|]+?)\s*\|.*?\|/g);
+    for (const match of tableMatches) {
+      const keywordCell = match[1];
+      if (!keywordCell.includes('Mots-clés') && !keywordCell.includes('---')) {
+        keywordCell.split(',').forEach(kw => {
+          const cleaned = kw.trim().toLowerCase();
+          if (cleaned && cleaned.length > 2) {
+            keywords.add(cleaned);
+          }
+        });
+      }
+    }
+
+    // Match SI/ALORS patterns: SI question contient [keywords]
+    const siMatches = content.matchAll(/SI.*?\[(.*?)\]/gi);
+    for (const match of siMatches) {
+      match[1].split(',').forEach(kw => {
         const cleaned = kw.trim().toLowerCase();
         if (cleaned && cleaned.length > 2) {
           keywords.add(cleaned);
         }
       });
     }
-  }
 
-  // Match SI/ALORS patterns: SI question contient [keywords]
-  const siMatches = content.matchAll(/SI.*?\[(.*?)\]/gi);
-  for (const match of siMatches) {
-    match[1].split(',').forEach(kw => {
-      const cleaned = kw.trim().toLowerCase();
-      if (cleaned && cleaned.length > 2) {
-        keywords.add(cleaned);
-      }
-    });
+    return Array.from(keywords);
+  } catch (err) {
+    console.warn(`Error extracting keywords: ${err.message}`);
+    return [];
   }
-
-  return Array.from(keywords);
 }
 
 /**
@@ -100,56 +110,25 @@ function countAgents(skillPath) {
     agentFiles: []
   };
 
-  // Check for agents/ directory
-  const agentsDir = path.join(skillPath, 'agents');
-  if (fs.existsSync(agentsDir)) {
-    const domains = fs.readdirSync(agentsDir).filter(d =>
-      fs.statSync(path.join(agentsDir, d)).isDirectory()
-    );
+  try {
+    // Check for agents/ directory
+    const agentsDir = path.join(skillPath, 'agents');
+    if (fs.existsSync(agentsDir)) {
+      const domains = fs.readdirSync(agentsDir).filter(d => {
+        try {
+          return fs.statSync(path.join(agentsDir, d)).isDirectory();
+        } catch { return false; }
+      });
 
-    result.domains = domains;
+      result.domains = domains;
 
-    for (const domain of domains) {
-      const domainPath = path.join(agentsDir, domain);
-      const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+      for (const domain of domains) {
+        const domainPath = path.join(agentsDir, domain);
+        const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
 
-      for (const file of files) {
-        result.total++;
-        result.agentFiles.push(`${domain}/${file}`);
-
-        if (file === 'orchestrator.md') {
-          result.orchestrators++;
-        } else {
-          result.agents++;
-        }
-      }
-    }
-  }
-
-  // Dynamically scan for organizational folders containing .md agent files
-  // Excludes known non-agent directories
-  const EXCLUDED_DIRS = new Set([
-    'agents', 'tests', 'docs', 'templates', 'node_modules',
-    'orchestration', '.git', 'scripts', 'examples'
-  ]);
-
-  const allDirs = fs.readdirSync(skillPath).filter(item => {
-    const itemPath = path.join(skillPath, item);
-    return fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
-  });
-
-  for (const folder of allDirs) {
-    const folderPath = path.join(skillPath, folder);
-    const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
-
-    // Only consider folders with .md files as agent folders
-    if (files.length > 0 && !result.domains.includes(folder)) {
-      result.domains.push(folder);
-
-      for (const file of files) {
-        if (!result.agentFiles.includes(`${folder}/${file}`)) {
+        for (const file of files) {
           result.total++;
-          result.agentFiles.push(`${folder}/${file}`);
+          result.agentFiles.push(`${domain}/${file}`);
 
           if (file === 'orchestrator.md') {
             result.orchestrators++;
@@ -159,6 +138,45 @@ function countAgents(skillPath) {
         }
       }
     }
+
+    // Dynamically scan for organizational folders containing .md agent files
+    // Excludes known non-agent directories
+    const EXCLUDED_DIRS = new Set([
+      'agents', 'tests', 'docs', 'templates', 'node_modules',
+      'orchestration', '.git', 'scripts', 'examples'
+    ]);
+
+    const allDirs = fs.readdirSync(skillPath).filter(item => {
+      try {
+        const itemPath = path.join(skillPath, item);
+        return fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
+      } catch { return false; }
+    });
+
+    for (const folder of allDirs) {
+      const folderPath = path.join(skillPath, folder);
+      const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
+
+      // Only consider folders with .md files as agent folders
+      if (files.length > 0 && !result.domains.includes(folder)) {
+        result.domains.push(folder);
+
+        for (const file of files) {
+          if (!result.agentFiles.includes(`${folder}/${file}`)) {
+            result.total++;
+            result.agentFiles.push(`${folder}/${file}`);
+
+            if (file === 'orchestrator.md') {
+              result.orchestrators++;
+            } else {
+              result.agents++;
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn(`Error counting agents in ${skillPath}: ${err.message}`);
   }
 
   return result;

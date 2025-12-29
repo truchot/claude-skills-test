@@ -26,10 +26,15 @@ const INVOCATION_LOG = path.join(__dirname, 'invocation-log.jsonl');
  * @returns {Array} Test cases
  */
 function loadTestCases() {
-  if (!fs.existsSync(TEST_CASES_FILE)) {
+  try {
+    if (!fs.existsSync(TEST_CASES_FILE)) {
+      return [];
+    }
+    return JSON.parse(fs.readFileSync(TEST_CASES_FILE, 'utf8'));
+  } catch (err) {
+    console.warn(`Error loading test cases: ${err.message}`);
     return [];
   }
-  return JSON.parse(fs.readFileSync(TEST_CASES_FILE, 'utf8'));
 }
 
 /**
@@ -37,7 +42,11 @@ function loadTestCases() {
  * @param {Array} testCases - Test cases to save
  */
 function saveTestCases(testCases) {
-  fs.writeFileSync(TEST_CASES_FILE, JSON.stringify(testCases, null, 2));
+  try {
+    fs.writeFileSync(TEST_CASES_FILE, JSON.stringify(testCases, null, 2));
+  } catch (err) {
+    console.error(`Error saving test cases: ${err.message}`);
+  }
 }
 
 /**
@@ -45,10 +54,15 @@ function saveTestCases(testCases) {
  * @returns {Object} Results history
  */
 function loadResults() {
-  if (!fs.existsSync(RESULTS_FILE)) {
+  try {
+    if (!fs.existsSync(RESULTS_FILE)) {
+      return { runs: [] };
+    }
+    return JSON.parse(fs.readFileSync(RESULTS_FILE, 'utf8'));
+  } catch (err) {
+    console.warn(`Error loading results: ${err.message}`);
     return { runs: [] };
   }
-  return JSON.parse(fs.readFileSync(RESULTS_FILE, 'utf8'));
 }
 
 /**
@@ -56,7 +70,11 @@ function loadResults() {
  * @param {Object} results - Results to save
  */
 function saveResults(results) {
-  fs.writeFileSync(RESULTS_FILE, JSON.stringify(results, null, 2));
+  try {
+    fs.writeFileSync(RESULTS_FILE, JSON.stringify(results, null, 2));
+  } catch (err) {
+    console.error(`Error saving results: ${err.message}`);
+  }
 }
 
 /**
