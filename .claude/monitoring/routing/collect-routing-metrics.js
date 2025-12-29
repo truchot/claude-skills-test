@@ -126,20 +126,26 @@ function countAgents(skillPath) {
     }
   }
 
-  // Check for organizational folders (direction-technique, lead-dev style)
-  const orgFolders = ['avant-projet', 'pilotage', 'communication', 'livraison',
-    'facturation', 'architecture', 'estimation', 'qualite', 'securite',
-    'performance', 'code-review', 'team-coordination', 'technical-decisions',
-    'mentoring', 'delivery'];
+  // Dynamically scan for organizational folders containing .md agent files
+  // Excludes known non-agent directories
+  const EXCLUDED_DIRS = new Set([
+    'agents', 'tests', 'docs', 'templates', 'node_modules',
+    'orchestration', '.git', 'scripts', 'examples'
+  ]);
 
-  for (const folder of orgFolders) {
+  const allDirs = fs.readdirSync(skillPath).filter(item => {
+    const itemPath = path.join(skillPath, item);
+    return fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
+  });
+
+  for (const folder of allDirs) {
     const folderPath = path.join(skillPath, folder);
-    if (fs.existsSync(folderPath) && fs.statSync(folderPath).isDirectory()) {
-      if (!result.domains.includes(folder)) {
-        result.domains.push(folder);
-      }
+    const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
 
-      const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
+    // Only consider folders with .md files as agent folders
+    if (files.length > 0 && !result.domains.includes(folder)) {
+      result.domains.push(folder);
+
       for (const file of files) {
         if (!result.agentFiles.includes(`${folder}/${file}`)) {
           result.total++;
