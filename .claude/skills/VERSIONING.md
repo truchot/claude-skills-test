@@ -215,11 +215,76 @@ Example:
 
 ## Version Compatibility Matrix
 
-| Skill | Compatible With |
-|-------|-----------------|
-| `web-agency` v2.x | All v1.x skills |
-| `direction-technique` v3.x | `web-dev-process` >= 1.0, `testing-process` >= 1.0 |
-| `testing-process` v1.x | `frontend-developer` >= 1.0, `backend-developer` >= 1.0 |
+### All Skills (13 total)
+
+| Skill | Current | Requires | Notes |
+|-------|---------|----------|-------|
+| `web-agency` | v2.9.0 | All skills >= 1.0 | Meta-orchestrator |
+| `project-management` | v1.0.0 | - | Standalone |
+| `direction-technique` | v3.0.0 | `web-dev-process` >= 1.0, `testing-process` >= 1.0, `devops` >= 1.0 | Strategy level |
+| `lead-dev` | v1.1.0 | `direction-technique` >= 3.0, `web-dev-process` >= 1.0 | Coordination |
+| `web-dev-process` | v1.2.0 | `frontend-developer` >= 1.0, `backend-developer` >= 2.0, `devops` >= 1.0 | Process level |
+| `testing-process` | v1.0.0 | `frontend-developer` >= 1.0, `backend-developer` >= 1.0 | Process level |
+| `devops` | v1.0.0 | - | Implementation (extracted from backend-developer) |
+| `frontend-developer` | v1.0.0 | `design-system-foundations` >= 1.0, `react-expert` >= 1.0 | Implementation |
+| `backend-developer` | v2.0.0 | `devops` >= 1.0 (for DevOps features) | Implementation |
+| `react-expert` | v1.0.0 | `nextjs-expert` >= 1.0 (for Next.js) | Implementation |
+| `nextjs-expert` | v1.0.0 | - | Implementation |
+| `wordpress-gutenberg-expert` | v1.0.0 | - | Implementation |
+| `design-system-foundations` | v1.1.0 | - | Implementation |
+
+### Breaking Changes History
+
+| Version Change | Skill | Breaking Change | Migration |
+|----------------|-------|-----------------|-----------|
+| 1.x → 2.0.0 | `backend-developer` | DevOps domain extracted | Use `devops` skill |
+| 2.x → 3.0.0 | `direction-technique` | 3-level hierarchy (ADR-005) | Update routing |
+
+### Dependency Graph
+
+```
+                     web-agency v2.x
+                          │
+         ┌────────────────┼────────────────┐
+         │                │                │
+         ▼                ▼                ▼
+  project-management  direction-technique  lead-dev
+       v1.x              v3.x              v1.x
+                          │                  │
+         ┌────────────────┼──────────────────┤
+         │                │                  │
+         ▼                ▼                  ▼
+   web-dev-process  testing-process      devops
+       v1.x             v1.x              v1.x
+         │                │
+    ┌────┴────┬───────────┴───────┐
+    │         │                   │
+    ▼         ▼                   ▼
+frontend  backend     react    nextjs    wordpress
+  v1.x    v2.x       v1.x      v1.x       v1.x
+    │
+    ▼
+design-system
+   v1.x
+```
+
+### Compatibility Rules
+
+1. **Upward Compatible**: Lower-level skills (implementation) should work with any higher-level skill version
+2. **Cross-References**: When skill A references skill B, A declares minimum B version
+3. **Extraction**: When extracting a skill, source bumps MAJOR, new skill starts at 1.0.0
+
+### Validation
+
+Run the compatibility check:
+
+```bash
+# Validate all skill versions are compatible
+node .claude/skills/scripts/validate-migration.js
+
+# Check specific skill dependencies
+grep -r "→.*skill" .claude/skills/*/SKILL.md
+```
 
 ## FAQ
 
