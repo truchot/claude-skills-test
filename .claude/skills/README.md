@@ -483,17 +483,10 @@ Ce que fait cet agent (et ce qu'il ne fait PAS)
 
 #### Agents Sous le Seuil (à améliorer)
 
-Les agents suivants sont identifiés pour amélioration :
-
 | Skill | Agent | Lignes | Action |
 |-------|-------|--------|--------|
-| `frontend-developer` | `frameworks/wordpress-expert` | 90 | Délégation - acceptable |
 | `web-dev-process` | `setup/quality-tools` | 96 | Étoffer contenu |
-| `frontend-developer` | `frameworks/react-expert` | 98 | Délégation - acceptable |
 | `web-dev-process` | `testing/security-headers` | 102 | Ajouter exemples |
 | `web-dev-process` | `setup/environment` | 105 | Ajouter exemples |
 
-> **Note** : ~28 agents sont sous le seuil de 150 lignes. Les agents de délégation (qui pointent vers un skill dédié) peuvent rester compacts. Pour la liste complète :
-> ```bash
-> find .claude/skills -path "*/agents/*.md" ! -name "orchestrator.md" -exec wc -l {} \; | awk '$1 < 150' | sort -n
-> ```
+> **Note** : Les agents de délégation (qui pointent vers un skill dédié comme `react-expert` ou `wordpress-gutenberg-expert`) peuvent rester compacts.
