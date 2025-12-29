@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-13-green) ![Agents](https://img.shields.io/badge/agents-336+-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-13-green) ![Agents](https://img.shields.io/badge/agents-426-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -85,20 +85,20 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | Skill | Version | Niveau | Agents | Description |
 |-------|---------|--------|--------|-------------|
 | `web-agency` | ![v2.9.0](https://img.shields.io/badge/v2.9.0-blue) | Meta | - | Orchestrateur principal agence |
-| `project-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Gestion | 24 | Gestion de projet client |
+| `project-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Gestion | 29 | Gestion de projet client |
 | `direction-technique` | ![v3.0.0](https://img.shields.io/badge/v3.0.0-green) | 1-Stratégie | 54 | Décisions architecturales |
-| `lead-dev` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | Coordination | 12 | Coordination technique |
-| `web-dev-process` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | 2-Processus | 27 | Phases de développement |
+| `lead-dev` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | Coordination | 27 | Coordination technique |
+| `web-dev-process` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | 2-Processus | 64 | Phases de développement |
 | `testing-process` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 25 | Méthodologie de tests |
 | `devops` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 30 | CI/CD et infrastructure |
-| `frontend-developer` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 28 | Développement frontend |
-| `backend-developer` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 30 | Développement backend |
+| `frontend-developer` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 33 | Développement frontend |
+| `backend-developer` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 38 | Développement backend |
 | `react-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 28 | Expertise React |
-| `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 18 | Expertise Next.js |
-| `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 35 | Expertise WordPress |
-| `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 25 | Design system |
+| `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 35 | Expertise Next.js |
+| `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 42 | Expertise WordPress |
+| `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 21 | Design system |
 
-**Total : ~336 agents spécialisés**
+**Total : 426 agents spécialisés**
 
 ## Guide de Migration
 
