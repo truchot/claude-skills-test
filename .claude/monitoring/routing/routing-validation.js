@@ -15,9 +15,11 @@
 
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 
 const TEST_CASES_FILE = path.join(__dirname, 'test-cases.json');
 const RESULTS_FILE = path.join(__dirname, 'validation-results.json');
+const INVOCATION_LOG = path.join(__dirname, 'invocation-log.jsonl');
 
 /**
  * Load test cases from file
@@ -309,6 +311,11 @@ if (require.main === module) {
       runValidation();
       break;
 
+    case 'patterns':
+      const patterns = analyzeInvocationPatterns();
+      console.log(formatPatterns(patterns));
+      break;
+
     case 'clear':
       saveResults({ runs: [], decisions: [] });
       console.log('Cleared all validation results');
@@ -324,15 +331,20 @@ Usage:
   node routing-validation.js [command]
 
 Commands:
-  init     Create test-cases.json with example test cases
-  report   Generate validation report from recorded decisions
-  clear    Clear all recorded decisions
+  init      Create test-cases.json with example test cases
+  report    Generate validation report from recorded decisions
+  patterns  Analyze skill invocation patterns from logs
+  clear     Clear all recorded decisions
 
 Programmatic usage:
   const { recordRoutingDecision } = require('./routing-validation');
 
   // Record a routing decision for later analysis
   recordRoutingDecision(query, observedSkill, expectedSkill);
+
+Hook integration:
+  The hook at .claude/hooks/log-skill-invocation.sh logs skill invocations.
+  Run 'patterns' to analyze the logged invocations.
 `);
       break;
 
@@ -342,9 +354,114 @@ Programmatic usage:
   }
 }
 
+/**
+ * Load invocation logs from JSONL file
+ * @returns {Array} Invocation entries
+ */
+function loadInvocationLogs() {
+  if (!fs.existsSync(INVOCATION_LOG)) {
+    return [];
+  }
+
+  const content = fs.readFileSync(INVOCATION_LOG, 'utf8');
+  return content
+    .split('\n')
+    .filter(line => line.trim())
+    .map(line => {
+      try {
+        return JSON.parse(line);
+      } catch (e) {
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
+/**
+ * Analyze skill invocation patterns
+ * @returns {Object} Pattern analysis
+ */
+function analyzeInvocationPatterns() {
+  const logs = loadInvocationLogs();
+
+  if (logs.length === 0) {
+    return {
+      total: 0,
+      message: 'No invocation logs found. Skills will be logged when invoked.'
+    };
+  }
+
+  // Count by skill
+  const bySkill = {};
+  logs.forEach(entry => {
+    const skill = entry.skill || 'unknown';
+    bySkill[skill] = (bySkill[skill] || 0) + 1;
+  });
+
+  // Sort by frequency
+  const sorted = Object.entries(bySkill)
+    .sort((a, b) => b[1] - a[1]);
+
+  // Time analysis
+  const timestamps = logs.map(e => new Date(e.timestamp));
+  const first = new Date(Math.min(...timestamps));
+  const last = new Date(Math.max(...timestamps));
+
+  return {
+    total: logs.length,
+    uniqueSkills: Object.keys(bySkill).length,
+    period: {
+      from: first.toISOString(),
+      to: last.toISOString(),
+      days: Math.ceil((last - first) / (1000 * 60 * 60 * 24))
+    },
+    bySkill: sorted.map(([skill, count]) => ({
+      skill,
+      count,
+      percentage: ((count / logs.length) * 100).toFixed(1)
+    })),
+    topSkills: sorted.slice(0, 5)
+  };
+}
+
+/**
+ * Format invocation patterns as report
+ * @param {Object} patterns - Pattern analysis
+ * @returns {string} Formatted report
+ */
+function formatPatterns(patterns) {
+  if (patterns.total === 0) {
+    return patterns.message;
+  }
+
+  let report = `
+╔══════════════════════════════════════════════════════════════════╗
+║            SKILL INVOCATION PATTERNS                             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📊 OVERVIEW
+────────────────────────────────────────────
+  Total Invocations:  ${String(patterns.total).padStart(5)}
+  Unique Skills:      ${String(patterns.uniqueSkills).padStart(5)}
+  Period:             ${patterns.period.days} days
+
+📈 SKILL USAGE (top 10)
+────────────────────────────────────────────`;
+
+  patterns.bySkill.slice(0, 10).forEach(({ skill, count, percentage }) => {
+    const bar = '█'.repeat(Math.ceil(parseFloat(percentage) / 5));
+    report += `\n  ${skill.padEnd(35)} ${String(count).padStart(4)} (${percentage.padStart(5)}%) ${bar}`;
+  });
+
+  report += '\n';
+  return report;
+}
+
 module.exports = {
   recordRoutingDecision,
   calculateMetrics,
   loadTestCases,
-  loadResults
+  loadResults,
+  loadInvocationLogs,
+  analyzeInvocationPatterns
 };
