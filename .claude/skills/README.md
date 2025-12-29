@@ -396,6 +396,22 @@ npm test
 | `validate-routing.test.js` | Keywords de routage |
 | `validate-markdown.test.js` | Syntaxe markdown |
 
+### Résultats des Tests (2025-12-29)
+
+| Skill | Tests | Passed | Status |
+|-------|-------|--------|--------|
+| `devops` | 4 suites | 118 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `testing-process` | 4 suites | 109 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `web-agency` | 7 suites | 209 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `web-dev-process` | 4 suites | 113 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `wordpress-gutenberg-expert` | 4 suites | 86 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `design-system-foundations` | 5 suites | 88 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `backend-developer` | 1 suite | 118 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+
+**Total : 841 tests passés, 0 échecs**
+
+> **Note** : Certains skills (react-expert, nextjs-expert, lead-dev, etc.) n'ont pas encore de suite de tests.
+
 ## Contribution
 
 Voir les ADR pour les conventions à respecter lors de l'ajout d'agents.
