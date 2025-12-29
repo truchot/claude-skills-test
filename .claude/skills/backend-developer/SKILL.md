@@ -1,7 +1,7 @@
 ---
 name: backend-developer
 description: Expert en développement backend - APIs, bases de données, architecture, sécurité et performance
-version: 1.1.0
+version: 2.0.0
 status: active
 ---
 

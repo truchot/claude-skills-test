@@ -92,7 +92,7 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `testing-process` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 25 | Méthodologie de tests |
 | `devops` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 30 | CI/CD et infrastructure |
 | `frontend-developer` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 33 | Développement frontend |
-| `backend-developer` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 38 | Développement backend |
+| `backend-developer` | ![v2.0.0](https://img.shields.io/badge/v2.0.0-green) | 3-Implémentation | 32 | Développement backend |
 | `react-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 28 | Expertise React |
 | `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 35 | Expertise Next.js |
 | `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 42 | Expertise WordPress |
