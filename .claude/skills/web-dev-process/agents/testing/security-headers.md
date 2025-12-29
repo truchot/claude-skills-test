@@ -76,22 +76,120 @@ test('should not expose sensitive headers', async ({ request }) => {
 });
 ```
 
+## Exemples par Framework
+
+### Next.js
+
+```javascript
+// next.config.js
+const securityHeaders = [
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY',
+  },
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline';",
+  },
+];
+
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+    ];
+  },
+};
+```
+
+### Express.js avec Helmet
+
+```javascript
+import helmet from 'helmet';
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+  },
+}));
+
+// Supprimer le header x-powered-by
+app.disable('x-powered-by');
+```
+
+### Nginx
+
+```nginx
+# security-headers.conf
+add_header X-Frame-Options "DENY" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+add_header Content-Security-Policy "default-src 'self';" always;
+
+# Hide server version
+server_tokens off;
+```
+
 ## Outils de Vérification
 
-| Outil | URL |
-|-------|-----|
-| SecurityHeaders.com | https://securityheaders.com |
-| Mozilla Observatory | https://observatory.mozilla.org |
-| SSL Labs | https://www.ssllabs.com/ssltest/ |
+| Outil | URL | Score Cible |
+|-------|-----|-------------|
+| SecurityHeaders.com | https://securityheaders.com | A+ |
+| Mozilla Observatory | https://observatory.mozilla.org | A+ |
+| SSL Labs | https://www.ssllabs.com/ssltest/ | A+ |
+
+## Bonnes Pratiques
+
+| Pratique | Raison |
+|----------|--------|
+| Commencer restrictif puis assouplir | Plus sûr que l'inverse |
+| Utiliser report-uri/report-to | Détecter les violations CSP |
+| Tester en staging d'abord | Éviter de casser la prod |
+| HSTS uniquement en prod | Éviter blocage en dev local |
+| Automatiser les tests | Détecter les régressions |
+
+## Erreurs Courantes
+
+| Erreur | Impact | Solution |
+|--------|--------|----------|
+| CSP trop permissif (`unsafe-inline`) | XSS possible | Utiliser nonces ou hashes |
+| HSTS sur localhost | Blocage permanent | Conditionner sur NODE_ENV |
+| Oublier `frame-ancestors` | Clickjacking possible | Ajouter dans CSP |
+| Headers en doublon | Comportement imprévisible | Vérifier nginx + app |
 
 ## Checklist
 
-- [ ] CSP configuré
+- [ ] CSP configuré (tester progressivement)
 - [ ] X-Frame-Options: DENY
 - [ ] X-Content-Type-Options: nosniff
-- [ ] HSTS en production
+- [ ] HSTS en production (max-age >= 1 an)
 - [ ] X-Powered-By supprimé
-- [ ] Tests automatisés
+- [ ] Referrer-Policy configuré
+- [ ] Permissions-Policy configuré
+- [ ] Tests automatisés dans CI
+- [ ] Score A+ sur SecurityHeaders.com
 
 ## Livrables
 
@@ -100,3 +198,4 @@ test('should not expose sensitive headers', async ({ request }) => {
 | Security Headers Configuration | Configuration complète des headers de sécurité HTTP |
 | Security Headers Tests | Tests automatisés de vérification des headers |
 | Security Headers Audit | Rapport d'audit SecurityHeaders.com/Mozilla Observatory |
+| CSP Report Endpoint | Endpoint pour collecter les violations CSP |

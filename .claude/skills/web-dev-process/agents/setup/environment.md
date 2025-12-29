@@ -90,6 +90,101 @@ npm run dev
 | `docker-compose.yml` | Services de dev | ✅ Oui |
 | `Dockerfile` | Image de production | ✅ Oui |
 
+## Exemples de Configuration
+
+### .env.example
+
+```bash
+# .env.example - Template à copier en .env.local
+
+# Application
+NODE_ENV=development
+APP_URL=http://localhost:3000
+API_URL=http://localhost:4000
+
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/myapp_dev
+
+# Auth
+JWT_SECRET=your-secret-here-change-in-production
+SESSION_SECRET=another-secret-change-this
+
+# External APIs
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+
+# Feature Flags
+FEATURE_NEW_DASHBOARD=false
+```
+
+### Validation avec Zod
+
+```typescript
+// src/env.ts
+import { z } from 'zod';
+
+const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'staging', 'production']),
+  DATABASE_URL: z.string().url(),
+  JWT_SECRET: z.string().min(32),
+  STRIPE_SECRET_KEY: z.string().startsWith('sk_'),
+});
+
+// Valider au démarrage
+export const env = envSchema.parse(process.env);
+```
+
+### docker-compose.yml
+
+```yaml
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: myapp_dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - '1025:1025'  # SMTP
+      - '8025:8025'  # Web UI
+
+volumes:
+  postgres_data:
+```
+
+## Bonnes Pratiques
+
+| Pratique | Raison |
+|----------|--------|
+| Valider les variables au démarrage | Fail fast si config manquante |
+| Utiliser des valeurs par défaut sûres | Éviter erreurs de prod en dev |
+| Séparer les secrets | Ne jamais commiter de secrets |
+| Documenter chaque variable | Faciliter l'onboarding |
+| Utiliser des préfixes cohérents | `DB_`, `API_`, `FEATURE_` |
+
+## Erreurs Courantes
+
+| Erreur | Solution |
+|--------|----------|
+| Secrets committé par erreur | Utiliser `git-secrets` ou pre-commit hooks |
+| Variables manquantes en prod | Valider avec Zod/dotenv-safe au démarrage |
+| .env.local non ignoré | Vérifier `.gitignore` |
+| Config différente dev/prod | Utiliser `.env.development`, `.env.production` |
+
 ## Agents à Consulter
 
 - Pour les variables d'environnement → `env-variables.md`
@@ -103,3 +198,4 @@ npm run dev
 | Environment Setup Guide | Guide complet de configuration des environnements (local, dev, staging, prod) |
 | Docker Compose Configuration | Configuration docker-compose pour services locaux |
 | Environment Documentation | Documentation des différences entre environnements |
+| Env Validation Schema | Schéma Zod pour valider les variables d'environnement |

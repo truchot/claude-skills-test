@@ -481,12 +481,8 @@ Ce que fait cet agent (et ce qu'il ne fait PAS)
 - Lien vers documentation
 ```
 
-#### Agents Sous le Seuil (à améliorer)
+#### Agents Conformes
 
-| Skill | Agent | Lignes | Action |
-|-------|-------|--------|--------|
-| `web-dev-process` | `setup/quality-tools` | 96 | Étoffer contenu |
-| `web-dev-process` | `testing/security-headers` | 102 | Ajouter exemples |
-| `web-dev-process` | `setup/environment` | 105 | Ajouter exemples |
+Tous les agents prioritaires ont été améliorés et dépassent le seuil de 150 lignes.
 
-> **Note** : Les agents de délégation (qui pointent vers un skill dédié comme `react-expert` ou `wordpress-gutenberg-expert`) peuvent rester compacts.
+> **Note** : Les agents de délégation (qui pointent vers un skill dédié comme `react-expert` ou `wordpress-gutenberg-expert`) peuvent rester compacts car leur rôle est de rediriger vers le skill spécialisé.
