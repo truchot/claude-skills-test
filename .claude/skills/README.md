@@ -1,5 +1,7 @@
 # Claude Skills Architecture
 
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-13-green) ![Agents](https://img.shields.io/badge/agents-336+-brightgreen)
+
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
 ## Vue d'Ensemble
