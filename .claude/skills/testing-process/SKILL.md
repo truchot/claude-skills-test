@@ -263,10 +263,62 @@ testing-process ──► wordpress-gutenberg-expert/testing (tests WP)
 | `react-expert` | IMPLÉMENTATION | Délègue tests React |
 | `nextjs-expert` | IMPLÉMENTATION | Délègue tests Next.js |
 
+## Exemples de Routage Pratiques
+
+Cette section clarifie les frontières entre **PROCESSUS** (testing-process) et **IMPLÉMENTATION** (skills techniques).
+
+### Exemple 1 : Tests Unitaires
+
+| Question | Skill | Raison |
+|----------|-------|--------|
+| "Comment structurer mes tests unitaires ?" | `testing-process/types/unit` | **Méthodologie** : pattern AAA, isolation |
+| "Comment mocker un service Node.js ?" | `backend-developer/testing/unit` | **Implémentation** : code Jest spécifique |
+| "Comment tester un hook React ?" | `react-expert/testing` | **Implémentation** : RTL, code spécifique |
+
+### Exemple 2 : Pyramide de Tests
+
+| Question | Skill | Raison |
+|----------|-------|--------|
+| "Quels ratios adopter (70/20/10) ?" | `testing-process/strategy/pyramide` | **Stratégie** : ratios, anti-patterns |
+| "Combien de tests E2E pour mon projet ?" | `testing-process/strategy/planning` | **Planification** : allocation |
+| "Comment configurer Playwright ?" | `frontend-developer/testing/e2e` | **Implémentation** : config technique |
+
+### Exemple 3 : Tests de Sécurité
+
+| Question | Skill | Raison |
+|----------|-------|--------|
+| "Quelles vulnérabilités OWASP tester ?" | `testing-process/security/owasp` | **Méthodologie** : checklist OWASP |
+| "Comment scanner les dépendances npm ?" | `testing-process/security/dependencies` | **Méthodologie** : processus audit |
+| "Script Snyk pour mon CI GitHub Actions" | `devops/cicd/quality-gates` | **Implémentation** : config CI |
+
+### Exemple 4 : Couverture de Code
+
+| Question | Skill | Raison |
+|----------|-------|--------|
+| "Quel seuil de couverture viser ?" | `testing-process/quality/coverage` | **Méthodologie** : objectifs, métriques |
+| "Comment configurer Istanbul/nyc ?" | `backend-developer/testing/coverage` | **Implémentation** : config outil |
+
+### Règle Générale
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  QUESTION                          │  SKILL                         │
+├────────────────────────────────────┼─────────────────────────────────┤
+│  "QUOI tester ?"                   │  testing-process               │
+│  "POURQUOI tester X ?"             │  testing-process               │
+│  "QUAND ajouter des tests ?"       │  testing-process               │
+│  "COMBIEN de tests ?"              │  testing-process               │
+├────────────────────────────────────┼─────────────────────────────────┤
+│  "COMMENT écrire ce test ?"        │  skill technique (impl)        │
+│  "COMMENT configurer l'outil ?"    │  skill technique (impl)        │
+│  "Code de test pour X ?"           │  skill technique (impl)        │
+└────────────────────────────────────┴─────────────────────────────────┘
+```
+
 ## Changelog
 
 ### v1.0.0
-- Création initiale avec 7 domaines et 25 agents
+- Création initiale avec 6 domaines et 25 agents
 - Consolidation de la méthodologie testing
 - Position : NIVEAU 2 PROCESSUS
-- Couverture : strategy, types, quality, performance, security, accessibility, automation
+- Couverture : strategy, types, quality, performance, security, accessibility
