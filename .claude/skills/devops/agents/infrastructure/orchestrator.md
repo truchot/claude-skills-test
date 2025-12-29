@@ -18,24 +18,27 @@ Tu coordonnes le domaine **Infrastructure** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `terraform` | IaC, AWS, GCP, cloud provisioning |
+| `terraform` | Terraform modules, state, HCL |
+| `aws` | EC2, RDS, S3, EKS, Lambda, IAM |
+| `gcp` | GCE, GKE, Cloud SQL, Cloud Run |
+| `networking` | VPC, subnets, security groups, firewalls |
 
 ## Arbre de Décision
 
 ```
 Requête Infrastructure
 │
-├─ Terraform, HCL, state ?
+├─ Terraform, HCL, state, modules ?
 │  └─ → terraform
 │
-├─ AWS, EC2, RDS, EKS ?
-│  └─ → terraform
+├─ AWS, EC2, RDS, S3, EKS, Lambda ?
+│  └─ → aws
 │
-├─ GCP, GCE, GKE ?
-│  └─ → terraform
+├─ GCP, GCE, GKE, Cloud SQL, Cloud Run ?
+│  └─ → gcp
 │
-├─ Networking, VPC, subnets ?
-│  └─ → terraform
+├─ VPC, subnets, security groups, networking ?
+│  └─ → networking
 │
 └─ Choix stratégique cloud ?
    └─ → ESCALADE: direction-technique/infrastructure
@@ -45,10 +48,10 @@ Requête Infrastructure
 
 | Mots-clés | Agent |
 |-----------|-------|
-| terraform, tf, plan, apply | terraform |
-| AWS, EC2, RDS, S3, Lambda | terraform |
-| GCP, GCE, GKE, Cloud SQL | terraform |
-| VPC, subnet, security group | terraform |
+| terraform, tf, plan, apply, HCL, state | terraform |
+| AWS, EC2, RDS, S3, EKS, Lambda, IAM | aws |
+| GCP, GCE, GKE, Cloud SQL, Cloud Run | gcp |
+| VPC, subnet, security group, firewall | networking |
 
 
 ## Livrables

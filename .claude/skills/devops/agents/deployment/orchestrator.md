@@ -18,21 +18,25 @@ Tu coordonnes le domaine **Deployment** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `strategies` | Blue-Green, Canary, rollback |
+| `strategies` | Blue-Green, Canary, Rolling, ArgoCD |
+| `rollback` | Recovery procedures, undo, historique |
 
 ## Arbre de Décision
 
 ```
 Requête Deployment
 │
-├─ Blue-Green, Canary ?
+├─ Blue-Green, Canary, Rolling ?
 │  └─ → strategies
 │
-├─ Feature flags ?
+├─ Feature flags, toggles ?
 │  └─ → strategies
 │
-├─ Rollback, recovery ?
+├─ ArgoCD, Flux, GitOps ?
 │  └─ → strategies
+│
+├─ Rollback, recovery, undo ?
+│  └─ → rollback
 │
 ├─ Migrations DB ?
 │  └─ → strategies
@@ -45,10 +49,10 @@ Requête Deployment
 
 | Mots-clés | Agent |
 |-----------|-------|
-| blue-green, canary | strategies |
-| rollback, recovery | strategies |
-| feature flag, toggle | strategies |
+| blue-green, canary, rolling update | strategies |
+| feature flag, toggle, LaunchDarkly | strategies |
 | ArgoCD, Flux, GitOps | strategies |
+| rollback, recovery, undo, revert | rollback |
 
 
 ## Livrables

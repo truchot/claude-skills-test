@@ -18,7 +18,11 @@ Tu coordonnes le domaine **Kubernetes** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `deployments` | Manifests K8s, Helm charts |
+| `deployments` | Deployment, ReplicaSet, pods |
+| `services` | Service, Ingress, networking K8s |
+| `helm` | Helm charts, values, templating |
+| `scaling` | HPA, VPA, Keda, autoscaling |
+| `config` | ConfigMaps, Secrets, gestion config |
 
 ## Arbre de Décision
 
@@ -28,27 +32,31 @@ Requête Kubernetes
 ├─ Deployment, ReplicaSet, pods ?
 │  └─ → deployments
 │
-├─ Service, Ingress, exposition ?
-│  └─ → deployments
+├─ Service, Ingress, LoadBalancer ?
+│  └─ → services
 │
-├─ Helm, charts, values ?
-│  └─ → deployments
+├─ Helm, charts, values, templating ?
+│  └─ → helm
 │
-├─ HPA, scaling ?
-│  └─ → deployments
+├─ HPA, VPA, Keda, autoscaling ?
+│  └─ → scaling
 │
-└─ ConfigMap, Secrets ?
-   └─ → deployments
+├─ ConfigMap, Secrets, env vars ?
+│  └─ → config
+│
+└─ Choix stratégiques K8s ?
+   └─ → ESCALADE: direction-technique/infrastructure
 ```
 
 ## Mots-clés → Agent
 
 | Mots-clés | Agent |
 |-----------|-------|
-| kubectl, deployment, pod | deployments |
-| service, ingress, loadbalancer | deployments |
-| helm, chart, values.yaml | deployments |
-| HPA, autoscaling | deployments |
+| kubectl, deployment, pod, ReplicaSet | deployments |
+| service, ingress, loadbalancer, networking | services |
+| helm, chart, values.yaml, templating | helm |
+| HPA, VPA, Keda, autoscaling, replicas | scaling |
+| ConfigMap, Secret, env, configuration | config |
 
 
 ## Livrables

@@ -18,34 +18,40 @@ Tu coordonnes le domaine **Containers** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `docker` | Dockerfile, multi-stage, docker-compose |
+| `docker` | Dockerfile, multi-stage builds, optimisation |
+| `docker-compose` | Orchestration locale, services, volumes |
+| `registries` | Docker Hub, ECR, GCR, GHCR |
+| `security` | Trivy, Snyk, image hardening, CVE |
 
 ## Arbre de Décision
 
 ```
 Requête Containers
 │
-├─ Dockerfile, build, image ?
+├─ Dockerfile, build, multi-stage ?
 │  └─ → docker
 │
-├─ Docker Compose, services ?
-│  └─ → docker
+├─ Docker Compose, services locaux, volumes ?
+│  └─ → docker-compose
 │
-├─ Registry, push, pull ?
-│  └─ → docker
+├─ Registry, push, pull, ECR, GHCR ?
+│  └─ → registries
 │
-└─ Sécurité images, scan ?
-   └─ → docker
+├─ Sécurité images, scan, Trivy, Snyk ?
+│  └─ → security
+│
+└─ Stratégie conteneurisation ?
+   └─ → ESCALADE: direction-technique/infrastructure
 ```
 
 ## Mots-clés → Agent
 
 | Mots-clés | Agent |
 |-----------|-------|
-| Dockerfile, FROM, COPY, RUN | docker |
-| docker-compose, services | docker |
-| multi-stage, alpine, optimisation | docker |
-| registry, ghcr, ECR | docker |
+| Dockerfile, FROM, COPY, RUN, multi-stage | docker |
+| docker-compose, services, volumes, networks | docker-compose |
+| registry, ghcr, ECR, GCR, push, pull | registries |
+| Trivy, Snyk, CVE, image scan, hardening | security |
 
 
 ## Livrables

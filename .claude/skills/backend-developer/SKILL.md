@@ -86,15 +86,25 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 ### DevOps (→ skill dédié)
 
 > **Redirection** : Les requêtes DevOps sont maintenant gérées par le skill `devops`.
+> Voir [ADR-007](../web-agency/docs/adr/007-skill-extraction-pattern.md) pour la rationale d'extraction.
 
-| Mots-clés | Redirection |
-|-----------|-------------|
-| CI/CD, pipeline, GitHub Actions | → `devops` skill |
-| Docker, container, image | → `devops` skill |
-| Kubernetes, K8s, orchestration | → `devops` skill |
-| deploy, release, rollback | → `devops` skill |
-| monitoring, alerting, logs | → `devops` skill |
-| infrastructure, IaC, Terraform | → `devops` skill |
+| Mots-clés | Action | Route Cible |
+|-----------|--------|-------------|
+| CI/CD, pipeline, GitHub Actions | `REDIRECT` | `devops/cicd/github-actions` |
+| GitLab CI, stages | `REDIRECT` | `devops/cicd/gitlab-ci` |
+| Docker, Dockerfile, image | `REDIRECT` | `devops/containers/docker` |
+| Docker Compose, services | `REDIRECT` | `devops/containers/docker-compose` |
+| Kubernetes, K8s, pods | `REDIRECT` | `devops/kubernetes/deployments` |
+| Helm, charts | `REDIRECT` | `devops/kubernetes/helm` |
+| deploy, release, blue-green | `REDIRECT` | `devops/deployment/strategies` |
+| rollback, recovery | `REDIRECT` | `devops/deployment/rollback` |
+| Prometheus, metrics | `REDIRECT` | `devops/monitoring/prometheus` |
+| Grafana, dashboards | `REDIRECT` | `devops/monitoring/grafana` |
+| logs, ELK, Loki | `REDIRECT` | `devops/monitoring/logging` |
+| alerting, PagerDuty | `REDIRECT` | `devops/monitoring/alerting` |
+| Terraform, IaC | `REDIRECT` | `devops/infrastructure/terraform` |
+| AWS, EC2, RDS | `REDIRECT` | `devops/infrastructure/aws` |
+| GCP, GKE | `REDIRECT` | `devops/infrastructure/gcp` |
 
 ## Principes Directeurs
 

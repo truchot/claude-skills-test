@@ -18,7 +18,11 @@ Tu coordonnes le domaine **CI/CD** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `github-actions` | Pipelines GitHub Actions |
+| `github-actions` | Workflows GitHub Actions, jobs, runners |
+| `gitlab-ci` | Pipelines GitLab CI, stages, .gitlab-ci.yml |
+| `pipelines` | Patterns et best practices CI/CD |
+| `quality-gates` | SonarQube, coverage gates, qualité |
+| `artifacts` | Gestion des artifacts, releases |
 
 ## Arbre de Décision
 
@@ -28,8 +32,17 @@ Requête CI/CD
 ├─ GitHub Actions, workflow, .github ?
 │  └─ → github-actions
 │
-├─ GitLab CI, .gitlab-ci.yml ?
-│  └─ → github-actions (contient aussi GitLab CI)
+├─ GitLab CI, .gitlab-ci.yml, stages ?
+│  └─ → gitlab-ci
+│
+├─ Patterns CI/CD, best practices ?
+│  └─ → pipelines
+│
+├─ SonarQube, coverage, quality gate ?
+│  └─ → quality-gates
+│
+├─ Artifacts, releases, npm publish ?
+│  └─ → artifacts
 │
 └─ Principes CI/CD généraux ?
    └─ → ESCALADE: web-dev-process/setup/cicd
@@ -39,9 +52,11 @@ Requête CI/CD
 
 | Mots-clés | Agent |
 |-----------|-------|
-| GitHub Actions, workflow, jobs | github-actions |
-| GitLab CI, stages, pipeline | github-actions |
-| cache, artifacts, matrix | github-actions |
+| GitHub Actions, workflow, jobs, runner | github-actions |
+| GitLab CI, .gitlab-ci.yml, stages | gitlab-ci |
+| pipeline patterns, best practices, multi-stage | pipelines |
+| SonarQube, coverage gate, quality check | quality-gates |
+| artifact, release, npm publish, registry | artifacts |
 
 
 ## Livrables

@@ -18,26 +18,29 @@ Tu coordonnes le domaine **Monitoring** du skill DevOps.
 
 | Agent | Responsabilité |
 |-------|----------------|
-| `prometheus` | Métriques, dashboards, alerting, logs |
+| `prometheus` | Métriques, scraping, exporters |
+| `grafana` | Dashboards, panels, visualisation |
+| `logging` | ELK, Loki, Fluentd, logs structurés |
+| `alerting` | Alertmanager, PagerDuty, notifications |
 
 ## Arbre de Décision
 
 ```
 Requête Monitoring
 │
-├─ Prometheus, métriques, scrape ?
+├─ Prometheus, métriques, scrape, exporters ?
 │  └─ → prometheus
 │
-├─ Grafana, dashboards ?
-│  └─ → prometheus
+├─ Grafana, dashboards, panels ?
+│  └─ → grafana
 │
-├─ Logs, ELK, Loki ?
-│  └─ → prometheus
+├─ Logs, ELK, Loki, Fluentd ?
+│  └─ → logging
 │
-├─ Alerting, notifications ?
-│  └─ → prometheus
+├─ Alerting, Alertmanager, PagerDuty ?
+│  └─ → alerting
 │
-└─ Stratégie monitoring ?
+└─ Stratégie monitoring/observabilité ?
    └─ → ESCALADE: direction-technique/infrastructure
 ```
 
@@ -45,10 +48,10 @@ Requête Monitoring
 
 | Mots-clés | Agent |
 |-----------|-------|
-| prometheus, metrics, scrape | prometheus |
-| grafana, dashboard, panels | prometheus |
-| logs, ELK, Loki, Fluentd | prometheus |
-| alertmanager, alerts | prometheus |
+| prometheus, metrics, scrape, exporter | prometheus |
+| grafana, dashboard, panels, visualization | grafana |
+| logs, ELK, Loki, Fluentd, structured logging | logging |
+| alertmanager, PagerDuty, Slack, notifications | alerting |
 
 
 ## Livrables
