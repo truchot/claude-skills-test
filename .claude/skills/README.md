@@ -183,9 +183,150 @@ Un script permet de détecter les références obsolètes dans votre codebase :
 # Scanner les références deprecated
 node .claude/skills/scripts/validate-migration.js
 
+# Voir ce qui serait corrigé sans modifier les fichiers
+node .claude/skills/scripts/validate-migration.js --dry-run
+
 # Corriger automatiquement (expérimental)
 node .claude/skills/scripts/validate-migration.js --fix
 ```
+
+#### Exemple de Sortie
+
+```
+============================================================
+  Migration Validation Script
+============================================================
+
+  Mode: SCAN (read-only)
+
+  Scanning for deprecated references...
+  Found 42 files to scan
+
+  [WARN] Found 2 deprecated reference(s)
+
+------------------------------------------------------------
+  DEPRECATED REFERENCES
+------------------------------------------------------------
+
+  File: prompts/api-setup.md
+    [!] backend-developer\/devops
+        → Replace with: devops
+        Reason: DevOps extracted to standalone skill (v1.0.0)
+        Since: 2025-12-28
+        Occurrences: 1
+
+  File: configs/pipeline.yml
+    [!] backend-developer\/agents\/devops
+        → Replace with: devops/agents
+        Reason: DevOps agents moved to devops skill
+        Since: 2025-12-28
+        Occurrences: 3
+
+------------------------------------------------------------
+  MIGRATION GUIDE
+------------------------------------------------------------
+
+  The following skill extractions have occurred:
+
+  backend-developer\/devops
+    → devops
+    DevOps extracted to standalone skill (v1.0.0)
+
+  For more details, see:
+  - .claude/skills/VERSIONING.md
+  - .claude/skills/devops/CHANGELOG.md
+```
+
+### Exemples de Routes Deprecated
+
+#### Pattern 1 : Référence directe au domaine DevOps
+
+```markdown
+<!-- ❌ Deprecated (backend-developer v1.x) -->
+Pour configurer CI/CD, voir `backend-developer/devops/cicd`
+
+<!-- ✅ Nouvelle route (devops v1.0.0+) -->
+Pour configurer CI/CD, voir `devops/cicd/github-actions`
+```
+
+#### Pattern 2 : Import ou référence d'agent
+
+```yaml
+# ❌ Deprecated
+skill: backend-developer
+agent: devops/containers
+
+# ✅ Nouvelle structure
+skill: devops
+agent: containers/docker
+```
+
+#### Pattern 3 : Liens dans la documentation
+
+```markdown
+<!-- ❌ Deprecated -->
+[Guide containers](../backend-developer/agents/devops/containers.md)
+
+<!-- ✅ Nouvelle route -->
+[Guide containers](../devops/agents/containers/docker.md)
+```
+
+### Comment Mettre à Jour le Code
+
+#### Étape 1 : Scanner votre codebase
+
+```bash
+cd .claude/skills
+node scripts/validate-migration.js
+```
+
+#### Étape 2 : Examiner les résultats
+
+Le script identifie les fichiers avec des références obsolètes et propose les remplacements.
+
+#### Étape 3 : Corriger manuellement ou automatiquement
+
+**Correction manuelle** (recommandée pour les cas complexes) :
+```bash
+# Rechercher les occurrences
+grep -r "backend-developer/devops" --include="*.md" --include="*.yml"
+
+# Remplacer
+sed -i 's|backend-developer/devops|devops|g' fichier.md
+```
+
+**Correction automatique** (pour les cas simples) :
+```bash
+# Prévisualiser les changements
+node scripts/validate-migration.js --dry-run
+
+# Appliquer les corrections
+node scripts/validate-migration.js --fix
+```
+
+#### Étape 4 : Vérifier et committer
+
+```bash
+# Vérifier que le scan est propre
+node scripts/validate-migration.js
+
+# Résultat attendu
+# [OK] No deprecated references found!
+# Your codebase is up to date with all migrations.
+```
+
+### Mapping Complet des Routes
+
+| Ancienne Route | Nouvelle Route | Agent Cible |
+|----------------|----------------|-------------|
+| `backend-developer/devops/cicd` | `devops/cicd/github-actions` | CI/CD GitHub |
+| `backend-developer/devops/containers` | `devops/containers/docker` | Dockerfile |
+| `backend-developer/devops/kubernetes` | `devops/kubernetes/deployments` | K8s manifestes |
+| `backend-developer/devops/deployment` | `devops/deployment/strategies` | Blue-Green, Canary |
+| `backend-developer/devops/monitoring` | `devops/monitoring/prometheus` | Métriques |
+| `backend-developer/devops/infrastructure` | `devops/infrastructure/terraform` | IaC |
+
+> **Note** : Les nouveaux agents sont plus spécialisés. Par exemple, `cicd` devient `cicd/github-actions` ou `cicd/gitlab-ci` selon le contexte.
 
 ### Règle Simple
 
