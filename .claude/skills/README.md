@@ -487,10 +487,13 @@ Les agents suivants sont identifiés pour amélioration :
 
 | Skill | Agent | Lignes | Action |
 |-------|-------|--------|--------|
-| `web-dev-process` | `design/ux-principles` | 89 | Ajouter exemples |
-| `frontend-developer` | `frameworks/wordpress-expert` | 90 | Ajouter exemples |
+| `frontend-developer` | `frameworks/wordpress-expert` | 90 | Délégation - acceptable |
 | `web-dev-process` | `setup/quality-tools` | 96 | Étoffer contenu |
-| `frontend-developer` | `frameworks/react-expert` | 98 | Ajouter best practices |
+| `frontend-developer` | `frameworks/react-expert` | 98 | Délégation - acceptable |
 | `web-dev-process` | `testing/security-headers` | 102 | Ajouter exemples |
+| `web-dev-process` | `setup/environment` | 105 | Ajouter exemples |
 
-> **Note** : 29 agents au total sont sous le seuil de 150 lignes. Voir `find .claude/skills -path "*/agents/*.md" ! -name "orchestrator.md" -exec wc -l {} \; | awk '$1 < 150'` pour la liste complète.
+> **Note** : ~28 agents sont sous le seuil de 150 lignes. Les agents de délégation (qui pointent vers un skill dédié) peuvent rester compacts. Pour la liste complète :
+> ```bash
+> find .claude/skills -path "*/agents/*.md" ! -name "orchestrator.md" -exec wc -l {} \; | awk '$1 < 150' | sort -n
+> ```
