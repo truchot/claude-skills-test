@@ -66,24 +66,23 @@ const EFFICIENCY_THRESHOLDS = {
 
 /**
  * Skills to monitor with their expected structure
+ * Updated after merge with main branch (2025-12-29)
  * @const {Object}
  */
 const MONITORED_SKILLS = {
-  'backend-developer': { expectedAgents: 45, hasOrchestrator: true },
-  'content': { expectedAgents: 1, hasOrchestrator: false },
-  'design': { expectedAgents: 1, hasOrchestrator: false },
+  'backend-developer': { expectedAgents: 38, hasOrchestrator: true },
   'design-system-foundations': { expectedAgents: 21, hasOrchestrator: true },
-  'direction-technique': { expectedAgents: 52, hasOrchestrator: true },
+  'devops': { expectedAgents: 35, hasOrchestrator: true },
+  'direction-technique': { expectedAgents: 60, hasOrchestrator: true },
   'frontend-developer': { expectedAgents: 33, hasOrchestrator: true },
   'lead-dev': { expectedAgents: 27, hasOrchestrator: true },
-  'marketing': { expectedAgents: 1, hasOrchestrator: false },
   'nextjs-expert': { expectedAgents: 35, hasOrchestrator: true },
   'project-management': { expectedAgents: 24, hasOrchestrator: true },
   'react-expert': { expectedAgents: 28, hasOrchestrator: true },
-  'strategy': { expectedAgents: 1, hasOrchestrator: false },
+  'testing-process': { expectedAgents: 26, hasOrchestrator: true },
   'web-agency': { expectedAgents: 0, hasOrchestrator: true, isMetaOrchestrator: true },
-  'web-dev-process': { expectedAgents: 64, hasOrchestrator: true },
-  'wordpress-gutenberg-expert': { expectedAgents: 42, hasOrchestrator: true }
+  'web-dev-process': { expectedAgents: 70, hasOrchestrator: true },
+  'wordpress-gutenberg-expert': { expectedAgents: 45, hasOrchestrator: true }
 };
 
 /**
