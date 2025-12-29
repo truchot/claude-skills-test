@@ -268,6 +268,127 @@ devops ──► nextjs-expert (complément Next.js spécifique)
 | Coûts cloud imprévus | Validation budget |
 | Changement architecture majeur | Impact business |
 
+## Security Best Practices
+
+Le DevOps gère des opérations sensibles (secrets, déploiements, infrastructure). Appliquer ces principes de sécurité :
+
+### 1. Gestion des Secrets
+
+| Pratique | Description |
+|----------|-------------|
+| **Ne jamais committer de secrets** | Pas de `.env`, credentials, API keys dans git |
+| **Variables d'environnement** | Utiliser les secrets managers (GitHub Secrets, GitLab CI/CD Variables) |
+| **Secrets par environnement** | Séparer dev, staging, production |
+| **Rotation régulière** | Changer les credentials périodiquement |
+
+```yaml
+# ✅ Bon : référence à un secret
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+# ❌ Mauvais : secret en clair
+env:
+  DATABASE_URL: "postgresql://user:password@host:5432/db"
+```
+
+### 2. Scanning et Validation
+
+| Outil | Usage | Intégration |
+|-------|-------|-------------|
+| **Secret scanning** | Détection de secrets dans le code | GitHub Advanced Security, GitLeaks |
+| **SAST** | Analyse statique sécurité | SonarQube, Snyk Code |
+| **DAST** | Tests dynamiques | OWASP ZAP |
+| **Container scanning** | Vulnérabilités images | Trivy, Snyk Container |
+| **Dependency scanning** | Vulnérabilités deps | Dependabot, npm audit |
+
+```yaml
+# Pipeline avec security gates
+jobs:
+  security:
+    steps:
+      - name: Secret Scan
+        uses: trufflesecurity/trufflehog@main
+      - name: SAST
+        uses: SonarSource/sonarcloud-github-action@master
+      - name: Container Scan
+        run: trivy image ${{ env.IMAGE }}
+```
+
+### 3. Infrastructure Security
+
+| Domaine | Bonnes Pratiques |
+|---------|------------------|
+| **Réseau** | VPC privés, security groups restrictifs, pas de 0.0.0.0/0 |
+| **IAM** | Principe du moindre privilège, pas de credentials root |
+| **Encryption** | At-rest et in-transit, KMS pour les clés |
+| **Logging** | CloudTrail/Audit logs activés, centralisation |
+
+### 4. Container Security
+
+Voir l'agent `containers/security` pour les détails complets :
+
+- Images de base minimales (alpine, distroless)
+- Utilisateur non-root dans les containers
+- Scan des vulnérabilités avant push
+- Pas de secrets dans les images
+- Healthchecks configurés
+
+### 5. Pipeline Security
+
+| Risque | Mitigation |
+|--------|------------|
+| Injection dans workflows | Éviter `${{ github.event.*.body }}` non échappé |
+| Permissions excessives | `permissions: read-all` par défaut |
+| Actions tierces | Pin par SHA, pas par tag |
+| Artifacts sensibles | Ne pas exposer de logs avec secrets |
+
+```yaml
+# Sécurité pipeline GitHub Actions
+permissions:
+  contents: read
+  pull-requests: write  # Seulement si nécessaire
+
+jobs:
+  build:
+    steps:
+      # ✅ Pin par SHA
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      # ❌ Pin par tag (peut changer)
+      - uses: actions/checkout@v4
+```
+
+### 6. Checklist Sécurité
+
+```markdown
+## Pre-Deployment Security Checklist
+
+### Secrets
+- [ ] Aucun secret dans le code source
+- [ ] Variables d'environnement configurées
+- [ ] Secret scanning activé
+
+### Scanning
+- [ ] SAST passé (0 critical)
+- [ ] Container scan passé
+- [ ] Dependency audit passé
+
+### Infrastructure
+- [ ] Security groups restrictifs
+- [ ] IAM least privilege
+- [ ] Encryption activée
+
+### Pipeline
+- [ ] Permissions minimales
+- [ ] Actions pinnées par SHA
+- [ ] Logs sanitisés
+```
+
+### Références
+
+- Agent détaillé : `containers/security`
+- OWASP DevSecOps Guidelines
+- CIS Benchmarks (Docker, Kubernetes)
+
 ## Skills Associés
 
 | Skill | Niveau | Relation |
