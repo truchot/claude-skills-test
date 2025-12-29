@@ -24,7 +24,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   SKILLS_ROOT,
-  PERFORMANCE_BUDGETS,
+  ROUTING_THRESHOLDS,
   MONITORED_SKILLS
 } = require('./config');
 
@@ -121,13 +121,22 @@ function buildRoutingGraph() {
 function analyzeRoutingPaths(graph) {
   const paths = [];
   const pathDepths = [];
+  const cycles = [];
 
-  // DFS to find all paths from entry to leaf
-  function findPaths(nodeId, currentPath, depth) {
+  // DFS to find all paths from entry to leaf (with cycle detection)
+  function findPaths(nodeId, currentPath, depth, visiting) {
     const node = graph.nodes.get(nodeId);
     if (!node) return;
 
+    // Cycle detection: check if we're revisiting a node in current path
+    if (visiting.has(nodeId)) {
+      cycles.push([...currentPath, nodeId]);
+      return;
+    }
+
     const newPath = [...currentPath, nodeId];
+    const newVisiting = new Set(visiting);
+    newVisiting.add(nodeId);
 
     // Check if leaf node
     if (graph.leafNodes.includes(nodeId)) {
@@ -147,12 +156,12 @@ function analyzeRoutingPaths(graph) {
     }
 
     outEdges.forEach(edge => {
-      findPaths(edge.to, newPath, depth + 1);
+      findPaths(edge.to, newPath, depth + 1, newVisiting);
     });
   }
 
   graph.entryPoints.forEach(entry => {
-    findPaths(entry, [], 0);
+    findPaths(entry, [], 0, new Set());
   });
 
   return {
@@ -173,7 +182,9 @@ function analyzeRoutingPaths(graph) {
     deadEnds: paths.filter((p, i) => {
       const lastNode = p[p.length - 1];
       return !graph.leafNodes.includes(lastNode) && pathDepths[i] > 0;
-    })
+    }),
+    cycles: cycles,
+    hasCycles: cycles.length > 0
   };
 }
 
@@ -224,7 +235,7 @@ function analyzeCoverage(graph) {
     unreachableNodes: unreachableNodes.length,
     coverageRatio,
     coveragePercent: (coverageRatio * 100).toFixed(1),
-    meetsMinimum: coverageRatio >= PERFORMANCE_BUDGETS.minAgentCoverage,
+    meetsMinimum: coverageRatio >= ROUTING_THRESHOLDS.minAgentCoverage,
     unreachableList: unreachableNodes
   };
 }
@@ -248,15 +259,15 @@ function detectAmbiguity(graph) {
     branchingFactors.push(branchingFactor);
 
     // High branching factor indicates potential ambiguity
-    if (branchingFactor > 10) {
+    if (branchingFactor > ROUTING_THRESHOLDS.branchingFactor.high) {
       ambiguityHotspots.push({
         node: nodeId,
         type: node.type,
         branchingFactor,
-        severity: branchingFactor > 20 ? 'critical' : 'high',
+        severity: branchingFactor > ROUTING_THRESHOLDS.branchingFactor.critical ? 'critical' : 'high',
         targets: outEdges.map(e => e.to)
       });
-    } else if (branchingFactor > 5) {
+    } else if (branchingFactor > ROUTING_THRESHOLDS.branchingFactor.medium) {
       ambiguityHotspots.push({
         node: nodeId,
         type: node.type,
@@ -293,11 +304,11 @@ function generateOptimizations(pathAnalysis, coverageAnalysis, ambiguityAnalysis
   const optimizations = [];
 
   // Path depth optimizations
-  if (pathAnalysis.maxPathDepth > PERFORMANCE_BUDGETS.maxRoutingDepth) {
+  if (pathAnalysis.maxPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth) {
     optimizations.push({
       category: 'path-depth',
       priority: 'high',
-      issue: `Maximum path depth (${pathAnalysis.maxPathDepth}) exceeds budget (${PERFORMANCE_BUDGETS.maxRoutingDepth})`,
+      issue: `Maximum path depth (${pathAnalysis.maxPathDepth}) exceeds threshold (${ROUTING_THRESHOLDS.maxRoutingDepth})`,
       suggestion: 'Consider flattening the routing hierarchy or creating direct routes for common paths',
       affectedPaths: pathAnalysis.longestPaths.map(p => p.path.join(' → '))
     });
@@ -308,7 +319,7 @@ function generateOptimizations(pathAnalysis, coverageAnalysis, ambiguityAnalysis
     optimizations.push({
       category: 'coverage',
       priority: 'high',
-      issue: `Coverage (${coverageAnalysis.coveragePercent}%) below minimum (${PERFORMANCE_BUDGETS.minAgentCoverage * 100}%)`,
+      issue: `Coverage (${coverageAnalysis.coveragePercent}%) below minimum (${ROUTING_THRESHOLDS.minAgentCoverage * 100}%)`,
       suggestion: 'Add routing rules to reach unreachable agents',
       unreachableAgents: coverageAnalysis.unreachableList.slice(0, 10)
     });
@@ -378,8 +389,8 @@ function formatAnalysis(analysis) {
 📍 ROUTING PATHS
 ────────────────────────────────────────────
   Total Paths:        ${String(analysis.paths.totalPaths).padStart(5)}
-  Avg Path Depth:     ${analysis.paths.avgPathDepth.toFixed(2).padStart(5)} ${analysis.paths.avgPathDepth > PERFORMANCE_BUDGETS.maxRoutingDepth ? '⚠️' : '✓'}
-  Max Path Depth:     ${String(analysis.paths.maxPathDepth).padStart(5)} ${analysis.paths.maxPathDepth > PERFORMANCE_BUDGETS.maxRoutingDepth ? '⚠️' : '✓'}
+  Avg Path Depth:     ${analysis.paths.avgPathDepth.toFixed(2).padStart(5)} ${analysis.paths.avgPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth ? '⚠️' : '✓'}
+  Max Path Depth:     ${String(analysis.paths.maxPathDepth).padStart(5)} ${analysis.paths.maxPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth ? '⚠️' : '✓'}
   Dead Ends:          ${String(analysis.paths.deadEnds.length).padStart(5)} ${analysis.paths.deadEnds.length > 0 ? '⚠️' : '✓'}
 
 📊 COVERAGE

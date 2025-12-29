@@ -26,7 +26,20 @@ const ROUTING_THRESHOLDS = {
   maxKeywordOverlap: 5,
 
   // Minimum keyword uniqueness ratio (unique/total)
-  minKeywordUniqueness: 0.7
+  minKeywordUniqueness: 0.7,
+
+  // Maximum routing depth (skill → domain → agent)
+  maxRoutingDepth: 3,
+
+  // Minimum agent coverage (reachable from entry points)
+  minAgentCoverage: 0.85,
+
+  // Branching factor thresholds for ambiguity hotspots
+  branchingFactor: {
+    medium: 5,   // Warning level
+    high: 10,    // Significant ambiguity
+    critical: 20 // Needs immediate attention
+  }
 };
 
 /**
