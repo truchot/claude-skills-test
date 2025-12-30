@@ -29,6 +29,31 @@ const {
 } = require('./config');
 
 /**
+ * Validate that a path is within SKILLS_ROOT to prevent path traversal
+ * @param {string} targetPath - Path to validate
+ * @returns {boolean} True if path is safe
+ */
+function isPathWithinSkillsRoot(targetPath) {
+  const resolvedPath = path.resolve(targetPath);
+  const resolvedRoot = path.resolve(SKILLS_ROOT);
+  return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+}
+
+/**
+ * Safe path join that validates result is within SKILLS_ROOT
+ * @param {...string} segments - Path segments to join
+ * @returns {string|null} Joined path or null if outside SKILLS_ROOT
+ */
+function safePathJoin(...segments) {
+  const joined = path.join(...segments);
+  if (!isPathWithinSkillsRoot(joined)) {
+    console.warn(`Path traversal attempt blocked: ${joined}`);
+    return null;
+  }
+  return joined;
+}
+
+/**
  * Parse frontmatter from markdown content
  * @param {string} content - Markdown content
  * @returns {Object} Parsed frontmatter
@@ -110,20 +135,29 @@ function countAgents(skillPath) {
     agentFiles: []
   };
 
+  // Validate skill path is within SKILLS_ROOT
+  if (!isPathWithinSkillsRoot(skillPath)) {
+    console.warn(`Blocked access to path outside SKILLS_ROOT: ${skillPath}`);
+    return result;
+  }
+
   try {
     // Check for agents/ directory
-    const agentsDir = path.join(skillPath, 'agents');
-    if (fs.existsSync(agentsDir)) {
+    const agentsDir = safePathJoin(skillPath, 'agents');
+    if (agentsDir && fs.existsSync(agentsDir)) {
       const domains = fs.readdirSync(agentsDir).filter(d => {
         try {
-          return fs.statSync(path.join(agentsDir, d)).isDirectory();
+          const domainPath = safePathJoin(agentsDir, d);
+          return domainPath && fs.statSync(domainPath).isDirectory();
         } catch { return false; }
       });
 
       result.domains = domains;
 
       for (const domain of domains) {
-        const domainPath = path.join(agentsDir, domain);
+        const domainPath = safePathJoin(agentsDir, domain);
+        if (!domainPath) continue;
+
         const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
 
         for (const file of files) {
@@ -148,13 +182,15 @@ function countAgents(skillPath) {
 
     const allDirs = fs.readdirSync(skillPath).filter(item => {
       try {
-        const itemPath = path.join(skillPath, item);
-        return fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
+        const itemPath = safePathJoin(skillPath, item);
+        return itemPath && fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
       } catch { return false; }
     });
 
     for (const folder of allDirs) {
-      const folderPath = path.join(skillPath, folder);
+      const folderPath = safePathJoin(skillPath, folder);
+      if (!folderPath) continue;
+
       const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
 
       // Only consider folders with .md files as agent folders

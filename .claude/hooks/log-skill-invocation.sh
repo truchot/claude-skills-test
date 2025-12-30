@@ -13,6 +13,7 @@
 #
 
 LOG_FILE="${HOME}/.claude/monitoring/routing/invocation-log.jsonl"
+LOCK_FILE="${LOG_FILE}.lock"
 MAX_LOG_SIZE=10485760  # 10MB in bytes
 MAX_ROTATED_LOGS=5     # Keep 5 rotated logs
 
@@ -30,13 +31,25 @@ validate_skill_name() {
   echo "$name" | tr -cd 'a-zA-Z0-9_/-.'
 }
 
+# Validate timestamp format (ISO 8601)
+validate_timestamp() {
+  local ts="$1"
+  # Match YYYY-MM-DDTHH:MM:SSZ format strictly
+  if [[ "$ts" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]; then
+    echo "$ts"
+  else
+    # Fallback to epoch if system time is compromised
+    echo "1970-01-01T00:00:00Z"
+  fi
+}
+
 SKILL_NAME=$(validate_skill_name "$SKILL_NAME")
 if [[ -z "$SKILL_NAME" ]]; then
   SKILL_NAME="unknown"
 fi
 
-# Log rotation function
-rotate_logs() {
+# Log rotation function (called within lock)
+rotate_logs_unlocked() {
   if [[ -f "$LOG_FILE" ]]; then
     local file_size
     file_size=$(stat -c%s "$LOG_FILE" 2>/dev/null || stat -f%z "$LOG_FILE" 2>/dev/null || echo 0)
@@ -58,11 +71,9 @@ rotate_logs() {
   fi
 }
 
-# Perform log rotation if needed
-rotate_logs
-
-# Create log entry with timestamp
-TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+# Create log entry with validated timestamp
+RAW_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+TIMESTAMP=$(validate_timestamp "$RAW_TIMESTAMP")
 
 # Function to escape JSON string (handle quotes and special chars)
 json_escape() {
@@ -79,13 +90,27 @@ json_escape() {
 # Escape values for safe JSON
 SAFE_SKILL=$(json_escape "$SKILL_NAME")
 SAFE_SESSION=$(json_escape "${CLAUDE_SESSION_ID:-}")
+SAFE_TIMESTAMP=$(json_escape "$TIMESTAMP")
 
-# Append to JSONL log (one JSON object per line)
-# Using printf to avoid issues with echo and special characters
-printf '{"timestamp":"%s","skill":"%s","session":"%s"}\n' \
-  "$TIMESTAMP" \
-  "$SAFE_SKILL" \
-  "$SAFE_SESSION" >> "$LOG_FILE" 2>/dev/null || true
+# Use flock for atomic log operations (rotation + write)
+# This prevents race conditions when multiple hooks run concurrently
+(
+  # Acquire exclusive lock (timeout 5 seconds)
+  if command -v flock &>/dev/null; then
+    flock -w 5 200 || exit 0
+  fi
+
+  # Perform log rotation if needed
+  rotate_logs_unlocked
+
+  # Append to JSONL log (one JSON object per line)
+  # Using printf to avoid issues with echo and special characters
+  printf '{"timestamp":"%s","skill":"%s","session":"%s"}\n' \
+    "$SAFE_TIMESTAMP" \
+    "$SAFE_SKILL" \
+    "$SAFE_SESSION" >> "$LOG_FILE" 2>/dev/null || true
+
+) 200>"$LOCK_FILE"
 
 # Exit successfully (don't block the skill invocation)
 exit 0

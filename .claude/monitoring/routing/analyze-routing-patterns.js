@@ -29,6 +29,31 @@ const {
 } = require('./config');
 
 /**
+ * Validate that a path is within SKILLS_ROOT to prevent path traversal
+ * @param {string} targetPath - Path to validate
+ * @returns {boolean} True if path is safe
+ */
+function isPathWithinSkillsRoot(targetPath) {
+  const resolvedPath = path.resolve(targetPath);
+  const resolvedRoot = path.resolve(SKILLS_ROOT);
+  return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+}
+
+/**
+ * Safe path join that validates result is within SKILLS_ROOT
+ * @param {...string} segments - Path segments to join
+ * @returns {string|null} Joined path or null if outside SKILLS_ROOT
+ */
+function safePathJoin(...segments) {
+  const joined = path.join(...segments);
+  if (!isPathWithinSkillsRoot(joined)) {
+    console.warn(`Path traversal attempt blocked: ${joined}`);
+    return null;
+  }
+  return joined;
+}
+
+/**
  * Build routing graph from skill definitions
  * @returns {Object} Routing graph structure
  */
@@ -44,8 +69,8 @@ function buildRoutingGraph() {
   graph.entryPoints.push('web-agency');
 
   for (const [skillName, config] of Object.entries(MONITORED_SKILLS)) {
-    const skillPath = path.join(SKILLS_ROOT, skillName);
-    if (!fs.existsSync(skillPath)) continue;
+    const skillPath = safePathJoin(SKILLS_ROOT, skillName);
+    if (!skillPath || !fs.existsSync(skillPath)) continue;
 
     // Add skill node
     graph.nodes.set(skillName, {
@@ -56,11 +81,12 @@ function buildRoutingGraph() {
     });
 
     // Scan for domains and agents
-    const agentsDir = path.join(skillPath, 'agents');
-    if (fs.existsSync(agentsDir)) {
-      const domains = fs.readdirSync(agentsDir).filter(d =>
-        fs.statSync(path.join(agentsDir, d)).isDirectory()
-      );
+    const agentsDir = safePathJoin(skillPath, 'agents');
+    if (agentsDir && fs.existsSync(agentsDir)) {
+      const domains = fs.readdirSync(agentsDir).filter(d => {
+        const domainPath = safePathJoin(agentsDir, d);
+        return domainPath && fs.statSync(domainPath).isDirectory();
+      });
 
       domains.forEach(domain => {
         const domainId = `${skillName}/${domain}`;
@@ -78,7 +104,8 @@ function buildRoutingGraph() {
         });
 
         // Add agent nodes
-        const domainPath = path.join(agentsDir, domain);
+        const domainPath = safePathJoin(agentsDir, domain);
+        if (!domainPath) return;
         const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
 
         files.forEach(file => {
@@ -126,11 +153,8 @@ function analyzeRoutingPaths(graph) {
 
   // DFS to find all paths from entry to leaf (with cycle detection and depth limit)
   function findPaths(nodeId, currentPath, depth, visiting) {
-    const node = graph.nodes.get(nodeId);
-    if (!node) return;
-
-    // Depth limit check to prevent stack overflow
-    if (depth > ROUTING_THRESHOLDS.maxExplorationDepth) {
+    // Depth limit check FIRST to prevent stack overflow
+    if (depth >= ROUTING_THRESHOLDS.maxExplorationDepth) {
       depthLimitExceeded.push([...currentPath, nodeId]);
       return;
     }
@@ -140,6 +164,9 @@ function analyzeRoutingPaths(graph) {
       cycles.push([...currentPath, nodeId]);
       return;
     }
+
+    const node = graph.nodes.get(nodeId);
+    if (!node) return;
 
     const newPath = [...currentPath, nodeId];
     const newVisiting = new Set(visiting);
@@ -488,10 +515,53 @@ function runAnalysis() {
   };
 }
 
+/**
+ * Validate analysis results and exit with error if critical issues found
+ * @param {Object} analysis - Analysis results
+ * @param {boolean} strict - Whether to fail on warnings
+ * @returns {number} Exit code (0 = success, 1 = error)
+ */
+function validateAnalysis(analysis, strict = false) {
+  const errors = [];
+
+  // Critical: cycles detected
+  if (analysis.paths.hasCycles) {
+    errors.push(`CRITICAL: ${analysis.paths.cycles.length} cycle(s) detected in routing graph`);
+    analysis.paths.cycles.slice(0, 3).forEach(cycle => {
+      errors.push(`  → ${cycle.join(' → ')}`);
+    });
+  }
+
+  // Critical: depth limit exceeded
+  if (analysis.paths.hasDepthLimitExceeded) {
+    errors.push(`CRITICAL: ${analysis.paths.depthLimitExceeded.length} path(s) exceeded depth limit`);
+  }
+
+  // Strict mode: fail on coverage issues
+  if (strict && !analysis.coverage.meetsMinimum) {
+    errors.push(`ERROR: Coverage (${analysis.coverage.coveragePercent}%) below minimum threshold`);
+  }
+
+  // Strict mode: fail on critical ambiguity hotspots
+  if (strict && analysis.ambiguity.criticalHotspots > 0) {
+    errors.push(`ERROR: ${analysis.ambiguity.criticalHotspots} critical ambiguity hotspot(s) detected`);
+  }
+
+  if (errors.length > 0) {
+    console.error('\n🔴 VALIDATION FAILED\n');
+    errors.forEach(err => console.error(err));
+    return 1;
+  }
+
+  return 0;
+}
+
 // Main execution
 if (require.main === module) {
   try {
-    const command = process.argv[2] || 'all';
+    const args = process.argv.slice(2);
+    const strict = args.includes('--strict');
+    const command = args.find(a => !a.startsWith('--')) || 'all';
     const analysis = runAnalysis();
 
     switch (command) {
@@ -520,10 +590,19 @@ if (require.main === module) {
         console.log(JSON.stringify(analysis, null, 2));
         break;
 
+      case 'validate':
+        // Validation-only mode for CI/CD
+        const exitCode = validateAnalysis(analysis, strict);
+        if (exitCode === 0) {
+          console.log('✓ Routing validation passed');
+        }
+        process.exit(exitCode);
+        break;
+
       case 'help':
       case '--help':
       case '-h':
-        console.log(`Usage: node analyze-routing-patterns.js [command]
+        console.log(`Usage: node analyze-routing-patterns.js [command] [options]
 
 Commands:
   all       Complete analysis with visual summary (default)
@@ -532,17 +611,30 @@ Commands:
   ambiguity Detect ambiguity hotspots (JSON)
   optimize  Generate optimization suggestions (JSON)
   json      Full analysis as JSON
+  validate  Validate routing and exit with error code if issues found
+
+Options:
+  --strict  Fail on warnings (coverage issues, critical hotspots)
 
 Examples:
   node analyze-routing-patterns.js
   node analyze-routing-patterns.js ambiguity
+  node analyze-routing-patterns.js validate --strict
   node analyze-routing-patterns.js json | jq '.optimizations'
 `);
         break;
 
       default:
-        console.error(`Unknown command: ${command}. Use 'all', 'paths', 'coverage', 'ambiguity', 'optimize', 'json', or 'help'.`);
+        console.error(`Unknown command: ${command}. Use 'all', 'paths', 'coverage', 'ambiguity', 'optimize', 'json', 'validate', or 'help'.`);
         process.exit(1);
+    }
+
+    // Always validate after analysis (except for validate command which handles its own exit)
+    if (command !== 'validate') {
+      const exitCode = validateAnalysis(analysis, false);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
     }
   } catch (err) {
     console.error(`Error analyzing routing patterns: ${err.message}`);
