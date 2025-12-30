@@ -1,7 +1,7 @@
 /**
  * Routing Monitoring Tests
  *
- * Validates routing efficiency monitoring functionality and performance budgets.
+ * Validates routing efficiency monitoring functionality and ambiguity detection.
  *
  * @module tests/routing-monitoring
  */
@@ -11,14 +11,16 @@ const path = require('path');
 // Mock the config for testing
 const mockConfig = {
   SKILLS_ROOT: path.join(__dirname, '../../../skills'),
-  PERFORMANCE_BUDGETS: {
-    maxAgentsPerSkill: 50,
-    maxTotalAgents: 400,
-    maxKeywordsPerDomain: 15,
+  ROUTING_THRESHOLDS: {
+    maxKeywordOverlap: 5,
     minKeywordUniqueness: 0.7,
     maxRoutingDepth: 3,
-    maxKeywordOverlap: 5,
-    minAgentCoverage: 0.85
+    minAgentCoverage: 0.85,
+    branchingFactor: {
+      medium: 5,
+      high: 10,
+      critical: 20
+    }
   },
   EFFICIENCY_THRESHOLDS: {
     complexity: { low: 0.3, medium: 0.6, high: 0.8, critical: 1.0 },
@@ -53,7 +55,7 @@ describe('Routing Metrics Collection', () => {
     expect(metrics).toHaveProperty('summary');
     expect(metrics).toHaveProperty('skills');
     expect(metrics).toHaveProperty('keywordAnalysis');
-    expect(metrics).toHaveProperty('performanceStatus');
+    expect(metrics).toHaveProperty('ambiguityStatus');
     expect(metrics).toHaveProperty('recommendations');
   });
 
@@ -76,22 +78,22 @@ describe('Routing Metrics Collection', () => {
     expect(typeof summary.totalAgents).toBe('number');
   });
 
-  test('performance status tracks budget compliance', () => {
+  test('ambiguity status tracks routing quality', () => {
     if (!collectMetrics) {
       console.warn('Skipping test: collectMetrics not available');
       return;
     }
 
     const metrics = collectMetrics();
-    const { performanceStatus } = metrics;
+    const { ambiguityStatus } = metrics;
 
-    expect(performanceStatus).toHaveProperty('budgetCompliance');
-    expect(performanceStatus).toHaveProperty('violations');
-    expect(performanceStatus).toHaveProperty('averageComplexity');
-    expect(performanceStatus).toHaveProperty('ambiguityScore');
+    expect(ambiguityStatus).toHaveProperty('score');
+    expect(ambiguityStatus).toHaveProperty('level');
 
-    expect(typeof performanceStatus.budgetCompliance).toBe('boolean');
-    expect(Array.isArray(performanceStatus.violations)).toBe(true);
+    expect(typeof ambiguityStatus.score).toBe('number');
+    expect(ambiguityStatus.score).toBeGreaterThanOrEqual(0);
+    expect(ambiguityStatus.score).toBeLessThanOrEqual(1);
+    expect(['low', 'medium', 'high', 'critical']).toContain(ambiguityStatus.level);
   });
 
   test('keyword analysis includes overlap detection', () => {
@@ -122,9 +124,9 @@ describe('Routing Metrics Collection', () => {
     const markdown = formatMarkdown(metrics);
 
     expect(typeof markdown).toBe('string');
-    expect(markdown).toContain('# Routing Efficiency Report');
-    expect(markdown).toContain('## Executive Summary');
-    expect(markdown).toContain('## Skill Breakdown');
+    expect(markdown).toContain('# Routing Ambiguity Report');
+    expect(markdown).toContain('## Summary');
+    expect(markdown).toContain('Keyword Overlap');
   });
 
   test('formatSummary produces readable output', () => {
@@ -137,9 +139,9 @@ describe('Routing Metrics Collection', () => {
     const summary = formatSummary(metrics);
 
     expect(typeof summary).toBe('string');
-    expect(summary).toContain('ROUTING EFFICIENCY MONITORING REPORT');
-    expect(summary).toContain('SUMMARY');
-    expect(summary).toContain('PERFORMANCE STATUS');
+    expect(summary).toContain('ROUTING AMBIGUITY ANALYSIS');
+    expect(summary).toContain('INVENTORY');
+    expect(summary).toContain('AMBIGUITY STATUS');
   });
 });
 
@@ -267,7 +269,7 @@ describe('Routing Pattern Analysis', () => {
   });
 });
 
-describe('Performance Budget Compliance', () => {
+describe('Ambiguity and Routing Quality', () => {
   let collectMetrics;
 
   beforeAll(() => {
@@ -278,44 +280,41 @@ describe('Performance Budget Compliance', () => {
     }
   });
 
-  test('tracks total agent budget', () => {
+  test('detects keyword overlap severity correctly', () => {
     if (!collectMetrics) {
       console.warn('Skipping test: collectMetrics not available');
       return;
     }
 
     const metrics = collectMetrics();
-    const maxAgents = mockConfig.PERFORMANCE_BUDGETS.maxTotalAgents;
+    const { overlap } = metrics.keywordAnalysis;
 
-    if (metrics.summary.totalAgents > maxAgents) {
-      expect(metrics.performanceStatus.budgetCompliance).toBe(false);
-      expect(
-        metrics.performanceStatus.violations.some(v => v.type === 'total_agents')
-      ).toBe(true);
-    }
+    // High severity overlaps should have more keywords than threshold
+    overlap.overlaps.filter(o => o.severity === 'high').forEach(o => {
+      expect(o.count).toBeGreaterThan(mockConfig.ROUTING_THRESHOLDS.maxKeywordOverlap);
+    });
+
+    // Low severity overlaps should have fewer keywords than threshold
+    overlap.overlaps.filter(o => o.severity === 'low').forEach(o => {
+      expect(o.count).toBeLessThanOrEqual(mockConfig.ROUTING_THRESHOLDS.maxKeywordOverlap);
+    });
   });
 
-  test('tracks per-skill agent budget', () => {
+  test('calculates keyword uniqueness ratio', () => {
     if (!collectMetrics) {
       console.warn('Skipping test: collectMetrics not available');
       return;
     }
 
     const metrics = collectMetrics();
-    const maxPerSkill = mockConfig.PERFORMANCE_BUDGETS.maxAgentsPerSkill;
+    const { uniquenessRatio } = metrics.keywordAnalysis;
 
-    for (const [skillName, skill] of Object.entries(metrics.skills)) {
-      if (skill.agentCount > maxPerSkill) {
-        expect(
-          metrics.performanceStatus.violations.some(
-            v => v.type === 'agent_count' && v.skill === skillName
-          )
-        ).toBe(true);
-      }
-    }
+    expect(typeof uniquenessRatio).toBe('number');
+    expect(uniquenessRatio).toBeGreaterThanOrEqual(0);
+    expect(uniquenessRatio).toBeLessThanOrEqual(1);
   });
 
-  test('generates recommendations for violations', () => {
+  test('generates recommendations for high severity overlaps', () => {
     if (!collectMetrics) {
       console.warn('Skipping test: collectMetrics not available');
       return;
@@ -323,8 +322,11 @@ describe('Performance Budget Compliance', () => {
 
     const metrics = collectMetrics();
 
-    if (metrics.performanceStatus.violations.length > 0) {
+    if (metrics.keywordAnalysis.overlap.highSeverityCount > 0) {
       expect(metrics.recommendations.length).toBeGreaterThan(0);
+      expect(
+        metrics.recommendations.some(r => r.category === 'ambiguity')
+      ).toBe(true);
     }
   });
 });
@@ -334,19 +336,33 @@ describe('Configuration Validation', () => {
     const config = require('../config');
 
     expect(config).toHaveProperty('SKILLS_ROOT');
-    expect(config).toHaveProperty('PERFORMANCE_BUDGETS');
+    expect(config).toHaveProperty('ROUTING_THRESHOLDS');
     expect(config).toHaveProperty('EFFICIENCY_THRESHOLDS');
     expect(config).toHaveProperty('MONITORED_SKILLS');
   });
 
-  test('performance budgets have valid values', () => {
+  test('routing thresholds have valid values', () => {
     const config = require('../config');
-    const { PERFORMANCE_BUDGETS } = config;
+    const { ROUTING_THRESHOLDS } = config;
 
-    expect(PERFORMANCE_BUDGETS.maxAgentsPerSkill).toBeGreaterThan(0);
-    expect(PERFORMANCE_BUDGETS.maxTotalAgents).toBeGreaterThan(0);
-    expect(PERFORMANCE_BUDGETS.minAgentCoverage).toBeGreaterThan(0);
-    expect(PERFORMANCE_BUDGETS.minAgentCoverage).toBeLessThanOrEqual(1);
+    expect(ROUTING_THRESHOLDS.maxKeywordOverlap).toBeGreaterThan(0);
+    expect(ROUTING_THRESHOLDS.minKeywordUniqueness).toBeGreaterThan(0);
+    expect(ROUTING_THRESHOLDS.minKeywordUniqueness).toBeLessThanOrEqual(1);
+    expect(ROUTING_THRESHOLDS.maxRoutingDepth).toBeGreaterThan(0);
+    expect(ROUTING_THRESHOLDS.minAgentCoverage).toBeGreaterThan(0);
+    expect(ROUTING_THRESHOLDS.minAgentCoverage).toBeLessThanOrEqual(1);
+  });
+
+  test('branching factor thresholds are properly ordered', () => {
+    const config = require('../config');
+    const { ROUTING_THRESHOLDS } = config;
+
+    expect(ROUTING_THRESHOLDS.branchingFactor.medium).toBeLessThan(
+      ROUTING_THRESHOLDS.branchingFactor.high
+    );
+    expect(ROUTING_THRESHOLDS.branchingFactor.high).toBeLessThan(
+      ROUTING_THRESHOLDS.branchingFactor.critical
+    );
   });
 
   test('efficiency thresholds are properly ordered', () => {

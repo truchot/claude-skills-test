@@ -122,11 +122,18 @@ function analyzeRoutingPaths(graph) {
   const paths = [];
   const pathDepths = [];
   const cycles = [];
+  const depthLimitExceeded = [];
 
-  // DFS to find all paths from entry to leaf (with cycle detection)
+  // DFS to find all paths from entry to leaf (with cycle detection and depth limit)
   function findPaths(nodeId, currentPath, depth, visiting) {
     const node = graph.nodes.get(nodeId);
     if (!node) return;
+
+    // Depth limit check to prevent stack overflow
+    if (depth > ROUTING_THRESHOLDS.maxExplorationDepth) {
+      depthLimitExceeded.push([...currentPath, nodeId]);
+      return;
+    }
 
     // Cycle detection: check if we're revisiting a node in current path
     if (visiting.has(nodeId)) {
@@ -184,7 +191,9 @@ function analyzeRoutingPaths(graph) {
       return !graph.leafNodes.includes(lastNode) && pathDepths[i] > 0;
     }),
     cycles: cycles,
-    hasCycles: cycles.length > 0
+    hasCycles: cycles.length > 0,
+    depthLimitExceeded: depthLimitExceeded,
+    hasDepthLimitExceeded: depthLimitExceeded.length > 0
   };
 }
 

@@ -34,6 +34,9 @@ const ROUTING_THRESHOLDS = {
   // Minimum agent coverage (reachable from entry points)
   minAgentCoverage: 0.85,
 
+  // Maximum path exploration depth (prevents stack overflow)
+  maxExplorationDepth: 50,
+
   // Branching factor thresholds for ambiguity hotspots
   branchingFactor: {
     medium: 5,   // Warning level
