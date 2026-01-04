@@ -12,7 +12,15 @@
 #   USER_QUERY - The user's query (if available)
 #
 
-LOG_FILE="${HOME}/.claude/monitoring/routing/invocation-log.jsonl"
+# Validate HOME environment variable
+if [[ -z "$HOME" ]] || [[ ! -d "$HOME" ]] || [[ "$HOME" != /* ]]; then
+  # HOME is unset, not a directory, or not absolute path - use fallback
+  HOME_DIR="/tmp"
+else
+  HOME_DIR="$HOME"
+fi
+
+LOG_FILE="${HOME_DIR}/.claude/monitoring/routing/invocation-log.jsonl"
 LOCK_FILE="${LOG_FILE}.lock"
 MAX_LOG_SIZE=10485760  # 10MB in bytes
 MAX_ROTATED_LOGS=5     # Keep 5 rotated logs
@@ -58,13 +66,10 @@ rotate_logs_unlocked() {
     if [[ "$file_size" -gt "$MAX_LOG_SIZE" ]]; then
       local temp_dir
       temp_dir=$(dirname "$LOG_FILE")
-      local rotation_marker="${temp_dir}/.rotation_in_progress_$$"
 
-      # Create rotation marker (atomic via O_EXCL)
-      if ! (set -o noclobber; echo $$ > "$rotation_marker") 2>/dev/null; then
-        # Another rotation in progress, skip
-        return 0
-      fi
+      # Use mktemp for guaranteed atomic uniqueness (not PID which can be reused)
+      local rotation_marker
+      rotation_marker=$(mktemp "${temp_dir}/.rotation_XXXXXX" 2>/dev/null) || return 0
 
       # Cleanup marker on exit
       trap "rm -f '$rotation_marker'" RETURN
@@ -79,14 +84,17 @@ rotate_logs_unlocked() {
         fi
       done
 
-      # Atomically move current log to .1 using hard link + unlink pattern
+      # Atomically move current log to .1 using temp file pattern
       if [[ -f "$LOG_FILE" ]]; then
-        # Create temp file with unique name
-        local temp_file="${LOG_FILE}.tmp.$$"
+        # Create temp file with unique name using mktemp
+        local temp_file
+        temp_file=$(mktemp "${LOG_FILE}.tmp.XXXXXX" 2>/dev/null) || return 0
         if cp "$LOG_FILE" "$temp_file" 2>/dev/null; then
           mv -f "$temp_file" "${LOG_FILE}.1" 2>/dev/null || rm -f "$temp_file"
           # Truncate original instead of removing (preserves inode for any open handles)
           : > "$LOG_FILE" 2>/dev/null || true
+        else
+          rm -f "$temp_file" 2>/dev/null || true
         fi
       fi
 
@@ -99,16 +107,37 @@ rotate_logs_unlocked() {
 RAW_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 TIMESTAMP=$(validate_timestamp "$RAW_TIMESTAMP")
 
-# Function to escape JSON string (handle quotes and special chars)
+# Function to escape JSON string (RFC 8259 compliant)
+# Escapes: backslash, quotes, and all control characters (0x00-0x1F)
 json_escape() {
   local str="$1"
-  # Escape backslashes first, then quotes, then control characters
-  str="${str//\\/\\\\}"
-  str="${str//\"/\\\"}"
-  str="${str//$'\n'/\\n}"
-  str="${str//$'\r'/\\r}"
-  str="${str//$'\t'/\\t}"
-  echo "$str"
+  local result=""
+  local i char code
+
+  for ((i=0; i<${#str}; i++)); do
+    char="${str:$i:1}"
+    case "$char" in
+      \\) result+='\\' ;;
+      '"') result+='\"' ;;
+      $'\n') result+='\n' ;;
+      $'\r') result+='\r' ;;
+      $'\t') result+='\t' ;;
+      $'\b') result+='\b' ;;
+      $'\f') result+='\f' ;;
+      *)
+        # Check for other control characters (0x00-0x1F)
+        code=$(printf '%d' "'$char" 2>/dev/null || echo 0)
+        if [[ "$code" -lt 32 ]]; then
+          # Escape as \u00XX
+          result+=$(printf '\\u%04x' "$code")
+        else
+          result+="$char"
+        fi
+        ;;
+    esac
+  done
+
+  echo "$result"
 }
 
 # Escape values for safe JSON
