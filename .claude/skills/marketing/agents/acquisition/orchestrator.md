@@ -19,11 +19,25 @@ Tu es au niveau exécution. Tu configures et optimises les canaux selon les obje
 
 | Agent | Responsabilité unique |
 |-------|----------------------|
-| `seo` | Optimiser le référencement naturel et la visibilité organique |
+| `seo/` | **Skill complet SEO** avec triptyque Technique/Contenu/Popularité |
 | `sea-google-ads` | Gérer les campagnes publicitaires search (Google, Bing) |
 | `social-ads` | Gérer les campagnes publicitaires sociales (Meta, LinkedIn, TikTok) |
 | `email-marketing` | Orchestrer les campagnes email et automation |
 | `growth-hacking` | Identifier et activer des leviers de croissance innovants |
+
+### SEO - Structure Complète
+
+Le skill SEO est organisé selon le **triptyque SEO** (Technique/Contenu/Popularité) plus Stratégie et Pilotage :
+
+```
+seo/
+├── orchestrator.md      # Orchestrateur principal SEO
+├── strategie/           # Audit, roadmap, analyse concurrentielle
+├── technique/           # Crawl, Core Web Vitals, architecture, migrations
+├── contenu/             # Mots-clés, briefs, on-page, refresh
+├── netlinking/          # Backlinks, prospection, outreach
+└── pilotage/            # Reporting, positions, analytics, veille
+```
 
 ## Architecture Acquisition
 
