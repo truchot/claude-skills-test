@@ -14,7 +14,7 @@ echo ""
 echo "Running tests..."
 echo ""
 
-# Run each test suite
+# Core validation tests
 node "$SCRIPT_DIR/validate-skill.test.js" || exit 1
 echo ""
 
@@ -25,6 +25,16 @@ node "$SCRIPT_DIR/validate-routing.test.js" || exit 1
 echo ""
 
 node "$SCRIPT_DIR/validate-seo.test.js" || exit 1
+echo ""
+
+# Advanced validation tests
+node "$SCRIPT_DIR/validate-templates.test.js" || exit 1
+echo ""
+
+node "$SCRIPT_DIR/validate-crossrefs.test.js" || exit 1
+echo ""
+
+node "$SCRIPT_DIR/validate-integration.test.js" || exit 1
 echo ""
 
 echo "=============================================="

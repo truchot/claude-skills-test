@@ -186,7 +186,7 @@ Requête SEO
 - Produit : Audits, recommandations stratégiques, roadmaps
 
 ### Chef de Projet SEO
-- Utilise : `strategie/roadmap`, `pilotage/*`
+- Utilise : `strategie/roadmap-seo`, `pilotage/*`
 - Produit : Planning, coordination, reporting, arbitrages
 
 ### Rédacteur SEO
