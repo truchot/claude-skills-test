@@ -49,10 +49,10 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | **Stratégie** | `strategie/orchestrator` | 4 | Positionnement, marché, personas, objectifs | POURQUOI |
 | **Campagnes** | `campagnes/orchestrator` | 4 | Planning, budget, coordination, tracking | QUOI |
 | **Content** | `content/orchestrator` | 4 | Copywriting, blog, social media, landing pages | COMMENT |
-| **Acquisition** | `acquisition/orchestrator` | 5 | SEO, SEA, Social Ads, Email, Growth | COMMENT |
+| **Acquisition** | `acquisition/orchestrator` | 5 + SEO (39) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
 | **Analytics** | `analytics/orchestrator` | 4 | KPIs, A/B testing, reporting, attribution | COMMENT |
 
-**Total : 21 agents spécialisés**
+**Total : 59 agents spécialisés** (dont 39 agents SEO)
 
 ## Règles de Routage
 
@@ -175,4 +175,21 @@ Ce skill interagit avec :
 ## Ressources
 
 - **Agents** : `/strategie`, `/campagnes`, `/content`, `/acquisition`, `/analytics`
-- **Templates** : `/templates`
+- **SEO** : `/acquisition/seo/` (9 domaines, 39 agents spécialisés)
+
+## Structure SEO Complète
+
+Le sous-domaine SEO est le plus développé avec 9 domaines :
+
+```
+acquisition/seo/
+├── strategie/      # Audit, roadmap, concurrence
+├── technique/      # Crawl, Core Web Vitals, architecture
+├── contenu/        # Keywords, briefs, on-page
+├── netlinking/     # Backlinks, outreach, prospection
+├── pilotage/       # Reporting, positions, veille
+├── geo/            # AI Search, ChatGPT, AI Overviews
+├── local/          # Google Business, avis, NAP
+├── ecommerce/      # Fiches produits, catégories, Shopping
+└── international/  # Hreflang, localisation, geotargeting
+```

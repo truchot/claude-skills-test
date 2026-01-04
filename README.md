@@ -37,10 +37,10 @@ HUMAIN (supervision)
 |-------|-------------|--------|--------|
 | [project-management](.claude/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
 | [technical](.claude/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
+| [marketing](.claude/skills/marketing/) | Marketing digital (SEO complet, SEA, Social, Email, Analytics) | 59 | 🟢 Actif |
 | [strategy](.claude/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
 | [design](.claude/skills/design/) | Design & création graphique | - | 🔴 Planifié |
 | [content](.claude/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
-| [marketing](.claude/skills/marketing/) | Marketing digital | - | 🔴 Planifié |
 
 ### Skills Techniques
 
@@ -232,12 +232,12 @@ cd .claude/skills/backend-developer/tests && bash run-tests.sh
 - [x] frontend-developer (33 agents)
 - [x] react-expert (28 agents)
 - [x] backend-developer (38 agents)
+- [x] marketing (59 agents) - SEO complet avec 9 domaines
 
 ### Skills planifiés
 - [ ] strategy
 - [ ] design
 - [ ] content
-- [ ] marketing
 
 ### Infrastructure
 - [x] Tests web-agency
