@@ -98,7 +98,9 @@ for (const domain of DOMAINS) {
     const { content: orchContent } = safeReadFile(orchPath);
     if (orchContent) {
       // Check for self-reference that would cause circular routing
-      const selfRef = new RegExp(`→\\s*${domain}/orchestrator`, 'i');
+      // Escape regex metacharacters in domain name
+      const escapedDomain = domain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const selfRef = new RegExp(`→\\s*${escapedDomain}/orchestrator`, 'i');
       if (selfRef.test(orchContent)) {
         reporter.fail(`${domain}/orchestrator has circular reference`);
       } else {
