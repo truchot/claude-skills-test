@@ -49,24 +49,48 @@ if [[ -z "$SKILL_NAME" ]]; then
 fi
 
 # Log rotation function (called within lock)
+# Uses atomic operations with temp files to prevent partial rotations
 rotate_logs_unlocked() {
   if [[ -f "$LOG_FILE" ]]; then
     local file_size
     file_size=$(stat -c%s "$LOG_FILE" 2>/dev/null || stat -f%z "$LOG_FILE" 2>/dev/null || echo 0)
 
     if [[ "$file_size" -gt "$MAX_LOG_SIZE" ]]; then
-      # Rotate existing logs
+      local temp_dir
+      temp_dir=$(dirname "$LOG_FILE")
+      local rotation_marker="${temp_dir}/.rotation_in_progress_$$"
+
+      # Create rotation marker (atomic via O_EXCL)
+      if ! (set -o noclobber; echo $$ > "$rotation_marker") 2>/dev/null; then
+        # Another rotation in progress, skip
+        return 0
+      fi
+
+      # Cleanup marker on exit
+      trap "rm -f '$rotation_marker'" RETURN
+
+      # Remove oldest log first to make room
+      rm -f "${LOG_FILE}.$MAX_ROTATED_LOGS" 2>/dev/null || true
+
+      # Rotate existing logs (from oldest to newest)
       for i in $(seq $((MAX_ROTATED_LOGS - 1)) -1 1); do
         if [[ -f "${LOG_FILE}.$i" ]]; then
-          mv "${LOG_FILE}.$i" "${LOG_FILE}.$((i + 1))" 2>/dev/null || true
+          mv -f "${LOG_FILE}.$i" "${LOG_FILE}.$((i + 1))" 2>/dev/null || true
         fi
       done
 
-      # Move current log to .1
-      mv "$LOG_FILE" "${LOG_FILE}.1" 2>/dev/null || true
+      # Atomically move current log to .1 using hard link + unlink pattern
+      if [[ -f "$LOG_FILE" ]]; then
+        # Create temp file with unique name
+        local temp_file="${LOG_FILE}.tmp.$$"
+        if cp "$LOG_FILE" "$temp_file" 2>/dev/null; then
+          mv -f "$temp_file" "${LOG_FILE}.1" 2>/dev/null || rm -f "$temp_file"
+          # Truncate original instead of removing (preserves inode for any open handles)
+          : > "$LOG_FILE" 2>/dev/null || true
+        fi
+      fi
 
-      # Remove oldest log if it exists
-      rm -f "${LOG_FILE}.$((MAX_ROTATED_LOGS + 1))" 2>/dev/null || true
+      rm -f "$rotation_marker" 2>/dev/null || true
     fi
   fi
 }

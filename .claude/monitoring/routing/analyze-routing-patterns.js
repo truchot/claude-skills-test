@@ -151,8 +151,12 @@ function analyzeRoutingPaths(graph) {
   const cycles = [];
   const depthLimitExceeded = [];
 
+  // Use backtracking to avoid memory allocation on each recursive call
+  const currentPath = [];
+  const visiting = new Set();
+
   // DFS to find all paths from entry to leaf (with cycle detection and depth limit)
-  function findPaths(nodeId, currentPath, depth, visiting) {
+  function findPaths(nodeId, depth) {
     // Depth limit check FIRST to prevent stack overflow
     if (depth >= ROUTING_THRESHOLDS.maxExplorationDepth) {
       depthLimitExceeded.push([...currentPath, nodeId]);
@@ -168,34 +172,40 @@ function analyzeRoutingPaths(graph) {
     const node = graph.nodes.get(nodeId);
     if (!node) return;
 
-    const newPath = [...currentPath, nodeId];
-    const newVisiting = new Set(visiting);
-    newVisiting.add(nodeId);
+    // Backtracking: add to path and visiting set
+    currentPath.push(nodeId);
+    visiting.add(nodeId);
 
-    // Check if leaf node
-    if (graph.leafNodes.includes(nodeId)) {
-      paths.push(newPath);
-      pathDepths.push(depth);
-      return;
+    try {
+      // Check if leaf node
+      if (graph.leafNodes.includes(nodeId)) {
+        paths.push([...currentPath]);
+        pathDepths.push(depth);
+        return;
+      }
+
+      // Find outgoing edges
+      const outEdges = graph.edges.filter(e => e.from === nodeId);
+
+      if (outEdges.length === 0 && depth > 0) {
+        // Dead end that's not an entry
+        paths.push([...currentPath]);
+        pathDepths.push(depth);
+        return;
+      }
+
+      outEdges.forEach(edge => {
+        findPaths(edge.to, depth + 1);
+      });
+    } finally {
+      // Backtracking: remove from path and visiting set
+      currentPath.pop();
+      visiting.delete(nodeId);
     }
-
-    // Find outgoing edges
-    const outEdges = graph.edges.filter(e => e.from === nodeId);
-
-    if (outEdges.length === 0 && depth > 0) {
-      // Dead end that's not an entry
-      paths.push(newPath);
-      pathDepths.push(depth);
-      return;
-    }
-
-    outEdges.forEach(edge => {
-      findPaths(edge.to, newPath, depth + 1, newVisiting);
-    });
   }
 
   graph.entryPoints.forEach(entry => {
-    findPaths(entry, [], 0, new Set());
+    findPaths(entry, 0);
   });
 
   return {
