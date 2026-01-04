@@ -17,6 +17,49 @@
  * @module monitoring/routing/collect-routing-metrics
  */
 
+/**
+ * @typedef {Object} AgentInfo
+ * @property {number} total - Total agent count
+ * @property {number} orchestrators - Number of orchestrators
+ * @property {number} agents - Number of non-orchestrator agents
+ * @property {string[]} domains - List of domain names
+ * @property {string[]} agentFiles - List of agent file paths
+ */
+
+/**
+ * @typedef {Object} KeywordOverlap
+ * @property {string[]} skills - Pair of skill names with overlap
+ * @property {string[]} overlappingKeywords - Keywords shared between skills
+ * @property {number} count - Number of overlapping keywords
+ * @property {'high'|'low'} severity - Overlap severity level
+ */
+
+/**
+ * @typedef {Object} OverlapAnalysis
+ * @property {number} totalOverlaps - Total number of skill pairs with overlaps
+ * @property {number} highSeverityCount - Number of high severity overlaps
+ * @property {KeywordOverlap[]} overlaps - List of overlaps sorted by count
+ */
+
+/**
+ * @typedef {Object} CollectionError
+ * @property {string} phase - Phase where error occurred
+ * @property {string} [skill] - Skill name if applicable
+ * @property {string} message - Error message
+ */
+
+/**
+ * @typedef {Object} RoutingMetrics
+ * @property {string} timestamp - ISO timestamp of collection
+ * @property {string} version - Metrics version
+ * @property {Object} summary - Summary statistics
+ * @property {Object.<string, Object>} skills - Per-skill metrics
+ * @property {Object} keywordAnalysis - Keyword analysis results
+ * @property {Object} ambiguityStatus - Ambiguity status
+ * @property {Object[]} recommendations - Recommendations list
+ * @property {CollectionError[]} errors - Errors during collection
+ */
+
 const fs = require('fs');
 const path = require('path');
 const {
@@ -124,7 +167,7 @@ function extractKeywords(content) {
 /**
  * Count agents in a skill directory
  * @param {string} skillPath - Path to skill directory
- * @returns {Object} Agent count details
+ * @returns {AgentInfo} Agent count details
  */
 function countAgents(skillPath) {
   const result = {
@@ -220,8 +263,8 @@ function countAgents(skillPath) {
 
 /**
  * Analyze keyword overlap between skills
- * @param {Object} skillKeywords - Map of skill name to keywords
- * @returns {Object} Overlap analysis
+ * @param {Object.<string, string[]>} skillKeywords - Map of skill name to keywords
+ * @returns {OverlapAnalysis} Overlap analysis
  */
 function analyzeKeywordOverlap(skillKeywords) {
   const overlaps = [];
@@ -328,7 +371,7 @@ function generateRecommendations(metrics) {
 /**
  * Collect all routing metrics
  * Focus on ambiguity analysis for routing quality
- * @returns {Object} Complete metrics collection
+ * @returns {RoutingMetrics} Complete metrics collection
  */
 function collectMetrics() {
   const metrics = {
@@ -351,80 +394,141 @@ function collectMetrics() {
       score: 0,
       level: 'low'
     },
-    recommendations: []
+    recommendations: [],
+    errors: [] // Track errors during collection
   };
 
   const allKeywords = new Set();
   const skillKeywordMap = {};
 
-  // Collect metrics for each skill
+  // Phase 1: Collect metrics for each skill (with error boundary)
   for (const [skillName, config] of Object.entries(MONITORED_SKILLS)) {
-    const skillPath = path.join(SKILLS_ROOT, skillName);
+    try {
+      const skillPath = path.join(SKILLS_ROOT, skillName);
 
-    if (!fs.existsSync(skillPath)) {
-      console.warn(`Warning: Skill not found: ${skillName}`);
-      continue;
+      if (!fs.existsSync(skillPath)) {
+        console.warn(`Warning: Skill not found: ${skillName}`);
+        continue;
+      }
+
+      metrics.summary.totalSkills++;
+
+      // Read SKILL.md for routing keywords
+      let keywords = [];
+      try {
+        const skillMdPath = path.join(skillPath, 'SKILL.md');
+        if (fs.existsSync(skillMdPath)) {
+          const content = fs.readFileSync(skillMdPath, 'utf8');
+          keywords = extractKeywords(content);
+        }
+      } catch (kwErr) {
+        metrics.errors.push({
+          phase: 'keyword_extraction',
+          skill: skillName,
+          message: kwErr.message
+        });
+      }
+
+      // Count agents
+      let agentInfo = { total: 0, orchestrators: 0, domains: [] };
+      try {
+        agentInfo = countAgents(skillPath);
+      } catch (agentErr) {
+        metrics.errors.push({
+          phase: 'agent_counting',
+          skill: skillName,
+          message: agentErr.message
+        });
+      }
+
+      // Store skill metrics
+      metrics.skills[skillName] = {
+        agentCount: agentInfo.total,
+        domainCount: agentInfo.domains.length,
+        keywordCount: keywords.length
+      };
+
+      // Update summary
+      metrics.summary.totalAgents += agentInfo.total;
+      metrics.summary.totalOrchestrators += agentInfo.orchestrators;
+      metrics.summary.totalDomains += agentInfo.domains.length;
+      metrics.summary.totalKeywords += keywords.length;
+
+      // Track keywords
+      skillKeywordMap[skillName] = keywords;
+      keywords.forEach(kw => allKeywords.add(kw));
+
+      metrics.keywordAnalysis.bySkill[skillName] = {
+        count: keywords.length,
+        sample: keywords.slice(0, 10)
+      };
+    } catch (skillErr) {
+      metrics.errors.push({
+        phase: 'skill_collection',
+        skill: skillName,
+        message: skillErr.message
+      });
     }
+  }
 
-    metrics.summary.totalSkills++;
-
-    // Read SKILL.md for routing keywords
-    const skillMdPath = path.join(skillPath, 'SKILL.md');
-    let keywords = [];
-    if (fs.existsSync(skillMdPath)) {
-      const content = fs.readFileSync(skillMdPath, 'utf8');
-      keywords = extractKeywords(content);
-    }
-
-    // Count agents
-    const agentInfo = countAgents(skillPath);
-
-    // Store skill metrics
-    metrics.skills[skillName] = {
-      agentCount: agentInfo.total,
-      domainCount: agentInfo.domains.length,
-      keywordCount: keywords.length
-    };
-
-    // Update summary
-    metrics.summary.totalAgents += agentInfo.total;
-    metrics.summary.totalOrchestrators += agentInfo.orchestrators;
-    metrics.summary.totalDomains += agentInfo.domains.length;
-    metrics.summary.totalKeywords += keywords.length;
-
-    // Track keywords
-    skillKeywordMap[skillName] = keywords;
-    keywords.forEach(kw => allKeywords.add(kw));
-
-    metrics.keywordAnalysis.bySkill[skillName] = {
-      count: keywords.length,
-      sample: keywords.slice(0, 10)
+  // Phase 2: Analyze keyword overlap (with error boundary)
+  try {
+    metrics.keywordAnalysis.overlap = analyzeKeywordOverlap(skillKeywordMap);
+  } catch (overlapErr) {
+    metrics.errors.push({
+      phase: 'keyword_overlap_analysis',
+      message: overlapErr.message
+    });
+    metrics.keywordAnalysis.overlap = {
+      totalOverlaps: 0,
+      highSeverityCount: 0,
+      overlaps: []
     };
   }
 
-  // Analyze keyword overlap
-  metrics.keywordAnalysis.overlap = analyzeKeywordOverlap(skillKeywordMap);
+  // Phase 3: Calculate uniqueness ratio (with error boundary)
+  try {
+    const totalKeywordUsages = Object.values(skillKeywordMap)
+      .reduce((sum, kws) => sum + kws.length, 0);
+    metrics.keywordAnalysis.uniquenessRatio = totalKeywordUsages > 0
+      ? allKeywords.size / totalKeywordUsages
+      : 1;
+  } catch (uniqueErr) {
+    metrics.errors.push({
+      phase: 'uniqueness_calculation',
+      message: uniqueErr.message
+    });
+    metrics.keywordAnalysis.uniquenessRatio = 1;
+  }
 
-  // Calculate uniqueness ratio
-  const totalKeywordUsages = Object.values(skillKeywordMap)
-    .reduce((sum, kws) => sum + kws.length, 0);
-  metrics.keywordAnalysis.uniquenessRatio = totalKeywordUsages > 0
-    ? allKeywords.size / totalKeywordUsages
-    : 1;
+  // Phase 4: Calculate ambiguity score (with error boundary)
+  try {
+    const ambiguityScore = calculateAmbiguityScore(
+      metrics.keywordAnalysis.overlap,
+      allKeywords.size
+    );
+    metrics.ambiguityStatus.score = ambiguityScore;
+    metrics.ambiguityStatus.level =
+      ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.low ? 'low' :
+      ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.medium ? 'medium' :
+      ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.high ? 'high' : 'critical';
+  } catch (ambiguityErr) {
+    metrics.errors.push({
+      phase: 'ambiguity_calculation',
+      message: ambiguityErr.message
+    });
+  }
 
-  // Calculate ambiguity score - the key metric for routing quality
-  const ambiguityScore = calculateAmbiguityScore(
-    metrics.keywordAnalysis.overlap,
-    allKeywords.size
-  );
-  metrics.ambiguityStatus.score = ambiguityScore;
-  metrics.ambiguityStatus.level =
-    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.low ? 'low' :
-    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.medium ? 'medium' :
-    ambiguityScore <= EFFICIENCY_THRESHOLDS.ambiguity.high ? 'high' : 'critical';
-
-  // Generate recommendations focused on ambiguity
-  metrics.recommendations = generateRecommendations(metrics);
+  // Phase 5: Generate recommendations (with error boundary)
+  try {
+    metrics.recommendations = generateRecommendations(metrics);
+  } catch (recErr) {
+    metrics.errors.push({
+      phase: 'recommendation_generation',
+      message: recErr.message
+    });
+    metrics.recommendations = [];
+  }
 
   return metrics;
 }

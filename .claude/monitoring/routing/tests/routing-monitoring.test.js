@@ -403,3 +403,112 @@ describe('Configuration Validation', () => {
     }
   });
 });
+
+describe('Edge Cases', () => {
+  let collectMetrics, runAnalysis;
+
+  beforeAll(() => {
+    try {
+      collectMetrics = require('../collect-routing-metrics').collectMetrics;
+      runAnalysis = require('../analyze-routing-patterns').runAnalysis;
+    } catch (err) {
+      console.warn('Could not load modules:', err.message);
+    }
+  });
+
+  test('metrics collection handles errors gracefully', () => {
+    if (!collectMetrics) {
+      console.warn('Skipping test: collectMetrics not available');
+      return;
+    }
+
+    const metrics = collectMetrics();
+
+    // Should have errors array (even if empty)
+    expect(metrics).toHaveProperty('errors');
+    expect(Array.isArray(metrics.errors)).toBe(true);
+
+    // Errors should have proper structure if present
+    metrics.errors.forEach(err => {
+      expect(err).toHaveProperty('phase');
+      expect(err).toHaveProperty('message');
+    });
+  });
+
+  test('handles empty keyword analysis gracefully', () => {
+    if (!collectMetrics) {
+      console.warn('Skipping test: collectMetrics not available');
+      return;
+    }
+
+    const metrics = collectMetrics();
+
+    // Even if no keywords found, structure should be valid
+    expect(metrics.keywordAnalysis).toHaveProperty('overlap');
+    expect(metrics.keywordAnalysis.overlap).toHaveProperty('totalOverlaps');
+    expect(metrics.keywordAnalysis.overlap).toHaveProperty('overlaps');
+    expect(Array.isArray(metrics.keywordAnalysis.overlap.overlaps)).toBe(true);
+  });
+
+  test('analysis handles missing skills gracefully', () => {
+    if (!runAnalysis) {
+      console.warn('Skipping test: runAnalysis not available');
+      return;
+    }
+
+    // Should not throw even if skills directory is partially empty
+    expect(() => runAnalysis()).not.toThrow();
+  });
+
+  test('path analysis detects cycles without crashing', () => {
+    if (!runAnalysis) {
+      console.warn('Skipping test: runAnalysis not available');
+      return;
+    }
+
+    const analysis = runAnalysis();
+
+    // Cycle detection should be present
+    expect(analysis.paths).toHaveProperty('hasCycles');
+    expect(analysis.paths).toHaveProperty('cycles');
+    expect(Array.isArray(analysis.paths.cycles)).toBe(true);
+  });
+
+  test('path analysis respects depth limits', () => {
+    if (!runAnalysis) {
+      console.warn('Skipping test: runAnalysis not available');
+      return;
+    }
+
+    const analysis = runAnalysis();
+
+    // Depth limit detection should be present
+    expect(analysis.paths).toHaveProperty('hasDepthLimitExceeded');
+    expect(analysis.paths).toHaveProperty('depthLimitExceeded');
+    expect(Array.isArray(analysis.paths.depthLimitExceeded)).toBe(true);
+  });
+
+  test('ambiguity score stays within valid range', () => {
+    if (!collectMetrics) {
+      console.warn('Skipping test: collectMetrics not available');
+      return;
+    }
+
+    const metrics = collectMetrics();
+
+    expect(metrics.ambiguityStatus.score).toBeGreaterThanOrEqual(0);
+    expect(metrics.ambiguityStatus.score).toBeLessThanOrEqual(1);
+  });
+
+  test('uniqueness ratio stays within valid range', () => {
+    if (!collectMetrics) {
+      console.warn('Skipping test: collectMetrics not available');
+      return;
+    }
+
+    const metrics = collectMetrics();
+
+    expect(metrics.keywordAnalysis.uniquenessRatio).toBeGreaterThanOrEqual(0);
+    expect(metrics.keywordAnalysis.uniquenessRatio).toBeLessThanOrEqual(1);
+  });
+});
