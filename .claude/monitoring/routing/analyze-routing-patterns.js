@@ -30,13 +30,24 @@ const {
 
 /**
  * Validate that a path is within SKILLS_ROOT to prevent path traversal
+ * Resolves symlinks to prevent symlink-based attacks
  * @param {string} targetPath - Path to validate
  * @returns {boolean} True if path is safe
  */
 function isPathWithinSkillsRoot(targetPath) {
-  const resolvedPath = path.resolve(targetPath);
-  const resolvedRoot = path.resolve(SKILLS_ROOT);
-  return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+  try {
+    // Use realpathSync to resolve symlinks and get canonical path
+    // This prevents symlink attacks where a symlink points outside SKILLS_ROOT
+    const resolvedPath = fs.existsSync(targetPath)
+      ? fs.realpathSync(targetPath)
+      : path.resolve(targetPath);
+    const resolvedRoot = fs.realpathSync(SKILLS_ROOT);
+    return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+  } catch (err) {
+    // If we can't resolve the path, assume it's unsafe
+    console.warn(`Path resolution failed for ${targetPath}: ${err.message}`);
+    return false;
+  }
 }
 
 /**
@@ -55,15 +66,29 @@ function safePathJoin(...segments) {
 
 /**
  * Build routing graph from skill definitions
+ * Uses Set for O(1) leaf node lookups and adjacency map for O(1) edge lookups
  * @returns {Object} Routing graph structure
  */
 function buildRoutingGraph() {
   const graph = {
     nodes: new Map(),
     edges: [],
+    edgesBySource: new Map(), // Adjacency map for O(1) edge lookup
     entryPoints: [],
-    leafNodes: []
+    leafNodes: new Set() // Set for O(1) membership testing
   };
+
+  /**
+   * Add edge with O(1) lookup support
+   * @param {Object} edge - Edge to add
+   */
+  function addEdge(edge) {
+    graph.edges.push(edge);
+    if (!graph.edgesBySource.has(edge.from)) {
+      graph.edgesBySource.set(edge.from, []);
+    }
+    graph.edgesBySource.get(edge.from).push(edge);
+  }
 
   // Add entry point (web-agency meta-orchestrator)
   graph.entryPoints.push('web-agency');
@@ -97,7 +122,7 @@ function buildRoutingGraph() {
         });
 
         // Add edge from skill to domain
-        graph.edges.push({
+        addEdge({
           from: skillName,
           to: domainId,
           type: 'contains'
@@ -120,15 +145,15 @@ function buildRoutingGraph() {
           });
 
           // Add edge from domain to agent
-          graph.edges.push({
+          addEdge({
             from: isOrchestrator ? skillName : domainId,
             to: agentId,
             type: isOrchestrator ? 'orchestrates' : 'routes-to'
           });
 
-          // Track leaf nodes (non-orchestrator agents)
+          // Track leaf nodes (non-orchestrator agents) - O(1) Set.add
           if (!isOrchestrator) {
-            graph.leafNodes.push(agentId);
+            graph.leafNodes.add(agentId);
           }
         });
 
@@ -142,6 +167,7 @@ function buildRoutingGraph() {
 
 /**
  * Analyze all possible routing paths
+ * Uses O(1) lookups for performance and enforces path limit for memory safety
  * @param {Object} graph - Routing graph
  * @returns {Object} Path analysis
  */
@@ -150,14 +176,21 @@ function analyzeRoutingPaths(graph) {
   const pathDepths = [];
   const cycles = [];
   const depthLimitExceeded = [];
+  let pathLimitReached = false;
 
   // Use backtracking to avoid memory allocation on each recursive call
   const currentPath = [];
   const visiting = new Set();
 
-  // DFS to find all paths from entry to leaf (with cycle detection and depth limit)
+  // DFS to find all paths from entry to leaf (with cycle detection, depth limit, and path limit)
   function findPaths(nodeId, depth) {
-    // Depth limit check FIRST to prevent stack overflow
+    // Path limit check FIRST to prevent memory exhaustion
+    if (paths.length >= ROUTING_THRESHOLDS.maxPaths) {
+      pathLimitReached = true;
+      return;
+    }
+
+    // Depth limit check to prevent stack overflow
     if (depth >= ROUTING_THRESHOLDS.maxExplorationDepth) {
       depthLimitExceeded.push([...currentPath, nodeId]);
       return;
@@ -177,15 +210,15 @@ function analyzeRoutingPaths(graph) {
     visiting.add(nodeId);
 
     try {
-      // Check if leaf node
-      if (graph.leafNodes.includes(nodeId)) {
+      // Check if leaf node - O(1) Set.has instead of Array.includes
+      if (graph.leafNodes.has(nodeId)) {
         paths.push([...currentPath]);
         pathDepths.push(depth);
         return;
       }
 
-      // Find outgoing edges
-      const outEdges = graph.edges.filter(e => e.from === nodeId);
+      // Find outgoing edges - O(1) Map lookup instead of O(n) filter
+      const outEdges = graph.edgesBySource.get(nodeId) || [];
 
       if (outEdges.length === 0 && depth > 0) {
         // Dead end that's not an entry
@@ -194,9 +227,10 @@ function analyzeRoutingPaths(graph) {
         return;
       }
 
-      outEdges.forEach(edge => {
+      for (const edge of outEdges) {
+        if (pathLimitReached) break;
         findPaths(edge.to, depth + 1);
-      });
+      }
     } finally {
       // Backtracking: remove from path and visiting set
       currentPath.pop();
@@ -204,9 +238,10 @@ function analyzeRoutingPaths(graph) {
     }
   }
 
-  graph.entryPoints.forEach(entry => {
+  for (const entry of graph.entryPoints) {
+    if (pathLimitReached) break;
     findPaths(entry, 0);
-  });
+  }
 
   return {
     totalPaths: paths.length,
@@ -225,17 +260,20 @@ function analyzeRoutingPaths(graph) {
       .slice(0, 5),
     deadEnds: paths.filter((p, i) => {
       const lastNode = p[p.length - 1];
-      return !graph.leafNodes.includes(lastNode) && pathDepths[i] > 0;
+      return !graph.leafNodes.has(lastNode) && pathDepths[i] > 0;
     }),
     cycles: cycles,
     hasCycles: cycles.length > 0,
     depthLimitExceeded: depthLimitExceeded,
-    hasDepthLimitExceeded: depthLimitExceeded.length > 0
+    hasDepthLimitExceeded: depthLimitExceeded.length > 0,
+    pathLimitReached: pathLimitReached,
+    pathLimit: ROUTING_THRESHOLDS.maxPaths
   };
 }
 
 /**
  * Analyze routing coverage
+ * Uses O(1) edge lookups via adjacency map
  * @param {Object} graph - Routing graph
  * @returns {Object} Coverage analysis
  */
@@ -243,7 +281,7 @@ function analyzeCoverage(graph) {
   const reachableFromEntry = new Set();
   const unreachableNodes = [];
 
-  // BFS from entry points
+  // BFS from entry points using O(1) edge lookups
   function markReachable(startNode) {
     const queue = [startNode];
     while (queue.length > 0) {
@@ -252,12 +290,13 @@ function analyzeCoverage(graph) {
 
       reachableFromEntry.add(node);
 
-      const outEdges = graph.edges.filter(e => e.from === node);
-      outEdges.forEach(e => {
-        if (!reachableFromEntry.has(e.to)) {
-          queue.push(e.to);
+      // O(1) lookup via adjacency map instead of O(n) filter
+      const outEdges = graph.edgesBySource.get(node) || [];
+      for (const edge of outEdges) {
+        if (!reachableFromEntry.has(edge.to)) {
+          queue.push(edge.to);
         }
-      });
+      }
     }
   }
 
@@ -288,6 +327,7 @@ function analyzeCoverage(graph) {
 
 /**
  * Detect routing ambiguity hotspots
+ * Uses O(1) edge lookups via adjacency map
  * @param {Object} graph - Routing graph
  * @returns {Object} Ambiguity analysis
  */
@@ -295,11 +335,12 @@ function detectAmbiguity(graph) {
   const ambiguityHotspots = [];
   const branchingFactors = [];
 
-  // Calculate branching factor for each non-leaf node
+  // Calculate branching factor for each non-leaf node using O(1) lookups
   graph.nodes.forEach((node, nodeId) => {
     if (node.type === 'agent') return; // Skip leaf nodes
 
-    const outEdges = graph.edges.filter(e => e.from === nodeId);
+    // O(1) lookup via adjacency map instead of O(n) filter
+    const outEdges = graph.edgesBySource.get(nodeId) || [];
     const branchingFactor = outEdges.length;
 
     branchingFactors.push(branchingFactor);
@@ -502,9 +543,27 @@ function formatAnalysis(analysis) {
 /**
  * Run complete routing pattern analysis
  * @returns {Object} Complete analysis results
+ * @throws {Error} If critical graph building fails
  */
 function runAnalysis() {
-  const graph = buildRoutingGraph();
+  let graph;
+  try {
+    graph = buildRoutingGraph();
+  } catch (err) {
+    console.error(`Failed to build routing graph: ${err.message}`);
+    throw err;
+  }
+
+  // Validate graph structure
+  if (!graph || !graph.nodes || !(graph.nodes instanceof Map)) {
+    throw new Error('Invalid graph structure: nodes Map is missing');
+  }
+  if (!graph.edgesBySource || !(graph.edgesBySource instanceof Map)) {
+    throw new Error('Invalid graph structure: edgesBySource Map is missing');
+  }
+  if (!graph.leafNodes || !(graph.leafNodes instanceof Set)) {
+    throw new Error('Invalid graph structure: leafNodes Set is missing');
+  }
   const pathAnalysis = analyzeRoutingPaths(graph);
   const coverageAnalysis = analyzeCoverage(graph);
   const ambiguityAnalysis = detectAmbiguity(graph);
@@ -516,7 +575,7 @@ function runAnalysis() {
       nodeCount: graph.nodes.size,
       edgeCount: graph.edges.length,
       entryPoints: graph.entryPoints,
-      leafNodeCount: graph.leafNodes.length
+      leafNodeCount: graph.leafNodes.size
     },
     paths: pathAnalysis,
     coverage: coverageAnalysis,

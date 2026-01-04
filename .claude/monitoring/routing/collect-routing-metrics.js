@@ -73,13 +73,24 @@ const {
 
 /**
  * Validate that a path is within SKILLS_ROOT to prevent path traversal
+ * Resolves symlinks to prevent symlink-based attacks
  * @param {string} targetPath - Path to validate
  * @returns {boolean} True if path is safe
  */
 function isPathWithinSkillsRoot(targetPath) {
-  const resolvedPath = path.resolve(targetPath);
-  const resolvedRoot = path.resolve(SKILLS_ROOT);
-  return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+  try {
+    // Use realpathSync to resolve symlinks and get canonical path
+    // This prevents symlink attacks where a symlink points outside SKILLS_ROOT
+    const resolvedPath = fs.existsSync(targetPath)
+      ? fs.realpathSync(targetPath)
+      : path.resolve(targetPath);
+    const resolvedRoot = fs.realpathSync(SKILLS_ROOT);
+    return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+  } catch (err) {
+    // If we can't resolve the path, assume it's unsafe
+    console.warn(`Path resolution failed for ${targetPath}: ${err.message}`);
+    return false;
+  }
 }
 
 /**
@@ -98,11 +109,19 @@ function safePathJoin(...segments) {
 
 /**
  * Parse frontmatter from markdown content
+ * Enforces input size limit to prevent ReDoS attacks
  * @param {string} content - Markdown content
  * @returns {Object} Parsed frontmatter
  */
 function parseFrontmatter(content) {
   try {
+    // Input size limit to prevent ReDoS
+    if (!content || typeof content !== 'string') return {};
+    if (content.length > ROUTING_THRESHOLDS.maxInputSize) {
+      console.warn(`Content exceeds size limit (${ROUTING_THRESHOLDS.maxInputSize} bytes), truncating for frontmatter parsing`);
+      content = content.slice(0, ROUTING_THRESHOLDS.maxInputSize);
+    }
+
     const match = content.match(/^---\n([\s\S]*?)\n---/);
     if (!match) return {};
 
@@ -125,11 +144,19 @@ function parseFrontmatter(content) {
 
 /**
  * Extract keywords from routing rules in markdown
+ * Enforces input size limit to prevent ReDoS attacks
  * @param {string} content - Markdown content
  * @returns {string[]} Extracted keywords
  */
 function extractKeywords(content) {
   try {
+    // Input validation and size limit to prevent ReDoS
+    if (!content || typeof content !== 'string') return [];
+    if (content.length > ROUTING_THRESHOLDS.maxInputSize) {
+      console.warn(`Content exceeds size limit (${ROUTING_THRESHOLDS.maxInputSize} bytes), truncating for keyword extraction`);
+      content = content.slice(0, ROUTING_THRESHOLDS.maxInputSize);
+    }
+
     const keywords = new Set();
 
     // Match table-based keywords: | keyword1, keyword2 |

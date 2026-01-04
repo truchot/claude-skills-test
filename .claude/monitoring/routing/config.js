@@ -37,6 +37,12 @@ const ROUTING_THRESHOLDS = {
   // Maximum path exploration depth (prevents stack overflow)
   maxExplorationDepth: 50,
 
+  // Maximum paths to collect (prevents memory exhaustion)
+  maxPaths: 10000,
+
+  // Maximum input size for regex operations (prevents ReDoS)
+  maxInputSize: 1048576, // 1MB
+
   // Branching factor thresholds for ambiguity hotspots
   branchingFactor: {
     medium: 5,   // Warning level

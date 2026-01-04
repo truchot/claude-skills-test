@@ -147,7 +147,11 @@ SAFE_TIMESTAMP=$(json_escape "$TIMESTAMP")
 
 # Use flock for atomic log operations (rotation + write)
 # This prevents race conditions when multiple hooks run concurrently
+# Set restrictive umask for lock file creation (0600 = owner read/write only)
 (
+  # Set restrictive permissions for any files created in this subshell
+  umask 077
+
   # Acquire exclusive lock (timeout 5 seconds)
   if command -v flock &>/dev/null; then
     flock -w 5 200 || exit 0
