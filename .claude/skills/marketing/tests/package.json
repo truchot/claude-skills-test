@@ -1,0 +1,14 @@
+{
+  "name": "marketing-skill-tests",
+  "version": "1.0.0",
+  "description": "Validation tests for the marketing skill",
+  "scripts": {
+    "test": "bash run-tests.sh",
+    "test:skill": "node validate-skill.test.js",
+    "test:agents": "node validate-agents.test.js",
+    "test:routing": "node validate-routing.test.js",
+    "test:seo": "node validate-seo.test.js"
+  },
+  "keywords": ["claude", "skills", "marketing", "tests"],
+  "license": "MIT"
+}

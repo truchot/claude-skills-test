@@ -1,7 +1,7 @@
 ---
 name: marketing
 description: Expert Marketing - Stratégie, campagnes, contenu, acquisition et analytics pour agence Web
-version: 1.0.0
+version: 1.2.0
 status: active
 ---
 
@@ -46,13 +46,13 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 
 | Sous-domaine | Orchestrateur | Agents | Périmètre | Niveau |
 |--------------|---------------|--------|-----------|--------|
-| **Stratégie** | `strategie/orchestrator` | 4 | Positionnement, marché, personas, objectifs | POURQUOI |
-| **Campagnes** | `campagnes/orchestrator` | 4 | Planning, budget, coordination, tracking | QUOI |
-| **Content** | `content/orchestrator` | 4 | Copywriting, blog, social media, landing pages | COMMENT |
-| **Acquisition** | `acquisition/orchestrator` | 5 + SEO (39) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
-| **Analytics** | `analytics/orchestrator` | 4 | KPIs, A/B testing, reporting, attribution | COMMENT |
+| **Stratégie** | `strategie/orchestrator` | 5 | Positionnement, marché, personas, objectifs | POURQUOI |
+| **Campagnes** | `campagnes/orchestrator` | 5 | Planning, budget, coordination, tracking | QUOI |
+| **Content** | `content/orchestrator` | 5 | Copywriting, blog, social media, landing pages | COMMENT |
+| **Acquisition** | `acquisition/orchestrator` | 5 + SEO (49) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
+| **Analytics** | `analytics/orchestrator` | 5 | KPIs, A/B testing, reporting, attribution | COMMENT |
 
-**Total : 59 agents spécialisés** (dont 39 agents SEO)
+**Total : 74 agents spécialisés** (dont 49 agents SEO)
 
 ## Règles de Routage
 
@@ -175,7 +175,7 @@ Ce skill interagit avec :
 ## Ressources
 
 - **Agents** : `/strategie`, `/campagnes`, `/content`, `/acquisition`, `/analytics`
-- **SEO** : `/acquisition/seo/` (9 domaines, 39 agents spécialisés)
+- **SEO** : `/acquisition/seo/` (9 domaines, 49 agents spécialisés)
 
 ## Structure SEO Complète
 
