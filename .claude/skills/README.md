@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-13-green) ![Agents](https://img.shields.io/badge/agents-426-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-14-green) ![Agents](https://img.shields.io/badge/agents-500-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -97,8 +97,9 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 35 | Expertise Next.js |
 | `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 42 | Expertise WordPress |
 | `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 21 | Design system |
+| `marketing` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | Métier | 74 | Marketing digital complet |
 
-**Total : 426 agents spécialisés**
+**Total : 500 agents spécialisés**
 
 ## Guide de Migration
 
