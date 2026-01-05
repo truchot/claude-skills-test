@@ -15,7 +15,11 @@ const DOMAINS = [
   'campagnes',
   'content',
   'acquisition',
-  'analytics'
+  'analytics',
+  'fidelisation',
+  'automation',
+  'performance',
+  'social-strategy'
 ];
 
 /** @const {string[]} SEO sub-domains */
@@ -67,6 +71,34 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'reporting',
     'attribution',
     'ab-testing'
+  ],
+  'fidelisation': [
+    'orchestrator',
+    'lifecycle-management',
+    'loyalty-programs',
+    'churn-prevention',
+    'customer-success'
+  ],
+  'automation': [
+    'orchestrator',
+    'workflow-builder',
+    'lead-scoring',
+    'triggers-actions',
+    'multi-touch-sequences'
+  ],
+  'performance': [
+    'orchestrator',
+    'conversion-optimization',
+    'funnel-analysis',
+    'personalization',
+    'experimentation'
+  ],
+  'social-strategy': [
+    'orchestrator',
+    'platform-strategy',
+    'community-management',
+    'social-listening',
+    'engagement-strategy'
   ]
 };
 
@@ -163,7 +195,11 @@ const DOMAIN_KEYWORDS = {
   'campagnes': ['campagne', 'planning', 'budget', 'multicanal', 'coordination'],
   'content': ['copywriting', 'rédaction', 'article', 'blog', 'social media', 'landing page'],
   'acquisition': ['SEO', 'SEA', 'Google Ads', 'Facebook Ads', 'email', 'growth'],
-  'analytics': ['analytics', 'données', 'A/B test', 'rapport', 'attribution']
+  'analytics': ['analytics', 'données', 'A/B test', 'rapport', 'attribution'],
+  'fidelisation': ['fidélisation', 'rétention', 'loyalty', 'churn', 'customer success', 'NPS', 'lifecycle'],
+  'automation': ['automation', 'workflow', 'lead scoring', 'trigger', 'séquence', 'nurturing'],
+  'performance': ['CRO', 'conversion', 'funnel', 'personnalisation', 'A/B test', 'expérimentation'],
+  'social-strategy': ['social media', 'communauté', 'engagement', 'LinkedIn', 'Instagram', 'TikTok']
 };
 
 /**
@@ -179,11 +215,11 @@ function getTotalExpectedAgents() {
 }
 
 /**
- * Get expected agent count (should be 74)
+ * Get expected agent count (should be 94)
  * @returns {number}
  */
 function getExpectedTotal() {
-  return 74;
+  return 94;
 }
 
 module.exports = {
