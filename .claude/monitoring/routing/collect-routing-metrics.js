@@ -65,10 +65,12 @@ const path = require('path');
 const {
   SKILLS_ROOT,
   OUTPUT_DIR,
+  EXCLUDED_DIRS,
   ROUTING_THRESHOLDS,
   EFFICIENCY_THRESHOLDS,
   MONITORED_SKILLS,
-  METRICS_CONFIG
+  METRICS_CONFIG,
+  validateMonitoredSkills
 } = require('./config');
 
 /**
@@ -215,12 +217,20 @@ function countAgents(skillPath) {
     // Check for agents/ directory
     const agentsDir = safePathJoin(skillPath, 'agents');
     if (agentsDir && fs.existsSync(agentsDir)) {
-      const domains = fs.readdirSync(agentsDir).filter(d => {
-        try {
-          const domainPath = safePathJoin(agentsDir, d);
-          return domainPath && fs.statSync(domainPath).isDirectory();
-        } catch { return false; }
-      });
+      let domains = [];
+      try {
+        domains = fs.readdirSync(agentsDir).filter(d => {
+          try {
+            const domainPath = safePathJoin(agentsDir, d);
+            return domainPath && fs.statSync(domainPath).isDirectory();
+          } catch (statErr) {
+            console.warn(`Failed to stat ${d} in ${agentsDir}: ${statErr.message}`);
+            return false;
+          }
+        });
+      } catch (readErr) {
+        console.warn(`Failed to read agents directory ${agentsDir}: ${readErr.message}`);
+      }
 
       result.domains = domains;
 
@@ -228,7 +238,13 @@ function countAgents(skillPath) {
         const domainPath = safePathJoin(agentsDir, domain);
         if (!domainPath) continue;
 
-        const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+        let files = [];
+        try {
+          files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+        } catch (readErr) {
+          console.warn(`Failed to read domain ${domainPath}: ${readErr.message}`);
+          continue;
+        }
 
         for (const file of files) {
           result.total++;
@@ -244,24 +260,33 @@ function countAgents(skillPath) {
     }
 
     // Dynamically scan for organizational folders containing .md agent files
-    // Excludes known non-agent directories
-    const EXCLUDED_DIRS = new Set([
-      'agents', 'tests', 'docs', 'templates', 'node_modules',
-      'orchestration', '.git', 'scripts', 'examples'
-    ]);
-
-    const allDirs = fs.readdirSync(skillPath).filter(item => {
-      try {
-        const itemPath = safePathJoin(skillPath, item);
-        return itemPath && fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
-      } catch { return false; }
-    });
+    // Uses EXCLUDED_DIRS from config for consistency
+    let allDirs = [];
+    try {
+      allDirs = fs.readdirSync(skillPath).filter(item => {
+        try {
+          const itemPath = safePathJoin(skillPath, item);
+          return itemPath && fs.statSync(itemPath).isDirectory() && !EXCLUDED_DIRS.has(item);
+        } catch (statErr) {
+          console.warn(`Failed to stat ${item} in ${skillPath}: ${statErr.message}`);
+          return false;
+        }
+      });
+    } catch (readErr) {
+      console.warn(`Failed to read skill directory ${skillPath}: ${readErr.message}`);
+    }
 
     for (const folder of allDirs) {
       const folderPath = safePathJoin(skillPath, folder);
       if (!folderPath) continue;
 
-      const files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
+      let files = [];
+      try {
+        files = fs.readdirSync(folderPath).filter(f => f.endsWith('.md'));
+      } catch (readErr) {
+        console.warn(`Failed to read folder ${folderPath}: ${readErr.message}`);
+        continue;
+      }
 
       // Only consider folders with .md files as agent folders
       if (files.length > 0 && !result.domains.includes(folder)) {
@@ -399,8 +424,17 @@ function generateRecommendations(metrics) {
  * Collect all routing metrics
  * Focus on ambiguity analysis for routing quality
  * @returns {RoutingMetrics} Complete metrics collection
+ * @throws {Error} If MONITORED_SKILLS configuration is invalid
  */
 function collectMetrics() {
+  // Validate configuration before collecting metrics
+  const validation = validateMonitoredSkills(MONITORED_SKILLS);
+  if (!validation.valid) {
+    const errorMsg = `Invalid MONITORED_SKILLS configuration:\n  - ${validation.errors.join('\n  - ')}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
+  }
+
   const metrics = {
     timestamp: new Date().toISOString(),
     version: '2.0.0',

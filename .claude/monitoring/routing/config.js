@@ -18,6 +18,16 @@ const LOG_CONFIG = {
   maxRotatedLogs: 5     // Keep 5 rotated logs
 };
 
+/**
+ * Directories to exclude when scanning for agent files
+ * These are known non-agent directories in skill folders
+ * @const {Set<string>}
+ */
+const EXCLUDED_DIRS = new Set([
+  'agents', 'tests', 'docs', 'templates', 'node_modules',
+  'orchestration', '.git', 'scripts', 'examples'
+]);
+
 /** @const {string} Skills root directory */
 const SKILLS_ROOT = path.join(__dirname, '../../skills');
 
@@ -190,6 +200,7 @@ module.exports = {
   SKILLS_ROOT,
   OUTPUT_DIR,
   LOG_CONFIG,
+  EXCLUDED_DIRS,
   ROUTING_THRESHOLDS,
   EFFICIENCY_THRESHOLDS,
   MONITORED_SKILLS,
