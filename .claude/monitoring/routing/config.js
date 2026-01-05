@@ -9,6 +9,15 @@
 
 const path = require('path');
 
+/**
+ * Log file configuration (centralized magic numbers)
+ * @const {Object}
+ */
+const LOG_CONFIG = {
+  maxLogSize: 10485760, // 10MB in bytes
+  maxRotatedLogs: 5     // Keep 5 rotated logs
+};
+
 /** @const {string} Skills root directory */
 const SKILLS_ROOT = path.join(__dirname, '../../skills');
 
@@ -141,12 +150,50 @@ const REPORT_SETTINGS = {
   includeRoutingPaths: true
 };
 
+/**
+ * Validate MONITORED_SKILLS configuration structure
+ * @param {Object} skills - Skills configuration to validate
+ * @returns {{valid: boolean, errors: string[]}} Validation result
+ */
+function validateMonitoredSkills(skills) {
+  const errors = [];
+
+  if (!skills || typeof skills !== 'object') {
+    errors.push('MONITORED_SKILLS must be a non-null object');
+    return { valid: false, errors };
+  }
+
+  for (const [skillName, config] of Object.entries(skills)) {
+    if (typeof skillName !== 'string' || skillName.length === 0) {
+      errors.push(`Invalid skill name: ${skillName}`);
+      continue;
+    }
+
+    if (!config || typeof config !== 'object') {
+      errors.push(`${skillName}: config must be an object`);
+      continue;
+    }
+
+    if (typeof config.expectedAgents !== 'number' || config.expectedAgents < 0) {
+      errors.push(`${skillName}: expectedAgents must be a non-negative number`);
+    }
+
+    if (typeof config.hasOrchestrator !== 'boolean') {
+      errors.push(`${skillName}: hasOrchestrator must be a boolean`);
+    }
+  }
+
+  return { valid: errors.length === 0, errors };
+}
+
 module.exports = {
   SKILLS_ROOT,
   OUTPUT_DIR,
+  LOG_CONFIG,
   ROUTING_THRESHOLDS,
   EFFICIENCY_THRESHOLDS,
   MONITORED_SKILLS,
   METRICS_CONFIG,
-  REPORT_SETTINGS
+  REPORT_SETTINGS,
+  validateMonitoredSkills
 };

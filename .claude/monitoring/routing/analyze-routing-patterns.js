@@ -25,7 +25,8 @@ const path = require('path');
 const {
   SKILLS_ROOT,
   ROUTING_THRESHOLDS,
-  MONITORED_SKILLS
+  MONITORED_SKILLS,
+  validateMonitoredSkills
 } = require('./config');
 
 /**
@@ -68,8 +69,17 @@ function safePathJoin(...segments) {
  * Build routing graph from skill definitions
  * Uses Set for O(1) leaf node lookups and adjacency map for O(1) edge lookups
  * @returns {Object} Routing graph structure
+ * @throws {Error} If MONITORED_SKILLS configuration is invalid
  */
 function buildRoutingGraph() {
+  // Validate configuration before building graph
+  const validation = validateMonitoredSkills(MONITORED_SKILLS);
+  if (!validation.valid) {
+    const errorMsg = `Invalid MONITORED_SKILLS configuration:\n  - ${validation.errors.join('\n  - ')}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
+  }
+
   const graph = {
     nodes: new Map(),
     edges: [],
@@ -108,10 +118,20 @@ function buildRoutingGraph() {
     // Scan for domains and agents
     const agentsDir = safePathJoin(skillPath, 'agents');
     if (agentsDir && fs.existsSync(agentsDir)) {
-      const domains = fs.readdirSync(agentsDir).filter(d => {
-        const domainPath = safePathJoin(agentsDir, d);
-        return domainPath && fs.statSync(domainPath).isDirectory();
-      });
+      let domains = [];
+      try {
+        domains = fs.readdirSync(agentsDir).filter(d => {
+          try {
+            const domainPath = safePathJoin(agentsDir, d);
+            return domainPath && fs.statSync(domainPath).isDirectory();
+          } catch (statErr) {
+            console.warn(`Failed to stat ${d} in ${agentsDir}: ${statErr.message}`);
+            return false;
+          }
+        });
+      } catch (readErr) {
+        console.warn(`Failed to read agents directory ${agentsDir}: ${readErr.message}`);
+      }
 
       domains.forEach(domain => {
         const domainId = `${skillName}/${domain}`;
@@ -131,7 +151,14 @@ function buildRoutingGraph() {
         // Add agent nodes
         const domainPath = safePathJoin(agentsDir, domain);
         if (!domainPath) return;
-        const files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+
+        let files = [];
+        try {
+          files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+        } catch (readErr) {
+          console.warn(`Failed to read domain directory ${domainPath}: ${readErr.message}`);
+          return;
+        }
 
         files.forEach(file => {
           const agentName = file.replace('.md', '');

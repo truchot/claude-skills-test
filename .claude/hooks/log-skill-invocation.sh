@@ -145,13 +145,18 @@ SAFE_SKILL=$(json_escape "$SKILL_NAME")
 SAFE_SESSION=$(json_escape "${CLAUDE_SESSION_ID:-}")
 SAFE_TIMESTAMP=$(json_escape "$TIMESTAMP")
 
+# Pre-construct the log line to avoid format string issues
+# This is safer than using printf with variables in the format string
+LOG_LINE="{\"timestamp\":\"${SAFE_TIMESTAMP}\",\"skill\":\"${SAFE_SKILL}\",\"session\":\"${SAFE_SESSION}\"}"
+
+# Set restrictive umask BEFORE creating lock file (fixes race condition)
+# This ensures the lock file itself has proper permissions from creation
+old_umask=$(umask)
+umask 077
+
 # Use flock for atomic log operations (rotation + write)
 # This prevents race conditions when multiple hooks run concurrently
-# Set restrictive umask for lock file creation (0600 = owner read/write only)
 (
-  # Set restrictive permissions for any files created in this subshell
-  umask 077
-
   # Acquire exclusive lock (timeout 5 seconds)
   if command -v flock &>/dev/null; then
     flock -w 5 200 || exit 0
@@ -161,13 +166,13 @@ SAFE_TIMESTAMP=$(json_escape "$TIMESTAMP")
   rotate_logs_unlocked
 
   # Append to JSONL log (one JSON object per line)
-  # Using printf to avoid issues with echo and special characters
-  printf '{"timestamp":"%s","skill":"%s","session":"%s"}\n' \
-    "$SAFE_TIMESTAMP" \
-    "$SAFE_SKILL" \
-    "$SAFE_SESSION" >> "$LOG_FILE" 2>/dev/null || true
+  # Using echo with pre-constructed string for safety
+  echo "$LOG_LINE" >> "$LOG_FILE" 2>/dev/null || true
 
 ) 200>"$LOCK_FILE"
+
+# Restore original umask
+umask "$old_umask"
 
 # Exit successfully (don't block the skill invocation)
 exit 0
