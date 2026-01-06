@@ -131,10 +131,21 @@ Voir les templates dans chaque dossier :
 
 | Skill | Description | Sous-skills |
 |-------|-------------|-------------|
-| `html` | Structure HTML5 sémantique | - |
-| `css` | CSS moderne, Grid, Flexbox | grid, flexbox, variables |
+| `html` | Structure HTML5 sémantique, SEO | - |
+| `css` | CSS moderne, Grid, Flexbox, variables | - |
+| `javascript` | JavaScript ES6+, DOM, async | - |
+| `typescript` | Typage TypeScript, génériques | - |
+| `react` | Composants, patterns React | hooks, state |
+| `nextjs` | App Router, Server Components | - |
+| `api-rest` | Design API REST, HTTP, versioning | - |
+| `database` | SQL, Prisma ORM, optimisation | - |
+| `security` | Auth, JWT, OWASP, encryption | - |
+| `accessibility` | WCAG, ARIA, tests a11y | - |
+| `performance` | Core Web Vitals, optimisation | - |
+| `docker` | Conteneurs, Dockerfile, Compose | - |
+| `ci-cd` | GitHub Actions, pipelines | - |
 | `testing` | Stratégie et techniques de tests | unit, integration, e2e |
-| `git` | Versioning et collaboration | branching, commits |
+| `git` | Versioning et collaboration | - |
 
 ### Workflows (Processus)
 
@@ -180,8 +191,11 @@ L'ancien dossier `skills/` contient l'ancienne structure avec un mélange de :
 - [x] Structure créée (skills/, workflows/, roles/)
 - [x] Templates définis
 - [x] Skills pilotes migrés (html, css, testing, git)
+- [x] Skills core migrés (javascript, typescript, react, nextjs)
+- [x] Skills backend migrés (api-rest, database, security)
+- [x] Skills DevOps migrés (docker, ci-cd)
+- [x] Skills qualité migrés (accessibility, performance)
 - [x] Workflows développement créés
 - [x] Roles principaux créés
-- [ ] Migration complète des skills existants
+- [ ] Archiver ancienne structure
 - [ ] Tests de validation
-- [ ] Suppression ancienne structure

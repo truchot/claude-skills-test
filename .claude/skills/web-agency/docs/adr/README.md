@@ -11,6 +11,9 @@ Ce dossier contient les ADRs (Architecture Decision Records) documentant les dé
 | [003](003-markdown-agent-format.md) | Format Markdown pour les agents | Accepté |
 | [004](004-human-supervision.md) | Supervision humaine obligatoire | Accepté |
 | [005](005-skill-responsibility-boundaries.md) | Frontières de responsabilités entre skills | Accepté |
+| [006](006-hierarchy-clarification.md) | Clarification hiérarchie lead-dev/web-dev-process | Accepté |
+| [007](007-skill-extraction-pattern.md) | Pattern d'extraction de skills | Accepté |
+| [008](008-triple-layer-architecture.md) | Architecture Triple Couche (Skills/Workflows/Roles) | Accepté |
 
 ## Format ADR
 
