@@ -73,11 +73,40 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'ab-testing'
   ],
   'fidelisation': [
+    'orchestrator'
+  ],
+  'fidelisation/lifecycle': [
     'orchestrator',
-    'lifecycle-management',
-    'loyalty-programs',
-    'churn-prevention',
-    'customer-success'
+    'onboarding',
+    'activation',
+    'engagement',
+    'retention',
+    'expansion',
+    'advocacy'
+  ],
+  'fidelisation/loyalty': [
+    'orchestrator',
+    'program-economics',
+    'earn-mechanics',
+    'burn-rewards',
+    'tier-design',
+    'gamification'
+  ],
+  'fidelisation/churn': [
+    'orchestrator',
+    'signal-detection',
+    'scoring-model',
+    'intervention-playbooks',
+    'retention-offers',
+    'dunning'
+  ],
+  'fidelisation/success': [
+    'orchestrator',
+    'health-score',
+    'nps-csat',
+    'qbr',
+    'csm-operations',
+    'voc'
   ],
   'automation': [
     'orchestrator',
@@ -215,11 +244,11 @@ function getTotalExpectedAgents() {
 }
 
 /**
- * Get expected agent count (should be 94)
+ * Get expected agent count (115 after SRP refactoring of fidelisation)
  * @returns {number}
  */
 function getExpectedTotal() {
-  return 94;
+  return 115;
 }
 
 module.exports = {

@@ -55,14 +55,54 @@ Tu es l'orchestrateur du domaine **Fidélisation**. Tu coordonnes toutes les act
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Tes Agents Spécialisés
+## Tes Agents Spécialisés (Architecture SRP)
 
-| Agent | Périmètre | Quand le solliciter | Expertise clé |
-|-------|-----------|---------------------|---------------|
-| `lifecycle-management` | Cycle de vie client | Onboarding, engagement, réactivation | Cartographie parcours, moments clés, séquences |
-| `loyalty-programs` | Programmes de fidélité | Points, tiers, rewards, gamification | Économie programme, mécaniques, ROI |
-| `churn-prevention` | Prévention de l'attrition | Signaux de désengagement, interventions | Scoring prédictif, playbooks rétention |
-| `customer-success` | Succès client | Accompagnement, NPS, satisfaction | Health scores, QBR, advocacy |
+Chaque domaine est divisé en agents spécialisés suivant le principe de Single Responsibility.
+
+### Domaine Lifecycle (`lifecycle/`)
+
+| Agent | Responsabilité | Périmètre |
+|-------|----------------|-----------|
+| `lifecycle/orchestrator` | Routage lifecycle | Coordination des phases AARRR |
+| `lifecycle/onboarding` | J0-J7 | Welcome, TTFV, premiers pas |
+| `lifecycle/activation` | J7-J30 | Aha moment, feature adoption |
+| `lifecycle/engagement` | J30-J90 | Habitudes, hooks, usage régulier |
+| `lifecycle/retention` | J90+ | NRR/GRR, QBR, renouvellements |
+| `lifecycle/expansion` | Croissance | Upsell, cross-sell, triggers |
+| `lifecycle/advocacy` | Ambassadeurs | Referrals, reviews, case studies |
+
+### Domaine Loyalty (`loyalty/`)
+
+| Agent | Responsabilité | Périmètre |
+|-------|----------------|-----------|
+| `loyalty/orchestrator` | Routage fidélité | Coordination programme |
+| `loyalty/program-economics` | ROI & Coûts | Liability, break-even, budget |
+| `loyalty/earn-mechanics` | Accumulation | Points, règles, multiplicateurs |
+| `loyalty/burn-rewards` | Récompenses | Catalogue, valeur perçue |
+| `loyalty/tier-design` | Statuts | Niveaux, qualifications, avantages |
+| `loyalty/gamification` | Engagement | Badges, streaks, challenges |
+
+### Domaine Churn (`churn/`)
+
+| Agent | Responsabilité | Périmètre |
+|-------|----------------|-----------|
+| `churn/orchestrator` | Routage churn | Coordination anti-churn |
+| `churn/signal-detection` | Signaux | Comportementaux, explicites |
+| `churn/scoring-model` | Score risque | ML, pondérations, seuils |
+| `churn/intervention-playbooks` | Actions | Séquences par niveau risque |
+| `churn/retention-offers` | Offres | Remises, conditions, ROI |
+| `churn/dunning` | Paiements | Échecs, relances, involontaire |
+
+### Domaine Success (`success/`)
+
+| Agent | Responsabilité | Périmètre |
+|-------|----------------|-----------|
+| `success/orchestrator` | Routage CS | Coordination customer success |
+| `success/health-score` | Santé client | Score composite, alertes |
+| `success/nps-csat` | Satisfaction | NPS, CSAT, CES, closed-loop |
+| `success/qbr` | Reviews | QBR, EBR, success plans |
+| `success/csm-operations` | Opérations | Playbooks, cadence, segmentation |
+| `success/voc` | Voice of Customer | Advisory boards, beta, feedback |
 
 ## Arbre de Décision Avancé
 
