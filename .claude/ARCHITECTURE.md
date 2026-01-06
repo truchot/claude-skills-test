@@ -197,5 +197,5 @@ L'ancien dossier `skills/` contient l'ancienne structure avec un mélange de :
 - [x] Skills qualité migrés (accessibility, performance)
 - [x] Workflows développement créés
 - [x] Roles principaux créés
-- [ ] Archiver ancienne structure
-- [ ] Tests de validation
+- [x] Archiver ancienne structure (`skills/_archive/`)
+- [x] Tests de validation (`scripts/validate-architecture.sh`)
