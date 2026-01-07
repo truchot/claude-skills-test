@@ -3,6 +3,7 @@ name: wordpress
 description: WordPress et Gutenberg - blocks, thèmes, plugins, API
 tags: [wordpress, gutenberg, php, blocks, theme, plugin, wp-cli]
 sub-skills: [gutenberg, theme]
+related-workflows: [wordpress-project-setup, wordpress-deployment, wordpress-migration-classic-to-block]
 ---
 
 # WordPress
@@ -20,6 +21,16 @@ sub-skills: [gutenberg, theme]
 |------------|---------|-------------|
 | Gutenberg | `gutenberg.md` | Blocks custom, variations, data stores |
 | Theme | `theme.md` | Block themes, theme.json, patterns, Interactivity API |
+
+## Workflows Associés
+
+> Les processus séquentiels (QUAND) sont dans `/workflows/wordpress/`
+
+| Workflow | Fichier | Description |
+|----------|---------|-------------|
+| Project Setup | `workflows/wordpress/project-setup.md` | Init projet → Git → Env dev |
+| Deployment | `workflows/wordpress/deployment.md` | SSH → Staging → Production |
+| Migration | `workflows/wordpress/migration-classic-to-block.md` | Classic → Block Theme |
 
 ## Architecture WordPress
 

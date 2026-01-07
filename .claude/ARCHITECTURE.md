@@ -153,7 +153,7 @@ Voir les templates dans chaque dossier :
 | `analytics-marketing` | KPIs, tracking, attribution, A/B tests | - |
 | `project-management` | Gestion de projet, communication, templates | **communication** |
 
-### Workflows (Processus) - 10 workflows
+### Workflows (Processus) - 13 workflows
 
 | Workflow | Description | Appelle |
 |----------|-------------|---------|
@@ -167,6 +167,9 @@ Voir les templates dans chaque dossier :
 | `project/avant-projet` | Brief → Chiffrage → Proposition | - |
 | `project/pilotage-projet` | Planning → Suivi → Reporting | - |
 | `marketing/content-strategy` | Audit → Personas → Keywords → Calendar | - |
+| `wordpress/project-setup` | Init projet WP → Git → Env dev | - |
+| `wordpress/deployment` | SSH → Staging → Production | - |
+| `wordpress/migration-classic-to-block` | Classic Theme → Block Theme FSE | - |
 
 ### Roles (Métiers) - 7 rôles
 
