@@ -1,6 +1,6 @@
 ---
 name: success-csm-operations
-version: 2.0.0
+version: 1.0.0
 description: Opérations quotidiennes des Customer Success Managers
 dependencies:
   - success/health-score (priorisation)

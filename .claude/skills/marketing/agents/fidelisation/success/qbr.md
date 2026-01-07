@@ -1,6 +1,6 @@
 ---
 name: success-qbr
-version: 2.0.0
+version: 1.0.0
 description: Quarterly Business Reviews et Success Planning
 dependencies:
   - success/health-score (données santé)

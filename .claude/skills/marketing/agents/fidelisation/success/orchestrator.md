@@ -1,6 +1,6 @@
 ---
 name: success-orchestrator
-version: 2.0.0
+version: 1.0.0
 description: Orchestration du Customer Success Management
 dependencies:
   - success/health-score

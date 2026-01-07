@@ -1,6 +1,6 @@
 ---
 name: churn-dunning
-version: 2.0.0
+version: 1.0.0
 description: Gestion des échecs de paiement et prévention du churn involontaire
 dependencies:
   - churn/signal-detection (signaux paiement)

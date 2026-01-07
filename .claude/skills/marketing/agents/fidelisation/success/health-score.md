@@ -1,6 +1,6 @@
 ---
 name: success-health-score
-version: 2.0.0
+version: 1.0.0
 description: Calcul et monitoring du Health Score client
 dependencies:
   - churn/scoring-model (complémentarité avec score churn)

@@ -1,6 +1,6 @@
 ---
 name: churn-intervention-playbooks
-version: 2.0.0
+version: 1.0.0
 description: Playbooks d'intervention par niveau de risque churn
 dependencies:
   - churn/scoring-model (score risque)

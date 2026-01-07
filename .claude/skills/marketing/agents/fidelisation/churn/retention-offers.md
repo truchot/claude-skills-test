@@ -1,6 +1,6 @@
 ---
 name: churn-retention-offers
-version: 2.0.0
+version: 1.0.0
 description: Matrice des offres de rétention et incentives
 dependencies:
   - churn/scoring-model (critères éligibilité)

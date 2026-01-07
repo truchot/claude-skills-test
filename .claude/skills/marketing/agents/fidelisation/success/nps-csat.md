@@ -1,6 +1,6 @@
 ---
 name: success-nps-csat
-version: 2.0.0
+version: 1.0.0
 description: Gestion des métriques de satisfaction client (NPS, CSAT, CES)
 dependencies:
   - success/health-score (alimentation score santé)

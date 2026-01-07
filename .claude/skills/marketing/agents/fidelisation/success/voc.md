@@ -1,6 +1,6 @@
 ---
 name: success-voc
-version: 2.0.0
+version: 1.0.0
 description: Voice of Customer - Programmes de feedback et advisory
 dependencies:
   - success/nps-csat (feedback quantitatif)
