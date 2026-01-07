@@ -5,6 +5,45 @@ Toutes les modifications notables de ce skill sont documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [1.3.0] - 2026-01-05
+
+### Ajouté
+
+#### Domaine Fidélisation (5 agents)
+- `orchestrator.md` - Coordination fidélisation et rétention
+- `lifecycle-management.md` - Gestion du cycle de vie client (onboarding → advocacy)
+- `loyalty-programs.md` - Programmes de fidélité, points, tiers, gamification
+- `churn-prevention.md` - Détection et prévention de l'attrition
+- `customer-success.md` - Customer success, NPS, CSAT, health score
+
+#### Domaine Automation (5 agents)
+- `orchestrator.md` - Coordination marketing automation avancé
+- `workflow-builder.md` - Conception de workflows automatisés
+- `lead-scoring.md` - Modélisation et scoring de leads (MQL/SQL)
+- `triggers-actions.md` - Configuration des déclencheurs et actions
+- `multi-touch-sequences.md` - Séquences de nurturing multi-canal
+
+#### Domaine Performance / CRO (5 agents)
+- `orchestrator.md` - Coordination optimisation des conversions
+- `conversion-optimization.md` - Stratégie CRO et audits
+- `funnel-analysis.md` - Analyse des funnels et drop-offs
+- `personalization.md` - Personnalisation par segment et contexte
+- `experimentation.md` - A/B tests, tests multivariés, feature flags
+
+#### Domaine Social Strategy (5 agents)
+- `orchestrator.md` - Coordination stratégie social media
+- `platform-strategy.md` - Stratégie par plateforme (LinkedIn, Instagram, TikTok, etc.)
+- `community-management.md` - Animation et modération de communauté
+- `social-listening.md` - Veille, monitoring, analyse de sentiment
+- `engagement-strategy.md` - Croissance organique et viralité
+
+### Modifié
+- `SKILL.md` v1.3.0 : 9 domaines, 94 agents au total (+20 agents)
+- Architecture mise à jour avec 4 nouveaux domaines de niveau COMMENT
+- Règles de routage étendues pour les nouveaux domaines
+
+---
+
 ## [1.2.0] - 2026-01-04
 
 ### Ajouté
@@ -116,7 +155,7 @@ et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 ## Roadmap
 
 ### Prochaines versions
-- Domaine CRM et fidélisation
 - Domaine Influence marketing
-- Domaine Marketing automation avancé
-- Intégration avec skill `project-management`
+- Domaine Affiliation marketing
+- Intégration avancée avec skill `project-management`
+- Domaine Video marketing (YouTube, Shorts, Reels)

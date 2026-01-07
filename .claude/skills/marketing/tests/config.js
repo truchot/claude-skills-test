@@ -15,7 +15,11 @@ const DOMAINS = [
   'campagnes',
   'content',
   'acquisition',
-  'analytics'
+  'analytics',
+  'fidelisation',
+  'automation',
+  'performance',
+  'social-strategy'
 ];
 
 /** @const {string[]} SEO sub-domains */
@@ -67,6 +71,63 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'reporting',
     'attribution',
     'ab-testing'
+  ],
+  'fidelisation': [
+    'orchestrator'
+  ],
+  'fidelisation/lifecycle': [
+    'orchestrator',
+    'onboarding',
+    'activation',
+    'engagement',
+    'retention',
+    'expansion',
+    'advocacy'
+  ],
+  'fidelisation/loyalty': [
+    'orchestrator',
+    'program-economics',
+    'earn-mechanics',
+    'burn-rewards',
+    'tier-design',
+    'gamification'
+  ],
+  'fidelisation/churn': [
+    'orchestrator',
+    'signal-detection',
+    'scoring-model',
+    'intervention-playbooks',
+    'retention-offers',
+    'dunning'
+  ],
+  'fidelisation/success': [
+    'orchestrator',
+    'health-score',
+    'nps-csat',
+    'qbr',
+    'csm-operations',
+    'voc'
+  ],
+  'automation': [
+    'orchestrator',
+    'workflow-builder',
+    'lead-scoring',
+    'triggers-actions',
+    'multi-touch-sequences'
+  ],
+  'performance': [
+    'orchestrator',
+    'conversion-optimization',
+    'funnel-analysis',
+    'personalization',
+    'experimentation'
+  ],
+  'social-strategy': [
+    'orchestrator',
+    'platform-strategy',
+    'community-management',
+    'social-listening',
+    'engagement-strategy'
   ]
 };
 
@@ -163,7 +224,11 @@ const DOMAIN_KEYWORDS = {
   'campagnes': ['campagne', 'planning', 'budget', 'multicanal', 'coordination'],
   'content': ['copywriting', 'rédaction', 'article', 'blog', 'social media', 'landing page'],
   'acquisition': ['SEO', 'SEA', 'Google Ads', 'Facebook Ads', 'email', 'growth'],
-  'analytics': ['analytics', 'données', 'A/B test', 'rapport', 'attribution']
+  'analytics': ['analytics', 'données', 'A/B test', 'rapport', 'attribution'],
+  'fidelisation': ['fidélisation', 'rétention', 'loyalty', 'churn', 'customer success', 'NPS', 'lifecycle'],
+  'automation': ['automation', 'workflow', 'lead scoring', 'trigger', 'séquence', 'nurturing'],
+  'performance': ['CRO', 'conversion', 'funnel', 'personnalisation', 'A/B test', 'expérimentation'],
+  'social-strategy': ['social media', 'communauté', 'engagement', 'LinkedIn', 'Instagram', 'TikTok']
 };
 
 /**
@@ -179,11 +244,11 @@ function getTotalExpectedAgents() {
 }
 
 /**
- * Get expected agent count (should be 74)
+ * Get expected agent count (115 after SRP refactoring of fidelisation)
  * @returns {number}
  */
 function getExpectedTotal() {
-  return 74;
+  return 115;
 }
 
 module.exports = {

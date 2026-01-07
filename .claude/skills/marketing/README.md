@@ -2,7 +2,7 @@
 
 Expert Marketing digital pour agence Web - Stratégie, campagnes, contenu, acquisition et analytics.
 
-![Version](https://img.shields.io/badge/version-1.2.0-blue) ![Agents](https://img.shields.io/badge/agents-74-brightgreen) ![Status](https://img.shields.io/badge/status-active-green)
+![Version](https://img.shields.io/badge/version-1.3.0-blue) ![Agents](https://img.shields.io/badge/agents-115-brightgreen) ![Status](https://img.shields.io/badge/status-active-green)
 
 ## Vue d'Ensemble
 

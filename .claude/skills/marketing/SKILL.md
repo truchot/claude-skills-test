@@ -1,7 +1,7 @@
 ---
 name: marketing
-description: Expert Marketing - Stratégie, campagnes, contenu, acquisition et analytics pour agence Web
-version: 1.2.0
+description: Expert Marketing - Stratégie, campagnes, contenu, acquisition, fidélisation, automation, performance et analytics pour agence Web
+version: 1.3.0
 status: active
 ---
 
@@ -35,9 +35,14 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 └─────────────────────────────────────────────────────────────┘
                           ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  NIVEAU 3 : COMMENT (content/, acquisition/, analytics/)    │
+│  NIVEAU 3 : COMMENT (content/, acquisition/, analytics/,    │
+│              fidelisation/, automation/, performance/,       │
+│              social-strategy/)                               │
 │  → Production de contenu                                    │
 │  → Activation des canaux                                    │
+│  → Fidélisation et rétention                                │
+│  → Automatisation marketing                                 │
+│  → Optimisation des conversions                             │
 │  → ✅ EXÉCUTION                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -51,8 +56,12 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | **Content** | `content/orchestrator` | 5 | Copywriting, blog, social media, landing pages | COMMENT |
 | **Acquisition** | `acquisition/orchestrator` | 5 + SEO (49) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
 | **Analytics** | `analytics/orchestrator` | 5 | KPIs, A/B testing, reporting, attribution | COMMENT |
+| **Fidélisation** | `fidelisation/orchestrator` | 26 | Lifecycle (7), Loyalty (6), Churn (6), Success (6) | COMMENT |
+| **Automation** | `automation/orchestrator` | 5 | Workflows, lead scoring, triggers, séquences | COMMENT |
+| **Performance** | `performance/orchestrator` | 5 | CRO, funnel analysis, personnalisation, A/B testing | COMMENT |
+| **Social Strategy** | `social-strategy/orchestrator` | 5 | Plateformes, community, social listening, engagement | COMMENT |
 
-**Total : 74 agents spécialisés** (dont 49 agents SEO)
+**Total : 115 agents spécialisés** (dont 49 agents SEO + 26 agents Fidélisation)
 
 ## Règles de Routage
 
@@ -78,6 +87,16 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | A/B test, expérimentation, optimisation | `analytics` |
 | rapport, dashboard, reporting, bilan | `analytics` |
 | attribution, parcours, funnel | `analytics` |
+| fidélisation, rétention, loyalty, churn, customer success | `fidelisation` |
+| lifecycle, cycle de vie, NPS, satisfaction, LTV | `fidelisation` |
+| automation, workflow, lead scoring, trigger, séquence | `automation` |
+| nurturing, drip, multi-touch, cadence | `automation` |
+| CRO, conversion, optimisation, performance | `performance` |
+| funnel analysis, drop-off, personnalisation | `performance` |
+| test A/B avancé, multivarié, expérimentation | `performance` |
+| social media, réseaux sociaux, communauté, engagement | `social-strategy` |
+| LinkedIn, Instagram, TikTok, Twitter, Facebook, YouTube | `social-strategy` |
+| community management, modération, social listening | `social-strategy` |
 
 ## Arbre de Décision
 
@@ -96,8 +115,20 @@ Requête Marketing
 ├─ Activation de canaux d'acquisition ?
 │  └─ → acquisition/orchestrator
 │
-└─ Mesure ou optimisation ?
-   └─ → analytics/orchestrator
+├─ Mesure ou optimisation analytics ?
+│  └─ → analytics/orchestrator
+│
+├─ Fidélisation, rétention ou loyalty ?
+│  └─ → fidelisation/orchestrator
+│
+├─ Workflows ou automation avancée ?
+│  └─ → automation/orchestrator
+│
+├─ CRO, conversion ou A/B testing avancé ?
+│  └─ → performance/orchestrator
+│
+└─ Social media ou community management ?
+   └─ → social-strategy/orchestrator
 ```
 
 ## Funnel Marketing AARRR
@@ -122,7 +153,7 @@ Requête Marketing
 │        ▼                                                    │
 │  ┌────────────┐                                             │
 │  │ RETENTION  │ ← Fidélisation                              │
-│  │            │   Agents: Email Automation, Content         │
+│  │            │   Agents: Fidelisation, Automation, Email   │
 │  └─────┬──────┘                                             │
 │        ▼                                                    │
 │  ┌────────────┐                                             │
@@ -174,7 +205,7 @@ Ce skill interagit avec :
 
 ## Ressources
 
-- **Agents** : `/strategie`, `/campagnes`, `/content`, `/acquisition`, `/analytics`
+- **Agents** : `/strategie`, `/campagnes`, `/content`, `/acquisition`, `/analytics`, `/fidelisation`, `/automation`, `/performance`, `/social-strategy`
 - **SEO** : `/acquisition/seo/` (9 domaines, 49 agents spécialisés)
 
 ## Structure SEO Complète
@@ -192,4 +223,50 @@ acquisition/seo/
 ├── local/          # Google Business, avis, NAP
 ├── ecommerce/      # Fiches produits, catégories, Shopping
 └── international/  # Hreflang, localisation, geotargeting
+```
+
+## Nouveaux Domaines v1.3
+
+### Fidélisation (5 agents)
+
+```
+fidelisation/
+├── orchestrator.md       # Coordination fidélisation
+├── lifecycle-management.md # Cycle de vie client
+├── loyalty-programs.md   # Programmes de fidélité
+├── churn-prevention.md   # Prévention de l'attrition
+└── customer-success.md   # Customer success & NPS
+```
+
+### Automation (5 agents)
+
+```
+automation/
+├── orchestrator.md       # Coordination automation
+├── workflow-builder.md   # Conception de workflows
+├── lead-scoring.md       # Scoring et qualification
+├── triggers-actions.md   # Déclencheurs et actions
+└── multi-touch-sequences.md # Séquences multi-canal
+```
+
+### Performance / CRO (5 agents)
+
+```
+performance/
+├── orchestrator.md       # Coordination CRO
+├── conversion-optimization.md # Optimisation conversions
+├── funnel-analysis.md    # Analyse des funnels
+├── personalization.md    # Personnalisation
+└── experimentation.md    # A/B tests et MVT
+```
+
+### Social Strategy (5 agents)
+
+```
+social-strategy/
+├── orchestrator.md       # Coordination social media
+├── platform-strategy.md  # Stratégie par plateforme
+├── community-management.md # Gestion de communauté
+├── social-listening.md   # Veille et écoute sociale
+└── engagement-strategy.md # Croissance et engagement
 ```
