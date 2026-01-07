@@ -1,6 +1,7 @@
 #!/bin/bash
 # Validation script for triple-layer architecture
-# Enhanced with schema validation, workflow calls, and circular dependency detection
+# Enhanced with schema validation, workflow calls, circular dependency detection,
+# and sub-skill validation
 
 set -e
 
@@ -19,6 +20,7 @@ NC='\033[0m' # No Color
 # Arrays for tracking
 declare -A WORKFLOW_NAMES
 declare -A SKILL_NAMES
+declare -A SKILL_DIRS
 declare -A ROLE_NAMES
 declare -A WORKFLOW_CALLS
 
@@ -76,6 +78,47 @@ check_frontmatter() {
     return 0
 }
 
+# Recursive function to detect circular dependencies up to depth 3
+# Returns 0 if cycle found, 1 if no cycle
+check_cycle() {
+    local start="$1"
+    local current="$2"
+    local depth="$3"
+    local path="$4"
+
+    # Max depth reached
+    if [ "$depth" -gt 3 ]; then
+        return 1
+    fi
+
+    # Get calls for current workflow
+    local calls="${WORKFLOW_CALLS[$current]}"
+    if [ -z "$calls" ]; then
+        return 1
+    fi
+
+    IFS=', ' read -ra CALL_ARRAY <<< "$calls"
+    for called in "${CALL_ARRAY[@]}"; do
+        called=$(echo "$called" | tr -d ' ')
+        if [ -z "$called" ]; then
+            continue
+        fi
+
+        # Check if we've come back to start
+        if [ "$called" = "$start" ]; then
+            echo -e "   ${RED}✗${NC} Cycle détecté: $path → $called"
+            return 0
+        fi
+
+        # Recurse deeper
+        if check_cycle "$start" "$called" $((depth + 1)) "$path → $called"; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 # 1. Check directory structure
 echo "1. Vérification de la structure..."
 for dir in skills workflows roles schemas scripts; do
@@ -103,7 +146,7 @@ for template in skills/_TEMPLATE.md workflows/_TEMPLATE.md roles/_TEMPLATE.md; d
     fi
 done
 
-# 3. Check skills
+# 3. Check skills and collect sub-skill info
 echo ""
 echo "3. Vérification des skills atomiques..."
 for skill_dir in .claude/skills/*/; do
@@ -115,6 +158,7 @@ for skill_dir in .claude/skills/*/; do
         if check_frontmatter "${skill_dir}SKILL.md" "skill"; then
             echo -e "   ${GREEN}✓${NC} $skill_name/SKILL.md"
             SKILL_NAMES["$skill_name"]=1
+            SKILL_DIRS["$skill_name"]="$skill_dir"
             SKILL_COUNT=$((SKILL_COUNT + 1))
         fi
     else
@@ -193,29 +237,15 @@ else
     ERRORS=$((ERRORS + call_errors))
 fi
 
-# 7. Check for circular dependencies (simple check)
+# 7. Check for circular dependencies (depth up to 3)
 echo ""
-echo "7. Vérification des dépendances circulaires..."
+echo "7. Vérification des dépendances circulaires (profondeur 3)..."
 circular_found=0
 
-# Simple depth-1 circular check
-for wf_a in "${!WORKFLOW_CALLS[@]}"; do
-    calls_a="${WORKFLOW_CALLS[$wf_a]}"
-    IFS=', ' read -ra CALL_ARRAY_A <<< "$calls_a"
-    for called_b in "${CALL_ARRAY_A[@]}"; do
-        called_b=$(echo "$called_b" | tr -d ' ')
-        if [ -z "$called_b" ]; then
-            continue
-        fi
-        # Check if called_b calls back to wf_a
-        calls_b="${WORKFLOW_CALLS[$called_b]}"
-        if [ -n "$calls_b" ]; then
-            if echo "$calls_b" | grep -q "$wf_a"; then
-                echo -e "   ${RED}✗${NC} Dépendance circulaire: $wf_a ↔ $called_b"
-                circular_found=$((circular_found + 1))
-            fi
-        fi
-    done
+for wf_name in "${!WORKFLOW_CALLS[@]}"; do
+    if check_cycle "$wf_name" "$wf_name" 1 "$wf_name"; then
+        circular_found=$((circular_found + 1))
+    fi
 done
 
 if [ $circular_found -eq 0 ]; then
@@ -252,6 +282,39 @@ for wf in .claude/workflows/*/*.md; do
 done
 if [ $skill_ref_errors -eq 0 ]; then
     echo -e "   ${GREEN}✓${NC} Références de skills vérifiées"
+fi
+
+# 9. Validate sub-skill file existence
+echo ""
+echo "9. Vérification des sub-skills déclarés..."
+subskill_errors=0
+for skill_name in "${!SKILL_DIRS[@]}"; do
+    skill_dir="${SKILL_DIRS[$skill_name]}"
+    skill_file="${skill_dir}SKILL.md"
+
+    # Get declared sub-skills
+    subskills=$(get_frontmatter_field "$skill_file" "sub-skills")
+    if [ -n "$subskills" ]; then
+        IFS=', ' read -ra SUBSKILL_ARRAY <<< "$subskills"
+        for subskill in "${SUBSKILL_ARRAY[@]}"; do
+            subskill=$(echo "$subskill" | tr -d ' ')
+            if [ -z "$subskill" ]; then
+                continue
+            fi
+            subskill_file="${skill_dir}${subskill}.md"
+            if [ -f "$subskill_file" ]; then
+                echo -e "   ${GREEN}✓${NC} $skill_name/$subskill.md"
+            else
+                echo -e "   ${RED}✗${NC} $skill_name déclare sub-skill '$subskill' mais '$subskill.md' n'existe pas"
+                subskill_errors=$((subskill_errors + 1))
+            fi
+        done
+    fi
+done
+if [ $subskill_errors -eq 0 ]; then
+    echo -e "   ${GREEN}✓${NC} Tous les sub-skills déclarés existent"
+else
+    ERRORS=$((ERRORS + subskill_errors))
 fi
 
 # Summary

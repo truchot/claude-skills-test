@@ -2,7 +2,6 @@
 name: database
 description: Bases de données - SQL, modélisation, requêtes, ORM
 tags: [database, sql, postgresql, prisma, orm]
-sub-skills: [modeling, queries, migrations, optimization]
 ---
 
 # Database

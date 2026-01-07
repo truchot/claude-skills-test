@@ -2,7 +2,6 @@
 name: performance
 description: Performance web - Core Web Vitals, optimisation, profiling
 tags: [performance, web-vitals, optimization, lighthouse]
-sub-skills: [core-web-vitals, bundle, caching]
 ---
 
 # Performance

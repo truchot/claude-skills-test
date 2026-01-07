@@ -2,7 +2,6 @@
 name: security
 description: Sécurité applicative - Auth, OWASP, encryption
 tags: [security, auth, jwt, owasp, encryption]
-sub-skills: [authentication, authorization, vulnerabilities]
 ---
 
 # Security

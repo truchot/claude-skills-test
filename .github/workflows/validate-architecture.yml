@@ -1,0 +1,163 @@
+name: Validate Architecture
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - '.claude/**'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - '.claude/**'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Skills/Workflows/Roles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x .claude/scripts/*.sh
+
+      - name: Run architecture validation
+        id: validate
+        run: |
+          echo "## Architecture Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Run validation and capture output
+          if bash .claude/scripts/validate-architecture.sh 2>&1 | tee validation-output.txt; then
+            echo "✅ **Validation Passed**" >> $GITHUB_STEP_SUMMARY
+            echo "validation_status=success" >> $GITHUB_OUTPUT
+          else
+            echo "❌ **Validation Failed**" >> $GITHUB_STEP_SUMMARY
+            echo "validation_status=failure" >> $GITHUB_OUTPUT
+          fi
+
+          # Add output to summary
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat validation-output.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Run validation tests
+        if: always()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Validation Script Tests" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if bash .claude/scripts/test-validate-architecture.sh 2>&1 | tee test-output.txt; then
+            echo "✅ **All Tests Passed**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ **Some Tests Failed**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "<details>" >> $GITHUB_STEP_SUMMARY
+          echo "<summary>Test Output</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat test-output.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+
+      - name: Count inventory
+        if: always()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Current Inventory" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          SKILLS=$(find .claude/skills -name "SKILL.md" | wc -l)
+          WORKFLOWS=$(find .claude/workflows -name "*.md" ! -name "_*" | wc -l)
+          ROLES=$(find .claude/roles -name "*.md" ! -name "_*" | wc -l)
+          SUBSKILLS=$(find .claude/skills -name "*.md" ! -name "SKILL.md" ! -name "_*" | wc -l)
+
+          echo "| Type | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Skills | $SKILLS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Sub-skills | $SUBSKILLS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Workflows | $WORKFLOWS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Roles | $ROLES |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail if validation failed
+        if: steps.validate.outputs.validation_status == 'failure'
+        run: exit 1
+
+  lint-frontmatter:
+    name: Lint Frontmatter YAML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Extract and lint frontmatter
+        run: |
+          echo "## Frontmatter Lint Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          errors=0
+
+          # Check all SKILL.md files
+          for file in $(find .claude/skills -name "SKILL.md"); do
+            # Extract frontmatter (between --- markers)
+            frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+            if [ -n "$frontmatter" ]; then
+              if echo "$frontmatter" | yamllint -d relaxed - > /dev/null 2>&1; then
+                echo "✓ $file" >> lint-results.txt
+              else
+                echo "✗ $file" >> lint-results.txt
+                errors=$((errors + 1))
+              fi
+            fi
+          done
+
+          # Check workflows
+          for file in $(find .claude/workflows -name "*.md" ! -name "_*"); do
+            frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+            if [ -n "$frontmatter" ]; then
+              if echo "$frontmatter" | yamllint -d relaxed - > /dev/null 2>&1; then
+                echo "✓ $file" >> lint-results.txt
+              else
+                echo "✗ $file" >> lint-results.txt
+                errors=$((errors + 1))
+              fi
+            fi
+          done
+
+          # Check roles
+          for file in $(find .claude/roles -name "*.md" ! -name "_*"); do
+            frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+            if [ -n "$frontmatter" ]; then
+              if echo "$frontmatter" | yamllint -d relaxed - > /dev/null 2>&1; then
+                echo "✓ $file" >> lint-results.txt
+              else
+                echo "✗ $file" >> lint-results.txt
+                errors=$((errors + 1))
+              fi
+            fi
+          done
+
+          if [ $errors -eq 0 ]; then
+            echo "✅ All frontmatter YAML is valid" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Found $errors files with invalid YAML frontmatter" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "<details>" >> $GITHUB_STEP_SUMMARY
+          echo "<summary>Details</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat lint-results.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY

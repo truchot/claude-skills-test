@@ -2,7 +2,6 @@
 name: accessibility
 description: Accessibilité web - WCAG, ARIA, tests a11y
 tags: [accessibility, a11y, wcag, aria, screen-reader]
-sub-skills: [wcag, aria, testing]
 ---
 
 # Accessibility (a11y)

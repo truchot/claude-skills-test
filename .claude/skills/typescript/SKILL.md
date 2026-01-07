@@ -2,7 +2,6 @@
 name: typescript
 description: TypeScript - typage statique, interfaces, generics
 tags: [typescript, types, interfaces, generics]
-sub-skills: [generics, utility-types, type-guards]
 ---
 
 # TypeScript

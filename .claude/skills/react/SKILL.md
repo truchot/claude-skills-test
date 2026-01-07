@@ -2,7 +2,7 @@
 name: react
 description: React - hooks, composants, state management, patterns modernes
 tags: [react, hooks, components, state, jsx]
-sub-skills: [hooks, components, state, data-fetching]
+sub-skills: [hooks, state]
 ---
 
 # React

@@ -2,7 +2,6 @@
 name: css
 description: CSS moderne - Grid, Flexbox, variables, cascade
 tags: [css, grid, flexbox, variables, layout, responsive]
-sub-skills: [grid, flexbox, variables]
 ---
 
 # CSS

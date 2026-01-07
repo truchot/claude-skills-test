@@ -2,7 +2,7 @@
 name: testing
 description: Stratégie et techniques de tests logiciels
 tags: [testing, tests, qualité, tdd, coverage]
-sub-skills: [unit, integration, e2e, performance, security]
+sub-skills: [unit, integration, e2e]
 ---
 
 # Testing

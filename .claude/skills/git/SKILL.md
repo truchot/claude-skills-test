@@ -2,7 +2,6 @@
 name: git
 description: Versioning avec Git - branches, commits, workflows
 tags: [git, versioning, branches, commits, merge]
-sub-skills: [branching, commits, workflows]
 ---
 
 # Git

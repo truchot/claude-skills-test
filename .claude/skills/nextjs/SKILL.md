@@ -2,7 +2,6 @@
 name: nextjs
 description: Next.js - App Router, Server Components, data fetching
 tags: [nextjs, react, ssr, server-components, routing]
-sub-skills: [app-router, data-fetching, server-actions]
 ---
 
 # Next.js

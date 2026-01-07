@@ -2,7 +2,6 @@
 name: ci-cd
 description: CI/CD - GitHub Actions, pipelines, automatisation
 tags: [ci-cd, github-actions, pipeline, automation]
-sub-skills: [github-actions, testing, deployment]
 ---
 
 # CI/CD

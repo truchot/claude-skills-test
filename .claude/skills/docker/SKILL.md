@@ -2,7 +2,6 @@
 name: docker
 description: Docker - conteneurs, images, Dockerfile, Docker Compose
 tags: [docker, containers, dockerfile, compose]
-sub-skills: [dockerfile, compose, optimization]
 ---
 
 # Docker

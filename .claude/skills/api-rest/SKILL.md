@@ -2,7 +2,6 @@
 name: api-rest
 description: Conception et développement d'APIs REST
 tags: [api, rest, http, endpoints, openapi]
-sub-skills: [design, validation, versioning]
 ---
 
 # API REST

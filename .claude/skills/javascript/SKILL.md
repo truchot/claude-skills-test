@@ -2,7 +2,6 @@
 name: javascript
 description: JavaScript moderne ES6+ - async/await, modules, destructuring
 tags: [javascript, es6, async, modules, promises]
-sub-skills: [async, modules, arrays]
 ---
 
 # JavaScript
