@@ -56,12 +56,12 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | **Content** | `content/orchestrator` | 5 | Copywriting, blog, social media, landing pages | COMMENT |
 | **Acquisition** | `acquisition/orchestrator` | 5 + SEO (49) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
 | **Analytics** | `analytics/orchestrator` | 5 | KPIs, A/B testing, reporting, attribution | COMMENT |
-| **Fidélisation** | `fidelisation/orchestrator` | 5 | Lifecycle, loyalty, churn prevention, customer success | COMMENT |
+| **Fidélisation** | `fidelisation/orchestrator` | 26 | Lifecycle (7), Loyalty (6), Churn (6), Success (6) | COMMENT |
 | **Automation** | `automation/orchestrator` | 5 | Workflows, lead scoring, triggers, séquences | COMMENT |
 | **Performance** | `performance/orchestrator` | 5 | CRO, funnel analysis, personnalisation, A/B testing | COMMENT |
 | **Social Strategy** | `social-strategy/orchestrator` | 5 | Plateformes, community, social listening, engagement | COMMENT |
 
-**Total : 94 agents spécialisés** (dont 49 agents SEO)
+**Total : 115 agents spécialisés** (dont 49 agents SEO + 26 agents Fidélisation)
 
 ## Règles de Routage
 
