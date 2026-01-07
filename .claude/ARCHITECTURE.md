@@ -127,7 +127,7 @@ Voir les templates dans chaque dossier :
 
 ## Inventaire Actuel
 
-### Skills (Compétences)
+### Skills (Compétences) - 20 skills
 
 | Skill | Description | Sous-skills |
 |-------|-------------|-------------|
@@ -137,6 +137,7 @@ Voir les templates dans chaque dossier :
 | `typescript` | Typage TypeScript, génériques | - |
 | `react` | Composants, patterns React | hooks, state |
 | `nextjs` | App Router, Server Components | - |
+| `wordpress` | WordPress, Gutenberg, blocks, thèmes | - |
 | `api-rest` | Design API REST, HTTP, versioning | - |
 | `database` | SQL, Prisma ORM, optimisation | - |
 | `security` | Auth, JWT, OWASP, encryption | - |
@@ -146,8 +147,12 @@ Voir les templates dans chaque dossier :
 | `ci-cd` | GitHub Actions, pipelines | - |
 | `testing` | Stratégie et techniques de tests | unit, integration, e2e |
 | `git` | Versioning et collaboration | - |
+| `design-system` | Atomic Design, tokens, composants | - |
+| `seo` | Référencement naturel, technique, contenu | - |
+| `content-marketing` | Copywriting, blog, landing pages | - |
+| `analytics-marketing` | KPIs, tracking, attribution, A/B tests | - |
 
-### Workflows (Processus)
+### Workflows (Processus) - 7 workflows
 
 | Workflow | Description | Appelle |
 |----------|-------------|---------|
@@ -156,8 +161,10 @@ Voir les templates dans chaque dossier :
 | `development/code-review` | Revue de code | - |
 | `deployment/release` | Déployer en production | `rollback` |
 | `deployment/rollback` | Annuler un déploiement | - |
+| `project/kickoff` | Lancement de projet | - |
+| `project/sprint-planning` | Planification de sprint | - |
 
-### Roles (Métiers)
+### Roles (Métiers) - 7 rôles
 
 | Role | Niveau | Skills principaux |
 |------|--------|-------------------|
@@ -165,7 +172,9 @@ Voir les templates dans chaque dossier :
 | `backend-developer` | Implementation | api-rest, database, security |
 | `fullstack-developer` | Implementation | front + back |
 | `tech-lead` | Strategy | architecture, code-review |
-| `devops-engineer` | Operations | docker, kubernetes, ci-cd |
+| `devops-engineer` | Operations | docker, ci-cd |
+| `technical-director` | Strategy | security, performance, architecture |
+| `project-manager` | Process | gestion projet, communication |
 
 ## Migration depuis l'Ancienne Structure
 
@@ -195,7 +204,12 @@ L'ancien dossier `skills/` contient l'ancienne structure avec un mélange de :
 - [x] Skills backend migrés (api-rest, database, security)
 - [x] Skills DevOps migrés (docker, ci-cd)
 - [x] Skills qualité migrés (accessibility, performance)
+- [x] Skills spécialisés migrés (wordpress, design-system)
+- [x] Skills marketing migrés (seo, content-marketing, analytics-marketing)
 - [x] Workflows développement créés
+- [x] Workflows projet créés (kickoff, sprint-planning)
 - [x] Roles principaux créés
+- [x] Roles stratégiques créés (technical-director, project-manager)
 - [x] Archiver ancienne structure (`skills/_archive/`)
 - [x] Tests de validation (`scripts/validate-architecture.sh`)
+- [x] **Migration 100% complète**
