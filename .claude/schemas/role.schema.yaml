@@ -1,0 +1,81 @@
+# Schema for Role frontmatter validation
+# Usage: Used by validate-architecture.sh to validate role files
+
+type: object
+required:
+  - name
+  - description
+  - level
+  - skills
+
+properties:
+  name:
+    type: string
+    pattern: "^[a-z][a-z0-9-]*$"
+    description: "Role identifier in kebab-case"
+
+  description:
+    type: string
+    minLength: 10
+    maxLength: 200
+    description: "Brief description of the role"
+
+  level:
+    type: string
+    enum: [junior, mid, senior, lead, principal, strategy, implementation, operations, process]
+    description: "Seniority or responsibility level"
+
+  skills:
+    type: array
+    items:
+      type: string
+      pattern: "^[a-z][a-z0-9-]*$"
+    minItems: 1
+    description: "Skills assigned to this role"
+
+  workflows:
+    type: array
+    items:
+      type: string
+      pattern: "^[a-z][a-z0-9-]*$"
+    description: "Workflows this role can execute"
+
+  escalation:
+    type: string
+    pattern: "^[a-z][a-z0-9-]*$"
+    description: "Role to escalate to when needed"
+
+  version:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    description: "Semantic version (e.g., 1.0.0)"
+
+  last-updated:
+    type: string
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    description: "Last update date (YYYY-MM-DD)"
+
+examples:
+  developer:
+    name: frontend-developer
+    description: Développeur spécialisé frontend (React, CSS, HTML)
+    level: implementation
+    skills: [html, css, javascript, react, testing, accessibility]
+    workflows: [create-feature, fix-bug, code-review]
+    escalation: tech-lead
+
+  lead:
+    name: tech-lead
+    description: Lead technique, architecture et coordination équipe
+    level: lead
+    skills: [architecture, security, performance, git]
+    workflows: [code-review, release, sprint-planning]
+    escalation: technical-director
+
+  manager:
+    name: project-manager
+    description: Chef de projet, gestion planning et communication client
+    level: process
+    skills: [project-management, analytics-marketing]
+    workflows: [kickoff, sprint-planning, avant-projet, pilotage-projet]
+    escalation: technical-director
