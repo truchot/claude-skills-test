@@ -36,10 +36,16 @@ Concevoir et implémenter des APIs robustes, sécurisées et performantes.
 
 | Skill | Usage |
 |-------|-------|
-| `graphql` | APIs GraphQL |
-| `caching` | Redis, stratégies cache |
-| `messaging` | Queues, events |
 | `docker` | Containerisation |
+| `performance` | Optimisation requêtes |
+
+### Autres technologies (hors skills)
+
+| Technologie | Usage |
+|-------------|-------|
+| GraphQL | APIs alternatives |
+| Redis | Caching, sessions |
+| Message queues | RabbitMQ, SQS, events |
 
 ## Workflows
 

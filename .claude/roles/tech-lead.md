@@ -25,12 +25,19 @@ Garantir l'excellence technique du projet et faire grandir l'équipe.
 
 | Skill | Usage |
 |-------|-------|
-| `architecture` | Design système |
-| `code-review` | Qualité, standards |
 | `testing` | Stratégie de tests |
 | `security` | Bonnes pratiques |
 | `performance` | Optimisation |
 | `git` | Workflows, conventions |
+| `api-rest` | Design APIs |
+| `database` | Architecture données |
+
+### Compétences transverses (hors skills)
+
+| Domaine | Description |
+|---------|-------------|
+| Architecture | Design système, patterns (voir ADR) |
+| Code review | Via workflow code-review |
 
 ### Vision globale
 

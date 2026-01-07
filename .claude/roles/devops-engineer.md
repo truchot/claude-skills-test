@@ -21,27 +21,26 @@ Assurer la fiabilité, la performance et l'automatisation des déploiements et d
 
 ## Skills
 
-### Maîtrisés (requis)
+### Skills disponibles (requis)
 
 | Skill | Usage |
 |-------|-------|
 | `docker` | Containerisation |
-| `kubernetes` | Orchestration |
 | `ci-cd` | Pipelines, automation |
-| `monitoring` | Prometheus, Grafana |
-| `infrastructure` | Terraform, IaC |
-| `linux` | Administration système |
-| `networking` | DNS, load balancing |
 | `git` | Versioning, workflows |
-
-### Connus (nice-to-have)
-
-| Skill | Usage |
-|-------|-------|
 | `security` | Hardening, secrets |
 | `database` | Backup, réplication |
-| `scripting` | Bash, Python |
-| `cloud` | AWS/GCP/Azure |
+
+### Technologies maîtrisées (hors skills)
+
+| Domaine | Technologies |
+|---------|--------------|
+| Orchestration | Kubernetes, ECS, Nomad |
+| Monitoring | Prometheus, Grafana, Datadog |
+| Infrastructure | Terraform, Pulumi, Ansible |
+| Linux | Administration système, shell |
+| Networking | DNS, load balancing, CDN |
+| Cloud | AWS, GCP, Azure |
 
 ## Workflows
 

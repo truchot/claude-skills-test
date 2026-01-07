@@ -40,10 +40,16 @@ Développer des fonctionnalités complètes de bout en bout, du frontend au back
 | Skill | Usage |
 |-------|-------|
 | `nextjs` | Full stack React |
-| `graphql` | APIs alternatives |
 | `docker` | Dev environment |
 | `security` | Bonnes pratiques |
-| `caching` | Performance |
+| `performance` | Optimisation |
+
+### Autres technologies (hors skills)
+
+| Technologie | Usage |
+|-------------|-------|
+| GraphQL | APIs alternatives |
+| Redis | Caching, performance |
 
 ## Workflows
 

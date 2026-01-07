@@ -39,9 +39,15 @@ Concevoir et implémenter des interfaces utilisateur performantes, accessibles e
 | Skill | Usage |
 |-------|-------|
 | `nextjs` | SSR, routing, optimisations |
-| `vue` | Alternative à React |
 | `performance` | Core Web Vitals |
 | `design-system` | Tokens, composants partagés |
+
+### Autres technologies (hors skills)
+
+| Technologie | Usage |
+|-------------|-------|
+| Vue.js | Alternative à React |
+| Svelte | Framework léger |
 
 ## Workflows
 

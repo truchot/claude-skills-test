@@ -317,6 +317,111 @@ else
     ERRORS=$((ERRORS + subskill_errors))
 fi
 
+# 10. Validate role escalation targets
+echo ""
+echo "10. Vérification des escalades de rôles..."
+escalation_warnings=0
+for role in .claude/roles/*.md; do
+    case "$role" in
+        *_TEMPLATE*) continue ;;
+    esac
+    if [ -f "$role" ]; then
+        role_basename=$(basename "$role" .md)
+        escalation=$(get_frontmatter_field "$role" "escalation")
+        if [ -n "$escalation" ]; then
+            escalation=$(echo "$escalation" | tr -d ' ')
+            if [ -z "${ROLE_NAMES[$escalation]}" ]; then
+                echo -e "   ${YELLOW}!${NC} $role_basename escalade vers '$escalation' (role non trouvé)"
+                escalation_warnings=$((escalation_warnings + 1))
+            else
+                echo -e "   ${GREEN}✓${NC} $role_basename → $escalation"
+            fi
+        fi
+    fi
+done
+if [ $escalation_warnings -eq 0 ]; then
+    echo -e "   ${GREEN}✓${NC} Escalades vérifiées"
+else
+    WARNINGS=$((WARNINGS + escalation_warnings))
+fi
+
+# 11. Check for duplicate names
+echo ""
+echo "11. Vérification des noms uniques..."
+declare -A ALL_NAMES
+duplicates=0
+for name in "${!SKILL_NAMES[@]}"; do
+    if [ -n "${ALL_NAMES[$name]}" ]; then
+        echo -e "   ${RED}✗${NC} Nom dupliqué: '$name' (skill et ${ALL_NAMES[$name]})"
+        duplicates=$((duplicates + 1))
+    fi
+    ALL_NAMES["$name"]="skill"
+done
+for name in "${!WORKFLOW_NAMES[@]}"; do
+    if [ -n "${ALL_NAMES[$name]}" ]; then
+        echo -e "   ${RED}✗${NC} Nom dupliqué: '$name' (workflow et ${ALL_NAMES[$name]})"
+        duplicates=$((duplicates + 1))
+    fi
+    ALL_NAMES["$name"]="workflow"
+done
+for name in "${!ROLE_NAMES[@]}"; do
+    if [ -n "${ALL_NAMES[$name]}" ]; then
+        echo -e "   ${RED}✗${NC} Nom dupliqué: '$name' (role et ${ALL_NAMES[$name]})"
+        duplicates=$((duplicates + 1))
+    fi
+    ALL_NAMES["$name"]="role"
+done
+if [ $duplicates -eq 0 ]; then
+    echo -e "   ${GREEN}✓${NC} Tous les noms sont uniques"
+else
+    ERRORS=$((ERRORS + duplicates))
+fi
+
+# 12. Validate skill references in roles (only in Skills sections)
+echo ""
+echo "12. Vérification des références skills dans les rôles..."
+role_skill_warnings=0
+for role in .claude/roles/*.md; do
+    case "$role" in
+        *_TEMPLATE*) continue ;;
+    esac
+    if [ -f "$role" ]; then
+        role_basename=$(basename "$role" .md)
+        # Only extract skills from the ## Skills section (up to next ## section)
+        in_skills_section=0
+        while IFS= read -r line; do
+            # Detect start of Skills section
+            if [[ "$line" =~ ^##[[:space:]]+Skills ]]; then
+                in_skills_section=1
+                continue
+            fi
+            # Detect end of Skills section (next ## header)
+            if [[ "$in_skills_section" -eq 1 ]] && [[ "$line" =~ ^##[[:space:]][^#] ]]; then
+                in_skills_section=0
+                continue
+            fi
+            # Only check lines in Skills section
+            if [[ "$in_skills_section" -eq 1 ]]; then
+                # Match patterns like | `skill-name` | or | `skill/subskill` |
+                if [[ "$line" =~ \`([a-z][a-z0-9-]*(/[a-z][a-z0-9-]*)?)\` ]]; then
+                    skill="${BASH_REMATCH[1]}"
+                    # Extract base skill (before /)
+                    base_skill="${skill%%/*}"
+                    if [ -z "${SKILL_NAMES[$base_skill]}" ]; then
+                        echo -e "   ${YELLOW}!${NC} $role_basename référence skill '$skill' (non trouvé)"
+                        role_skill_warnings=$((role_skill_warnings + 1))
+                    fi
+                fi
+            fi
+        done < "$role"
+    fi
+done
+if [ $role_skill_warnings -eq 0 ]; then
+    echo -e "   ${GREEN}✓${NC} Références skills dans rôles vérifiées"
+else
+    WARNINGS=$((WARNINGS + role_skill_warnings))
+fi
+
 # Summary
 echo ""
 echo "=== Résumé ==="
