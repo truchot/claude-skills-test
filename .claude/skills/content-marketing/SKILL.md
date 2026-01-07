@@ -2,22 +2,23 @@
 name: content-marketing
 description: Marketing de contenu - copywriting, blog, landing pages, social media
 tags: [content, copywriting, blog, landing-page, social-media, editorial]
-sub-skills: [strategie]
+related-workflows: [content-strategy]
 ---
 
 # Content Marketing
 
 ## Quand Utiliser
 - Rédiger du contenu marketing (blog, landing pages)
-- Créer une stratégie de contenu
 - Optimiser le copywriting pour la conversion
 - Planifier le contenu social media
 
-## Sous-Skills Disponibles
+## Workflows Associés
 
-| Sous-skill | Fichier | Description |
-|------------|---------|-------------|
-| Stratégie | `strategie.md` | Personas, calendrier éditorial, pillar-cluster |
+> Les processus séquentiels (QUAND) sont dans `/workflows/marketing/`
+
+| Workflow | Fichier | Description |
+|----------|---------|-------------|
+| Content Strategy | `workflows/marketing/content-strategy.md` | Audit → Personas → Keywords → Calendar |
 
 ## Types de Contenu
 

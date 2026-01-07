@@ -149,11 +149,11 @@ Voir les templates dans chaque dossier :
 | `git` | Versioning et collaboration | - |
 | `design-system` | Atomic Design, tokens, composants | - |
 | `seo` | Référencement naturel, technique, contenu | **technique, contenu, netlinking, local** |
-| `content-marketing` | Copywriting, blog, landing pages | **strategie** |
+| `content-marketing` | Copywriting, blog, landing pages | - |
 | `analytics-marketing` | KPIs, tracking, attribution, A/B tests | - |
-| `project-management` | Gestion de projet, estimation, planning | **avant-projet, pilotage, communication** |
+| `project-management` | Gestion de projet, communication, templates | **communication** |
 
-### Workflows (Processus) - 7 workflows
+### Workflows (Processus) - 10 workflows
 
 | Workflow | Description | Appelle |
 |----------|-------------|---------|
@@ -164,6 +164,9 @@ Voir les templates dans chaque dossier :
 | `deployment/rollback` | Annuler un déploiement | - |
 | `project/kickoff` | Lancement de projet | - |
 | `project/sprint-planning` | Planification de sprint | - |
+| `project/avant-projet` | Brief → Chiffrage → Proposition | - |
+| `project/pilotage-projet` | Planning → Suivi → Reporting | - |
+| `marketing/content-strategy` | Audit → Personas → Keywords → Calendar | - |
 
 ### Roles (Métiers) - 7 rôles
 

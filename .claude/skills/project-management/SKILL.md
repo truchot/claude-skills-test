@@ -1,25 +1,32 @@
 ---
 name: project-management
-description: Gestion de projet - brief, estimation, planning, suivi, communication
-tags: [gestion-projet, planning, estimation, brief, suivi, communication]
-sub-skills: [avant-projet, pilotage, communication]
+description: Gestion de projet - communication, templates, bonnes pratiques
+tags: [gestion-projet, communication, templates]
+sub-skills: [communication]
+related-workflows: [avant-projet, pilotage-projet]
 ---
 
 # Project Management (Gestion de Projet)
 
 ## Quand Utiliser
-- Cadrer un nouveau projet (brief, estimation)
-- Créer et suivre un planning
-- Rédiger des comptes-rendus
-- Gérer la communication client
+- Rédiger des comptes-rendus de réunion
+- Gérer la communication client (emails, relances)
+- Utiliser les templates de gestion de projet
 
 ## Sous-Skills Disponibles
 
 | Sous-skill | Fichier | Description |
 |------------|---------|-------------|
-| Avant-projet | `avant-projet.md` | Brief, estimation, chiffrage, proposition |
-| Pilotage | `pilotage.md` | Planning, suivi, reporting, alertes |
 | Communication | `communication.md` | CR réunion, emails client |
+
+## Workflows Associés
+
+> Les processus séquentiels (QUAND) sont dans `/workflows/project/`
+
+| Workflow | Fichier | Description |
+|----------|---------|-------------|
+| Avant-projet | `workflows/project/avant-projet.md` | Brief → Chiffrage → Proposition |
+| Pilotage | `workflows/project/pilotage-projet.md` | Planning → Suivi → Reporting |
 
 ## Cycle de Vie Projet
 
@@ -36,23 +43,8 @@ Proposition    Suivi, CR     Bilan         Relances
         ◀──── COMMUNICATION (transversal) ────▶
 ```
 
-## Vue d'Ensemble des Templates
+## Templates de Communication
 
-### Avant-Projet
-| Template | Usage |
-|----------|-------|
-| Brief client | Formaliser le besoin |
-| Estimation | Chiffrage en JH |
-| Proposition | Offre commerciale |
-
-### Pilotage
-| Template | Usage |
-|----------|-------|
-| Planning Gantt | Jalons et phases |
-| Reporting | Point d'avancement |
-| Alertes | Signalement de risques |
-
-### Communication
 | Template | Usage |
 |----------|-------|
 | Compte-rendu | Synthèse réunion |
