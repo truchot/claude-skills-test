@@ -2,6 +2,7 @@
 name: content-marketing
 description: Marketing de contenu - copywriting, blog, landing pages, social media
 tags: [content, copywriting, blog, landing-page, social-media, editorial]
+sub-skills: [strategie]
 ---
 
 # Content Marketing
@@ -11,6 +12,12 @@ tags: [content, copywriting, blog, landing-page, social-media, editorial]
 - Créer une stratégie de contenu
 - Optimiser le copywriting pour la conversion
 - Planifier le contenu social media
+
+## Sous-Skills Disponibles
+
+| Sous-skill | Fichier | Description |
+|------------|---------|-------------|
+| Stratégie | `strategie.md` | Personas, calendrier éditorial, pillar-cluster |
 
 ## Types de Contenu
 

@@ -2,6 +2,7 @@
 name: wordpress
 description: WordPress et Gutenberg - blocks, thèmes, plugins, API
 tags: [wordpress, gutenberg, php, blocks, theme, plugin, wp-cli]
+sub-skills: [gutenberg, theme]
 ---
 
 # WordPress
@@ -13,11 +14,18 @@ tags: [wordpress, gutenberg, php, blocks, theme, plugin, wp-cli]
 - Utiliser l'API REST WordPress
 - Configurer wp-env ou environnements
 
+## Sous-Skills Disponibles
+
+| Sous-skill | Fichier | Description |
+|------------|---------|-------------|
+| Gutenberg | `gutenberg.md` | Blocks custom, variations, data stores |
+| Theme | `theme.md` | Block themes, theme.json, patterns, Interactivity API |
+
 ## Architecture WordPress
 
 ```
 WordPress
-├── Themes (block themes)
+├── Themes (block themes) → theme.md
 │   ├── theme.json (settings, styles)
 │   ├── templates/ (HTML templates)
 │   ├── parts/ (template parts)
@@ -25,7 +33,7 @@ WordPress
 ├── Plugins
 │   ├── CPT (Custom Post Types)
 │   ├── Taxonomies
-│   └── Blocks custom
+│   └── Blocks custom → gutenberg.md
 └── API REST
 ```
 

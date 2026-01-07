@@ -127,7 +127,7 @@ Voir les templates dans chaque dossier :
 
 ## Inventaire Actuel
 
-### Skills (Compétences) - 20 skills
+### Skills (Compétences) - 21 skills + sous-skills
 
 | Skill | Description | Sous-skills |
 |-------|-------------|-------------|
@@ -137,7 +137,7 @@ Voir les templates dans chaque dossier :
 | `typescript` | Typage TypeScript, génériques | - |
 | `react` | Composants, patterns React | hooks, state |
 | `nextjs` | App Router, Server Components | - |
-| `wordpress` | WordPress, Gutenberg, blocks, thèmes | - |
+| `wordpress` | WordPress, Gutenberg, blocks, thèmes | **gutenberg, theme** |
 | `api-rest` | Design API REST, HTTP, versioning | - |
 | `database` | SQL, Prisma ORM, optimisation | - |
 | `security` | Auth, JWT, OWASP, encryption | - |
@@ -148,9 +148,10 @@ Voir les templates dans chaque dossier :
 | `testing` | Stratégie et techniques de tests | unit, integration, e2e |
 | `git` | Versioning et collaboration | - |
 | `design-system` | Atomic Design, tokens, composants | - |
-| `seo` | Référencement naturel, technique, contenu | - |
-| `content-marketing` | Copywriting, blog, landing pages | - |
+| `seo` | Référencement naturel, technique, contenu | **technique, contenu, netlinking, local** |
+| `content-marketing` | Copywriting, blog, landing pages | **strategie** |
 | `analytics-marketing` | KPIs, tracking, attribution, A/B tests | - |
+| `project-management` | Gestion de projet, estimation, planning | **avant-projet, pilotage, communication** |
 
 ### Workflows (Processus) - 7 workflows
 

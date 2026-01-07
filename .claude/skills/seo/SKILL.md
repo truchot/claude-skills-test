@@ -2,6 +2,7 @@
 name: seo
 description: SEO - référencement naturel, technique, contenu, netlinking
 tags: [seo, référencement, google, keywords, backlinks, core-web-vitals]
+sub-skills: [technique, contenu, netlinking, local]
 ---
 
 # SEO (Search Engine Optimization)
@@ -13,14 +14,23 @@ tags: [seo, référencement, google, keywords, backlinks, core-web-vitals]
 - Améliorer les Core Web Vitals
 - Planifier une stratégie de netlinking
 
+## Sous-Skills Disponibles
+
+| Sous-skill | Fichier | Description |
+|------------|---------|-------------|
+| Technique | `technique.md` | Crawl, indexation, robots.txt, CWV |
+| Contenu | `contenu.md` | Keywords, on-page, briefs rédactionnels |
+| Netlinking | `netlinking.md` | Backlinks, outreach, link building |
+| Local | `local.md` | Google Business, citations NAP, avis |
+
 ## Piliers du SEO
 
 ```
 SEO
-├── Technique (crawl, indexation, performance)
-├── Contenu (keywords, optimisation on-page)
-├── Netlinking (backlinks, autorité)
-└── Local (Google Business, NAP)
+├── Technique (crawl, indexation, performance) → technique.md
+├── Contenu (keywords, optimisation on-page) → contenu.md
+├── Netlinking (backlinks, autorité) → netlinking.md
+└── Local (Google Business, NAP) → local.md
 ```
 
 ## SEO Technique
