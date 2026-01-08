@@ -422,6 +422,50 @@ else
     WARNINGS=$((WARNINGS + role_skill_warnings))
 fi
 
+# 13. Validate workflow references in roles (in Workflows sections)
+echo ""
+echo "13. Vérification des références workflows dans les rôles..."
+role_workflow_warnings=0
+for role in .claude/roles/*.md; do
+    case "$role" in
+        *_TEMPLATE*) continue ;;
+    esac
+    if [ -f "$role" ]; then
+        role_basename=$(basename "$role" .md)
+        # Only extract workflows from the ## Workflows section (up to next ## section)
+        in_workflows_section=0
+        while IFS= read -r line; do
+            # Detect start of Workflows section
+            if [[ "$line" =~ ^##[[:space:]]+Workflows ]]; then
+                in_workflows_section=1
+                continue
+            fi
+            # Detect end of Workflows section (next ## header)
+            if [[ "$in_workflows_section" -eq 1 ]] && [[ "$line" =~ ^##[[:space:]][^#] ]]; then
+                in_workflows_section=0
+                continue
+            fi
+            # Only check lines in Workflows section
+            if [[ "$in_workflows_section" -eq 1 ]]; then
+                # Match patterns like | `workflow-name` | (without path prefixes)
+                if [[ "$line" =~ \`([a-z][a-z0-9-]*)\` ]]; then
+                    workflow="${BASH_REMATCH[1]}"
+                    # Skip if it looks like a path (contains /)
+                    if [[ ! "$workflow" =~ / ]] && [ -z "${WORKFLOW_NAMES[$workflow]}" ]; then
+                        echo -e "   ${YELLOW}!${NC} $role_basename référence workflow '$workflow' (non trouvé)"
+                        role_workflow_warnings=$((role_workflow_warnings + 1))
+                    fi
+                fi
+            fi
+        done < "$role"
+    fi
+done
+if [ $role_workflow_warnings -eq 0 ]; then
+    echo -e "   ${GREEN}✓${NC} Références workflows dans rôles vérifiées"
+else
+    WARNINGS=$((WARNINGS + role_workflow_warnings))
+fi
+
 # Summary
 echo ""
 echo "=== Résumé ==="
