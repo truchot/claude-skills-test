@@ -1,47 +1,81 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web - Compose et orchestre les skills métiers (project-management, direction-technique, lead-dev, web-dev-process, testing-process, frontend-developer, backend-developer, devops, etc.)
-version: 2.9.0
+description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
+version: 3.0.0
 ---
 
-# Web Agency - Orchestrateur de Skills
+# Web Agency - Agence Web IA Full-Automatisée
 
-Tu es le **méta-orchestrateur** du skill **Web Agency**. Ta responsabilité unique : **router les requêtes vers le bon skill**.
+Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique : **router les requêtes vers le bon skill**.
 
 ## Philosophie
 
-> Les skills exécutent, web-agency route, les humains supervisent.
+> Les clients demandent → l'intake qualifie → l'orchestrateur distribue → les skills exécutent → les humains supervisent.
 
 ```
-CLIENT
-   │
-   ▼
-┌─────────────────────────────────────────────────────────┐
-│                     WEB-AGENCY                          │
-│                  (Routage uniquement)                   │
-│                                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ project │ │direction│ │lead-dev │ │ web-dev │       │
-│  │-manage- │ │-techni- │ │         │ │-process │       │
-│  │  ment   │ │   que   │ │         │ │         │       │
-│  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
-│                                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │testing- │ │frontend │ │ backend │ │ devops  │       │
-│  │process  │ │-dev     │ │-dev     │ │         │       │
-│  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
-│                                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │wordpress│ │  react  │ │ nextjs  │ │ design- │       │
-│  │-gutenb. │ │ -expert │ │ -expert │ │ system  │       │
-│  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
-└─────────────────────────────────────────────────────────┘
-   │
-   ▼
-HUMAIN (supervision)
+                         CLIENT
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│  NIVEAU 0 : ENTRÉE                                            │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │                    client-intake                         │  │
+│  │      Réception → Qualification → Extraction → Routing    │  │
+│  │                      (23 agents)                         │  │
+│  └─────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│  NIVEAU 1 : ORCHESTRATION                                     │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │                  task-orchestrator                       │  │
+│  │       Queue → State Machine → Execution → Tracking       │  │
+│  │                      (16 agents)                         │  │
+│  └─────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│                       WEB-AGENCY                              │
+│                    (Routage métier)                           │
+│                                                               │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐             │
+│  │ project │ │direction│ │lead-dev │ │ web-dev │             │
+│  │-manage- │ │-techni- │ │         │ │-process │             │
+│  │  ment   │ │   que   │ │         │ │         │             │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘             │
+│                                                               │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐             │
+│  │testing- │ │frontend │ │ backend │ │ devops  │             │
+│  │process  │ │-dev     │ │-dev     │ │         │             │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘             │
+│                                                               │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+│  │wordpress│ │  react  │ │ nextjs  │ │ design- │ │marketing│ │
+│  │-gutenb. │ │ -expert │ │ -expert │ │ system  │ │         │ │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ │
+└───────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+                    HUMAIN (supervision)
 ```
 
 ## Skills Disponibles
+
+### Niveau 0 : Entrée
+
+| Skill | Rôle | Agents | Statut |
+|-------|------|--------|--------|
+| `client-intake` | Réception et qualification des demandes | 23 | 🟢 |
+
+### Niveau 1 : Orchestration
+
+| Skill | Rôle | Agents | Statut |
+|-------|------|--------|--------|
+| `task-orchestrator` | Queue, state machine, exécution, tracking | 16 | 🟢 |
+
+### Niveau 2-4 : Métier
 
 | Skill | Rôle | Agents | Statut |
 |-------|------|--------|--------|
@@ -57,10 +91,22 @@ HUMAIN (supervision)
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
+| `marketing` | Stratégie marketing et campagnes | 115 | 🟢 |
 
-**Total : 409 agents disponibles**
+**Total : 563 agents disponibles** (23 + 16 + 524 métier)
 
 ## Routage Rapide
+
+### Niveau 0-1 : Entrée & Orchestration
+
+| Requête concerne... | → Skill |
+|---------------------|---------|
+| Nouvelle demande client (email, form, chat, webhook) | `client-intake` |
+| Qualification, faisabilité, complexité, urgence | `client-intake` |
+| Queue de tâches, priorités, distribution | `task-orchestrator` |
+| État des tâches, tracking, métriques | `task-orchestrator` |
+
+### Niveau 2-4 : Métier
 
 | Requête concerne... | → Skill |
 |---------------------|---------|
@@ -75,19 +121,30 @@ HUMAIN (supervision)
 | CI/CD, Docker, Kubernetes, Terraform, monitoring | `devops` |
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
+| Campagnes, SEO, réseaux sociaux, analytics | `marketing` |
 
 **Règles détaillées** → [orchestration/routing.md](./orchestration/routing.md)
 
-## Hiérarchie des Skills Techniques
-
-Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
+## Hiérarchie Complète
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
+│  NIVEAU 0 : ENTRÉE (client-intake)                                  │
+│  → RÉCEPTION : Emails, formulaires, chats, webhooks                 │
+│  → QUALIFICATION : Intent, complexité, urgence, faisabilité         │
+│  → EXTRACTION : Requirements, stakeholders, contraintes             │
+│  → ROUTING : Vers task-orchestrator                                 │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 1 : ORCHESTRATION (task-orchestrator)                       │
+│  → QUEUE : Priorités, capacité, SLA                                 │
+│  → STATE MACHINE : Lifecycle des tâches                             │
+│  → EXECUTION : Dispatch, parallélisation, collecte                  │
+│  → TRACKING : Progress, métriques, audit                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 2 : STRATÉGIE (direction-technique)                         │
 │  → POURQUOI : Décisions, politiques, standards                      │
 ├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : OPÉRATIONS (PROCESSUS)                                  │
+│  NIVEAU 3 : OPÉRATIONS (PROCESSUS)                                  │
 │  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐    │
 │  │  web-dev-process │ │  testing-process │ │     lead-dev     │    │
 │  │                  │ │                  │ │                  │    │
@@ -97,14 +154,18 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 │  │ • Workflows      │ │ • Qualité/Perf   │ │ • Delivery       │    │
 │  └──────────────────┘ └──────────────────┘ └──────────────────┘    │
 ├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : IMPLÉMENTATION (skills techniques)                      │
+│  NIVEAU 4 : IMPLÉMENTATION (skills techniques)                      │
 │  → COMMENT : Code, configuration, patterns                          │
 │  frontend-dev, backend-dev, devops, react-expert, nextjs-expert,    │
-│  wordpress-gutenberg-expert, design-system-foundations              │
+│  wordpress-gutenberg-expert, design-system-foundations, marketing   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-**Distinction NIVEAU 2** :
+**Architecture Full-Automatisée** :
+- `client-intake` = **POINT D'ENTRÉE** (multicanal, NLP, qualification automatique)
+- `task-orchestrator` = **MOTEUR** (queue, state machine, distribution)
+
+**Distinction NIVEAU 3** :
 - `web-dev-process` = **QUOI** (méthodologie, process, checklists)
 - `testing-process` = **QUOI** (stratégie tests, types, qualité, sécurité, accessibilité)
 - `lead-dev` = **QUI** (coordination, exécution, qualité quotidienne)
@@ -132,6 +193,23 @@ Selon [ADR-006](./docs/adr/006-hierarchy-clarification.md) :
 | [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v3.0.0
+
+- **MAJOR** : Transformation en Agence Web IA Full-Automatisée
+- **Nouveau skill** : `client-intake` (23 agents) - Point d'entrée automatisé
+  - Domaines : reception, qualification, extraction, response, routing
+  - Multicanal : email, formulaires, chat, webhooks
+  - NLP : classification d'intent, détection d'urgence, estimation budget
+  - Position : NIVEAU 0 ENTRÉE
+- **Nouveau skill** : `task-orchestrator` (16 agents) - Moteur d'orchestration
+  - Domaines : queue, state-machine, execution, tracking
+  - Queue management : priorités dynamiques, capacité, SLA
+  - State machine : lifecycle complet des tâches
+  - Position : NIVEAU 1 ORCHESTRATION
+- **Architecture** : Nouveau modèle 5 niveaux (0: Entrée → 1: Orchestration → 2: Stratégie → 3: Opérations → 4: Implémentation)
+- **Total agents** : 563 (vs 409 en v2.9.0, +154 agents)
+- **Intégration** : Ajout du skill `marketing` (115 agents) dans le routage
 
 ### v2.9.0
 
