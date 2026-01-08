@@ -1,126 +1,71 @@
 ---
 name: project-management
-description: Gestion de projet et relation client pour agence Web - Brief, estimation, planning, suivi, communication, livraison, facturation
-version: 1.0.0
+description: Gestion de projet - communication, templates, bonnes pratiques
+tags: [gestion-projet, communication, templates]
+sub-skills: [communication]
+related-workflows: [avant-projet, pilotage-projet]
 ---
 
-# Project Management - Gestion de Projet
+# Project Management (Gestion de Projet)
 
-Tu es l'orchestrateur du skill **Project Management**. Tu gères tout le cycle de vie d'un projet client, de l'avant-vente à la facturation.
+## Quand Utiliser
+- Rédiger des comptes-rendus de réunion
+- Gérer la communication client (emails, relances)
+- Utiliser les templates de gestion de projet
 
-## Philosophie
+## Sous-Skills Disponibles
 
-> Les agents exécutent, les humains supervisent et décident.
+| Sous-skill | Fichier | Description |
+|------------|---------|-------------|
+| Communication | `communication.md` | CR réunion, emails client |
 
-```
-CLIENT ←→ HUMAIN (supervision) ←→ AGENTS (exécution)
-```
+## Workflows Associés
 
-## Tes Sous-Domaines
+> Les processus séquentiels (QUAND) sont dans `/workflows/project/`
 
-| Sous-domaine | Orchestrateur | Agents | Périmètre |
-|--------------|---------------|--------|-----------|
-| **Avant-projet** | `avant-projet/orchestrator` | 7 | Brief, estimation, proposition commerciale |
-| **Pilotage** | `pilotage/orchestrator` | 5 | Planning, suivi, risques, ressources |
-| **Communication** | `communication/orchestrator` | 6 | CR, emails, présentations client |
-| **Livraison** | `livraison/orchestrator` | 4 | Recettage, documentation, bilan |
-| **Facturation** | `facturation/orchestrator` | 2 | Jalons, factures, relances |
-
-**Total : 24 agents spécialisés**
-
-## Règles de Routage
-
-| Mots-clés | Sous-domaine |
-|-----------|--------------|
-| brief, besoin, demande client, RFP, cahier des charges | `avant-projet` |
-| devis, estimation, chiffrage, budget, proposition, propale | `avant-projet` |
-| planning, jalon, milestone, Gantt, calendrier, deadline | `pilotage` |
-| avancement, suivi, reporting, statut, progression | `pilotage` |
-| risque, alerte, problème, blocage, retard | `pilotage` |
-| réunion, CR, compte-rendu, notes, PV | `communication` |
-| email, mail, relance, message client | `communication` |
-| recette, validation, test, PV, anomalie | `livraison` |
-| livraison, MEP, mise en production | `livraison` |
-| facture, facturation, paiement, échéance | `facturation` |
-
-## Arbre de Décision
-
-```
-Requête Gestion de Projet
-│
-├─ Phase commerciale (avant signature) ?
-│  └─ → avant-projet/orchestrator
-│
-├─ Projet en cours ?
-│  └─ → pilotage/orchestrator
-│
-├─ Communication client ?
-│  └─ → communication/orchestrator
-│
-├─ Fin de projet ?
-│  └─ → livraison/orchestrator
-│
-└─ Facturation ?
-   └─ → facturation/orchestrator
-```
+| Workflow | Fichier | Description |
+|----------|---------|-------------|
+| Avant-projet | `workflows/project/avant-projet.md` | Brief → Chiffrage → Proposition |
+| Pilotage | `workflows/project/pilotage-projet.md` | Planning → Suivi → Reporting |
 
 ## Cycle de Vie Projet
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐ │
-│  │  AVANT-  │──▶│ PILOTAGE │──▶│ LIVRAISON│──▶│FACTURAT° │ │
-│  │  PROJET  │   │          │   │          │   │          │ │
-│  └──────────┘   └──────────┘   └──────────┘   └──────────┘ │
-│       │              │              │              │        │
-│       ▼              ▼              ▼              ▼        │
-│  Brief, Devis   Planning,     Recette,      Factures,      │
-│  Proposition    Suivi, CR     Bilan         Relances       │
-│                                                             │
-│         ◀──── COMMUNICATION (transversal) ────▶            │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
+│  AVANT-  │──▶│ PILOTAGE │──▶│ LIVRAISON│──▶│FACTURAT° │
+│  PROJET  │   │          │   │          │   │          │
+└──────────┘   └──────────┘   └──────────┘   └──────────┘
+     │              │              │              │
+     ▼              ▼              ▼              ▼
+Brief, Devis   Planning,     Recette,      Factures,
+Proposition    Suivi, CR     Bilan         Relances
+
+        ◀──── COMMUNICATION (transversal) ────▶
 ```
 
-## Points d'Escalade Humaine
+## Templates de Communication
 
-| Situation | Raison | Action |
-|-----------|--------|--------|
-| Brief incomplet après 2 relances | Décision commerciale | Alerter le commercial |
-| Estimation hors fourchette | Risque financier | Valider avec la direction |
-| Dépassement > 20% budget | Impact financier | Arbitrage nécessaire |
-| Conflit ou tension client | Relationnel sensible | Intervention humaine |
-| Demande hors périmètre | Avenant potentiel | Négociation commerciale |
-| Retard > 1 semaine | Communication client | Chef de projet décide |
-| Facture impayée > 60 jours | Recouvrement | Procédure à décider |
+| Template | Usage |
+|----------|-------|
+| Compte-rendu | Synthèse réunion |
+| Email relance | Demande de retour |
+| Email livraison | Annonce MEP |
 
-## Templates Disponibles
+## Points d'Escalade
 
-Les templates sont dans `/templates/` :
+| Situation | Action |
+|-----------|--------|
+| Brief incomplet après 2 relances | Alerter commercial |
+| Estimation hors fourchette | Valider avec direction |
+| Dépassement > 20% budget | Arbitrage nécessaire |
+| Retard > 1 semaine | Communication client |
+| Demande hors périmètre | Négociation avenant |
 
-- `brief-client.md` - Template de brief
-- `estimation.md` - Template d'estimation
-- `proposition.md` - Template de proposition commerciale
-- `planning.md` - Template de planning (Mermaid)
-- `reporting.md` - Template de reporting hebdo
-- `compte-rendu.md` - Template de CR
-- `pv-recette.md` - Template de PV de recette
-- `bilan-projet.md` - Template de bilan
+## Métriques Clés
 
-## Composition avec les Autres Skills
-
-Ce skill interagit avec :
-
-| Skill | Interaction |
-|-------|-------------|
-| `direction-technique` | Estimation technique, specs, qualité |
-| `strategy` | Recommandations stratégiques |
-| `design` | Maquettes, DA |
-| `content` | Contenus à livrer |
-| `marketing` | Objectifs acquisition |
-
-## Ressources
-
-- **Agents** : `/avant-projet`, `/pilotage`, `/communication`, `/livraison`, `/facturation`
-- **Templates** : `/templates`
+| Métrique | Formule | Cible |
+|----------|---------|-------|
+| Respect délais | Livré à temps / Total | > 90% |
+| Respect budget | Budget réel / Budget prévu | < 110% |
+| Satisfaction client | NPS ou note | > 8/10 |
+| Taux d'avenants | Avenants / Projets | < 20% |
