@@ -2,6 +2,9 @@
 name: frontend-developer
 description: Développeur spécialisé interfaces utilisateur
 level: implementation
+skills: [html, css, javascript, typescript, react, testing, git, accessibility]
+workflows: [create-feature, fix-bug, code-review, release]
+escalation: tech-lead
 ---
 
 # Frontend Developer

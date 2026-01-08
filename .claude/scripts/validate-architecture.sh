@@ -27,12 +27,29 @@ declare -A WORKFLOW_CALLS
 echo "=== Validation Architecture Triple Couche ==="
 echo ""
 
-# Helper function to extract frontmatter field
+# Helper function to extract frontmatter field with error handling
 get_frontmatter_field() {
     local file="$1"
     local field="$2"
+
+    # Validate file exists
+    if [ ! -f "$file" ]; then
+        return 1
+    fi
+
+    # Check for frontmatter markers
+    if ! head -1 "$file" 2>/dev/null | grep -q "^---"; then
+        return 1
+    fi
+
     # Extract value between --- markers, then find the field
-    sed -n '/^---$/,/^---$/p' "$file" | grep "^${field}:" | sed "s/^${field}: *//" | tr -d '[]'
+    sed -n '/^---$/,/^---$/p' "$file" 2>/dev/null | grep "^${field}:" | sed "s/^${field}: *//" | tr -d '[]'
+}
+
+# Sanitize input for safe use (alphanumeric, dash, underscore only)
+sanitize_name() {
+    local input="$1"
+    echo "$input" | tr -cd 'a-zA-Z0-9_-'
 }
 
 # Check if file has required frontmatter fields
@@ -91,15 +108,18 @@ check_cycle() {
         return 1
     fi
 
-    # Get calls for current workflow
-    local calls="${WORKFLOW_CALLS[$current]}"
+    # Get calls for current workflow (sanitize input)
+    local sanitized_current
+    sanitized_current=$(sanitize_name "$current")
+    local calls="${WORKFLOW_CALLS[$sanitized_current]}"
     if [ -z "$calls" ]; then
         return 1
     fi
 
     IFS=', ' read -ra CALL_ARRAY <<< "$calls"
     for called in "${CALL_ARRAY[@]}"; do
-        called=$(echo "$called" | tr -d ' ')
+        # Sanitize input to prevent injection
+        called=$(sanitize_name "$called")
         if [ -z "$called" ]; then
             continue
         fi

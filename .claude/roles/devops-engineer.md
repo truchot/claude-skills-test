@@ -2,6 +2,9 @@
 name: devops-engineer
 description: Ingénieur DevOps - CI/CD, infrastructure, monitoring
 level: operations
+skills: [docker, ci-cd, git, security, database]
+workflows: [release, rollback, create-feature, fix-bug]
+escalation: tech-lead
 ---
 
 # DevOps Engineer

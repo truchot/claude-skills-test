@@ -304,13 +304,31 @@ test_subskill_exists
 test_subskill_missing
 test_valid_role
 
+TOTAL_TESTS=$((TESTS_PASSED + TESTS_FAILED))
+
 echo ""
 echo "=========================================="
-echo "  Results: $TESTS_PASSED passed, $TESTS_FAILED failed"
+echo "           TEST SUMMARY"
+echo "=========================================="
+echo ""
+echo "  Tests run:    $TOTAL_TESTS"
+echo "  Passed:       $TESTS_PASSED"
+echo "  Failed:       $TESTS_FAILED"
+echo ""
+echo "  Coverage:"
+echo "  - Structure validation     ✓"
+echo "  - Frontmatter validation   ✓"
+echo "  - Workflow call validation ✓"
+echo "  - Circular deps detection  ✓"
+echo "  - Sub-skill validation     ✓"
+echo "  - Role validation          ✓"
+echo ""
 echo "=========================================="
 
 if [ $TESTS_FAILED -gt 0 ]; then
+    echo -e "${RED}FAILED${NC}"
     exit 1
 else
+    echo -e "${GREEN}ALL TESTS PASSED${NC}"
     exit 0
 fi

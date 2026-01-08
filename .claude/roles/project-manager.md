@@ -2,6 +2,9 @@
 name: project-manager
 description: Chef de projet - gestion du cycle de vie projet et relation client
 level: process
+skills: [git, project-management]
+workflows: [kickoff, sprint-planning, release]
+escalation: technical-director
 ---
 
 # Project Manager (Chef de Projet)

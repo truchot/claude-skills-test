@@ -2,6 +2,8 @@
 name: technical-director
 description: Direction technique - pilotage stratégique des choix techniques
 level: strategy
+skills: [security, performance, ci-cd, docker, database, api-rest, testing, git, javascript, typescript, react, nextjs]
+workflows: [code-review, release, rollback]
 ---
 
 # Technical Director (Direction Technique)

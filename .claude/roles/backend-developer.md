@@ -2,6 +2,9 @@
 name: backend-developer
 description: Développeur spécialisé côté serveur et APIs
 level: implementation
+skills: [api-rest, database, security, testing, git, typescript]
+workflows: [create-feature, fix-bug, code-review, release]
+escalation: tech-lead
 ---
 
 # Backend Developer

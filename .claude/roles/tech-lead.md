@@ -2,6 +2,9 @@
 name: tech-lead
 description: Leader technique - architecture, qualité, mentorat
 level: strategy
+skills: [testing, security, performance, git, api-rest, database]
+workflows: [code-review, create-feature, release, fix-bug, rollback]
+escalation: technical-director
 ---
 
 # Tech Lead

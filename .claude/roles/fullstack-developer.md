@@ -2,6 +2,9 @@
 name: fullstack-developer
 description: Développeur polyvalent frontend et backend
 level: implementation
+skills: [html, css, javascript, typescript, react, api-rest, database, testing, git]
+workflows: [create-feature, fix-bug, code-review, release]
+escalation: tech-lead
 ---
 
 # Fullstack Developer
