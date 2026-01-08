@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
-version: 3.0.0
+version: 3.0.1
 ---
 
 # Web Agency - Agence Web IA Full-Automatisée
@@ -177,8 +177,21 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | [orchestration/routing.md](./orchestration/routing.md) | Règles de routage détaillées |
 | [orchestration/composition.md](./orchestration/composition.md) | Comment combiner les skills |
 | [orchestration/escalation.md](./orchestration/escalation.md) | Points d'escalade humaine |
-| [workflows/nouveau-projet.md](./workflows/nouveau-projet.md) | Workflow nouveau projet |
-| [workflows/refonte.md](./workflows/refonte.md) | Workflow refonte |
+
+### Workflows Automatisés (v3.0.0)
+
+| Workflow | Description | SLA |
+|----------|-------------|-----|
+| [workflows/email-to-devis.md](./workflows/email-to-devis.md) | Email client → Devis automatisé | < 24h |
+| [workflows/bug-to-hotfix.md](./workflows/bug-to-hotfix.md) | Bug report → Hotfix déployé | P1: 4h |
+| [workflows/feature-to-sprint.md](./workflows/feature-to-sprint.md) | Feature request → Sprint planning | 3-5 jours |
+
+### Workflows Classiques
+
+| Workflow | Description |
+|----------|-------------|
+| [workflows/nouveau-projet.md](./workflows/nouveau-projet.md) | Workflow nouveau projet complet |
+| [workflows/refonte.md](./workflows/refonte.md) | Workflow refonte site existant |
 
 ## ADRs
 
@@ -193,6 +206,14 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v3.0.1
+
+- **Workflows** : Ajout de 3 workflows automatisés end-to-end
+  - `email-to-devis.md` : Email client → Devis en < 24h (94% automatisé)
+  - `bug-to-hotfix.md` : Bug report → Hotfix déployé (SLA P1: 4h)
+  - `feature-to-sprint.md` : Feature request → Sprint planning (3-5 jours)
+- **Documentation** : Restructuration section workflows (automatisés vs classiques)
 
 ### v3.0.0
 
