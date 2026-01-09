@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
-version: 3.1.0
+version: 3.2.0
 ---
 
 # Web Agency - Agence Web IA Full-Automatisée
@@ -86,7 +86,7 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | Skill | Rôle | Agents | Statut |
 |-------|------|--------|--------|
 | `project-management` | Gestion projet & client | 24 | 🟢 |
-| `direction-technique` | Décisions techniques stratégiques | 52 | 🟢 |
+| `direction-technique` | Décisions techniques stratégiques + stratégie digitale | 57 | 🟢 |
 | `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
 | `web-dev-process` | Process de développement | 61 | 🟢 |
 | `testing-process` | Stratégie et méthodologie de tests | 25 | 🟢 |
@@ -97,14 +97,14 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
-| `marketing` | Stratégie marketing et campagnes | 115 | 🟢 |
-| `ux-ui-design` | UX Research, Wireframes, Design visuel, Prototypage | 22 | 🟢 |
+| `marketing` | Stratégie marketing, campagnes, ligne éditoriale | 117 | 🟢 |
+| `ux-ui-design` | UX Research, Wireframes, Design visuel, Branding, Motion | 27 | 🟢 |
 | `legal-compliance` | RGPD, Mentions légales, Audit conformité, Cookies | 16 | 🟢 |
 | `support-client` | Ticketing, Knowledge base, Escalade, Satisfaction | 16 | 🟢 |
 | `commercial-crm` | Pipeline, Prospection, Négociation, Rétention | 17 | 🟢 |
 | `finance-analytics` | Facturation, KPIs, Reporting, Prévisions | 17 | 🟢 |
 
-**Total : 651 agents disponibles** (23 + 16 + 612 métier)
+**Total : 663 agents disponibles** (23 + 16 + 624 métier)
 
 ## Routage Rapide
 
@@ -123,6 +123,7 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 |---------------------|---------|
 | Client, brief, devis, planning, facture | `project-management` |
 | Choix stack, architecture, décisions stratégiques | `direction-technique` |
+| Benchmark concurrence, stratégie digitale, KPIs business | `direction-technique` |
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
 | Process dev, méthodologie, checklists | `web-dev-process` |
 | Stratégie tests, TDD/BDD, pyramide, coverage, sécurité, accessibilité | `testing-process` |
@@ -133,7 +134,9 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 | Campagnes, SEO, réseaux sociaux, analytics | `marketing` |
+| Ligne éditoriale, arborescence, architecture information | `marketing` |
 | UX research, personas, wireframes, maquettes, prototypes | `ux-ui-design` |
+| Direction artistique, branding, identité visuelle, motion design | `ux-ui-design` |
 | RGPD, CGV, mentions légales, conformité, cookies | `legal-compliance` |
 | Tickets, FAQ, support technique, SLA, satisfaction | `support-client` |
 | Pipeline commercial, leads, propositions, CRM | `commercial-crm` |
@@ -227,6 +230,21 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v3.2.0
+
+- **Renforcement skills existants** : Ajout de 12 agents dans 3 skills
+  - `ux-ui-design` v2.0.0 (+5 agents) : Nouveau domaine `branding/`
+    - direction-artistique, brand-identity, motion-design, assets-creator, orchestrator
+    - Total : 27 agents (vs 22)
+  - `marketing` v1.4.0 (+2 agents) : Renforcement domaine `content/`
+    - ligne-editoriale, arborescence
+    - Total : 117 agents (vs 115)
+  - `direction-technique` v3.1.0 (+5 agents) : Nouveau domaine `strategy/`
+    - benchmark-concurrentiel, strategie-digitale, recommandations, kpis-business, orchestrator
+    - Total : 57 agents (vs 52)
+- **Couverture métiers** : Ajout branding, DA, motion design, ligne éditoriale, stratégie digitale
+- **Total agents** : 663 (vs 651 en v3.1.0, +12 agents)
 
 ### v3.1.0
 

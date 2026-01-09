@@ -1,7 +1,7 @@
 ---
 name: marketing
 description: Expert Marketing - Stratégie, campagnes, contenu, acquisition, fidélisation, automation, performance et analytics pour agence Web
-version: 1.3.0
+version: 1.4.0
 status: active
 ---
 
@@ -53,7 +53,7 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 |--------------|---------------|--------|-----------|--------|
 | **Stratégie** | `strategie/orchestrator` | 5 | Positionnement, marché, personas, objectifs | POURQUOI |
 | **Campagnes** | `campagnes/orchestrator` | 5 | Planning, budget, coordination, tracking | QUOI |
-| **Content** | `content/orchestrator` | 5 | Copywriting, blog, social media, landing pages | COMMENT |
+| **Content** | `content/orchestrator` | 7 | Copywriting, blog, social media, landing pages, ligne éditoriale, arborescence | COMMENT |
 | **Acquisition** | `acquisition/orchestrator` | 5 + SEO (49) | SEO complet, SEA, Social Ads, Email, Growth | COMMENT |
 | **Analytics** | `analytics/orchestrator` | 5 | KPIs, A/B testing, reporting, attribution | COMMENT |
 | **Fidélisation** | `fidelisation/orchestrator` | 26 | Lifecycle (7), Loyalty (6), Churn (6), Success (6) | COMMENT |
@@ -61,7 +61,7 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | **Performance** | `performance/orchestrator` | 5 | CRO, funnel analysis, personnalisation, A/B testing | COMMENT |
 | **Social Strategy** | `social-strategy/orchestrator` | 5 | Plateformes, community, social listening, engagement | COMMENT |
 
-**Total : 115 agents spécialisés** (dont 49 agents SEO + 26 agents Fidélisation)
+**Total : 117 agents spécialisés** (dont 49 agents SEO + 26 agents Fidélisation)
 
 ## Règles de Routage
 
@@ -78,6 +78,8 @@ OBJECTIFS BUSINESS ←→ STRATÉGIE ←→ CAMPAGNES ←→ EXÉCUTION ←→ M
 | article, blog, contenu éditorial | `content` |
 | post, social media, réseaux sociaux, community | `content` |
 | landing page, page de vente, conversion | `content` |
+| ligne éditoriale, ton, voix de marque, charte éditoriale | `content` |
+| arborescence, architecture information, taxonomie, navigation | `content` |
 | SEO, référencement naturel, mots-clés, backlinks | `acquisition` |
 | SEA, Google Ads, Bing Ads, PPC, CPC | `acquisition` |
 | Facebook Ads, Instagram Ads, LinkedIn Ads, TikTok | `acquisition` |
