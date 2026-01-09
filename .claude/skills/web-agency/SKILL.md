@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
-version: 3.0.1
+version: 3.1.0
 ---
 
 # Web Agency - Agence Web IA Full-Automatisée
@@ -55,6 +55,12 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 │  │wordpress│ │  react  │ │ nextjs  │ │ design- │ │marketing│ │
 │  │-gutenb. │ │ -expert │ │ -expert │ │ system  │ │         │ │
 │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ │
+│                                                               │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+│  │  ux-ui  │ │  legal  │ │ support │ │commerc- │ │ finance │ │
+│  │ -design │ │-compli- │ │ -client │ │ial-crm  │ │-analyt. │ │
+│  │         │ │  ance   │ │         │ │         │ │         │ │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ │
 └───────────────────────────────────────────────────────────────┘
                             │
                             ▼
@@ -92,8 +98,13 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
 | `marketing` | Stratégie marketing et campagnes | 115 | 🟢 |
+| `ux-ui-design` | UX Research, Wireframes, Design visuel, Prototypage | 22 | 🟢 |
+| `legal-compliance` | RGPD, Mentions légales, Audit conformité, Cookies | 16 | 🟢 |
+| `support-client` | Ticketing, Knowledge base, Escalade, Satisfaction | 16 | 🟢 |
+| `commercial-crm` | Pipeline, Prospection, Négociation, Rétention | 17 | 🟢 |
+| `finance-analytics` | Facturation, KPIs, Reporting, Prévisions | 17 | 🟢 |
 
-**Total : 563 agents disponibles** (23 + 16 + 524 métier)
+**Total : 651 agents disponibles** (23 + 16 + 612 métier)
 
 ## Routage Rapide
 
@@ -122,6 +133,11 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 | Campagnes, SEO, réseaux sociaux, analytics | `marketing` |
+| UX research, personas, wireframes, maquettes, prototypes | `ux-ui-design` |
+| RGPD, CGV, mentions légales, conformité, cookies | `legal-compliance` |
+| Tickets, FAQ, support technique, SLA, satisfaction | `support-client` |
+| Pipeline commercial, leads, propositions, CRM | `commercial-crm` |
+| Factures, paiements, KPIs, reporting, budget, forecast | `finance-analytics` |
 
 **Règles détaillées** → [orchestration/routing.md](./orchestration/routing.md)
 
@@ -158,6 +174,11 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 │  → COMMENT : Code, configuration, patterns                          │
 │  frontend-dev, backend-dev, devops, react-expert, nextjs-expert,    │
 │  wordpress-gutenberg-expert, design-system-foundations, marketing   │
+├─────────────────────────────────────────────────────────────────────┤
+│  NIVEAU 4 : FONCTIONS SUPPORT (skills transverses)                  │
+│  → QUOI : UX, Légal, Support, Commercial, Finance                   │
+│  ux-ui-design, legal-compliance, support-client,                    │
+│  commercial-crm, finance-analytics                                  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -206,6 +227,22 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v3.1.0
+
+- **Nouveaux skills** : Ajout de 5 skills fonctions support (88 agents)
+  - `ux-ui-design` (22 agents) : UX Research, Wireframes, Design visuel, Prototypage, Tests utilisateurs
+    - Domaines : research, wireframe, visual, prototype, testing
+  - `legal-compliance` (16 agents) : RGPD, Documents légaux, Audit conformité, Cookies
+    - Domaines : rgpd, documents, audit, cookies
+  - `support-client` (16 agents) : Ticketing, Knowledge base, Escalade, Satisfaction
+    - Domaines : ticketing, knowledge, escalation, satisfaction
+  - `commercial-crm` (17 agents) : Pipeline, Prospection, Négociation, Rétention
+    - Domaines : pipeline, prospection, negotiation, retention
+  - `finance-analytics` (17 agents) : Facturation, KPIs, Reporting, Prévisions
+    - Domaines : billing, kpis, reporting, forecasting
+- **Architecture** : Ajout niveau "Fonctions Support" pour skills transverses
+- **Total agents** : 651 (vs 563 en v3.0.1, +88 agents)
 
 ### v3.0.1
 
