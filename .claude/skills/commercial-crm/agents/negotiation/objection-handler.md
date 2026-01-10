@@ -2,6 +2,12 @@
 name: objection-handler
 description: Prépare les réponses aux objections commerciales
 version: 1.0.0
+workflows:
+  - id: objection-response
+    template: wf-support
+    phase: Diagnostic
+    name: Traitement objection
+    duration: 0.25-0.5 jour
 ---
 
 # Agent Objection Handler

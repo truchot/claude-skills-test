@@ -2,6 +2,12 @@
 name: proposal-generator
 description: Génère des propositions commerciales
 version: 1.0.0
+workflows:
+  - id: proposal-creation
+    template: wf-creation
+    phase: Conception
+    name: Création proposition commerciale
+    duration: 1-2 jours
 ---
 
 # Agent Proposal Generator

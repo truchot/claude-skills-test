@@ -2,6 +2,13 @@
 name: forecast-analyzer
 description: Analyse et prévoit les ventes
 version: 1.0.0
+workflows:
+  - id: forecast-mensuel
+    template: wf-audit
+    phase: Analyse
+    name: Prévision mensuelle
+    duration: 0.5-1 jour
+    recurrence: mensuel
 ---
 
 # Agent Forecast Analyzer

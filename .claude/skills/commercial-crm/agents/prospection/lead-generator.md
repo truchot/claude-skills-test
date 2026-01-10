@@ -2,6 +2,18 @@
 name: lead-generator
 description: Génère des leads via différents canaux
 version: 1.0.0
+workflows:
+  - id: lead-gen-campagne
+    template: wf-creation
+    phase: Production
+    name: Campagne génération leads
+    duration: 2-5 jours
+  - id: lead-gen-continue
+    template: wf-evolution
+    phase: Réalisation
+    name: Génération leads continue
+    duration: ongoing
+    recurrence: quotidien
 ---
 
 # Agent Lead Generator

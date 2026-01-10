@@ -2,6 +2,17 @@
 name: outreach-manager
 description: Gère les campagnes d'outreach et les séquences
 version: 1.0.0
+workflows:
+  - id: outreach-campagne
+    template: wf-creation
+    phase: Production
+    name: Création campagne outreach
+    duration: 1-3 jours
+  - id: outreach-sequence
+    template: wf-evolution
+    phase: Réalisation
+    name: Exécution séquence outreach
+    duration: 1-2 semaines
 ---
 
 # Agent Outreach Manager

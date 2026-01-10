@@ -2,6 +2,19 @@
 name: account-manager
 description: Gère la relation et le suivi des comptes clients
 version: 1.0.0
+workflows:
+  - id: account-checkin
+    template: wf-evolution
+    phase: Réalisation
+    name: Check-in compte client
+    duration: 0.5 jour
+    recurrence: mensuel
+  - id: account-qbr
+    template: wf-audit
+    phase: Restitution
+    name: QBR trimestriel
+    duration: 1 jour
+    recurrence: trimestriel
 ---
 
 # Agent Account Manager

@@ -2,6 +2,12 @@
 name: closing-assistant
 description: Assiste le processus de closing et signature
 version: 1.0.0
+workflows:
+  - id: closing-process
+    template: wf-creation
+    phase: Livraison
+    name: Processus de closing
+    duration: 1-5 jours
 ---
 
 # Agent Closing Assistant
