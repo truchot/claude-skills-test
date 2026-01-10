@@ -1,6 +1,17 @@
 ---
 name: analyse-dependances
 description: Analyse des dépendances et calcul du chemin critique
+workflows:
+  - id: dependances-creation
+    template: wf-creation
+    phase: Brief
+    name: Analyse dépendances nouveau projet
+    duration: 0.5 jour
+  - id: dependances-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit dépendances projet en cours
+    duration: 0.5 jour
 ---
 
 # Agent Analyse Dépendances

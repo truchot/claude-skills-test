@@ -1,6 +1,17 @@
 ---
 name: collecte-besoin
 description: Collecte et extraction des informations depuis les sources client
+workflows:
+  - id: collecte-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Collecte pour nouveau projet
+    duration: 0.5-1 jour
+  - id: collecte-refonte
+    template: wf-refonte
+    phase: Audit
+    name: Collecte pour refonte existant
+    duration: 1-2 jours
 ---
 
 # Agent Collecte Besoin

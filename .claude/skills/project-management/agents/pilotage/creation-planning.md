@@ -1,6 +1,22 @@
 ---
 name: creation-planning
 description: Création du planning projet initial (Gantt, jalons)
+workflows:
+  - id: planning-creation
+    template: wf-creation
+    phase: Brief
+    name: Planning nouveau projet
+    duration: 0.5-1 jour
+  - id: planning-refonte
+    template: wf-refonte
+    phase: Conception
+    name: Planning refonte
+    duration: 1 jour
+  - id: planning-evolution
+    template: wf-evolution
+    phase: Spécification
+    name: Planning évolution
+    duration: 0.5 jour
 ---
 
 # Agent Création Planning

@@ -1,6 +1,12 @@
 ---
 name: analyse-ecarts
 description: Analyse des écarts entre prévu et réalisé
+workflows:
+  - id: ecarts-diagnostic
+    template: wf-audit
+    phase: Analyse
+    name: Diagnostic des écarts
+    duration: 0.5-1 jour
 ---
 
 # Agent Analyse Écarts

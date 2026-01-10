@@ -1,6 +1,12 @@
 ---
 name: email-demande-information
 description: Rédaction d'emails de demande d'informations
+workflows:
+  - id: email-info
+    template: wf-creation
+    phase: Brief
+    name: Email demande information
+    duration: 0.25 jour
 ---
 
 # Agent Email Demande d'Information

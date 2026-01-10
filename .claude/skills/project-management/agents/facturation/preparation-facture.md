@@ -1,6 +1,12 @@
 ---
 name: preparation-facture
 description: Préparation des éléments de facturation
+workflows:
+  - id: facture-jalon
+    template: wf-evolution
+    phase: Réalisation
+    name: Préparation facture jalon
+    duration: 0.5 jour
 ---
 
 # Agent Préparation Facture

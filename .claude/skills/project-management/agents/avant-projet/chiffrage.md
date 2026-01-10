@@ -1,6 +1,22 @@
 ---
 name: chiffrage
 description: Estimation des charges en jours/homme par lot et profil
+workflows:
+  - id: chiffrage-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Chiffrage nouveau projet
+    duration: 1-2 jours
+  - id: chiffrage-evolution
+    template: wf-evolution
+    phase: Spécification
+    name: Chiffrage évolution
+    duration: 0.5 jour
+  - id: chiffrage-refonte
+    template: wf-refonte
+    phase: Analyse
+    name: Chiffrage refonte
+    duration: 1-2 jours
 ---
 
 # Agent Chiffrage
