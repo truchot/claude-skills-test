@@ -1,6 +1,12 @@
 ---
 name: block-styles
 description: Block Styles Expert
+workflows:
+  - id: block-style-creation
+    template: wf-creation
+    phase: Production
+    name: Création block styles
+    duration: 0.5 jour
 ---
 
 # Block Styles Expert

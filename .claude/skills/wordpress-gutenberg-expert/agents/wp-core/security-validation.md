@@ -1,6 +1,13 @@
 ---
 name: security-validation
 description: Security & Validation Expert
+workflows:
+  - id: security-audit-wp
+    template: wf-audit
+    phase: Analyse
+    name: Audit sécurité WordPress
+    duration: 1 jour
+    recurrence: mensuel
 ---
 
 # Security & Validation Expert

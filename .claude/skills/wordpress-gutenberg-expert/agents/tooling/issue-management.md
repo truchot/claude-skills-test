@@ -2,6 +2,12 @@
 name: issue-management
 description: WordPress Issue Templates Expert
 niveau: comment
+workflows:
+  - id: issue-template-creation
+    template: wf-support
+    phase: Réception
+    name: Création templates issues
+    duration: 0.5 jour
 ---
 
 # WordPress Issue Templates Expert

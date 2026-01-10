@@ -1,6 +1,12 @@
 ---
 name: gdpr-consent-api
 description: GDPR & Consent API Expert
+workflows:
+  - id: gdpr-consent-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation RGPD/Consent API
+    duration: 1 jour
 ---
 
 # GDPR & Consent API Expert

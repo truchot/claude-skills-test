@@ -1,6 +1,12 @@
 ---
 name: wp-rest-api-expert
 description: WP REST API Expert
+workflows:
+  - id: rest-api-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation API REST
+    duration: 1-2 jours
 ---
 
 # WP REST API Expert

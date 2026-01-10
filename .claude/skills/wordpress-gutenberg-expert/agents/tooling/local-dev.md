@@ -1,6 +1,12 @@
 ---
 name: local-dev
 description: Local Dev WordPress Expert
+workflows:
+  - id: wp-local-dev-setup
+    template: wf-creation
+    phase: Brief
+    name: Setup environnement local
+    duration: 0.5 jour
 ---
 
 # Local Dev WordPress Expert

@@ -1,6 +1,12 @@
 ---
 name: build-tooling
 description: Build Tooling WordPress Expert
+workflows:
+  - id: wp-build-setup
+    template: wf-creation
+    phase: Brief
+    name: Configuration build tools
+    duration: 0.5 jour
 ---
 
 # Build Tooling WordPress Expert

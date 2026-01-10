@@ -1,6 +1,12 @@
 ---
 name: custom-post-types
 description: Custom Post Types Expert
+workflows:
+  - id: cpt-creation
+    template: wf-creation
+    phase: Production
+    name: Création Custom Post Types
+    duration: 0.5-1 jour
 ---
 
 # Custom Post Types Expert

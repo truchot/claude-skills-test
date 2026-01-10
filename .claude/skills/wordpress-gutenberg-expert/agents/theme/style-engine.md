@@ -1,6 +1,12 @@
 ---
 name: style-engine
 description: Style Engine Expert
+workflows:
+  - id: style-engine-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration Style Engine
+    duration: 0.5-1 jour
 ---
 
 # Style Engine Expert

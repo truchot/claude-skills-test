@@ -1,6 +1,12 @@
 ---
 name: design-tokens
 description: Design Tokens → theme.json Expert
+workflows:
+  - id: design-tokens-conversion
+    template: wf-creation
+    phase: Conception
+    name: Conversion design tokens theme.json
+    duration: 0.5-1 jour
 ---
 
 # Design Tokens → theme.json Expert

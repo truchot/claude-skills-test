@@ -1,6 +1,12 @@
 ---
 name: templates-patterns
 description: Templates & Patterns Expert
+workflows:
+  - id: templates-patterns-creation
+    template: wf-creation
+    phase: Production
+    name: Création templates et patterns
+    duration: 1-2 jours
 ---
 
 # Templates & Patterns Expert

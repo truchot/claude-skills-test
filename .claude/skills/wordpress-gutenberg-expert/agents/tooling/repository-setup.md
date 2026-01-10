@@ -1,6 +1,12 @@
 ---
 name: repository-setup
 description: Repository Setup WordPress Expert
+workflows:
+  - id: wp-repo-setup
+    template: wf-creation
+    phase: Brief
+    name: Setup repository WordPress
+    duration: 0.5 jour
 ---
 
 # Repository Setup WordPress Expert

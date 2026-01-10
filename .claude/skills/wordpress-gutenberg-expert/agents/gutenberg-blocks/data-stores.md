@@ -1,6 +1,12 @@
 ---
 name: data-stores
 description: Gutenberg Data Expert
+workflows:
+  - id: data-store-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration data stores
+    duration: 1-2 jours
 ---
 
 # Gutenberg Data Expert

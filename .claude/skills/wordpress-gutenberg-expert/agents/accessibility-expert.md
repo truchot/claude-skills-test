@@ -1,6 +1,13 @@
 ---
 name: accessibility-expert
 description: Accessibilité WordPress Expert
+workflows:
+  - id: a11y-wp-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit accessibilité WordPress
+    duration: 1 jour
+    recurrence: trimestriel
 ---
 
 # Accessibilité WordPress Expert

@@ -1,6 +1,12 @@
 ---
 name: gitlab-ci
 description: GitLab CI/CD Expert
+workflows:
+  - id: gitlab-ci-setup
+    template: wf-creation
+    phase: Production
+    name: Setup GitLab CI
+    duration: 0.5-1 jour
 ---
 
 # GitLab CI/CD Expert

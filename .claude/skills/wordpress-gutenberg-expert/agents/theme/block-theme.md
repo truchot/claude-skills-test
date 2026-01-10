@@ -1,6 +1,12 @@
 ---
 name: block-theme
 description: Block Theme Expert
+workflows:
+  - id: block-theme-creation
+    template: wf-creation
+    phase: Production
+    name: Création Block Theme
+    duration: 2-3 jours
 ---
 
 # Block Theme Expert

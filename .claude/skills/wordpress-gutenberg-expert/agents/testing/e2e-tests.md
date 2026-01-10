@@ -1,6 +1,12 @@
 ---
 name: e2e-tests
 description: E2E Tests Expert WordPress
+workflows:
+  - id: e2e-wp-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests E2E WordPress
+    duration: 1 jour
 ---
 
 # E2E Tests Expert WordPress

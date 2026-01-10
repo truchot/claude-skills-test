@@ -1,6 +1,12 @@
 ---
 name: custom-meta
 description: Custom Meta Expert
+workflows:
+  - id: custom-meta-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration métadonnées
+    duration: 0.5 jour
 ---
 
 # Custom Meta Expert
