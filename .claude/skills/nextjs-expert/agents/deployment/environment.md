@@ -1,6 +1,12 @@
 ---
 name: environment
 description: Variables d'environnement et secrets
+workflows:
+  - id: env-vars-setup
+    template: wf-creation
+    phase: Brief
+    name: Configuration variables environnement
+    duration: 0.5 jour
 ---
 
 # Environment Variables

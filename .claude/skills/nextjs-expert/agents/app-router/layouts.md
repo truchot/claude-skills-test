@@ -1,6 +1,12 @@
 ---
 name: layouts
 description: Layouts, templates et loading states
+workflows:
+  - id: nextjs-layouts-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration layouts Next.js
+    duration: 0.5 jour
 ---
 
 # Layouts

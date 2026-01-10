@@ -1,6 +1,12 @@
 ---
 name: ci-cd
 description: Pipelines CI/CD pour Next.js
+workflows:
+  - id: cicd-nextjs
+    template: wf-creation
+    phase: Production
+    name: Setup CI/CD Next.js
+    duration: 1 jour
 ---
 
 # CI/CD Pipelines

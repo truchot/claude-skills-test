@@ -1,6 +1,12 @@
 ---
 name: routing
 description: Routes, segments et groupes dans le App Router
+workflows:
+  - id: nextjs-routing-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration routing Next.js
+    duration: 0.5-1 jour
 ---
 
 # Routing

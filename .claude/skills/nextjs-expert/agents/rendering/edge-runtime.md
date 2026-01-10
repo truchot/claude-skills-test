@@ -1,6 +1,12 @@
 ---
 name: edge-runtime
 description: Edge Functions et runtime configuration
+workflows:
+  - id: edge-runtime-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration Edge Runtime
+    duration: 0.5 jour
 ---
 
 # Edge Runtime

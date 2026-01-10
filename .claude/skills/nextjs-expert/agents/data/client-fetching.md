@@ -1,6 +1,12 @@
 ---
 name: client-fetching
 description: Fetching côté client avec SWR et React Query
+workflows:
+  - id: client-fetching-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation client fetching
+    duration: 0.5 jour
 ---
 
 # Client-Side Fetching

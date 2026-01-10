@@ -1,6 +1,12 @@
 ---
 name: unit-testing
 description: Tests unitaires avec Vitest/Jest
+workflows:
+  - id: unit-testing-nextjs
+    template: wf-creation
+    phase: Production
+    name: Setup tests unitaires
+    duration: 0.5 jour
 ---
 
 # Unit Testing

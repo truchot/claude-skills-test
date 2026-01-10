@@ -1,6 +1,12 @@
 ---
 name: streaming
 description: Suspense, loading UI et streaming SSR
+workflows:
+  - id: streaming-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation streaming SSR
+    duration: 0.5-1 jour
 ---
 
 # Streaming

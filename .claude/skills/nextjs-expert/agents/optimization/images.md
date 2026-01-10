@@ -1,6 +1,12 @@
 ---
 name: images
 description: Optimisation des images avec next/image
+workflows:
+  - id: image-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation images
+    duration: 0.5 jour
 ---
 
 # Image Optimization

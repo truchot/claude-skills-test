@@ -1,6 +1,12 @@
 ---
 name: mocking
 description: Mocking API, DB et services
+workflows:
+  - id: mocking-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration mocking
+    duration: 0.5 jour
 ---
 
 # Mocking

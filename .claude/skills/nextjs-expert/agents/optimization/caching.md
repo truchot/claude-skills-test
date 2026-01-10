@@ -1,6 +1,12 @@
 ---
 name: caching
 description: Stratégies de cache Next.js
+workflows:
+  - id: caching-strategy
+    template: wf-creation
+    phase: Production
+    name: Configuration stratégie cache
+    duration: 0.5 jour
 ---
 
 # Caching Strategies

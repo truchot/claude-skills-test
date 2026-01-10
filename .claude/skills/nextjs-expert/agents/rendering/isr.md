@@ -1,6 +1,12 @@
 ---
 name: isr
 description: Incremental Static Regeneration
+workflows:
+  - id: isr-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration ISR
+    duration: 0.5 jour
 ---
 
 # ISR (Incremental Static Regeneration)

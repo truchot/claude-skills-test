@@ -1,6 +1,12 @@
 ---
 name: server-vs-client
 description: Décider entre Server Component et Client Component
+workflows:
+  - id: rsc-architecture
+    template: wf-creation
+    phase: Conception
+    name: Architecture Server/Client Components
+    duration: 0.5 jour
 ---
 
 # Server vs Client Components
