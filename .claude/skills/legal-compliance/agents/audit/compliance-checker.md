@@ -2,6 +2,13 @@
 name: compliance-checker
 description: Vérifie la conformité aux exigences légales
 version: 1.0.0
+workflows:
+  - id: compliance-check
+    template: wf-audit
+    phase: Analyse
+    name: Vérification conformité légale
+    duration: 1-2 jours
+    recurrence: trimestriel
 ---
 
 # Agent Compliance Checker

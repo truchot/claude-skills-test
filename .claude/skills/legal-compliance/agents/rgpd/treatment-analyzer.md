@@ -2,6 +2,12 @@
 name: treatment-analyzer
 description: Analyse les traitements de données et définit les bases légales
 version: 1.0.0
+workflows:
+  - id: treatment-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse traitements RGPD
+    duration: 1-2 jours
 ---
 
 # Agent Treatment Analyzer

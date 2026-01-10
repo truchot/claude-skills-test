@@ -2,6 +2,13 @@
 name: cookie-auditor
 description: Audite et classifie les cookies du site
 version: 1.0.0
+workflows:
+  - id: cookie-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit cookies
+    duration: 0.5 jour
+    recurrence: trimestriel
 ---
 
 # Agent Cookie Auditor

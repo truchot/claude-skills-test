@@ -2,6 +2,12 @@
 name: remediation-planner
 description: Planifie les actions de remédiation des non-conformités
 version: 1.0.0
+workflows:
+  - id: remediation-plan
+    template: wf-support
+    phase: Résolution
+    name: Plan de remédiation conformité
+    duration: 1-3 jours
 ---
 
 # Agent Remediation Planner

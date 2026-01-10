@@ -2,6 +2,12 @@
 name: gap-analyzer
 description: Analyse les écarts de conformité et évalue les risques
 version: 1.0.0
+workflows:
+  - id: gap-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse écarts conformité
+    duration: 1-2 jours
 ---
 
 # Agent Gap Analyzer
