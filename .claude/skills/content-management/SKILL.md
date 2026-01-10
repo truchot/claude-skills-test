@@ -134,3 +134,161 @@ marketing DÉLÈGUE À content-management:
 - Assets optimisés
 - Contenus traduits
 - Rapports de performance contenu
+
+## Exemples de Requêtes → Agents
+
+### Exemple 1 : Rédaction d'article
+
+```
+Requête: "Rédige un article sur les tendances e-commerce 2025"
+
+Routage:
+1. content-management (skill)
+   └─► redaction (domaine)
+       └─► article-writer (agent principal)
+           ├─► Recherche et structure
+           └─► Rédaction du contenu
+
+2. Post-rédaction:
+   └─► seo-optimizer (agent secondaire)
+       └─► Optimisation meta, headings, keywords
+```
+
+### Exemple 2 : Publication multilingue
+
+```
+Requête: "Publie cet article en FR, EN et DE la semaine prochaine"
+
+Routage:
+1. editorial/workflow-controller
+   └─► Validation du contenu source
+
+2. localization/translation-manager
+   ├─► Traduction EN
+   └─► Traduction DE
+
+3. localization/locale-adapter
+   └─► Adaptation culturelle par marché
+
+4. editorial/publication-scheduler
+   └─► Planification publication 3 langues
+```
+
+### Exemple 3 : Upload média
+
+```
+Requête: "Ajoute cette image hero à la bibliothèque"
+
+Routage:
+1. assets/media-manager
+   └─► Validation format et taille
+
+2. assets/image-optimizer
+   ├─► Compression
+   ├─► Génération variantes (srcset)
+   └─► Conversion WebP
+
+3. assets/media-manager
+   └─► Catalogage et indexation
+```
+
+## Workflows et Triggers
+
+### Mécanismes de Déclenchement
+
+Les workflows peuvent être déclenchés de plusieurs façons :
+
+| Type | Mécanisme | Exemple |
+|------|-----------|---------|
+| **Manuel** | Appel direct via skill | "Lance le workflow brief-to-article" |
+| **Webhook** | API externe | Sentry, GitHub, CMS headless |
+| **Email** | Parsing inbox | client-intake parse les emails |
+| **Formulaire** | Soumission web | /api/content/request |
+| **Planifié** | Cron job | Audit mensuel, newsletter hebdo |
+| **Événement** | Trigger interne | Contenu publié → déclenche traduction |
+
+### Implémentation des Triggers
+
+```yaml
+# Exemple: brief-to-article triggers
+triggers:
+  manual:
+    command: "/content brief-to-article"
+
+  webhook:
+    endpoint: /api/webhooks/content
+    events: [brief.approved, brief.created]
+
+  email:
+    inbox: briefs@agence.fr
+    patterns: ["brief", "nouveau contenu", "article"]
+    handler: client-intake/reception/email-parser
+
+  scheduled:
+    cron: "0 9 * * 1"  # Lundi 9h
+    action: process_pending_briefs
+```
+
+### Chaîne de Workflows
+
+```
+request-to-brief ─────► brief-to-article ─────► content-to-multilang
+     │                        │                        │
+     │                        ▼                        ▼
+     │                  media-to-cdn              Distribution
+     │                  (assets liés)
+     ▼
+Client notifié
+```
+
+## Troubleshooting
+
+### Problèmes Courants
+
+| Problème | Cause probable | Solution |
+|----------|----------------|----------|
+| Article non publié à l'heure | Timezone incorrecte | Vérifier `publication-scheduler` timezone config |
+| Traduction incomplète | Clés i18n manquantes | Lancer `i18n-validator` avant traduction |
+| Image non optimisée | Format non supporté | Vérifier formats acceptés dans `image-optimizer` |
+| Workflow bloqué en "review" | Approbateur non assigné | Configurer fallback approver |
+| Brief rejeté | Infos manquantes | Utiliser template brief complet |
+
+### Diagnostics
+
+```bash
+# Vérifier l'état d'un contenu
+/content status CONTENT-ID
+
+# Lister les contenus bloqués
+/content list --status=review --age=">7d"
+
+# Forcer la republication
+/content republish CONTENT-ID --skip-cache
+
+# Valider la configuration i18n
+/content validate-i18n --locale=fr-FR
+```
+
+### Escalade
+
+| Niveau | Condition | Action |
+|--------|-----------|--------|
+| L1 | Contenu bloqué > 24h | Notification équipe content |
+| L2 | Workflow failed | Alert lead-dev + logs |
+| L3 | Publication échouée | Rollback + incident report |
+
+### Logs et Monitoring
+
+```
+Logs disponibles:
+├── /logs/content-management/workflows/   # Exécutions workflows
+├── /logs/content-management/publishing/  # Publications
+├── /logs/content-management/assets/      # Uploads et optimisation
+└── /logs/content-management/i18n/        # Traductions
+
+Métriques clés:
+- publishing_success_rate (cible: >99%)
+- avg_review_time (cible: <24h)
+- translation_coverage (cible: 100%)
+- asset_optimization_ratio (cible: >70%)
+```
