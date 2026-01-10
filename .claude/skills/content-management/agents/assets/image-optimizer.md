@@ -121,9 +121,146 @@ Upload → Validation → Compression → Resize → Conversion → CDN → Purg
 | Format moderne | > 95% WebP | Performance |
 | Lazy loading | 100% below fold | Initial load |
 
+## Accessibilité (WCAG 2.1 AA)
+
+### Alt Text Requirements
+
+| Type d'image | Alt text | Exigence |
+|--------------|----------|----------|
+| Informative | Descriptif | **Requis** |
+| Décorative | `alt=""` | Requis (vide) |
+| Fonctionnelle | Action/destination | **Requis** |
+| Complexe | Description + longdesc | **Requis** |
+
+### Génération Automatique d'Alt Text
+
+```json
+{
+  "image_id": "IMG-001234",
+  "alt_generation": {
+    "enabled": true,
+    "provider": "openai-vision",
+    "fallback": "manual_required",
+    "output": {
+      "generated": "Bannière promotionnelle montrant des fleurs printanières sur fond pastel rose et vert",
+      "confidence": 0.92,
+      "requires_review": false
+    }
+  },
+  "validation": {
+    "has_alt": true,
+    "alt_length": 89,
+    "alt_quality": "good",
+    "wcag_compliant": true
+  }
+}
+```
+
+### Validation Alt Text
+
+```yaml
+alt_text_validation:
+  rules:
+    - min_length: 10
+    - max_length: 150
+    - no_redundant_prefix: ["image of", "photo of", "picture of"]
+    - no_filename: true
+    - descriptive_check: true
+
+  on_missing:
+    action: block_publish
+    notification: content-team
+
+  on_low_quality:
+    action: flag_for_review
+    notification: accessibility-team
+```
+
+## Batch Processing
+
+### Configuration
+
+```yaml
+batch_processing:
+  enabled: true
+  max_concurrent: 5
+  batch_size: 20
+  priority_queue: true
+
+  queue_config:
+    high_priority:
+      - hero_images
+      - product_photos
+    normal_priority:
+      - blog_images
+      - thumbnails
+    low_priority:
+      - archive_optimization
+      - bulk_conversion
+
+  progress_tracking:
+    enabled: true
+    webhook: /api/webhooks/batch-progress
+    update_interval: 5s
+```
+
+### Job Structure
+
+```json
+{
+  "batch_id": "BATCH-2025-001234",
+  "status": "processing",
+  "created_at": "2025-01-10T14:00:00Z",
+  "config": {
+    "operation": "optimize_and_resize",
+    "quality": 85,
+    "formats": ["webp", "jpeg"],
+    "sizes": [400, 800, 1200, 1600]
+  },
+  "progress": {
+    "total": 150,
+    "completed": 87,
+    "failed": 2,
+    "skipped": 1,
+    "percentage": 58
+  },
+  "results": {
+    "total_input_size": "450MB",
+    "total_output_size": "85MB",
+    "compression_ratio": "81%",
+    "variants_generated": 696
+  },
+  "errors": [
+    {
+      "file": "corrupt-image.png",
+      "error": "Invalid image format",
+      "action": "skipped"
+    }
+  ]
+}
+```
+
+### CLI Batch Commands
+
+```bash
+# Lancer un batch d'optimisation
+/content batch-optimize --path=/assets/2025/ --quality=85
+
+# Voir le statut d'un batch
+/content batch-status BATCH-ID
+
+# Annuler un batch en cours
+/content batch-cancel BATCH-ID
+
+# Reprendre un batch échoué
+/content batch-retry BATCH-ID --failed-only
+```
+
 ## Livrables
 
 - Images optimisées multi-format
 - Rapport de compression
+- Alt text générés/validés
 - Suggestions d'amélioration
 - Code srcset prêt à l'emploi
+- Rapport d'accessibilité
