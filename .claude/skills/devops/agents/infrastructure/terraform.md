@@ -1,6 +1,17 @@
 ---
 name: infrastructure
 description: Infrastructure as Code, Terraform, cloud providers
+workflows:
+  - id: terraform-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Terraform/IaC
+    duration: 1-2 jours
+  - id: terraform-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers IaC
+    duration: 5-15 jours
 ---
 
 # Agent Infrastructure

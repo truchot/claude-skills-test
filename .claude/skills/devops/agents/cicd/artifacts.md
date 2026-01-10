@@ -1,6 +1,17 @@
 ---
 name: artifacts
 description: Gestion des artefacts de build et releases
+workflows:
+  - id: artifacts-setup
+    template: wf-creation
+    phase: Production
+    name: Setup gestion artefacts
+    duration: 0.5-1 jour
+  - id: artifacts-cleanup
+    template: wf-evolution
+    phase: Réalisation
+    name: Politique rétention artefacts
+    duration: 0.5 jour
 ---
 
 # Agent Artifacts

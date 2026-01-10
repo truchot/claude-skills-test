@@ -1,6 +1,17 @@
 ---
 name: logging
 description: Centralisation des logs (ELK, Loki)
+workflows:
+  - id: logging-setup
+    template: wf-creation
+    phase: Production
+    name: Setup stack logging
+    duration: 2-3 jours
+  - id: logging-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution logging
+    duration: 0.5-1 jour
 ---
 
 # Agent Logging

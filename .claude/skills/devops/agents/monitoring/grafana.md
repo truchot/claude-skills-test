@@ -1,6 +1,17 @@
 ---
 name: grafana
 description: Dashboards et visualisation avec Grafana
+workflows:
+  - id: grafana-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Grafana
+    duration: 1-2 jours
+  - id: grafana-dashboard
+    template: wf-evolution
+    phase: Réalisation
+    name: Création dashboard
+    duration: 0.5-1 jour
 ---
 
 # Agent Grafana

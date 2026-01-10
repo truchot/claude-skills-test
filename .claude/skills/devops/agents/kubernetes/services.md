@@ -1,6 +1,17 @@
 ---
 name: services
 description: Services Kubernetes et exposition réseau
+workflows:
+  - id: k8s-services-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Services/Ingress
+    duration: 0.5-1 jour
+  - id: k8s-services-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution exposition réseau
+    duration: 0.5 jour
 ---
 
 # Agent Kubernetes Services

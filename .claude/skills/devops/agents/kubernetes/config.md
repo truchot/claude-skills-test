@@ -1,6 +1,17 @@
 ---
 name: config
 description: Configuration Kubernetes (ConfigMaps, Secrets)
+workflows:
+  - id: k8s-config-setup
+    template: wf-creation
+    phase: Production
+    name: Setup ConfigMaps/Secrets
+    duration: 0.5 jour
+  - id: k8s-config-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit secrets K8s
+    duration: 0.5 jour
 ---
 
 # Agent Kubernetes Config

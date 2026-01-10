@@ -1,6 +1,17 @@
 ---
 name: deployment
 description: Stratégies de déploiement, releases, rollback
+workflows:
+  - id: deploy-strategy
+    template: wf-creation
+    phase: Conception
+    name: Stratégie déploiement
+    duration: 1-2 jours
+  - id: deploy-execution
+    template: wf-evolution
+    phase: Déploiement
+    name: Exécution déploiement
+    duration: 0.5-2 heures
 ---
 
 # Agent Deployment

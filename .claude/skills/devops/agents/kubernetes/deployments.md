@@ -1,6 +1,17 @@
 ---
 name: kubernetes
 description: Kubernetes, orchestration, Helm, déploiements
+workflows:
+  - id: k8s-deploy-setup
+    template: wf-creation
+    phase: Production
+    name: Setup déploiement K8s
+    duration: 1-2 jours
+  - id: k8s-deploy-evolution
+    template: wf-evolution
+    phase: Déploiement
+    name: Évolution manifests K8s
+    duration: 0.5-1 jour
 ---
 
 # Agent Kubernetes

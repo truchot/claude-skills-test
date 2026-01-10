@@ -1,6 +1,17 @@
 ---
 name: registries
 description: Gestion des registres d'images Docker
+workflows:
+  - id: registry-setup
+    template: wf-creation
+    phase: Production
+    name: Setup container registry
+    duration: 0.5-1 jour
+  - id: registry-policies
+    template: wf-evolution
+    phase: Réalisation
+    name: Politiques registry
+    duration: 0.5 jour
 ---
 
 # Agent Container Registries

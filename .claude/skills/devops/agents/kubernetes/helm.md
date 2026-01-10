@@ -1,6 +1,17 @@
 ---
 name: helm
 description: Gestion de packages Kubernetes avec Helm
+workflows:
+  - id: helm-chart-creation
+    template: wf-creation
+    phase: Production
+    name: Création Helm chart
+    duration: 1-2 jours
+  - id: helm-chart-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution Helm chart
+    duration: 0.5 jour
 ---
 
 # Agent Helm

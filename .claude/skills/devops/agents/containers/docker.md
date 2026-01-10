@@ -1,6 +1,17 @@
 ---
 name: containers
 description: Docker, images, multi-stage builds, optimisation
+workflows:
+  - id: docker-creation
+    template: wf-creation
+    phase: Production
+    name: Création Dockerfile
+    duration: 0.5-1 jour
+  - id: docker-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation images Docker
+    duration: 0.5 jour
 ---
 
 # Agent Containers

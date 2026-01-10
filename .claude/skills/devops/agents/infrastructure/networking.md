@@ -1,6 +1,17 @@
 ---
 name: networking
 description: Conception et configuration réseau cloud
+workflows:
+  - id: network-design
+    template: wf-creation
+    phase: Conception
+    name: Design architecture réseau
+    duration: 1-3 jours
+  - id: network-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit sécurité réseau
+    duration: 0.5-1 jour
 ---
 
 # Agent Networking
