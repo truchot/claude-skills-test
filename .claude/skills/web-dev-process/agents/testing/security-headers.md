@@ -1,6 +1,8 @@
 ---
 name: security-headers-expert
 description: Expert en configuration des headers de sécurité HTTP
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Expert Security Headers

@@ -2,6 +2,9 @@
 name: wordpress-data-mapping
 description: Mapping des concepts métier vers les structures WordPress
 niveau: quoi
+workflows:
+  - name: wf-creation
+    step: Conception
 ---
 
 # Mapping Données Métier → WordPress

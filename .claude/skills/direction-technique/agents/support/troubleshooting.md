@@ -1,6 +1,8 @@
 ---
 name: troubleshooting
 description: Diagnostic et résolution systématique de problèmes techniques
+workflow: wf-support
+phase: Diagnostic
 ---
 
 # Troubleshooting

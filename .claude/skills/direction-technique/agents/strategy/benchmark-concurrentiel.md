@@ -2,6 +2,9 @@
 name: benchmark-concurrentiel
 description: Analyse la concurrence et le positionnement marché pour orienter les choix stratégiques
 version: 1.0.0
+workflow:
+  id: wf-audit
+  phase: Analyse
 ---
 
 # Agent Benchmark Concurrentiel

@@ -1,6 +1,9 @@
 ---
 name: accessibility-design-expert
 description: Expert en principes d'accessibilité web et conformité WCAG (Niveau QUOI - Design)
+workflows:
+  - name: wf-audit
+    step: Analyse
 ---
 
 # Expert Accessibilité Web - Principes

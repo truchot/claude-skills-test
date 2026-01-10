@@ -1,6 +1,9 @@
 ---
 name: staging-expert
 description: Expert en environnements de staging et validation pré-production
+workflow:
+  ref: wf-creation
+  phase: Production
 ---
 
 # Expert Staging

@@ -1,6 +1,8 @@
 ---
 name: accessibility-testing-expert
 description: Expert en tests d'accessibilité et audits WCAG (Niveau QUOI - Testing)
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Expert Tests d'Accessibilité

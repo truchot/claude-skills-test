@@ -1,6 +1,9 @@
 ---
 name: estimation-detaillee
 description: Estimation détaillée des charges de développement
+workflow:
+  id: wf-audit
+  phase: Analyse
 ---
 
 # Estimation Détaillée

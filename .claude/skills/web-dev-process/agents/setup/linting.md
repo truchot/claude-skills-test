@@ -1,6 +1,9 @@
 ---
 name: linting-expert
 description: Expert en configuration ESLint et Stylelint pour la qualité du code
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Expert Linting

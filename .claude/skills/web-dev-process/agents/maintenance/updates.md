@@ -1,6 +1,10 @@
 ---
 name: updates-expert
 description: Expert en mises à jour de dépendances et gestion de la dette technique
+workflow:
+  ref: wf-evolution
+  phase: Réalisation
+  recurrence: mensuel
 ---
 
 # Expert Updates & Dette Technique

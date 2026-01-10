@@ -1,6 +1,8 @@
 ---
 name: security-orchestrator
 description: Orchestrateur pour les tests de sécurité
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Orchestrateur Tests de Sécurité

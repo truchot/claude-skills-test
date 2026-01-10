@@ -1,6 +1,9 @@
 ---
 name: git-workflow-expert
 description: Expert en workflow Git, commits et gestion des branches
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Expert Git Workflow

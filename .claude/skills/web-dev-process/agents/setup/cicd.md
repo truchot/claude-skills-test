@@ -1,6 +1,12 @@
 ---
 name: cicd-orchestrator
 description: Orchestrateur pour les principes CI/CD et automatisation (Niveau QUOI)
+workflows:
+  - id: wdp-setup-cicd
+    template: wf-creation
+    phase: Production
+    name: Pipelines CI/CD
+    duration: 0.5 jour
 ---
 
 # Orchestrateur CI/CD

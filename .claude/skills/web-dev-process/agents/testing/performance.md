@@ -1,6 +1,9 @@
 ---
 name: performance-expert
 description: Expert en tests de performance et optimisation
+workflows:
+  - id: wf-audit
+    phase: Analyse
 ---
 
 # Expert Tests de Performance

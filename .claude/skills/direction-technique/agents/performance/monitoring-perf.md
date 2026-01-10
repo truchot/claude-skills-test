@@ -1,6 +1,9 @@
 ---
 name: monitoring-perf
 description: Politique de monitoring et observabilité (Niveau POURQUOI)
+workflow: wf-audit
+phase: Analyse
+recurrence: quotidien
 ---
 
 # Politique de Monitoring Performance

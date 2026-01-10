@@ -1,6 +1,8 @@
 ---
 name: patterns-design
 description: Politique et critères de choix des patterns de conception (Niveau POURQUOI)
+workflow: wf-creation
+phase: Conception
 ---
 
 # Politique des Patterns de Design

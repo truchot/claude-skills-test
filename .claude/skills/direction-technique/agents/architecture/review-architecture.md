@@ -1,6 +1,8 @@
 ---
 name: review-architecture
 description: Revue et validation d'architecture technique
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Revue d'Architecture

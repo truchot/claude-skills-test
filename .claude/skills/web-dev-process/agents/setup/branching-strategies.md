@@ -1,6 +1,12 @@
 ---
 name: branching-strategies-expert
 description: Expert en stratégies de branches Git (GitHub Flow, Git Flow, Trunk-based)
+workflows:
+  - id: wdp-setup-branching
+    template: wf-creation
+    phase: Brief
+    name: Stratégies de branches Git
+    duration: 0.5 jour
 ---
 
 # Expert Stratégies de Branches

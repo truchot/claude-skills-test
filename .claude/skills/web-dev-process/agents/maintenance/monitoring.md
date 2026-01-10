@@ -1,6 +1,10 @@
 ---
 name: monitoring-orchestrator
 description: Orchestrateur pour l'observabilité et le monitoring
+workflow:
+  ref: wf-audit
+  phase: Analyse
+  recurrence: quotidien
 ---
 
 # Orchestrateur Monitoring

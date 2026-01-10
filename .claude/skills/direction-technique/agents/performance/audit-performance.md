@@ -1,6 +1,8 @@
 ---
 name: audit-performance
 description: Audits et diagnostics de performance (Niveau POURQUOI)
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Audit de Performance

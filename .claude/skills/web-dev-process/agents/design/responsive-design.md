@@ -1,6 +1,9 @@
 ---
 name: responsive-design-expert
 description: Expert en design responsive et mobile-first
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Expert Responsive Design

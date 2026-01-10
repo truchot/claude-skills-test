@@ -2,6 +2,9 @@
 name: kpis-business
 description: Définit les indicateurs de performance et objectifs de succès
 version: 1.0.0
+workflow:
+  id: wf-audit
+  phase: Analyse
 ---
 
 # Agent KPIs Business

@@ -1,6 +1,9 @@
 ---
 name: documentation-orchestrator
 description: Orchestrateur pour la documentation technique
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Orchestrateur Documentation

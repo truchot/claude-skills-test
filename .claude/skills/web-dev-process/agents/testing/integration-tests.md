@@ -1,6 +1,8 @@
 ---
 name: integration-tests-expert
 description: Expert en tests d'intégration et tests d'API
+workflow: wf-creation
+phase: Production
 ---
 
 # Expert Tests d'Intégration

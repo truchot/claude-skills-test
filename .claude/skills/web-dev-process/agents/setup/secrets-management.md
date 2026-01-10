@@ -1,6 +1,9 @@
 ---
 name: secrets-management-expert
 description: Expert en gestion sécurisée des secrets et credentials
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Expert Gestion des Secrets

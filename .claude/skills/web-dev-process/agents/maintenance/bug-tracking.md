@@ -1,6 +1,9 @@
 ---
 name: bug-tracking-expert
 description: Expert en gestion des bugs et incidents
+workflow:
+  ref: wf-support
+  phase: Diagnostic
 ---
 
 # Expert Bug Tracking

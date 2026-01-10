@@ -1,6 +1,8 @@
 ---
 name: unit-tests-expert
 description: Expert en tests unitaires et isolation du code
+workflow: wf-creation
+phase: Production
 ---
 
 # Expert Tests Unitaires

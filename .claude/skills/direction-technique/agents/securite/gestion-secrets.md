@@ -1,6 +1,9 @@
 ---
 name: gestion-secrets
 description: Politique de gestion sécurisée des secrets et credentials (Niveau POURQUOI)
+workflow:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Politique de Gestion des Secrets

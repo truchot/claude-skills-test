@@ -1,6 +1,12 @@
 ---
 name: commit-conventions-expert
 description: Expert en conventional commits et validation des messages de commit
+workflows:
+  - id: wdp-setup-commits
+    template: wf-creation
+    phase: Brief
+    name: Conventions de commits
+    duration: 0.5 jour
 ---
 
 # Expert Commit Conventions

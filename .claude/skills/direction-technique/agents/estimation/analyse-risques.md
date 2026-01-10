@@ -1,6 +1,9 @@
 ---
 name: analyse-risques
 description: Identification et quantification des risques techniques
+workflow:
+  id: wf-audit
+  phase: Analyse
 ---
 
 # Analyse des Risques

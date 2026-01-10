@@ -1,6 +1,9 @@
 ---
 name: logging-expert
 description: Expert en logs structurés et observabilité
+workflow:
+  ref: wf-creation
+  phase: Production
 ---
 
 # Expert Logging

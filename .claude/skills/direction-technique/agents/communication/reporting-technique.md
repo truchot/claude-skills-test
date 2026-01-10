@@ -1,6 +1,10 @@
 ---
 name: reporting-technique
 description: Politique de reporting technique (Niveau POURQUOI)
+workflow:
+  id: wf-audit
+  phase: Restitution
+  recurrence: hebdomadaire
 ---
 
 # Politique de Reporting Technique

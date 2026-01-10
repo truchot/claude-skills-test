@@ -1,6 +1,8 @@
 ---
 name: optimisation-backend
 description: Objectifs et politiques d'optimisation des performances backend (Niveau POURQUOI)
+workflow: wf-evolution
+phase: Réalisation
 ---
 
 # Politique de Performance Backend

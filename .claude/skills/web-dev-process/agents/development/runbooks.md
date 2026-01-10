@@ -1,6 +1,9 @@
 ---
 name: runbooks-expert
 description: Expert en rédaction de runbooks et procédures opérationnelles
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Expert Runbooks

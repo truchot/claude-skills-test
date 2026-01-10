@@ -1,6 +1,8 @@
 ---
 name: gestion-incidents
 description: Politique de gestion des incidents (Niveau POURQUOI)
+workflow: wf-support
+phase: Résolution
 ---
 
 # Politique de Gestion des Incidents

@@ -1,6 +1,8 @@
 ---
 name: e2e-tests-expert
 description: Expert en tests end-to-end et automatisation de parcours utilisateur
+workflow: wf-creation
+phase: Production
 ---
 
 # Expert Tests End-to-End

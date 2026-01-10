@@ -1,6 +1,9 @@
 ---
 name: design-system-expert
 description: Expert en design systems et tokens de design
+workflows:
+  - name: wf-creation
+    step: Conception
 ---
 
 # Expert Design System

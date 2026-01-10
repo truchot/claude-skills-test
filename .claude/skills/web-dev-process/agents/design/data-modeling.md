@@ -2,6 +2,9 @@
 name: data-modeling-process
 description: Process de modélisation de données en 3 couches contextuelles
 niveau: quoi
+workflows:
+  - name: wf-creation
+    step: Conception
 ---
 
 # Process de Modélisation de Données

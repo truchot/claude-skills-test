@@ -1,6 +1,9 @@
 ---
 name: strategie-cicd
 description: Décisions stratégiques CI/CD - Politiques, standards, quality gates
+workflow:
+  id: wf-creation
+  phase: Conception
 ---
 
 # Stratégie CI/CD

@@ -1,6 +1,10 @@
 ---
 name: metriques-qualite
 description: Politique de métriques qualité (Niveau POURQUOI)
+workflow:
+  - id: wf-audit
+    phase: Analyse
+    recurrence: hebdomadaire
 ---
 
 # Politique de Métriques Qualité

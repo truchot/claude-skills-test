@@ -1,6 +1,8 @@
 ---
 name: architecture-systeme
 description: Politique et décisions d'architecture système et infrastructure (Niveau POURQUOI)
+workflow: wf-creation
+phase: Conception
 ---
 
 # Politique d'Architecture Système

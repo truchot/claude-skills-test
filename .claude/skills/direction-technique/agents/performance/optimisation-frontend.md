@@ -1,6 +1,8 @@
 ---
 name: optimisation-frontend
 description: Objectifs et politiques d'optimisation des performances frontend (Niveau POURQUOI)
+workflow: wf-evolution
+phase: Réalisation
 ---
 
 # Politique de Performance Frontend

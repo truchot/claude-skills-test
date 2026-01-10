@@ -1,6 +1,12 @@
 ---
 name: git-config-expert
 description: Expert en configuration Git et aliases
+workflows:
+  - id: wdp-setup-git-config
+    template: wf-creation
+    phase: Brief
+    name: Configuration Git
+    duration: 0.5 jour
 ---
 
 # Expert Configuration Git

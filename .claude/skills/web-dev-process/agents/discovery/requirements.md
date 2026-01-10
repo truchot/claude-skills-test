@@ -1,6 +1,8 @@
 ---
 name: requirements-expert
 description: Expert en collecte et formalisation des exigences projet
+workflow: wf-creation
+phase: Brief
 ---
 
 # Expert Exigences (Requirements)

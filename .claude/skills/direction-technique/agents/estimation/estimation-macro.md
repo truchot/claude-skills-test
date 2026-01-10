@@ -1,6 +1,9 @@
 ---
 name: estimation-macro
 description: Estimation de haut niveau pour l'avant-vente et le cadrage
+workflow:
+  id: wf-audit
+  phase: Analyse
 ---
 
 # Estimation Macro

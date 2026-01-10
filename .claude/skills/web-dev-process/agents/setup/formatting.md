@@ -1,6 +1,12 @@
 ---
 name: formatting-expert
 description: Expert en configuration Prettier et EditorConfig pour le formatage du code
+workflows:
+  - id: wdp-setup-formatting
+    template: wf-creation
+    phase: Brief
+    name: Formatage du code
+    duration: 0.5 jour
 ---
 
 # Expert Formatting

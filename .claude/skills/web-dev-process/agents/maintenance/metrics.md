@@ -1,6 +1,9 @@
 ---
 name: metrics-expert
 description: Expert en métriques applicatives et Golden Signals
+workflow:
+  ref: wf-audit
+  phase: Analyse
 ---
 
 # Expert Métriques

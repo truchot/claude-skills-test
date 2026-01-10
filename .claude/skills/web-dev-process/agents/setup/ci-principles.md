@@ -1,6 +1,9 @@
 ---
 name: ci-principles-expert
 description: Expert en principes d'intégration continue (CI)
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Expert CI (Intégration Continue)

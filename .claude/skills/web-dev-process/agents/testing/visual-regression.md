@@ -1,6 +1,8 @@
 ---
 name: visual-regression-expert
 description: Expert en tests de régression visuelle
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Expert Tests de Régression Visuelle

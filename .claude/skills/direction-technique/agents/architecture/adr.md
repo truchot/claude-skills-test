@@ -1,6 +1,8 @@
 ---
 name: adr
 description: Architecture Decision Records - Documentation des décisions techniques
+workflow: wf-creation
+phase: Conception
 ---
 
 # Architecture Decision Records (ADR)

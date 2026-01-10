@@ -1,6 +1,8 @@
 ---
 name: post-mortem
 description: Analyse post-incident et amélioration continue
+workflow: wf-audit
+phase: Restitution
 ---
 
 # Post-Mortem

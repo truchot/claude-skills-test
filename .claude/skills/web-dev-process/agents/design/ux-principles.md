@@ -1,6 +1,9 @@
 ---
 name: ux-principles-expert
 description: Expert en principes UX et lois de l'expérience utilisateur
+workflows:
+  - name: wf-creation
+    step: Conception
 ---
 
 # Expert Principes UX

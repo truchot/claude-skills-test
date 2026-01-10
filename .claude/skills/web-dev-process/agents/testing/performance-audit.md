@@ -1,6 +1,9 @@
 ---
 name: performance-audit-expert
 description: Expert en audits de performance et rapports d'analyse
+workflow: wf-audit
+phase: Analyse
+recurrence: mensuel
 ---
 
 # Expert Audit de Performance

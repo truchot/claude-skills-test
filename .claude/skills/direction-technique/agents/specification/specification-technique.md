@@ -1,6 +1,9 @@
 ---
 name: specification-technique
 description: Politique et standards de rédaction des spécifications techniques (Niveau POURQUOI)
+workflow:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Politique de Spécification Technique

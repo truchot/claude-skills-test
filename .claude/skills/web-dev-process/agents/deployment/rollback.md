@@ -1,6 +1,9 @@
 ---
 name: rollback-expert
 description: Expert en stratégies de rollback et gestion des incidents
+workflow:
+  ref: wf-support
+  phase: Résolution
 ---
 
 # Expert Rollback

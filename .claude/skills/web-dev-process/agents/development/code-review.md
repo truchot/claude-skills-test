@@ -1,6 +1,9 @@
 ---
 name: code-review-expert
 description: Expert en pratiques de revue de code et feedback constructif (Niveau QUOI)
+workflows:
+  - id: wf-audit
+    phase: Analyse
 ---
 
 # Expert Code Review

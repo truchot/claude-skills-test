@@ -1,6 +1,9 @@
 ---
 name: conventions-code
 description: Politique et standards des conventions de code (Niveau POURQUOI)
+workflow:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Politique des Conventions de Code

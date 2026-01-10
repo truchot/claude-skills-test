@@ -1,6 +1,12 @@
 ---
 name: pr-templates-expert
 description: Expert en templates de Pull Requests et Issues
+workflows:
+  - id: wdp-setup-pr-templates
+    template: wf-creation
+    phase: Brief
+    name: Templates PR et Issues
+    duration: 0.5 jour
 ---
 
 # Expert Templates PR/Issues

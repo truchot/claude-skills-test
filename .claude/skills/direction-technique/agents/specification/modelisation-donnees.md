@@ -2,6 +2,9 @@
 name: modelisation-donnees
 description: Politiques et objectifs de modélisation des données
 niveau: pourquoi
+workflow:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Modélisation des Données - Politique et Objectifs

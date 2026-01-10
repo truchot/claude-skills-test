@@ -1,6 +1,9 @@
 ---
 name: adr-expert
 description: Expert en Architecture Decision Records (ADRs)
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Expert ADR

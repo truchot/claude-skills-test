@@ -1,6 +1,9 @@
 ---
 name: ui-ux-orchestrator
 description: Orchestrateur pour le design UI/UX et l'accessibilité
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Orchestrateur UI/UX

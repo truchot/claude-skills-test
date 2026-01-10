@@ -1,6 +1,9 @@
 ---
 name: readme-expert
 description: Expert en rédaction de README et documentation de projet
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Expert README
