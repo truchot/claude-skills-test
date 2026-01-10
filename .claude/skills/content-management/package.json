@@ -23,7 +23,7 @@
     "assets"
   ],
   "author": "Web Agency IA",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   },

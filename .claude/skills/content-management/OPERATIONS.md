@@ -194,24 +194,62 @@ dead_letter_queue:
 
 ```yaml
 batch_processing:
-  image_optimization:
-    enabled: true
-    batch_size: 10
-    max_concurrent: 3
+  # Environment-specific configurations
+  environments:
+    development:
+      image_optimization:
+        batch_size: 2
+        max_concurrent: 1
+        timeout_per_item: 120s
+      translation:
+        batch_size: 2
+        max_concurrent: 1
+        rate_limit: 10/min
+      cdn_upload:
+        batch_size: 5
+        max_concurrent: 2
+
+    staging:
+      image_optimization:
+        batch_size: 5
+        max_concurrent: 2
+        timeout_per_item: 90s
+      translation:
+        batch_size: 3
+        max_concurrent: 1
+        rate_limit: 50/min
+      cdn_upload:
+        batch_size: 10
+        max_concurrent: 3
+
+    production:
+      image_optimization:
+        batch_size: 10
+        max_concurrent: 3
+        timeout_per_item: 60s
+      translation:
+        batch_size: 5
+        max_concurrent: 2
+        rate_limit: 100/min
+      cdn_upload:
+        batch_size: 20
+        max_concurrent: 5
+
+  # Shared settings
+  defaults:
     priority_queue: true
-    timeout_per_item: 60s
-
-  translation:
-    enabled: true
-    batch_size: 5
-    max_concurrent: 2
-    rate_limit: 100/min
-
-  cdn_upload:
-    enabled: true
-    batch_size: 20
-    max_concurrent: 5
     multipart_threshold: 5MB
+    retry_failed: true
+    max_retries: 3
+
+  # Auto-scaling rules (production only)
+  auto_scaling:
+    enabled: ${ENVIRONMENT === 'production'}
+    min_workers: 2
+    max_workers: 10
+    scale_up_threshold: 100  # Queue depth
+    scale_down_threshold: 10
+    cooldown: 300s
 ```
 
 ### Async Processing

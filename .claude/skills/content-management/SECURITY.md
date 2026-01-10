@@ -46,22 +46,44 @@ file_validation:
 ### Magic Bytes Validation
 
 ```javascript
+// Simple magic bytes for most formats
 const MAGIC_BYTES = {
   'image/jpeg': [0xFF, 0xD8, 0xFF],
-  'image/png': [0x89, 0x50, 0x4E, 0x47],
-  'image/gif': [0x47, 0x49, 0x46],
-  'image/webp': [0x52, 0x49, 0x46, 0x46],
-  'application/pdf': [0x25, 0x50, 0x44, 0x46]
+  'image/png': [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A],
+  'image/gif': [0x47, 0x49, 0x46, 0x38],  // GIF8 (GIF87a or GIF89a)
+  'application/pdf': [0x25, 0x50, 0x44, 0x46]  // %PDF
 };
 
+// WebP requires special handling (RIFF container + WEBP signature)
+const WEBP_RIFF = [0x52, 0x49, 0x46, 0x46];  // "RIFF" at offset 0
+const WEBP_SIG = [0x57, 0x45, 0x42, 0x50];   // "WEBP" at offset 8
+
 function validateMagicBytes(buffer, expectedType) {
+  if (buffer.length < 12) return false;
+
+  // Special case for WebP: check both RIFF header and WEBP signature
+  if (expectedType === 'image/webp') {
+    const isRIFF = WEBP_RIFF.every((byte, i) => buffer[i] === byte);
+    const isWEBP = WEBP_SIG.every((byte, i) => buffer[8 + i] === byte);
+    return isRIFF && isWEBP;
+  }
+
   const expected = MAGIC_BYTES[expectedType];
   if (!expected) return false;
 
-  for (let i = 0; i < expected.length; i++) {
-    if (buffer[i] !== expected[i]) return false;
-  }
-  return true;
+  return expected.every((byte, i) => buffer[i] === byte);
+}
+
+// Additional validation for AVIF (ISO Base Media File Format)
+const AVIF_FTYP = [0x00, 0x00, 0x00];  // Starts with size (variable)
+// AVIF has 'ftyp' at offset 4, then 'avif' or 'avis' brand
+
+function validateAVIF(buffer) {
+  if (buffer.length < 12) return false;
+  const ftyp = String.fromCharCode(...buffer.slice(4, 8));
+  if (ftyp !== 'ftyp') return false;
+  const brand = String.fromCharCode(...buffer.slice(8, 12));
+  return ['avif', 'avis', 'mif1'].includes(brand);
 }
 ```
 
@@ -172,17 +194,41 @@ const sanitizeConfig = {
 
 ### SVG Sanitization
 
+> **Recommended Libraries**: Use battle-tested libraries for SVG sanitization:
+> - [DOMPurify](https://github.com/cure53/DOMPurify) (recommended)
+> - [svg-sanitizer](https://github.com/nickcaballero/svg-sanitizer)
+> - [sanitize-svg](https://www.npmjs.com/package/@braintree/sanitize-svg)
+
+```javascript
+// Using DOMPurify (recommended)
+import DOMPurify from 'dompurify';
+
+const sanitizeSVG = (svgContent) => {
+  return DOMPurify.sanitize(svgContent, {
+    USE_PROFILES: { svg: true, svgFilters: true },
+    ADD_TAGS: ['use'],  // If needed for icon systems
+    FORBID_TAGS: ['script', 'foreignObject'],
+    FORBID_ATTR: ['onclick', 'onerror', 'onload', 'xlink:href'],
+  });
+};
+```
+
 ```yaml
 svg_sanitization:
   enabled: true
+  library: dompurify  # Use proven library, not custom implementation
 
   remove:
     - script
     - foreignObject
     - use[href^="data:"]
+    - use[href^="javascript:"]
     - "*[onclick]"
     - "*[onerror]"
     - "*[onload]"
+    - "*[onmouseover]"
+    - set  # Can be used for XSS
+    - animate[attributeName="href"]
 
   allowed_elements:
     - svg
@@ -202,6 +248,8 @@ svg_sanitization:
     - linearGradient
     - radialGradient
     - stop
+    - symbol  # For icon systems
+    - use     # Only with sanitized href
 
   allowed_attributes:
     - viewBox
@@ -214,6 +262,17 @@ svg_sanitization:
     - transform
     - class
     - id
+    - xmlns
+    - xmlns:xlink
+    - aria-label
+    - aria-hidden
+    - role
+
+  # Additional security checks
+  post_sanitize:
+    - validate_no_external_refs
+    - validate_no_data_uris_in_use
+    - validate_viewbox_bounds
 ```
 
 ### Markdown Sanitization
@@ -371,29 +430,85 @@ cors:
 
 ### Content Security Policy
 
+> **Security Note**: Avoid `'unsafe-inline'` - use nonces or hashes instead.
+
+```javascript
+// Generate CSP nonce per request
+import crypto from 'crypto';
+
+function generateCSPNonce() {
+  return crypto.randomBytes(16).toString('base64');
+}
+
+// Middleware example
+app.use((req, res, next) => {
+  res.locals.cspNonce = generateCSPNonce();
+  res.setHeader('Content-Security-Policy', buildCSP(res.locals.cspNonce));
+  next();
+});
+
+// In templates: <style nonce="{{cspNonce}}">...</style>
+```
+
 ```yaml
 csp:
   default-src: "'self'"
+
   script-src:
     - "'self'"
+    - "'nonce-{CSP_NONCE}'"  # Dynamic nonce per request
     - "https://cdn.example.com"
+    # Fallback for older browsers: use strict-dynamic
+    - "'strict-dynamic'"
+
   style-src:
     - "'self'"
-    - "'unsafe-inline'"  # Pour inline styles du CMS
+    - "'nonce-{CSP_NONCE}'"  # Use nonce instead of unsafe-inline
+    - "https://fonts.googleapis.com"
+    # For CMS inline styles, inject with nonce attribute
+
   img-src:
     - "'self'"
     - "https://cdn.example.com"
     - "https://images.example.com"
-    - "data:"  # Pour base64 thumbnails
+    - "data:"  # Pour base64 thumbnails (limited use)
+    - "blob:"  # For image previews
+
   font-src:
     - "'self'"
     - "https://fonts.googleapis.com"
+    - "https://fonts.gstatic.com"
+
   connect-src:
     - "'self'"
     - "https://api.example.com"
+    - "https://cdn.example.com"
+
+  media-src:
+    - "'self'"
+    - "https://cdn.example.com"
+    - "blob:"
+
   frame-ancestors: "'none'"
   base-uri: "'self'"
   form-action: "'self'"
+  upgrade-insecure-requests: true
+
+  # Reporting
+  report-uri: "/api/csp-report"
+  report-to: "csp-endpoint"
+```
+
+```yaml
+# CSP Reporting endpoint configuration
+csp_reporting:
+  endpoint: /api/csp-report
+  log_level: warning
+  alert_threshold: 10  # Alert if >10 violations/hour
+  ignore_patterns:
+    - browser_extension
+    - moz-extension
+    - chrome-extension
 ```
 
 ### Permissions Policy
