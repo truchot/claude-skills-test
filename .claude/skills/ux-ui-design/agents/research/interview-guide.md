@@ -2,6 +2,17 @@
 name: interview-guide
 description: Prépare et analyse les interviews utilisateurs
 version: 1.0.0
+workflows:
+  - id: interview-prep
+    template: wf-creation
+    phase: Brief
+    name: Préparation interviews
+    duration: 1-2 jours
+  - id: interview-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse interviews
+    duration: 1-2 jours
 ---
 
 # Agent Interview Guide

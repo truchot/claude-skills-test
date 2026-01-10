@@ -2,6 +2,13 @@
 name: feedback-analyzer
 description: Analyse et synthétise les retours utilisateurs
 version: 1.0.0
+workflows:
+  - id: feedback-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse feedbacks utilisateurs
+    duration: 1-2 jours
+    recurrence: mensuel
 ---
 
 # Agent Feedback Analyzer

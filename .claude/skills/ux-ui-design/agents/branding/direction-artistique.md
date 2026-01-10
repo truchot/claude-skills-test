@@ -4,12 +4,18 @@ description: Définit l'univers graphique et créatif d'un projet - moodboards, 
 version: 2.0.0
 workflows:
   - id: da-nouveau-projet
+    template: wf-creation
+    phase: Conception
     name: DA Nouveau Projet
     duration: 5-8 jours
   - id: da-refonte
+    template: wf-refonte
+    phase: Conception
     name: Refonte DA
     duration: 8-12 jours
   - id: da-evolution
+    template: wf-evolution
+    phase: Réalisation
     name: Évolution DA
     duration: 3-5 jours
 ---

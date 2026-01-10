@@ -2,6 +2,17 @@
 name: motion-design
 description: Conçoit les animations, micro-interactions et contenus motion de la marque
 version: 1.0.0
+workflows:
+  - id: motion-creation
+    template: wf-creation
+    phase: Production
+    name: Création motion design
+    duration: 3-7 jours
+  - id: motion-guidelines
+    template: wf-evolution
+    phase: Réalisation
+    name: Guidelines motion
+    duration: 1-2 jours
 ---
 
 # Agent Motion Design

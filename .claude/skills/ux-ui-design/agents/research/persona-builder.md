@@ -2,6 +2,17 @@
 name: persona-builder
 description: Crée des personas utilisateurs détaillés basés sur la recherche
 version: 1.0.0
+workflows:
+  - id: persona-creation
+    template: wf-creation
+    phase: Conception
+    name: Création personas
+    duration: 2-4 jours
+  - id: persona-update
+    template: wf-evolution
+    phase: Réalisation
+    name: Mise à jour personas
+    duration: 1 jour
 ---
 
 # Agent Persona Builder

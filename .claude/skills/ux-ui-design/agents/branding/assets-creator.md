@@ -2,6 +2,17 @@
 name: assets-creator
 description: Crée les assets visuels de marque - icônes, illustrations, pictogrammes
 version: 1.0.0
+workflows:
+  - id: assets-creation
+    template: wf-creation
+    phase: Production
+    name: Création assets visuels
+    duration: 2-5 jours
+  - id: assets-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Déclinaison assets
+    duration: 1-2 jours
 ---
 
 # Agent Assets Creator

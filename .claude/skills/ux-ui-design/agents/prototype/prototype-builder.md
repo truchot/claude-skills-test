@@ -2,6 +2,17 @@
 name: prototype-builder
 description: Assemble les prototypes interactifs cliquables
 version: 1.0.0
+workflows:
+  - id: prototype-creation
+    template: wf-creation
+    phase: Production
+    name: Création prototype cliquable
+    duration: 2-5 jours
+  - id: prototype-iteration
+    template: wf-evolution
+    phase: Réalisation
+    name: Itération prototype
+    duration: 1-2 jours
 ---
 
 # Agent Prototype Builder

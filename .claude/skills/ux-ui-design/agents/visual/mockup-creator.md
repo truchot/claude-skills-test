@@ -2,6 +2,17 @@
 name: mockup-creator
 description: Crée les maquettes haute fidélité des pages
 version: 1.0.0
+workflows:
+  - id: mockup-creation
+    template: wf-creation
+    phase: Production
+    name: Création maquettes HD
+    duration: 3-7 jours
+  - id: mockup-iteration
+    template: wf-evolution
+    phase: Réalisation
+    name: Itération maquettes
+    duration: 1-3 jours
 ---
 
 # Agent Mockup Creator

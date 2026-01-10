@@ -2,6 +2,17 @@
 name: wireframe-generator
 description: Génère les wireframes basse et haute fidélité
 version: 1.0.0
+workflows:
+  - id: wireframe-creation
+    template: wf-creation
+    phase: Conception
+    name: Création wireframes
+    duration: 2-5 jours
+  - id: wireframe-iteration
+    template: wf-evolution
+    phase: Réalisation
+    name: Itération wireframes
+    duration: 1-2 jours
 ---
 
 # Agent Wireframe Generator

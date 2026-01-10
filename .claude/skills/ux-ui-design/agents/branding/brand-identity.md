@@ -4,12 +4,18 @@ description: Crée l'identité visuelle complète - logo, charte graphique, bran
 version: 2.0.0
 workflows:
   - id: bi-creation
+    template: wf-creation
+    phase: Production
     name: Création Identité Complète
     duration: 10-15 jours
   - id: bi-refonte
+    template: wf-refonte
+    phase: Conception
     name: Refonte Identité
     duration: 12-18 jours
   - id: bi-declinaison
+    template: wf-evolution
+    phase: Réalisation
     name: Déclinaison Identité
     duration: 3-5 jours
 ---
