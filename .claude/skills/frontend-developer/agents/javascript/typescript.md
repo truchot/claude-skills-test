@@ -1,6 +1,17 @@
 ---
 name: TypeScript Expert
 description: Expert en TypeScript - typage, interfaces, generics et utility types
+workflows:
+  - id: ts-setup
+    template: wf-creation
+    phase: Production
+    name: Setup TypeScript
+    duration: 0.5-1 jour
+  - id: ts-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration JS vers TypeScript
+    duration: 5-15 jours
 ---
 
 # Agent TypeScript

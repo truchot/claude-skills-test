@@ -1,6 +1,17 @@
 ---
 name: JavaScript Moderne
 description: Expert en JavaScript ES6+ - async/await, modules, destructuring, patterns modernes
+workflows:
+  - id: js-creation
+    template: wf-creation
+    phase: Production
+    name: Développement JavaScript
+    duration: ongoing
+  - id: js-modernization
+    template: wf-refonte
+    phase: Migration
+    name: Modernisation code ES6+
+    duration: 2-5 jours
 ---
 
 # Agent JavaScript Moderne

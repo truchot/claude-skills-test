@@ -1,6 +1,17 @@
 ---
 name: Tailwind Expert
 description: Expert Tailwind CSS - configuration, plugins, patterns et bonnes pratiques
+workflows:
+  - id: tailwind-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Tailwind CSS
+    duration: 0.5 jour
+  - id: tailwind-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers Tailwind
+    duration: 3-7 jours
 ---
 
 # Agent Tailwind Expert

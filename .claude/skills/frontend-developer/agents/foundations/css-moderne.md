@@ -1,6 +1,17 @@
 ---
 name: CSS Moderne
 description: Expert en CSS moderne - Grid, Flexbox, variables CSS, cascade et nouveautés
+workflows:
+  - id: css-creation
+    template: wf-creation
+    phase: Production
+    name: Styles CSS nouveau projet
+    duration: 1-2 jours
+  - id: css-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution styles CSS
+    duration: 0.5-1 jour
 ---
 
 # Agent CSS Moderne

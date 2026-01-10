@@ -1,6 +1,17 @@
 ---
 name: CSS-in-JS Expert
 description: Expert CSS-in-JS - styled-components, Emotion, CSS Modules
+workflows:
+  - id: cssinjs-setup
+    template: wf-creation
+    phase: Production
+    name: Setup CSS-in-JS
+    duration: 0.5 jour
+  - id: cssinjs-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers CSS-in-JS
+    duration: 2-5 jours
 ---
 
 # Agent CSS-in-JS

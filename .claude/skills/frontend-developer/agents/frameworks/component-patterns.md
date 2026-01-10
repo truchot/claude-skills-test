@@ -1,6 +1,17 @@
 ---
 name: Component Patterns
 description: Patterns de composants communs - HOC, Render Props, Compound Components, Headless
+workflows:
+  - id: patterns-creation
+    template: wf-creation
+    phase: Conception
+    name: Architecture composants
+    duration: 1-2 jours
+  - id: patterns-refactor
+    template: wf-evolution
+    phase: Réalisation
+    name: Refactoring patterns
+    duration: 1-3 jours
 ---
 
 # Agent Component Patterns

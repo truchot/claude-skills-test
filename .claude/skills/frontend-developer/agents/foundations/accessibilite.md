@@ -1,6 +1,17 @@
 ---
 name: Accessibilité Web
 description: Expert en accessibilité web - WCAG, ARIA, tests et bonnes pratiques a11y
+workflows:
+  - id: a11y-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit accessibilité WCAG
+    duration: 1-2 jours
+  - id: a11y-remediation
+    template: wf-evolution
+    phase: Réalisation
+    name: Remédiation accessibilité
+    duration: 1-3 jours
 ---
 
 # Agent Accessibilité Web

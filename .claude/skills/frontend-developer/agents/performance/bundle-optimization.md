@@ -1,6 +1,17 @@
 ---
 name: Bundle Optimization Expert
 description: Expert en optimisation de bundle - code splitting, tree shaking, lazy loading
+workflows:
+  - id: bundle-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit taille bundle
+    duration: 0.5 jour
+  - id: bundle-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation bundle
+    duration: 1-2 jours
 ---
 
 # Agent Bundle Optimization

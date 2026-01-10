@@ -1,6 +1,17 @@
 ---
 name: Vue Expert
 description: Expert Vue 3 - Composition API, Pinia, Vue patterns et bonnes pratiques
+workflows:
+  - id: vue-creation
+    template: wf-creation
+    phase: Production
+    name: Développement Vue.js
+    duration: ongoing
+  - id: vue-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration Vue 2 → Vue 3
+    duration: 5-15 jours
 ---
 
 # Agent Vue Expert

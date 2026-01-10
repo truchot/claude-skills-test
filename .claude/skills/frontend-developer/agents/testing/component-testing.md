@@ -1,6 +1,18 @@
 ---
 name: Component Testing Expert
 description: Expert en tests de composants - React Testing Library, Vue Test Utils
+workflows:
+  - id: component-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests composants
+    duration: 0.5 jour
+  - id: component-test-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout tests composants
+    duration: ongoing
+    recurrence: par composant
 ---
 
 # Agent Component Testing

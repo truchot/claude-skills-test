@@ -1,6 +1,17 @@
 ---
 name: Build Tools Expert
 description: Expert en outils de build - Vite, Webpack, esbuild, configuration
+workflows:
+  - id: build-setup
+    template: wf-creation
+    phase: Brief
+    name: Setup build tooling
+    duration: 0.5-1 jour
+  - id: build-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration bundler (ex: Webpack→Vite)
+    duration: 2-5 jours
 ---
 
 # Agent Build Tools

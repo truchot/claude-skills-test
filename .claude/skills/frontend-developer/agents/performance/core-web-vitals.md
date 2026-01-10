@@ -1,6 +1,17 @@
 ---
 name: Core Web Vitals Expert
 description: Expert Core Web Vitals - LCP, FID, CLS, INP et optimisation Lighthouse
+workflows:
+  - id: cwv-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit Core Web Vitals
+    duration: 0.5-1 jour
+  - id: cwv-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation Core Web Vitals
+    duration: 1-3 jours
 ---
 
 # Agent Core Web Vitals
