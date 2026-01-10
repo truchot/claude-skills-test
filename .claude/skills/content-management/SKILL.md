@@ -59,6 +59,59 @@ Planification → Création → Révision → Validation → Publication → Ana
 | `web-dev-process` | Documentation technique |
 | `project-management` | Planning client |
 
+## Content Management vs Marketing
+
+### Règle de Routage
+
+```
+Stratégie et acquisition    →  marketing
+Production et workflow      →  content-management
+```
+
+### Matrice de Responsabilités
+
+| Tâche | content-management | marketing | Notes |
+|-------|:------------------:|:---------:|-------|
+| **Stratégie SEO** (recherche keywords, roadmap) | | ✅ | `marketing/acquisition/seo/strategie` |
+| **Optimisation SEO on-page** (meta, structure) | ✅ | | Application des guidelines SEO |
+| **Calendrier éditorial** | ✅ | | Workflow et planning |
+| **Stratégie de contenu** (personas, pillars) | | ✅ | `marketing/strategie` |
+| **Rédaction d'articles** | ✅ | | Production du contenu |
+| **Copywriting conversion** | ✅ | | Copy pour pages/CTA |
+| **Copywriting campagnes** | | ✅ | `marketing/content/copywriting` |
+| **Gestion des assets** | ✅ | | Bibliothèque, optimisation |
+| **Distribution sociale** | | ✅ | `marketing/content/social-media-content` |
+| **Traduction/i18n** | ✅ | | Localisation contenu |
+| **SEO international** (hreflang, geotargeting) | | ✅ | `marketing/acquisition/seo/international` |
+
+### Exemples de Routage
+
+| Requête utilisateur | Skill | Raison |
+|---------------------|-------|--------|
+| "Quels keywords cibler ?" | `marketing` | Stratégie SEO |
+| "Optimise cet article pour le SEO" | `content-management` | Optimisation on-page |
+| "Planifie la publication de ce contenu" | `content-management` | Workflow éditorial |
+| "Crée une campagne de contenu Q1" | `marketing` | Stratégie campagne |
+| "Rédige un article sur le cloud" | `content-management` | Production contenu |
+| "Traduis ce contenu en anglais" | `content-management` | Localisation |
+| "Publie ce contenu sur LinkedIn" | `marketing` | Distribution sociale |
+
+### Délégation entre Skills
+
+```
+content-management DÉLÈGUE À marketing:
+├── Recherche de keywords (avant rédaction)
+├── Stratégie de contenu macro
+├── Distribution sur réseaux sociaux
+└── SEO technique et international
+
+marketing DÉLÈGUE À content-management:
+├── Production de contenu
+├── Workflow de publication
+├── Gestion des assets
+└── Traduction et localisation
+```
+
 ## Statuts de Contenu
 
 | Statut | Description | Actions possibles |
