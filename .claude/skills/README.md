@@ -98,8 +98,9 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 42 | Expertise WordPress |
 | `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 21 | Design system |
 | `marketing` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | Métier | 74 | Marketing digital complet |
+| `content-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 17 | Gestion éditoriale, assets, localisation |
 
-**Total : 500 agents spécialisés**
+**Total : 668 agents spécialisés**
 
 ## Guide de Migration
 
@@ -346,8 +347,8 @@ Les skills suivants ont été supprimés ou déplacés :
 |-------|--------|-------------|
 | `strategy` | Jamais implémenté | `direction-technique` |
 | `design` | Jamais implémenté | `design-system-foundations` |
-| `content` | Jamais implémenté | - |
-| `marketing` | Jamais implémenté | - |
+| `content` | Jamais implémenté | `content-management` (v3.2.0) |
+| `marketing` | Jamais implémenté | `marketing` (ré-implémenté v3.0.0) |
 
 ### Skills Extraits/Déplacés
 
@@ -357,6 +358,7 @@ Les skills suivants ont été supprimés ou déplacés :
 
 ### Notes de Migration
 
+- **Références à `content (skill)`** : Utiliser `content-management` pour la gestion éditoriale, assets et localisation
 - **Références à `design (skill)`** : Utiliser `design-system-foundations` pour les design systems
 - **Références à `backend-developer/devops/*`** : Utiliser `devops/*` directement
 - Voir [VERSIONING.md](./VERSIONING.md) pour la matrice de compatibilité
