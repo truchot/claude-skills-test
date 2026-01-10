@@ -1,6 +1,18 @@
 ---
 name: integration
 description: Tests d'intégration, test database, containers
+workflows:
+  - id: integration-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests intégration
+    duration: 1-2 jours
+  - id: integration-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout tests intégration
+    duration: ongoing
+    recurrence: par feature
 ---
 
 # Agent Integration Testing

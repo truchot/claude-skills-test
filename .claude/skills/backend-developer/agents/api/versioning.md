@@ -1,6 +1,17 @@
 ---
 name: versioning
 description: Stratégies de versioning d'API et gestion des breaking changes
+workflows:
+  - id: versioning-strategy
+    template: wf-creation
+    phase: Conception
+    name: Stratégie versioning API
+    duration: 0.5-1 jour
+  - id: versioning-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration version API
+    duration: 2-5 jours
 ---
 
 # Agent API Versioning

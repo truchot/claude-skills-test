@@ -1,6 +1,17 @@
 ---
 name: monolith
 description: Architecture monolithique et monolithe modulaire
+workflows:
+  - id: monolith-creation
+    template: wf-creation
+    phase: Conception
+    name: Design monolithe modulaire
+    duration: 2-5 jours
+  - id: monolith-modularize
+    template: wf-refonte
+    phase: Analyse
+    name: Modularisation monolithe
+    duration: 5-15 jours
 ---
 
 # Agent Monolith Architecture

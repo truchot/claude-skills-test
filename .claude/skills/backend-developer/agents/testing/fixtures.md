@@ -1,6 +1,18 @@
 ---
 name: fixtures
 description: Factories, fixtures, seeds et données de test
+workflows:
+  - id: fixtures-setup
+    template: wf-creation
+    phase: Production
+    name: Setup factories/fixtures
+    duration: 0.5-1 jour
+  - id: fixtures-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout fixtures
+    duration: ongoing
+    recurrence: par feature
 ---
 
 # Agent Test Fixtures

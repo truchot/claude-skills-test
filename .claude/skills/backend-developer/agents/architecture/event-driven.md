@@ -1,6 +1,17 @@
 ---
 name: event-driven
 description: Architecture événementielle, messaging et event sourcing
+workflows:
+  - id: eda-creation
+    template: wf-creation
+    phase: Conception
+    name: Design architecture événementielle
+    duration: 3-7 jours
+  - id: eda-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers EDA
+    duration: 10-30 jours
 ---
 
 # Agent Event-Driven Architecture

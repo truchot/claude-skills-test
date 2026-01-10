@@ -1,6 +1,17 @@
 ---
 name: transactions
 description: Gestion des transactions, niveaux d'isolation et intégrité des données
+workflows:
+  - id: tx-implementation
+    template: wf-creation
+    phase: Production
+    name: Implémentation transactions
+    duration: 0.5-1 jour
+  - id: tx-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit intégrité données
+    duration: 0.5 jour
 ---
 
 # Agent Database Transactions

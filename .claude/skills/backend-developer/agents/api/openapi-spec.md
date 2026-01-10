@@ -1,6 +1,18 @@
 ---
 name: openapi-spec
 description: Génération de spécifications OpenAPI/Swagger pour documenter les APIs REST
+workflows:
+  - id: openapi-creation
+    template: wf-creation
+    phase: Conception
+    name: Création spec OpenAPI
+    duration: 1-2 jours
+  - id: openapi-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Mise à jour spec OpenAPI
+    duration: 0.25-0.5 jour
+    recurrence: par endpoint
 ---
 
 # Agent OpenAPI Specification

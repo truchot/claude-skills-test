@@ -1,6 +1,17 @@
 ---
 name: nosql
 description: Bases de données NoSQL - MongoDB, Redis, Elasticsearch et autres
+workflows:
+  - id: nosql-setup
+    template: wf-creation
+    phase: Production
+    name: Setup base NoSQL
+    duration: 1-2 jours
+  - id: nosql-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers NoSQL
+    duration: 5-15 jours
 ---
 
 # Agent NoSQL Databases

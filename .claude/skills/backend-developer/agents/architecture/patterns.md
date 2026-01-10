@@ -1,6 +1,17 @@
 ---
 name: patterns
 description: Design patterns et principes SOLID pour le développement backend
+workflows:
+  - id: patterns-review
+    template: wf-audit
+    phase: Analyse
+    name: Review patterns et SOLID
+    duration: 0.5-1 jour
+  - id: patterns-refactor
+    template: wf-evolution
+    phase: Réalisation
+    name: Refactoring patterns
+    duration: 1-3 jours
 ---
 
 # Agent Design Patterns

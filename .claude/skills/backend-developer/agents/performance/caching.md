@@ -1,6 +1,17 @@
 ---
 name: caching
 description: Stratégies de cache - Redis, in-memory, CDN, cache patterns
+workflows:
+  - id: cache-setup
+    template: wf-creation
+    phase: Production
+    name: Setup stratégie cache
+    duration: 1-2 jours
+  - id: cache-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation cache
+    duration: 0.5-1 jour
 ---
 
 # Agent Caching

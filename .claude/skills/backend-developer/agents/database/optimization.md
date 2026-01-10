@@ -1,6 +1,17 @@
 ---
 name: optimization
 description: Optimisation des performances de base de données, indexation et analyse
+workflows:
+  - id: db-perf-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit performance DB
+    duration: 0.5-1 jour
+  - id: db-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation DB
+    duration: 1-3 jours
 ---
 
 # Agent Database Optimization

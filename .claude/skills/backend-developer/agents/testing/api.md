@@ -1,6 +1,18 @@
 ---
 name: api
 description: Tests API, tests HTTP, contract testing
+workflows:
+  - id: api-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests API
+    duration: 0.5-1 jour
+  - id: api-test-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout tests API
+    duration: ongoing
+    recurrence: par endpoint
 ---
 
 # Agent API Testing

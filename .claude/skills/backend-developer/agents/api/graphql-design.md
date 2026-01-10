@@ -1,6 +1,17 @@
 ---
 name: graphql-design
 description: Conception de schémas GraphQL, types, queries, mutations et resolvers
+workflows:
+  - id: graphql-creation
+    template: wf-creation
+    phase: Conception
+    name: Design API GraphQL
+    duration: 2-4 jours
+  - id: graphql-evolution
+    template: wf-evolution
+    phase: Spécification
+    name: Évolution schéma GraphQL
+    duration: 0.5-1 jour
 ---
 
 # Agent GraphQL Design

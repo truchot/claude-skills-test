@@ -1,6 +1,17 @@
 ---
 name: queries
 description: Écriture et optimisation de requêtes SQL et utilisation d'ORMs
+workflows:
+  - id: query-creation
+    template: wf-creation
+    phase: Production
+    name: Développement requêtes SQL
+    duration: ongoing
+  - id: query-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation requêtes
+    duration: 0.5-2 jours
 ---
 
 # Agent Database Queries
