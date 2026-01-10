@@ -1,6 +1,12 @@
 ---
 name: wcag
 description: Standards WCAG et niveaux de conformité
+workflows:
+  - id: wcag-conformance
+    template: wf-audit
+    phase: Analyse
+    name: Vérification conformité WCAG
+    duration: 1-3 jours
 ---
 
 # WCAG Standards

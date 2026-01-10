@@ -1,6 +1,17 @@
 ---
 name: profiling
 description: Profiling et optimisation
+workflows:
+  - id: profiling-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse profiling
+    duration: 0.5-1 jour
+  - id: profiling-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation post-profiling
+    duration: 1-3 jours
 ---
 
 # Profiling

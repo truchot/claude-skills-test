@@ -1,6 +1,13 @@
 ---
 name: pyramide
 description: Pyramide de tests et stratégie de répartition
+workflows:
+  - id: test-strategy-review
+    template: wf-audit
+    phase: Analyse
+    name: Revue stratégie pyramide tests
+    duration: 0.5 jour
+    recurrence: trimestriel
 ---
 
 # Pyramide de Tests

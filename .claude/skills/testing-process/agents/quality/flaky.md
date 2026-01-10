@@ -1,6 +1,17 @@
 ---
 name: flaky
 description: Détection et résolution des tests flaky
+workflows:
+  - id: flaky-detection
+    template: wf-audit
+    phase: Analyse
+    name: Détection tests flaky
+    duration: 0.5 jour
+  - id: flaky-resolution
+    template: wf-support
+    phase: Résolution
+    name: Résolution tests flaky
+    duration: 0.5-2 jours
 ---
 
 # Tests Flaky

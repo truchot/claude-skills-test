@@ -1,6 +1,17 @@
 ---
 name: load
 description: Tests de charge et stress
+workflows:
+  - id: load-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests de charge
+    duration: 1-2 jours
+  - id: load-test-run
+    template: wf-audit
+    phase: Analyse
+    name: Exécution tests charge
+    duration: 0.5-1 jour
 ---
 
 # Tests de Charge

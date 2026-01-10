@@ -1,6 +1,12 @@
 ---
 name: e2e
 description: Tests end-to-end - parcours utilisateur
+workflows:
+  - id: e2e-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests E2E
+    duration: 2-3 jours
 ---
 
 # Tests End-to-End

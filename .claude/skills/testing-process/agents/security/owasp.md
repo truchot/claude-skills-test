@@ -1,6 +1,13 @@
 ---
 name: owasp
 description: Top 10 OWASP et vulnérabilités courantes
+workflows:
+  - id: owasp-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit OWASP Top 10
+    duration: 1-2 jours
+    recurrence: trimestriel
 ---
 
 # OWASP Top 10

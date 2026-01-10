@@ -1,6 +1,17 @@
 ---
 name: mutation
 description: Tests de mutation pour valider la qualité des tests
+workflows:
+  - id: mutation-setup
+    template: wf-creation
+    phase: Production
+    name: Setup mutation testing
+    duration: 0.5-1 jour
+  - id: mutation-audit
+    template: wf-audit
+    phase: Analyse
+    name: Analyse mutation testing
+    duration: 0.5 jour
 ---
 
 # Mutation Testing

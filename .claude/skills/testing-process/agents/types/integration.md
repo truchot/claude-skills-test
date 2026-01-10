@@ -1,6 +1,12 @@
 ---
 name: integration
 description: Tests d'intégration - composants multiples
+workflows:
+  - id: integration-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests intégration
+    duration: 1-2 jours
 ---
 
 # Tests d'Intégration

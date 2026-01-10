@@ -1,6 +1,13 @@
 ---
 name: dependencies
 description: Audit des dépendances et CVE
+workflows:
+  - id: deps-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit dépendances CVE
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Audit des Dépendances

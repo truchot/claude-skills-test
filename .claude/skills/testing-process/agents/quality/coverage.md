@@ -1,6 +1,13 @@
 ---
 name: coverage
 description: Couverture de code et analyse
+workflows:
+  - id: coverage-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit couverture code
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Couverture de Code
