@@ -2,6 +2,7 @@
 name: content-management
 description: Expert Content Management - Gestion éditoriale, rédaction, assets et localisation
 version: 1.0.0
+ecosystem_version: 3.2.0
 ---
 
 # Content Management
@@ -24,7 +25,9 @@ NIVEAU 4 : IMPLÉMENTATION (Support)
 | `assets` | 4 | Gestion des médias et assets |
 | `localization` | 4 | Multi-langue et traduction |
 
-**Total : 17 agents**
+**Total : 17 agents** (dont 4 orchestrateurs de domaine)
+
+> **Note versioning** : `version` = version du skill, `ecosystem_version` = version de l'écosystème web-agency au moment de la création. Voir [VERSIONING.md](../VERSIONING.md) pour les détails.
 
 ## Workflow Principal
 
