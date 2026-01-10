@@ -2,6 +2,12 @@
 name: lifecycle-onboarding
 version: 1.0.0
 description: Spécialiste de l'onboarding client J0-J7
+workflows:
+  - id: lifecycle-onboarding-creation
+    template: wf-creation
+    phase: Production
+    name: Création parcours onboarding
+    duration: 2 jours
 dependencies:
   - lifecycle/activation (handoff J7+)
 ---

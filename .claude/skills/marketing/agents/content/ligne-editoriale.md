@@ -1,17 +1,13 @@
 ---
 name: ligne-editoriale
 description: Définit la voix de marque, le ton éditorial et les guidelines de rédaction
-version: 2.0.0
 workflows:
-  - id: le-creation
+  - id: ligne-editoriale-creation
+    template: wf-creation
+    phase: Conception
     name: Création Ligne Éditoriale
-    duration: 5-8 jours
-  - id: le-audit
-    name: Audit & Optimisation
-    duration: 3-5 jours
-  - id: le-extension
-    name: Extension Nouveau Canal
-    duration: 2-3 jours
+    duration: 3 jours
+version: 2.0.0
 ---
 
 # Agent Ligne Éditoriale

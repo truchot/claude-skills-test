@@ -1,6 +1,12 @@
 ---
 name: google-merchant
 description: Optimisation Google Merchant Center et flux produits pour Google Shopping
+workflows:
+  - id: google-merchant-creation
+    template: wf-creation
+    phase: Production
+    name: Configuration Google Merchant
+    duration: 2 jours
 ---
 
 # Agent Google Merchant Center

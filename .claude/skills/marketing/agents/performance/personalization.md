@@ -1,6 +1,12 @@
 ---
 name: personalization
 description: Stratégie et conception d'expériences personnalisées
+workflows:
+  - id: personalization-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution Personnalisation
+    duration: 2 jours
 ---
 
 # Agent Personalization

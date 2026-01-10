@@ -1,6 +1,12 @@
 ---
 name: javascript-seo
 description: Optimisation SEO des sites JavaScript et Single Page Applications
+workflows:
+  - id: javascript-seo-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit JavaScript SEO
+    duration: 2 jours
 ---
 
 # Agent JavaScript SEO

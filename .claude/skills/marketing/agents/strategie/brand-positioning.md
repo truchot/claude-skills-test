@@ -1,6 +1,12 @@
 ---
 name: brand-positioning
 description: Définition du positionnement de marque et de la proposition de valeur
+workflows:
+  - id: brand-positioning-creation
+    template: wf-creation
+    phase: Conception
+    name: Création positionnement de marque
+    duration: 2 jours
 ---
 
 # Agent Positionnement de Marque

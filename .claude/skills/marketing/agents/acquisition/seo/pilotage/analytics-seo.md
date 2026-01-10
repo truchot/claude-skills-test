@@ -1,6 +1,12 @@
 ---
 name: analytics-seo
 description: Analyse du trafic organique et des conversions SEO
+workflows:
+  - id: analytics-seo-audit
+    template: wf-audit
+    phase: Analyse
+    name: Analyse analytics SEO
+    duration: 2 jours
 ---
 
 # Agent Analytics SEO

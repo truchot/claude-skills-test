@@ -1,6 +1,12 @@
 ---
 name: strategie-structure
 description: Définition de la stratégie et architecture pour le SEO international
+workflows:
+  - id: strategie-structure-creation
+    template: wf-creation
+    phase: Conception
+    name: Création stratégie structure internationale
+    duration: 3 jours
 ---
 
 # Agent Stratégie & Structure Internationale

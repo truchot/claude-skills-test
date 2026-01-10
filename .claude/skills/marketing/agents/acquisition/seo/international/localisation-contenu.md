@@ -1,6 +1,12 @@
 ---
 name: localisation-contenu
 description: Stratégie de localisation et adaptation du contenu par marché
+workflows:
+  - id: localisation-contenu-creation
+    template: wf-creation
+    phase: Production
+    name: Localisation de contenu
+    duration: 3 jours
 ---
 
 # Agent Localisation Contenu

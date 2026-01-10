@@ -6,6 +6,11 @@ dependencies:
   - success/health-score (priorisation)
   - success/qbr (reviews)
   - churn/intervention-playbooks (clients à risque)
+workflows:
+  - id: csm-operations-support
+    template: wf-support
+    phase: Résolution
+    name: Support Opérations CSM
 ---
 
 # Agent CSM Operations

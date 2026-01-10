@@ -1,6 +1,12 @@
 ---
 name: planning-campagne
 description: Création du calendrier et plan de campagne marketing
+workflows:
+  - id: planning-campagne-creation
+    template: wf-creation
+    phase: Brief
+    name: Création planning campagne
+    duration: 1 jour
 ---
 
 # Agent Planning Campagne

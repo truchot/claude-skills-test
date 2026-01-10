@@ -1,6 +1,12 @@
 ---
 name: ai-search-strategy
 description: Stratégie globale d'optimisation pour les moteurs de recherche IA
+workflows:
+  - id: ai-search-strategy-creation
+    template: wf-creation
+    phase: Conception
+    name: Stratégie AI Search
+    duration: 3 jours
 ---
 
 # Agent Stratégie AI Search

@@ -1,6 +1,12 @@
 ---
 name: growth-hacking
 description: Identification et activation de leviers de croissance innovants
+workflows:
+  - id: growth-hacking-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Activation growth hacking
+    duration: 2 jours
 ---
 
 # Agent Growth Hacking

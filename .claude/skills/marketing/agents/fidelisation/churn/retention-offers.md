@@ -6,6 +6,11 @@ dependencies:
   - churn/scoring-model (critères éligibilité)
   - churn/intervention-playbooks (timing intervention)
   - lifecycle/expansion (upsell post-rétention)
+workflows:
+  - id: retention-offers-creation
+    template: wf-creation
+    phase: Production
+    name: Création Offres Rétention
 ---
 
 # Agent Retention Offers

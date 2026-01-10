@@ -6,6 +6,12 @@ dependencies:
   - success/health-score (données santé)
   - success/nps-csat (satisfaction)
   - lifecycle/expansion (opportunités)
+workflows:
+  - id: qbr-review
+    template: wf-audit
+    phase: Restitution
+    name: Quarterly Business Review
+    recurrence: trimestriel
 ---
 
 # Agent QBR (Quarterly Business Reviews)

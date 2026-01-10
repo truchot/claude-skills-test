@@ -1,6 +1,12 @@
 ---
 name: multi-touch-sequences
 description: Conception de séquences de nurturing multi-canal
+workflows:
+  - id: multi-touch-sequences-creation
+    template: wf-creation
+    phase: Production
+    name: Création séquences multi-touch
+    duration: 2 jours
 ---
 
 # Agent Multi-Touch Sequences

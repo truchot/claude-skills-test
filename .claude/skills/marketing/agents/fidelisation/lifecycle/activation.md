@@ -2,6 +2,12 @@
 name: lifecycle-activation
 version: 1.0.0
 description: Spécialiste de l'activation client J7-J30 et Aha moment
+workflows:
+  - id: lifecycle-activation-creation
+    template: wf-creation
+    phase: Production
+    name: Création programme activation
+    duration: 2 jours
 dependencies:
   - lifecycle/onboarding (handoff entrant)
   - lifecycle/engagement (handoff J30+)

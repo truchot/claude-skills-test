@@ -1,6 +1,12 @@
 ---
 name: social-media-content
 description: Production de contenu pour les réseaux sociaux (LinkedIn, Instagram, Facebook, TikTok)
+workflows:
+  - id: social-media-content-creation
+    template: wf-creation
+    phase: Production
+    name: Création Social Media Content
+    duration: 1 jour
 ---
 
 # Agent Social Media Content

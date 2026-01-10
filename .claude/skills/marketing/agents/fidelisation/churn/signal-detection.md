@@ -5,6 +5,12 @@ description: Détection des signaux précoces de désengagement
 dependencies:
   - churn/scoring-model (alimentation score)
   - lifecycle/engagement (métriques usage)
+workflows:
+  - id: signal-detection-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Détection Signaux Churn
+    recurrence: quotidien
 ---
 
 # Agent Signal Detection

@@ -1,6 +1,12 @@
 ---
 name: google-business
 description: Optimisation et gestion de Google Business Profile (ex-Google My Business)
+workflows:
+  - id: google-business-creation
+    template: wf-creation
+    phase: Production
+    name: Création profil Google Business
+    duration: 2 jours
 ---
 
 # Agent Google Business Profile

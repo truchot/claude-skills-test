@@ -2,6 +2,12 @@
 name: loyalty-tier-design
 version: 1.0.0
 description: Structure des tiers, qualification et gestion des statuts
+workflows:
+  - id: loyalty-tier-design-creation
+    template: wf-creation
+    phase: Conception
+    name: Conception structure tiers
+    duration: 2 jours
 dependencies:
   - loyalty/earn-mechanics (multiplicateurs)
   - loyalty/burn-rewards (rewards par tier)

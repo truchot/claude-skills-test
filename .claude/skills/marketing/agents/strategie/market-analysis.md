@@ -1,6 +1,12 @@
 ---
 name: market-analysis
 description: Analyse du marché, de la concurrence et identification des opportunités
+workflows:
+  - id: market-analysis-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit analyse de marché
+    duration: 2 jours
 ---
 
 # Agent Analyse de Marché

@@ -1,6 +1,12 @@
 ---
 name: roadmap-seo
 description: Création et priorisation de la roadmap SEO
+workflows:
+  - id: roadmap-seo-creation
+    template: wf-creation
+    phase: Brief
+    name: Roadmap SEO
+    duration: 1 jour
 ---
 
 # Agent Roadmap SEO

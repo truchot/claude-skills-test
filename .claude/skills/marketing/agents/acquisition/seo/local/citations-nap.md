@@ -1,6 +1,12 @@
 ---
 name: citations-nap
 description: Gestion des citations locales et cohérence NAP
+workflows:
+  - id: citations-nap-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit cohérence NAP
+    duration: 1 jour
 ---
 
 # Agent Citations & NAP

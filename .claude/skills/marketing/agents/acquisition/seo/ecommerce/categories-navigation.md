@@ -1,6 +1,12 @@
 ---
 name: categories-navigation
 description: Optimisation des pages catégories et gestion de la navigation à facettes
+workflows:
+  - id: categories-navigation-creation
+    template: wf-creation
+    phase: Conception
+    name: Conception catégories et navigation
+    duration: 2 jours
 ---
 
 # Agent Catégories & Navigation

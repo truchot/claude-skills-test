@@ -1,6 +1,12 @@
 ---
 name: engagement-strategy
 description: Stratégie de croissance organique et d'engagement
+workflows:
+  - id: engagement-strategy-creation
+    template: wf-creation
+    phase: Production
+    name: Création stratégie engagement
+    duration: 2 jours
 ---
 
 # Agent Engagement Strategy

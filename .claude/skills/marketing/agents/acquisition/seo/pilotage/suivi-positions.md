@@ -1,6 +1,13 @@
 ---
 name: suivi-positions
 description: Tracking des positions et visibilité SERP
+workflows:
+  - id: suivi-positions-audit
+    template: wf-audit
+    phase: Analyse
+    name: Suivi positions SERP
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Suivi Positions

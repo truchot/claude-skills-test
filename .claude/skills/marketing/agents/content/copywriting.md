@@ -1,6 +1,12 @@
 ---
 name: copywriting
 description: Rédaction d'accroches, headlines et textes publicitaires percutants
+workflows:
+  - id: copywriting-creation
+    template: wf-creation
+    phase: Production
+    name: Création Copywriting
+    duration: 1 jour
 ---
 
 # Agent Copywriting

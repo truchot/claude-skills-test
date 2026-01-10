@@ -1,6 +1,12 @@
 ---
 name: persona-definition
 description: Création et documentation des personas marketing cibles
+workflows:
+  - id: persona-definition-creation
+    template: wf-creation
+    phase: Brief
+    name: Création définition persona
+    duration: 1 jour
 ---
 
 # Agent Définition Persona

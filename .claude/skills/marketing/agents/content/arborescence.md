@@ -1,6 +1,12 @@
 ---
 name: arborescence
 description: Conçoit l'architecture de l'information et l'arborescence des contenus web
+workflows:
+  - id: arborescence-creation
+    template: wf-creation
+    phase: Conception
+    name: Création Arborescence
+    duration: 2 jours
 version: 1.0.0
 ---
 

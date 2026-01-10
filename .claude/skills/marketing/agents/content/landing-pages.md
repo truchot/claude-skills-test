@@ -1,6 +1,12 @@
 ---
 name: landing-pages
 description: Rédaction de landing pages et pages de conversion optimisées
+workflows:
+  - id: landing-pages-creation
+    template: wf-creation
+    phase: Production
+    name: Création Landing Pages
+    duration: 2 jours
 ---
 
 # Agent Landing Pages

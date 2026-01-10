@@ -1,6 +1,12 @@
 ---
 name: social-ads
 description: Gestion des campagnes publicitaires sur les réseaux sociaux (Meta, LinkedIn, TikTok)
+workflows:
+  - id: social-ads-creation
+    template: wf-creation
+    phase: Production
+    name: Campagnes Social Ads
+    duration: 2 jours
 ---
 
 # Agent Social Ads

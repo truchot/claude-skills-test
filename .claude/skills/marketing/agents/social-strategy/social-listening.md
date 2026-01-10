@@ -1,6 +1,13 @@
 ---
 name: social-listening
 description: Veille et écoute sociale pour monitoring de réputation
+workflows:
+  - id: social-listening-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit social listening
+    duration: 1 jour
+    recurrence: quotidien
 ---
 
 # Agent Social Listening

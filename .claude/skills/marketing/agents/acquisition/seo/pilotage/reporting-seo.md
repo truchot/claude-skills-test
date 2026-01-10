@@ -1,6 +1,13 @@
 ---
 name: reporting-seo
 description: Création de rapports et dashboards de performance SEO
+workflows:
+  - id: reporting-seo-audit
+    template: wf-audit
+    phase: Restitution
+    name: Reporting SEO mensuel
+    duration: 1 jour
+    recurrence: mensuel
 ---
 
 # Agent Reporting SEO

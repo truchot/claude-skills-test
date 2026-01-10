@@ -1,6 +1,13 @@
 ---
 name: avis-reputation
 description: Stratégie de gestion des avis clients et e-réputation locale
+workflows:
+  - id: avis-reputation-support
+    template: wf-support
+    phase: Support
+    name: Gestion avis et réputation
+    duration: 0.5 jour
+    recurrence: quotidien
 ---
 
 # Agent Avis & Réputation

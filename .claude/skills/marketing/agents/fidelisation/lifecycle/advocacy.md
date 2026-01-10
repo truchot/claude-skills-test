@@ -2,6 +2,12 @@
 name: lifecycle-advocacy
 version: 1.0.0
 description: Spécialiste de l'advocacy client (referrals, reviews, case studies)
+workflows:
+  - id: lifecycle-advocacy-creation
+    template: wf-creation
+    phase: Production
+    name: Création programme advocacy
+    duration: 2 jours
 dependencies:
   - lifecycle/expansion (clients satisfaits)
   - success/satisfaction-metrics (NPS)

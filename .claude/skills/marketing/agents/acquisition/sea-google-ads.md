@@ -1,6 +1,12 @@
 ---
 name: sea-google-ads
 description: Gestion des campagnes publicitaires search (Google Ads, Bing Ads)
+workflows:
+  - id: sea-google-ads-creation
+    template: wf-creation
+    phase: Production
+    name: Campagnes SEA Google Ads
+    duration: 2 jours
 ---
 
 # Agent SEA / Google Ads

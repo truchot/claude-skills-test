@@ -1,6 +1,12 @@
 ---
 name: email-marketing
 description: Orchestration des campagnes email et marketing automation
+workflows:
+  - id: email-marketing-creation
+    template: wf-creation
+    phase: Production
+    name: Campagnes email marketing
+    duration: 2 jours
 ---
 
 # Agent Email Marketing

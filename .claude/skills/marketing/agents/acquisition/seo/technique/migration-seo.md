@@ -1,6 +1,12 @@
 ---
 name: migration-seo
 description: Gestion des migrations SEO et refontes de site
+workflows:
+  - id: migration-seo-refonte
+    template: wf-refonte
+    phase: Migration
+    name: Migration SEO
+    duration: 5 jours
 ---
 
 # Agent Migration SEO

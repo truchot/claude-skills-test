@@ -1,6 +1,12 @@
 ---
 name: ai-overviews
 description: Optimisation pour Google AI Overviews (ex-SGE)
+workflows:
+  - id: ai-overviews-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit AI Overviews
+    duration: 2 jours
 ---
 
 # Agent AI Overviews (SGE)

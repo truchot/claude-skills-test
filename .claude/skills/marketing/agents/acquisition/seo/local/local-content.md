@@ -1,6 +1,12 @@
 ---
 name: local-content
 description: Stratégie de contenu géolocalisé pour le SEO local
+workflows:
+  - id: local-content-creation
+    template: wf-creation
+    phase: Production
+    name: Production contenu local
+    duration: 2 jours
 ---
 
 # Agent Contenu Local

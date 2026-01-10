@@ -1,6 +1,13 @@
 ---
 name: veille-algorithmes
 description: Veille algorithmique Google et tendances SEO
+workflows:
+  - id: veille-algorithmes-audit
+    template: wf-audit
+    phase: Collecte
+    name: Veille algorithmes Google
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Veille Algorithmes

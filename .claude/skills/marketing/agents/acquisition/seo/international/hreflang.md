@@ -1,6 +1,12 @@
 ---
 name: hreflang
 description: Implémentation et audit des balises hreflang pour le SEO multilingue
+workflows:
+  - id: hreflang-creation
+    template: wf-creation
+    phase: Production
+    name: Implémentation hreflang
+    duration: 1 jour
 ---
 
 # Agent Hreflang

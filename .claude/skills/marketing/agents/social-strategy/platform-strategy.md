@@ -1,6 +1,12 @@
 ---
 name: platform-strategy
 description: Stratégie et tactiques spécifiques par plateforme sociale
+workflows:
+  - id: platform-strategy-creation
+    template: wf-creation
+    phase: Conception
+    name: Création stratégie plateforme
+    duration: 2 jours
 ---
 
 # Agent Platform Strategy

@@ -1,6 +1,12 @@
 ---
 name: recherche-mots-cles
 description: Identification et analyse des mots-clés cibles pour le SEO
+workflows:
+  - id: recherche-mots-cles-audit
+    template: wf-audit
+    phase: Analyse
+    name: Recherche de mots-clés
+    duration: 2 jours
 ---
 
 # Agent Recherche Mots-Clés

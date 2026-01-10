@@ -1,6 +1,12 @@
 ---
 name: brief-redactionnel
 description: Création de briefs SEO détaillés pour les rédacteurs
+workflows:
+  - id: brief-redactionnel-creation
+    template: wf-creation
+    phase: Production
+    name: Brief redactionnel SEO
+    duration: 1 jour
 ---
 
 # Agent Brief Rédactionnel
