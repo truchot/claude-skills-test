@@ -2,6 +2,12 @@
 name: response-generator
 description: Génère des réponses et suggestions pour les tickets
 version: 1.0.0
+workflows:
+  - id: support-response-generator
+    template: wf-support
+    phase: Résolution
+    name: Génération de réponses tickets
+    duration: 1 jour
 ---
 
 # Agent Response Generator

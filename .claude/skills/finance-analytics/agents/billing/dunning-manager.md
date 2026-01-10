@@ -2,6 +2,12 @@
 name: dunning-manager
 description: Gère les relances et recouvrements
 version: 1.0.0
+workflows:
+  - id: dunning-resolution
+    template: wf-support
+    phase: Résolution
+    name: Résolution des impayés
+    duration: 3 jours
 ---
 
 # Agent Dunning Manager

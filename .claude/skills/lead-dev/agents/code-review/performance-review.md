@@ -1,6 +1,8 @@
 ---
 name: performance-review
 description: Revue performance du code
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Performance Review

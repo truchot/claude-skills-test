@@ -1,6 +1,8 @@
 ---
 name: task-delegation
 description: Répartition des tâches entre développeurs
+workflow: wf-creation
+phase: Production
 ---
 
 # Task Delegation

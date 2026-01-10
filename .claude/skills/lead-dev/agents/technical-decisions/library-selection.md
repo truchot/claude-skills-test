@@ -1,6 +1,8 @@
 ---
 name: library-selection
 description: Choix de librairies pour des besoins spécifiques
+workflow: wf-creation
+phase: Conception
 ---
 
 # Library Selection

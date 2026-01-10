@@ -1,6 +1,8 @@
 ---
 name: sprint-support
 description: Support technique pour la planification et l'exécution des sprints
+workflow: wf-support
+recurrence: quotidien
 ---
 
 # Sprint Support

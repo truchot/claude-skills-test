@@ -2,6 +2,12 @@
 name: metric-calculator
 description: Calcule les métriques business clés
 version: 1.0.0
+workflows:
+  - id: metric-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Calcul des métriques
+    duration: 1 jour
 ---
 
 # Agent Metric Calculator

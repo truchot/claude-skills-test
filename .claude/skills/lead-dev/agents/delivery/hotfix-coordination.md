@@ -1,6 +1,8 @@
 ---
 name: hotfix-coordination
 description: Coordination des hotfixes urgents
+workflow: wf-support
+phase: Résolution
 ---
 
 # Hotfix Coordination

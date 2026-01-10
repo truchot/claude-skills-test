@@ -2,6 +2,12 @@
 name: improvement-suggester
 description: Suggère des améliorations basées sur les feedbacks
 version: 1.0.0
+workflows:
+  - id: support-improvement-suggester
+    template: wf-evolution
+    phase: Réalisation
+    name: Suggestions d'amélioration support
+    duration: 2 jours
 ---
 
 # Agent Improvement Suggester

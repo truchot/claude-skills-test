@@ -2,6 +2,12 @@
 name: refund-handler
 description: Traite les avoirs et remboursements
 version: 1.0.0
+workflows:
+  - id: refund-resolution
+    template: wf-support
+    phase: Résolution
+    name: Traitement des remboursements
+    duration: 2 jours
 ---
 
 # Agent Refund Handler

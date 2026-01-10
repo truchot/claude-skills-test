@@ -1,6 +1,8 @@
 ---
 name: tech-debt-prioritization
 description: Priorisation de la dette technique
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Tech Debt Prioritization

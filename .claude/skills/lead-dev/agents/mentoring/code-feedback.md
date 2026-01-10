@@ -1,6 +1,8 @@
 ---
 name: code-feedback
 description: Feedback constructif sur le code des développeurs
+workflow: wf-support
+phase: Résolution
 ---
 
 # Code Feedback

@@ -2,6 +2,8 @@
 name: email-parser
 description: Parse et structure les emails entrants pour extraction des demandes clients
 version: 1.0.0
+workflow: wf-support
+phase: Réception
 ---
 
 # Agent Email Parser

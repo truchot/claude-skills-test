@@ -2,6 +2,8 @@
 name: urgency-detector
 description: Détecte le niveau d'urgence et la priorité d'une demande (P1-P4)
 version: 1.0.0
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Agent Urgency Detector

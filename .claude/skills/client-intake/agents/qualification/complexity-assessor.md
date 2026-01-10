@@ -2,6 +2,8 @@
 name: complexity-assessor
 description: Évalue la complexité et la taille d'un projet (S/M/L/XL/XXL)
 version: 1.0.0
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Agent Complexity Assessor

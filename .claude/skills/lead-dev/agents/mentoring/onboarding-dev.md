@@ -1,6 +1,8 @@
 ---
 name: onboarding-dev
 description: Intégration technique des nouveaux développeurs
+workflow: wf-creation
+phase: Production
 ---
 
 # Onboarding Dev

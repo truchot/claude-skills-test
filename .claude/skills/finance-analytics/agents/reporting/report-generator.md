@@ -2,6 +2,13 @@
 name: report-generator
 description: Génère les rapports financiers
 version: 1.0.0
+workflows:
+  - id: report-restitution
+    template: wf-audit
+    phase: Restitution
+    name: Génération de rapports
+    duration: 2 jours
+    recurrence: mensuel
 ---
 
 # Agent Report Generator

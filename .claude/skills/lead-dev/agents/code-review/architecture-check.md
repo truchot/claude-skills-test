@@ -1,6 +1,8 @@
 ---
 name: architecture-check
 description: Vérification de l'architecture locale d'une feature
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Architecture Check

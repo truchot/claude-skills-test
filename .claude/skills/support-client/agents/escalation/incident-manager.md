@@ -2,6 +2,12 @@
 name: incident-manager
 description: Gère les incidents majeurs et coordonne la résolution
 version: 1.0.0
+workflows:
+  - id: support-incident-manager
+    template: wf-support
+    phase: Résolution
+    name: Gestion des incidents majeurs
+    duration: 1 jour
 ---
 
 # Agent Incident Manager

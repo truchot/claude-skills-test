@@ -1,6 +1,8 @@
 ---
 name: merge-strategy
 description: Stratégie de merge et gestion des branches
+workflow: wf-creation
+phase: Production
 ---
 
 # Merge Strategy

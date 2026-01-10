@@ -2,6 +2,13 @@
 name: payment-tracker
 description: Suit les encaissements et rapprochements
 version: 1.0.0
+workflows:
+  - id: payment-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse des paiements
+    duration: 1 jour
+    recurrence: quotidien
 ---
 
 # Agent Payment Tracker

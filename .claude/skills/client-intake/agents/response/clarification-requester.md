@@ -2,6 +2,8 @@
 name: clarification-requester
 description: Génère des demandes de clarification lorsque des informations sont manquantes
 version: 1.0.0
+workflow: wf-support
+phase: Diagnostic
 ---
 
 # Agent Clarification Requester

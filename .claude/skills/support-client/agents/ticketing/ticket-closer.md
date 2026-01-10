@@ -2,6 +2,12 @@
 name: ticket-closer
 description: Gère la clôture des tickets et le suivi satisfaction
 version: 1.0.0
+workflows:
+  - id: support-ticket-closer
+    template: wf-support
+    phase: Clôture
+    name: Clôture des tickets
+    duration: 1 jour
 ---
 
 # Agent Ticket Closer

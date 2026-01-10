@@ -1,6 +1,8 @@
 ---
 name: skill-assessment
 description: Évaluation des compétences techniques
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Skill Assessment

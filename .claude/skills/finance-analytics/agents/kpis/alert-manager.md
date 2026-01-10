@@ -2,6 +2,13 @@
 name: alert-manager
 description: Gère les alertes et seuils KPI
 version: 1.0.0
+workflows:
+  - id: kpi-alert-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse des alertes KPI
+    duration: 1 jour
+    recurrence: quotidien
 ---
 
 # Agent Alert Manager

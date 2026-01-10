@@ -1,6 +1,8 @@
 ---
 name: deployment-check
 description: Vérifications pré-déploiement
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Deployment Check

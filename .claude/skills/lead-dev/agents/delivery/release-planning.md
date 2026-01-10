@@ -1,6 +1,8 @@
 ---
 name: release-planning
 description: Planification des releases
+workflow: wf-creation
+phase: Brief
 ---
 
 # Release Planning

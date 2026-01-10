@@ -1,6 +1,8 @@
 ---
 name: blocker-resolution
 description: Déblocage technique des développeurs
+workflow: wf-support
+phase: Résolution
 ---
 
 # Blocker Resolution

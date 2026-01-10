@@ -1,6 +1,8 @@
 ---
 name: pr-review
 description: Revue complète des Pull Requests
+workflow: wf-audit
+phase: Analyse
 ---
 
 # PR Review

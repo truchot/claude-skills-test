@@ -1,6 +1,8 @@
 ---
 name: security-review
 description: Revue sécurité du code
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Security Review

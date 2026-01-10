@@ -2,6 +2,8 @@
 name: form-handler
 description: Traite les soumissions de formulaires web (contact, devis, brief)
 version: 1.0.0
+workflow: wf-support
+phase: Réception
 ---
 
 # Agent Form Handler

@@ -2,6 +2,8 @@
 name: requirements-extractor
 description: Extrait les besoins fonctionnels, techniques et non-fonctionnels d'une demande
 version: 1.0.0
+workflow: wf-audit
+phase: Collecte
 ---
 
 # Agent Requirements Extractor

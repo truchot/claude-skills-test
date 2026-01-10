@@ -1,6 +1,8 @@
 ---
 name: release-notes
 description: Rédaction des notes de version
+workflow: wf-creation
+phase: Livraison
 ---
 
 # Release Notes

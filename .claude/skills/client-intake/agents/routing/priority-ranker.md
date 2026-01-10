@@ -2,6 +2,8 @@
 name: priority-ranker
 description: Calcule le score de priorité global pour ordonner les demandes
 version: 1.0.0
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Agent Priority Ranker

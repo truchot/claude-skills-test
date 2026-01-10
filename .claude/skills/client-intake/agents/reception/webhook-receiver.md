@@ -2,6 +2,8 @@
 name: webhook-receiver
 description: Reçoit et valide les webhooks externes (API, intégrations tierces)
 version: 1.0.0
+workflow: wf-support
+phase: Réception
 ---
 
 # Agent Webhook Receiver

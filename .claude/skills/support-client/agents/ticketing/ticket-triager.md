@@ -2,6 +2,12 @@
 name: ticket-triager
 description: Triage et classifie les tickets de support entrants
 version: 1.0.0
+workflows:
+  - id: support-ticket-triager
+    template: wf-support
+    phase: Réception
+    name: Triage des tickets entrants
+    duration: 1 jour
 ---
 
 # Agent Ticket Triager

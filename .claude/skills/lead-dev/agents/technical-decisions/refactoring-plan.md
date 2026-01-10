@@ -1,6 +1,8 @@
 ---
 name: refactoring-plan
 description: Planification des refactorings
+workflow: wf-evolution
+phase: Spec
 ---
 
 # Refactoring Plan

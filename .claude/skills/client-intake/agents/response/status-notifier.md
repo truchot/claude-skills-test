@@ -2,6 +2,8 @@
 name: status-notifier
 description: Informe les clients du statut de traitement de leur demande
 version: 1.0.0
+workflow: wf-support
+phase: Résolution
 ---
 
 # Agent Status Notifier

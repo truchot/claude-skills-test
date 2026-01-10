@@ -1,6 +1,8 @@
 ---
 name: pattern-choice
 description: Choix de patterns pour les features
+workflow: wf-creation
+phase: Conception
 ---
 
 # Pattern Choice

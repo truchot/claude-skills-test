@@ -2,6 +2,8 @@
 name: rejection-handler
 description: Gère les refus de demandes (spam, hors scope, incompatibles)
 version: 1.0.0
+workflow: wf-support
+phase: Clôture
 ---
 
 # Agent Rejection Handler

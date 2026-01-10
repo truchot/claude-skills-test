@@ -1,6 +1,8 @@
 ---
 name: quality-gate
 description: Validation des standards qualité du code
+workflow: wf-audit
+phase: Analyse
 ---
 
 # Quality Gate

@@ -2,6 +2,8 @@
 name: chat-handler
 description: Gère les conversations et messages instantanés (Slack, Discord, Intercom, Crisp)
 version: 1.0.0
+workflow: wf-support
+phase: Réception
 ---
 
 # Agent Chat Handler

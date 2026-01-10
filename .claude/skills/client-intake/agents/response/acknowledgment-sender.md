@@ -2,6 +2,8 @@
 name: acknowledgment-sender
 description: Génère et envoie les accusés de réception pour les nouvelles demandes
 version: 1.0.0
+workflow: wf-support
+phase: Résolution
 ---
 
 # Agent Acknowledgment Sender
