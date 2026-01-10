@@ -1,6 +1,12 @@
 ---
 name: "Typography Expert"
 description: "Expert en typographie - Échelles, chargement fonts, accessibilité"
+workflows:
+  - id: typography-tokens
+    template: wf-creation
+    phase: Conception
+    name: Définition tokens typographie
+    duration: 0.5-1 jour
 ---
 
 # Typography Expert

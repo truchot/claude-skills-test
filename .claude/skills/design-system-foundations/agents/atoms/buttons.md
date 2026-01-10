@@ -1,6 +1,12 @@
 ---
 name: "Buttons Expert"
 description: "Expert en boutons - Variants, tailles, états"
+workflows:
+  - id: buttons-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant buttons
+    duration: 0.5-1 jour
 ---
 
 # Buttons Expert

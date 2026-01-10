@@ -1,6 +1,12 @@
 ---
 name: "Labels Expert"
 description: "Expert en labels, tags et chips"
+workflows:
+  - id: labels-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant labels
+    duration: 0.5 jour
 ---
 
 # Labels, Tags & Chips Expert

@@ -1,6 +1,12 @@
 ---
 name: "Icons Expert"
 description: "Expert en systèmes d'icônes - SVG sprites, accessibilité, performance"
+workflows:
+  - id: icons-creation
+    template: wf-creation
+    phase: Production
+    name: Création système icônes
+    duration: 1 jour
 ---
 
 # Icons Expert

@@ -1,6 +1,12 @@
 ---
 name: "Hero Sections Expert"
 description: "Expert en sections hero - Landing pages, feature blocks"
+workflows:
+  - id: hero-creation
+    template: wf-creation
+    phase: Production
+    name: Création templates hero
+    duration: 0.5-1 jour
 ---
 
 # Hero Sections Expert

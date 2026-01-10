@@ -1,6 +1,12 @@
 ---
 name: "Modals Expert"
 description: "Expert en modales et dialogues - Focus trap, accessibilité"
+workflows:
+  - id: modals-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant modals
+    duration: 1 jour
 ---
 
 # Modals & Dialogs Expert

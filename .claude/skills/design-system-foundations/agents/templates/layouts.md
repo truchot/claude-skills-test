@@ -1,6 +1,12 @@
 ---
 name: "Layouts Expert"
 description: "Expert en layouts - Dashboard, auth, marketing structures"
+workflows:
+  - id: layouts-creation
+    template: wf-creation
+    phase: Production
+    name: Création templates layouts
+    duration: 1-2 jours
 ---
 
 # Layouts Expert

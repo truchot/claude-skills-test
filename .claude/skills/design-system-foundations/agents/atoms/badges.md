@@ -1,6 +1,12 @@
 ---
 name: "Badges Expert"
 description: "Expert en badges et indicateurs - Statuts, compteurs, notifications"
+workflows:
+  - id: badges-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant badges
+    duration: 0.5 jour
 ---
 
 # Badges Expert

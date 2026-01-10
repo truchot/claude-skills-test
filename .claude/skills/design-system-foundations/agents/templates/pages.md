@@ -1,6 +1,12 @@
 ---
 name: "Pages Expert"
 description: "Expert en templates de pages - List, detail, error pages"
+workflows:
+  - id: pages-creation
+    template: wf-creation
+    phase: Production
+    name: Création templates pages
+    duration: 1-2 jours
 ---
 
 # Pages Expert

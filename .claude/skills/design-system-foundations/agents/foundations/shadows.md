@@ -1,6 +1,12 @@
 ---
 name: "Shadows Expert"
 description: "Expert en ombres et élévation - Z-index, focus rings, profondeur"
+workflows:
+  - id: shadows-tokens
+    template: wf-creation
+    phase: Conception
+    name: Définition tokens ombres
+    duration: 0.5 jour
 ---
 
 # Shadows & Elevation Expert

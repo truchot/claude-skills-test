@@ -1,6 +1,12 @@
 ---
 name: "Inputs Expert"
 description: "Expert en champs de saisie - Types, validation, états"
+workflows:
+  - id: inputs-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant inputs
+    duration: 1 jour
 ---
 
 # Inputs Expert
