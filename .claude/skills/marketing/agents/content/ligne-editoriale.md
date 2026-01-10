@@ -1,7 +1,17 @@
 ---
 name: ligne-editoriale
 description: Définit la voix de marque, le ton éditorial et les guidelines de rédaction
-version: 1.0.0
+version: 2.0.0
+workflows:
+  - id: le-creation
+    name: Création Ligne Éditoriale
+    duration: 5-8 jours
+  - id: le-audit
+    name: Audit & Optimisation
+    duration: 3-5 jours
+  - id: le-extension
+    name: Extension Nouveau Canal
+    duration: 2-3 jours
 ---
 
 # Agent Ligne Éditoriale
@@ -296,3 +306,198 @@ Brief marque
 | Glossaire | Sheet | Termes et définitions |
 | Templates | Docs | Modèles par type de contenu |
 | Exemples | Doc | Avant/après annotés |
+
+---
+
+## Workflows
+
+### WF-LE-001 : Création Ligne Éditoriale
+
+**Durée** : 5-8 jours | **Prérequis** : Brief marque, personas, positionnement
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  WORKFLOW : CRÉATION LIGNE ÉDITORIALE                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  JOUR 1-2 : IMMERSION & ANALYSE                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Réception brief marque ← project-management                       │   │
+│  │ ○ Analyse personas et parcours ← ux-ui-design/research             │   │
+│  │ ○ Étude positionnement et valeurs ← direction-technique/strategy   │   │
+│  │ ○ Audit contenus existants (si refonte)                             │   │
+│  │ ○ Benchmark éditorial concurrence                                   │   │
+│  │ ● Livrable : Note d'analyse éditoriale                              │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 3 : ATELIER VOIX DE MARQUE                                           │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Animation atelier avec stakeholders                               │   │
+│  │ ○ Exercice "Si la marque était une personne..."                     │   │
+│  │ ○ Définition des 3-5 traits de personnalité                        │   │
+│  │ ○ Échelles de ton (formel/informel, sérieux/léger, etc.)           │   │
+│  │ ○ Mots-clés et vocabulaire signature                                │   │
+│  │ ● Livrable : Synthèse atelier                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 4-5 : FORMALISATION                                                   │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Rédaction des principes rédactionnels                             │   │
+│  │ ○ Création du glossaire (termes à utiliser/éviter)                  │   │
+│  │ ○ Définition formulations types par situation                       │   │
+│  │ ○ Adaptation du ton par canal                                       │   │
+│  │ ○ Rédaction exemples avant/après                                    │   │
+│  │ ● Livrable : Charte éditoriale v1                                   │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 6 : VALIDATION                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Présentation aux stakeholders                                     │   │
+│  │ ○ Recueil feedback                                                  │   │
+│  │ ○ Test sur contenus existants                                       │   │
+│  │ ○ Ajustements                                                        │   │
+│  │ ● Checkpoint : Validation charte                                    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 7-8 : DÉPLOIEMENT                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Création templates par type de contenu                            │   │
+│  │ ○ Guide de ton synthétique (quick reference)                        │   │
+│  │ ○ Formation équipes rédaction/marketing                             │   │
+│  │ ○ Mise en place checklist validation                                │   │
+│  │ ○ Handoff vers copywriting et blog-articles                         │   │
+│  │ ● Livrable : Kit complet + Formation                                │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  → copywriting (rédaction persuasive)                                      │
+│  → blog-articles (rédaction longue)                                        │
+│  → social-media-content (adaptation réseaux)                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Checklist de Validation** :
+- [ ] Brief marque et personas analysés
+- [ ] Atelier voix de marque réalisé
+- [ ] Traits de personnalité définis (3-5)
+- [ ] Échelles de ton positionnées
+- [ ] Glossaire créé (termes signature + interdits)
+- [ ] Adaptation par canal documentée
+- [ ] Exemples avant/après rédigés
+- [ ] Templates créés
+- [ ] Équipes formées
+
+---
+
+### WF-LE-002 : Audit & Optimisation
+
+**Durée** : 3-5 jours | **Prérequis** : Ligne éditoriale existante, contenus publiés
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  WORKFLOW : AUDIT LIGNE ÉDITORIALE                                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  JOUR 1 : COLLECTE                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Extraction échantillon contenus (20-50 par canal)                 │   │
+│  │ ○ Récupération métriques engagement                                 │   │
+│  │ ○ Collecte feedbacks utilisateurs (NPS, commentaires)              │   │
+│  │ ○ Récupération charte actuelle                                      │   │
+│  │ ● Livrable : Corpus d'analyse                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 2-3 : ANALYSE                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Scoring conformité (% respect guidelines)                         │   │
+│  │ ○ Analyse cohérence entre canaux                                    │   │
+│  │ ○ Corrélation ton → engagement                                      │   │
+│  │ ○ Identification patterns performants                               │   │
+│  │ ○ Identification écarts et incohérences                             │   │
+│  │ ● Livrable : Rapport d'audit                                        │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 4 : RECOMMANDATIONS                                                   │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Priorisation des ajustements                                      │   │
+│  │ ○ Mise à jour guidelines si nécessaire                              │   │
+│  │ ○ Nouveaux exemples basés sur best performers                       │   │
+│  │ ○ Plan de formation complémentaire si besoin                        │   │
+│  │ ● Livrable : Plan d'optimisation                                    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 5 : DÉPLOIEMENT                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Mise à jour charte éditoriale                                     │   │
+│  │ ○ Communication des changements                                     │   │
+│  │ ○ Mise en place suivi récurrent                                     │   │
+│  │ ● Livrable : Charte mise à jour + Dashboard suivi                   │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Métriques Clés d'Audit** :
+- Score de conformité (% contenus respectant la charte)
+- Cohérence inter-canal (écart de ton entre canaux)
+- Corrélation ton-engagement (quels traits performent)
+- NPS contenu (satisfaction lecteurs)
+
+---
+
+### WF-LE-003 : Extension Nouveau Canal
+
+**Durée** : 2-3 jours | **Prérequis** : Ligne éditoriale existante, brief nouveau canal
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  WORKFLOW : EXTENSION LIGNE ÉDITORIALE - NOUVEAU CANAL                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  JOUR 1 : ANALYSE CANAL                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Étude spécificités du canal (format, audience, codes)            │   │
+│  │ ○ Benchmark concurrents sur ce canal                                │   │
+│  │ ○ Revue ligne éditoriale existante                                  │   │
+│  │ ○ Identification adaptations nécessaires                            │   │
+│  │ ● Livrable : Brief adaptation                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 2 : ADAPTATION                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Déclinaison du ton pour le canal                                  │   │
+│  │ ○ Règles spécifiques (longueur, format, hashtags, emojis...)       │   │
+│  │ ○ Formulations types adaptées                                       │   │
+│  │ ○ Templates spécifiques                                             │   │
+│  │ ○ Exemples concrets                                                  │   │
+│  │ ● Livrable : Guidelines canal                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                              │                                              │
+│                              ▼                                              │
+│  JOUR 3 : INTÉGRATION                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ ○ Ajout section dans charte globale                                 │   │
+│  │ ○ Formation équipe canal                                            │   │
+│  │ ○ Création contenus pilotes                                         │   │
+│  │ ○ Validation avant lancement                                        │   │
+│  │ ● Livrable : Charte mise à jour + Formation                         │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Cas d'Usage Extension** :
+- Lancement TikTok (ton très décontracté, format court)
+- Lancement podcast (ton conversationnel, script audio)
+- Lancement newsletter (ton intime, storytelling)
+- Expansion internationale (adaptation culturelle)
+- Chatbot/IA (ton service, concis, utile)
