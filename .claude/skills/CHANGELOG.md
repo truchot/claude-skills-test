@@ -4,6 +4,35 @@ Historique consolidé de tous les changements de l'agence web IA full-automatis�
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [3.2.0] - 2025-01-10
+
+### Ajouté
+
+- **Nouveau skill** : `content-management` (17 agents) - Gestion éditoriale complète
+  - Domaine `editorial` (4 agents) : Calendrier éditorial, workflow, publication
+  - Domaine `redaction` (5 agents) : Articles, pages, copywriting, SEO
+  - Domaine `assets` (4 agents) : Médias, images, vidéos
+  - Domaine `localization` (4 agents) : Traduction, i18n, adaptation culturelle
+
+- **4 nouveaux workflows automatisés** pour content-management
+  - `brief-to-article` : Du brief éditorial à l'article publié (< 8h, 85% automatisé)
+  - `content-to-multilang` : Du contenu source à la publication multilingue (< 48h, 80% automatisé)
+  - `media-to-cdn` : De l'upload média à la distribution CDN optimisée (< 5 min, 98% automatisé)
+  - `request-to-brief` : De la demande client/analyse au brief éditorial structuré (< 4h, 90% automatisé)
+
+### Modifié
+
+- **Total skills** : 20 (vs 19 en v3.1.0, +1 skill)
+- **Total agents** : 668 (vs 651 en v3.1.0, +17 agents)
+- **Total workflows** : 9 (vs 5 en v3.1.0, +4 workflows)
+- **README.md** : Ajout documentation content-management
+
+### Notes
+
+- Skill créé pour combler le gap laissé par la suppression de l'ancien skill `content` (v2.9.0)
+- Fonctionnalités distinctes de `marketing` : focus sur workflow éditorial et gestion d'assets
+- Workflows couvrent le cycle complet : demande → brief → création → publication → distribution
+
 ## [3.1.0] - 2025-01-09
 
 ### Ajouté
