@@ -1,6 +1,12 @@
 ---
 name: memoization
 description: React.memo, useMemo, and useCallback for optimization
+workflows:
+  - id: react-perf-optim
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation performance React
+    duration: 0.5-1 jour
 ---
 
 # Memoization - React.memo, useMemo, useCallback

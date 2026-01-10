@@ -1,6 +1,12 @@
 ---
 name: custom-hooks
 description: Creating reusable custom hooks to share logic
+workflows:
+  - id: custom-hooks-creation
+    template: wf-creation
+    phase: Production
+    name: Création custom hooks
+    duration: 0.5-1 jour
 ---
 
 # Custom Hooks - Création de Hooks Personnalisés

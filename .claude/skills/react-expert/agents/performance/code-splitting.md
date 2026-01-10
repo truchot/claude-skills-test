@@ -1,6 +1,12 @@
 ---
 name: code-splitting
 description: Lazy loading and bundle optimization with React.lazy
+workflows:
+  - id: code-splitting-setup
+    template: wf-evolution
+    phase: Réalisation
+    name: Setup code splitting
+    duration: 0.5-1 jour
 ---
 
 # Code Splitting - Lazy Loading et Optimisation Bundle

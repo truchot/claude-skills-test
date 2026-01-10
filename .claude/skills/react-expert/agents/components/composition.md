@@ -1,6 +1,12 @@
 ---
 name: composition
 description: Advanced composition patterns - Compound components, Render Props, and HOC
+workflows:
+  - id: react-patterns-impl
+    template: wf-evolution
+    phase: Réalisation
+    name: Implémentation patterns avancés
+    duration: 1-2 jours
 ---
 
 # Composition Patterns - Compound, Render Props, HOC

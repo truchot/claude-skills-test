@@ -1,6 +1,12 @@
 ---
 name: context
 description: Context API for sharing state without prop drilling
+workflows:
+  - id: context-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Context API
+    duration: 0.5 jour
 ---
 
 # Context API - État Partagé React Natif

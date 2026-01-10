@@ -1,6 +1,12 @@
 ---
 name: tailwind-react
 description: Tailwind CSS with React using cn and CVA
+workflows:
+  - id: tailwind-react-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Tailwind React
+    duration: 0.5 jour
 ---
 
 # Tailwind + React - Styling avec Classes Utilitaires

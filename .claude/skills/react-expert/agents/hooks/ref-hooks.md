@@ -1,6 +1,12 @@
 ---
 name: ref-hooks
 description: useRef, forwardRef, and useImperativeHandle for DOM refs and persistent values
+workflows:
+  - id: ref-hooks-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation ref hooks
+    duration: 0.5 jour
 ---
 
 # Ref Hooks - useRef, forwardRef & useImperativeHandle

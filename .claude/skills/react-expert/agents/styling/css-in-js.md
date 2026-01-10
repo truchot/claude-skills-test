@@ -1,6 +1,12 @@
 ---
 name: css-in-js
 description: CSS-in-JS with styled-components and Emotion
+workflows:
+  - id: css-in-js-setup
+    template: wf-creation
+    phase: Production
+    name: Setup CSS-in-JS
+    duration: 0.5-1 jour
 ---
 
 # CSS-in-JS - styled-components & Emotion
