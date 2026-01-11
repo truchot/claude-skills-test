@@ -256,11 +256,11 @@ git status
 
 # 2. Ouvrir et résoudre
 # Chercher les marqueurs:
-<<<<<<< HEAD
-const timeout = 5000;
-=======
-const timeout = 10000;
->>>>>>> feature-branch
+# <<<<<<< HEAD (votre version)
+# const timeout = 5000;
+# =======
+# const timeout = 10000;
+# >>>>>>> feature-branch (leur version)
 
 # 3. Choisir/combiner et supprimer les marqueurs
 const timeout = 10000; // On garde la nouvelle valeur
