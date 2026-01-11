@@ -1,8 +1,8 @@
 # Web Agency IA - Version Information
 
 ## Current Version
-VERSION=3.2.0
-RELEASE_DATE=2025-01-10
+VERSION=4.0.0
+RELEASE_DATE=2025-01-11
 
 ## Schema Version
 AGENT_SCHEMA=1.0.0

@@ -4,6 +4,38 @@ Historique consolidé de tous les changements de l'agence web IA full-automatis�
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [4.0.0] - 2025-01-11
+
+### BREAKING CHANGES
+
+- **Architecture agnostique** : Migration de `.claude/` vers `.web-agency/`
+  - `.claude/skills/` → `.web-agency/skills/`
+  - `.claude/learnings/` → `.web-agency/learnings/`
+  - Toutes les références internes mises à jour (54 fichiers)
+
+### Ajouté
+
+- **Nouveau dossier `.web-agency/`** : Framework agnostique indépendant de tout système d'IA
+  - Structure : `skills/` (24 skills, 707 agents) + `learnings/` (learning loop)
+  - README documentant l'architecture et l'intégration multi-IA
+
+- **Nouveau dossier `.claude/commands/`** : Interface Claude minimaliste
+  - 21 commandes de rôles référençant `.web-agency/` sans duplication
+  - Commandes : web-agency, direction-technique, lead-dev, frontend-developer, backend-developer, etc.
+
+- **CI validation** : Nouveau workflow `validate-paths.yml`
+  - Empêche les références aux anciens chemins `.claude/skills` et `.claude/learnings`
+  - Valide la structure `.web-agency/`
+
+### Migration
+
+Pour migrer depuis v3.x :
+1. Remplacer `.claude/skills/` par `.web-agency/skills/` dans vos références
+2. Remplacer `.claude/learnings/` par `.web-agency/learnings/`
+3. Les commandes Claude sont maintenant dans `.claude/commands/`
+
+---
+
 ## [3.2.0] - 2025-01-11
 
 ### Ajouté

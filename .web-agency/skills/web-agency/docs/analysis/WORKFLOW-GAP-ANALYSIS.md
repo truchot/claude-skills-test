@@ -155,9 +155,10 @@ Compléter les skills support restants.
 
 ### Vision Utilisateur
 
-> "Chaque skills, workflow, roles sont indépendant de l'architecture que propose Claude.
-> Dans le dossier .web-agency on retrouve les instructions agnostiques.
-> Un dossier .claude/ optionnel peut contenir la configuration spécifique à Claude."
+> "Chaque skills, workflow, roles sont indépendants de tout système d'IA.
+> Le dossier .web-agency/ contient les instructions agnostiques (skills, learnings).
+> Le dossier .claude/commands/ contient uniquement les points d'entrée spécifiques à Claude,
+> qui référencent les skills dans .web-agency/ sans duplication."
 
 ### Structure Proposée
 
