@@ -8,7 +8,9 @@ Ce dossier contient les commandes spécifiques à Claude Code.
 .claude/
 ├── commands/              # Commandes de rôles
 │   ├── web-agency.md      # Meta-orchestrateur
-│   ├── direction-technique.md
+│   ├── direction-technique.md  # Niveau 2: Stratégie
+│   ├── direction-marketing.md  # Niveau 2: Stratégie
+│   ├── direction-artistique.md # Niveau 2: Stratégie
 │   ├── lead-dev.md
 │   ├── frontend-developer.md
 │   ├── backend-developer.md
@@ -50,7 +52,7 @@ Exemple d'utilisation:
     │
     └── référence →
                       .web-agency/        # Framework agnostique
-                      ├── skills/         # 24 skills, 707 agents
+                      ├── skills/         # 24 skills, 763 agents
                       └── learnings/      # Learning loop
 ```
 

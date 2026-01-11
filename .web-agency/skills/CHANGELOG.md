@@ -4,6 +4,45 @@ Historique consolidé de tous les changements de l'agence web IA full-automatis�
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [4.1.0] - 2025-01-11
+
+### Ajouté
+
+- **Nouveau skill `direction-marketing`** (25 agents) - Stratégie marketing Niveau 2
+  - Domaine `strategie/` (6 agents) : Audit marché, analyse concurrentielle, SWOT, roadmap, budget
+  - Domaine `positionnement/` (5 agents) : Brand positioning, personas, value proposition, différenciation
+  - Domaine `acquisition/` (5 agents) : Channel strategy, funnel design, budget allocation, growth
+  - Domaine `mesure/` (5 agents) : KPIs, OKRs, attribution, ROI framework
+  - Domaine `orchestration/` (4 agents) : Briefs, délégation vers skill marketing
+
+- **Nouveau skill `direction-artistique`** (25 agents) - Stratégie design Niveau 2
+  - Domaine `branding/` (6 agents) : Brand identity, visual language, tone of voice, guidelines
+  - Domaine `ux-strategy/` (5 agents) : UX research strategy, user journey, principes UX, accessibilité
+  - Domaine `design-strategy/` (5 agents) : Design vision, principles, DS strategy, innovation
+  - Domaine `guidelines/` (5 agents) : Style guide, component standards, documentation, qualité
+  - Domaine `orchestration/` (4 agents) : Briefs créatifs, délégation vers skills design
+
+### Modifié
+
+- **Niveau 2 enrichi** : Passage de 1 à 3 skills stratégiques
+  - `direction-technique` (52 agents) - Stratégie technique
+  - `direction-marketing` (25 agents) - Stratégie marketing (NOUVEAU)
+  - `direction-artistique` (25 agents) - Stratégie design (NOUVEAU)
+
+- **Total skills** : 22 → 24 (+2 skills)
+- **Total agents** : 713 → 763 (+50 agents)
+
+### Philosophie
+
+Le Niveau 2 "POURQUOI" est maintenant multi-dimensionnel :
+- Technique : direction-technique
+- Marketing : direction-marketing
+- Design : direction-artistique
+
+Ces skills définissent la **stratégie** et délèguent l'**exécution** au Niveau 4.
+
+---
+
 ## [4.0.0] - 2025-01-11
 
 ### BREAKING CHANGES

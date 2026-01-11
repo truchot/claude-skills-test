@@ -40,11 +40,13 @@ HUMAIN (supervision)
 | [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills | - | 🟢 Actif |
 | [task-orchestrator](.web-agency/skills/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
 
-### Niveau 2 : Stratégie
+### Niveau 2 : Stratégie (POURQUOI)
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [direction-technique](.web-agency/skills/direction-technique/) | Décisions stratégiques, architecture | 52 | 🟢 Actif |
+| [direction-technique](.web-agency/skills/direction-technique/) | Stratégie technique, architecture | 52 | 🟢 Actif |
+| [direction-marketing](.web-agency/skills/direction-marketing/) | Stratégie marketing, positionnement | 25 | 🟢 Actif |
+| [direction-artistique](.web-agency/skills/direction-artistique/) | Stratégie design, branding | 25 | 🟢 Actif |
 
 ### Niveau 3 : Opérations
 
@@ -79,18 +81,20 @@ HUMAIN (supervision)
 | [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
 | [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
 
-**Total : 22 skills, 713 agents**
+**Total : 24 skills, 763 agents**
 
 ## Architecture
 
 ```
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
-│   ├── skills/                    # 22 skills, 713 agents
+│   ├── skills/                    # 24 skills, 763 agents
 │   │   ├── web-agency/            # Meta-orchestrateur
 │   │   ├── client-intake/         # Niveau 0: Entrée
 │   │   ├── task-orchestrator/     # Niveau 1: Orchestration
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
+│   │   ├── direction-marketing/   # Niveau 2: Stratégie
+│   │   ├── direction-artistique/  # Niveau 2: Stratégie
 │   │   ├── project-management/    # Niveau 3: Opérations
 │   │   ├── lead-dev/
 │   │   ├── web-dev-process/
@@ -112,7 +116,7 @@ HUMAIN (supervision)
 │   └── learnings/                 # Learning loop system
 │
 └── .claude/                       # Interface Claude (commandes uniquement)
-    └── commands/                  # 21 commandes référençant .web-agency/
+    └── commands/                  # 23 commandes référençant .web-agency/
 ```
 
 ## Hiérarchie des Skills
@@ -126,7 +130,9 @@ NIVEAU 1: ORCHESTRATION
 └── task-orchestrator (16)          # Gestion des tâches
 
 NIVEAU 2: STRATÉGIE (POURQUOI)
-└── direction-technique (52)        # Décisions stratégiques
+├── direction-technique (52)        # Stratégie technique
+├── direction-marketing (25)        # Stratégie marketing
+└── direction-artistique (25)       # Stratégie design
 
 NIVEAU 3: OPÉRATIONS (QUOI)
 ├── project-management (24)         # Gestion de projet
@@ -229,7 +235,7 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.0.0** - 22 skills, 713 agents
+**v4.1.0** - 24 skills, 763 agents
 
 Voir [CHANGELOG](.web-agency/skills/CHANGELOG.md) pour l'historique complet.
 
