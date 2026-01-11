@@ -1,0 +1,164 @@
+{
+  "$schema": "../schemas/skills-index.schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-11",
+  "totalSkills": 20,
+  "totalAgents": 668,
+  "skills": [
+    {
+      "name": "client-intake",
+      "level": 0,
+      "category": "entry",
+      "agents": 19,
+      "status": "active"
+    },
+    {
+      "name": "task-orchestrator",
+      "level": 1,
+      "category": "orchestration",
+      "agents": 24,
+      "status": "active"
+    },
+    {
+      "name": "direction-technique",
+      "level": 2,
+      "category": "strategy",
+      "agents": 52,
+      "status": "active"
+    },
+    {
+      "name": "project-management",
+      "level": 3,
+      "category": "operations",
+      "agents": 35,
+      "status": "active"
+    },
+    {
+      "name": "lead-dev",
+      "level": 3,
+      "category": "operations",
+      "agents": 32,
+      "status": "active"
+    },
+    {
+      "name": "web-dev-process",
+      "level": 3,
+      "category": "operations",
+      "agents": 38,
+      "status": "active"
+    },
+    {
+      "name": "testing-process",
+      "level": 3,
+      "category": "operations",
+      "agents": 32,
+      "status": "active"
+    },
+    {
+      "name": "frontend-developer",
+      "level": 4,
+      "category": "implementation",
+      "agents": 45,
+      "status": "active"
+    },
+    {
+      "name": "backend-developer",
+      "level": 4,
+      "category": "implementation",
+      "agents": 48,
+      "status": "active"
+    },
+    {
+      "name": "devops",
+      "level": 4,
+      "category": "implementation",
+      "agents": 42,
+      "status": "active"
+    },
+    {
+      "name": "react-expert",
+      "level": 4,
+      "category": "implementation",
+      "agents": 28,
+      "status": "active"
+    },
+    {
+      "name": "nextjs-expert",
+      "level": 4,
+      "category": "implementation",
+      "agents": 26,
+      "status": "active"
+    },
+    {
+      "name": "wordpress-gutenberg-expert",
+      "level": 4,
+      "category": "implementation",
+      "agents": 35,
+      "status": "active"
+    },
+    {
+      "name": "design-system-foundations",
+      "level": 4,
+      "category": "implementation",
+      "agents": 38,
+      "status": "active"
+    },
+    {
+      "name": "marketing",
+      "level": 4,
+      "category": "implementation",
+      "agents": 42,
+      "status": "active"
+    },
+    {
+      "name": "ux-ui-design",
+      "level": 4,
+      "category": "support",
+      "agents": 35,
+      "status": "active"
+    },
+    {
+      "name": "legal-compliance",
+      "level": 4,
+      "category": "support",
+      "agents": 18,
+      "status": "active"
+    },
+    {
+      "name": "support-client",
+      "level": 4,
+      "category": "support",
+      "agents": 22,
+      "status": "active"
+    },
+    {
+      "name": "commercial-crm",
+      "level": 4,
+      "category": "support",
+      "agents": 25,
+      "status": "active"
+    },
+    {
+      "name": "finance-analytics",
+      "level": 4,
+      "category": "support",
+      "agents": 20,
+      "status": "active"
+    },
+    {
+      "name": "content-management",
+      "level": 4,
+      "category": "support",
+      "agents": 28,
+      "status": "active"
+    },
+    {
+      "name": "web-agency",
+      "level": 0,
+      "category": "orchestration",
+      "agents": 12,
+      "status": "active",
+      "isMetaOrchestrator": true
+    }
+  ]
+}

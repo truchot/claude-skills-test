@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.ai/schemas/skill.schema.json",
+  "title": "Skill Definition Schema",
+  "description": "Schema agnostique pour definir un skill independamment de la plateforme IA",
+  "type": "object",
+  "required": ["name", "description", "version", "level", "domains"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Identifiant unique du skill (kebab-case)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description courte du skill"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version semantique (SemVer)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated", "archived"],
+      "default": "active"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "Niveau hierarchique: 0=Entry, 1=Orchestration, 2=Strategy, 3=Operations, 4=Implementation"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["entry", "orchestration", "strategy", "operations", "implementation", "support"],
+      "description": "Categorie fonctionnelle du skill"
+    },
+    "philosophy": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Role principal du skill"
+        },
+        "does": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ce que le skill fait"
+        },
+        "doesNot": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ce que le skill ne fait PAS (limites explicites)"
+        }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "agents"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom du domaine"
+          },
+          "description": {
+            "type": "string"
+          },
+          "agents": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Liste des agents dans ce domaine"
+          }
+        }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Mots-cles pour router vers ce skill"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "if": { "type": "string" },
+              "then": { "type": "string" },
+              "priority": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "properties": {
+        "parent": {
+          "type": "string",
+          "description": "Skill parent dans la hierarchie"
+        },
+        "children": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skills enfants"
+        },
+        "peers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skills du meme niveau"
+        },
+        "delegates": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skills auxquels on peut deleguer"
+        }
+      }
+    },
+    "escalation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "condition": { "type": "string" },
+          "target": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      },
+      "description": "Regles d'escalade vers d'autres skills"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date" },
+        "updatedAt": { "type": "string", "format": "date" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

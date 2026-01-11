@@ -1,0 +1,40 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "name": "web-agency",
+  "version": "1.0.0",
+  "description": "Architecture de skills agnostique pour agence web IA full-automatisee",
+  "author": "Web Agency Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "skills": {
+    "directory": "./skills",
+    "schema": "./schemas/skill.schema.json"
+  },
+  "agents": {
+    "schema": "./schemas/agent.schema.json"
+  },
+  "orchestration": {
+    "directory": "./orchestration"
+  },
+  "workflows": {
+    "directory": "./workflows"
+  },
+  "templates": {
+    "directory": "./templates"
+  },
+  "learnings": {
+    "directory": "./learnings"
+  },
+  "bridges": {
+    "supported": ["claude", "cursor", "codeium"],
+    "default": "claude"
+  },
+  "metadata": {
+    "totalSkills": 20,
+    "totalAgents": 668,
+    "releaseDate": "2025-01-11",
+    "schemaVersion": "1.0.0"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.ai/schemas/manifest.schema.json",
+  "title": "Web Agency Manifest Schema",
+  "description": "Schema pour le fichier manifest.json principal",
+  "type": "object",
+  "required": ["name", "version", "skills"],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "engines": {
+      "type": "object",
+      "properties": {
+        "node": { "type": "string" }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "properties": {
+        "directory": { "type": "string" },
+        "schema": { "type": "string" }
+      }
+    },
+    "agents": {
+      "type": "object",
+      "properties": {
+        "schema": { "type": "string" }
+      }
+    },
+    "orchestration": {
+      "type": "object",
+      "properties": {
+        "directory": { "type": "string" }
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "properties": {
+        "directory": { "type": "string" }
+      }
+    },
+    "templates": {
+      "type": "object",
+      "properties": {
+        "directory": { "type": "string" }
+      }
+    },
+    "learnings": {
+      "type": "object",
+      "properties": {
+        "directory": { "type": "string" }
+      }
+    },
+    "bridges": {
+      "type": "object",
+      "properties": {
+        "supported": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "default": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "totalSkills": { "type": "integer" },
+        "totalAgents": { "type": "integer" },
+        "releaseDate": { "type": "string" },
+        "schemaVersion": { "type": "string" }
+      }
+    }
+  }
+}

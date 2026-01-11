@@ -1,0 +1,174 @@
+# Composition Patterns - Comment les skills collaborent
+# Independant de la plateforme IA
+
+version: "1.0.0"
+
+# Hierarchie des niveaux
+hierarchy:
+  levels:
+    - id: 0
+      name: entry
+      description: Points d'entree (intake, orchestration)
+      skills: [client-intake, task-orchestrator]
+
+    - id: 2
+      name: strategy
+      description: Decisions strategiques (POURQUOI)
+      skills: [direction-technique]
+
+    - id: 3
+      name: operations
+      description: Processus et coordination (QUOI/QUAND)
+      skills: [project-management, lead-dev, web-dev-process, testing-process]
+
+    - id: 4
+      name: implementation
+      description: Implementation concrete (COMMENT)
+      skills:
+        technical:
+          - frontend-developer
+          - backend-developer
+          - devops
+          - react-expert
+          - nextjs-expert
+          - wordpress-gutenberg-expert
+          - design-system-foundations
+        support:
+          - ux-ui-design
+          - marketing
+          - legal-compliance
+          - support-client
+          - commercial-crm
+          - finance-analytics
+          - content-management
+
+# Patterns de composition
+patterns:
+  # Pattern 1: Sequential
+  # Output d'un skill devient input du suivant
+  sequential:
+    description: "Pipeline lineaire - output devient input"
+    examples:
+      - name: "Brief to Code"
+        flow:
+          - skill: project-management
+            input: "Demande client"
+            output: "Brief structure"
+          - skill: direction-technique
+            input: "Brief structure"
+            output: "Specs techniques"
+          - skill: frontend-developer
+            input: "Specs techniques"
+            output: "Code"
+
+      - name: "Design to Implementation"
+        flow:
+          - skill: ux-ui-design
+            input: "Requirements"
+            output: "Maquettes"
+          - skill: design-system-foundations
+            input: "Maquettes"
+            output: "Tokens + Composants"
+          - skill: react-expert
+            input: "Composants design system"
+            output: "Composants React"
+
+  # Pattern 2: Parallel
+  # Plusieurs skills travaillent independamment
+  parallel:
+    description: "Travail simultane sur aspects independants"
+    examples:
+      - name: "Sprint Development"
+        trigger: "Specs validees"
+        parallel_skills:
+          - skill: frontend-developer
+            task: "UI implementation"
+          - skill: backend-developer
+            task: "API implementation"
+          - skill: devops
+            task: "Infrastructure setup"
+        sync_point: "Integration testing"
+
+      - name: "Full Website"
+        trigger: "Architecture definie"
+        parallel_skills:
+          - skill: design-system-foundations
+            task: "Design tokens"
+          - skill: content-management
+            task: "Contenu"
+          - skill: legal-compliance
+            task: "Mentions legales"
+
+  # Pattern 3: Hierarchical
+  # Composition POURQUOI -> QUOI -> COMMENT
+  hierarchical:
+    description: "Delegation hierarchique 3-tiers"
+    examples:
+      - name: "Quality Assurance"
+        levels:
+          pourquoi:
+            skill: direction-technique
+            decides: "Pourquoi tester? Objectifs qualite"
+          quoi:
+            skill: testing-process
+            decides: "Quoi tester? Pyramide, coverage 80%"
+          comment:
+            skill: frontend-developer
+            implements: "Vitest + RTL + Playwright"
+
+      - name: "State Management"
+        levels:
+          pourquoi:
+            skill: direction-technique
+            decides: "Pourquoi besoin state global?"
+          quoi:
+            skill: web-dev-process
+            decides: "Quel pattern? Context vs Zustand"
+          comment:
+            skill: react-expert
+            implements: "Implementation Zustand"
+
+# Relations inter-skills
+relations:
+  direction-technique:
+    supervises: [project-management, lead-dev, web-dev-process, testing-process]
+    delegates_to: [frontend-developer, backend-developer, devops]
+
+  project-management:
+    coordinates_with: [lead-dev, web-dev-process]
+    receives_from: [client-intake]
+    delivers_to: [direction-technique]
+
+  lead-dev:
+    reviews: [frontend-developer, backend-developer]
+    coordinates_with: [web-dev-process, testing-process]
+
+  web-dev-process:
+    defines_process_for: [frontend-developer, backend-developer, react-expert, nextjs-expert]
+    coordinates_with: [lead-dev, testing-process]
+
+  frontend-developer:
+    specializes_into: [react-expert, nextjs-expert, design-system-foundations]
+    collaborates_with: [backend-developer, ux-ui-design]
+
+  react-expert:
+    extends: frontend-developer
+    peer_of: [nextjs-expert]
+    uses: [design-system-foundations]
+
+# Anti-patterns a eviter
+anti_patterns:
+  - name: "Skip hierarchy"
+    description: "Aller directement de POURQUOI a COMMENT sans QUOI"
+    consequence: "Perte de tracabilite des decisions"
+    solution: "Toujours passer par le niveau intermediaire"
+
+  - name: "Circular delegation"
+    description: "A delegue a B qui delegue a A"
+    consequence: "Boucle infinie"
+    solution: "Respecter la hierarchie des niveaux"
+
+  - name: "Mixed responsibilities"
+    description: "Un skill fait QUOI et COMMENT"
+    consequence: "Violation SRP, difficulte de maintenance"
+    solution: "Extraire en skills separes"

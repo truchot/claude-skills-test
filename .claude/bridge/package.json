@@ -1,0 +1,38 @@
+{
+  "name": "@web-agency/claude-bridge",
+  "version": "1.0.0",
+  "description": "Bridge compiler from .web-agency/ to .claude/ format",
+  "main": "compiler.js",
+  "bin": {
+    "wa-compile": "./compiler.js"
+  },
+  "scripts": {
+    "build": "node compiler.js",
+    "build:skill": "node compiler.js --skill",
+    "build:dry-run": "node compiler.js --dry-run",
+    "watch": "node compiler.js --watch",
+    "validate": "node validators/validate-all.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "yaml": "^2.3.0",
+    "handlebars": "^4.7.8",
+    "ajv": "^8.12.0",
+    "chokidar": "^3.5.3"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "web-agency",
+    "claude",
+    "bridge",
+    "skills",
+    "agents"
+  ],
+  "author": "Web Agency Team",
+  "license": "MIT"
+}

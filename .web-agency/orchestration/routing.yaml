@@ -1,0 +1,216 @@
+# Routing Rules - Definition agnostique du routage vers les skills
+# Ce fichier est compile vers le format specifique de chaque plateforme
+
+version: "1.0.0"
+
+# Matrice de routage par mots-cles
+routing:
+  # Entry Points
+  - skill: client-intake
+    keywords:
+      - nouveau client
+      - demande
+      - premier contact
+      - prise de contact
+    priority: 100
+
+  - skill: task-orchestrator
+    keywords:
+      - queue
+      - task
+      - orchestration
+      - state machine
+    priority: 95
+
+  # Strategy Level
+  - skill: direction-technique
+    keywords:
+      - choix stack
+      - architecture globale
+      - ADR
+      - decision technique
+      - strategie technique
+    priority: 90
+
+  # Operations Level
+  - skill: project-management
+    keywords:
+      - brief
+      - budget
+      - planning
+      - client
+      - livraison
+      - facturation
+    priority: 85
+
+  - skill: lead-dev
+    keywords:
+      - code review
+      - PR
+      - pull request
+      - merge
+      - mentoring
+    priority: 85
+
+  - skill: web-dev-process
+    keywords:
+      - user story
+      - requirement
+      - scope
+      - workflow dev
+      - processus
+    priority: 85
+
+  - skill: testing-process
+    keywords:
+      - pyramide de tests
+      - TDD
+      - coverage
+      - strategie de test
+    priority: 85
+
+  # Implementation Level - Frontend
+  - skill: frontend-developer
+    keywords:
+      - HTML
+      - CSS
+      - JavaScript
+      - TypeScript
+      - frontend
+    priority: 70
+
+  - skill: react-expert
+    keywords:
+      - React
+      - useState
+      - useEffect
+      - hook
+      - composant React
+      - props
+      - JSX
+    priority: 80
+
+  - skill: nextjs-expert
+    keywords:
+      - Next.js
+      - App Router
+      - Server Component
+      - Server Action
+      - RSC
+    priority: 80
+
+  - skill: design-system-foundations
+    keywords:
+      - design system
+      - atomic design
+      - tokens
+      - composants UI
+    priority: 75
+
+  # Implementation Level - Backend
+  - skill: backend-developer
+    keywords:
+      - API
+      - base de donnees
+      - REST
+      - GraphQL
+      - serveur
+    priority: 70
+
+  - skill: devops
+    keywords:
+      - CI/CD
+      - Docker
+      - Kubernetes
+      - deployment
+      - infrastructure
+    priority: 75
+
+  # Implementation Level - CMS
+  - skill: wordpress-gutenberg-expert
+    keywords:
+      - WordPress
+      - Gutenberg
+      - block
+      - theme WP
+      - plugin WP
+    priority: 80
+
+  # Support Functions
+  - skill: ux-ui-design
+    keywords:
+      - UX
+      - UI
+      - wireframe
+      - maquette
+      - prototype
+    priority: 75
+
+  - skill: marketing
+    keywords:
+      - SEO
+      - campagne
+      - acquisition
+      - analytics
+    priority: 70
+
+  - skill: legal-compliance
+    keywords:
+      - RGPD
+      - CGV
+      - mentions legales
+      - conformite
+    priority: 70
+
+  - skill: support-client
+    keywords:
+      - ticket
+      - support
+      - FAQ
+      - satisfaction
+    priority: 70
+
+  - skill: commercial-crm
+    keywords:
+      - CRM
+      - pipeline
+      - prospection
+      - relance
+    priority: 70
+
+  - skill: finance-analytics
+    keywords:
+      - facturation
+      - KPI
+      - reporting
+      - rentabilite
+    priority: 70
+
+  - skill: content-management
+    keywords:
+      - contenu
+      - redaction
+      - localisation
+      - assets
+    priority: 70
+
+# Regles de disambiguation
+disambiguation:
+  # Si plusieurs skills matchent, appliquer ces regles de priorite
+  rules:
+    - condition: "match React ET Next.js"
+      winner: nextjs-expert
+      reason: "Next.js est plus specifique"
+
+    - condition: "match frontend ET React"
+      winner: react-expert
+      reason: "React est plus specifique"
+
+    - condition: "match architecture ET code"
+      winner: direction-technique
+      reason: "Les decisions d'architecture priment"
+
+# Fallback
+fallback:
+  skill: web-agency
+  reason: "Aucun skill specifique identifie, delegation au meta-orchestrateur"

@@ -1,0 +1,58 @@
+{
+  "$schema": "./schemas/config.schema.json",
+  "version": "1.0.0",
+  "source": {
+    "root": "../../.web-agency",
+    "skills": "./skills",
+    "orchestration": "./orchestration",
+    "templates": "./templates",
+    "learnings": "./learnings"
+  },
+  "output": {
+    "root": "..",
+    "skills": "./skills",
+    "commands": "./commands"
+  },
+  "compilation": {
+    "format": "markdown",
+    "frontmatter": "yaml",
+    "lineEnding": "lf",
+    "encoding": "utf-8"
+  },
+  "templates": {
+    "skill": "./templates/skill.md.hbs",
+    "agent": "./templates/agent.md.hbs",
+    "orchestrator": "./templates/orchestrator.md.hbs",
+    "command": "./templates/command.md.hbs"
+  },
+  "mapping": {
+    "levels": {
+      "pourquoi": "POURQUOI (Strategie)",
+      "quoi": "QUOI/QUAND (Processus)",
+      "comment": "COMMENT (Implementation)"
+    },
+    "types": {
+      "orchestrator": "Orchestrateur de domaine",
+      "specialist": "Agent specialise",
+      "validator": "Agent de validation",
+      "generator": "Agent generateur"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "active": "Actif",
+      "deprecated": "Deprecie",
+      "archived": "Archive"
+    }
+  },
+  "validation": {
+    "validateSource": true,
+    "validateOutput": true,
+    "strictMode": false
+  },
+  "features": {
+    "generateCommands": true,
+    "generateSettings": true,
+    "includeMetadata": true,
+    "preserveComments": false
+  }
+}

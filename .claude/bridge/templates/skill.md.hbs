@@ -1,0 +1,89 @@
+---
+name: {{name}}
+description: {{description}}
+version: {{version}}
+status: {{status}}
+---
+
+# {{name}}
+
+{{description}}
+
+{{#if philosophy}}
+## Philosophie
+
+{{#if philosophy.role}}
+{{philosophy.role}}
+{{/if}}
+
+{{#if philosophy.does}}
+### Ce que fait ce skill
+
+{{#each philosophy.does}}
+- {{this}}
+{{/each}}
+{{/if}}
+
+{{#if philosophy.doesNot}}
+### Tu NE fais PAS
+
+{{#each philosophy.doesNot}}
+- {{this}}
+{{/each}}
+{{/if}}
+{{/if}}
+
+{{#if domains}}
+## Architecture
+
+| Domaine | Agents |
+|---------|--------|
+{{#each domains}}
+| {{name}} | {{join agents ", "}} |
+{{/each}}
+{{/if}}
+
+{{#if routing}}
+## Regles de Routage
+
+{{#if routing.keywords}}
+### Mots-cles
+
+{{#each routing.keywords}}`{{this}}`{{#unless @last}}, {{/unless}}{{/each}}
+{{/if}}
+
+{{#if routing.rules}}
+### Regles
+
+{{#each routing.rules}}
+IF {{if}}
+   -> {{then}}
+
+{{/each}}
+{{/if}}
+{{/if}}
+
+{{#if composition}}
+## Composition
+
+{{#if composition.parent}}
+- **Parent**: {{composition.parent}}
+{{/if}}
+{{#if composition.peers}}
+- **Peers**: {{join composition.peers ", "}}
+{{/if}}
+{{#if composition.delegates}}
+- **Delegue a**: {{join composition.delegates ", "}}
+{{/if}}
+{{/if}}
+
+{{#if escalation}}
+## Escalade
+
+{{#each escalation}}
+- **{{target}}**: {{condition}}
+{{#if reason}}
+  - Raison: {{reason}}
+{{/if}}
+{{/each}}
+{{/if}}

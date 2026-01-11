@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.ai/schemas/agent.schema.json",
+  "title": "Agent Definition Schema",
+  "description": "Schema agnostique pour definir un agent independamment de la plateforme IA",
+  "type": "object",
+  "required": ["name", "description", "role"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Identifiant unique de l'agent (kebab-case)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description courte de l'agent"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": "1.0.0"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["orchestrator", "specialist", "validator", "generator"],
+      "default": "specialist",
+      "description": "Type d'agent"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["pourquoi", "quoi", "comment"],
+      "description": "Niveau dans la hierarchie 3-tiers: POURQUOI (strategie), QUOI (processus), COMMENT (implementation)"
+    },
+    "role": {
+      "type": "string",
+      "description": "Role principal de l'agent"
+    },
+    "responsibilities": {
+      "type": "object",
+      "properties": {
+        "does": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ce que l'agent fait"
+        },
+        "doesNot": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ce que l'agent ne fait PAS (SRP)"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "description": "Contenu principal de l'agent",
+      "properties": {
+        "systemPrompt": {
+          "type": "string",
+          "description": "Prompt systeme pour l'agent"
+        },
+        "instructions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Instructions detaillees"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "input": { "type": "string" },
+              "output": { "type": "string" },
+              "code": { "type": "string" }
+            }
+          }
+        },
+        "bestPractices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "practice": { "type": "string" },
+              "instead": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "url": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "template": { "type": "string" },
+          "phase": { "type": "string" },
+          "duration": { "type": "string" }
+        }
+      }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "format": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "escalation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "condition": { "type": "string" },
+          "target": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "description": "Pour les orchestrators uniquement",
+      "properties": {
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "file": { "type": "string" },
+              "specialty": { "type": "string" }
+            }
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "if": { "type": "string" },
+              "keywords": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "then": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date" },
+        "updatedAt": { "type": "string", "format": "date" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "skill": {
+          "type": "string",
+          "description": "Skill parent de cet agent"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domaine de l'agent"
+        }
+      }
+    }
+  }
+}

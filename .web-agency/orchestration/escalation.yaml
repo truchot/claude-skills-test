@@ -1,0 +1,208 @@
+# Escalation Rules - Quand et comment deleguer
+# Independant de la plateforme IA
+
+version: "1.0.0"
+
+# Principes d'escalade
+principles:
+  - name: "Escalade vers le haut"
+    description: "Quand une decision depasse le scope, escalader au niveau superieur"
+    direction: up
+
+  - name: "Delegation vers le bas"
+    description: "Quand une implementation est requise, deleguer au niveau inferieur"
+    direction: down
+
+  - name: "Delegation laterale"
+    description: "Quand un autre domaine est concerne, deleguer au peer"
+    direction: lateral
+
+# Regles par skill
+skills:
+  # Implementation Level Skills
+  react-expert:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Decision d'architecture globale"
+          - "Choix de stack technologique"
+          - "Trade-offs architecturaux majeurs"
+      - target: web-dev-process
+        when:
+          - "Questions sur le workflow PR"
+          - "Standards de code projet"
+          - "Definition des conventions"
+      - target: frontend-developer
+        when:
+          - "Questions JavaScript/TypeScript generales"
+          - "CSS/styling non lie a React"
+          - "Tooling frontend general"
+      - target: nextjs-expert
+        when:
+          - "App Router"
+          - "Server Components"
+          - "Server Actions"
+          - "Specifique Next.js"
+      - target: testing-process
+        when:
+          - "Strategie de test globale"
+          - "Choix des outils de test"
+
+  nextjs-expert:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Architecture application"
+          - "Decisions deployment"
+      - target: react-expert
+        when:
+          - "Patterns React purs"
+          - "Hooks non lies a Next.js"
+      - target: backend-developer
+        when:
+          - "API externe"
+          - "Base de donnees"
+      - target: devops
+        when:
+          - "Infrastructure Vercel/AWS"
+          - "CI/CD pipelines"
+
+  frontend-developer:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Choix de framework"
+          - "Architecture frontend"
+      - target: react-expert
+        when:
+          - "Implementation React specifique"
+      - target: design-system-foundations
+        when:
+          - "Tokens design"
+          - "Composants UI reutilisables"
+      - target: ux-ui-design
+        when:
+          - "Questions UX"
+          - "Design decisions"
+
+  backend-developer:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Architecture systeme"
+          - "Choix de base de donnees"
+      - target: devops
+        when:
+          - "Infrastructure"
+          - "Deployment"
+          - "CI/CD"
+      - target: legal-compliance
+        when:
+          - "RGPD"
+          - "Securite des donnees"
+
+  devops:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Decisions infrastructure majeures"
+          - "Choix cloud provider"
+      - target: backend-developer
+        when:
+          - "Code application"
+          - "API design"
+      - target: legal-compliance
+        when:
+          - "Conformite hebergement"
+          - "Localisation donnees"
+
+  # Operations Level Skills
+  web-dev-process:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Validation architecture"
+          - "Decisions strategiques"
+      - target: project-management
+        when:
+          - "Planning projet"
+          - "Communication client"
+      - target: lead-dev
+        when:
+          - "Assignation taches"
+          - "Code review"
+
+  testing-process:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Objectifs qualite globaux"
+          - "Trade-offs coverage"
+      - target: web-dev-process
+        when:
+          - "Integration dans le workflow"
+          - "Standards de PR"
+
+  lead-dev:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Decisions techniques majeures"
+          - "Conflits d'architecture"
+      - target: project-management
+        when:
+          - "Estimation"
+          - "Planning"
+          - "Communication client"
+
+  project-management:
+    escalates_to:
+      - target: direction-technique
+        when:
+          - "Validation specs techniques"
+          - "Trade-offs budget/qualite"
+      - target: commercial-crm
+        when:
+          - "Negociation client"
+          - "Upsell"
+      - target: finance-analytics
+        when:
+          - "Facturation"
+          - "Rentabilite projet"
+
+  # Strategy Level
+  direction-technique:
+    escalates_to:
+      - target: web-agency
+        when:
+          - "Decision hors scope technique"
+          - "Coordination multi-projets"
+    delegates_to:
+      - target: web-dev-process
+        when:
+          - "Definition de processus"
+          - "Standards de developpement"
+      - target: testing-process
+        when:
+          - "Strategie de test"
+          - "Criteres qualite"
+      - target: lead-dev
+        when:
+          - "Coordination equipe dev"
+          - "Code reviews"
+
+# Timeout et fallback
+timeouts:
+  default: 30s
+  escalation_retry: 3
+  fallback_skill: web-agency
+
+# Logging des escalades (pour metriques)
+logging:
+  enabled: true
+  include:
+    - timestamp
+    - source_skill
+    - target_skill
+    - reason
+    - resolution_time

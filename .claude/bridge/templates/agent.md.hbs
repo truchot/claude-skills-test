@@ -1,0 +1,140 @@
+---
+name: {{name}}
+description: {{description}}
+{{#if workflows}}
+workflows:
+{{#each workflows}}
+  - id: {{id}}
+{{#if template}}
+    template: {{template}}
+{{/if}}
+{{#if phase}}
+    phase: {{phase}}
+{{/if}}
+{{#if name}}
+    name: {{name}}
+{{/if}}
+{{#if duration}}
+    duration: {{duration}}
+{{/if}}
+{{/each}}
+{{/if}}
+---
+
+# {{titleCase name}}
+
+{{#if role}}
+## Role
+
+{{role}}
+{{/if}}
+
+{{#if responsibilities}}
+{{#if responsibilities.does}}
+## Responsabilites
+
+{{#each responsibilities.does}}
+- {{this}}
+{{/each}}
+{{/if}}
+
+{{#if responsibilities.doesNot}}
+## Tu NE fais PAS
+
+{{#each responsibilities.doesNot}}
+- {{this}}
+{{/each}}
+{{/if}}
+{{/if}}
+
+{{#if content}}
+{{#if content.instructions}}
+## Instructions
+
+{{#each content.instructions}}
+- {{this}}
+{{/each}}
+{{/if}}
+
+{{#if content.examples}}
+## Exemples
+
+{{#each content.examples}}
+{{#if title}}
+### {{title}}
+
+{{/if}}
+{{#if code}}
+```javascript
+{{code}}
+```
+
+{{/if}}
+{{#if input}}
+**Input**: {{input}}
+{{/if}}
+{{#if output}}
+**Output**: {{output}}
+{{/if}}
+
+{{/each}}
+{{/if}}
+
+{{#if content.bestPractices}}
+## Best Practices
+
+| Pratique | Au lieu de | Raison |
+|----------|------------|--------|
+{{#each content.bestPractices}}
+| {{practice}} | {{or instead "-"}} | {{or reason "-"}} |
+{{/each}}
+{{/if}}
+
+{{#if content.references}}
+## References
+
+{{#each content.references}}
+- [{{title}}]({{url}})
+{{/each}}
+{{/if}}
+{{/if}}
+
+{{#if deliverables}}
+## Livrables
+
+| Livrable | Format | Description |
+|----------|--------|-------------|
+{{#each deliverables}}
+| {{name}} | {{or format "-"}} | {{or description "-"}} |
+{{/each}}
+{{/if}}
+
+{{#if escalation}}
+## Escalade
+
+{{#each escalation}}
+- **{{target}}**: {{condition}}
+{{/each}}
+{{/if}}
+
+{{#if routing}}
+{{#if routing.agents}}
+## Agents Disponibles
+
+| Agent | Fichier | Specialite |
+|-------|---------|------------|
+{{#each routing.agents}}
+| {{name}} | {{file}} | {{or specialty "-"}} |
+{{/each}}
+{{/if}}
+
+{{#if routing.rules}}
+## Regles de Routage
+
+{{#each routing.rules}}
+IF question contient [{{join keywords ", "}}]
+   -> {{then}}
+
+{{/each}}
+{{/if}}
+{{/if}}
