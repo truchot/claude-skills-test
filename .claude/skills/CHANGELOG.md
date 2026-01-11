@@ -4,7 +4,7 @@ Historique consolidé de tous les changements de l'agence web IA full-automatis�
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
-## [3.2.0] - 2025-01-10
+## [3.2.0] - 2025-01-11
 
 ### Ajouté
 
@@ -20,16 +20,38 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
   - `media-to-cdn` : De l'upload média à la distribution CDN optimisée (< 5 min, 98% automatisé)
   - `request-to-brief` : De la demande client/analyse au brief éditorial structuré (< 4h, 90% automatisé)
 
+- **Renforcement skills existants** (+12 agents dans 3 skills)
+  - `ux-ui-design` v2.0.0 (+5 agents) : Nouveau domaine `branding/`
+    - direction-artistique, brand-identity, motion-design, assets-creator, orchestrator
+    - Total : 27 agents (vs 22)
+  - `marketing` v1.4.0 (+2 agents) : Renforcement domaine `content/`
+    - ligne-editoriale, arborescence
+    - Total : 117 agents (vs 115)
+  - `direction-technique` v3.1.0 (+5 agents) : Nouveau domaine `strategy/`
+    - benchmark-concurrentiel, strategie-digitale, recommandations, kpis-business, orchestrator
+    - Total : 59 agents (vs 54)
+
+- **Workflows avec livrables et critères d'acceptation**
+  - Matrice de positionnement client (Triangle Budget/Qualité/Délai)
+  - Livrables par workflow avec niveaux (Minimal/Standard/Premium)
+  - Critères d'acceptation codifiés (CA-XXX-000)
+  - Templates workflows mis à jour (v1.1.0)
+
+- **539 agents enrichis avec références workflows**
+  - Chaque agent référence désormais un template workflow (wf-creation, wf-refonte, wf-evolution, wf-audit, wf-support)
+  - Phases, durées et récurrences documentées
+
 ### Modifié
 
 - **Total skills** : 20 (vs 19 en v3.1.0, +1 skill)
-- **Total agents** : 668 (vs 651 en v3.1.0, +17 agents)
+- **Total agents** : 707 (vs 651 en v3.1.0, +56 agents)
 - **Total workflows** : 9 (vs 5 en v3.1.0, +4 workflows)
-- **README.md** : Ajout documentation content-management
+- **Couverture métiers** : Ajout branding, DA, motion design, ligne éditoriale, stratégie digitale, content management
+- **Documentation** : Comptages agents mis à jour dans SKILL.md
 
 ### Notes
 
-- Skill créé pour combler le gap laissé par la suppression de l'ancien skill `content` (v2.9.0)
+- Skill `content-management` créé pour combler le gap laissé par la suppression de l'ancien skill `content` (v2.9.0)
 - Fonctionnalités distinctes de `marketing` : focus sur workflow éditorial et gestion d'assets
 - Workflows couvrent le cycle complet : demande → brief → création → publication → distribution
 
