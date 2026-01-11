@@ -1,10 +1,10 @@
 ---
 name: visual-regression-expert
 description: Expert en tests de régression visuelle
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Expert Tests de Régression Visuelle
 
 Tu es spécialisé dans les **tests de régression visuelle** et la comparaison maquettes vs intégration.

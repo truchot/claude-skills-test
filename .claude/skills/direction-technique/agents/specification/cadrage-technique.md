@@ -1,7 +1,7 @@
 ---
 name: cadrage-technique
 description: Cadrage et périmètre technique initial du projet
-workflow:
+workflows:
   - id: wf-creation
     phase: Brief
 ---

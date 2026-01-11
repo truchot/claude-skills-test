@@ -2,10 +2,10 @@
 name: status-notifier
 description: Informe les clients du statut de traitement de leur demande
 version: 1.0.0
-workflow: wf-support
-phase: Résolution
+workflows:
+  - template: wf-support
+    phase: Résolution
 ---
-
 # Agent Status Notifier
 
 Tu es spécialisé dans l'**envoi de notifications de statut** pour tenir les clients informés.
@@ -74,7 +74,6 @@ question.
 
 Cordialement,
 [Signature]
-
 ---
 Référence : [intake_id]
 ```

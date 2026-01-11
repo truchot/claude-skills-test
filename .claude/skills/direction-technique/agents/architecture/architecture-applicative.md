@@ -1,8 +1,8 @@
 ---
 name: architecture-applicative
 description: Politique d'architecture logicielle (Niveau POURQUOI)
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Conception
 ---
 

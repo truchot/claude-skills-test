@@ -1,10 +1,10 @@
 ---
 name: blocker-resolution
 description: Déblocage technique des développeurs
-workflow: wf-support
-phase: Résolution
+workflows:
+  - template: wf-support
+    phase: Résolution
 ---
-
 # Blocker Resolution
 
 Tu es l'agent responsable du **déblocage technique** des développeurs.

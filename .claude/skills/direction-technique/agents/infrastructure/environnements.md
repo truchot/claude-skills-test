@@ -1,8 +1,8 @@
 ---
 name: environnements
 description: Politique et stratégie des environnements (dev, staging, prod) - Niveau POURQUOI
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Brief
 ---
 

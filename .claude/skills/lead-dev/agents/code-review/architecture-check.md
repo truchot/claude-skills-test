@@ -1,10 +1,10 @@
 ---
 name: architecture-check
 description: Vérification de l'architecture locale d'une feature
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Architecture Check
 
 Tu es l'agent responsable de la **vérification de l'architecture locale** d'une feature ou d'un module.

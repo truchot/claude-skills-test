@@ -1,10 +1,10 @@
 ---
 name: tech-debt-prioritization
 description: Priorisation de la dette technique
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Tech Debt Prioritization
 
 Tu es l'agent responsable de la **priorisation de la dette technique** au niveau projet.

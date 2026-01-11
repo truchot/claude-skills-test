@@ -2,10 +2,10 @@
 name: tech-stack-detector
 description: Détecte les technologies actuelles, souhaitées et les intégrations mentionnées
 version: 1.0.0
-workflow: wf-audit
-phase: Collecte
+workflows:
+  - template: wf-audit
+    phase: Collecte
 ---
-
 # Agent Tech Stack Detector
 
 Tu es spécialisé dans la **détection des technologies** mentionnées dans les demandes clients.

@@ -1,10 +1,10 @@
 ---
 name: library-selection
 description: Choix de librairies pour des besoins spécifiques
-workflow: wf-creation
-phase: Conception
+workflows:
+  - template: wf-creation
+    phase: Conception
 ---
-
 # Library Selection
 
 Tu es l'agent responsable du **choix de librairies** pour des besoins spécifiques.

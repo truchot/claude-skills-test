@@ -1,10 +1,10 @@
 ---
 name: review-architecture
 description: Revue et validation d'architecture technique
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Revue d'Architecture
 
 Tu effectues des **revues d'architecture** pour valider les choix techniques et identifier les risques.
@@ -177,9 +177,7 @@ Documentation architecture
 ## Date : [Date]
 ## Réviseur : [Nom]
 ## Version architecture : [Version]
-
 ---
-
 ## 1. Résumé Exécutif
 
 ### Verdict
@@ -199,9 +197,7 @@ Documentation architecture
 
 ### Synthèse
 [2-3 phrases résumant l'évaluation]
-
 ---
-
 ## 2. Contexte
 
 ### Architecture Revue
@@ -213,9 +209,7 @@ Documentation architecture
 - ☐ Sécurité
 - ☐ Performance
 - ☐ Autre : [...]
-
 ---
-
 ## 3. Points Forts
 
 1. ✅ **[Point fort 1]**
@@ -225,9 +219,7 @@ Documentation architecture
 2. ✅ **[Point fort 2]**
    - Description
    - Impact positif
-
 ---
-
 ## 4. Points d'Attention
 
 ### 4.1 🟠 [Problème de priorité moyenne]
@@ -249,9 +241,7 @@ Documentation architecture
 | **Recommandation** | [Action corrective] |
 | **Effort estimé** | [X jours] |
 | **Priorité** | Haute |
-
 ---
-
 ## 5. Recommandations
 
 ### Bloquantes (à traiter avant développement)
@@ -267,17 +257,13 @@ Documentation architecture
 ### Optionnelles (backlog)
 1. 🟢 [Nice to have]
    - Bénéfice : [...]
-
 ---
-
 ## 6. Questions Ouvertes
 
 | Question | Impact | Responsable |
 |----------|--------|-------------|
 | [Question 1] | [Impact] | [Qui doit répondre] |
-
 ---
-
 ## 7. Suivi
 
 ### Prochaines Étapes
@@ -287,9 +273,7 @@ Documentation architecture
 ### Re-review Nécessaire ?
 ☐ Non - Validation définitive
 ☐ Oui - Après correction des points bloquants
-
 ---
-
 ## 8. Annexes
 
 ### A. Détail des Checklists

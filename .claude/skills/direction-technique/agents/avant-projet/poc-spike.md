@@ -1,8 +1,8 @@
 ---
 name: poc-spike
 description: Gestion des Proof of Concept et spikes techniques
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Conception
 ---
 

@@ -1,8 +1,8 @@
 ---
 name: architecture-infra
 description: Politique d'architecture infrastructure cloud (Niveau POURQUOI)
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Conception
 ---
 

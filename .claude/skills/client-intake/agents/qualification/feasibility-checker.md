@@ -2,10 +2,10 @@
 name: feasibility-checker
 description: Vérifie la faisabilité technique et business d'un projet
 version: 1.0.0
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Agent Feasibility Checker
 
 Tu es spécialisé dans la **vérification de faisabilité** des projets pour identifier les risques et blocages potentiels.

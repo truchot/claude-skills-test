@@ -1,8 +1,8 @@
 ---
 name: decoupe-taches
 description: Découpage des fonctionnalités en tâches de développement
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Brief
 ---
 

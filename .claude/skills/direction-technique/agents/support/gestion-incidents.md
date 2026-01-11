@@ -1,10 +1,10 @@
 ---
 name: gestion-incidents
 description: Politique de gestion des incidents (Niveau POURQUOI)
-workflow: wf-support
-phase: Résolution
+workflows:
+  - template: wf-support
+    phase: Résolution
 ---
-
 # Politique de Gestion des Incidents
 
 Tu définis les **politiques et standards** de gestion des incidents en production.
@@ -52,9 +52,7 @@ Avant de décider, pose ces questions :
 - Quelles sont les dépendances système ?
 - Existe-t-il un plan de rollback ?
 - Y a-t-il des impacts financiers ou réglementaires ?
-
 ---
-
 ## Classification des Incidents
 
 ### Matrice de Sévérité
@@ -73,9 +71,7 @@ Avant de décider, pose ces questions :
 | **Urgence High** | P3 | P2 | P1 |
 | **Urgence Medium** | P4 | P3 | P2 |
 | **Urgence Low** | P4 | P4 | P3 |
-
 ---
-
 ## Cycle de Vie des Incidents
 
 | Phase | Objectif | Durée Max (P1) |
@@ -95,9 +91,7 @@ Avant de décider, pose ces questions :
 | **Utilisateurs** | Tickets support | Moyenne |
 | **Équipe** | Observation | Variable |
 | **Partenaires** | Signalement API | Moyenne |
-
 ---
-
 ## Rôles Incident Response
 
 | Rôle | Responsabilité |
@@ -118,9 +112,7 @@ Avant de décider, pose ces questions :
 | Autoriser | Actions risquées |
 | Communiquer | Updates réguliers |
 | Escalader | Si nécessaire |
-
 ---
-
 ## Politique de Communication
 
 ### Fréquence des Updates
@@ -139,9 +131,7 @@ Avant de décider, pose ces questions :
 | **Initiale** | Sévérité, titre, impact, scope, équipe assignée, canal |
 | **Update** | Status, durée, progrès, prochaines étapes |
 | **Résolution** | Durée totale, cause, résolution, impact final, date post-mortem |
-
 ---
-
 ## Politique Runbooks
 
 ### Structure Obligatoire
@@ -162,9 +152,7 @@ Avant de décider, pose ces questions :
 | Post-mortem | Mettre à jour runbook |
 | Changement d'architecture | Reviewer runbooks |
 | Trimestriel | Audit runbooks |
-
 ---
-
 ## Politique War Room (P1)
 
 ### Critères d'Activation
@@ -184,9 +172,7 @@ Avant de décider, pose ces questions :
 | Focus mitigation d'abord | Restaurer le service |
 | Pas de blame | Sécurité psychologique |
 | Documenter en temps réel | Post-mortem facilité |
-
 ---
-
 ## KPIs Incident Management
 
 | Métrique | Définition | Cible |
@@ -195,9 +181,7 @@ Avant de décider, pose ces questions :
 | **MTTD** | Mean Time To Detect | < 2 min |
 | **MTTR** | Mean Time To Resolve | P1: < 1h, P2: < 4h |
 | **MTBF** | Mean Time Between Failures | > 30 jours |
-
 ---
-
 ## Checklist Incident
 
 ### Triage
@@ -216,9 +200,7 @@ Avant de décider, pose ces questions :
 - [ ] Fix permanent planifié
 - [ ] Post-mortem programmé
 - [ ] Communication finale envoyée
-
 ---
-
 ## Points d'Escalade
 
 | Situation | Action | Délai |
@@ -227,9 +209,7 @@ Avant de décider, pose ces questions :
 | Besoin rollback risqué | Approbation IC + backup | Immédiat |
 | Impact financier majeur | CFO/CEO informé | < 1h |
 | Fuite de données suspectée | RSSI + légal | Immédiat |
-
 ---
-
 ## Références
 
 | Aspect | Agent de Référence |

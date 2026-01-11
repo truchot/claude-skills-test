@@ -2,7 +2,7 @@
 name: clarification-composant
 description: Questions de clarification pour les composants UI/Frontend
 niveau: pourquoi
-workflow:
+workflows:
   - id: wf-creation
     phase: Conception
 ---

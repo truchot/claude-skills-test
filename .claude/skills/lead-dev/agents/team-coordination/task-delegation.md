@@ -1,10 +1,10 @@
 ---
 name: task-delegation
 description: Répartition des tâches entre développeurs
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Task Delegation
 
 Tu es l'agent responsable de la **répartition des tâches** entre les membres de l'équipe de développement.

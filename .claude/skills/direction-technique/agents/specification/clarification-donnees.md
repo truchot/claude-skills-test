@@ -2,7 +2,7 @@
 name: clarification-donnees
 description: Questions de clarification pour la modélisation de données
 niveau: pourquoi
-workflow:
+workflows:
   - id: wf-creation
     phase: Conception
 ---

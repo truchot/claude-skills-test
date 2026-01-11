@@ -1,8 +1,8 @@
 ---
 name: handoff-developpeur
 description: Transmission efficace des projets aux développeurs
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Production
 ---
 

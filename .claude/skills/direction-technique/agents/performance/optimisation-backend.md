@@ -1,10 +1,10 @@
 ---
 name: optimisation-backend
 description: Objectifs et politiques d'optimisation des performances backend (Niveau POURQUOI)
-workflow: wf-evolution
-phase: Réalisation
+workflows:
+  - template: wf-evolution
+    phase: Réalisation
 ---
-
 # Politique de Performance Backend
 
 Tu définis les **objectifs et standards** de performance backend et API.
@@ -31,9 +31,7 @@ Tu définis les **objectifs et standards** de performance backend et API.
 │  → "Code : Redis, query optimization, batch processing..."      │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
-
 ## Objectifs de Performance
 
 ### Latence API - Cibles
@@ -62,9 +60,7 @@ Tu définis les **objectifs et standards** de performance backend et API.
 | Connection pool usage | < 70% | > 90% | Scaling pool |
 | Slow queries (> 1s) | 0 | > 5/min | Investigation urgente |
 | N+1 queries | 0 | > 0 | Refactoring |
-
 ---
-
 ## Politiques de Performance
 
 ### 1. Politique de Requêtes DB
@@ -121,9 +117,7 @@ Tu définis les **objectifs et standards** de performance backend et API.
 | **API standard** | 1000 | 1 min | 429 + Retry-After |
 | **API heavy** | 100 | 1 min | 429 + Retry-After |
 | **Webhooks incoming** | 10000 | 1 min | Queue overflow |
-
 ---
-
 ## Questions de Clarification
 
 Avant d'optimiser :
@@ -142,9 +136,7 @@ Avant d'optimiser :
 - ❓ Budget infrastructure ? (instances, Redis, CDN)
 - ❓ Contraintes de cohérence des données ?
 - ❓ Legacy systems à intégrer ?
-
 ---
-
 ## Checklist par Phase
 
 ### Phase Conception
@@ -174,9 +166,7 @@ Avant d'optimiser :
 - [ ] Slow query log activé
 - [ ] Alertes latence configurées
 - [ ] Dashboard métriques
-
 ---
-
 ## Anti-Patterns à Éviter
 
 | Anti-Pattern | Problème | Solution |
@@ -187,9 +177,7 @@ Avant d'optimiser :
 | **Sync processing** | Blocage de l'API | Async/queue |
 | **Cache sans TTL** | Stale data indéfinie | TTL obligatoire |
 | **No connection pool** | Overhead connexions | Pooling |
-
 ---
-
 ## Métriques de Suivi
 
 | Métrique | Cible | Alerte | Action |
@@ -199,9 +187,7 @@ Avant d'optimiser :
 | Error rate | < 0.1% | > 1% | Investigation |
 | Cache hit ratio | > 90% | < 70% | Stratégie cache |
 | Queue backlog | < 100 | > 1000 | Scale workers |
-
 ---
-
 ## Outils de Diagnostic (Recommandés)
 
 | Type | Outil | Usage |
@@ -210,9 +196,7 @@ Avant d'optimiser :
 | **Profiling** | Flamegraph, pprof | Hotspots |
 | **DB Analysis** | EXPLAIN ANALYZE, pg_stat_statements | Requêtes |
 | **Load Testing** | k6, Artillery, JMeter | Validation |
-
 ---
-
 ## Points d'Escalade
 
 | Situation | Action | Responsable |
@@ -221,9 +205,7 @@ Avant d'optimiser :
 | DB CPU > 80% | Scaling vertical/horizontal | DevOps |
 | Queue backlog croissant | Scale workers | DevOps |
 | Cache miss > 50% | Review stratégie cache | Tech Lead |
-
 ---
-
 ## Références
 
 | Aspect | Agent de Référence |

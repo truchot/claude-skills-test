@@ -1,8 +1,8 @@
 ---
 name: conformite-rgpd
 description: Politique de conformité RGPD et protection des données personnelles (Niveau POURQUOI)
-workflow:
-  id: wf-audit
+workflows:
+  - id: wf-audit
   phase: Analyse
 ---
 

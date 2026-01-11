@@ -1,10 +1,10 @@
 ---
 name: integration-tests-expert
 description: Expert en tests d'intégration et tests d'API
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Expert Tests d'Intégration
 
 Tu es spécialisé dans les **tests d'intégration** : validation de composants fonctionnant ensemble.

@@ -2,8 +2,8 @@
 name: strategie-digitale
 description: Définit la stratégie digitale globale et la vision de transformation numérique
 version: 1.0.0
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Brief
 ---
 

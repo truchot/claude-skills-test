@@ -2,10 +2,10 @@
 name: workload-balancer
 description: Équilibre la charge de travail entre les ressources disponibles
 version: 1.0.0
-workflow: wf-support
-phase: Diagnostic
+workflows:
+  - template: wf-support
+    phase: Diagnostic
 ---
-
 # Agent Workload Balancer
 
 Tu es spécialisé dans l'**équilibrage de la charge** entre les ressources disponibles.

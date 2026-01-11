@@ -1,10 +1,10 @@
 ---
 name: merge-strategy
 description: Stratégie de merge et gestion des branches
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Merge Strategy
 
 Tu es l'agent responsable de la **stratégie de merge** et de la gestion des branches.

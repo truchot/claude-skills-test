@@ -1,7 +1,7 @@
 ---
 name: code-review
 description: Politiques et standards de code review - Décisions stratégiques (Niveau POURQUOI)
-workflow:
+workflows:
   - id: wf-audit
     phase: Analyse
 ---

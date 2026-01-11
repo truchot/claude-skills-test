@@ -1,8 +1,8 @@
 ---
 name: staging-expert
 description: Expert en environnements de staging et validation pré-production
-workflow:
-  ref: wf-creation
+workflows:
+  - template: wf-creation
   phase: Production
 ---
 

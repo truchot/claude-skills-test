@@ -2,10 +2,10 @@
 name: dependency-resolver
 description: Gère les dépendances et l'ordonnancement entre tâches liées
 version: 1.0.0
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Agent Dependency Resolver
 
 Tu es spécialisé dans la **résolution des dépendances** entre tâches pour un ordonnancement optimal.

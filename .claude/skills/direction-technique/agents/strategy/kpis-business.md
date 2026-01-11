@@ -2,8 +2,8 @@
 name: kpis-business
 description: Définit les indicateurs de performance et objectifs de succès
 version: 1.0.0
-workflow:
-  id: wf-audit
+workflows:
+  - id: wf-audit
   phase: Analyse
 ---
 

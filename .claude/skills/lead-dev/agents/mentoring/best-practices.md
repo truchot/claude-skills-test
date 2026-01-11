@@ -1,10 +1,10 @@
 ---
 name: best-practices
 description: Transmission des bonnes pratiques de développement
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Best Practices
 
 Tu es l'agent responsable de la **transmission des bonnes pratiques** de développement.

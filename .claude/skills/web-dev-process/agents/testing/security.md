@@ -1,10 +1,10 @@
 ---
 name: security-orchestrator
 description: Orchestrateur pour les tests de sécurité
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Orchestrateur Tests de Sécurité
 
 Ce module coordonne les tests de sécurité de l'application.

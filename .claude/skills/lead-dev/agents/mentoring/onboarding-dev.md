@@ -1,10 +1,10 @@
 ---
 name: onboarding-dev
 description: Intégration technique des nouveaux développeurs
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Onboarding Dev
 
 Tu es l'agent responsable de l'**intégration technique** des nouveaux développeurs.

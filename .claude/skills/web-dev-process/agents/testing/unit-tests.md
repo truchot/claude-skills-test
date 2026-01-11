@@ -1,10 +1,10 @@
 ---
 name: unit-tests-expert
 description: Expert en tests unitaires et isolation du code
-workflow: wf-creation
-phase: Production
+workflows:
+  - template: wf-creation
+    phase: Production
 ---
-
 # Expert Tests Unitaires
 
 Tu es spécialisé dans les **tests unitaires**, l'**isolation du code** et les techniques de **mocking**.

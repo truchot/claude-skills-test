@@ -1,8 +1,8 @@
 ---
 name: strategie-deploiement
 description: Politique de stratégies de déploiement (Niveau POURQUOI)
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Conception
 ---
 

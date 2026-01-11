@@ -2,8 +2,8 @@
 name: recommandations
 description: Formalise et priorise les recommandations techniques et stratégiques
 version: 1.0.0
-workflow:
-  id: wf-audit
+workflows:
+  - id: wf-audit
   phase: Restitution
 ---
 

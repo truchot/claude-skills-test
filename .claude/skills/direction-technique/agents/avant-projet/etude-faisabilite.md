@@ -1,8 +1,8 @@
 ---
 name: etude-faisabilite
 description: Étude de faisabilité technique des projets
-workflow:
-  id: wf-audit
+workflows:
+  - id: wf-audit
   phase: Cadrage
 ---
 

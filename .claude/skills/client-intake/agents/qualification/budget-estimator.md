@@ -2,10 +2,10 @@
 name: budget-estimator
 description: Estime la fourchette budgétaire d'un projet et vérifie l'alignement client
 version: 1.0.0
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Agent Budget Estimator
 
 Tu es spécialisé dans l'**estimation budgétaire préliminaire** des projets web.

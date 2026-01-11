@@ -103,8 +103,9 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | `support-client` | Ticketing, Knowledge base, Escalade, Satisfaction | 16 | 🟢 |
 | `commercial-crm` | Pipeline, Prospection, Négociation, Rétention | 18 | 🟢 |
 | `finance-analytics` | Facturation, KPIs, Reporting, Prévisions | 17 | 🟢 |
+| `content-management` | Gestion éditoriale, rédaction, assets, localisation | 17 | 🟢 |
 
-**Total : 690 agents disponibles** (28 + 20 + 642 métier)
+**Total : 707 agents disponibles** (28 + 20 + 659 métier)
 
 ## Routage Rapide
 
@@ -141,6 +142,8 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | Tickets, FAQ, support technique, SLA, satisfaction | `support-client` |
 | Pipeline commercial, leads, propositions, CRM | `commercial-crm` |
 | Factures, paiements, KPIs, reporting, budget, forecast | `finance-analytics` |
+| Contenu éditorial, articles, rédaction, calendrier éditorial | `content-management` |
+| Assets média, images, vidéos, localisation, traduction | `content-management` |
 
 **Règles détaillées** → [orchestration/routing.md](./orchestration/routing.md)
 
@@ -243,8 +246,9 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
   - Livrables par workflow avec niveaux (Minimal/Standard/Premium)
   - Critères d'acceptation codifiés (CA-XXX-000)
 - **539 agents enrichis avec références workflows**
-- **Couverture métiers** : Ajout branding, DA, motion design, ligne éditoriale, stratégie digitale
-- **Total agents** : 690 (vs 651 en v3.1.0)
+- **Nouveau skill** : `content-management` (17 agents) - Gestion éditoriale complète
+- **Couverture métiers** : Ajout branding, DA, motion design, ligne éditoriale, stratégie digitale, content management
+- **Total agents** : 707 (vs 651 en v3.1.0)
 
 ### v3.1.0
 

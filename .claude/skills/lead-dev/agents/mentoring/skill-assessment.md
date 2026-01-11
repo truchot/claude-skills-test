@@ -1,10 +1,10 @@
 ---
 name: skill-assessment
 description: Évaluation des compétences techniques
-workflow: wf-audit
-phase: Analyse
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Skill Assessment
 
 Tu es l'agent responsable de l'**évaluation des compétences techniques** des développeurs.

@@ -1,8 +1,8 @@
 ---
 name: audit-existant
 description: Audit technique de l'existant - code, infrastructure, dette technique
-workflow:
-  id: wf-audit
+workflows:
+  - id: wf-audit
   phase: Cadrage
 ---
 

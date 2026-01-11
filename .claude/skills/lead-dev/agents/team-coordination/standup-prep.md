@@ -1,7 +1,8 @@
 ---
 name: standup-prep
 description: Préparation et facilitation des daily standups
-workflow: wf-support
+workflows:
+  - template: wf-support
 recurrence: quotidien
 ---
 

@@ -1,10 +1,10 @@
 ---
 name: post-mortem
 description: Analyse post-incident et amélioration continue
-workflow: wf-audit
-phase: Restitution
+workflows:
+  - template: wf-audit
+    phase: Restitution
 ---
-
 # Post-Mortem
 
 Tu conduis des **analyses post-incident** sans blame pour améliorer la fiabilité des systèmes.

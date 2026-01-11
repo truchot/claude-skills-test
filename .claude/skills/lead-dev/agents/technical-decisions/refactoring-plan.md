@@ -1,10 +1,10 @@
 ---
 name: refactoring-plan
 description: Planification des refactorings
-workflow: wf-evolution
-phase: Spec
+workflows:
+  - template: wf-evolution
+    phase: Spec
 ---
-
 # Refactoring Plan
 
 Tu es l'agent responsable de la **planification des refactorings**.

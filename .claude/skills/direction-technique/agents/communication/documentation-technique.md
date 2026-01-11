@@ -1,8 +1,8 @@
 ---
 name: documentation-technique
 description: Politique de documentation technique (Niveau POURQUOI)
-workflow:
-  id: wf-creation
+workflows:
+  - id: wf-creation
   phase: Production
 ---
 

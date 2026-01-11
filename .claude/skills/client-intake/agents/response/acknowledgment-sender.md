@@ -2,10 +2,10 @@
 name: acknowledgment-sender
 description: Génère et envoie les accusés de réception pour les nouvelles demandes
 version: 1.0.0
-workflow: wf-support
-phase: Résolution
+workflows:
+  - template: wf-support
+    phase: Résolution
 ---
-
 # Agent Acknowledgment Sender
 
 Tu es spécialisé dans l'**envoi d'accusés de réception** pour confirmer la bonne prise en compte des demandes.
@@ -52,7 +52,6 @@ cahier des charges), n'hésitez pas à nous les transmettre.
 
 À très bientôt,
 [Signature agence]
-
 ---
 Référence : [intake_id]
 ```
@@ -273,7 +272,6 @@ des charges, benchmark), n'hésitez pas à nous les transmettre.
 À très bientôt,
 
 L'équipe [Agence]
-
 ---
 Référence : INK-2024-001234
 ```
