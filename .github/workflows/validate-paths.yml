@@ -15,7 +15,8 @@ jobs:
       - name: Check for deprecated .claude/skills references
         run: |
           echo "Checking for deprecated .claude/skills references..."
-          if grep -r "\.claude/skills" --include="*.md" --include="*.yml" --include="*.yaml" --include="*.js" --include="*.sh" . 2>/dev/null | grep -v ".github/workflows/validate-paths.yml"; then
+          # Exclude CHANGELOG.md (contains migration documentation) and this workflow
+          if grep -r "\.claude/skills" --include="*.md" --include="*.yml" --include="*.yaml" --include="*.js" --include="*.sh" . 2>/dev/null | grep -v ".github/workflows/validate-paths.yml" | grep -v "CHANGELOG.md"; then
             echo "❌ ERROR: Found deprecated .claude/skills references"
             echo "Please use .web-agency/skills instead"
             exit 1
@@ -25,7 +26,8 @@ jobs:
       - name: Check for deprecated .claude/learnings references
         run: |
           echo "Checking for deprecated .claude/learnings references..."
-          if grep -r "\.claude/learnings" --include="*.md" --include="*.yml" --include="*.yaml" --include="*.js" --include="*.sh" . 2>/dev/null | grep -v ".github/workflows/validate-paths.yml"; then
+          # Exclude CHANGELOG.md (contains migration documentation) and this workflow
+          if grep -r "\.claude/learnings" --include="*.md" --include="*.yml" --include="*.yaml" --include="*.js" --include="*.sh" . 2>/dev/null | grep -v ".github/workflows/validate-paths.yml" | grep -v "CHANGELOG.md"; then
             echo "❌ ERROR: Found deprecated .claude/learnings references"
             echo "Please use .web-agency/learnings instead"
             exit 1

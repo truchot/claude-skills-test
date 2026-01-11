@@ -27,133 +27,144 @@ HUMAIN (supervision)
 
 ## Skills Disponibles
 
-### Orchestrateur
+### Niveau 0 : Entrée
 
-| Skill | Description | Version |
-|-------|-------------|---------|
-| [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills métiers | 2.0.0 |
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [client-intake](.web-agency/skills/client-intake/) | Réception et qualification des demandes | 23 | 🟢 Actif |
 
-### Skills Métiers
+### Niveau 1 : Orchestration
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills | - | 🟢 Actif |
+| [task-orchestrator](.web-agency/skills/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+
+### Niveau 2 : Stratégie
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [direction-technique](.web-agency/skills/direction-technique/) | Décisions stratégiques, architecture | 52 | 🟢 Actif |
+
+### Niveau 3 : Opérations
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
 | [project-management](.web-agency/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
-| [technical](.web-agency/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
-| [marketing](.web-agency/skills/marketing/) | Marketing digital (SEO complet, SEA, Social, Email, Analytics, Fidélisation) | 115 | 🟢 Actif |
-| [strategy](.web-agency/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
-| [design](.web-agency/skills/design/) | Design & création graphique | - | 🔴 Planifié |
-| [content](.web-agency/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
+| [lead-dev](.web-agency/skills/lead-dev/) | Coordination technique | 27 | 🟢 Actif |
+| [web-dev-process](.web-agency/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
+| [testing-process](.web-agency/skills/testing-process/) | Stratégie et process de test | 25 | 🟢 Actif |
 
-### Skills Techniques
+### Niveau 4 : Implémentation
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [web-dev-process](.web-agency/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
-| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
-| [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
 | [frontend-developer](.web-agency/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
-| [react-expert](.web-agency/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
-| [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture, DevOps | 38 | 🟢 Actif |
+| [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture | 32 | 🟢 Actif |
+| [devops](.web-agency/skills/devops/) | CI/CD, containers, infrastructure | 30 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | WordPress & Gutenberg | 41 | 🟢 Actif |
+| [react-expert](.web-agency/skills/react-expert/) | Expert React | 28 | 🟢 Actif |
+| [nextjs-expert](.web-agency/skills/nextjs-expert/) | Expert Next.js | 35 | 🟢 Actif |
+| [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design | 21 | 🟢 Actif |
+| [marketing](.web-agency/skills/marketing/) | Marketing digital complet | 115 | 🟢 Actif |
+| [content-management](.web-agency/skills/content-management/) | Gestion de contenu éditorial | 17 | 🟢 Actif |
+
+### Niveau 4 : Fonctions Support
+
+| Skill | Description | Agents | Statut |
+|-------|-------------|--------|--------|
+| [ux-ui-design](.web-agency/skills/ux-ui-design/) | Design UX/UI | 22 | 🟢 Actif |
+| [legal-compliance](.web-agency/skills/legal-compliance/) | Juridique et conformité | 16 | 🟢 Actif |
+| [support-client](.web-agency/skills/support-client/) | Support client | 16 | 🟢 Actif |
+| [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
+| [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
+
+**Total : 22 skills, 713 agents**
 
 ## Architecture
 
 ```
-.web-agency/skills/
+.
+├── .web-agency/                   # Framework agnostique (instructions métier)
+│   ├── skills/                    # 22 skills, 713 agents
+│   │   ├── web-agency/            # Meta-orchestrateur
+│   │   ├── client-intake/         # Niveau 0: Entrée
+│   │   ├── task-orchestrator/     # Niveau 1: Orchestration
+│   │   ├── direction-technique/   # Niveau 2: Stratégie
+│   │   ├── project-management/    # Niveau 3: Opérations
+│   │   ├── lead-dev/
+│   │   ├── web-dev-process/
+│   │   ├── testing-process/
+│   │   ├── frontend-developer/    # Niveau 4: Implémentation
+│   │   ├── backend-developer/
+│   │   ├── devops/
+│   │   ├── wordpress-gutenberg-expert/
+│   │   ├── react-expert/
+│   │   ├── nextjs-expert/
+│   │   ├── design-system-foundations/
+│   │   ├── marketing/
+│   │   ├── content-management/
+│   │   ├── ux-ui-design/          # Niveau 4: Support
+│   │   ├── legal-compliance/
+│   │   ├── support-client/
+│   │   ├── commercial-crm/
+│   │   └── finance-analytics/
+│   └── learnings/                 # Learning loop system
 │
-├── web-agency/                    # ORCHESTRATEUR (compose les skills)
-│   └── SKILL.md
-│
-├── project-management/            # Skill métier : Gestion de projet
-│   ├── SKILL.md
-│   ├── avant-projet/              # 7 agents
-│   ├── pilotage/                  # 5 agents
-│   ├── communication/             # 6 agents
-│   ├── livraison/                 # 4 agents
-│   ├── facturation/               # 2 agents
-│   └── templates/                 # 8 templates
-│
-├── technical/                     # Skill métier : Technique
-│   ├── SKILL.md
-│   └── *.md                       # 6 agents
-│
-├── strategy/                      # Skill métier : Stratégie (planifié)
-├── design/                        # Skill métier : Design (planifié)
-├── content/                       # Skill métier : Contenu (planifié)
-├── marketing/                     # Skill métier : Marketing (planifié)
-│
-├── web-dev-process/               # Skill technique : Process dev
-│   ├── SKILL.md
-│   └── agents/                    # 61 agents (7 phases)
-│
-├── wordpress-gutenberg-expert/    # Skill technique : WordPress
-│   ├── SKILL.md
-│   └── agents/                    # 41 agents (6 domaines)
-│
-├── design-system-foundations/     # Skill technique : Design System
-│   ├── SKILL.md
-│   ├── agents/                    # 21 agents (4 niveaux Atomic Design)
-│   │   ├── foundations/           # Colors, Typography, Spacing, Shadows
-│   │   ├── atoms/                 # Buttons, Inputs, Labels, Icons, Badges
-│   │   ├── molecules/             # Forms, Cards, Navigation, Modals, Alerts
-│   │   └── templates/             # Hero, Layouts, Pages
-│   └── docs/                      # 7 guides (a11y, testing, dark mode, etc.)
-│
-└── backend-developer/             # Skill technique : Backend Development
-    ├── SKILL.md
-    ├── agents/                    # 38 agents (7 domaines)
-    │   ├── api/                   # REST, GraphQL, OpenAPI, validation
-    │   ├── database/              # Modeling, migrations, queries, NoSQL
-    │   ├── auth-security/         # JWT, OAuth, OWASP, cryptography
-    │   ├── architecture/          # Patterns, microservices, DDD
-    │   ├── performance/           # Caching, profiling, optimization
-    │   ├── testing/               # Unit, integration, API tests
-    │   └── devops/                # CI/CD, Docker, Kubernetes
-    └── tests/                     # Validation tests
+└── .claude/                       # Interface Claude (commandes uniquement)
+    └── commands/                  # 21 commandes référençant .web-agency/
 ```
 
-## Composition des Skills
-
-### Hiérarchie
+## Hiérarchie des Skills
 
 ```
-web-agency (orchestrateur)
-    │
-    ├── project-management (24 agents)
-    │
-    ├── technical (6 agents)
-    │   │
-    │   ├── web-dev-process (61 agents)
-    │   │
-    │   ├── wordpress-gutenberg-expert (41 agents)
-    │   │
-    │   ├── design-system-foundations (21 agents)
-    │   │
-    │   ├── backend-developer (38 agents)
-    │   │
-    │   └── frontend-developer (33 agents)
-    │       │
-    │       ├── react-expert (28 agents) ← délégation
-    │       │
-    │       └── wordpress-gutenberg-expert (41 agents) ← délégation
-    │
-    ├── strategy (planifié)
-    ├── design (planifié)
-    ├── content (planifié)
-    └── marketing (planifié)
+NIVEAU 0: ENTRÉE
+└── client-intake (23)              # Réception des demandes
+
+NIVEAU 1: ORCHESTRATION
+├── web-agency                      # Meta-orchestrateur
+└── task-orchestrator (16)          # Gestion des tâches
+
+NIVEAU 2: STRATÉGIE (POURQUOI)
+└── direction-technique (52)        # Décisions stratégiques
+
+NIVEAU 3: OPÉRATIONS (QUOI)
+├── project-management (24)         # Gestion de projet
+├── lead-dev (27)                   # Coordination technique
+├── web-dev-process (61)            # Process de développement
+└── testing-process (25)            # Process de test
+
+NIVEAU 4: IMPLÉMENTATION (COMMENT)
+├── frontend-developer (33)
+├── backend-developer (32)
+├── devops (30)
+├── wordpress-gutenberg-expert (41)
+├── react-expert (28)
+├── nextjs-expert (35)
+├── design-system-foundations (21)
+├── marketing (115)
+└── content-management (17)
+
+NIVEAU 4: SUPPORT
+├── ux-ui-design (22)
+├── legal-compliance (16)
+├── support-client (16)
+├── commercial-crm (17)
+└── finance-analytics (17)
 ```
 
 ### Workflow type : Nouveau projet
 
 ```
-1. project-management  → Brief, estimation, proposition
-2. strategy            → Audit, benchmark, recommandations
-3. design              → DA, maquettes
-   └── design-system-foundations → Tokens, composants, guidelines
-4. content             → Arborescence, contenus
-5. technical           → Specs, estimation technique
+1. client-intake       → Réception, qualification
+2. direction-technique → Architecture, estimation
+3. project-management  → Brief, planning
+4. ux-ui-design        → Maquettes, design
+   └── design-system-foundations → Tokens, composants
+5. lead-dev            → Coordination technique
    └── web-dev-process → Setup, dev, test, deploy
-   └── wordpress-*     → Si projet WordPress
-6. project-management  → Pilotage, livraison, facturation
+   └── testing-process → Tests, QA
+6. devops              → CI/CD, déploiement
 7. marketing           → Lancement, acquisition
 ```
 
@@ -173,15 +184,15 @@ git clone https://github.com/truchot/claude-skills-test.git
 ```
 # Orchestration
 "J'ai un nouveau projet de site e-commerce WordPress"
-→ web-agency compose : project-management + technical + wordpress-gutenberg-expert
+→ web-agency compose : project-management + wordpress-gutenberg-expert
 
 # Gestion de projet
 "Aide-moi à rédiger un brief client"
 → project-management/avant-projet
 
-# Technique
+# Direction technique
 "Quelle stack pour ce projet ?"
-→ technical/selection-stack
+→ direction-technique/avant-projet/selection-stack
 
 # WordPress
 "Comment créer un block Gutenberg ?"
@@ -191,15 +202,9 @@ git clone https://github.com/truchot/claude-skills-test.git
 "Crée une palette de couleurs WCAG AA"
 → design-system-foundations/foundations/colors
 
-"Comment structurer mes boutons avec BEM ?"
-→ design-system-foundations/atoms/buttons
-
 # Backend
-"Comment concevoir une API REST pour les utilisateurs ?"
+"Comment concevoir une API REST ?"
 → backend-developer/api/rest-design
-
-"Mes requêtes SQL sont lentes, comment optimiser ?"
-→ backend-developer/database/optimization
 ```
 
 ## Tests
@@ -222,33 +227,11 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 4. **Single Responsibility** : Un agent = une responsabilité
 5. **Traçabilité** : Historique des décisions
 
-## Roadmap
+## Version
 
-### Skills actifs
-- [x] web-agency (orchestrateur v2.0.0)
-- [x] project-management (24 agents)
-- [x] technical (6 agents)
-- [x] web-dev-process (61 agents)
-- [x] wordpress-gutenberg-expert (41 agents)
-- [x] design-system-foundations (21 agents)
-- [x] frontend-developer (33 agents)
-- [x] react-expert (28 agents)
-- [x] backend-developer (38 agents)
-- [x] marketing (115 agents) - SEO complet + Fidélisation SRP (25 agents)
+**v4.0.0** - 22 skills, 713 agents
 
-### Skills planifiés
-- [ ] strategy
-- [ ] design
-- [ ] content
-
-### Infrastructure
-- [x] Tests web-agency
-- [x] Tests web-dev-process
-- [x] Tests wordpress-gutenberg-expert
-- [x] Tests frontend-developer
-- [x] Tests react-expert
-- [x] Tests backend-developer
-- [x] CI/CD workflows
+Voir [CHANGELOG](.web-agency/skills/CHANGELOG.md) pour l'historique complet.
 
 ## Licence
 
