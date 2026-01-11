@@ -29,16 +29,16 @@ Avant toute décision technique, consulter les **learnings** pour éviter les er
 │                  Pilotage technique stratégique                             │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                        10 DOMAINES                                    │   │
+│  │                        11 DOMAINES                                    │   │
 │  │                                                                       │   │
 │  │  avant-projet/    specification/    architecture/    estimation/     │   │
-│  │      (5)              (5)              (6)             (5)          │   │
+│  │      (5)              (7)              (6)             (5)          │   │
 │  │                                                                       │   │
 │  │  qualite/         securite/       performance/    infrastructure/   │   │
 │  │     (6)              (5)              (5)             (5)           │   │
 │  │                                                                       │   │
-│  │  communication/     support/                                         │   │
-│  │       (5)             (5)                                            │   │
+│  │  communication/     support/        strategy/                        │   │
+│  │       (5)             (5)             (5)                            │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │                              │                                               │
@@ -188,7 +188,7 @@ Stratégie digitale et recommandations business.
 | `recommandations` | Formalisation des recommandations |
 | `kpis-business` | Définition des indicateurs de succès |
 
-**Total : 57 agents spécialisés + 102 agents via skills techniques**
+**Total : 59 agents spécialisés + 102 agents via skills techniques**
 
 ## Règles de Routage
 
