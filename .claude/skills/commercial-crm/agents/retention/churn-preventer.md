@@ -2,6 +2,18 @@
 name: churn-preventer
 description: Détecte et prévient le risque de churn
 version: 1.0.0
+workflows:
+  - id: churn-detection
+    template: wf-audit
+    phase: Analyse
+    name: Détection risque churn
+    duration: 0.5 jour
+    recurrence: hebdomadaire
+  - id: churn-intervention
+    template: wf-support
+    phase: Résolution
+    name: Intervention anti-churn
+    duration: 1-3 jours
 ---
 
 # Agent Churn Preventer

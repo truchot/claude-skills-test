@@ -1,6 +1,12 @@
 ---
 name: functional
 description: React functional components with props, children, and composition patterns
+workflows:
+  - id: react-component-creation
+    template: wf-creation
+    phase: Production
+    name: Création composants React
+    duration: 0.5-1 jour
 ---
 
 # Functional Components - Composants Fonctionnels

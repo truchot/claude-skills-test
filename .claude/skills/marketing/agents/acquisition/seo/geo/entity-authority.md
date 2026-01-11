@@ -1,6 +1,12 @@
 ---
 name: entity-authority
 description: Construction et renforcement de l'autorité d'entité pour le GEO
+workflows:
+  - id: entity-authority-creation
+    template: wf-creation
+    phase: Production
+    name: Construction autorité entité
+    duration: 5 jours
 ---
 
 # Agent Autorité d'Entité

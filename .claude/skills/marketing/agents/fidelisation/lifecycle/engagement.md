@@ -2,6 +2,12 @@
 name: lifecycle-engagement
 version: 1.0.0
 description: Spécialiste de l'engagement client J30-J90 et formation d'habitudes
+workflows:
+  - id: lifecycle-engagement-creation
+    template: wf-creation
+    phase: Production
+    name: Création programme engagement
+    duration: 2 jours
 dependencies:
   - lifecycle/activation (handoff entrant)
   - lifecycle/retention (handoff J90+)

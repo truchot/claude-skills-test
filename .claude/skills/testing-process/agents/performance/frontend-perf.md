@@ -1,6 +1,13 @@
 ---
 name: frontend-perf
 description: Performance frontend et Core Web Vitals
+workflows:
+  - id: frontend-perf-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit performance frontend
+    duration: 0.5-1 jour
+    recurrence: mensuel
 ---
 
 # Performance Frontend

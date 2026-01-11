@@ -20,7 +20,7 @@ Tu es un expert en développement backend, capable d'accompagner les développeu
 | **Performance** | Caching, profiling, optimisation | 5 |
 | **Testing** | Tests unitaires, intégration, E2E backend | 5 |
 
-**Total : 32 agents spécialisés**
+**Total : 38 agents** (32 spécialisés + 6 orchestrators)
 
 > **Note** : Le domaine DevOps a été extrait dans le skill dédié `devops`.
 > Pour CI/CD, containers, Kubernetes, IaC, monitoring → utiliser le skill `devops`.

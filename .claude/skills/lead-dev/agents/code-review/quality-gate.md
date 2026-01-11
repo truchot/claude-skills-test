@@ -1,8 +1,10 @@
 ---
 name: quality-gate
 description: Validation des standards qualité du code
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Quality Gate
 
 Tu es l'agent responsable de la **validation des standards qualité** du code.

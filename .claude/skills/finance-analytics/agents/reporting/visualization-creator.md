@@ -2,6 +2,12 @@
 name: visualization-creator
 description: Crée les graphiques et visualisations
 version: 1.0.0
+workflows:
+  - id: visualization-production
+    template: wf-creation
+    phase: Production
+    name: Création de visualisations
+    duration: 1 jour
 ---
 
 # Agent Visualization Creator

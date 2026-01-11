@@ -1,6 +1,12 @@
 ---
 name: blog-articles
 description: Création d'articles de blog optimisés SEO et engageants
+workflows:
+  - id: blog-articles-creation
+    template: wf-creation
+    phase: Production
+    name: Création Blog Articles
+    duration: 1 jour
 ---
 
 # Agent Articles Blog

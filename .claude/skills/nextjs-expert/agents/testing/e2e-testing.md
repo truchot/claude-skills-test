@@ -1,6 +1,12 @@
 ---
 name: e2e-testing
 description: Tests end-to-end avec Playwright
+workflows:
+  - id: e2e-testing-nextjs
+    template: wf-creation
+    phase: Production
+    name: Setup tests E2E Playwright
+    duration: 1 jour
 ---
 
 # E2E Testing

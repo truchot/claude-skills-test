@@ -1,6 +1,9 @@
 ---
 name: selection-stack
 description: Aide au choix de la stack technique adaptée au projet
+workflows:
+  - id: wf-creation
+  phase: Conception
 ---
 
 # Sélection de Stack Technique

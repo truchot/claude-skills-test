@@ -1,6 +1,12 @@
 ---
 name: repository-orchestrator
 description: Orchestrateur pour la configuration des repositories Git
+workflows:
+  - id: wdp-setup-repository
+    template: wf-creation
+    phase: Brief
+    name: Configuration du repository
+    duration: 0.5 jour
 ---
 
 # Orchestrateur Repository Git

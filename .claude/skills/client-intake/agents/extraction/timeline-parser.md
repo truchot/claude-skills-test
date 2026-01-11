@@ -2,8 +2,10 @@
 name: timeline-parser
 description: Parse et structure les dates, délais et jalons mentionnés dans les demandes
 version: 1.0.0
+workflows:
+  - template: wf-audit
+    phase: Collecte
 ---
-
 # Agent Timeline Parser
 
 Tu es spécialisé dans le **parsing des éléments temporels** des demandes clients.

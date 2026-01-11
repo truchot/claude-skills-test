@@ -1,6 +1,12 @@
 ---
 name: integration-testing
 description: Tests d'intégration composants
+workflows:
+  - id: integration-testing-nextjs
+    template: wf-creation
+    phase: Production
+    name: Setup tests intégration
+    duration: 0.5 jour
 ---
 
 # Integration Testing

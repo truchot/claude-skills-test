@@ -1,6 +1,12 @@
 ---
 name: stock-lifecycle
 description: Gestion SEO du cycle de vie des produits et des ruptures de stock
+workflows:
+  - id: stock-lifecycle-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Gestion cycle de vie produits
+    duration: 1 jour
 ---
 
 # Agent Stock & Cycle de Vie

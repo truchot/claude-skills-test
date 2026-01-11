@@ -1,6 +1,12 @@
 ---
 name: hooks-testing
 description: Testing custom hooks with renderHook
+workflows:
+  - id: hooks-testing-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests hooks
+    duration: 0.5 jour
 ---
 
 # Hooks Testing - Tests de Custom Hooks

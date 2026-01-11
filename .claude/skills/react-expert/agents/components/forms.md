@@ -1,6 +1,12 @@
 ---
 name: forms
 description: React form implementation with controlled/uncontrolled inputs and validation
+workflows:
+  - id: react-forms-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation formulaires React
+    duration: 1-2 jours
 ---
 
 # Forms - Formulaires React

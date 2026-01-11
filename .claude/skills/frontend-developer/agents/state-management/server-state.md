@@ -1,6 +1,17 @@
 ---
 name: Server State Expert
 description: Expert en gestion d'état serveur - React Query, SWR, Apollo Client
+workflows:
+  - id: server-state-setup
+    template: wf-creation
+    phase: Production
+    name: Setup data fetching
+    duration: 0.5-1 jour
+  - id: server-state-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers React Query/SWR
+    duration: 1-2 jours
 ---
 
 # Agent Server State

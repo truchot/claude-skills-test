@@ -1,6 +1,12 @@
 ---
 name: architecture-site
 description: Optimisation de la structure du site et du maillage interne
+workflows:
+  - id: architecture-site-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit architecture site
+    duration: 2 jours
 ---
 
 # Agent Architecture Site

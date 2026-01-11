@@ -1,6 +1,12 @@
 ---
 name: wp-cli-commands
 description: WP-CLI Custom Commands Expert
+workflows:
+  - id: wp-cli-creation
+    template: wf-creation
+    phase: Production
+    name: Création commandes WP-CLI
+    duration: 0.5-1 jour
 ---
 
 # WP-CLI Custom Commands Expert

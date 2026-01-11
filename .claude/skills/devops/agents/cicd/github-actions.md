@@ -1,6 +1,17 @@
 ---
 name: github-actions
 description: Pipelines CI/CD avec GitHub Actions
+workflows:
+  - id: gha-setup
+    template: wf-creation
+    phase: Production
+    name: Setup GitHub Actions
+    duration: 1-2 jours
+  - id: gha-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution workflows GHA
+    duration: 0.5-1 jour
 ---
 
 # Agent GitHub Actions

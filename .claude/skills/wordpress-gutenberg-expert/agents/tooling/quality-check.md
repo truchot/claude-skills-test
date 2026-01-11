@@ -1,6 +1,13 @@
 ---
 name: quality-check
 description: Quality Check WordPress Expert
+workflows:
+  - id: wp-quality-check
+    template: wf-audit
+    phase: Analyse
+    name: Contrôle qualité code
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Quality Check WordPress Expert

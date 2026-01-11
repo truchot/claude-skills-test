@@ -1,6 +1,12 @@
 ---
 name: async-components
 description: Composants async et data fetching inline
+workflows:
+  - id: async-components-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation composants async
+    duration: 0.5-1 jour
 ---
 
 # Async Components

@@ -1,6 +1,17 @@
 ---
 name: gcp
 description: Infrastructure GCP avec Terraform
+workflows:
+  - id: gcp-setup
+    template: wf-creation
+    phase: Production
+    name: Setup infra GCP
+    duration: 2-5 jours
+  - id: gcp-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution infra GCP
+    duration: 0.5-2 jours
 ---
 
 # Agent GCP Infrastructure

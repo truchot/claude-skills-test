@@ -1,6 +1,12 @@
 ---
 name: swr
 description: SWR for lightweight data fetching and caching
+workflows:
+  - id: swr-setup
+    template: wf-creation
+    phase: Production
+    name: Setup SWR data fetching
+    duration: 0.5 jour
 ---
 
 # SWR - Data Fetching Léger

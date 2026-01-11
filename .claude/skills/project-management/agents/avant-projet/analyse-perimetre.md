@@ -1,6 +1,17 @@
 ---
 name: analyse-perimetre
 description: Analyse et découpage du périmètre fonctionnel en lots
+workflows:
+  - id: perimetre-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Analyse périmètre nouveau projet
+    duration: 1-2 jours
+  - id: perimetre-evolution
+    template: wf-evolution
+    phase: Spécification
+    name: Analyse périmètre évolution
+    duration: 0.5-1 jour
 ---
 
 # Agent Analyse Périmètre

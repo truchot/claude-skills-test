@@ -1,6 +1,12 @@
 ---
 name: php-unit-tests
 description: PHP Unit Tests WordPress Expert
+workflows:
+  - id: php-unit-wp-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests unitaires PHP
+    duration: 0.5-1 jour
 ---
 
 # PHP Unit Tests WordPress Expert

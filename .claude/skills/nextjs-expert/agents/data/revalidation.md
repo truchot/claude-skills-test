@@ -1,6 +1,12 @@
 ---
 name: revalidation
 description: Stratégies de revalidation et cache
+workflows:
+  - id: revalidation-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration revalidation/cache
+    duration: 0.5 jour
 ---
 
 # Revalidation

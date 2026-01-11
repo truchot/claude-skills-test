@@ -1,6 +1,12 @@
 ---
 name: audit-global-seo
 description: Réalisation d'audits SEO complets couvrant les 3 piliers
+workflows:
+  - id: audit-global-seo-audit
+    template: wf-audit
+    phase: Cadrage
+    name: Audit SEO global
+    duration: 2 jours
 ---
 
 # Agent Audit SEO Global

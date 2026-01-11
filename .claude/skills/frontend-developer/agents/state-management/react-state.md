@@ -1,6 +1,17 @@
 ---
 name: React State Expert
 description: Expert en gestion d'état React - useState, Context, Redux, Zustand
+workflows:
+  - id: state-setup
+    template: wf-creation
+    phase: Production
+    name: Setup gestion d'état
+    duration: 0.5-1 jour
+  - id: state-refactor
+    template: wf-refonte
+    phase: Migration
+    name: Refactoring state management
+    duration: 1-3 jours
 ---
 
 # Agent React State

@@ -2,6 +2,17 @@
 name: animation-designer
 description: Conçoit les micro-interactions et animations
 version: 1.0.0
+workflows:
+  - id: micro-interactions
+    template: wf-creation
+    phase: Production
+    name: Design micro-interactions
+    duration: 2-4 jours
+  - id: animation-specs
+    template: wf-evolution
+    phase: Réalisation
+    name: Spécifications animations
+    duration: 1 jour
 ---
 
 # Agent Animation Designer

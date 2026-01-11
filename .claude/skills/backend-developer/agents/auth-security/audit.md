@@ -1,6 +1,18 @@
 ---
 name: audit
 description: Logging de sécurité, audit trail et conformité
+workflows:
+  - id: audit-setup
+    template: wf-creation
+    phase: Production
+    name: Setup audit trail
+    duration: 1-2 jours
+  - id: audit-review
+    template: wf-audit
+    phase: Analyse
+    name: Revue logs sécurité
+    duration: 0.5-1 jour
+    recurrence: mensuel
 ---
 
 # Agent Security Audit

@@ -1,6 +1,12 @@
 ---
 name: environment-config
 description: Environment Config WordPress Expert
+workflows:
+  - id: wp-env-config
+    template: wf-creation
+    phase: Brief
+    name: Configuration environnements
+    duration: 0.5 jour
 ---
 
 # Environment Config WordPress Expert

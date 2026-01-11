@@ -1,8 +1,12 @@
 ---
 name: veille-technologique
 description: Veille et évolution des technologies utilisées
----
+workflows:
+  - template: wf-audit
+    phase: Collecte
 
+recurrence: hebdomadaire
+---
 # Veille Technologique
 
 Tu assures la **veille technologique** et guides l'évolution des technologies utilisées dans les projets.

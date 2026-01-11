@@ -1,6 +1,12 @@
 ---
 name: docker-expert
 description: Expert en configuration Docker et docker-compose pour le développement
+workflows:
+  - id: wdp-setup-docker
+    template: wf-creation
+    phase: Brief
+    name: Configuration Docker
+    duration: 0.5 jour
 ---
 
 # Expert Docker

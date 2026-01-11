@@ -5,6 +5,11 @@ description: Gestion des échecs de paiement et prévention du churn involontair
 dependencies:
   - churn/signal-detection (signaux paiement)
   - churn/intervention-playbooks (escalade si nécessaire)
+workflows:
+  - id: dunning-support
+    template: wf-support
+    phase: Résolution
+    name: Gestion Dunning
 ---
 
 # Agent Dunning Management

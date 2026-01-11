@@ -1,6 +1,17 @@
 ---
 name: concurrency
 description: Programmation asynchrone, parallélisme et concurrence
+workflows:
+  - id: async-implementation
+    template: wf-creation
+    phase: Production
+    name: Implémentation async/parallèle
+    duration: 1-3 jours
+  - id: async-refactor
+    template: wf-evolution
+    phase: Réalisation
+    name: Refactoring concurrence
+    duration: 1-2 jours
 ---
 
 # Agent Concurrency

@@ -1,6 +1,17 @@
 ---
 name: formalisation-brief
 description: Structuration des informations collectées en brief client formel
+workflows:
+  - id: brief-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Brief nouveau projet
+    duration: 1-2 jours
+  - id: brief-refonte
+    template: wf-refonte
+    phase: Analyse
+    name: Brief projet refonte
+    duration: 1-2 jours
 ---
 
 # Agent Formalisation Brief

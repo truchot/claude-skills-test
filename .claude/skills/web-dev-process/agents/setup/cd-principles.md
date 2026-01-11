@@ -1,6 +1,9 @@
 ---
 name: cd-principles-expert
 description: Expert en principes de déploiement continu (CD)
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Expert CD (Déploiement Continu)

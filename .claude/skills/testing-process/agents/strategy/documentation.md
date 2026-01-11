@@ -1,6 +1,12 @@
 ---
 name: documentation
 description: Documentation et reporting des tests
+workflows:
+  - id: test-doc-update
+    template: wf-evolution
+    phase: Réalisation
+    name: Mise à jour documentation tests
+    duration: 0.5-1 jour
 ---
 
 # Documentation des Tests

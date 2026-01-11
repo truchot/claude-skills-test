@@ -1,6 +1,12 @@
 ---
 name: component
 description: Tests de composants UI isolés
+workflows:
+  - id: component-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests composants
+    duration: 1-2 jours
 ---
 
 # Tests de Composants

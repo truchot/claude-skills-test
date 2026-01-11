@@ -18,6 +18,7 @@ const {
   DOMAINS,
   EXPECTED_AGENTS_PER_DOMAIN,
   EXPECTED_SEO_AGENTS,
+  EXPECTED_FIDELISATION_AGENTS,
   AGENT_REQUIREMENTS,
   getExpectedTotal
 } = require('./config');
@@ -93,6 +94,39 @@ for (const [subDomain, agents] of Object.entries(EXPECTED_SEO_AGENTS)) {
       }
     } else {
       reporter.fail(`acquisition/${subDomain}/${agent}: File not found`, { path: agentPath });
+    }
+  }
+}
+
+// Validate Fidelisation sub-domains
+reporter.section('Fidelisation Sub-Domain Agents');
+
+for (const [subDomain, agents] of Object.entries(EXPECTED_FIDELISATION_AGENTS)) {
+  totalAgents += agents.length;
+
+  for (const agent of agents) {
+    const agentPath = path.join(agentsDir, 'fidelisation', subDomain, `${agent}.md`);
+
+    if (fileExists(agentPath)) {
+      foundAgents++;
+      const { content, error } = safeReadFile(agentPath);
+
+      if (error) {
+        reporter.fail(`fidelisation/${subDomain}/${agent}: Cannot read file`);
+        continue;
+      }
+
+      const minLength = agent === 'orchestrator'
+        ? AGENT_REQUIREMENTS.minOrchestratorLength
+        : AGENT_REQUIREMENTS.minAgentLength;
+
+      if (content.length >= minLength) {
+        reporter.pass(`fidelisation/${subDomain}/${agent} (${content.length} chars)`);
+      } else {
+        reporter.warn(`fidelisation/${subDomain}/${agent}: Short (${content.length}/${minLength})`);
+      }
+    } else {
+      reporter.fail(`fidelisation/${subDomain}/${agent}: File not found`, { path: agentPath });
     }
   }
 }

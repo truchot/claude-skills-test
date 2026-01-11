@@ -1,6 +1,12 @@
 ---
 name: custom-roles
 description: Custom Roles & Capabilities Expert
+workflows:
+  - id: roles-capabilities-setup
+    template: wf-creation
+    phase: Production
+    name: Configuration rôles et capabilities
+    duration: 0.5 jour
 ---
 
 # Custom Roles & Capabilities Expert

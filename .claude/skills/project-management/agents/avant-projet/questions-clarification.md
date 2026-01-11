@@ -1,6 +1,17 @@
 ---
 name: questions-clarification
 description: Génération de questions pour clarifier les zones d'ombre du brief
+workflows:
+  - id: questions-brief
+    template: wf-creation
+    phase: Brief
+    name: Questions clarification brief
+    duration: 0.5 jour
+  - id: questions-audit
+    template: wf-audit
+    phase: Collecte
+    name: Questions clarification audit
+    duration: 0.5 jour
 ---
 
 # Agent Questions Clarification

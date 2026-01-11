@@ -56,7 +56,9 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'copywriting',
     'blog-articles',
     'social-media-content',
-    'landing-pages'
+    'landing-pages',
+    'ligne-editoriale',
+    'arborescence'
   ],
   'acquisition': [
     'orchestrator',
@@ -74,39 +76,6 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   ],
   'fidelisation': [
     'orchestrator'
-  ],
-  'fidelisation/lifecycle': [
-    'orchestrator',
-    'onboarding',
-    'activation',
-    'engagement',
-    'retention',
-    'expansion',
-    'advocacy'
-  ],
-  'fidelisation/loyalty': [
-    'orchestrator',
-    'program-economics',
-    'earn-mechanics',
-    'burn-rewards',
-    'tier-design',
-    'gamification'
-  ],
-  'fidelisation/churn': [
-    'orchestrator',
-    'signal-detection',
-    'scoring-model',
-    'intervention-playbooks',
-    'retention-offers',
-    'dunning'
-  ],
-  'fidelisation/success': [
-    'orchestrator',
-    'health-score',
-    'nps-csat',
-    'qbr',
-    'csm-operations',
-    'voc'
   ],
   'automation': [
     'orchestrator',
@@ -202,6 +171,43 @@ const EXPECTED_SEO_AGENTS = {
   ]
 };
 
+/** @const {Object} Expected Fidelisation agents per sub-domain */
+const EXPECTED_FIDELISATION_AGENTS = {
+  'lifecycle': [
+    'orchestrator',
+    'onboarding',
+    'activation',
+    'engagement',
+    'retention',
+    'expansion',
+    'advocacy'
+  ],
+  'loyalty': [
+    'orchestrator',
+    'program-economics',
+    'earn-mechanics',
+    'burn-rewards',
+    'tier-design',
+    'gamification'
+  ],
+  'churn': [
+    'orchestrator',
+    'signal-detection',
+    'scoring-model',
+    'intervention-playbooks',
+    'retention-offers',
+    'dunning'
+  ],
+  'success': [
+    'orchestrator',
+    'health-score',
+    'nps-csat',
+    'qbr',
+    'csm-operations',
+    'voc'
+  ]
+};
+
 /**
  * Agent validation requirements
  * @const {Object}
@@ -240,23 +246,30 @@ function getTotalExpectedAgents() {
     .reduce((sum, agents) => sum + agents.length, 0);
   const seoAgents = Object.values(EXPECTED_SEO_AGENTS)
     .reduce((sum, agents) => sum + agents.length, 0);
-  return baseAgents + seoAgents;
+  const fidelisationAgents = Object.values(EXPECTED_FIDELISATION_AGENTS)
+    .reduce((sum, agents) => sum + agents.length, 0);
+  return baseAgents + seoAgents + fidelisationAgents;
 }
 
 /**
- * Get expected agent count (115 after SRP refactoring of fidelisation)
+ * Get expected agent count (117 after adding ligne-editoriale and arborescence)
  * @returns {number}
  */
 function getExpectedTotal() {
-  return 115;
+  return 117;
 }
+
+/** @const {string[]} Fidelisation sub-domains */
+const FIDELISATION_DOMAINS = ['lifecycle', 'loyalty', 'churn', 'success'];
 
 module.exports = {
   SKILL_ROOT,
   DOMAINS,
   SEO_DOMAINS,
+  FIDELISATION_DOMAINS,
   EXPECTED_AGENTS_PER_DOMAIN,
   EXPECTED_SEO_AGENTS,
+  EXPECTED_FIDELISATION_AGENTS,
   AGENT_REQUIREMENTS,
   DOMAIN_KEYWORDS,
   getTotalExpectedAgents,

@@ -1,6 +1,18 @@
 ---
 name: profiling
 description: Profiling, APM, tracing et analyse des performances
+workflows:
+  - id: profiling-setup
+    template: wf-creation
+    phase: Production
+    name: Setup APM/profiling
+    duration: 0.5-1 jour
+  - id: profiling-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse performance
+    duration: 0.5-1 jour
+    recurrence: mensuel
 ---
 
 # Agent Profiling

@@ -1,6 +1,12 @@
 ---
 name: email-annonce-livraison
 description: Rédaction d'emails d'annonce de livraison
+workflows:
+  - id: email-livraison
+    template: wf-creation
+    phase: Livraison
+    name: Email annonce livraison
+    duration: 0.25 jour
 ---
 
 # Agent Email Annonce Livraison

@@ -1,6 +1,12 @@
 ---
 name: vercel
 description: Déploiement sur Vercel
+workflows:
+  - id: vercel-deployment
+    template: wf-creation
+    phase: Livraison
+    name: Déploiement Vercel
+    duration: 0.5 jour
 ---
 
 # Vercel Deployment

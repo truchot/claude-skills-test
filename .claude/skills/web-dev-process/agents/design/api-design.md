@@ -1,6 +1,9 @@
 ---
 name: api-design-expert
 description: Expert en design d'API REST et GraphQL
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Expert Design d'API

@@ -2,6 +2,17 @@
 name: usability-tester
 description: Planifie et analyse les tests d'utilisabilité
 version: 1.0.0
+workflows:
+  - id: usability-test-prep
+    template: wf-creation
+    phase: Brief
+    name: Préparation tests utilisabilité
+    duration: 1-2 jours
+  - id: usability-test-analysis
+    template: wf-audit
+    phase: Restitution
+    name: Analyse tests utilisabilité
+    duration: 1-2 jours
 ---
 
 # Agent Usability Tester

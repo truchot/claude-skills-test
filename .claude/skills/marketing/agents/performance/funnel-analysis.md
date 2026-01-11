@@ -1,6 +1,12 @@
 ---
 name: funnel-analysis
 description: Analyse des funnels de conversion et identification des drop-offs
+workflows:
+  - id: funnel-analysis-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit Funnel Analysis
+    duration: 1 jour
 ---
 
 # Agent Funnel Analysis

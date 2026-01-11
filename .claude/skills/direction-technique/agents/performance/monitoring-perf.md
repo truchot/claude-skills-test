@@ -1,8 +1,12 @@
 ---
 name: monitoring-perf
 description: Politique de monitoring et observabilité (Niveau POURQUOI)
----
+workflows:
+  - template: wf-audit
+    phase: Analyse
 
+recurrence: quotidien
+---
 # Politique de Monitoring Performance
 
 Tu définis les **politiques et standards** de monitoring de performance.
@@ -50,9 +54,7 @@ Avant de décider, pose ces questions :
 - Y a-t-il des points de contention identifiés ?
 - Quel est le budget temps/argent pour les optimisations ?
 - Y a-t-il des contraintes techniques limitantes ?
-
 ---
-
 ## Stack de Monitoring
 
 ### Composants
@@ -166,9 +168,7 @@ Avant de décider, pose ces questions :
 | **Homepage** | 5 min | Status 200, contenu attendu |
 | **API Health** | 1 min | Status 200, réponse < 2s |
 | **Formulaires critiques** | 15 min | Workflow complet |
-
 ---
-
 ## Checklist Monitoring
 
 ### Setup Initial
@@ -187,9 +187,7 @@ Avant de décider, pose ces questions :
 - [ ] Dashboard dédié
 - [ ] Uptime monitoring actif
 - [ ] Logs centralisés
-
 ---
-
 ## Points d'Escalade
 
 | Situation | Action | Responsable |
@@ -199,9 +197,7 @@ Avant de décider, pose ces questions :
 | Pas de données | Vérifier les exporters/agents | DevOps |
 | False positives fréquents | Ajuster les seuils | DevOps + Tech Lead |
 | Incident majeur | War room, communication | Tech Lead + Management |
-
 ---
-
 ## Références
 
 | Aspect | Agent de Référence |

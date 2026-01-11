@@ -2,6 +2,12 @@
 name: lead-qualifier
 description: Qualifie les leads avec le framework BANT
 version: 1.0.0
+workflows:
+  - id: qualification-lead
+    template: wf-audit
+    phase: Analyse
+    name: Qualification lead BANT
+    duration: 0.5 jour
 ---
 
 # Agent Lead Qualifier

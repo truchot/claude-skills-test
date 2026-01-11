@@ -1,6 +1,12 @@
 ---
 name: alertes-projet
 description: Détection et génération des alertes projet
+workflows:
+  - id: alerte-detection
+    template: wf-support
+    phase: Diagnostic
+    name: Détection et traitement alerte
+    duration: 0.5-2 jours
 ---
 
 # Agent Alertes Projet

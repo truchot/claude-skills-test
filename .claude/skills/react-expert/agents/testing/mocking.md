@@ -1,6 +1,12 @@
 ---
 name: mocking
 description: Mocks, spies, and MSW for testing
+workflows:
+  - id: mocking-setup
+    template: wf-creation
+    phase: Production
+    name: Setup mocking MSW
+    duration: 0.5-1 jour
 ---
 
 # Mocking - Mocks, Spies et MSW

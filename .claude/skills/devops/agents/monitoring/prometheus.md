@@ -1,6 +1,17 @@
 ---
 name: monitoring
 description: Observabilité, métriques, logs, alerting
+workflows:
+  - id: prometheus-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Prometheus
+    duration: 1-2 jours
+  - id: prometheus-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout métriques custom
+    duration: 0.5 jour
 ---
 
 # Agent Monitoring

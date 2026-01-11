@@ -1,6 +1,17 @@
 ---
 name: microservices
 description: Architecture microservices - design, communication, patterns
+workflows:
+  - id: microservices-creation
+    template: wf-creation
+    phase: Conception
+    name: Design microservices
+    duration: 5-10 jours
+  - id: microservices-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration vers microservices
+    duration: 30-90 jours
 ---
 
 # Agent Microservices

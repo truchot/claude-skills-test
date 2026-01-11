@@ -1,6 +1,12 @@
 ---
 name: citation-optimization
 description: Optimisation pour être cité comme source par les LLMs
+workflows:
+  - id: citation-optimization-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation citations LLM
+    duration: 3 jours
 ---
 
 # Agent Optimisation Citations LLM

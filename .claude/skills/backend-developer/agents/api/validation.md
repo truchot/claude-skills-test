@@ -1,6 +1,17 @@
 ---
 name: validation
 description: Validation des payloads, paramètres et données entrantes dans les APIs
+workflows:
+  - id: validation-setup
+    template: wf-creation
+    phase: Production
+    name: Setup validation API
+    duration: 0.5-1 jour
+  - id: validation-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit validation inputs
+    duration: 0.5 jour
 ---
 
 # Agent API Validation

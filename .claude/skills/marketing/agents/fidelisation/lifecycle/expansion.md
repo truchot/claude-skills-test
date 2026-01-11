@@ -2,6 +2,12 @@
 name: lifecycle-expansion
 version: 1.0.0
 description: Spécialiste de l'expansion client (upsell, cross-sell, add-ons)
+workflows:
+  - id: lifecycle-expansion-creation
+    template: wf-creation
+    phase: Production
+    name: Création stratégie expansion
+    duration: 2 jours
 dependencies:
   - lifecycle/retention (signaux readiness)
   - loyalty/tier-design (tier upgrades)

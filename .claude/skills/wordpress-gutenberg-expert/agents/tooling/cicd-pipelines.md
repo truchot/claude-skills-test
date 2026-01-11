@@ -1,6 +1,12 @@
 ---
 name: cicd-pipelines
 description: CI/CD WordPress Expert
+workflows:
+  - id: wp-cicd-setup
+    template: wf-creation
+    phase: Production
+    name: Setup CI/CD WordPress
+    duration: 1 jour
 ---
 
 # CI/CD WordPress Expert

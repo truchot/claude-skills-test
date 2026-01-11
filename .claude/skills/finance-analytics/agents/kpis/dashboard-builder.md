@@ -2,6 +2,12 @@
 name: dashboard-builder
 description: Construit les dashboards et visualisations
 version: 1.0.0
+workflows:
+  - id: dashboard-production
+    template: wf-creation
+    phase: Production
+    name: Construction de dashboards
+    duration: 2 jours
 ---
 
 # Agent Dashboard Builder

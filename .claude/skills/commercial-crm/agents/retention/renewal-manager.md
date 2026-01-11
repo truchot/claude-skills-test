@@ -2,6 +2,12 @@
 name: renewal-manager
 description: Gère les renouvellements et reconductions
 version: 1.0.0
+workflows:
+  - id: renewal-process
+    template: wf-refonte
+    phase: Bascule
+    name: Processus de renouvellement
+    duration: 2-4 semaines
 ---
 
 # Agent Renewal Manager

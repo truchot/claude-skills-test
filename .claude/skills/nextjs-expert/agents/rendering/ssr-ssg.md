@@ -1,6 +1,12 @@
 ---
 name: ssr-ssg
 description: SSR dynamique vs SSG statique
+workflows:
+  - id: rendering-strategy
+    template: wf-creation
+    phase: Conception
+    name: Choix stratégie SSR/SSG
+    duration: 0.5 jour
 ---
 
 # SSR vs SSG

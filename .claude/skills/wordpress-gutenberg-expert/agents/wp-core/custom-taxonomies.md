@@ -1,6 +1,12 @@
 ---
 name: custom-taxonomies
 description: Custom Taxonomies Expert
+workflows:
+  - id: taxonomy-creation
+    template: wf-creation
+    phase: Production
+    name: Création taxonomies
+    duration: 0.5 jour
 ---
 
 # Custom Taxonomies Expert

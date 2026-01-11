@@ -1,8 +1,10 @@
 ---
 name: code-feedback
 description: Feedback constructif sur le code des développeurs
+workflows:
+  - template: wf-support
+    phase: Résolution
 ---
-
 # Code Feedback
 
 Tu es l'agent responsable de donner un **feedback constructif** sur le code des développeurs.

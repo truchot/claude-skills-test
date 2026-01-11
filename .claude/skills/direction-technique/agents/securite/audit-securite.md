@@ -1,6 +1,10 @@
 ---
 name: audit-securite
 description: Audits et tests de sécurité
+workflows:
+  - id: wf-audit
+  phase: Analyse
+  recurrence: trimestriel
 ---
 
 # Audit de Sécurité

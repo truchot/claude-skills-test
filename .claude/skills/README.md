@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-14-green) ![Agents](https://img.shields.io/badge/agents-500-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-21-green) ![Agents](https://img.shields.io/badge/agents-707-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -84,23 +84,30 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 
 | Skill | Version | Niveau | Agents | Description |
 |-------|---------|--------|--------|-------------|
-| `web-agency` | ![v2.9.0](https://img.shields.io/badge/v2.9.0-blue) | Meta | - | Orchestrateur principal agence |
+| `web-agency` | ![v3.2.0](https://img.shields.io/badge/v3.2.0-blue) | Meta | - | Orchestrateur principal agence |
+| `client-intake` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 0-Entrée | 28 | Réception et qualification demandes |
+| `task-orchestrator` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 1-Orchestration | 20 | Queue, state machine, tracking |
 | `project-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Gestion | 29 | Gestion de projet client |
-| `direction-technique` | ![v3.0.0](https://img.shields.io/badge/v3.0.0-green) | 1-Stratégie | 54 | Décisions architecturales |
-| `lead-dev` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | Coordination | 27 | Coordination technique |
-| `web-dev-process` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | 2-Processus | 64 | Phases de développement |
-| `testing-process` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 25 | Méthodologie de tests |
-| `devops` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 2-Processus | 30 | CI/CD et infrastructure |
-| `frontend-developer` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 33 | Développement frontend |
-| `backend-developer` | ![v2.0.0](https://img.shields.io/badge/v2.0.0-green) | 3-Implémentation | 32 | Développement backend |
-| `react-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 28 | Expertise React |
-| `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 35 | Expertise Next.js |
-| `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Implémentation | 42 | Expertise WordPress |
-| `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Implémentation | 21 | Design system |
-| `marketing` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | Métier | 74 | Marketing digital complet |
+| `direction-technique` | ![v3.1.0](https://img.shields.io/badge/v3.1.0-green) | 2-Stratégie | 59 | Décisions architecturales + stratégie digitale |
+| `lead-dev` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 3-Opérations | 27 | Coordination technique |
+| `web-dev-process` | ![v1.2.0](https://img.shields.io/badge/v1.2.0-blue) | 3-Opérations | 64 | Phases de développement |
+| `testing-process` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 3-Opérations | 25 | Méthodologie de tests |
+| `devops` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 30 | CI/CD et infrastructure |
+| `frontend-developer` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 33 | Développement frontend |
+| `backend-developer` | ![v2.0.0](https://img.shields.io/badge/v2.0.0-green) | 4-Implémentation | 38 | Développement backend |
+| `react-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 28 | Expertise React |
+| `nextjs-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 35 | Expertise Next.js |
+| `wordpress-gutenberg-expert` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 42 | Expertise WordPress |
+| `design-system-foundations` | ![v1.1.0](https://img.shields.io/badge/v1.1.0-blue) | 4-Implémentation | 21 | Design system |
+| `marketing` | ![v1.4.0](https://img.shields.io/badge/v1.4.0-blue) | Métier | 117 | Marketing digital complet |
 | `content-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 4-Implémentation | 17 | Gestion éditoriale, assets, localisation |
+| `ux-ui-design` | ![v2.0.0](https://img.shields.io/badge/v2.0.0-blue) | Support | 27 | UX Research, Design, Branding |
+| `legal-compliance` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 16 | RGPD, mentions légales, conformité |
+| `support-client` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 16 | Ticketing, FAQ, satisfaction |
+| `commercial-crm` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 18 | Pipeline, prospection, CRM |
+| `finance-analytics` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 17 | Facturation, KPIs, reporting |
 
-**Total : 668 agents spécialisés**
+**Total : 707 agents spécialisés**
 
 ## Guide de Migration
 

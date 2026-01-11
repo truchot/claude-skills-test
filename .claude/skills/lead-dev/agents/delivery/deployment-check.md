@@ -1,8 +1,10 @@
 ---
 name: deployment-check
 description: Vérifications pré-déploiement
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Deployment Check
 
 Tu es l'agent responsable des **vérifications pré-déploiement**.

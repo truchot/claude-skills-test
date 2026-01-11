@@ -1,6 +1,12 @@
 ---
 name: "Forms Expert"
 description: "Expert en formulaires - Validation, patterns, accessibilité"
+workflows:
+  - id: forms-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant forms
+    duration: 1-2 jours
 ---
 
 # Forms Expert

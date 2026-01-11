@@ -1,6 +1,12 @@
 ---
 name: error-boundaries
 description: Error Boundary implementation for React error handling
+workflows:
+  - id: error-handling-setup
+    template: wf-creation
+    phase: Production
+    name: Setup gestion erreurs React
+    duration: 0.5 jour
 ---
 
 # Error Boundaries - Gestion d'Erreurs React

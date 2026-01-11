@@ -2,6 +2,12 @@
 name: loyalty-earn-mechanics
 version: 1.0.0
 description: Mécaniques d'accumulation de points et règles d'earn
+workflows:
+  - id: loyalty-earn-mechanics-creation
+    template: wf-creation
+    phase: Production
+    name: Création mécaniques earn
+    duration: 2 jours
 dependencies:
   - loyalty/tier-design (multiplicateurs par tier)
   - loyalty/program-economics (budget earn)

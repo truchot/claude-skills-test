@@ -1,6 +1,12 @@
 ---
 name: "Navigation Expert"
 description: "Expert en navigation - Navbar, tabs, breadcrumbs, pagination"
+workflows:
+  - id: navigation-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant navigation
+    duration: 1-2 jours
 ---
 
 # Navigation Expert

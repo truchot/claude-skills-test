@@ -1,6 +1,12 @@
 ---
 name: content-refresh
 description: Mise à jour et consolidation du contenu existant
+workflows:
+  - id: content-refresh-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Rafraîchissement de contenu
+    duration: 1 jour
 ---
 
 # Agent Content Refresh

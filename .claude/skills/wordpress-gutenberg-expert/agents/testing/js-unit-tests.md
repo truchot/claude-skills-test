@@ -1,6 +1,12 @@
 ---
 name: js-unit-tests
 description: JS Unit Tests Expert WordPress
+workflows:
+  - id: js-unit-wp-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests unitaires JS
+    duration: 0.5-1 jour
 ---
 
 # JS Unit Tests Expert WordPress

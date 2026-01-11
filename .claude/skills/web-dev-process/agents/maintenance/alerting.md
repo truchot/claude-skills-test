@@ -1,6 +1,10 @@
 ---
 name: alerting-expert
 description: Expert en configuration d'alertes et on-call
+workflows:
+  - template: wf-audit
+  phase: Analyse
+  recurrence: quotidien
 ---
 
 # Expert Alerting

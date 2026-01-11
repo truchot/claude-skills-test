@@ -1,6 +1,12 @@
 ---
 name: unit
 description: Tests unitaires - isolation et mocking
+workflows:
+  - id: unit-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests unitaires
+    duration: 0.5-1 jour
 ---
 
 # Tests Unitaires

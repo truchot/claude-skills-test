@@ -2,6 +2,17 @@
 name: ui-designer
 description: Conçoit les composants UI du design system
 version: 1.0.0
+workflows:
+  - id: ui-components-creation
+    template: wf-creation
+    phase: Production
+    name: Design composants UI
+    duration: 3-7 jours
+  - id: ui-components-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution composants UI
+    duration: 1-2 jours
 ---
 
 # Agent UI Designer

@@ -1,6 +1,12 @@
 ---
 name: suivi-anomalies
 description: Suivi et gestion des anomalies de recette
+workflows:
+  - id: anomalie-traitement
+    template: wf-support
+    phase: Résolution
+    name: Traitement anomalie recette
+    duration: 0.5-2 jours
 ---
 
 # Agent Suivi Anomalies

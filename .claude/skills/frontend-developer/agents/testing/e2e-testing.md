@@ -1,6 +1,18 @@
 ---
 name: E2E Testing Expert
 description: Expert en tests end-to-end - Playwright, Cypress
+workflows:
+  - id: e2e-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests E2E
+    duration: 1 jour
+  - id: e2e-scenarios
+    template: wf-evolution
+    phase: Réalisation
+    name: Création scénarios E2E
+    duration: ongoing
+    recurrence: par parcours utilisateur
 ---
 
 # Agent E2E Testing

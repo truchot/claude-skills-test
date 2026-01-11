@@ -1,6 +1,12 @@
 ---
 name: redux-toolkit
 description: Redux Toolkit for complex state management
+workflows:
+  - id: redux-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Redux Toolkit
+    duration: 1-2 jours
 ---
 
 # Redux Toolkit - State Management Avancé

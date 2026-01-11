@@ -1,6 +1,9 @@
 ---
 name: deployment-strategies-expert
 description: Expert en stratégies de déploiement (Rolling, Blue-Green, Canary)
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Expert Stratégies de Déploiement

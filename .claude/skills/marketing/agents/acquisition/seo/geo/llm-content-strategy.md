@@ -1,6 +1,12 @@
 ---
 name: llm-content-strategy
 description: Stratégie de contenu optimisée pour les LLMs et l'IA
+workflows:
+  - id: llm-content-strategy-creation
+    template: wf-creation
+    phase: Conception
+    name: Stratégie contenu LLM
+    duration: 3 jours
 ---
 
 # Agent Stratégie Contenu LLM

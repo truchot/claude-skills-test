@@ -1,6 +1,13 @@
 ---
 name: audit
 description: Outils d'audit et tests automatisés d'accessibilité
+workflows:
+  - id: a11y-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit accessibilité
+    duration: 1-2 jours
+    recurrence: trimestriel
 ---
 
 # Audit d'Accessibilité

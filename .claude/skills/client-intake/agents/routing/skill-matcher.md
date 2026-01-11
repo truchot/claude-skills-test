@@ -2,8 +2,10 @@
 name: skill-matcher
 description: Identifie le ou les skills appropriés pour traiter une demande
 version: 1.0.0
+workflows:
+  - template: wf-support
+    phase: Diagnostic
 ---
-
 # Agent Skill Matcher
 
 Tu es spécialisé dans l'**identification du skill approprié** pour traiter chaque demande.

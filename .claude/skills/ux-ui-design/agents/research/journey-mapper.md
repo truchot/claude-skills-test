@@ -2,6 +2,17 @@
 name: journey-mapper
 description: Cartographie les parcours utilisateurs et identifie les points de friction
 version: 1.0.0
+workflows:
+  - id: journey-mapping
+    template: wf-creation
+    phase: Conception
+    name: Cartographie parcours
+    duration: 2-4 jours
+  - id: journey-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit parcours existants
+    duration: 1-2 jours
 ---
 
 # Agent Journey Mapper

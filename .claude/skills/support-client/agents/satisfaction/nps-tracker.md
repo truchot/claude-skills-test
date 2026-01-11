@@ -2,6 +2,13 @@
 name: nps-tracker
 description: Suit et analyse les scores NPS et CSAT
 version: 1.0.0
+workflows:
+  - id: support-nps-tracker
+    template: wf-audit
+    phase: Analyse
+    name: Suivi NPS et CSAT
+    duration: 1 jour
+    recurrence: mensuel
 ---
 
 # Agent NPS Tracker

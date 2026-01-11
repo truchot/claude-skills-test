@@ -1,6 +1,12 @@
 ---
 name: env-variables-expert
 description: Expert en gestion des variables d'environnement et validation
+workflows:
+  - id: wdp-setup-env-vars
+    template: wf-creation
+    phase: Brief
+    name: Variables d'environnement
+    duration: 0.5 jour
 ---
 
 # Expert Variables d'Environnement

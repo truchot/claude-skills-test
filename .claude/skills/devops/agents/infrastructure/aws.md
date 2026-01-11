@@ -1,6 +1,17 @@
 ---
 name: aws
 description: Infrastructure AWS avec Terraform
+workflows:
+  - id: aws-setup
+    template: wf-creation
+    phase: Production
+    name: Setup infra AWS
+    duration: 2-5 jours
+  - id: aws-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution infra AWS
+    duration: 0.5-2 jours
 ---
 
 # Agent AWS Infrastructure

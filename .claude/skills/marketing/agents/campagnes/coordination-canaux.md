@@ -1,6 +1,12 @@
 ---
 name: coordination-canaux
 description: Coordination des actions multicanal et des équipes marketing
+workflows:
+  - id: coordination-canaux-creation
+    template: wf-creation
+    phase: Production
+    name: Coordination multicanal
+    duration: 2 jours
 ---
 
 # Agent Coordination Canaux

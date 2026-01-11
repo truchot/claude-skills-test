@@ -6,6 +6,11 @@ dependencies:
   - churn/scoring-model (score risque)
   - churn/signal-detection (alertes)
   - churn/retention-offers (offres si nécessaire)
+workflows:
+  - id: intervention-playbooks-creation
+    template: wf-creation
+    phase: Production
+    name: Création Playbooks Intervention
 ---
 
 # Agent Intervention Playbooks

@@ -1,6 +1,12 @@
 ---
 name: semantique-seo
 description: Enrichissement sémantique du contenu avec entités et cooccurrences
+workflows:
+  - id: semantique-seo-creation
+    template: wf-creation
+    phase: Production
+    name: Enrichissement sémantique SEO
+    duration: 2 jours
 ---
 
 # Agent Sémantique SEO

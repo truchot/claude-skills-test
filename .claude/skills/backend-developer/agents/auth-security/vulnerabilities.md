@@ -1,6 +1,18 @@
 ---
 name: vulnerabilities
 description: Protection contre les vulnérabilités OWASP Top 10 et bonnes pratiques sécurité
+workflows:
+  - id: vuln-scan
+    template: wf-audit
+    phase: Analyse
+    name: Scan vulnérabilités OWASP
+    duration: 1-2 jours
+    recurrence: trimestriel
+  - id: vuln-remediation
+    template: wf-support
+    phase: Résolution
+    name: Remédiation vulnérabilité
+    duration: 0.5-3 jours
 ---
 
 # Agent Security Vulnerabilities

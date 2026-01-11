@@ -2,6 +2,13 @@
 name: revenue-forecaster
 description: Prévoit le chiffre d'affaires
 version: 1.0.0
+workflows:
+  - id: revenue-forecast-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Prévision des revenus
+    duration: 2 jours
+    recurrence: mensuel
 ---
 
 # Agent Revenue Forecaster

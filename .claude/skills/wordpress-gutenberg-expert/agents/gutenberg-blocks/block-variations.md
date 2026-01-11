@@ -1,6 +1,12 @@
 ---
 name: block-variations
 description: Block Variations Expert
+workflows:
+  - id: block-variation-creation
+    template: wf-creation
+    phase: Production
+    name: Création block variation
+    duration: 0.5 jour
 ---
 
 # Block Variations Expert

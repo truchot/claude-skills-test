@@ -2,6 +2,12 @@
 name: escalation-handler
 description: Gère les processus d'escalade standard
 version: 1.0.0
+workflows:
+  - id: support-escalation-handler
+    template: wf-support
+    phase: Résolution
+    name: Gestion des escalades
+    duration: 1 jour
 ---
 
 # Agent Escalation Handler

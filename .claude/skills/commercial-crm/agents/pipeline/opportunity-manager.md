@@ -2,6 +2,18 @@
 name: opportunity-manager
 description: Gère les opportunités commerciales dans le pipeline
 version: 1.0.0
+workflows:
+  - id: opp-creation
+    template: wf-creation
+    phase: Brief
+    name: Création opportunité
+    duration: 0.5 jour
+  - id: opp-suivi
+    template: wf-evolution
+    phase: Réalisation
+    name: Suivi opportunité
+    duration: ongoing
+    recurrence: hebdomadaire
 ---
 
 # Agent Opportunity Manager

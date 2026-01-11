@@ -1,6 +1,12 @@
 ---
 name: opportunites-keywords
 description: Identification des opportunités de mots-clés stratégiques
+workflows:
+  - id: opportunites-keywords-audit
+    template: wf-audit
+    phase: Analyse
+    name: Analyse opportunites keywords
+    duration: 1 jour
 ---
 
 # Agent Opportunités Keywords

@@ -1,6 +1,12 @@
 ---
 name: zustand
 description: Zustand lightweight state management implementation
+workflows:
+  - id: zustand-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Zustand store
+    duration: 0.5 jour
 ---
 
 # Zustand - State Management Léger

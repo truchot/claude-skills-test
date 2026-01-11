@@ -1,6 +1,12 @@
 ---
 name: bedrock-setup
 description: Bedrock WordPress Setup Expert
+workflows:
+  - id: bedrock-init
+    template: wf-creation
+    phase: Brief
+    name: Setup Bedrock
+    duration: 0.5 jour
 ---
 
 # Bedrock WordPress Setup Expert

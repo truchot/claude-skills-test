@@ -1,6 +1,9 @@
 ---
 name: production-expert
 description: Expert en déploiement production et stratégies de mise en ligne
+workflows:
+  - template: wf-creation
+  phase: Livraison
 ---
 
 # Expert Production

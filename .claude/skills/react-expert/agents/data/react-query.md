@@ -1,6 +1,12 @@
 ---
 name: react-query
 description: TanStack Query for server state management and data fetching
+workflows:
+  - id: react-query-setup
+    template: wf-creation
+    phase: Production
+    name: Setup React Query
+    duration: 0.5-1 jour
 ---
 
 # React Query (TanStack Query) - Server State Management

@@ -1,6 +1,12 @@
 ---
 name: optimisation-on-page
 description: Optimisation des éléments on-page pour le SEO
+workflows:
+  - id: optimisation-on-page-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation on-page
+    duration: 1 jour
 ---
 
 # Agent Optimisation On-Page

@@ -5,6 +5,12 @@ description: Gestion des métriques de satisfaction client (NPS, CSAT, CES)
 dependencies:
   - success/health-score (alimentation score santé)
   - success/voc (analyse qualitative)
+workflows:
+  - id: nps-csat-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse NPS/CSAT
+    recurrence: mensuel
 ---
 
 # Agent NPS/CSAT/CES

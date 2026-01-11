@@ -1,6 +1,17 @@
 ---
 name: authentication
 description: Implémentation de l'authentification - JWT, OAuth2, sessions, MFA
+workflows:
+  - id: auth-creation
+    template: wf-creation
+    phase: Production
+    name: Implémentation authentification
+    duration: 2-5 jours
+  - id: auth-migration
+    template: wf-refonte
+    phase: Migration
+    name: Migration système auth
+    duration: 3-10 jours
 ---
 
 # Agent Authentication

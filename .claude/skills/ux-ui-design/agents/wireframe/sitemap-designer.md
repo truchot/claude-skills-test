@@ -2,6 +2,17 @@
 name: sitemap-designer
 description: Conçoit l'architecture de l'information et la navigation
 version: 1.0.0
+workflows:
+  - id: sitemap-creation
+    template: wf-creation
+    phase: Conception
+    name: Design sitemap/arborescence
+    duration: 1-3 jours
+  - id: sitemap-refonte
+    template: wf-refonte
+    phase: Analyse
+    name: Refonte arborescence
+    duration: 2-4 jours
 ---
 
 # Agent Sitemap Designer

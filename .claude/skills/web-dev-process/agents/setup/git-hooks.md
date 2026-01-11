@@ -1,6 +1,12 @@
 ---
 name: git-hooks-expert
 description: Expert en configuration des git hooks avec Husky ou Lefthook
+workflows:
+  - id: wdp-setup-git-hooks
+    template: wf-creation
+    phase: Brief
+    name: Configuration des hooks Git
+    duration: 0.5 jour
 ---
 
 # Expert Git Hooks

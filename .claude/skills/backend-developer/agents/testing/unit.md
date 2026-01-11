@@ -1,6 +1,18 @@
 ---
 name: unit
 description: Tests unitaires, mocks, stubs, spies et isolation
+workflows:
+  - id: unit-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup tests unitaires
+    duration: 0.5 jour
+  - id: unit-test-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajout tests unitaires
+    duration: ongoing
+    recurrence: par feature
 ---
 
 # Agent Unit Testing

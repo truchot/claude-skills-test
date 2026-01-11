@@ -1,6 +1,17 @@
 ---
 name: resource-optimization
 description: Optimisation CPU, mémoire, I/O et ressources système
+workflows:
+  - id: resource-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit ressources système
+    duration: 0.5-1 jour
+  - id: resource-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation ressources
+    duration: 1-3 jours
 ---
 
 # Agent Resource Optimization

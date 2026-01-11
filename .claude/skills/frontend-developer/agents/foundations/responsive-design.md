@@ -1,6 +1,17 @@
 ---
 name: Responsive Design
 description: Expert en design responsive - mobile-first, breakpoints, media queries et viewport
+workflows:
+  - id: responsive-creation
+    template: wf-creation
+    phase: Production
+    name: Implémentation responsive
+    duration: 1-2 jours
+  - id: responsive-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit responsive design
+    duration: 0.5 jour
 ---
 
 # Agent Responsive Design

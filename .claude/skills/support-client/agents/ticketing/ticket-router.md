@@ -2,6 +2,12 @@
 name: ticket-router
 description: Route les tickets vers les équipes et agents appropriés
 version: 1.0.0
+workflows:
+  - id: support-ticket-router
+    template: wf-support
+    phase: Diagnostic
+    name: Routage des tickets
+    duration: 1 jour
 ---
 
 # Agent Ticket Router

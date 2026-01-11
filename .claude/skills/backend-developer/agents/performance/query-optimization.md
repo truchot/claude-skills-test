@@ -1,6 +1,17 @@
 ---
 name: query-optimization
 description: Optimisation des requêtes, problème N+1, eager loading
+workflows:
+  - id: query-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit requêtes N+1
+    duration: 0.5 jour
+  - id: query-fix
+    template: wf-evolution
+    phase: Réalisation
+    name: Fix problèmes N+1
+    duration: 0.5-2 jours
 ---
 
 # Agent Query Optimization

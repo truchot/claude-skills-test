@@ -2,6 +2,12 @@
 name: asset-exporter
 description: Exporte les assets pour le développement
 version: 1.0.0
+workflows:
+  - id: assets-export
+    template: wf-creation
+    phase: Livraison
+    name: Export assets dev
+    duration: 0.5-1 jour
 ---
 
 # Agent Asset Exporter

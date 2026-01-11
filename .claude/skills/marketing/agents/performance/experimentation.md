@@ -1,6 +1,12 @@
 ---
 name: experimentation
 description: Conception et analyse de tests A/B et expérimentations
+workflows:
+  - id: experimentation-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit Experimentation
+    duration: 1 jour
 ---
 
 # Agent Experimentation

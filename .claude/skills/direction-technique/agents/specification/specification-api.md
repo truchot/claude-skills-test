@@ -1,6 +1,9 @@
 ---
 name: specification-api
 description: Politique et standards de spécification des APIs (Niveau POURQUOI)
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Politique de Spécification API

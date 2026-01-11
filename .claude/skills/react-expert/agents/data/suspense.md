@@ -1,6 +1,12 @@
 ---
 name: suspense
 description: React Suspense for lazy loading and declarative loading states
+workflows:
+  - id: suspense-impl
+    template: wf-evolution
+    phase: Réalisation
+    name: Implémentation React Suspense
+    duration: 0.5-1 jour
 ---
 
 # React Suspense - Chargement Déclaratif

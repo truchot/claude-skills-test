@@ -2,6 +2,17 @@
 name: style-guide-creator
 description: Définit la direction artistique et crée le style guide
 version: 1.0.0
+workflows:
+  - id: style-guide-creation
+    template: wf-creation
+    phase: Production
+    name: Création style guide
+    duration: 3-5 jours
+  - id: style-guide-update
+    template: wf-evolution
+    phase: Réalisation
+    name: Mise à jour style guide
+    duration: 1-2 jours
 ---
 
 # Agent Style Guide Creator

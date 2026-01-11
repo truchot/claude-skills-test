@@ -1,6 +1,12 @@
 ---
 name: triggers-actions
 description: Configuration des déclencheurs et actions d'automation
+workflows:
+  - id: triggers-actions-creation
+    template: wf-creation
+    phase: Production
+    name: Création triggers et actions
+    duration: 1 jour
 ---
 
 # Agent Triggers & Actions

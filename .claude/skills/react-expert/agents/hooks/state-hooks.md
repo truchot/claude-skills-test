@@ -1,6 +1,12 @@
 ---
 name: state-hooks
 description: useState and useReducer for local state management
+workflows:
+  - id: state-hooks-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation state hooks
+    duration: 0.5 jour
 ---
 
 # State Hooks - useState & useReducer

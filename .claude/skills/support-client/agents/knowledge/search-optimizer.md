@@ -2,6 +2,12 @@
 name: search-optimizer
 description: Optimise la recherche et la découvrabilité du contenu
 version: 1.0.0
+workflows:
+  - id: support-search-optimizer
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation de la recherche
+    duration: 2 jours
 ---
 
 # Agent Search Optimizer

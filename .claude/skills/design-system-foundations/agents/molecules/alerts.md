@@ -1,6 +1,12 @@
 ---
 name: "Alerts Expert"
 description: "Expert en alertes et notifications - Inline, banner, toast"
+workflows:
+  - id: alerts-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant alerts
+    duration: 0.5-1 jour
 ---
 
 # Alerts & Notifications Expert

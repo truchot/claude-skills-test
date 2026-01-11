@@ -1,6 +1,12 @@
 ---
 name: bundle
 description: Analyse et optimisation du bundle
+workflows:
+  - id: bundle-optimization
+    template: wf-audit
+    phase: Analyse
+    name: Audit et optimisation bundle
+    duration: 0.5-1 jour
 ---
 
 # Bundle Optimization

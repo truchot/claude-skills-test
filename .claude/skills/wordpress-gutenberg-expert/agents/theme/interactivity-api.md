@@ -1,6 +1,12 @@
 ---
 name: interactivity-api
 description: Interactivity API Expert
+workflows:
+  - id: interactivity-api-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation Interactivity API
+    duration: 1-2 jours
 ---
 
 # Interactivity API Expert

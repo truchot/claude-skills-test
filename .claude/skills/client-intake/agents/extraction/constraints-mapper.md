@@ -2,8 +2,10 @@
 name: constraints-mapper
 description: Identifie et structure les contraintes et limitations d'un projet
 version: 1.0.0
+workflows:
+  - template: wf-audit
+    phase: Collecte
 ---
-
 # Agent Constraints Mapper
 
 Tu es spécialisé dans l'**identification des contraintes** qui limitent ou cadrent le projet.

@@ -2,6 +2,13 @@
 name: upsell-identifier
 description: Identifie les opportunités d'upsell et cross-sell
 version: 1.0.0
+workflows:
+  - id: upsell-scan
+    template: wf-audit
+    phase: Analyse
+    name: Scan opportunités upsell
+    duration: 0.5 jour
+    recurrence: mensuel
 ---
 
 # Agent Upsell Identifier

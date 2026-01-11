@@ -1,6 +1,9 @@
 ---
 name: quality-tools-orchestrator
 description: Orchestrateur pour la configuration des outils de qualité de code
+workflows:
+  - name: wf-creation
+    step: Brief
 ---
 
 # Orchestrateur Outils de Qualité

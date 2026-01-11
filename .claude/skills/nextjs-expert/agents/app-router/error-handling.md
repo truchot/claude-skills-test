@@ -1,6 +1,12 @@
 ---
 name: error-handling
 description: Gestion des erreurs avec error.tsx et not-found.tsx
+workflows:
+  - id: nextjs-error-handling
+    template: wf-creation
+    phase: Production
+    name: Configuration gestion erreurs
+    duration: 0.5 jour
 ---
 
 # Error Handling

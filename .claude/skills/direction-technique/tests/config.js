@@ -28,7 +28,8 @@ const DOMAINS = [
   'performance',
   'infrastructure',
   'communication',
-  'support'
+  'support',
+  'strategy'
 ];
 
 /** @const {Object} Expected agents per domain */
@@ -104,6 +105,13 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'gestion-incidents',
     'post-mortem',
     'veille-technologique'
+  ],
+  'strategy': [
+    'orchestrator',
+    'benchmark-concurrentiel',
+    'strategie-digitale',
+    'recommandations',
+    'kpis-business'
   ]
 };
 
@@ -169,7 +177,8 @@ const DOMAIN_KEYWORDS = {
   'performance': ['performance', 'latence', 'Core Web Vitals', 'monitoring'],
   'infrastructure': ['CI/CD', 'pipeline', 'déploiement', 'Kubernetes', 'Terraform'],
   'communication': ['handoff', 'documentation', 'onboarding', 'reporting'],
-  'support': ['incident', 'post-mortem', 'troubleshooting', 'veille']
+  'support': ['incident', 'post-mortem', 'troubleshooting', 'veille'],
+  'strategy': ['benchmark', 'stratégie digitale', 'KPIs', 'roadmap', 'recommandation', 'concurrentiel']
 };
 
 /**

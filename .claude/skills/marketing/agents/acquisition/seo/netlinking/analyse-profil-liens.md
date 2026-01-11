@@ -1,6 +1,12 @@
 ---
 name: analyse-profil-liens
 description: Audit et analyse du profil de backlinks existant
+workflows:
+  - id: analyse-profil-liens-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit profil backlinks
+    duration: 1 jour
 ---
 
 # Agent Analyse Profil Liens

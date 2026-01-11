@@ -1,6 +1,17 @@
 ---
 name: authorization
 description: Contrôle d'accès - RBAC, ABAC, permissions et policies
+workflows:
+  - id: authz-creation
+    template: wf-creation
+    phase: Production
+    name: Implémentation RBAC/ABAC
+    duration: 2-4 jours
+  - id: authz-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit permissions
+    duration: 0.5-1 jour
 ---
 
 # Agent Authorization

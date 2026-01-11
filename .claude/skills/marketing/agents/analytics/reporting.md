@@ -1,6 +1,12 @@
 ---
 name: reporting
 description: Production des rapports et dashboards marketing
+workflows:
+  - id: reporting-dashboard
+    template: wf-audit
+    phase: Restitution
+    name: Reporting Marketing
+    recurrence: mensuel
 ---
 
 # Agent Reporting

@@ -2,6 +2,13 @@
 name: pipeline-reporter
 description: Génère les rapports et dashboards du pipeline
 version: 1.0.0
+workflows:
+  - id: pipeline-report
+    template: wf-evolution
+    phase: Réalisation
+    name: Reporting pipeline
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Pipeline Reporter

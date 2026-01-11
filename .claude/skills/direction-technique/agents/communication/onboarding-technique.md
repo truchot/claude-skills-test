@@ -1,6 +1,9 @@
 ---
 name: onboarding-technique
 description: Intégration des nouveaux développeurs dans l'équipe
+workflows:
+  - id: wf-creation
+  phase: Production
 ---
 
 # Onboarding Technique

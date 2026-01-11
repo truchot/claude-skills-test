@@ -1,6 +1,17 @@
 ---
 name: grille-recette
 description: Création des cas de test et grille de recette
+workflows:
+  - id: grille-creation
+    template: wf-creation
+    phase: Livraison
+    name: Grille de recette nouveau projet
+    duration: 1-2 jours
+  - id: grille-evolution
+    template: wf-evolution
+    phase: Déploiement
+    name: Grille de recette évolution
+    duration: 0.5 jour
 ---
 
 # Agent Grille de Recette

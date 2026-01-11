@@ -1,6 +1,12 @@
 ---
 name: "Cards Expert"
 description: "Expert en cartes - Product, user, stats cards"
+workflows:
+  - id: cards-creation
+    template: wf-creation
+    phase: Production
+    name: Création composant cards
+    duration: 0.5-1 jour
 ---
 
 # Cards Expert

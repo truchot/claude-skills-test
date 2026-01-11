@@ -1,6 +1,18 @@
 ---
 name: security
 description: Sécurité des conteneurs Docker
+workflows:
+  - id: container-security-scan
+    template: wf-audit
+    phase: Analyse
+    name: Scan sécurité containers
+    duration: 0.5 jour
+    recurrence: hebdomadaire
+  - id: container-hardening
+    template: wf-evolution
+    phase: Réalisation
+    name: Hardening containers
+    duration: 1-2 jours
 ---
 
 # Agent Container Security

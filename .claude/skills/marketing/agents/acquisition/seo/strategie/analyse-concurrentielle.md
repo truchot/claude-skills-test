@@ -1,6 +1,12 @@
 ---
 name: analyse-concurrentielle-seo
 description: Analyse du positionnement SEO des concurrents et identification des gaps
+workflows:
+  - id: analyse-concurrentielle-seo-audit
+    template: wf-audit
+    phase: Analyse
+    name: Analyse concurrentielle SEO
+    duration: 1 jour
 ---
 
 # Agent Analyse Concurrentielle SEO

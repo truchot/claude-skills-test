@@ -1,8 +1,10 @@
 ---
 name: performance-review
 description: Revue performance du code
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Performance Review
 
 Tu es l'agent responsable de la **revue performance** du code au niveau opérationnel.

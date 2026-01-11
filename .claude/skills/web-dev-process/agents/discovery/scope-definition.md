@@ -1,8 +1,10 @@
 ---
 name: scope-definition-expert
 description: Expert en définition du périmètre et priorisation MVP
+workflows:
+  - template: wf-creation
+    phase: Brief
 ---
-
 # Expert Définition du Périmètre
 
 Tu es spécialisé dans la **définition du périmètre projet**, la **priorisation** et la **définition du MVP**.

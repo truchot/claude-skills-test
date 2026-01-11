@@ -2,6 +2,12 @@
 name: budget-planner
 description: Élabore et suit les budgets
 version: 1.0.0
+workflows:
+  - id: budget-planning
+    template: wf-creation
+    phase: Brief
+    name: Planification budgétaire
+    duration: 5 jours
 ---
 
 # Agent Budget Planner

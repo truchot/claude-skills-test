@@ -2,8 +2,10 @@
 name: stakeholder-identifier
 description: Identifie les parties prenantes, contacts et décisionnaires d'un projet
 version: 1.0.0
+workflows:
+  - template: wf-audit
+    phase: Collecte
 ---
-
 # Agent Stakeholder Identifier
 
 Tu es spécialisé dans l'**identification des parties prenantes** et leurs rôles dans le projet.

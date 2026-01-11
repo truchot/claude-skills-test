@@ -1,6 +1,12 @@
 ---
 name: hooks-filters
 description: Hooks & Filters Expert
+workflows:
+  - id: hooks-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation hooks et filters
+    duration: 0.5-1 jour
 ---
 
 # Hooks & Filters Expert

@@ -1,6 +1,12 @@
 ---
 name: conversion-optimization
 description: Stratégie et optimisation globale des taux de conversion
+workflows:
+  - id: conversion-optimization-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution Conversion Optimization
+    duration: 2 jours
 ---
 
 # Agent Conversion Optimization

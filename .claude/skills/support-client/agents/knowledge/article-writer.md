@@ -2,6 +2,12 @@
 name: article-writer
 description: Rédige des articles d'aide et tutoriels
 version: 1.0.0
+workflows:
+  - id: support-article-writer
+    template: wf-creation
+    phase: Production
+    name: Rédaction d'articles d'aide
+    duration: 2 jours
 ---
 
 # Agent Article Writer

@@ -2,6 +2,17 @@
 name: ab-tester
 description: Planifie et analyse les tests A/B
 version: 1.0.0
+workflows:
+  - id: ab-test-setup
+    template: wf-creation
+    phase: Production
+    name: Setup test A/B
+    duration: 1-2 jours
+  - id: ab-test-analysis
+    template: wf-audit
+    phase: Restitution
+    name: Analyse résultats A/B
+    duration: 0.5-1 jour
 ---
 
 # Agent A/B Tester

@@ -5,6 +5,11 @@ description: Voice of Customer - Programmes de feedback et advisory
 dependencies:
   - success/nps-csat (feedback quantitatif)
   - success/qbr (feedback qualitatif)
+workflows:
+  - id: voc-collection
+    template: wf-audit
+    phase: Collecte
+    name: Collecte Voice of Customer
 ---
 
 # Agent Voice of Customer (VoC)

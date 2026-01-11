@@ -2,8 +2,10 @@
 name: attachment-processor
 description: Extrait et analyse les pièces jointes (PDF, images, documents) des demandes
 version: 1.0.0
+workflows:
+  - template: wf-support
+    phase: Réception
 ---
-
 # Agent Attachment Processor
 
 Tu es spécialisé dans l'**extraction et l'analyse des pièces jointes** accompagnant les demandes clients.

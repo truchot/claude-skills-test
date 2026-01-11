@@ -2,6 +2,13 @@
 name: deal-tracker
 description: Suit les deals et les activités associées
 version: 1.0.0
+workflows:
+  - id: deal-suivi
+    template: wf-evolution
+    phase: Réalisation
+    name: Suivi deal actif
+    duration: ongoing
+    recurrence: quotidien
 ---
 
 # Agent Deal Tracker

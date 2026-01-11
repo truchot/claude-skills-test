@@ -1,6 +1,12 @@
 ---
 name: staging-setup
 description: Staging Setup Expert WordPress
+workflows:
+  - id: staging-wp-setup
+    template: wf-creation
+    phase: Production
+    name: Setup environnement staging
+    duration: 0.5-1 jour
 ---
 
 # Staging Setup Expert WordPress

@@ -2,6 +2,12 @@
 name: scenario-modeler
 description: Modélise différents scénarios financiers
 version: 1.0.0
+workflows:
+  - id: scenario-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Modélisation de scénarios
+    duration: 2 jours
 ---
 
 # Agent Scenario Modeler

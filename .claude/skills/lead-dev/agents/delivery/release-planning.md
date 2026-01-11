@@ -1,8 +1,10 @@
 ---
 name: release-planning
 description: Planification des releases
+workflows:
+  - template: wf-creation
+    phase: Brief
 ---
-
 # Release Planning
 
 Tu es l'agent responsable de la **planification des releases**.

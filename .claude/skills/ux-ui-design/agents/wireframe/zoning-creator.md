@@ -2,6 +2,17 @@
 name: zoning-creator
 description: Crée les zonings de pages et définit la hiérarchie visuelle
 version: 1.0.0
+workflows:
+  - id: zoning-creation
+    template: wf-creation
+    phase: Conception
+    name: Création zonings
+    duration: 1-2 jours
+  - id: zoning-iteration
+    template: wf-evolution
+    phase: Réalisation
+    name: Itération zonings
+    duration: 0.5-1 jour
 ---
 
 # Agent Zoning Creator

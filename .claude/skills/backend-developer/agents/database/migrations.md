@@ -1,6 +1,18 @@
 ---
 name: migrations
 description: Gestion des migrations de base de données et évolutions de schéma
+workflows:
+  - id: migration-creation
+    template: wf-evolution
+    phase: Réalisation
+    name: Création migration DB
+    duration: 0.5-1 jour
+    recurrence: par feature
+  - id: migration-major
+    template: wf-refonte
+    phase: Migration
+    name: Migration majeure schéma
+    duration: 2-5 jours
 ---
 
 # Agent Database Migrations

@@ -1,6 +1,12 @@
 ---
 name: project-init
 description: Project Init Expert - Structure et scaffolding de projets WordPress
+workflows:
+  - id: wp-project-init
+    template: wf-creation
+    phase: Brief
+    name: Initialisation projet WordPress
+    duration: 0.5-1 jour
 ---
 
 # Project Init Expert

@@ -1,6 +1,17 @@
 ---
 name: Animations Expert
 description: Expert en animations web - CSS transitions, keyframes, Framer Motion
+workflows:
+  - id: animations-creation
+    template: wf-creation
+    phase: Production
+    name: Création animations
+    duration: 0.5-2 jours
+  - id: animations-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation animations
+    duration: 0.5-1 jour
 ---
 
 # Agent Animations

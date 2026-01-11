@@ -1,6 +1,12 @@
 ---
 name: docker
 description: Containerisation et self-hosting Next.js
+workflows:
+  - id: docker-nextjs
+    template: wf-creation
+    phase: Livraison
+    name: Containerisation Docker
+    duration: 0.5-1 jour
 ---
 
 # Docker & Self-Hosting

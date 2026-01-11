@@ -1,6 +1,12 @@
 ---
 name: strategie-backlinks
 description: Définition de la stratégie de link building et acquisition de backlinks
+workflows:
+  - id: strategie-backlinks-creation
+    template: wf-creation
+    phase: Conception
+    name: Stratégie link building
+    duration: 2 jours
 ---
 
 # Agent Stratégie Backlinks

@@ -1,6 +1,12 @@
 ---
 name: branch-protection-expert
 description: Expert en protection des branches et règles de merge
+workflows:
+  - id: wdp-setup-branch-protection
+    template: wf-creation
+    phase: Brief
+    name: Protection des branches
+    duration: 0.5 jour
 ---
 
 # Expert Protection de Branches

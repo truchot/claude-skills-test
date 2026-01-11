@@ -1,6 +1,12 @@
 ---
 name: crawl-indexation
 description: Optimisation du crawl et de l'indexation par les moteurs de recherche
+workflows:
+  - id: crawl-indexation-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit crawl et indexation
+    duration: 1 jour
 ---
 
 # Agent Crawl & Indexation

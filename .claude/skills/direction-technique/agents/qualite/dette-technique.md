@@ -1,6 +1,9 @@
 ---
 name: dette-technique
 description: Gestion de la dette technique
+workflows:
+  - id: wf-audit
+    phase: Analyse
 ---
 
 # Dette Technique

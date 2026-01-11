@@ -2,6 +2,17 @@
 name: interaction-designer
 description: Conçoit les patterns d'interaction utilisateur
 version: 1.0.0
+workflows:
+  - id: interaction-patterns
+    template: wf-creation
+    phase: Conception
+    name: Design patterns interaction
+    duration: 2-4 jours
+  - id: interaction-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution interactions
+    duration: 1-2 jours
 ---
 
 # Agent Interaction Designer

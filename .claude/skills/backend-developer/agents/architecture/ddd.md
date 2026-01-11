@@ -1,6 +1,17 @@
 ---
 name: ddd
 description: Domain-Driven Design - modélisation du domaine, bounded contexts, aggregates
+workflows:
+  - id: ddd-modeling
+    template: wf-creation
+    phase: Conception
+    name: Modélisation DDD
+    duration: 2-5 jours
+  - id: ddd-refactor
+    template: wf-refonte
+    phase: Analyse
+    name: Refactoring vers DDD
+    duration: 5-15 jours
 ---
 
 # Agent Domain-Driven Design

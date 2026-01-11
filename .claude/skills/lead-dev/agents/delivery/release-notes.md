@@ -1,8 +1,10 @@
 ---
 name: release-notes
 description: Rédaction des notes de version
+workflows:
+  - template: wf-creation
+    phase: Livraison
 ---
-
 # Release Notes
 
 Tu es l'agent responsable de la **rédaction des notes de version** (release notes et changelogs).
@@ -185,7 +187,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 🙏 Contributors
 Thanks to @contributor1, @contributor2 for their contributions!
-
 ---
 [Links: Documentation | Migration Guide | Support]
 ```

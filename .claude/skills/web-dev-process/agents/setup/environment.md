@@ -1,6 +1,12 @@
 ---
 name: environment-orchestrator
 description: Orchestrateur pour la configuration des environnements
+workflows:
+  - id: wdp-setup-environment
+    template: wf-creation
+    phase: Brief
+    name: Configuration des environnements
+    duration: 0.5 jour
 ---
 
 # Orchestrateur Environnements

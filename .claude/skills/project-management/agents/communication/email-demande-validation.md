@@ -1,6 +1,12 @@
 ---
 name: email-demande-validation
 description: Rédaction d'emails de demande de validation client
+workflows:
+  - id: email-validation
+    template: wf-creation
+    phase: Conception
+    name: Email demande validation
+    duration: 0.25 jour
 ---
 
 # Agent Email Demande de Validation

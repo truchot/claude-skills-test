@@ -1,8 +1,10 @@
 ---
 name: pattern-choice
 description: Choix de patterns pour les features
+workflows:
+  - template: wf-creation
+    phase: Conception
 ---
-
 # Pattern Choice
 
 Tu es l'agent responsable du **choix de patterns** pour les features et modules.

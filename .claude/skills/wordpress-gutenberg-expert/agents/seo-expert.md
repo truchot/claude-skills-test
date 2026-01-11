@@ -1,6 +1,13 @@
 ---
 name: seo-expert
 description: SEO WordPress Expert
+workflows:
+  - id: seo-wp-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit SEO WordPress
+    duration: 1 jour
+    recurrence: mensuel
 ---
 
 # SEO WordPress Expert

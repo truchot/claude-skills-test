@@ -1,6 +1,12 @@
 ---
 name: email-annonce-retard
 description: Rédaction d'emails d'annonce de retard
+workflows:
+  - id: email-retard
+    template: wf-support
+    phase: Diagnostic
+    name: Email annonce retard
+    duration: 0.25 jour
 ---
 
 # Agent Email Annonce Retard

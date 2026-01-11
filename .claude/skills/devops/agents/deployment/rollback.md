@@ -1,6 +1,17 @@
 ---
 name: rollback
 description: Procédures de rollback et recovery
+workflows:
+  - id: rollback-procedure
+    template: wf-support
+    phase: Résolution
+    name: Procédure rollback
+    duration: 0.5-2 heures
+  - id: rollback-planning
+    template: wf-creation
+    phase: Conception
+    name: Plan de rollback
+    duration: 0.5 jour
 ---
 
 # Agent Rollback

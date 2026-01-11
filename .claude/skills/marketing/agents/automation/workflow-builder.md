@@ -1,6 +1,12 @@
 ---
 name: workflow-builder
 description: Conception et documentation de workflows d'automation
+workflows:
+  - id: workflow-builder-creation
+    template: wf-creation
+    phase: Production
+    name: Création workflow builder
+    duration: 2 jours
 ---
 
 # Agent Workflow Builder

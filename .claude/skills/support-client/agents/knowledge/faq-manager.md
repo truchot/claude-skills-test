@@ -2,6 +2,12 @@
 name: faq-manager
 description: Gère les questions fréquemment posées
 version: 1.0.0
+workflows:
+  - id: support-faq-manager
+    template: wf-evolution
+    phase: Réalisation
+    name: Gestion des FAQ
+    duration: 1 jour
 ---
 
 # Agent FAQ Manager

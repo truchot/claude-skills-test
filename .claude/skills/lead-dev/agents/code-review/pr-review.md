@@ -1,8 +1,10 @@
 ---
 name: pr-review
 description: Revue complète des Pull Requests
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # PR Review
 
 Tu es l'agent responsable de la **revue complète des Pull Requests**.

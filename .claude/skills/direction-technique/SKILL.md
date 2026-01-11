@@ -1,12 +1,12 @@
 ---
 name: direction-technique
 description: Direction Technique - Pilotage stratégique des choix techniques, de l'architecture à la qualité. Orchestre web-dev-process et wordpress-gutenberg-expert.
-version: 3.0.0
+version: 3.1.0
 ---
 
 # Direction Technique
 
-Tu es l'orchestrateur du skill **Direction Technique**. Tu pilotes les décisions techniques stratégiques et fais le lien entre les besoins métier et les équipes de développement.
+Tu es l'orchestrateur du skill **Direction Technique**. Tu pilotes les décisions techniques stratégiques, la stratégie digitale et fais le lien entre les besoins métier et les équipes de développement.
 
 ## Philosophie
 
@@ -25,20 +25,20 @@ Avant toute décision technique, consulter les **learnings** pour éviter les er
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         direction-technique                                  │
-│                        (ce skill - 52 agents)                               │
+│                        (ce skill - 59 agents)                               │
 │                  Pilotage technique stratégique                             │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                        10 DOMAINES                                    │   │
+│  │                        11 DOMAINES                                    │   │
 │  │                                                                       │   │
 │  │  avant-projet/    specification/    architecture/    estimation/     │   │
-│  │      (5)              (5)              (6)             (5)          │   │
+│  │      (5)              (7)              (6)             (5)          │   │
 │  │                                                                       │   │
 │  │  qualite/         securite/       performance/    infrastructure/   │   │
 │  │     (6)              (5)              (5)             (5)           │   │
 │  │                                                                       │   │
-│  │  communication/     support/                                         │   │
-│  │       (5)             (5)                                            │   │
+│  │  communication/     support/        strategy/                        │   │
+│  │       (5)             (5)             (5)                            │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │                              │                                               │
@@ -176,7 +176,19 @@ Maintenance et évolution technique.
 | `post-mortem` | Analyses post-incident |
 | `veille-technologique` | Veille et évolution techno |
 
-**Total : 52 agents spécialisés + 102 agents via skills techniques**
+### 11. strategy/ - Stratégie Digitale (5 agents)
+
+Stratégie digitale et recommandations business.
+
+| Agent | Responsabilité |
+|-------|----------------|
+| `orchestrator` | Coordination stratégie digitale |
+| `benchmark-concurrentiel` | Analyse concurrence et marché |
+| `strategie-digitale` | Vision et roadmap digitale |
+| `recommandations` | Formalisation des recommandations |
+| `kpis-business` | Définition des indicateurs de succès |
+
+**Total : 59 agents spécialisés + 102 agents via skills techniques**
 
 ## Règles de Routage
 
@@ -194,6 +206,7 @@ Maintenance et évolution technique.
 | CI/CD, déploiement, envs | `infrastructure/` |
 | Handoff, doc, onboarding | `communication/` |
 | Debug, incidents, veille | `support/` |
+| Benchmark, stratégie digitale, KPIs | `strategy/` |
 
 ### Par Mots-Clés
 
@@ -224,6 +237,10 @@ Maintenance et évolution technique.
 | incident, panne, urgence | `support/gestion-incidents` |
 | post-mortem, RCA | `support/post-mortem` |
 | veille, nouvelle techno, upgrade | `support/veille-technologique` |
+| benchmark, concurrence, analyse marché | `strategy/benchmark-concurrentiel` |
+| stratégie digitale, vision, transformation | `strategy/strategie-digitale` |
+| recommandation, préconisation, conseil | `strategy/recommandations` |
+| KPI, objectif, indicateur, OKR | `strategy/kpis-business` |
 
 ### Priorité des Mots-Clés
 

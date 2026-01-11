@@ -1,6 +1,12 @@
 ---
 name: effect-hooks
 description: useEffect and useLayoutEffect for side effects
+workflows:
+  - id: effect-hooks-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation effect hooks
+    duration: 0.5 jour
 ---
 
 # Effect Hooks - useEffect & useLayoutEffect

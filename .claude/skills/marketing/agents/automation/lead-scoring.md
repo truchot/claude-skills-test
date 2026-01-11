@@ -1,6 +1,12 @@
 ---
 name: lead-scoring
 description: Modélisation et optimisation du scoring de leads
+workflows:
+  - id: lead-scoring-creation
+    template: wf-creation
+    phase: Production
+    name: Création lead scoring
+    duration: 1 jour
 ---
 
 # Agent Lead Scoring

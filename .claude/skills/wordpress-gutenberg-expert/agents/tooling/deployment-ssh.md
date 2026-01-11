@@ -1,6 +1,12 @@
 ---
 name: deployment-ssh
 description: Deployment & SSH Expert WordPress
+workflows:
+  - id: wp-deployment
+    template: wf-creation
+    phase: Livraison
+    name: Déploiement SSH
+    duration: 0.5 jour
 ---
 
 # Deployment & SSH Expert WordPress

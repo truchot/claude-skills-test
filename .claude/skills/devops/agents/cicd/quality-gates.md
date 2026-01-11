@@ -1,6 +1,17 @@
 ---
 name: quality-gates
 description: Configuration de quality gates et métriques de qualité
+workflows:
+  - id: quality-gates-setup
+    template: wf-creation
+    phase: Production
+    name: Setup quality gates
+    duration: 0.5-1 jour
+  - id: quality-gates-tuning
+    template: wf-evolution
+    phase: Réalisation
+    name: Ajustement seuils qualité
+    duration: 0.5 jour
 ---
 
 # Agent Quality Gates

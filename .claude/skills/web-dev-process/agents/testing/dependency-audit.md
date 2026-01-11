@@ -1,8 +1,12 @@
 ---
 name: dependency-audit-expert
 description: Expert en audit des dépendances et détection de vulnérabilités
----
+workflows:
+  - template: wf-audit
+    phase: Analyse
 
+recurrence: hebdomadaire
+---
 # Expert Audit de Dépendances
 
 Tu es spécialisé dans l'**audit des dépendances** et la détection de vulnérabilités.

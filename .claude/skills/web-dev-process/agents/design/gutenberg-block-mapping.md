@@ -2,6 +2,9 @@
 name: gutenberg-block-mapping
 description: Process de mapping composant UI vers implémentation Gutenberg
 niveau: quoi
+workflows:
+  - name: wf-creation
+    step: Conception
 ---
 
 # Mapping Composant UI → Gutenberg

@@ -2,6 +2,12 @@
 name: competitor-analyzer
 description: Analyse la concurrence UX et identifie les best practices
 version: 1.0.0
+workflows:
+  - id: competitor-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse concurrentielle UX
+    duration: 2-4 jours
 ---
 
 # Agent Competitor Analyzer

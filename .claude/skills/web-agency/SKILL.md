@@ -1,7 +1,7 @@
 ---
 name: web-agency
 description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
-version: 3.1.0
+version: 3.2.0
 ---
 
 # Web Agency - Agence Web IA Full-Automatisée
@@ -73,38 +73,39 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 
 | Skill | Rôle | Agents | Statut |
 |-------|------|--------|--------|
-| `client-intake` | Réception et qualification des demandes | 23 | 🟢 |
+| `client-intake` | Réception et qualification des demandes | 28 | 🟢 |
 
 ### Niveau 1 : Orchestration
 
 | Skill | Rôle | Agents | Statut |
 |-------|------|--------|--------|
-| `task-orchestrator` | Queue, state machine, exécution, tracking | 16 | 🟢 |
+| `task-orchestrator` | Queue, state machine, exécution, tracking | 20 | 🟢 |
 
 ### Niveau 2-4 : Métier
 
 | Skill | Rôle | Agents | Statut |
 |-------|------|--------|--------|
-| `project-management` | Gestion projet & client | 24 | 🟢 |
-| `direction-technique` | Décisions techniques stratégiques | 52 | 🟢 |
+| `project-management` | Gestion projet & client | 29 | 🟢 |
+| `direction-technique` | Décisions techniques stratégiques + stratégie digitale | 59 | 🟢 |
 | `lead-dev` | Coordination technique opérationnelle | 27 | 🟢 |
-| `web-dev-process` | Process de développement | 61 | 🟢 |
+| `web-dev-process` | Process de développement | 64 | 🟢 |
 | `testing-process` | Stratégie et méthodologie de tests | 25 | 🟢 |
 | `frontend-developer` | Implémentation frontend | 33 | 🟢 |
-| `backend-developer` | Implémentation backend | 32 | 🟢 |
+| `backend-developer` | Implémentation backend | 38 | 🟢 |
 | `devops` | CI/CD, containers, K8s, IaC, monitoring | 30 | 🟢 |
-| `wordpress-gutenberg-expert` | Implémentation WordPress | 41 | 🟢 |
+| `wordpress-gutenberg-expert` | Implémentation WordPress | 42 | 🟢 |
 | `react-expert` | Implémentation React | 28 | 🟢 |
 | `nextjs-expert` | Implémentation Next.js | 35 | 🟢 |
 | `design-system-foundations` | Design system Atomic | 21 | 🟢 |
-| `marketing` | Stratégie marketing et campagnes | 115 | 🟢 |
-| `ux-ui-design` | UX Research, Wireframes, Design visuel, Prototypage | 22 | 🟢 |
+| `marketing` | Stratégie marketing, campagnes, ligne éditoriale | 117 | 🟢 |
+| `ux-ui-design` | UX Research, Wireframes, Design visuel, Branding, Motion | 27 | 🟢 |
 | `legal-compliance` | RGPD, Mentions légales, Audit conformité, Cookies | 16 | 🟢 |
 | `support-client` | Ticketing, Knowledge base, Escalade, Satisfaction | 16 | 🟢 |
-| `commercial-crm` | Pipeline, Prospection, Négociation, Rétention | 17 | 🟢 |
+| `commercial-crm` | Pipeline, Prospection, Négociation, Rétention | 18 | 🟢 |
 | `finance-analytics` | Facturation, KPIs, Reporting, Prévisions | 17 | 🟢 |
+| `content-management` | Gestion éditoriale, rédaction, assets, localisation | 17 | 🟢 |
 
-**Total : 651 agents disponibles** (23 + 16 + 612 métier)
+**Total : 707 agents disponibles** (28 + 20 + 659 métier)
 
 ## Routage Rapide
 
@@ -123,6 +124,7 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 |---------------------|---------|
 | Client, brief, devis, planning, facture | `project-management` |
 | Choix stack, architecture, décisions stratégiques | `direction-technique` |
+| Benchmark concurrence, stratégie digitale, KPIs business | `direction-technique` |
 | Code review, coordination équipe, mentoring, release | `lead-dev` |
 | Process dev, méthodologie, checklists | `web-dev-process` |
 | Stratégie tests, TDD/BDD, pyramide, coverage, sécurité, accessibilité | `testing-process` |
@@ -133,11 +135,15 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | WordPress, Gutenberg, blocks, WP-CLI | `wordpress-gutenberg-expert` |
 | Tokens, boutons, formulaires, composants | `design-system-foundations` |
 | Campagnes, SEO, réseaux sociaux, analytics | `marketing` |
+| Ligne éditoriale, arborescence, architecture information | `marketing` |
 | UX research, personas, wireframes, maquettes, prototypes | `ux-ui-design` |
+| Direction artistique, branding, identité visuelle, motion design | `ux-ui-design` |
 | RGPD, CGV, mentions légales, conformité, cookies | `legal-compliance` |
 | Tickets, FAQ, support technique, SLA, satisfaction | `support-client` |
 | Pipeline commercial, leads, propositions, CRM | `commercial-crm` |
 | Factures, paiements, KPIs, reporting, budget, forecast | `finance-analytics` |
+| Contenu éditorial, articles, rédaction, calendrier éditorial | `content-management` |
+| Assets média, images, vidéos, localisation, traduction | `content-management` |
 
 **Règles détaillées** → [orchestration/routing.md](./orchestration/routing.md)
 
@@ -227,6 +233,22 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | [007](./docs/adr/007-skill-extraction-pattern.md) | Pattern d'Extraction de Skills |
 
 ## Changelog
+
+### v3.2.0
+
+- **Renforcement skills existants** : +39 agents
+  - `ux-ui-design` v2.0.0 (+5 agents) : Nouveau domaine `branding/`
+  - `marketing` v1.4.0 (+2 agents) : Renforcement domaine `content/`
+  - `direction-technique` v3.1.0 (+5 agents) : Nouveau domaine `strategy/`
+  - Autres skills : Mise à jour comptages et enrichissement agents
+- **Workflows avec livrables et critères d'acceptation**
+  - Matrice de positionnement client (Triangle Budget/Qualité/Délai)
+  - Livrables par workflow avec niveaux (Minimal/Standard/Premium)
+  - Critères d'acceptation codifiés (CA-XXX-000)
+- **539 agents enrichis avec références workflows**
+- **Nouveau skill** : `content-management` (17 agents) - Gestion éditoriale complète
+- **Couverture métiers** : Ajout branding, DA, motion design, ligne éditoriale, stratégie digitale, content management
+- **Total agents** : 707 (vs 651 en v3.1.0)
 
 ### v3.1.0
 

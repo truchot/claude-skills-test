@@ -1,6 +1,17 @@
 ---
 name: rest-design
 description: Conception d'APIs REST selon les bonnes pratiques et conventions RESTful
+workflows:
+  - id: rest-creation
+    template: wf-creation
+    phase: Conception
+    name: Design API REST
+    duration: 1-3 jours
+  - id: rest-evolution
+    template: wf-evolution
+    phase: Spécification
+    name: Évolution API REST
+    duration: 0.5-1 jour
 ---
 
 # Agent REST API Design

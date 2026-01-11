@@ -1,6 +1,12 @@
 ---
 name: outreach-partenariats
 description: Gestion des campagnes d'outreach et relations partenaires pour le link building
+workflows:
+  - id: outreach-partenariats-creation
+    template: wf-creation
+    phase: Production
+    name: Campagne outreach partenaires
+    duration: 3 jours
 ---
 
 # Agent Outreach & Partenariats

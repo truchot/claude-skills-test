@@ -1,6 +1,12 @@
 ---
 name: tdd-bdd
 description: Méthodologies TDD, BDD et ATDD
+workflows:
+  - id: tdd-adoption
+    template: wf-evolution
+    phase: Réalisation
+    name: Adoption méthodologie TDD/BDD
+    duration: 2-5 jours
 ---
 
 # TDD / BDD / ATDD

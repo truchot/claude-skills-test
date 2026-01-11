@@ -2,6 +2,12 @@
 name: lifecycle-retention
 version: 1.0.0
 description: Spécialiste de la rétention client J90+ et renouvellement
+workflows:
+  - id: lifecycle-retention-creation
+    template: wf-creation
+    phase: Production
+    name: Création stratégie rétention
+    duration: 2 jours
 dependencies:
   - lifecycle/engagement (handoff entrant)
   - lifecycle/expansion (opportunités)

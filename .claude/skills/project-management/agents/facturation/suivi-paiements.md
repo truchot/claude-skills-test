@@ -1,6 +1,13 @@
 ---
 name: suivi-paiements
 description: Suivi des paiements et échéancier de facturation
+workflows:
+  - id: paiement-suivi
+    template: wf-support
+    phase: Diagnostic
+    name: Suivi et relance paiement
+    duration: 0.5-2 jours
+    recurrence: hebdomadaire
 ---
 
 # Agent Suivi Paiements

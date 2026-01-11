@@ -1,6 +1,12 @@
 ---
 name: custom-blocks
 description: Custom Blocks Expert
+workflows:
+  - id: custom-block-creation
+    template: wf-creation
+    phase: Production
+    name: Création block custom
+    duration: 0.5-2 jours
 ---
 
 # Custom Blocks Expert

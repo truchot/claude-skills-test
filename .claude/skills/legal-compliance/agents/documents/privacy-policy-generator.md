@@ -2,6 +2,12 @@
 name: privacy-policy-generator
 description: Génère les politiques de confidentialité conformes RGPD
 version: 1.0.0
+workflows:
+  - id: privacy-policy
+    template: wf-creation
+    phase: Production
+    name: Rédaction politique confidentialité
+    duration: 1 jour
 ---
 
 # Agent Privacy Policy Generator

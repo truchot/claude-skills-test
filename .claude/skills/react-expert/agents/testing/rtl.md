@@ -1,6 +1,12 @@
 ---
 name: rtl
 description: React Testing Library for component testing
+workflows:
+  - id: rtl-setup
+    template: wf-creation
+    phase: Production
+    name: Setup React Testing Library
+    duration: 0.5 jour
 ---
 
 # React Testing Library - Tests de Composants

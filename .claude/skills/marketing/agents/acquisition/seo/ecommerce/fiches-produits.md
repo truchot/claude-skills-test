@@ -1,6 +1,12 @@
 ---
 name: fiches-produits
 description: Optimisation SEO des pages produits e-commerce
+workflows:
+  - id: fiches-produits-creation
+    template: wf-creation
+    phase: Production
+    name: Optimisation fiches produits
+    duration: 2 jours
 ---
 
 # Agent Fiches Produits

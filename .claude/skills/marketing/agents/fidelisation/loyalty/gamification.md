@@ -2,6 +2,12 @@
 name: loyalty-gamification
 version: 1.0.0
 description: Mécaniques de gamification - badges, streaks, challenges
+workflows:
+  - id: loyalty-gamification-creation
+    template: wf-creation
+    phase: Production
+    name: Création mécaniques gamification
+    duration: 2 jours
 dependencies:
   - loyalty/earn-mechanics (points bonus)
   - lifecycle/engagement (habit formation)

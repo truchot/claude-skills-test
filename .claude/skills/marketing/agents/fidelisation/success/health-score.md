@@ -5,6 +5,12 @@ description: Calcul et monitoring du Health Score client
 dependencies:
   - churn/scoring-model (complémentarité avec score churn)
   - success/csm-operations (alertes et actions)
+workflows:
+  - id: health-score-monitoring
+    template: wf-audit
+    phase: Analyse
+    name: Monitoring Health Score
+    recurrence: hebdomadaire
 ---
 
 # Agent Health Score

@@ -5,6 +5,11 @@ description: Modèle de scoring prédictif du churn
 dependencies:
   - churn/signal-detection (input signaux)
   - churn/intervention-playbooks (output seuils)
+workflows:
+  - id: scoring-model-creation
+    template: wf-creation
+    phase: Production
+    name: Création Modèle Scoring
 ---
 
 # Agent Scoring Model

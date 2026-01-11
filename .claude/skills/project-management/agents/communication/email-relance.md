@@ -1,6 +1,12 @@
 ---
 name: email-relance
 description: Rédaction d'emails de relance client
+workflows:
+  - id: email-relance-client
+    template: wf-support
+    phase: Résolution
+    name: Email relance client
+    duration: 0.25 jour
 ---
 
 # Agent Email Relance

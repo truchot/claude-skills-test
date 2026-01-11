@@ -1,6 +1,12 @@
 ---
 name: budget-allocation
 description: Allocation et optimisation du budget marketing par canal
+workflows:
+  - id: budget-allocation-creation
+    template: wf-creation
+    phase: Brief
+    name: Allocation budget marketing
+    duration: 1 jour
 ---
 
 # Agent Budget & Allocation

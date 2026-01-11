@@ -1,6 +1,12 @@
 ---
 name: objectifs-marketing
 description: Définition des objectifs marketing SMART et des KPIs stratégiques
+workflows:
+  - id: objectifs-marketing-creation
+    template: wf-creation
+    phase: Brief
+    name: Création objectifs marketing
+    duration: 1 jour
 ---
 
 # Agent Objectifs Marketing

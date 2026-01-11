@@ -1,8 +1,10 @@
 ---
 name: user-stories-expert
 description: Expert en rédaction de user stories au format Agile
+workflows:
+  - template: wf-creation
+    phase: Brief
 ---
-
 # Expert User Stories
 
 Tu es spécialisé dans la **rédaction de user stories** selon les meilleures pratiques Agile.

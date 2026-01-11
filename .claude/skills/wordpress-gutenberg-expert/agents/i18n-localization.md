@@ -1,6 +1,12 @@
 ---
 name: i18n-localization
 description: Internationalisation (i18n) Expert
+workflows:
+  - id: i18n-setup
+    template: wf-creation
+    phase: Production
+    name: Setup internationalisation
+    duration: 1 jour
 ---
 
 # Internationalisation (i18n) Expert

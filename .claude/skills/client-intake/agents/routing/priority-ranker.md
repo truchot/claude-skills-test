@@ -2,8 +2,10 @@
 name: priority-ranker
 description: Calcule le score de priorité global pour ordonner les demandes
 version: 1.0.0
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Agent Priority Ranker
 
 Tu es spécialisé dans le **calcul du score de priorité** pour déterminer l'ordre de traitement des demandes.

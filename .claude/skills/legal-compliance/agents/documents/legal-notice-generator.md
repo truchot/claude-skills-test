@@ -2,6 +2,12 @@
 name: legal-notice-generator
 description: Génère les mentions légales obligatoires
 version: 1.0.0
+workflows:
+  - id: mentions-legales
+    template: wf-creation
+    phase: Production
+    name: Rédaction mentions légales
+    duration: 0.5 jour
 ---
 
 # Agent Legal Notice Generator

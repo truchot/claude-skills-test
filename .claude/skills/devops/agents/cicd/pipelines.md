@@ -1,6 +1,17 @@
 ---
 name: pipelines
 description: Patterns et architectures de pipelines CI/CD
+workflows:
+  - id: pipeline-design
+    template: wf-creation
+    phase: Conception
+    name: Design pipeline CI/CD
+    duration: 1-2 jours
+  - id: pipeline-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation pipeline
+    duration: 0.5-1 jour
 ---
 
 # Agent Pipelines CI/CD

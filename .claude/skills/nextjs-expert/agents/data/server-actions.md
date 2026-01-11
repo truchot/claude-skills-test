@@ -1,6 +1,12 @@
 ---
 name: server-actions
 description: Mutations avec Server Actions
+workflows:
+  - id: server-actions-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation Server Actions
+    duration: 0.5-1 jour
 ---
 
 # Server Actions

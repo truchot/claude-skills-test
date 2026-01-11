@@ -1,6 +1,12 @@
 ---
 name: "Spacing Expert"
 description: "Expert en espacements - Système 8pt, radius, grilles, layout"
+workflows:
+  - id: spacing-tokens
+    template: wf-creation
+    phase: Conception
+    name: Définition tokens espacement
+    duration: 0.5-1 jour
 ---
 
 # Spacing Expert

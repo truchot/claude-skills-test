@@ -1,6 +1,9 @@
 ---
 name: architecture-expert
 description: Expert en architecture technique et patterns de conception (Niveau QUOI)
+workflows:
+  - id: wf-creation
+    phase: Conception
 ---
 
 # Expert Architecture

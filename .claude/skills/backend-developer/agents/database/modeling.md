@@ -1,6 +1,17 @@
 ---
 name: modeling
 description: Conception de schémas de bases de données, modèles de données et relations
+workflows:
+  - id: db-modeling
+    template: wf-creation
+    phase: Conception
+    name: Modélisation base de données
+    duration: 2-5 jours
+  - id: db-refactoring
+    template: wf-refonte
+    phase: Analyse
+    name: Refactoring schéma DB
+    duration: 3-10 jours
 ---
 
 # Agent Database Modeling

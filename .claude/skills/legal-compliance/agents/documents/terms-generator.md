@@ -2,6 +2,12 @@
 name: terms-generator
 description: Génère les conditions générales de vente et d'utilisation
 version: 1.0.0
+workflows:
+  - id: cgv-creation
+    template: wf-creation
+    phase: Production
+    name: Rédaction CGV/CGU
+    duration: 1-2 jours
 ---
 
 # Agent Terms Generator

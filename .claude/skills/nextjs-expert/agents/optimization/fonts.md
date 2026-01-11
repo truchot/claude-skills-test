@@ -1,6 +1,12 @@
 ---
 name: fonts
 description: Chargement optimal des fonts
+workflows:
+  - id: font-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation fonts
+    duration: 0.5 jour
 ---
 
 # Font Optimization

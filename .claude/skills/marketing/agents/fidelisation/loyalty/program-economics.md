@@ -2,6 +2,12 @@
 name: loyalty-program-economics
 version: 1.0.0
 description: Économie et ROI des programmes de fidélité
+workflows:
+  - id: loyalty-program-economics-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit économie programme fidélité
+    duration: 2 jours
 dependencies:
   - loyalty/earn-mechanics (taux d'earn)
   - loyalty/burn-rewards (coût rewards)

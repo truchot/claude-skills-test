@@ -1,6 +1,13 @@
 ---
 name: compte-rendu
 description: Expert en rédaction de comptes-rendus de réunion
+workflows:
+  - id: cr-reunion
+    template: wf-evolution
+    phase: Réalisation
+    name: Rédaction compte-rendu
+    duration: 0.5 jour
+    recurrence: après chaque réunion
 ---
 
 # Agent Compte-Rendu

@@ -1,6 +1,12 @@
 ---
 name: ab-testing
 description: Conception et analyse des tests A/B marketing
+workflows:
+  - id: ab-testing-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit A/B Testing
+    duration: 1 jour
 ---
 
 # Agent A/B Testing

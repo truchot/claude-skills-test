@@ -1,6 +1,17 @@
 ---
 name: plan-recette
 description: Préparation du plan de recette et de l'environnement
+workflows:
+  - id: recette-creation
+    template: wf-creation
+    phase: Livraison
+    name: Plan de recette nouveau projet
+    duration: 0.5-1 jour
+  - id: recette-refonte
+    template: wf-refonte
+    phase: Migration
+    name: Plan de recette refonte
+    duration: 1 jour
 ---
 
 # Agent Plan de Recette

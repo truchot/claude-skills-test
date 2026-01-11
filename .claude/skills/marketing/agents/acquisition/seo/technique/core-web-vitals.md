@@ -1,6 +1,13 @@
 ---
 name: core-web-vitals
 description: Optimisation des Core Web Vitals et performances web
+workflows:
+  - id: core-web-vitals-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit Core Web Vitals
+    duration: 1 jour
+    recurrence: mensuel
 ---
 
 # Agent Core Web Vitals

@@ -2,6 +2,12 @@
 name: data-aggregator
 description: Agrège et consolide les données financières
 version: 1.0.0
+workflows:
+  - id: data-collection
+    template: wf-audit
+    phase: Collecte
+    name: Agrégation des données
+    duration: 1 jour
 ---
 
 # Agent Data Aggregator

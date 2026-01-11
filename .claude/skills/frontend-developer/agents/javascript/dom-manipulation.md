@@ -1,6 +1,17 @@
 ---
 name: DOM Manipulation
 description: Expert en manipulation du DOM - sélection, modification, événements et patterns
+workflows:
+  - id: dom-creation
+    template: wf-creation
+    phase: Production
+    name: Développement DOM natif
+    duration: ongoing
+  - id: dom-optimization
+    template: wf-evolution
+    phase: Réalisation
+    name: Optimisation DOM
+    duration: 0.5-1 jour
 ---
 
 # Agent DOM Manipulation

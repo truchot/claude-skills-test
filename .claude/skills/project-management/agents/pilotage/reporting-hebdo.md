@@ -1,6 +1,13 @@
 ---
 name: reporting-hebdo
 description: Production du reporting hebdomadaire d'avancement
+workflows:
+  - id: reporting-hebdo-standard
+    template: wf-evolution
+    phase: Réalisation
+    name: Reporting hebdomadaire
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Reporting Hebdo

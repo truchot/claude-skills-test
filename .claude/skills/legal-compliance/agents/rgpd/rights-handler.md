@@ -2,6 +2,12 @@
 name: rights-handler
 description: Gère les demandes d'exercice des droits des personnes
 version: 1.0.0
+workflows:
+  - id: rights-request
+    template: wf-support
+    phase: Résolution
+    name: Traitement demande droits RGPD
+    duration: 0.5-1 jour
 ---
 
 # Agent Rights Handler

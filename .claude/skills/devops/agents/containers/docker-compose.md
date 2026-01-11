@@ -1,6 +1,17 @@
 ---
 name: docker-compose
 description: Orchestration locale avec Docker Compose
+workflows:
+  - id: compose-setup
+    template: wf-creation
+    phase: Production
+    name: Setup Docker Compose
+    duration: 0.5-1 jour
+  - id: compose-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution stack Compose
+    duration: 0.5 jour
 ---
 
 # Agent Docker Compose

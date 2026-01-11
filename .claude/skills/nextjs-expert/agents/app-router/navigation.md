@@ -1,6 +1,12 @@
 ---
 name: navigation
 description: Navigation avec Link, useRouter et redirects
+workflows:
+  - id: nextjs-navigation-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation navigation
+    duration: 0.5 jour
 ---
 
 # Navigation

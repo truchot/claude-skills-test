@@ -1,6 +1,18 @@
 ---
 name: alerting
 description: Configuration d'alertes et notifications
+workflows:
+  - id: alerting-setup
+    template: wf-creation
+    phase: Production
+    name: Setup alerting
+    duration: 1-2 jours
+  - id: alerting-tuning
+    template: wf-evolution
+    phase: Réalisation
+    name: Tuning alertes
+    duration: 0.5 jour
+    recurrence: mensuel
 ---
 
 # Agent Alerting

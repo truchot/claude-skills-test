@@ -1,6 +1,17 @@
 ---
 name: API Integration
 description: Expert en intégration d'APIs - Fetch, REST, GraphQL et WebSockets
+workflows:
+  - id: api-integration
+    template: wf-creation
+    phase: Production
+    name: Intégration API
+    duration: 1-3 jours
+  - id: api-refactor
+    template: wf-evolution
+    phase: Réalisation
+    name: Refactoring couche API
+    duration: 1-2 jours
 ---
 
 # Agent API Integration

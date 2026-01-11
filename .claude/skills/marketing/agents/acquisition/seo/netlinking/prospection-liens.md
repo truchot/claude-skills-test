@@ -1,6 +1,12 @@
 ---
 name: prospection-liens
 description: Identification et qualification des opportunités de backlinks
+workflows:
+  - id: prospection-liens-creation
+    template: wf-creation
+    phase: Production
+    name: Prospection opportunités liens
+    duration: 2 jours
 ---
 
 # Agent Prospection Liens

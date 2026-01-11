@@ -1,6 +1,17 @@
 ---
 name: gitlab-ci
 description: Configuration et optimisation de GitLab CI/CD
+workflows:
+  - id: gitlab-setup
+    template: wf-creation
+    phase: Production
+    name: Setup GitLab CI
+    duration: 1-2 jours
+  - id: gitlab-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Évolution pipeline GitLab
+    duration: 0.5-1 jour
 ---
 
 # Agent GitLab CI

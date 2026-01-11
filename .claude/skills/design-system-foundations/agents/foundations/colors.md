@@ -1,6 +1,12 @@
 ---
 name: "Colors Expert"
 description: "Expert en systèmes de couleurs - Palettes, tokens sémantiques, accessibilité WCAG"
+workflows:
+  - id: colors-tokens
+    template: wf-creation
+    phase: Conception
+    name: Définition tokens couleurs
+    duration: 1 jour
 ---
 
 # Colors Expert

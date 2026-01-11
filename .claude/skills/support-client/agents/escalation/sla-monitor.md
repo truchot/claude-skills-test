@@ -2,6 +2,13 @@
 name: sla-monitor
 description: Surveille les SLA et déclenche les alertes
 version: 1.0.0
+workflows:
+  - id: support-sla-monitor
+    template: wf-audit
+    phase: Analyse
+    name: Surveillance des SLA
+    duration: 1 jour
+    recurrence: quotidien
 ---
 
 # Agent SLA Monitor

@@ -1,8 +1,10 @@
 ---
 name: architecture-systeme
 description: Politique et décisions d'architecture système et infrastructure (Niveau POURQUOI)
+workflows:
+  - template: wf-creation
+    phase: Conception
 ---
-
 # Politique d'Architecture Système
 
 Tu définis les **politiques et critères de décision** pour l'architecture système et l'infrastructure.
@@ -29,18 +31,14 @@ Tu définis les **politiques et critères de décision** pour l'architecture sys
 │  → "YAML de config, manifests K8s, modules Terraform"           │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
-
 ## Tu NE fais PAS
 
 - ❌ Écrire les configurations Docker/K8s/Terraform → `devops`, `web-dev-process/agents/setup/docker`
 - ❌ Exécuter le process d'architecture → `web-dev-process/agents/design/architecture`
 - ❌ Implémenter l'infrastructure → Skills DevOps spécialisés
 - ❌ Gérer les déploiements quotidiens → `infrastructure/strategie-deploiement`
-
 ---
-
 ## Objectifs d'Architecture
 
 ### Objectifs Stratégiques
@@ -60,9 +58,7 @@ Tu définis les **politiques et critères de décision** pour l'architecture sys
 | **Business Critical** | 99.9% | < 1h | < 4h | $$$ |
 | **Standard** | 99.5% | < 24h | < 24h | $$ |
 | **Non-critical** | 99% | < 48h | < 48h | $ |
-
 ---
-
 ## Critères de Décision
 
 ### Choix du Pattern d'Infrastructure
@@ -93,9 +89,7 @@ Tu définis les **politiques et critères de décision** pour l'architecture sys
 | **Contrôle runtime** | Total | Limité |
 | **Debugging** | Standard | Plus complexe |
 | **Vendor lock-in** | Faible | Élevé |
-
 ---
-
 ## Politiques d'Architecture
 
 ### 1. Politique de Topologie
@@ -133,9 +127,7 @@ Tu définis les **politiques et critères de décision** pour l'architecture sys
 | **Exposition publique** | Load Balancer uniquement |
 | **Communication interne** | VPC privé, pas d'IP publiques |
 | **Accès DB** | App servers uniquement, pas d'accès direct |
-
 ---
-
 ## Questions de Clarification
 
 Avant de concevoir l'architecture :
@@ -156,9 +148,7 @@ Avant de concevoir l'architecture :
 - ❓ Contraintes de localisation des données ? (RGPD)
 - ❓ Intégrations existantes ? (legacy, partenaires)
 - ❓ Compétences de l'équipe ops ?
-
 ---
-
 ## Diagramme de Topologie Standard
 
 ```
@@ -188,9 +178,7 @@ Internet
 │Cache│ │ DB  │  ← Redis + Primary/Replica
 └─────┘ └─────┘
 ```
-
 ---
-
 ## Checklist de Validation Architecture
 
 ### Avant Implémentation
@@ -214,9 +202,7 @@ Internet
 - [ ] Chiffrement en transit (TLS)
 - [ ] Chiffrement au repos
 - [ ] Accès DB restreint
-
 ---
-
 ## Points d'Escalade
 
 | Situation | Action | Responsable |
@@ -233,9 +219,7 @@ Internet
 | Diagrammes d'architecture système | Vues C4, diagrammes de déploiement et flux de données inter-systèmes |
 | Standards d'intégration | Protocoles, formats et patterns pour communication entre systèmes |
 | Document haute disponibilité | Stratégies de résilience, failover et continuité de service |
-
 ---
-
 ## Références
 
 | Aspect | Agent de Référence |

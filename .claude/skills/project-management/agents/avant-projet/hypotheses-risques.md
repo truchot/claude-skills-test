@@ -1,6 +1,17 @@
 ---
 name: hypotheses-risques
 description: Identification des hypothèses de chiffrage et des risques associés
+workflows:
+  - id: risques-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Analyse risques nouveau projet
+    duration: 0.5-1 jour
+  - id: risques-refonte
+    template: wf-refonte
+    phase: Analyse
+    name: Analyse risques refonte
+    duration: 1 jour
 ---
 
 # Agent Hypothèses & Risques

@@ -1,6 +1,18 @@
 ---
 name: coverage
 description: Couverture de code, mutation testing et métriques de qualité
+workflows:
+  - id: coverage-setup
+    template: wf-creation
+    phase: Production
+    name: Setup coverage/CI
+    duration: 0.5 jour
+  - id: coverage-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit couverture code
+    duration: 0.5 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Test Coverage

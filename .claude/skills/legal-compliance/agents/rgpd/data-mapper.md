@@ -2,6 +2,12 @@
 name: data-mapper
 description: Cartographie les données personnelles collectées et leurs flux
 version: 1.0.0
+workflows:
+  - id: data-mapping
+    template: wf-audit
+    phase: Analyse
+    name: Cartographie données personnelles
+    duration: 2-3 jours
 ---
 
 # Agent Data Mapper

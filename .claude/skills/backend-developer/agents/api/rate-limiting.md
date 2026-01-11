@@ -1,6 +1,17 @@
 ---
 name: rate-limiting
 description: Configuration du rate limiting, throttling et quotas pour protéger les APIs
+workflows:
+  - id: ratelimit-setup
+    template: wf-creation
+    phase: Production
+    name: Setup rate limiting
+    duration: 0.5-1 jour
+  - id: ratelimit-tuning
+    template: wf-evolution
+    phase: Réalisation
+    name: Tuning limites API
+    duration: 0.5 jour
 ---
 
 # Agent Rate Limiting

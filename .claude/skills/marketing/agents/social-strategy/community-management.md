@@ -1,6 +1,13 @@
 ---
 name: community-management
 description: Animation de communauté et gestion des interactions
+workflows:
+  - id: community-management-support
+    template: wf-support
+    phase: Support
+    name: Support community management
+    duration: 1 jour
+    recurrence: quotidien
 ---
 
 # Agent Community Management

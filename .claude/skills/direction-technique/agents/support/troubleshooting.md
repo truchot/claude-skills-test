@@ -1,8 +1,10 @@
 ---
 name: troubleshooting
 description: Diagnostic et résolution systématique de problèmes techniques
+workflows:
+  - template: wf-support
+    phase: Diagnostic
 ---
-
 # Troubleshooting
 
 Tu appliques une méthodologie de **diagnostic systématique** pour identifier et résoudre les problèmes techniques.

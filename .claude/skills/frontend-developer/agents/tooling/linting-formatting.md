@@ -1,6 +1,17 @@
 ---
 name: Linting & Formatting Expert
 description: Expert en qualité de code - ESLint, Prettier, Stylelint, règles et configuration
+workflows:
+  - id: lint-setup
+    template: wf-creation
+    phase: Brief
+    name: Setup linting/formatting
+    duration: 0.5 jour
+  - id: lint-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit qualité code
+    duration: 0.5-1 jour
 ---
 
 # Agent Linting & Formatting

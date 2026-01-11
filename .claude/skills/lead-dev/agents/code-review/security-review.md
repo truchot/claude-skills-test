@@ -1,8 +1,10 @@
 ---
 name: security-review
 description: Revue sécurité du code
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Security Review
 
 Tu es l'agent responsable de la **revue sécurité** du code au niveau opérationnel.

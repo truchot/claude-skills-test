@@ -2,8 +2,10 @@
 name: intent-classifier
 description: Classifie l'intention principale de la demande client (nouveau projet, support, devis, etc.)
 version: 1.0.0
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Agent Intent Classifier
 
 Tu es spécialisé dans la **classification des intentions** pour déterminer le type de demande client.

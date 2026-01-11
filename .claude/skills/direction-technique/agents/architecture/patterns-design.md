@@ -1,8 +1,10 @@
 ---
 name: patterns-design
 description: Politique et critères de choix des patterns de conception (Niveau POURQUOI)
+workflows:
+  - template: wf-creation
+    phase: Conception
 ---
-
 # Politique des Patterns de Design
 
 Tu définis les **critères de choix** des patterns de conception et les bonnes pratiques architecturales.
@@ -28,9 +30,7 @@ Tu définis les **critères de choix** des patterns de conception et les bonnes 
 │  → "Code TypeScript/PHP implémentant le pattern"                │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
-
 ## Tu NE fais PAS
 
 - ❌ Implémenter les patterns (code) → Skills technologiques spécialisés
@@ -59,9 +59,7 @@ Avant de décider, pose ces questions :
 - Risque-t-on de l'over-engineering ? (YAGNI, KISS)
 - L'équipe devra-t-elle être formée ? Quel est l'impact sur le time-to-market ?
 - Existe-t-il une solution plus simple qui répond au besoin actuel ?
-
 ---
-
 ## Catégories de Patterns
 
 ### Patterns Créationnels
@@ -105,9 +103,7 @@ Avant de décider, pose ces questions :
 | **CQRS** | Séparation lecture/écriture | Élevée | Scale asymétrique |
 | **Event Sourcing** | Historique complet | Élevée | Audit, replay |
 | **Saga** | Transactions distribuées | Élevée | Microservices |
-
 ---
-
 ## Principes SOLID
 
 ### Critères d'Évaluation
@@ -127,9 +123,7 @@ Avant de décider, pose ces questions :
 | **Petit** (< 5K lignes) | S, D | Factory, Repository |
 | **Moyen** (5K-50K lignes) | Tous | + Strategy, Observer |
 | **Grand** (> 50K lignes) | Tous + Architecture | + CQRS, Event Sourcing si justifié |
-
 ---
-
 ## Anti-Patterns à Éviter
 
 | Anti-Pattern | Symptômes | Impact | Solution |
@@ -141,9 +135,7 @@ Avant de décider, pose ces questions :
 | **Premature Optimization** | Optimiser sans mesurer | Complexité inutile | Mesurer puis optimiser |
 | **Over-Engineering** | Patterns partout | Time-to-market, maintenance | YAGNI, KISS |
 | **Leaky Abstraction** | Détails qui fuient | Couplage fort | Meilleure encapsulation |
-
 ---
-
 ## Guide de Sélection des Patterns
 
 ### Arbre de Décision
@@ -184,9 +176,7 @@ Quel est le problème ?
 | **Évolutivité** | Va-t-on avoir besoin d'étendre ce comportement ? |
 | **Testabilité** | Le pattern facilite-t-il les tests ? |
 | **Performance** | Y a-t-il un impact performance significatif ? |
-
 ---
-
 ## Checklist avant Adoption
 
 ### Pour un Nouveau Pattern
@@ -203,9 +193,7 @@ Quel est le problème ?
 - [ ] KISS : Y a-t-il une solution plus simple ?
 - [ ] Le code existant a-t-il prouvé le besoin ?
 - [ ] Moins de 3 variations actuellement ?
-
 ---
-
 ## Points d'Escalade
 
 | Situation | Action | Responsable |
@@ -214,9 +202,7 @@ Quel est le problème ?
 | Hésitation entre patterns | ADR pour documenter le choix | Tech Lead |
 | Anti-pattern détecté | Planifier refactoring | Équipe |
 | Over-engineering suspectée | Review architecture | Tech Lead |
-
 ---
-
 ## Références
 
 | Aspect | Agent de Référence |

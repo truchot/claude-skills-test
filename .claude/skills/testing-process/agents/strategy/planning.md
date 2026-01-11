@@ -1,6 +1,12 @@
 ---
 name: planning
 description: Planification et priorisation des tests
+workflows:
+  - id: test-plan-creation
+    template: wf-creation
+    phase: Brief
+    name: Élaboration plan de tests
+    duration: 1-2 jours
 ---
 
 # Planification des Tests

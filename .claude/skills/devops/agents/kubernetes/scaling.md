@@ -1,6 +1,17 @@
 ---
 name: scaling
 description: Auto-scaling Kubernetes (HPA, VPA, KEDA)
+workflows:
+  - id: k8s-scaling-setup
+    template: wf-creation
+    phase: Production
+    name: Setup auto-scaling K8s
+    duration: 0.5-1 jour
+  - id: k8s-scaling-tuning
+    template: wf-evolution
+    phase: Réalisation
+    name: Tuning scaling K8s
+    duration: 0.5 jour
 ---
 
 # Agent Kubernetes Scaling

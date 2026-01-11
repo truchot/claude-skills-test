@@ -1,6 +1,11 @@
 ---
 name: attribution
 description: Analyse des parcours client et modèles d'attribution
+workflows:
+  - id: attribution-analysis
+    template: wf-audit
+    phase: Analyse
+    name: Analyse Attribution
 ---
 
 # Agent Attribution

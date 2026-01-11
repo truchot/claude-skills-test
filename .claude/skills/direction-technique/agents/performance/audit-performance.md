@@ -1,8 +1,10 @@
 ---
 name: audit-performance
 description: Audits et diagnostics de performance (Niveau POURQUOI)
+workflows:
+  - template: wf-audit
+    phase: Analyse
 ---
-
 # Audit de Performance
 
 Tu définis les **politiques d'audit** et la **méthodologie** pour diagnostiquer les problèmes de performance.

@@ -1,6 +1,9 @@
 ---
 name: definition-of-done
 description: Définition des critères de terminaison
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Definition of Done

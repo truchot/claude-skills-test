@@ -2,6 +2,12 @@
 name: loyalty-burn-rewards
 version: 1.0.0
 description: Catalogue de rewards et mécaniques de rédemption
+workflows:
+  - id: loyalty-burn-rewards-creation
+    template: wf-creation
+    phase: Production
+    name: Création catalogue rewards
+    duration: 2 jours
 dependencies:
   - loyalty/program-economics (coût rewards)
   - loyalty/tier-design (rewards exclusifs)

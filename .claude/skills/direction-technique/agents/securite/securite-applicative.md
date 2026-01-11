@@ -1,6 +1,9 @@
 ---
 name: securite-applicative
 description: Politiques et standards de sécurité applicative - Décisions stratégiques (Niveau POURQUOI)
+workflows:
+  - id: wf-audit
+  phase: Analyse
 ---
 
 # Politique de Sécurité Applicative

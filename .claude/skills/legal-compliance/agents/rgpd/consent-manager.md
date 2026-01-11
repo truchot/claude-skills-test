@@ -2,6 +2,12 @@
 name: consent-manager
 description: Gère le consentement utilisateur et sa documentation
 version: 1.0.0
+workflows:
+  - id: consent-setup
+    template: wf-creation
+    phase: Production
+    name: Mise en place gestion consentement
+    duration: 1-2 jours
 ---
 
 # Agent Consent Manager

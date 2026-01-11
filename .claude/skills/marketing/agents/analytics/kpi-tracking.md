@@ -1,6 +1,13 @@
 ---
 name: kpi-tracking
 description: Définition et suivi des KPIs marketing
+workflows:
+  - id: kpi-tracking-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit KPI Tracking
+    duration: 1 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent KPI Tracking

@@ -1,6 +1,12 @@
 ---
 name: geotargeting
 description: Configuration du ciblage géographique et signaux de localisation
+workflows:
+  - id: geotargeting-creation
+    template: wf-creation
+    phase: Production
+    name: Configuration geotargeting
+    duration: 1 jour
 ---
 
 # Agent Geotargeting

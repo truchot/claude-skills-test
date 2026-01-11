@@ -1,6 +1,17 @@
 ---
 name: HTML Sémantique
 description: Expert en structure HTML5 sémantique, SEO et métadonnées
+workflows:
+  - id: html-creation
+    template: wf-creation
+    phase: Production
+    name: Structure HTML nouveau projet
+    duration: 0.5-1 jour
+  - id: html-evolution
+    template: wf-evolution
+    phase: Réalisation
+    name: Amélioration structure HTML
+    duration: 0.25-0.5 jour
 ---
 
 # Agent HTML Sémantique

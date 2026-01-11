@@ -2,6 +2,12 @@
 name: invoice-generator
 description: Génère factures et avoirs conformes
 version: 1.0.0
+workflows:
+  - id: invoice-generation
+    template: wf-creation
+    phase: Production
+    name: Génération de factures
+    duration: 1 jour
 ---
 
 # Agent Invoice Generator

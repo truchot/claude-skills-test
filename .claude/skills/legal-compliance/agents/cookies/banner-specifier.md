@@ -2,6 +2,12 @@
 name: banner-specifier
 description: Spécifie le bandeau cookies conforme RGPD/ePrivacy
 version: 1.0.0
+workflows:
+  - id: cookie-banner
+    template: wf-creation
+    phase: Production
+    name: Spécification bandeau cookies
+    duration: 0.5-1 jour
 ---
 
 # Agent Banner Specifier

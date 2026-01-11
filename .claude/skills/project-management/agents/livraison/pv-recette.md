@@ -1,6 +1,17 @@
 ---
 name: pv-recette
 description: Génération du procès-verbal de recette
+workflows:
+  - id: pv-validation
+    template: wf-creation
+    phase: Livraison
+    name: PV de recette validation
+    duration: 0.5 jour
+  - id: pv-refonte
+    template: wf-refonte
+    phase: Bascule
+    name: PV de recette refonte
+    duration: 0.5 jour
 ---
 
 # Agent PV de Recette

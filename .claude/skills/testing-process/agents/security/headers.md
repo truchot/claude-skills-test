@@ -1,6 +1,13 @@
 ---
 name: headers
 description: Headers de sécurité HTTP
+workflows:
+  - id: headers-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit headers sécurité
+    duration: 0.5 jour
+    recurrence: mensuel
 ---
 
 # Headers de Sécurité HTTP

@@ -1,6 +1,12 @@
 ---
 name: data-fetching
 description: Récupération de données côté serveur
+workflows:
+  - id: data-fetching-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation data fetching
+    duration: 0.5-1 jour
 ---
 
 # Data Fetching

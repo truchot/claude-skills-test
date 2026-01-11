@@ -1,6 +1,13 @@
 ---
 name: suivi-performance
 description: Suivi en temps réel de l'avancement et des KPIs des campagnes
+workflows:
+  - id: suivi-performance-audit
+    template: wf-audit
+    phase: Analyse
+    name: Suivi performance campagnes
+    duration: 1 jour
+    recurrence: hebdomadaire
 ---
 
 # Agent Suivi Performance

@@ -1,6 +1,17 @@
 ---
 name: redaction-proposition
 description: Rédaction du document de proposition commerciale
+workflows:
+  - id: proposition-nouveau-projet
+    template: wf-creation
+    phase: Brief
+    name: Proposition nouveau projet
+    duration: 1-2 jours
+  - id: proposition-refonte
+    template: wf-refonte
+    phase: Analyse
+    name: Proposition refonte
+    duration: 2-3 jours
 ---
 
 # Agent Rédaction Proposition

@@ -1,6 +1,9 @@
 ---
 name: coding-standards-expert
 description: Expert en conventions de code et standards de développement
+workflows:
+  - id: wf-creation
+    phase: Production
 ---
 
 # Expert Conventions de Code

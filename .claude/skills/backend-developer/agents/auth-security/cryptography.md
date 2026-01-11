@@ -1,6 +1,17 @@
 ---
 name: cryptography
 description: Chiffrement, hashing, gestion des secrets et bonnes pratiques crypto
+workflows:
+  - id: crypto-implementation
+    template: wf-creation
+    phase: Production
+    name: Implémentation cryptographie
+    duration: 1-3 jours
+  - id: crypto-audit
+    template: wf-audit
+    phase: Analyse
+    name: Audit cryptographie
+    duration: 0.5-1 jour
 ---
 
 # Agent Cryptography

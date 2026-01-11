@@ -1,6 +1,12 @@
 ---
 name: middleware
 description: Middleware Edge et redirections
+workflows:
+  - id: middleware-impl
+    template: wf-creation
+    phase: Production
+    name: Implémentation middleware
+    duration: 0.5-1 jour
 ---
 
 # Middleware
