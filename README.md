@@ -1,6 +1,8 @@
-# Claude Skills - Web Agency
+# Web Agency Framework
 
-Collection modulaire de skills Claude pour industrialiser les métiers d'une agence Web.
+Framework agnostique de gestion d'une agence web automatisée.
+
+> **Note**: Ce framework est indépendant de tout système d'IA spécifique. Les instructions sont stockées dans `.web-agency/` au format Markdown avec frontmatter YAML.
 
 ## Philosophie
 
@@ -29,34 +31,34 @@ HUMAIN (supervision)
 
 | Skill | Description | Version |
 |-------|-------------|---------|
-| [web-agency](.claude/skills/web-agency/) | Méta-orchestrateur - compose les skills métiers | 2.0.0 |
+| [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills métiers | 2.0.0 |
 
 ### Skills Métiers
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [project-management](.claude/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
-| [technical](.claude/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
-| [marketing](.claude/skills/marketing/) | Marketing digital (SEO complet, SEA, Social, Email, Analytics, Fidélisation) | 115 | 🟢 Actif |
-| [strategy](.claude/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
-| [design](.claude/skills/design/) | Design & création graphique | - | 🔴 Planifié |
-| [content](.claude/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
+| [project-management](.web-agency/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
+| [technical](.web-agency/skills/technical/) | Pont métier → développement | 6 | 🟢 Actif |
+| [marketing](.web-agency/skills/marketing/) | Marketing digital (SEO complet, SEA, Social, Email, Analytics, Fidélisation) | 115 | 🟢 Actif |
+| [strategy](.web-agency/skills/strategy/) | Stratégie & conseil | - | 🔴 Planifié |
+| [design](.web-agency/skills/design/) | Design & création graphique | - | 🔴 Planifié |
+| [content](.web-agency/skills/content/) | Contenu & rédaction | - | 🔴 Planifié |
 
 ### Skills Techniques
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [web-dev-process](.claude/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
-| [wordpress-gutenberg-expert](.claude/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
-| [design-system-foundations](.claude/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
-| [frontend-developer](.claude/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
-| [react-expert](.claude/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
-| [backend-developer](.claude/skills/backend-developer/) | Backend - APIs, databases, architecture, DevOps | 38 | 🟢 Actif |
+| [web-dev-process](.web-agency/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | Implémentation WordPress | 41 | 🟢 Actif |
+| [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design industriel | 21 | 🟢 Actif |
+| [frontend-developer](.web-agency/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
+| [react-expert](.web-agency/skills/react-expert/) | Expert React - hooks, components, state | 28 | 🟢 Actif |
+| [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture, DevOps | 38 | 🟢 Actif |
 
 ## Architecture
 
 ```
-.claude/skills/
+.web-agency/skills/
 │
 ├── web-agency/                    # ORCHESTRATEUR (compose les skills)
 │   └── SKILL.md
@@ -204,12 +206,12 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 ```bash
 # Tests par skill
-cd .claude/skills/web-agency/tests && bash run-tests.sh
-cd .claude/skills/web-dev-process/tests && bash run-tests.sh
-cd .claude/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
-cd .claude/skills/frontend-developer/tests && node validate-skill.test.js
-cd .claude/skills/react-expert/tests && node validate-skill.test.js
-cd .claude/skills/backend-developer/tests && bash run-tests.sh
+cd .web-agency/skills/web-agency/tests && bash run-tests.sh
+cd .web-agency/skills/web-dev-process/tests && bash run-tests.sh
+cd .web-agency/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
+cd .web-agency/skills/frontend-developer/tests && node validate-skill.test.js
+cd .web-agency/skills/react-expert/tests && node validate-skill.test.js
+cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 ```
 
 ## Principes de Conception

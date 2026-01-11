@@ -135,7 +135,7 @@ Acquisition, visibilité, conversion et fidélisation.
 ## Architecture globale
 
 ```
-.claude/skills/
+.web-agency/skills/
 ├── web-agency/                    # NOUVEAU SKILL
 │   ├── SKILL.md                   # Orchestrateur principal
 │   ├── agents/

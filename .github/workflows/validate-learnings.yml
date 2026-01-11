@@ -3,17 +3,17 @@ name: Validate Learnings
 on:
   push:
     paths:
-      - '.claude/learnings/**'
+      - '.web-agency/learnings/**'
   pull_request:
     paths:
-      - '.claude/learnings/**'
+      - '.web-agency/learnings/**'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .claude/learnings
+        working-directory: .web-agency/learnings
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: .claude/learnings/package-lock.json
+          cache-dependency-path: .web-agency/learnings/package-lock.json
 
       - name: Install dependencies
         run: npm ci || npm install
@@ -39,5 +39,5 @@ jobs:
         if: always()
         with:
           name: coverage-report
-          path: .claude/learnings/coverage/
+          path: .web-agency/learnings/coverage/
           retention-days: 7

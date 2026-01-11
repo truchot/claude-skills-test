@@ -163,7 +163,7 @@ const REQUIRED_QUESTION_SECTIONS = [
 │  │                    APPRENTISSAGE GLOBAL                              │   │
 │  │              (partagé entre tous les projets)                        │   │
 │  │                                                                       │   │
-│  │  📁 .claude/learnings/                                               │   │
+│  │  📁 .web-agency/learnings/                                               │   │
 │  │  ├── patterns/           # Patterns réutilisables                    │   │
 │  │  ├── anti-patterns/      # Erreurs à éviter                          │   │
 │  │  ├── decisions/          # Décisions archétypales                    │   │
@@ -187,10 +187,10 @@ const REQUIRED_QUESTION_SECTIONS = [
 
 ### 3.2 Structure des Fichiers
 
-#### Apprentissage Global (`.claude/learnings/`)
+#### Apprentissage Global (`.web-agency/learnings/`)
 
 ```
-.claude/learnings/
+.web-agency/learnings/
 ├── LEARNING-GUIDE.md           # Guide d'utilisation
 ├── patterns/
 │   ├── INDEX.md                # Index des patterns
@@ -333,7 +333,7 @@ candidate_for_global: true
 
 ## Promotion vers global ?
 ✅ Ce problème est suffisamment générique pour être documenté globalement.
-→ Créer: `.claude/learnings/anti-patterns/cors-staging-misconfigured.md`
+→ Créer: `.web-agency/learnings/anti-patterns/cors-staging-misconfigured.md`
 ```
 
 ### 3.4 Mécanisme de Promotion
@@ -362,8 +362,8 @@ Chaque agent technique doit consulter les learnings pertinents :
 
 ### 1. Consulter les learnings
 
-- [ ] Vérifier `.claude/learnings/patterns/` pour des solutions existantes
-- [ ] Vérifier `.claude/learnings/anti-patterns/` pour les pièges à éviter
+- [ ] Vérifier `.web-agency/learnings/patterns/` pour des solutions existantes
+- [ ] Vérifier `.web-agency/learnings/anti-patterns/` pour les pièges à éviter
 - [ ] Vérifier `.learnings/context.md` du projet pour le contexte spécifique
 - [ ] Vérifier `.learnings/issues/` pour les problèmes déjà rencontrés
 
@@ -400,7 +400,7 @@ Chaque agent technique doit consulter les learnings pertinents :
 
 | Action | Fichiers | Effort |
 |--------|----------|--------|
-| Créer structure learnings globale | `.claude/learnings/*` | 2h |
+| Créer structure learnings globale | `.web-agency/learnings/*` | 2h |
 | Créer templates de learnings | `templates/*.md` | 1h |
 | Documenter le guide | `LEARNING-GUIDE.md` | 1h |
 
@@ -475,7 +475,7 @@ Chaque agent technique doit consulter les learnings pertinents :
 
 ```bash
 # Créer maintenant
-.claude/learnings/
+.web-agency/learnings/
 ├── LEARNING-GUIDE.md
 ├── patterns/INDEX.md
 ├── anti-patterns/INDEX.md
@@ -509,6 +509,6 @@ C'est le cas le plus flagrant avec 4 agents qui parlent du même sujet dans 3 sk
 
 ### B. Références
 
-- [ADR-005: Frontières de Responsabilités](../.claude/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005: Frontières de Responsabilités](../.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
 - [SRP-ANALYSIS.md](./SRP-ANALYSIS.md)
 - [MIGRATION.md](./MIGRATION.md)

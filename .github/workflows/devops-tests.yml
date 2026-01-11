@@ -3,12 +3,12 @@ name: DevOps Skill Tests
 on:
   pull_request:
     paths:
-      - '.claude/skills/devops/**'
+      - '.web-agency/skills/devops/**'
   push:
     branches:
       - main
     paths:
-      - '.claude/skills/devops/**'
+      - '.web-agency/skills/devops/**'
 
 jobs:
   test:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Run validation tests
         id: tests
-        working-directory: .claude/skills/devops/tests
+        working-directory: .web-agency/skills/devops/tests
         run: |
           set +e
 
@@ -145,5 +145,5 @@ ${testOutput}
         uses: actions/upload-artifact@v4
         with:
           name: devops-test-results
-          path: .claude/skills/devops/tests/
+          path: .web-agency/skills/devops/tests/
           retention-days: 7

@@ -3,12 +3,12 @@ name: Design System Foundations Skill Tests
 on:
   pull_request:
     paths:
-      - '.claude/skills/design-system-foundations/**'
+      - '.web-agency/skills/design-system-foundations/**'
   push:
     branches:
       - main
     paths:
-      - '.claude/skills/design-system-foundations/**'
+      - '.web-agency/skills/design-system-foundations/**'
 
 jobs:
   test:
@@ -29,11 +29,11 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'npm'
-          cache-dependency-path: .claude/skills/design-system-foundations/tests/package.json
+          cache-dependency-path: .web-agency/skills/design-system-foundations/tests/package.json
 
       - name: Run validation tests
         id: tests
-        working-directory: .claude/skills/design-system-foundations/tests
+        working-directory: .web-agency/skills/design-system-foundations/tests
         run: |
           set +e
           OUTPUT=$(bash run-tests.sh 2>&1)
@@ -158,5 +158,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: design-system-foundations-test-results
-          path: .claude/skills/design-system-foundations/tests/
+          path: .web-agency/skills/design-system-foundations/tests/
           retention-days: 7

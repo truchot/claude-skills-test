@@ -159,7 +159,7 @@ sequenceDiagram
 
 ## Références
 
-- [ADR-005: Frontières entre Skills](../.claude/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005: Frontières entre Skills](../.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
 - [SRP Analysis](./analysis/SRP-ANALYSIS.md)
 - [Migration Guide](./analysis/MIGRATION.md)
 - [Quick Start](./QUICK_START.md)

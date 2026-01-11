@@ -3,11 +3,11 @@ name: Testing Process Skill Tests
 on:
   push:
     paths:
-      - '.claude/skills/testing-process/**'
+      - '.web-agency/skills/testing-process/**'
       - '.github/workflows/testing-process-tests.yml'
   pull_request:
     paths:
-      - '.claude/skills/testing-process/**'
+      - '.web-agency/skills/testing-process/**'
       - '.github/workflows/testing-process-tests.yml'
   workflow_dispatch:
 
@@ -25,7 +25,7 @@ jobs:
           node-version: '20'
 
       - name: Run validation tests
-        working-directory: .claude/skills/testing-process/tests
+        working-directory: .web-agency/skills/testing-process/tests
         run: npm test
 
       - name: Count agents
@@ -33,7 +33,7 @@ jobs:
           echo "=== Testing Process Skill Agent Count ==="
           total=0
           for domain in strategy types quality performance security accessibility; do
-            count=$(find .claude/skills/testing-process/agents/$domain -name "*.md" 2>/dev/null | wc -l)
+            count=$(find .web-agency/skills/testing-process/agents/$domain -name "*.md" 2>/dev/null | wc -l)
             echo "$domain: $count agents"
             total=$((total + count))
           done
@@ -50,7 +50,7 @@ jobs:
           echo "=== Validating Frontmatter ==="
           errors=0
 
-          for file in $(find .claude/skills/testing-process/agents -name "*.md"); do
+          for file in $(find .web-agency/skills/testing-process/agents -name "*.md"); do
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "ERROR: Missing frontmatter in $file"
               errors=$((errors + 1))
@@ -67,7 +67,7 @@ jobs:
       - name: Check for empty files
         run: |
           echo "=== Checking for Empty Files ==="
-          empty_files=$(find .claude/skills/testing-process -name "*.md" -empty)
+          empty_files=$(find .web-agency/skills/testing-process -name "*.md" -empty)
 
           if [ -n "$empty_files" ]; then
             echo "ERROR: Found empty files:"
@@ -80,7 +80,7 @@ jobs:
       - name: Validate SKILL.md
         run: |
           echo "=== Validating SKILL.md ==="
-          skill_file=".claude/skills/testing-process/SKILL.md"
+          skill_file=".web-agency/skills/testing-process/SKILL.md"
 
           if [ ! -f "$skill_file" ]; then
             echo "ERROR: SKILL.md not found"
@@ -117,11 +117,11 @@ jobs:
           echo "|--------|--------|--------|" >> coverage-report.md
 
           for domain in strategy types quality performance security accessibility; do
-            count=$(find .claude/skills/testing-process/agents/$domain -name "*.md" 2>/dev/null | wc -l)
+            count=$(find .web-agency/skills/testing-process/agents/$domain -name "*.md" 2>/dev/null | wc -l)
             echo "| $domain | $count | ✅ |" >> coverage-report.md
           done
 
-          total=$(find .claude/skills/testing-process/agents -name "*.md" | wc -l)
+          total=$(find .web-agency/skills/testing-process/agents -name "*.md" | wc -l)
           echo "" >> coverage-report.md
           echo "**Total: $total agents**" >> coverage-report.md
           echo "" >> coverage-report.md
