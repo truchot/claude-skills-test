@@ -11,9 +11,9 @@ Accepté (v2.0 - Clarification du modèle)
 ## Contexte
 
 L'analyse SRP a révélé des **chevauchements significatifs** entre trois skills techniques :
-- `direction-technique` (52 agents)
-- `web-dev-process` (61 agents)
-- `wordpress-gutenberg-expert` (41 agents)
+- `direction-technique` (59 agents)
+- `web-dev-process` (64 agents)
+- `wordpress-gutenberg-expert` (42 agents)
 
 ### Problèmes identifiés
 

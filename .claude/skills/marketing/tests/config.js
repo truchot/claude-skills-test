@@ -56,7 +56,9 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
     'copywriting',
     'blog-articles',
     'social-media-content',
-    'landing-pages'
+    'landing-pages',
+    'ligne-editoriale',
+    'arborescence'
   ],
   'acquisition': [
     'orchestrator',
@@ -244,11 +246,11 @@ function getTotalExpectedAgents() {
 }
 
 /**
- * Get expected agent count (115 after SRP refactoring of fidelisation)
+ * Get expected agent count (117 after adding ligne-editoriale and arborescence)
  * @returns {number}
  */
 function getExpectedTotal() {
-  return 115;
+  return 117;
 }
 
 module.exports = {

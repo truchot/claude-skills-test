@@ -25,7 +25,7 @@ Avant toute décision technique, consulter les **learnings** pour éviter les er
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         direction-technique                                  │
-│                        (ce skill - 57 agents)                               │
+│                        (ce skill - 59 agents)                               │
 │                  Pilotage technique stratégique                             │
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
