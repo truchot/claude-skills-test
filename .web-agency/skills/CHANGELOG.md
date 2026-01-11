@@ -16,7 +16,7 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 ### Ajouté
 
 - **Nouveau dossier `.web-agency/`** : Framework agnostique indépendant de tout système d'IA
-  - Structure : `skills/` (24 skills, 707 agents) + `learnings/` (learning loop)
+  - Structure : `skills/` (22 skills, 713 agents) + `learnings/` (learning loop)
   - README documentant l'architecture et l'intégration multi-IA
 
 - **Nouveau dossier `.claude/commands/`** : Interface Claude minimaliste
@@ -26,6 +26,18 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - **CI validation** : Nouveau workflow `validate-paths.yml`
   - Empêche les références aux anciens chemins `.claude/skills` et `.claude/learnings`
   - Valide la structure `.web-agency/`
+  - Exclut CHANGELOG.md (contient documentation de migration)
+
+### Corrigé
+
+- **README.md** : Synchronisé avec l'architecture v4.0.0
+  - Remplacé les skills obsolètes (technical, strategy, design, content) par les 22 skills actuels
+  - Organisé par niveau hiérarchique (0: Entrée, 1: Orchestration, 2: Stratégie, 3: Opérations, 4: Implémentation/Support)
+  - Mis à jour le diagramme d'architecture et le workflow type
+
+- **VERSION** : Corrigé les statistiques
+  - TOTAL_SKILLS: 20 → 22
+  - TOTAL_AGENTS: 668 → 713
 
 ### Migration
 
