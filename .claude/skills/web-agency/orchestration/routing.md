@@ -38,6 +38,9 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | qualité, standards, dette technique | `direction-technique/qualite` |
 | sécurité, OWASP, RGPD, vulnérabilité | `direction-technique/securite` |
 | performance, optimisation, SLO | `direction-technique/performance` |
+| **benchmark, analyse concurrentielle** | `direction-technique/strategy` |
+| **stratégie digitale, roadmap technique** | `direction-technique/strategy` |
+| **recommandations techniques, KPIs business** | `direction-technique/strategy` |
 
 ### Lead Dev (Coordination)
 
@@ -88,6 +91,18 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | wp-env, WP-CLI, @wordpress/scripts | `wordpress-gutenberg-expert/tooling` |
 | PHPUnit WP, Jest WP, Playwright WP | `wordpress-gutenberg-expert/testing` |
 
+### UX-UI Design (Design & Branding)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| wireframe, mockup, prototype, parcours utilisateur | `ux-ui-design/wireframes` |
+| maquette HD, design visuel, UI kit | `ux-ui-design/design-visuel` |
+| **branding, identité visuelle, charte graphique** | `ux-ui-design/branding/brand-identity` |
+| **direction artistique, DA, univers graphique** | `ux-ui-design/branding/direction-artistique` |
+| **motion design, animation, micro-interactions** | `ux-ui-design/branding/motion-design` |
+| **logo, assets, iconographie, illustrations** | `ux-ui-design/branding/assets-creator` |
+| test utilisateur, A/B test, heatmap | `ux-ui-design/tests-utilisateurs` |
+
 ### Design System
 
 | Mots-clés | Skill |
@@ -96,6 +111,17 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | bouton, input, icône, badge | `design-system-foundations/atoms` |
 | formulaire, card, modal, navigation | `design-system-foundations/molecules` |
 | layout, page template, hero | `design-system-foundations/templates` |
+
+### Marketing (Content & Stratégie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| **ligne éditoriale, ton de voix, persona contenu** | `marketing/content/ligne-editoriale` |
+| **arborescence, architecture information, menu** | `marketing/content/arborescence` |
+| copywriting, rédaction web, SEO éditorial | `marketing/content/copywriting` |
+| campagne marketing, acquisition, conversion | `marketing/acquisition` |
+| email marketing, newsletter, automation | `marketing/automation` |
+| analytics, KPIs marketing, attribution | `marketing/analytics` |
 
 ### DevOps (Implémentation)
 
@@ -108,19 +134,18 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | Prometheus, Grafana, logs, alerting | `devops/monitoring` |
 | Blue-Green, Canary, rollback, feature flag | `devops/deployment` |
 
-### ⚠️ Domaines Non Couverts (Skills Planifiés - Non Disponibles)
+### ✅ Domaines Récemment Ajoutés (v3.2.0)
 
-Ces domaines ne sont **pas encore implémentés**. Ne pas router vers ces skills.
+Ces domaines sont maintenant **disponibles** et couverts par les skills suivants :
 
-| Mots-clés | Domaine | Action |
-|-----------|---------|--------|
-| audit, benchmark, stratégie digitale | Strategy | → Demander clarification à l'utilisateur |
-| maquette, logo, charte, branding, DA | Design | → Demander clarification à l'utilisateur |
-| rédaction, copywriting, SEO éditorial | Content | → Demander clarification à l'utilisateur |
-| SEO, SEA, analytics, social media | Marketing | → Demander clarification à l'utilisateur |
+| Mots-clés (anciennement non couverts) | Skill Disponible |
+|---------------------------------------|------------------|
+| audit, benchmark, stratégie digitale | `direction-technique/strategy` |
+| maquette, logo, charte, branding, DA | `ux-ui-design/branding` |
+| rédaction, copywriting, SEO éditorial | `marketing/content` |
+| SEO, SEA, analytics, social media | `marketing/acquisition` + `marketing/analytics` |
 
-> **Si l'utilisateur demande ces domaines** : Expliquer que ces skills sont prévus mais non disponibles.
-> Proposer d'utiliser les skills existants si applicable (ex: `design-system-foundations` pour aspects UI).
+> **Tous les domaines métiers sont désormais couverts.** L'agence web IA est complète.
 
 ## Arbre de Décision
 
@@ -161,8 +186,26 @@ Requête utilisateur
 ├─ Concerne le DESIGN SYSTEM ?
 │  └─ → design-system-foundations
 │
-└─ Autre domaine (strategy, design, content, marketing) ?
-   └─ → Ces skills ne sont pas encore disponibles. Demander clarification.
+├─ Concerne UX/UI ou BRANDING ?
+│  ├─ Wireframes, prototypes ? → ux-ui-design/wireframes
+│  ├─ Maquettes HD, design visuel ? → ux-ui-design/design-visuel
+│  ├─ Branding, identité, DA ? → ux-ui-design/branding
+│  ├─ Motion design, animations ? → ux-ui-design/branding/motion-design
+│  └─ Tests utilisateurs ? → ux-ui-design/tests-utilisateurs
+│
+├─ Concerne MARKETING ou CONTENU ?
+│  ├─ Ligne éditoriale, copywriting ? → marketing/content
+│  ├─ SEO, acquisition, campagnes ? → marketing/acquisition
+│  ├─ Email, automation ? → marketing/automation
+│  └─ Analytics, KPIs ? → marketing/analytics
+│
+├─ Concerne STRATÉGIE DIGITALE ?
+│  ├─ Benchmark concurrentiel ? → direction-technique/strategy/benchmark
+│  ├─ Roadmap technique ? → direction-technique/strategy/strategie-digitale
+│  └─ KPIs business ? → direction-technique/strategy/kpis-business
+│
+└─ Autre domaine ?
+   └─ → Tous les domaines sont couverts. Clarifier le besoin si ambigu.
 ```
 
 ## Matrice de Désambiguïsation
