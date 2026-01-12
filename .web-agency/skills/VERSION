@@ -2,7 +2,7 @@
 
 ## Current Version
 VERSION=4.1.0
-RELEASE_DATE=2025-01-11
+RELEASE_DATE=2026-01-12
 
 ## Schema Version
 AGENT_SCHEMA=1.0.0
