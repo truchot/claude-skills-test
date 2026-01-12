@@ -21,7 +21,7 @@ Ce dossier contient les commandes spécifiques à Claude Code.
 │   ├── project-management.md
 │   ├── marketing.md
 │   ├── ux-ui-design.md
-│   ├── design-system.md
+│   ├── design-system-foundations.md
 │   ├── web-dev-process.md
 │   ├── testing-process.md
 │   ├── client-intake.md
