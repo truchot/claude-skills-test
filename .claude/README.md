@@ -6,49 +6,54 @@ Ce dossier contient les commandes spécifiques à Claude Code.
 
 ```
 .claude/
-├── commands/              # Commandes de rôles
-│   ├── web-agency.md      # Meta-orchestrateur
-│   ├── direction-technique.md  # Niveau 2: Stratégie
-│   ├── direction-marketing.md  # Niveau 2: Stratégie
-│   ├── direction-artistique.md # Niveau 2: Stratégie
-│   ├── lead-dev.md
-│   ├── frontend-developer.md
-│   ├── backend-developer.md
-│   ├── wordpress-expert.md
-│   ├── devops.md
-│   ├── react-expert.md
-│   ├── nextjs-expert.md
-│   ├── project-management.md
-│   ├── marketing.md
-│   ├── ux-ui-design.md
-│   ├── design-system-foundations.md
-│   ├── web-dev-process.md
-│   ├── testing-process.md
-│   ├── client-intake.md
-│   ├── content-management.md
-│   ├── legal-compliance.md
-│   ├── support-client.md
-│   ├── commercial-crm.md
-│   ├── finance-analytics.md
-│   └── task-orchestrator.md
+├── commands/              # 3 commandes intelligentes
+│   ├── t.md               # Technique (routage intelligent)
+│   ├── marketing.md       # Marketing
+│   └── project.md         # Gestion de projet
+├── commands-archive/      # Anciennes commandes (référence)
+├── tests/                 # Tests de validation
 └── README.md              # Ce fichier
 ```
 
-## Utilisation
+## Commandes Disponibles
 
-Les commandes référencent les skills dans `.web-agency/` sans duplication.
+### `/t` - Technique
+Point d'entrée technique unifié qui route vers le bon agent selon le contexte:
+- **Niveau 2**: direction-technique (architecture, vision)
+- **Niveau 3**: lead-dev, devops, testing-process (coordination)
+- **Niveau 4**: frontend, backend, react, nextjs, wordpress (implémentation)
 
-Exemple d'utilisation:
 ```
-/direction-technique   → Charge le rôle de directeur technique
-/frontend-developer    → Charge le rôle de dev frontend
-/web-agency           → Charge le meta-orchestrateur
+/t optimiser les performances
+/t architecture microservices
+/t créer composant Button
+```
+
+### `/marketing` - Marketing
+Point d'entrée marketing avec routage stratégie/exécution:
+- **Niveau 2**: direction-marketing (stratégie, positionnement)
+- **Niveau 3**: marketing (SEO, content, campagnes)
+
+```
+/marketing stratégie acquisition B2B
+/marketing audit SEO technique
+```
+
+### `/project` - Projet
+Point d'entrée pour la visibilité et coordination:
+- project-management (suivi, planning)
+- web-agency (orchestration globale)
+- task-orchestrator (découpage tâches)
+
+```
+/project état du projet Alpha
+/project prioriser les initiatives Q1
 ```
 
 ## Architecture
 
 ```
-.claude/               # Interface Claude (commandes uniquement)
+.claude/               # Interface Claude (3 commandes)
     │
     └── référence →
                       .web-agency/        # Framework agnostique
@@ -56,4 +61,9 @@ Exemple d'utilisation:
                       └── learnings/      # Learning loop
 ```
 
-Les instructions métier sont dans `.web-agency/`, ce dossier ne contient que les points d'entrée pour Claude.
+Les commandes analysent le contexte et routent vers les skills appropriés dans `.web-agency/`.
+
+## Anciennes Commandes
+
+Les 23 commandes granulaires ont été archivées dans `commands-archive/` pour référence.
+Elles peuvent être restaurées si nécessaire.
