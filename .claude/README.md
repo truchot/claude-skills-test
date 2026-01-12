@@ -52,7 +52,7 @@ Exemple d'utilisation:
     │
     └── référence →
                       .web-agency/        # Framework agnostique
-                      ├── skills/         # 24 skills, 763 agents
+                      ├── skills/         # 24 skills, 757 agents
                       └── learnings/      # Learning loop
 ```
 

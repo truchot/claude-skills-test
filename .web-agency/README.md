@@ -8,7 +8,7 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 
 ```
 .web-agency/
-├── skills/          # 24 skills métier, 707 agents
+├── skills/          # 24 skills métier, 757 agents
 │   ├── web-agency/           # Meta-orchestrateur principal
 │   ├── client-intake/        # Réception des demandes
 │   ├── task-orchestrator/    # Gestion des tâches

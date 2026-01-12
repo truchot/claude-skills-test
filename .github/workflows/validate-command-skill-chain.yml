@@ -1,0 +1,22 @@
+name: Validate Command-Skill Chain
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - '.claude/commands/**'
+      - '.web-agency/skills/**/SKILL.md'
+  pull_request:
+    branches: ['**']
+    paths:
+      - '.claude/commands/**'
+      - '.web-agency/skills/**/SKILL.md'
+
+jobs:
+  validate-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate command → skill references
+        run: bash .claude/tests/validate-command-skill-chain.sh

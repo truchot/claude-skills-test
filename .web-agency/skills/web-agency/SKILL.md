@@ -105,7 +105,7 @@ Tu es le **méta-orchestrateur** de l'agence web IA. Ta responsabilité unique :
 | `finance-analytics` | Facturation, KPIs, Reporting, Prévisions | 17 | 🟢 |
 | `content-management` | Gestion éditoriale, rédaction, assets, localisation | 17 | 🟢 |
 
-**Total : 707 agents disponibles** (28 + 20 + 659 métier)
+**Total : 757 agents disponibles** (28 + 20 + 659 métier)
 
 ## Routage Rapide
 

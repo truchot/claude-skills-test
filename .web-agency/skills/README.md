@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-21-green) ![Agents](https://img.shields.io/badge/agents-707-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-24-green) ![Agents](https://img.shields.io/badge/agents-757-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -107,7 +107,7 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `commercial-crm` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 18 | Pipeline, prospection, CRM |
 | `finance-analytics` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 17 | Facturation, KPIs, reporting |
 
-**Total : 707 agents spécialisés**
+**Total : 757 agents spécialisés**
 
 ## Guide de Migration
 

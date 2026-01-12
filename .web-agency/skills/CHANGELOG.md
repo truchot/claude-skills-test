@@ -30,7 +30,7 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
   - `direction-artistique` (25 agents) - Stratégie design (NOUVEAU)
 
 - **Total skills** : 22 → 24 (+2 skills)
-- **Total agents** : 713 → 763 (+50 agents)
+- **Total agents** : 707 → 757 (+50 agents)
 
 ### Philosophie
 
@@ -55,7 +55,7 @@ Ces skills définissent la **stratégie** et délèguent l'**exécution** au Niv
 ### Ajouté
 
 - **Nouveau dossier `.web-agency/`** : Framework agnostique indépendant de tout système d'IA
-  - Structure : `skills/` (22 skills, 713 agents) + `learnings/` (learning loop)
+  - Structure : `skills/` (22 skills, 707 agents) + `learnings/` (learning loop)
   - README documentant l'architecture et l'intégration multi-IA
 
 - **Nouveau dossier `.claude/commands/`** : Interface Claude minimaliste
@@ -76,7 +76,7 @@ Ces skills définissent la **stratégie** et délèguent l'**exécution** au Niv
 
 - **VERSION** : Corrigé les statistiques
   - TOTAL_SKILLS: 20 → 22
-  - TOTAL_AGENTS: 668 → 713
+  - TOTAL_AGENTS: 668 → 707
 
 ### Migration
 

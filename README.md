@@ -81,14 +81,14 @@ HUMAIN (supervision)
 | [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
 | [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
 
-**Total : 24 skills, 763 agents**
+**Total : 24 skills, 757 agents**
 
 ## Architecture
 
 ```
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
-│   ├── skills/                    # 24 skills, 763 agents
+│   ├── skills/                    # 24 skills, 757 agents
 │   │   ├── web-agency/            # Meta-orchestrateur
 │   │   ├── client-intake/         # Niveau 0: Entrée
 │   │   ├── task-orchestrator/     # Niveau 1: Orchestration
@@ -235,7 +235,7 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.1.0** - 24 skills, 763 agents
+**v4.1.0** - 24 skills, 757 agents
 
 Voir [CHANGELOG](.web-agency/skills/CHANGELOG.md) pour l'historique complet.
 
