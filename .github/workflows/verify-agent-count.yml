@@ -1,0 +1,27 @@
+name: Verify Agent Count
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - '.web-agency/skills/**/agents/**'
+      - '.web-agency/skills/VERSION'
+      - '.web-agency/skills/**/SKILL.md'
+  pull_request:
+    branches: ['**']
+    paths:
+      - '.web-agency/skills/**/agents/**'
+      - '.web-agency/skills/VERSION'
+      - '.web-agency/skills/**/SKILL.md'
+
+jobs:
+  verify-count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x .web-agency/skills/scripts/verify-agent-count.sh
+
+      - name: Verify agent count matches VERSION
+        run: bash .web-agency/skills/scripts/verify-agent-count.sh

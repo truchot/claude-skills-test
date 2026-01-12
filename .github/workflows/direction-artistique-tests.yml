@@ -1,0 +1,25 @@
+name: Direction Artistique Tests
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - '.web-agency/skills/direction-artistique/**'
+  pull_request:
+    branches: ['**']
+    paths:
+      - '.web-agency/skills/direction-artistique/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run agent validation
+        run: node .web-agency/skills/direction-artistique/tests/validate-agents.test.js
