@@ -31,28 +31,46 @@ Référence: `.web-agency/skills/design-system-foundations/`
 - Documentation design
 - Implémentation patterns
 
-## Logique de Routage
+## Algorithme de Routage
+
+### 1. Analyse des mots-clés
+
+| Mots-clés | Destination |
+|-----------|-------------|
+| branding, identité, logo, charte, vision créative | direction-artistique |
+| guidelines, standards, principes design | direction-artistique |
+| wireframe, maquette, prototype, Figma | ux-ui-design |
+| parcours, user flow, test utilisateur, UX research | ux-ui-design |
+| accessibilité, WCAG, a11y | ux-ui-design |
+| composant, token, design system, Storybook | design-system-foundations |
+| spacing, typography, color palette | design-system-foundations |
+
+### 2. Analyse du contexte
+
+- **Type de livrable**: Stratégique (guidelines) vs Tactique (maquettes) vs Technique (composants)
+- **Phase projet**: Discovery → direction-artistique, Build → ux-ui-design/design-system
+- **Fichiers mentionnés**: `.fig` → Figma/UX, `tokens.json` → Design System
+
+### 3. Résolution d'ambiguïté
 
 ```
-SI demande concerne branding/identité/vision créative
-  → direction-artistique (Niveau 2)
+SI plusieurs skills possibles:
+  → Privilégier direction-artistique (cadrage avant exécution)
 
-SI demande concerne stratégie UX/guidelines
-  → direction-artistique (Niveau 2)
+SI demande transverse (ex: "refonte complète"):
+  → Séquencer: DA → UX/UI → Design System
+  → Proposer un plan d'action
 
-SI demande concerne wireframes/maquettes/prototypes
-  → ux-ui-design (Niveau 3)
-
-SI demande concerne parcours utilisateur/tests UX
-  → ux-ui-design (Niveau 3)
-
-SI demande concerne composants/design system
-  → design-system-foundations (Niveau 4)
-
-SI demande concerne les deux (stratégie + exécution)
-  → Commencer par direction-artistique pour cadrer
-  → Puis déléguer pour exécuter
+SI demande floue:
+  → Demander le livrable attendu (guidelines? maquettes? composants?)
 ```
+
+### 4. Fallback
+
+Si indétermination après analyse:
+1. Demander le type de livrable souhaité
+2. Identifier la phase projet actuelle
+3. Router vers ux-ui-design par défaut (le plus polyvalent)
 
 ## Utilisation
 

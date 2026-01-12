@@ -25,19 +25,49 @@ Référence: `.web-agency/skills/marketing/`
 - Email marketing
 - Analytics et tracking
 
-## Logique de Routage
+## Algorithme de Routage
+
+### 1. Analyse des mots-clés
+
+| Mots-clés | Destination |
+|-----------|-------------|
+| stratégie, positionnement, différenciation, marché | direction-marketing |
+| KPI, ROI, budget, allocation, mesure performance | direction-marketing |
+| persona, segment, ciblage, ICP | direction-marketing |
+| SEO, SEA, Google Ads, référencement | marketing |
+| contenu, article, blog, rédaction | marketing |
+| email, newsletter, automation, CRM | marketing |
+| social media, LinkedIn, campagne, ads | marketing |
+| analytics, tracking, GA4, conversion | marketing |
+
+### 2. Analyse du contexte
+
+- **Niveau de décision**: Stratégique (budget, vision) vs Opérationnel (campagne, contenu)
+- **Horizon temporel**: Long terme → direction-marketing, Court terme → marketing
+- **Type de question**: "Pourquoi?" → stratégie, "Comment?" → opérations
+
+### 3. Résolution d'ambiguïté
 
 ```
-SI demande concerne stratégie/positionnement/vision
-  → direction-marketing (Niveau 2)
+SI plusieurs skills possibles:
+  → Privilégier direction-marketing (cadrage avant exécution)
 
-SI demande concerne exécution/campagnes/contenu
-  → marketing (Niveau 3)
+SI demande mixte (ex: "lancer campagne acquisition"):
+  → Vérifier si stratégie définie
+  → Si non: direction-marketing d'abord
+  → Si oui: marketing pour exécution
 
-SI demande concerne les deux
-  → Commencer par direction-marketing pour cadrer
-  → Puis déléguer à marketing pour exécuter
+SI demande floue:
+  → Demander l'objectif business
+  → Identifier si besoin de cadrage ou d'exécution
 ```
+
+### 4. Fallback
+
+Si indétermination après analyse:
+1. Demander l'objectif principal
+2. Identifier les contraintes (budget, temps)
+3. Router vers marketing par défaut pour action rapide
 
 ## Utilisation
 

@@ -31,34 +31,50 @@ Références:
 - `.web-agency/skills/nextjs-expert/` - Next.js spécifique
 - `.web-agency/skills/wordpress-gutenberg-expert/` - WordPress/Gutenberg
 
-## Logique de Routage
+## Algorithme de Routage
+
+### 1. Analyse des mots-clés
+
+| Mots-clés | Destination |
+|-----------|-------------|
+| architecture, vision, standards, gouvernance, stratégie tech | direction-technique |
+| planning, sprint, review, coordination, équipe | lead-dev |
+| CI/CD, deploy, docker, kubernetes, infra, monitoring | devops |
+| test, qualité, coverage, e2e, unit test | testing-process |
+| composant, UI, CSS, responsive, animation | frontend-developer |
+| API, database, auth, backend, serveur | backend-developer |
+| React, hooks, Redux, state | react-expert |
+| Next.js, SSR, ISR, App Router | nextjs-expert |
+| WordPress, Gutenberg, WP, plugin, theme | wordpress-gutenberg-expert |
+
+### 2. Analyse du contexte
+
+- **Fichiers mentionnés**: `.tsx` → React, `docker-compose.yml` → DevOps
+- **Stack du projet**: Détecté via `package.json`, config files
+- **Historique conversation**: Continuité avec requêtes précédentes
+
+### 3. Résolution d'ambiguïté
 
 ```
-SI demande concerne architecture/vision/standards
-  → direction-technique (Niveau 2)
+SI plusieurs skills possibles:
+  → Privilégier le niveau le plus haut (stratégie > opérations > implémentation)
+  → Demander clarification si vraiment ambigu
 
-SI demande concerne coordination/planning/review
-  → lead-dev (Niveau 3)
+SI aucun mot-clé clair:
+  → Analyser l'intention (nouveau projet? bug? optimisation?)
+  → Poser 1-2 questions ciblées maximum
 
-SI demande concerne infrastructure/CI-CD/déploiement
-  → devops (Niveau 3)
-
-SI demande concerne tests/qualité
-  → testing-process (Niveau 3)
-
-SI demande concerne implémentation frontend
-  → frontend-developer ou react-expert/nextjs-expert (Niveau 4)
-
-SI demande concerne implémentation backend
-  → backend-developer (Niveau 4)
-
-SI demande concerne WordPress
-  → wordpress-gutenberg-expert (Niveau 4)
-
-SI contexte insuffisant
-  → Poser des questions pour clarifier
-  → Commencer par le niveau le plus haut pertinent
+SI demande transverse (ex: "optimiser performances"):
+  → Identifier le goulet d'étranglement probable
+  → Router vers le domaine le plus impacté
 ```
+
+### 4. Fallback
+
+Si indétermination après analyse:
+1. Proposer les 2-3 options les plus probables
+2. Laisser l'utilisateur choisir
+3. Ne jamais bloquer - toujours avancer
 
 ## Utilisation
 
