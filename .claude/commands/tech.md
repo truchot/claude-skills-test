@@ -1,4 +1,4 @@
-# /t - Commande Technique Intelligente
+# /tech - Commande Technique Intelligente
 
 ## Rôle
 Point d'entrée technique unifié qui route vers le bon agent en fonction du contexte.
@@ -63,13 +63,13 @@ SI contexte insuffisant
 ## Utilisation
 
 ```
-/t [description de la demande]
+/tech [description de la demande]
 ```
 
 ## Exemples
 
-- `/t optimiser les performances` → Analyse contexte, route vers frontend/backend/devops selon cas
-- `/t architecture microservices` → direction-technique (stratégie)
-- `/t créer composant Button` → frontend-developer ou react-expert
-- `/t pipeline CI/CD` → devops
-- `/t review PR #123` → lead-dev
+- `/tech optimiser les performances` → Analyse contexte, route vers frontend/backend/devops selon cas
+- `/tech architecture microservices` → direction-technique (stratégie)
+- `/tech créer composant Button` → frontend-developer ou react-expert
+- `/tech pipeline CI/CD` → devops
+- `/tech review PR #123` → lead-dev

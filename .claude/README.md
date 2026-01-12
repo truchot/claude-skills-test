@@ -6,8 +6,9 @@ Ce dossier contient les commandes spécifiques à Claude Code.
 
 ```
 .claude/
-├── commands/              # 3 commandes intelligentes
-│   ├── t.md               # Technique (routage intelligent)
+├── commands/              # 4 commandes intelligentes
+│   ├── tech.md            # Technique (routage intelligent)
+│   ├── design.md          # Design (UX/UI/DA)
 │   ├── marketing.md       # Marketing
 │   └── project.md         # Gestion de projet
 ├── commands-archive/      # Anciennes commandes (référence)
@@ -17,16 +18,28 @@ Ce dossier contient les commandes spécifiques à Claude Code.
 
 ## Commandes Disponibles
 
-### `/t` - Technique
+### `/tech` - Technique
 Point d'entrée technique unifié qui route vers le bon agent selon le contexte:
 - **Niveau 2**: direction-technique (architecture, vision)
 - **Niveau 3**: lead-dev, devops, testing-process (coordination)
 - **Niveau 4**: frontend, backend, react, nextjs, wordpress (implémentation)
 
 ```
-/t optimiser les performances
-/t architecture microservices
-/t créer composant Button
+/tech optimiser les performances
+/tech architecture microservices
+/tech créer composant Button
+```
+
+### `/design` - Design
+Point d'entrée design avec routage stratégie/exécution:
+- **Niveau 2**: direction-artistique (branding, vision créative)
+- **Niveau 3**: ux-ui-design (wireframes, prototypes)
+- **Niveau 4**: design-system-foundations (composants, tokens)
+
+```
+/design refonte identité visuelle
+/design wireframe page checkout
+/design créer composant Card
 ```
 
 ### `/marketing` - Marketing
@@ -53,7 +66,7 @@ Point d'entrée pour la visibilité et coordination:
 ## Architecture
 
 ```
-.claude/               # Interface Claude (3 commandes)
+.claude/               # Interface Claude (4 commandes)
     │
     └── référence →
                       .web-agency/        # Framework agnostique
