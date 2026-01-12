@@ -29,7 +29,7 @@ Références:
 - `.web-agency/skills/backend-developer/` - API/services
 - `.web-agency/skills/react-expert/` - React spécifique
 - `.web-agency/skills/nextjs-expert/` - Next.js spécifique
-- `.web-agency/skills/wordpress-expert/` - WordPress/Gutenberg
+- `.web-agency/skills/wordpress-gutenberg-expert/` - WordPress/Gutenberg
 
 ## Logique de Routage
 
@@ -53,7 +53,7 @@ SI demande concerne implémentation backend
   → backend-developer (Niveau 4)
 
 SI demande concerne WordPress
-  → wordpress-expert (Niveau 4)
+  → wordpress-gutenberg-expert (Niveau 4)
 
 SI contexte insuffisant
   → Poser des questions pour clarifier
