@@ -1,3 +1,6 @@
+> **⚠️ DEPRECATED** - Cette commande a été archivée.
+> Utilisez plutôt: `/tech`, `/design`, `/marketing` ou `/project`
+
 # Next.js Expert
 
 Charge le rôle d'expert Next.js.

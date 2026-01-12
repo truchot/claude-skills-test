@@ -1,3 +1,6 @@
+> **⚠️ DEPRECATED** - Cette commande a été archivée.
+> Utilisez plutôt: `/tech`, `/design`, `/marketing` ou `/project`
+
 # Finance & Analytics
 
 Charge le rôle finance et analytics.

@@ -1,3 +1,6 @@
+> **⚠️ DEPRECATED** - Cette commande a été archivée.
+> Utilisez plutôt: `/tech`, `/design`, `/marketing` ou `/project`
+
 # Task Orchestrator
 
 Charge l'orchestrateur de tâches.

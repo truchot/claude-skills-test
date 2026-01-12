@@ -1,3 +1,6 @@
+> **⚠️ DEPRECATED** - Cette commande a été archivée.
+> Utilisez plutôt: `/tech`, `/design`, `/marketing` ou `/project`
+
 # Web Agency - Meta-orchestrateur
 
 Charge le meta-orchestrateur web-agency.
