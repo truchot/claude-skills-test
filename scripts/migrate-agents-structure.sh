@@ -4,7 +4,7 @@
 
 set -e
 
-SKILLS_DIR="/home/user/claude-skills-test/.claude/skills"
+SKILLS_DIR="/home/user/claude-skills-test/.web-agency/skills"
 
 # Fichiers/dossiers à NE PAS déplacer
 EXCLUDE_PATTERNS="SKILL.md|orchestrator.md|package.json|package-lock.json|CHANGELOG.md|README.md|tests|.editorconfig|.gitattributes|templates|docs|workflows|orchestration"

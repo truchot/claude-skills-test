@@ -3,12 +3,12 @@ name: Lead Dev Skill Tests
 on:
   pull_request:
     paths:
-      - '.claude/skills/lead-dev/**'
+      - '.web-agency/skills/lead-dev/**'
   push:
     branches:
       - main
     paths:
-      - '.claude/skills/lead-dev/**'
+      - '.web-agency/skills/lead-dev/**'
 
 jobs:
   test:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Run validation tests
         id: tests
-        working-directory: .claude/skills/lead-dev
+        working-directory: .web-agency/skills/lead-dev
         run: |
           set +e
           OUTPUT=$(npm test 2>&1)
@@ -140,5 +140,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lead-dev-test-results
-          path: .claude/skills/lead-dev/tests/
+          path: .web-agency/skills/lead-dev/tests/
           retention-days: 7

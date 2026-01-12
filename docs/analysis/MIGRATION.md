@@ -216,7 +216,7 @@ Tous les fichiers ont été refactorés pour respecter le SRP. Phase 2 terminée
 Exécutez le script de validation pour vérifier la conformité :
 
 ```bash
-cd .claude/skills/direction-technique
+cd .web-agency/skills/direction-technique
 npm run test:srp
 ```
 

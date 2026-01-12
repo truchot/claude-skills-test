@@ -125,7 +125,7 @@ Cette règle (SRP - Single Responsibility Principle) garantit :
 ## Commandes de Test
 
 ```bash
-# Dans .claude/skills/direction-technique/
+# Dans .web-agency/skills/direction-technique/
 npm test           # Tous les tests (dont SRP)
 npm run test:srp   # Validation SRP uniquement
 ```
@@ -133,6 +133,6 @@ npm run test:srp   # Validation SRP uniquement
 ## Ressources
 
 - [Architecture complète](./ARCHITECTURE.md)
-- [ADR-005 : Frontières entre skills](../.claude/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005 : Frontières entre skills](../.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
 - [Guide de migration v3.0](./analysis/MIGRATION.md)
 - [Analyse SRP](./analysis/SRP-ANALYSIS.md)

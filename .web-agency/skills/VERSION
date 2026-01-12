@@ -1,0 +1,54 @@
+# Web Agency IA - Version Information
+
+## Current Version
+VERSION=4.1.0
+RELEASE_DATE=2026-01-12
+
+## Schema Version
+AGENT_SCHEMA=1.0.0
+SKILL_SCHEMA=1.0.0
+WORKFLOW_SCHEMA=1.0.0
+
+## Compatibility
+MIN_CLAUDE_CODE_VERSION=1.0.0
+
+## Statistics
+TOTAL_SKILLS=24
+TOTAL_AGENTS=757
+TOTAL_WORKFLOWS=9
+
+## Skills Breakdown
+# Niveau 0: Entrée
+client-intake=23
+
+# Niveau 1: Orchestration
+task-orchestrator=16
+
+# Niveau 2: Stratégie
+direction-technique=52
+direction-marketing=25
+direction-artistique=25
+
+# Niveau 3: Opérations
+project-management=24
+lead-dev=27
+web-dev-process=61
+testing-process=25
+
+# Niveau 4: Implémentation
+frontend-developer=33
+backend-developer=32
+devops=30
+wordpress-gutenberg-expert=41
+react-expert=28
+nextjs-expert=35
+design-system-foundations=21
+marketing=115
+content-management=17
+
+# Niveau 4: Fonctions Support
+ux-ui-design=22
+legal-compliance=16
+support-client=16
+commercial-crm=17
+finance-analytics=17

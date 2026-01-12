@@ -1,0 +1,20 @@
+name: Verify Agent Count
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+  workflow_dispatch:
+
+jobs:
+  verify-count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x .web-agency/skills/scripts/verify-agent-count.sh
+
+      - name: Verify agent count matches VERSION
+        run: bash .web-agency/skills/scripts/verify-agent-count.sh
