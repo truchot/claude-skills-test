@@ -14,6 +14,11 @@
     "create": "ts-node src/cli.ts create",
     "list": "ts-node src/cli.ts list",
     "stats": "ts-node src/cli.ts stats",
+    "import:git": "ts-node src/importers/git-history-importer.ts",
+    "session:start": "ts-node src/importers/session-logger-hook.ts start",
+    "session:end": "ts-node src/importers/session-logger-hook.ts end",
+    "session:log": "ts-node src/importers/session-logger-hook.ts log",
+    "session:status": "ts-node src/importers/session-logger-hook.ts status",
     "test": "jest",
     "clean": "rm -rf dist"
   },
