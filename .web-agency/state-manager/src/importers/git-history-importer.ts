@@ -18,7 +18,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { getStateManager } from '../StateManager';
 import {
   ProjectStatus,
@@ -26,6 +26,36 @@ import {
   TaskPriority,
   EventType,
 } from '../../types/project';
+
+// ============================================================
+// SECURITY HELPERS
+// ============================================================
+
+/**
+ * Validate that a string is a safe git ref (branch name, hash, etc.)
+ * Prevents command injection via malicious ref names
+ */
+function isValidGitRef(ref: string): boolean {
+  // Git refs can contain: alphanumeric, -, _, /, .
+  // Must not contain: shell metacharacters, spaces, control chars
+  const safeRefPattern = /^[a-zA-Z0-9._\/-]+$/;
+  return safeRefPattern.test(ref) && ref.length < 256;
+}
+
+/**
+ * Validate ISO date format (YYYY-MM-DD)
+ */
+function isValidDateString(date: string): boolean {
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+  return datePattern.test(date);
+}
+
+/**
+ * Sanitize string for safe logging (remove potential injection)
+ */
+function sanitizeForLog(str: string): string {
+  return str.replace(/[^\w\s@._\-\/]/g, '').slice(0, 200);
+}
 
 // ============================================================
 // TYPES
@@ -66,27 +96,34 @@ interface ClaudeSession {
 }
 
 // ============================================================
-// GIT HELPERS
+// GIT HELPERS (Secure - using execFileSync with array args)
 // ============================================================
 
-function execGit(command: string): string {
+/**
+ * Execute git command safely using execFileSync with array arguments
+ * This prevents command injection attacks
+ */
+function execGitSafe(args: string[]): string {
   try {
-    return execSync(`git ${command}`, {
+    return execFileSync('git', args, {
       encoding: 'utf-8',
       maxBuffer: 10 * 1024 * 1024,
     }).trim();
   } catch (error) {
-    console.error(`Git command failed: git ${command}`);
+    console.error(`Git command failed: git ${args.join(' ')}`);
     return '';
   }
 }
 
 function getProjectRoot(): string {
-  return execGit('rev-parse --show-toplevel');
+  return execGitSafe(['rev-parse', '--show-toplevel']);
 }
 
 function getAllBranches(): GitBranch[] {
-  const output = execGit('branch -a --format="%(refname:short)|%(objectname:short)"');
+  const output = execGitSafe([
+    'branch', '-a',
+    '--format=%(refname:short)|%(objectname:short)'
+  ]);
   if (!output) return [];
 
   return output.split('\n').map(line => {
@@ -101,17 +138,36 @@ function getAllBranches(): GitBranch[] {
 }
 
 function getCommits(options: { since?: string; branch?: string } = {}): GitCommit[] {
-  let command = 'log --all --format="%H|%h|%an|%ae|%aI|%s" --name-only';
+  const args: string[] = [
+    'log',
+    '--format=%H|%h|%an|%ae|%aI|%s',
+    '--name-only'
+  ];
 
+  // Only add --all if no specific branch
+  if (!options.branch) {
+    args.push('--all');
+  }
+
+  // Validate and add since date (prevent injection)
   if (options.since) {
-    command += ` --since="${options.since}"`;
+    if (!isValidDateString(options.since)) {
+      console.error('Invalid date format. Use YYYY-MM-DD');
+      return [];
+    }
+    args.push(`--since=${options.since}`);
   }
 
+  // Validate and add branch (prevent injection)
   if (options.branch) {
-    command = command.replace('--all', '') + ` ${options.branch}`;
+    if (!isValidGitRef(options.branch)) {
+      console.error('Invalid branch name');
+      return [];
+    }
+    args.push(options.branch);
   }
 
-  const output = execGit(command);
+  const output = execGitSafe(args);
   if (!output) return [];
 
   const commits: GitCommit[] = [];
@@ -141,7 +197,17 @@ function getCommits(options: { since?: string; branch?: string } = {}): GitCommi
 }
 
 function getCommitBranches(hash: string): string[] {
-  const output = execGit(`branch -a --contains ${hash} --format="%(refname:short)"`);
+  // Validate hash to prevent injection
+  if (!isValidGitRef(hash)) {
+    console.error('Invalid commit hash');
+    return [];
+  }
+
+  const output = execGitSafe([
+    'branch', '-a',
+    '--contains', hash,
+    '--format=%(refname:short)'
+  ]);
   return output ? output.split('\n').filter(b => b.trim()) : [];
 }
 

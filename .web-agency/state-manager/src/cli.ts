@@ -65,6 +65,36 @@ const stateManager = getStateManager({
 });
 
 // ============================================================
+// SECURITY VALIDATORS
+// ============================================================
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function isValidEmail(email: string): boolean {
+  return EMAIL_REGEX.test(email) && email.length <= 254;
+}
+
+function isValidUUID(id: string): boolean {
+  return UUID_REGEX.test(id);
+}
+
+function sanitizeInput(input: string, maxLength: number = 500): string {
+  // Remove control characters and limit length
+  return input.replace(/[\x00-\x1F\x7F]/g, '').trim().slice(0, maxLength);
+}
+
+function maskEmail(email: string): string {
+  // Mask email for logging: john@example.com -> j***@e***.com
+  const [local, domain] = email.split('@');
+  if (!domain) return '***@***';
+  const domainParts = domain.split('.');
+  const maskedLocal = local[0] + '***';
+  const maskedDomain = domainParts[0][0] + '***.' + domainParts.slice(1).join('.');
+  return `${maskedLocal}@${maskedDomain}`;
+}
+
+// ============================================================
 // CLI HELPERS
 // ============================================================
 
@@ -167,19 +197,33 @@ async function cmdCreate(args: Record<string, string>): Promise<void> {
     return;
   }
 
+  // Security: Validate email format
+  if (!isValidEmail(email)) {
+    console.error('Error: Invalid email format');
+    console.log('Please provide a valid email address (e.g., john@example.com)');
+    return;
+  }
+
+  // Security: Sanitize inputs
+  const sanitizedName = sanitizeInput(name, 500);
+  const sanitizedClient = sanitizeInput(client, 200);
+  const sanitizedDescription = sanitizeInput(description || '', 5000);
+  const sanitizedCompany = company ? sanitizeInput(company, 200) : undefined;
+
   const project = stateManager.createProject({
-    name,
-    description: description || '',
+    name: sanitizedName,
+    description: sanitizedDescription,
     client: {
-      name: client,
-      email,
-      company: company || undefined,
+      name: sanitizedClient,
+      email: email.toLowerCase().trim(), // Normalize email
+      company: sanitizedCompany,
     },
-    tags: tags ? tags.split(',').map(t => t.trim()) : [],
+    tags: tags ? tags.split(',').map(t => sanitizeInput(t.trim(), 50)) : [],
   });
 
   stateManager.saveProjects();
 
+  // Security: Mask email in output
   console.log(`
 ✓ Project created successfully!
 
@@ -187,7 +231,7 @@ async function cmdCreate(args: Record<string, string>): Promise<void> {
   Name:   ${project.name}
   Slug:   ${project.slug}
   Status: ${project.status}
-  Client: ${project.client.name} <${project.client.email}>
+  Client: ${project.client.name} <${maskEmail(project.client.email)}>
 
   Data stored in: ${PROJECT_DATA_DIR}/projects.json
 `);
@@ -265,7 +309,7 @@ async function cmdShow(args: Record<string, string>): Promise<void> {
 
 CLIENT
   Name:    ${project.client.name}
-  Email:   ${project.client.email}
+  Email:   ${maskEmail(project.client.email)}
   Company: ${project.client.company || '(none)'}
 
 METRICS

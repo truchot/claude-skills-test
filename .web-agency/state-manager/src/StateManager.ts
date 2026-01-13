@@ -30,6 +30,105 @@ import {
 } from '../types/project';
 
 // ============================================================
+// SECURITY VALIDATORS
+// ============================================================
+
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
+
+function isValidUUID(str: string): boolean {
+  return typeof str === 'string' && UUID_REGEX.test(str);
+}
+
+function isValidEmail(str: string): boolean {
+  return typeof str === 'string' && EMAIL_REGEX.test(str) && str.length <= 254;
+}
+
+function isValidISODate(str: string): boolean {
+  return typeof str === 'string' && ISO_DATE_REGEX.test(str);
+}
+
+function sanitizeString(str: unknown, maxLength: number = 1000): string {
+  if (typeof str !== 'string') return '';
+  // Remove control characters and limit length
+  return str.replace(/[\x00-\x1F\x7F]/g, '').slice(0, maxLength);
+}
+
+function validateClient(client: unknown): client is Client {
+  if (!client || typeof client !== 'object') return false;
+  const c = client as Record<string, unknown>;
+  return (
+    isValidUUID(c.id as string) &&
+    typeof c.name === 'string' &&
+    c.name.length > 0 &&
+    c.name.length <= 200 &&
+    isValidEmail(c.email as string)
+  );
+}
+
+function validateTask(task: unknown): task is Task {
+  if (!task || typeof task !== 'object') return false;
+  const t = task as Record<string, unknown>;
+  return (
+    isValidUUID(t.id as string) &&
+    isValidUUID(t.projectId as string) &&
+    typeof t.title === 'string' &&
+    t.title.length > 0 &&
+    typeof t.status === 'string' &&
+    ['todo', 'in_progress', 'blocked', 'review', 'done', 'cancelled'].includes(t.status)
+  );
+}
+
+function validateProject(project: unknown): project is Project {
+  if (!project || typeof project !== 'object') return false;
+  const p = project as Record<string, unknown>;
+
+  // Required fields validation
+  if (!isValidUUID(p.id as string)) return false;
+  if (typeof p.name !== 'string' || p.name.length === 0 || p.name.length > 500) return false;
+  if (typeof p.slug !== 'string') return false;
+  if (!isValidISODate(p.createdAt as string)) return false;
+  if (!isValidISODate(p.updatedAt as string)) return false;
+
+  // Status validation
+  const validStatuses = [
+    'intake', 'planning', 'design', 'development', 'testing',
+    'staging', 'deployed', 'maintenance', 'completed', 'on_hold', 'cancelled'
+  ];
+  if (!validStatuses.includes(p.status as string)) return false;
+
+  // Client validation
+  if (!validateClient(p.client)) return false;
+
+  // Arrays validation
+  if (!Array.isArray(p.tasks)) return false;
+  if (!Array.isArray(p.phases)) return false;
+  if (!Array.isArray(p.events)) return false;
+  if (!Array.isArray(p.tags)) return false;
+
+  return true;
+}
+
+function validateSnapshot(snapshot: unknown): snapshot is StateSnapshot {
+  if (!snapshot || typeof snapshot !== 'object') return false;
+  const s = snapshot as Record<string, unknown>;
+
+  if (typeof s.version !== 'string') return false;
+  if (!isValidISODate(s.exportedAt as string)) return false;
+  if (!Array.isArray(s.projects)) return false;
+
+  // Validate each project
+  for (const project of s.projects) {
+    if (!validateProject(project)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// ============================================================
 // DEFAULT CONFIG
 // ============================================================
 
@@ -82,9 +181,23 @@ export class StateManager {
     if (fs.existsSync(projectsFile)) {
       try {
         const data = fs.readFileSync(projectsFile, 'utf-8');
-        const projectsArray: Project[] = JSON.parse(data);
-        projectsArray.forEach((p) => this.projects.set(p.id, p));
-        console.log(`[StateManager] Loaded ${this.projects.size} projects`);
+        const projectsArray: unknown[] = JSON.parse(data);
+
+        let validCount = 0;
+        let invalidCount = 0;
+
+        for (const project of projectsArray) {
+          // Security: Validate each project before loading
+          if (validateProject(project)) {
+            this.projects.set(project.id, project);
+            validCount++;
+          } else {
+            invalidCount++;
+            console.warn('[StateManager] Skipped invalid project during load');
+          }
+        }
+
+        console.log(`[StateManager] Loaded ${validCount} valid projects (${invalidCount} invalid skipped)`);
       } catch (error) {
         console.error('[StateManager] Error loading projects:', error);
       }
@@ -135,10 +248,48 @@ export class StateManager {
     };
   }
 
-  public importSnapshot(snapshot: StateSnapshot): void {
+  public importSnapshot(snapshot: unknown): void {
+    // Security: Validate snapshot structure before importing
+    if (!validateSnapshot(snapshot)) {
+      throw new Error('Invalid snapshot format: validation failed');
+    }
+
+    // Security: Check for duplicate IDs that might cause conflicts
+    const existingIds = new Set(this.projects.keys());
+    const newIds = new Set<string>();
+
+    for (const project of snapshot.projects) {
+      if (newIds.has(project.id)) {
+        throw new Error(`Duplicate project ID in snapshot: ${project.id}`);
+      }
+      newIds.add(project.id);
+
+      // Sanitize string fields before importing
+      project.name = sanitizeString(project.name, 500);
+      project.description = sanitizeString(project.description, 5000);
+      project.client.name = sanitizeString(project.client.name, 200);
+
+      // Sanitize tasks
+      project.tasks = project.tasks.map((t: Task) => ({
+        ...t,
+        title: sanitizeString(t.title, 500),
+        description: sanitizeString(t.description, 2000),
+      }));
+
+      // Sanitize events
+      project.events = project.events.map((e: ProjectEvent) => ({
+        ...e,
+        title: sanitizeString(e.title, 500),
+        description: sanitizeString(e.description, 2000),
+      }));
+    }
+
+    // Import validated and sanitized projects
     snapshot.projects.forEach((p) => this.projects.set(p.id, p));
     this.isDirty = true;
     this.saveProjects();
+
+    console.log(`[StateManager] Imported ${snapshot.projects.length} projects (validated)`);
   }
 
   // ============================================================
