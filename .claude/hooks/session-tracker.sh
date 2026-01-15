@@ -93,9 +93,22 @@ validate_path "$PROJECT_DATA_DIR" "$PROJECT_ROOT" || exit 1
 validate_path "$SESSION_FILE" "$PROJECT_ROOT" || exit 1
 validate_path "$LOG_FILE" "$PROJECT_ROOT" || exit 1
 
-# Ensure directories exist (with restricted permissions)
-mkdir -p "$PROJECT_DATA_DIR"
-chmod 700 "$PROJECT_DATA_DIR" 2>/dev/null || true
+# Ensure directories exist with appropriate permissions
+# Use 755 for team environments, can be overridden by umask
+if ! mkdir -p "$PROJECT_DATA_DIR" 2>/dev/null; then
+    echo "Error: Cannot create directory $PROJECT_DATA_DIR" >&2
+    echo "Check permissions on parent directory" >&2
+    exit 1
+fi
+
+# Set permissions - use 750 as a balance between security and team access
+# Only change permissions if we own the directory
+if [ -O "$PROJECT_DATA_DIR" ]; then
+    chmod 750 "$PROJECT_DATA_DIR" 2>/dev/null || {
+        echo "Warning: Could not set permissions on $PROJECT_DATA_DIR" >&2
+        # Continue anyway - the directory exists
+    }
+fi
 
 # Logging function (with sanitization)
 log() {

@@ -149,6 +149,9 @@ export class StateManager {
   private projects: Map<string, Project>;
   private isDirty: boolean = false;
   private autoSaveTimer?: NodeJS.Timeout;
+  private isSaving: boolean = false; // Mutex to prevent concurrent saves
+  private saveErrors: number = 0;
+  private readonly MAX_SAVE_ERRORS = 3;
 
   constructor(config: Partial<StateManagerConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -206,10 +209,43 @@ export class StateManager {
 
   private startAutoSave(): void {
     this.autoSaveTimer = setInterval(() => {
-      if (this.isDirty) {
-        this.saveProjects();
+      if (this.isDirty && !this.isSaving) {
+        this.saveProjectsAsync().catch((error) => {
+          this.saveErrors++;
+          console.error(`[StateManager] Auto-save failed (${this.saveErrors}/${this.MAX_SAVE_ERRORS}):`, error);
+
+          // Stop auto-save after too many consecutive errors
+          if (this.saveErrors >= this.MAX_SAVE_ERRORS) {
+            console.error('[StateManager] Too many save errors, disabling auto-save');
+            this.stopAutoSave();
+          }
+        });
       }
     }, this.config.autoSaveInterval);
+  }
+
+  private stopAutoSave(): void {
+    if (this.autoSaveTimer) {
+      clearInterval(this.autoSaveTimer);
+      this.autoSaveTimer = undefined;
+    }
+  }
+
+  /**
+   * Async save with mutex to prevent concurrent writes
+   */
+  private async saveProjectsAsync(): Promise<void> {
+    if (this.isSaving) {
+      return; // Skip if already saving
+    }
+
+    this.isSaving = true;
+    try {
+      this.saveProjects();
+      this.saveErrors = 0; // Reset error count on success
+    } finally {
+      this.isSaving = false;
+    }
   }
 
   // ============================================================
