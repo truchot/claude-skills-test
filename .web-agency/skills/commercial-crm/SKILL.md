@@ -1,7 +1,9 @@
 ---
 name: commercial-crm
-description: Expert Commercial & CRM - Pipeline, prospection, relances, négociation et fidélisation
-version: 1.0.0
+description: |-
+  Expert Commercial & CRM pour pipeline, prospection, négociation et fidélisation. Utilise ce skill quand: (1) gestion du pipeline commercial, (2) suivi des prospects et relances, (3) préparation de propositions commerciales, (4) négociation tarifaire, (5) analyse du taux de conversion, (6) stratégie de fidélisation client.
+metadata:
+  version: 1.0.0
 ---
 
 # Commercial & CRM

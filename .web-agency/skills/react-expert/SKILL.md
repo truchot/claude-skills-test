@@ -1,8 +1,10 @@
 ---
 name: react-expert
-description: Expert React - Hooks, composants, state management, data fetching, testing, styling et patterns modernes
-version: 1.0.0
-status: active
+description: |-
+  Expert React pour hooks, state management et patterns modernes. Utilise ce skill quand: (1) développement de composants React, (2) gestion d'état (Redux, Zustand, Context), (3) hooks personnalisés, (4) optimisation des re-renders, (5) testing de composants React, (6) patterns React avancés.
+metadata:
+  version: 1.0.0
+  status: active
 ---
 
 # React Expert Skill

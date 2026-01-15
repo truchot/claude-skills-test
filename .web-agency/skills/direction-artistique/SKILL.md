@@ -1,7 +1,9 @@
 ---
 name: direction-artistique
-description: Direction Artistique - Pilotage stratégique du design et de l'identité visuelle. Définit la vision créative avant délégation aux skills ux-ui-design et design-system-foundations.
-version: 1.0.0
+description: |-
+  Direction Artistique pour pilotage stratégique du design et de l'identité visuelle. Utilise ce skill quand: (1) définition d'une identité visuelle, (2) validation de la cohérence créative, (3) brief créatif pour une campagne, (4) arbitrage sur les choix esthétiques, (5) supervision de la charte graphique.
+metadata:
+  version: 1.0.0
 ---
 
 # Direction Artistique

@@ -1,8 +1,10 @@
 ---
 name: nextjs-expert
-description: Expert Next.js - App Router, Server Components, Server Actions, data fetching, rendering strategies, optimization et déploiement
-version: 1.0.0
-status: active
+description: |-
+  Expert Next.js pour App Router, Server Components et optimisation. Utilise ce skill quand: (1) développement d'applications Next.js, (2) migration vers App Router, (3) Server Components et Server Actions, (4) stratégies de rendering (SSR/SSG/ISR), (5) optimisation des performances Next.js, (6) déploiement Vercel.
+metadata:
+  version: 1.0.0
+  status: active
 ---
 
 # Next.js Expert Skill

@@ -1,7 +1,9 @@
 ---
 name: direction-marketing
-description: Direction Marketing - Pilotage stratégique du marketing digital. Définit le positionnement, la stratégie d'acquisition et les KPIs avant délégation au skill marketing.
-version: 1.0.0
+description: |-
+  Direction Marketing pour stratégie digitale, positionnement et acquisition. Utilise ce skill quand: (1) définition de la stratégie marketing, (2) positionnement de marque, (3) planification des campagnes, (4) définition des KPIs marketing, (5) arbitrage budgétaire marketing, (6) analyse de la concurrence.
+metadata:
+  version: 1.0.0
 ---
 
 # Direction Marketing

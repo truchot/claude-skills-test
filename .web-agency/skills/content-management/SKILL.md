@@ -1,8 +1,10 @@
 ---
 name: content-management
-description: Expert Content Management - Gestion éditoriale, rédaction, assets et localisation
-version: 1.0.0
-ecosystem_version: 3.2.0
+description: |-
+  Expert gestion de contenu et workflow éditorial pour sites web et applications. Utilise ce skill quand: (1) création ou migration de contenus, (2) définition d'une stratégie éditoriale, (3) gestion des assets médias, (4) localisation et traduction, (5) workflow de validation de contenus, (6) optimisation SEO du contenu.
+metadata:
+  version: 1.0.0
+  ecosystem_version: 3.2.0
 ---
 
 # Content Management

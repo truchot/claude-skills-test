@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Web Agency Project State",
+  "description": "Schema for project state data stored in .project/projects.json",
+  "version": "1.0.0",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "name", "slug", "client", "status", "createdAt", "updatedAt"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Unique project identifier"
+      },
+      "name": {
+        "type": "string",
+        "description": "Project name"
+      },
+      "slug": {
+        "type": "string",
+        "description": "URL-friendly project identifier"
+      },
+      "description": {
+        "type": "string"
+      },
+      "client": {
+        "type": "object",
+        "required": ["id", "name", "email"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "company": { "type": "string" },
+          "phone": { "type": "string" }
+        }
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "intake",
+          "planning",
+          "design",
+          "development",
+          "testing",
+          "staging",
+          "deployed",
+          "maintenance",
+          "completed",
+          "on_hold",
+          "cancelled"
+        ]
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "updatedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "phases": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "status": { "type": "string" },
+            "progress": { "type": "number", "minimum": 0, "maximum": 100 },
+            "primarySkill": { "type": "string" }
+          }
+        }
+      },
+      "tasks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "title": { "type": "string" },
+            "status": {
+              "type": "string",
+              "enum": ["todo", "in_progress", "blocked", "review", "done", "cancelled"]
+            },
+            "priority": {
+              "type": "string",
+              "enum": ["critical", "high", "medium", "low"]
+            },
+            "assignedSkill": { "type": "string" }
+          }
+        }
+      },
+      "events": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "timestamp": { "type": "string", "format": "date-time" },
+            "type": { "type": "string" },
+            "title": { "type": "string" }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "overallProgress": { "type": "number" },
+          "healthScore": { "type": "number" },
+          "riskLevel": { "type": "string" },
+          "totalTasks": { "type": "number" },
+          "completedTasks": { "type": "number" }
+        }
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  }
+}

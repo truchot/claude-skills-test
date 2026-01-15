@@ -1,7 +1,9 @@
 ---
 name: legal-compliance
-description: Expert Legal & Compliance - RGPD, CGV, mentions légales, conformité et audit
-version: 1.0.0
+description: |-
+  Expert Legal & Compliance pour RGPD, CGV et conformité juridique. Utilise ce skill quand: (1) mise en conformité RGPD, (2) rédaction de CGV/CGU, (3) mentions légales, (4) politique de confidentialité, (5) audit de conformité, (6) gestion des cookies et consentements.
+metadata:
+  version: 1.0.0
 ---
 
 # Legal & Compliance

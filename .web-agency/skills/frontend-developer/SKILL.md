@@ -1,8 +1,10 @@
 ---
 name: frontend-developer
-description: Expert en développement front-end moderne - HTML, CSS, JavaScript, TypeScript, frameworks, testing, performance et tooling
-version: 1.0.0
-status: active
+description: |-
+  Expert développement front-end moderne avec HTML, CSS, JavaScript/TypeScript et frameworks. Utilise ce skill quand: (1) développement d'interfaces utilisateur, (2) intégration de maquettes, (3) optimisation des performances front, (4) accessibilité web (a11y), (5) responsive design, (6) animations et interactions.
+metadata:
+  version: 1.0.0
+  status: active
 ---
 
 # Frontend Developer Skill

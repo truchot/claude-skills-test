@@ -1,0 +1,18 @@
+# Web Agency Project State Data
+# This folder contains project-specific state data
+
+# Ignore all JSON data files (contain project/client info)
+*.json
+
+# But keep the schema for reference
+!schema.json
+
+# Ignore exports
+exports/
+
+# Ignore any backup files
+*.bak
+*.backup
+
+# Ignore logs
+*.log

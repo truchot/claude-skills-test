@@ -1,8 +1,10 @@
 ---
 name: testing-process
-description: Expert en stratégie et méthodologie de tests - Pyramide, types de tests, qualité, performance, sécurité, accessibilité
-version: 1.0.0
-status: active
+description: |-
+  Expert stratégie et méthodologie de tests - pyramide, qualité et automatisation. Utilise ce skill quand: (1) définition d'une stratégie de tests, (2) tests unitaires, intégration, e2e, (3) tests de performance, (4) tests de sécurité, (5) tests d'accessibilité, (6) CI/CD et automatisation des tests.
+metadata:
+  version: 1.0.0
+  status: active
 ---
 
 # Testing Process Expert Skill
