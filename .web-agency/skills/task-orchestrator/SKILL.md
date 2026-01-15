@@ -1,9 +1,11 @@
 ---
 name: task-orchestrator
-description: Orchestration des tâches - Queue, state machine, distribution et suivi d'exécution
-version: 1.0.0
-status: active
-level: 1
+description: |-
+  Orchestration des tâches pour queue, state machine et distribution. Utilise ce skill quand: (1) création d'une file de tâches, (2) gestion d'états et transitions, (3) distribution de travail entre skills, (4) suivi d'exécution des tâches, (5) gestion des erreurs et retry, (6) priorisation des tâches.
+metadata:
+  version: 1.0.0
+  status: active
+  level: 1
 ---
 
 # Task Orchestrator - Gestion Centralisée des Tâches

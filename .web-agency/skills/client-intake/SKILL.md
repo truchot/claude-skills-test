@@ -1,9 +1,11 @@
 ---
 name: client-intake
-description: Réception, qualification et routage automatisé des demandes clients vers l'agence IA
-version: 1.0.0
-status: active
-level: 0
+description: |-
+  Point d'entrée automatisé pour réception, qualification et routage des demandes clients vers l'agence IA. Utilise ce skill quand: (1) un nouveau client contacte l'agence, (2) qualification d'un besoin projet, (3) routage vers le bon interlocuteur/skill, (4) création d'un brief initial, (5) estimation préliminaire de faisabilité.
+metadata:
+  version: 1.0.0
+  status: active
+  level: 0
 ---
 
 # Client Intake - Point d'Entrée Automatisé

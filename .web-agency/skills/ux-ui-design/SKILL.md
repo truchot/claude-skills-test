@@ -1,7 +1,9 @@
 ---
 name: ux-ui-design
-description: Expert UX/UI Design - Recherche utilisateur, wireframes, maquettes, prototypes, tests utilisateurs, branding et direction artistique
-version: 2.0.0
+description: |-
+  Expert UX/UI Design pour recherche utilisateur, wireframes et prototypes. Utilise ce skill quand: (1) recherche utilisateur et personas, (2) wireframing et maquettage, (3) prototypage interactif, (4) tests utilisateurs, (5) design d'interfaces, (6) audit UX, (7) branding et identité visuelle.
+metadata:
+  version: 2.0.0
 ---
 
 # UX/UI Design

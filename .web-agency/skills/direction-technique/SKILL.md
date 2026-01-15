@@ -1,7 +1,9 @@
 ---
 name: direction-technique
-description: Direction Technique - Pilotage stratégique des choix techniques, de l'architecture à la qualité. Orchestre web-dev-process et wordpress-gutenberg-expert.
-version: 3.1.0
+description: |-
+  Direction Technique pour pilotage stratégique des choix techniques et de l'architecture. Utilise ce skill quand: (1) décisions d'architecture système, (2) choix de stack technique, (3) revue technique stratégique, (4) audit de code ou infrastructure, (5) estimation technique macro, (6) arbitrage dette technique.
+metadata:
+  version: 3.1.0
 ---
 
 # Direction Technique

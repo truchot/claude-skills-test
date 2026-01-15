@@ -1,7 +1,9 @@
 ---
 name: web-agency
-description: Méta-skill orchestrateur pour agence Web IA Full-Automatisée - Compose et orchestre les skills métiers avec intake automatisé et orchestration des tâches
-version: 3.2.0
+description: |-
+  Méta-orchestrateur de l'agence Web IA Full-Automatisée. Utilise ce skill quand: (1) routing d'une demande vers le bon skill, (2) orchestration multi-skills, (3) vue d'ensemble d'un projet, (4) coordination entre départements, (5) escalade de décisions stratégiques.
+metadata:
+  version: 3.2.0
 ---
 
 # Web Agency - Agence Web IA Full-Automatisée

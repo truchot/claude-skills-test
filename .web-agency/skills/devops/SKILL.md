@@ -1,8 +1,10 @@
 ---
 name: devops
-description: Expert DevOps - CI/CD, containers, Kubernetes, Infrastructure as Code, monitoring et déploiement
-version: 1.0.0
-status: active
+description: |-
+  Expert DevOps pour CI/CD, containers, Kubernetes et Infrastructure as Code. Utilise ce skill quand: (1) mise en place de pipelines CI/CD, (2) containerisation avec Docker/K8s, (3) infrastructure as code (Terraform, Pulumi), (4) monitoring et alerting, (5) optimisation des déploiements, (6) sécurisation de l'infrastructure.
+metadata:
+  version: 1.0.0
+  status: active
 ---
 
 # DevOps Expert Skill

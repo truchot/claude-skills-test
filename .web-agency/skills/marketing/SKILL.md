@@ -1,8 +1,10 @@
 ---
 name: marketing
-description: Expert Marketing - Stratégie, campagnes, contenu, acquisition, fidélisation, automation, performance et analytics pour agence Web
-version: 1.4.0
-status: active
+description: |-
+  Expert Marketing Digital pour stratégie, campagnes et acquisition. Utilise ce skill quand: (1) création de campagnes marketing, (2) stratégie de contenu, (3) SEO/SEA, (4) email marketing et automation, (5) analyse des performances marketing, (6) gestion des réseaux sociaux.
+metadata:
+  version: 1.4.0
+  status: active
 ---
 
 # Marketing - Expertise Marketing Digital

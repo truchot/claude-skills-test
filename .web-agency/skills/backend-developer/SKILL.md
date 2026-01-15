@@ -1,8 +1,10 @@
 ---
 name: backend-developer
-description: Expert en développement backend - APIs, bases de données, architecture, sécurité et performance
-version: 2.0.0
-status: active
+description: |-
+  Expert backend pour APIs REST/GraphQL, bases de données SQL/NoSQL, architecture serveur et sécurité. Utilise ce skill quand: (1) conception ou développement d'APIs, (2) modélisation de données et requêtes complexes, (3) authentification/autorisation, (4) optimisation de performances serveur, (5) intégration de services tiers, (6) architecture microservices.
+metadata:
+  version: 2.0.0
+  status: active
 ---
 
 # Backend Developer Expert

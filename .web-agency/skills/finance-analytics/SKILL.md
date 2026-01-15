@@ -1,7 +1,9 @@
 ---
 name: finance-analytics
-description: Expert Finance & Analytics - Facturation, KPIs, reporting business, prévisions et rentabilité
-version: 1.0.0
+description: |-
+  Expert Finance & Analytics pour facturation, KPIs et reporting business. Utilise ce skill quand: (1) création de factures ou devis, (2) suivi de la rentabilité projet, (3) analyse des KPIs business, (4) prévisions financières, (5) reporting pour la direction, (6) optimisation des coûts.
+metadata:
+  version: 1.0.0
 ---
 
 # Finance & Analytics

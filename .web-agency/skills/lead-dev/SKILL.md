@@ -1,8 +1,10 @@
 ---
 name: lead-dev
-description: Lead Développeur - Coordination technique opérationnelle, code review, mentoring et livraison. Pair de web-dev-process au niveau OPÉRATIONS.
-version: 1.1.0
-status: active
+description: |-
+  Lead Développeur pour coordination technique opérationnelle et code review. Utilise ce skill quand: (1) coordination d'une équipe de développeurs, (2) code review et qualité de code, (3) mentoring technique, (4) résolution de problèmes techniques complexes, (5) planification des sprints techniques, (6) validation des merge requests.
+metadata:
+  version: 1.1.0
+  status: active
 ---
 
 # Lead Développeur Skill

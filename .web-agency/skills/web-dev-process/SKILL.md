@@ -1,7 +1,9 @@
 ---
 name: web-dev-process
-description: Processus de développement web standardisé - Framework agnostique pour guider toutes les phases d'un projet web, de la découverte à la maintenance.
-version: 1.2.0
+description: |-
+  Processus de développement web standardisé en 7 phases. Utilise ce skill quand: (1) démarrage d'un nouveau projet web, (2) structuration des phases de développement, (3) best practices de développement, (4) checklist de livraison, (5) méthodologie agile appliquée au web.
+metadata:
+  version: 1.2.0
 ---
 
 # Web Development Process - Orchestrateur Principal

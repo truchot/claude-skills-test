@@ -1,7 +1,9 @@
 ---
 name: project-management
-description: Gestion de projet et relation client pour agence Web - Brief, estimation, planning, suivi, communication, livraison, facturation
-version: 1.0.0
+description: |-
+  Gestion de projet pour agence Web - du brief à la livraison. Utilise ce skill quand: (1) planification d'un projet web, (2) estimation et chiffrage, (3) suivi d'avancement, (4) communication client, (5) gestion des risques projet, (6) coordination des équipes, (7) livraison et recette.
+metadata:
+  version: 1.0.0
 ---
 
 # Project Management - Gestion de Projet

@@ -1,7 +1,9 @@
 ---
 name: wordpress-gutenberg-expert
-description: "Expert WordPress et Gutenberg pour répondre à toutes questions sur le développement WordPress, la création de thèmes, plugins, blocks Gutenberg, et l'API Block Editor. Utilise ce skill quand l'utilisateur pose des questions sur WordPress, Gutenberg, les blocks, le développement WP, ou demande de l'aide avec du code WordPress/PHP/React pour WP."
-version: 1.0.0
+description: |-
+  Expert WordPress et Gutenberg pour thèmes, plugins et blocks. Utilise ce skill quand: (1) développement WordPress (thèmes/plugins), (2) création de blocks Gutenberg, (3) API Block Editor, (4) migration ou optimisation WordPress, (5) hooks et filters WP, (6) WP-CLI et déploiement.
+metadata:
+  version: 1.0.0
 ---
 
 # WordPress & Gutenberg Expert - Orchestrateur Principal

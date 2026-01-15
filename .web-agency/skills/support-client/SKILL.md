@@ -1,7 +1,9 @@
 ---
 name: support-client
-description: Expert Support Client - Ticketing, FAQ, base de connaissances, escalade et satisfaction
-version: 1.0.0
+description: |-
+  Expert Support Client pour ticketing, FAQ et satisfaction utilisateur. Utilise ce skill quand: (1) gestion des tickets support, (2) création de FAQ ou base de connaissances, (3) escalade de problèmes, (4) analyse de la satisfaction client, (5) formation des utilisateurs, (6) documentation utilisateur.
+metadata:
+  version: 1.0.0
 ---
 
 # Support Client
