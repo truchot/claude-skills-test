@@ -7,13 +7,16 @@ description: |
   un ubiquitous language partagé, (4) tu veux modéliser des entités et agrégats,
   (5) tu dois structurer du code selon Clean Architecture.
 metadata:
-  version: 1.2.0
+  version: 1.3.0
   status: active
   level: transversal
   domains:
     - strategic
     - tactical
     - tooling
+    - templates
+    - case-studies
+    - integrations
 ---
 
 # Domain-Driven Design (DDD)
@@ -80,9 +83,21 @@ ddd/
     │   ├── saga-process-manager.md
     │   └── clean-architecture.md
     │
-    └── tooling/            # OUTILS - Validation et qualité (2 agents)
-        ├── model-validator.md
-        └── pattern-selector.md
+    ├── tooling/            # OUTILS - Validation et qualité (2 agents)
+    │   ├── model-validator.md
+    │   └── pattern-selector.md
+    │
+    ├── templates/          # SCAFFOLDING - Templates de code (3 agents)
+    │   ├── aggregate-template.md
+    │   ├── value-object-template.md
+    │   └── repository-template.md
+    │
+    ├── case-studies/       # EXEMPLES - Cas d'usage complets (2 agents)
+    │   ├── e-commerce-domain.md
+    │   └── anemic-to-rich-migration.md
+    │
+    └── integrations/       # INTÉGRATIONS - Frameworks (1 agent)
+        └── nextjs-integration.md
 ```
 
 ---
@@ -130,6 +145,27 @@ ddd/
 | `model-validator` | Auditer un modèle DDD, détecter les anti-patterns |
 | `pattern-selector` | Aider à choisir le bon pattern selon le contexte |
 
+### Templates (Scaffolding) - 3 agents
+
+| Agent | Responsabilité |
+|-------|----------------|
+| `aggregate-template` | Template complet pour créer un Aggregate |
+| `value-object-template` | Templates de Value Objects (Money, Email, Address...) |
+| `repository-template` | Template interface + implémentation Repository |
+
+### Case Studies (Exemples) - 2 agents
+
+| Agent | Responsabilité |
+|-------|----------------|
+| `e-commerce-domain` | Cas complet e-commerce (Event Storming → Code) |
+| `anemic-to-rich-migration` | Guide migration modèle anémique → Rich Domain |
+
+### Integrations (Frameworks) - 1 agent
+
+| Agent | Responsabilité |
+|-------|----------------|
+| `nextjs-integration` | Intégration DDD avec Next.js App Router |
+
 ---
 
 ## Table de Routage
@@ -162,6 +198,13 @@ ddd/
 | clean architecture, couche, layer, adapter, port | tactical | clean-architecture |
 | audit, validation, anti-pattern, qualité, review, santé modèle | tooling | model-validator |
 | quel pattern, choisir, décision, trade-off, comparaison, recommandation | tooling | pattern-selector |
+| template, scaffolding, générer, boilerplate, starter | templates | aggregate-template |
+| créer aggregate, structure aggregate | templates | aggregate-template |
+| créer value object, template vo | templates | value-object-template |
+| template repository, persistence, mapper | templates | repository-template |
+| case study, exemple complet, end-to-end, e-commerce | case-studies | e-commerce-domain |
+| migration, anemic, rich domain, refactoring legacy, strangler | case-studies | anemic-to-rich-migration |
+| nextjs, next.js, app router, server actions, api routes | integrations | nextjs-integration |
 
 ### Routage par Phase de Projet
 

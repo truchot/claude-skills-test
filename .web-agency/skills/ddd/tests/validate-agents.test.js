@@ -43,6 +43,18 @@ const EXPECTED_STRUCTURE = {
   'tooling': [
     'model-validator',
     'pattern-selector'
+  ],
+  'templates': [
+    'aggregate-template',
+    'value-object-template',
+    'repository-template'
+  ],
+  'case-studies': [
+    'e-commerce-domain',
+    'anemic-to-rich-migration'
+  ],
+  'integrations': [
+    'nextjs-integration'
   ]
 };
 
@@ -145,8 +157,8 @@ const totalExpectedAgents = Object.values(EXPECTED_STRUCTURE)
   .reduce((sum, agents) => sum + agents.length, 0);
 test(
   `Total expected agents: ${totalExpectedAgents}`,
-  totalExpectedAgents === 26,
-  `Expected 26 agents, got ${totalExpectedAgents}`
+  totalExpectedAgents === 32,
+  `Expected 32 agents, got ${totalExpectedAgents}`
 );
 
 // Test each domain
@@ -245,11 +257,14 @@ if (fs.existsSync(skillMdPath)) {
   );
 
   test(
-    'SKILL.md mentions all 3 domains',
+    'SKILL.md mentions all 6 domains',
     skillContent.includes('strategic') &&
     skillContent.includes('tactical') &&
-    skillContent.includes('tooling'),
-    'SKILL.md should mention all 3 domains: strategic, tactical, tooling'
+    skillContent.includes('tooling') &&
+    skillContent.includes('templates') &&
+    skillContent.includes('case-studies') &&
+    skillContent.includes('integrations'),
+    'SKILL.md should mention all 6 domains: strategic, tactical, tooling, templates, case-studies, integrations'
   );
 }
 

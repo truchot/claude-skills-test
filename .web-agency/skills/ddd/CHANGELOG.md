@@ -4,6 +4,26 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [1.3.0] - 2026-01-15
+
+### Ajouté
+
+#### Templates (3 agents)
+- **aggregate-template** : Template complet Aggregate avec TS/Java
+- **value-object-template** : Templates VO (Money, Email, Address, DateRange)
+- **repository-template** : Interface domaine + implémentation infra
+
+#### Case Studies (2 agents)
+- **e-commerce-domain** : Cas end-to-end (Event Storming → Bounded Contexts → Aggregates)
+- **anemic-to-rich-migration** : Guide migration Strangler Fig étape par étape
+
+#### Integrations (1 agent)
+- **nextjs-integration** : DDD avec Next.js App Router, Server Actions, API Routes
+
+### Modifié
+- Structure mise à jour avec 6 domaines (32 agents total)
+- Table de routage étendue pour templates, case-studies, integrations
+
 ## [1.2.0] - 2026-01-15
 
 ### Ajouté

@@ -6,9 +6,9 @@ Skill de modélisation métier basé sur les principes du Domain-Driven Design.
 
 | Métrique | Valeur |
 |----------|--------|
-| Version | 1.2.0 |
-| Agents | 26 |
-| Domaines | 3 (strategic, tactical, tooling) |
+| Version | 1.3.0 |
+| Agents | 32 |
+| Domaines | 6 (strategic, tactical, tooling, templates, case-studies, integrations) |
 | Niveau | Transversal |
 
 ## Quand utiliser ce skill
@@ -29,7 +29,10 @@ ddd/
 └── agents/
     ├── strategic/        # 8 agents - Découverte et structuration
     ├── tactical/         # 16 agents - Patterns d'implémentation
-    └── tooling/          # 2 agents - Outils et aide à la décision
+    ├── tooling/          # 2 agents - Outils et aide à la décision
+    ├── templates/        # 3 agents - Scaffolding et boilerplate
+    ├── case-studies/     # 2 agents - Exemples end-to-end
+    └── integrations/     # 1 agent - Intégration frameworks
 ```
 
 ## Domaines
@@ -55,6 +58,24 @@ Outils transverses
 
 - **model-validator** : Audit et détection d'anti-patterns
 - **pattern-selector** : Aide au choix du bon pattern
+
+### Templates (3 agents)
+Scaffolding et boilerplate
+
+- **aggregate-template** : Template Aggregate avec TS/Java
+- **value-object-template** : Templates VO (Money, Email, Address...)
+- **repository-template** : Interface + implémentation
+
+### Case Studies (2 agents)
+Exemples complets
+
+- **e-commerce-domain** : Cas end-to-end e-commerce
+- **anemic-to-rich-migration** : Guide migration Strangler Fig
+
+### Integrations (1 agent)
+Intégration frameworks
+
+- **nextjs-integration** : DDD avec Next.js App Router
 
 ## Workflow recommandé
 
