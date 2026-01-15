@@ -7,7 +7,7 @@ description: |
   un ubiquitous language partagé, (4) tu veux modéliser des entités et agrégats,
   (5) tu dois structurer du code selon Clean Architecture.
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   status: active
   level: transversal
   domains:
@@ -62,7 +62,7 @@ ddd/
     │   ├── domain-storytelling.md
     │   └── example-mapping.md
     │
-    ├── tactical/           # COMMENT - Niveau implémentation (13 agents)
+    ├── tactical/           # COMMENT - Niveau implémentation (16 agents)
     │   ├── orchestrator.md
     │   ├── entities.md
     │   ├── value-objects.md
@@ -75,10 +75,14 @@ ddd/
     │   ├── domain-primitives.md
     │   ├── application-services.md
     │   ├── anti-corruption-layer.md
+    │   ├── cqrs.md
+    │   ├── event-sourcing.md
+    │   ├── saga-process-manager.md
     │   └── clean-architecture.md
     │
-    └── tooling/            # OUTILS - Validation et qualité (1 agent)
-        └── model-validator.md
+    └── tooling/            # OUTILS - Validation et qualité (2 agents)
+        ├── model-validator.md
+        └── pattern-selector.md
 ```
 
 ---
@@ -98,7 +102,7 @@ ddd/
 | `domain-storytelling` | Narration visuelle des processus métier |
 | `example-mapping` | Découverte par exemples et règles métier (Given-When-Then) |
 
-### Tactical (Niveau implémentation) - 13 agents
+### Tactical (Niveau implémentation) - 16 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
@@ -114,13 +118,17 @@ ddd/
 | `domain-primitives` | Types primitifs typés (IDs, Email, Money...) |
 | `application-services` | Use Cases et orchestration applicative |
 | `anti-corruption-layer` | Protéger le domaine des modèles externes/legacy |
+| `cqrs` | Séparer les modèles de lecture et d'écriture |
+| `event-sourcing` | Stocker l'état comme séquence d'événements |
+| `saga-process-manager` | Orchestrer les processus multi-agrégats longs |
 | `clean-architecture` | Structurer le code en couches concentriques |
 
-### Tooling (Outils) - 1 agent
+### Tooling (Outils) - 2 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
 | `model-validator` | Auditer un modèle DDD, détecter les anti-patterns |
+| `pattern-selector` | Aider à choisir le bon pattern selon le contexte |
 
 ---
 
@@ -148,8 +156,12 @@ ddd/
 | domain primitive, type, typage, id, email, money | tactical | domain-primitives |
 | application service, use case, command, query, orchestration | tactical | application-services |
 | anti-corruption layer, ACL, legacy, traduction, isolation, externe | tactical | anti-corruption-layer |
+| cqrs, command, query, read model, projection, séparation lecture écriture | tactical | cqrs |
+| event sourcing, event store, replay, snapshot, historique, audit trail | tactical | event-sourcing |
+| saga, process manager, compensation, transaction distribuée, workflow long | tactical | saga-process-manager |
 | clean architecture, couche, layer, adapter, port | tactical | clean-architecture |
 | audit, validation, anti-pattern, qualité, review, santé modèle | tooling | model-validator |
+| quel pattern, choisir, décision, trade-off, comparaison, recommandation | tooling | pattern-selector |
 
 ### Routage par Phase de Projet
 
@@ -160,9 +172,11 @@ ddd/
 | Délimitation | bounded-contexts → context-mapping |
 | Spécification | example-mapping → ubiquitous-language |
 | Modélisation | domain-primitives → entities → value-objects → aggregates |
-| Patterns avancés | factories → specifications → domain-events |
+| Patterns de base | factories → specifications → domain-events |
 | Architecture | clean-architecture → repositories → application-services |
+| Patterns avancés | cqrs → event-sourcing → saga-process-manager |
 | Intégration externe | anti-corruption-layer → context-mapping |
+| Aide à la décision | pattern-selector |
 | Audit & Qualité | model-validator |
 
 ---
