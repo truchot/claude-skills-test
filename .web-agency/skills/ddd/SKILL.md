@@ -7,12 +7,13 @@ description: |
   un ubiquitous language partagé, (4) tu veux modéliser des entités et agrégats,
   (5) tu dois structurer du code selon Clean Architecture.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   status: active
   level: transversal
   domains:
     - strategic
     - tactical
+    - tooling
 ---
 
 # Domain-Driven Design (DDD)
@@ -61,19 +62,23 @@ ddd/
     │   ├── domain-storytelling.md
     │   └── example-mapping.md
     │
-    └── tactical/           # COMMENT - Niveau implémentation (12 agents)
-        ├── orchestrator.md
-        ├── entities.md
-        ├── value-objects.md
-        ├── aggregates.md
-        ├── repositories.md
-        ├── domain-services.md
-        ├── domain-events.md
-        ├── factories.md
-        ├── specifications.md
-        ├── domain-primitives.md
-        ├── application-services.md
-        └── clean-architecture.md
+    ├── tactical/           # COMMENT - Niveau implémentation (13 agents)
+    │   ├── orchestrator.md
+    │   ├── entities.md
+    │   ├── value-objects.md
+    │   ├── aggregates.md
+    │   ├── repositories.md
+    │   ├── domain-services.md
+    │   ├── domain-events.md
+    │   ├── factories.md
+    │   ├── specifications.md
+    │   ├── domain-primitives.md
+    │   ├── application-services.md
+    │   ├── anti-corruption-layer.md
+    │   └── clean-architecture.md
+    │
+    └── tooling/            # OUTILS - Validation et qualité (1 agent)
+        └── model-validator.md
 ```
 
 ---
@@ -93,7 +98,7 @@ ddd/
 | `domain-storytelling` | Narration visuelle des processus métier |
 | `example-mapping` | Découverte par exemples et règles métier (Given-When-Then) |
 
-### Tactical (Niveau implémentation) - 12 agents
+### Tactical (Niveau implémentation) - 13 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
@@ -108,7 +113,14 @@ ddd/
 | `specifications` | Règles métier composables et réutilisables |
 | `domain-primitives` | Types primitifs typés (IDs, Email, Money...) |
 | `application-services` | Use Cases et orchestration applicative |
+| `anti-corruption-layer` | Protéger le domaine des modèles externes/legacy |
 | `clean-architecture` | Structurer le code en couches concentriques |
+
+### Tooling (Outils) - 1 agent
+
+| Agent | Responsabilité |
+|-------|----------------|
+| `model-validator` | Auditer un modèle DDD, détecter les anti-patterns |
 
 ---
 
@@ -135,7 +147,9 @@ ddd/
 | specification, règle métier, critère, filtre, policy | tactical | specifications |
 | domain primitive, type, typage, id, email, money | tactical | domain-primitives |
 | application service, use case, command, query, orchestration | tactical | application-services |
+| anti-corruption layer, ACL, legacy, traduction, isolation, externe | tactical | anti-corruption-layer |
 | clean architecture, couche, layer, adapter, port | tactical | clean-architecture |
+| audit, validation, anti-pattern, qualité, review, santé modèle | tooling | model-validator |
 
 ### Routage par Phase de Projet
 
@@ -148,6 +162,8 @@ ddd/
 | Modélisation | domain-primitives → entities → value-objects → aggregates |
 | Patterns avancés | factories → specifications → domain-events |
 | Architecture | clean-architecture → repositories → application-services |
+| Intégration externe | anti-corruption-layer → context-mapping |
+| Audit & Qualité | model-validator |
 
 ---
 
