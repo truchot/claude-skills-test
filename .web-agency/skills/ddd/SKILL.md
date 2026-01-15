@@ -51,16 +51,17 @@ Le DDD est une approche de conception logicielle qui place le **domaine métier 
 ddd/
 ├── SKILL.md (ce fichier)
 └── agents/
-    ├── strategic/          # POURQUOI & QUOI - Niveau conceptuel
+    ├── strategic/          # POURQUOI & QUOI - Niveau conceptuel (8 agents)
     │   ├── orchestrator.md
     │   ├── bounded-contexts.md
     │   ├── context-mapping.md
     │   ├── ubiquitous-language.md
+    │   ├── core-domain-identification.md
     │   ├── event-storming.md
     │   ├── domain-storytelling.md
     │   └── example-mapping.md
     │
-    └── tactical/           # COMMENT - Niveau implémentation
+    └── tactical/           # COMMENT - Niveau implémentation (12 agents)
         ├── orchestrator.md
         ├── entities.md
         ├── value-objects.md
@@ -68,6 +69,10 @@ ddd/
         ├── repositories.md
         ├── domain-services.md
         ├── domain-events.md
+        ├── factories.md
+        ├── specifications.md
+        ├── domain-primitives.md
+        ├── application-services.md
         └── clean-architecture.md
 ```
 
@@ -75,29 +80,34 @@ ddd/
 
 ## Domaines et Agents
 
-### Strategic (Niveau conceptuel)
+### Strategic (Niveau conceptuel) - 8 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
 | `orchestrator` | Route vers l'agent strategic approprié |
 | `bounded-contexts` | Identifier et délimiter les contextes bornés |
-| `context-mapping` | Définir les relations entre contextes |
-| `ubiquitous-language` | Construire le vocabulaire partagé |
+| `context-mapping` | Définir les relations entre contextes (Shared Kernel, ACL, etc.) |
+| `ubiquitous-language` | Construire le vocabulaire partagé équipe/métier |
+| `core-domain-identification` | Classifier Core / Supporting / Generic domains |
 | `event-storming` | Faciliter les ateliers de découverte par événements |
 | `domain-storytelling` | Narration visuelle des processus métier |
-| `example-mapping` | Découverte par exemples et règles métier |
+| `example-mapping` | Découverte par exemples et règles métier (Given-When-Then) |
 
-### Tactical (Niveau implémentation)
+### Tactical (Niveau implémentation) - 12 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
 | `orchestrator` | Route vers l'agent tactical approprié |
-| `entities` | Modéliser les entités avec identité |
+| `entities` | Modéliser les entités avec identité et comportement |
 | `value-objects` | Créer des objets valeur immuables |
-| `aggregates` | Définir les agrégats et leurs racines |
+| `aggregates` | Définir les agrégats, racines et invariants |
 | `repositories` | Concevoir les interfaces de persistance |
 | `domain-services` | Implémenter la logique métier transverse |
 | `domain-events` | Modéliser les événements du domaine |
+| `factories` | Encapsuler la création complexe d'agrégats |
+| `specifications` | Règles métier composables et réutilisables |
+| `domain-primitives` | Types primitifs typés (IDs, Email, Money...) |
+| `application-services` | Use Cases et orchestration applicative |
 | `clean-architecture` | Structurer le code en couches concentriques |
 
 ---
@@ -111,6 +121,7 @@ ddd/
 | bounded context, sous-domaine, frontière, périmètre | strategic | bounded-contexts |
 | context map, relation, upstream, downstream, ACL | strategic | context-mapping |
 | vocabulaire, glossaire, terme, langage, ubiquitous | strategic | ubiquitous-language |
+| core domain, supporting, generic, priorisation, valeur stratégique | strategic | core-domain-identification |
 | event storming, atelier, sticky, événement métier | strategic | event-storming |
 | storytelling, processus, narration, pictogramme | strategic | domain-storytelling |
 | example mapping, user story, règle, exemple, cas limite | strategic | example-mapping |
@@ -120,17 +131,23 @@ ddd/
 | repository, persistance, collection, stockage | tactical | repositories |
 | domain service, service métier, logique transverse | tactical | domain-services |
 | domain event, événement, notification, réaction | tactical | domain-events |
-| clean architecture, couche, use case, adapter, port | tactical | clean-architecture |
+| factory, création, construction, instanciation | tactical | factories |
+| specification, règle métier, critère, filtre, policy | tactical | specifications |
+| domain primitive, type, typage, id, email, money | tactical | domain-primitives |
+| application service, use case, command, query, orchestration | tactical | application-services |
+| clean architecture, couche, layer, adapter, port | tactical | clean-architecture |
 
 ### Routage par Phase de Projet
 
 | Phase | Agents recommandés |
 |-------|-------------------|
 | Découverte initiale | event-storming → domain-storytelling → ubiquitous-language |
+| Priorisation | core-domain-identification |
 | Délimitation | bounded-contexts → context-mapping |
 | Spécification | example-mapping → ubiquitous-language |
-| Modélisation | entities → value-objects → aggregates |
-| Implémentation | clean-architecture → repositories → domain-services |
+| Modélisation | domain-primitives → entities → value-objects → aggregates |
+| Patterns avancés | factories → specifications → domain-events |
+| Architecture | clean-architecture → repositories → application-services |
 
 ---
 
