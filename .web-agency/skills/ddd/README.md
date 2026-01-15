@@ -79,6 +79,45 @@ Découverte → Structuration → Modélisation → Implémentation → Audit
 | Refactoring legacy | `legacy-modernization` |
 | Infrastructure | `devops` |
 
+## Relation avec les autres skills
+
+### Stratégie anti-duplication
+
+Ce skill `ddd` est le **skill de référence** pour tout ce qui concerne le Domain-Driven Design. Les autres skills doivent **rediriger ici** plutôt que de dupliquer le contenu.
+
+#### Pour `backend-developer`
+
+Si `backend-developer` a un agent `architecture/ddd.md`, il doit être **minimal** et rediriger :
+
+```markdown
+# DDD (Redirection)
+
+Pour tout ce qui concerne le Domain-Driven Design, utilise le skill `ddd`.
+
+→ Redirection: `.web-agency/skills/ddd/`
+
+Ce skill couvre:
+- Strategic DDD (Bounded Contexts, Event Storming...)
+- Tactical DDD (Entities, Aggregates, Repositories...)
+- Patterns avancés (CQRS, Event Sourcing, Sagas)
+```
+
+#### Pour `direction-technique`
+
+Peut référencer le skill `ddd` pour les décisions d'architecture DDD :
+- Choix de patterns → `ddd/tooling/pattern-selector`
+- Audit de modèle → `ddd/tooling/model-validator`
+
+### Frontières de responsabilité
+
+| Responsabilité | Skill |
+|----------------|-------|
+| Modélisation métier, patterns DDD | `ddd` |
+| Implémentation technique (API, DB queries) | `backend-developer` |
+| Tests du domaine | `testing-process` |
+| Refactoring vers DDD | `legacy-modernization` |
+| Décisions d'architecture globale | `direction-technique` |
+
 ## Ressources
 
 - [Domain-Driven Design (Eric Evans)](https://www.domainlanguage.com/ddd/)
