@@ -1,4 +1,4 @@
-# ADR-001: Utilisation de Mermaid pour les Diagrammes
+# ADR-008: Utilisation de Mermaid pour les Diagrammes
 
 ## Métadonnées
 
@@ -6,16 +6,16 @@
 |-------|--------|
 | **Statut** | 🟢 Accepté |
 | **Date** | 2026-01-17 |
-| **Décideurs** | DDD Skill Team |
-| **Scope** | Skill DDD |
+| **Décideurs** | Web Agency Team |
+| **Scope** | Tous les skills |
 
 ## Contexte
 
-Le skill DDD contient de nombreux diagrammes pour illustrer :
+Les skills contiennent de nombreux diagrammes pour illustrer :
 - Les architectures (Clean Architecture, Hexagonal)
-- Les relations entre Bounded Contexts (Context Maps)
-- Les flux de données (Event Storming, Sagas)
-- Les structures de code (Aggregates, Value Objects)
+- Les relations entre composants (Context Maps, dépendances)
+- Les flux de données (Event Storming, Sagas, workflows)
+- Les structures de code (Classes, Aggregates, Value Objects)
 
 Actuellement, certains diagrammes sont en ASCII art et d'autres en Mermaid, ce qui crée une incohérence.
 
