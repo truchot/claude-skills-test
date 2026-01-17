@@ -418,9 +418,9 @@ npm test
 | `wordpress-gutenberg-expert` | 4 suites | 86 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 | `design-system-foundations` | 5 suites | 88 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 | `backend-developer` | 1 suite | 118 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
-| `ddd` | 1 suite | 118 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `ddd` | 4 suites | 777 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 
-**Total : 959 tests passés, 0 échecs**
+**Total : 1618 tests passés, 0 échecs**
 
 > **Note** : Certains skills (react-expert, nextjs-expert, lead-dev, etc.) n'ont pas encore de suite de tests.
 
