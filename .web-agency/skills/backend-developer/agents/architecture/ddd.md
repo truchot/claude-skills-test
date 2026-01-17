@@ -17,24 +17,34 @@ workflows:
 
 ## Pourquoi cette redirection ?
 
-Le skill `ddd` est le **skill de référence** pour tout ce qui concerne le Domain-Driven Design. Il offre une couverture complète avec **26 agents spécialisés** :
+Le skill `ddd` est le **skill de référence** pour tout ce qui concerne le Domain-Driven Design. Il offre une couverture complète avec **34 agents spécialisés** :
 
 ### Strategic (8 agents)
 - Event Storming, Domain Storytelling, Example Mapping
 - Bounded Contexts, Context Mapping, Ubiquitous Language
 - Core Domain Identification
 
-### Tactical (16 agents)
+### Tactical (17 agents)
 - Entities, Value Objects, Aggregates
-- Repositories, Domain Services, Domain Events
+- Repositories, Domain Services, Domain Events, Domain Errors
 - Factories, Specifications, Domain Primitives
 - Application Services, Clean Architecture
 - CQRS, Event Sourcing, Saga/Process Manager
 - Anti-Corruption Layer
 
-### Tooling (2 agents)
+### Tooling (3 agents)
 - Model Validator (audit anti-patterns)
 - Pattern Selector (aide à la décision)
+- Performance Guide (aggregate sizing, snapshots)
+
+### Templates (3 agents)
+- Aggregate Template, Value Object Template, Repository Template
+
+### Case Studies (2 agents)
+- E-commerce Domain, Anemic-to-Rich Migration
+
+### Integrations (1 agent)
+- Next.js Integration
 
 ## Quand utiliser le skill DDD ?
 

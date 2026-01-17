@@ -6,7 +6,7 @@ Skill de modélisation métier basé sur les principes du Domain-Driven Design.
 
 | Métrique | Valeur |
 |----------|--------|
-| Version | 1.4.0 |
+| Version | 1.0.0 |
 | Agents | 34 |
 | Domaines | 6 (strategic, tactical, tooling, templates, case-studies, integrations) |
 | Niveau | Transversal |

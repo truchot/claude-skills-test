@@ -7,7 +7,7 @@ description: |
   un ubiquitous language partagé, (4) tu veux modéliser des entités et agrégats,
   (5) tu dois structurer du code selon Clean Architecture.
 metadata:
-  version: 1.4.0
+  version: 1.0.0
   status: active
   level: transversal
   domains:

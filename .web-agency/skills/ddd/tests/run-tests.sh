@@ -198,7 +198,7 @@ output_json() {
 
   echo "{"
   echo "  \"timestamp\": \"$timestamp\","
-  echo "  \"version\": \"1.4.0\","
+  echo "  \"version\": \"1.0.0\","
   echo "  \"totalDuration\": $TOTAL_TIME,"
   echo "  \"totalDurationFormatted\": \"$(format_duration $TOTAL_TIME)\","
   echo "  \"summary\": {"

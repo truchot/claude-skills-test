@@ -4,68 +4,7 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
-## [1.4.0] - 2026-01-17
-
-### Ajouté
-
-#### Tactical
-- **domain-errors** : Gestion des erreurs métier typées (Result/Either patterns, error hierarchy)
-
-#### Tooling
-- **performance-guide** : Optimisation performance DDD (aggregate sizing, snapshots, projections)
-
-### Modifié
-- Structure mise à jour : 34 agents total (17 tactical, 3 tooling)
-- Table de routage étendue avec nouveaux agents
-- Suite de tests complète avec 4 suites (813 tests)
-- Test runner amélioré : timing détaillé, sortie JSON, sélection de suites
-
----
-
-## [1.3.0] - 2026-01-15
-
-### Ajouté
-
-#### Templates (3 agents)
-- **aggregate-template** : Template complet Aggregate avec TS/Java
-- **value-object-template** : Templates VO (Money, Email, Address, DateRange)
-- **repository-template** : Interface domaine + implémentation infra
-
-#### Case Studies (2 agents)
-- **e-commerce-domain** : Cas end-to-end (Event Storming → Bounded Contexts → Aggregates)
-- **anemic-to-rich-migration** : Guide migration Strangler Fig étape par étape
-
-#### Integrations (1 agent)
-- **nextjs-integration** : DDD avec Next.js App Router, Server Actions, API Routes
-
-### Modifié
-- Structure mise à jour avec 6 domaines (32 agents total)
-- Table de routage étendue pour templates, case-studies, integrations
-
-## [1.2.0] - 2026-01-15
-
-### Ajouté
-- **cqrs** (tactical) : Séparation Command/Query, Read Models, Projections
-- **event-sourcing** (tactical) : Events comme source de vérité, snapshots, RGPD
-- **saga-process-manager** (tactical) : Orchestration processus longs, compensations
-- **pattern-selector** (tooling) : Aide à la décision avec arbres de décision
-
-### Modifié
-- Réorganisation des phases de projet dans la table de routage
-- Ajout de la phase "Patterns avancés"
-
-## [1.1.0] - 2026-01-15
-
-### Ajouté
-- **anti-corruption-layer** (tactical) : Protection du domaine, patterns ACL
-- **model-validator** (tooling) : Audit de modèles, détection anti-patterns
-- Nouveau domaine `tooling` pour les outils transverses
-
-### Modifié
-- Mise à jour des tables de routage
-- Ajout des phases "Intégration externe" et "Audit & Qualité"
-
-## [1.0.0] - 2026-01-15
+## [1.0.0] - 2026-01-17
 
 ### Ajouté
 
@@ -79,7 +18,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - **domain-storytelling** : Narration visuelle des processus
 - **example-mapping** : Découverte par exemples (Given-When-Then)
 
-#### Tactical (12 agents initiaux)
+#### Tactical (17 agents)
 - **orchestrator** : Routage vers les agents tactical
 - **entities** : Modélisation des entités
 - **value-objects** : Objets valeur immuables
@@ -87,13 +26,39 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 - **repositories** : Interfaces de persistance
 - **domain-services** : Logique métier transverse
 - **domain-events** : Événements du domaine
+- **domain-errors** : Gestion des erreurs métier typées (Result/Either patterns)
 - **factories** : Création complexe d'agrégats
 - **specifications** : Règles métier composables
 - **domain-primitives** : Types primitifs typés
 - **application-services** : Use Cases et orchestration
 - **clean-architecture** : Structure en couches concentriques
+- **anti-corruption-layer** : Protection du domaine, patterns ACL
+- **cqrs** : Séparation Command/Query, Read Models, Projections
+- **event-sourcing** : Events comme source de vérité, snapshots, RGPD
+- **saga-process-manager** : Orchestration processus longs, compensations
 
-### Structure
+#### Tooling (3 agents)
+- **model-validator** : Audit de modèles, détection anti-patterns
+- **pattern-selector** : Aide à la décision avec arbres de décision
+- **performance-guide** : Optimisation (aggregate sizing, snapshots, projections)
+
+#### Templates (3 agents)
+- **aggregate-template** : Template complet Aggregate avec TS/Java
+- **value-object-template** : Templates VO (Money, Email, Address, DateRange)
+- **repository-template** : Interface domaine + implémentation infra
+
+#### Case Studies (2 agents)
+- **e-commerce-domain** : Cas end-to-end (Event Storming → Bounded Contexts → Aggregates)
+- **anemic-to-rich-migration** : Guide migration Strangler Fig étape par étape
+
+#### Integrations (1 agent)
+- **nextjs-integration** : DDD avec Next.js App Router, Server Actions, API Routes
+
+### Infrastructure
+
 - SKILL.md avec philosophie, routage et workflow
-- Organisation en domaines : strategic, tactical
-- Tables de routage par mots-clés et par phase
+- Organisation en 6 domaines (strategic, tactical, tooling, templates, case-studies, integrations)
+- Tables de routage par mots-clés et par phase de projet
+- Suite de tests complète avec 4 suites (813 tests)
+- Test runner avec timing détaillé, sortie JSON, sélection de suites
+- ADR-008 : Standard Mermaid pour diagrammes
