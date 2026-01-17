@@ -31,27 +31,28 @@ Le Learning Loop est un système d'apprentissage continu qui permet aux agents t
 3. **Réutiliser** les patterns qui fonctionnent
 4. **Améliorer** continuellement la qualité des livrables
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              CYCLE D'APPRENTISSAGE                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│      ┌──────────────┐                                                        │
-│      │   PROJET     │                                                        │
-│      └──────┬───────┘                                                        │
-│             │                                                                │
-│             ▼                                                                │
-│      ┌──────────────┐     ┌──────────────┐     ┌──────────────┐             │
-│      │  CONSULTER   │────▶│   EXÉCUTER   │────▶│  DOCUMENTER  │             │
-│      │  learnings   │     │   la tâche   │     │  l'outcome   │             │
-│      └──────────────┘     └──────────────┘     └──────┬───────┘             │
-│             ▲                                          │                     │
-│             │         ┌──────────────┐                 │                     │
-│             └─────────│  PROMOUVOIR  │◀────────────────┘                     │
-│                       │  si générique│                                       │
-│                       └──────────────┘                                       │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph CYCLE["CYCLE D'APPRENTISSAGE"]
+        direction TB
+        PROJET["PROJET"]
+        CONSULTER["CONSULTER<br/>learnings"]
+        EXECUTER["EXÉCUTER<br/>la tâche"]
+        DOCUMENTER["DOCUMENTER<br/>l'outcome"]
+        PROMOUVOIR["PROMOUVOIR<br/>si générique"]
+
+        PROJET --> CONSULTER
+        CONSULTER --> EXECUTER
+        EXECUTER --> DOCUMENTER
+        DOCUMENTER --> PROMOUVOIR
+        PROMOUVOIR --> CONSULTER
+    end
+
+    classDef cycle fill:#e1f5fe,stroke:#01579b
+    classDef step fill:#e8f5e9,stroke:#388e3c
+
+    class CYCLE cycle
+    class PROJET,CONSULTER,EXECUTER,DOCUMENTER,PROMOUVOIR step
 ```
 
 ---
@@ -130,47 +131,34 @@ Un learning projet devient global quand :
 | Impact | Économie >= 2h de travail |
 | Généricité | Applicable à >= 50% des projets |
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        PROMOTION FLOWCHART                          │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
-│   ┌──────────────────┐                                              │
-│   │ Project Learning │                                              │
-│   │ (in .learnings/) │                                              │
-│   └────────┬─────────┘                                              │
-│            │                                                         │
-│            ▼                                                         │
-│   ┌──────────────────┐     NO                                       │
-│   │ Seen in >= 2     ├────────────────┐                             │
-│   │ projects?        │                │                             │
-│   └────────┬─────────┘                │                             │
-│            │ YES                      │                             │
-│            ▼                          │                             │
-│   ┌──────────────────┐     NO         │                             │
-│   │ Saves >= 2h of   ├───────────────►│                             │
-│   │ work?            │                │                             │
-│   └────────┬─────────┘                │                             │
-│            │ YES                      │                             │
-│            ▼                          ▼                             │
-│   ┌──────────────────┐     NO    ┌─────────────┐                    │
-│   │ Applies to >= 50%├──────────►│ Keep as     │                    │
-│   │ of projects?     │           │ project-    │                    │
-│   └────────┬─────────┘           │ specific    │                    │
-│            │ YES                 └─────────────┘                    │
-│            ▼                                                         │
-│   ┌──────────────────┐                                              │
-│   │ Tech Lead Review │                                              │
-│   └────────┬─────────┘                                              │
-│            │ APPROVED                                               │
-│            ▼                                                         │
-│   ┌──────────────────┐                                              │
-│   │ Global Learning  │                                              │
-│   │ (.web-agency/    │                                              │
-│   │  learnings/)     │                                              │
-│   └──────────────────┘                                              │
-│                                                                      │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph PROMOTION["PROMOTION FLOWCHART"]
+        START["Project Learning<br/>(in .learnings/)"]
+        Q1{"Seen in >= 2<br/>projects?"}
+        Q2{"Saves >= 2h of<br/>work?"}
+        Q3{"Applies to >= 50%<br/>of projects?"}
+        REVIEW["Tech Lead Review"]
+        GLOBAL["Global Learning<br/>(.web-agency/<br/>learnings/)"]
+        KEEP["Keep as<br/>project-specific"]
+
+        START --> Q1
+        Q1 -->|YES| Q2
+        Q1 -->|NO| KEEP
+        Q2 -->|YES| Q3
+        Q2 -->|NO| KEEP
+        Q3 -->|YES| REVIEW
+        Q3 -->|NO| KEEP
+        REVIEW -->|APPROVED| GLOBAL
+    end
+
+    classDef question fill:#fff3e0,stroke:#f57c00
+    classDef result fill:#e8f5e9,stroke:#388e3c
+    classDef reject fill:#ffebee,stroke:#c62828
+
+    class Q1,Q2,Q3 question
+    class START,REVIEW,GLOBAL result
+    class KEEP reject
 ```
 
 ---
