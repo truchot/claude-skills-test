@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-24-green) ![Agents](https://img.shields.io/badge/agents-757-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-25-green) ![Agents](https://img.shields.io/badge/agents-789-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -106,8 +106,9 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `support-client` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 16 | Ticketing, FAQ, satisfaction |
 | `commercial-crm` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 18 | Pipeline, prospection, CRM |
 | `finance-analytics` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | Support | 17 | Facturation, KPIs, reporting |
+| `ddd` | ![v1.3.0](https://img.shields.io/badge/v1.3.0-blue) | Transversal | 32 | Domain-Driven Design - Strategic & Tactical |
 
-**Total : 757 agents spécialisés**
+**Total : 789 agents spécialisés**
 
 ## Guide de Migration
 
@@ -417,8 +418,9 @@ npm test
 | `wordpress-gutenberg-expert` | 4 suites | 86 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 | `design-system-foundations` | 5 suites | 88 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 | `backend-developer` | 1 suite | 118 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
+| `ddd` | 4 suites | 777 ✅ | ![Pass](https://img.shields.io/badge/tests-passing-brightgreen) |
 
-**Total : 841 tests passés, 0 échecs**
+**Total : 1618 tests passés, 0 échecs**
 
 > **Note** : Certains skills (react-expert, nextjs-expert, lead-dev, etc.) n'ont pas encore de suite de tests.
 
