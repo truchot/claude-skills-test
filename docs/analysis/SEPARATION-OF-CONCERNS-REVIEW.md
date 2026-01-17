@@ -56,16 +56,52 @@ Cette analyse identifie **7 problèmes majeurs** dans le découpage actuel des s
 
 **Recommandation** : Créer une matrice claire :
 
+```mermaid
+flowchart LR
+    subgraph MATRICE["Matrice de Responsabilités Sécurité"]
+        direction TB
+        subgraph POLITIQUE["POLITIQUE<br/>(direction-tech)"]
+            P1["Audit sécurité"]
+            P2["Authentification"]
+            P3["Revue sécurité code"]
+            P4["Tests sécurité"]
+        end
+
+        subgraph PROCESS["PROCESS"]
+            PR1["web-dev-process"]
+            PR2["web-dev-process"]
+            PR3["lead-dev"]
+            PR4["web-dev-process"]
+        end
+
+        subgraph IMPLEMENTATION["IMPLÉMENTATION"]
+            I1["(outil externe)"]
+            I2["backend-dev"]
+            I3["(dans la review)"]
+            I4["backend-dev"]
+        end
+
+        P1 --> PR1 --> I1
+        P2 --> PR2 --> I2
+        P3 --> PR3 --> I3
+        P4 --> PR4 --> I4
+    end
+
+    classDef politique fill:#e1f5fe,stroke:#01579b
+    classDef process fill:#fff3e0,stroke:#e65100
+    classDef impl fill:#e8f5e9,stroke:#2e7d32
+
+    class POLITIQUE,P1,P2,P3,P4 politique
+    class PROCESS,PR1,PR2,PR3,PR4 process
+    class IMPLEMENTATION,I1,I2,I3,I4 impl
 ```
-┌────────────────────────┬──────────────────┬──────────────────┬──────────────────┐
-│ Concern                │ POLITIQUE        │ PROCESS          │ IMPLÉMENTATION   │
-├────────────────────────┼──────────────────┼──────────────────┼──────────────────┤
-│ Audit sécurité         │ direction-tech   │ web-dev-process  │ (outil externe)  │
-│ Authentification       │ direction-tech   │ web-dev-process  │ backend-dev      │
-│ Revue sécurité code    │ direction-tech   │ lead-dev         │ (dans la review) │
-│ Tests sécurité         │ direction-tech   │ web-dev-process  │ backend-dev      │
-└────────────────────────┴──────────────────┴──────────────────┴──────────────────┘
-```
+
+| Concern | POLITIQUE | PROCESS | IMPLÉMENTATION |
+|---------|-----------|---------|----------------|
+| Audit sécurité | direction-tech | web-dev-process | (outil externe) |
+| Authentification | direction-tech | web-dev-process | backend-dev |
+| Revue sécurité code | direction-tech | lead-dev | (dans la review) |
+| Tests sécurité | direction-tech | web-dev-process | backend-dev |
 
 ### 1.4 CI/CD & Déploiement : 4 endroits différents
 

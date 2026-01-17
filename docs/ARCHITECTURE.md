@@ -34,56 +34,55 @@ graph TB
 
 ## Hiérarchie POURQUOI / QUOI / COMMENT
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    NIVEAU 1 : POURQUOI                                       │
-│                   (direction-technique)                                      │
-│                                                                              │
-│  Rôle : QUESTIONNER et CLARIFIER le besoin                                  │
-│                                                                              │
-│  → Poser un MAXIMUM de questions pour comprendre le contexte                │
-│  → Identifier les objectifs réels derrière la demande                       │
-│  → Valider les hypothèses avant de déléguer                                 │
-│  → Prendre les décisions stratégiques                                       │
-│                                                                              │
-│  Output : Décisions documentées, ADRs, Politiques validées                  │
-│  Code : ❌ JAMAIS (voir SRP-ANALYSIS.md)                                    │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                      (besoin clarifié, décisions prises)
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       NIVEAU 2 : QUOI                                        │
-│                    (web-dev-process)                                         │
-│                                                                              │
-│  Rôle : CONTEXTUALISER en 3 couches                                         │
-│                                                                              │
-│  1. GLOBAL "Métier"     → Quel process métier standard appliquer ?          │
-│  2. AGENCE "Spécifique" → Quelles particularités de l'agence ?              │
-│  3. PROJET "Exception"  → Quelles exceptions projet outrepassent ?          │
-│                                                                              │
-│  Output : Process adapté, Templates contextualisés, Checklists              │
-│  Code : ❌ JAMAIS                                                            │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                      (process identifié, contexte établi)
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      NIVEAU 3 : COMMENT                                      │
-│                (wordpress-gutenberg-expert, etc.)                            │
-│                                                                              │
-│  Rôle : EXÉCUTER avec spécifications                                        │
-│                                                                              │
-│  → Dans quel environnement ?                                                │
-│  → Avec quelles spécifications techniques ?                                 │
-│  → Quels critères d'acceptance ?                                            │
-│  → Qu'est-ce qu'il y a à produire concrètement ?                            │
-│                                                                              │
-│  Output : Code, Configs, Scripts, Livrables testables                       │
-│  Code : ✅ OUI - C'est ici qu'on implémente                                  │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph N1["NIVEAU 1 : POURQUOI (direction-technique)"]
+        direction TB
+        R1[/"Rôle : QUESTIONNER et CLARIFIER le besoin"/]
+        A1["→ Poser un MAXIMUM de questions pour comprendre le contexte"]
+        A2["→ Identifier les objectifs réels derrière la demande"]
+        A3["→ Valider les hypothèses avant de déléguer"]
+        A4["→ Prendre les décisions stratégiques"]
+        O1["Output : Décisions documentées, ADRs, Politiques validées"]
+        C1["Code : ❌ JAMAIS (voir SRP-ANALYSIS.md)"]
+    end
+
+    T1(["besoin clarifié, décisions prises"])
+
+    subgraph N2["NIVEAU 2 : QUOI (web-dev-process)"]
+        direction TB
+        R2[/"Rôle : CONTEXTUALISER en 3 couches"/]
+        L1["1. GLOBAL 'Métier' → Quel process métier standard appliquer ?"]
+        L2["2. AGENCE 'Spécifique' → Quelles particularités de l'agence ?"]
+        L3["3. PROJET 'Exception' → Quelles exceptions projet outrepassent ?"]
+        O2["Output : Process adapté, Templates contextualisés, Checklists"]
+        C2["Code : ❌ JAMAIS"]
+    end
+
+    T2(["process identifié, contexte établi"])
+
+    subgraph N3["NIVEAU 3 : COMMENT (wordpress-gutenberg-expert, etc.)"]
+        direction TB
+        R3[/"Rôle : EXÉCUTER avec spécifications"/]
+        E1["→ Dans quel environnement ?"]
+        E2["→ Avec quelles spécifications techniques ?"]
+        E3["→ Quels critères d'acceptance ?"]
+        E4["→ Qu'est-ce qu'il y a à produire concrètement ?"]
+        O3["Output : Code, Configs, Scripts, Livrables testables"]
+        C3["Code : ✅ OUI - C'est ici qu'on implémente"]
+    end
+
+    N1 --> T1 --> N2 --> T2 --> N3
+
+    classDef pourquoi fill:#e1f5fe,stroke:#01579b
+    classDef quoi fill:#fff3e0,stroke:#e65100
+    classDef comment fill:#e8f5e9,stroke:#2e7d32
+    classDef transition fill:#f5f5f5,stroke:#9e9e9e
+
+    class N1 pourquoi
+    class N2 quoi
+    class N3 comment
+    class T1,T2 transition
 ```
 
 ## Structure des Domaines (direction-technique)

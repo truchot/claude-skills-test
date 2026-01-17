@@ -11,30 +11,44 @@ cp .web-agency/skills/web-dev-process/workflows/gitlab/.gitlab-ci.yml .
 
 ## Pipeline Structure
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  validate   │ ──▶ │    test     │ ──▶ │    build    │
-│ ─────────── │     │ ─────────── │     │ ─────────── │
-│ • lint      │     │ • unit      │     │ • build     │
-│ • typecheck │     │ • e2e       │     │             │
-│ • commitlint│     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-                                              │
-                    ┌─────────────┐           │
-                    │  security   │ ◀─────────┘
-                    │ ─────────── │
-                    │ • audit     │
-                    │ • sast      │
-                    │ • secrets   │
-                    └─────────────┘
-                          │
-                    ┌─────────────┐
-                    │   deploy    │
-                    │ ─────────── │
-                    │ • review    │
-                    │ • staging   │
-                    │ • production│
-                    └─────────────┘
+```mermaid
+flowchart LR
+    subgraph VALIDATE["validate"]
+        V1["• lint"]
+        V2["• typecheck"]
+        V3["• commitlint"]
+    end
+
+    subgraph TEST["test"]
+        T1["• unit"]
+        T2["• e2e"]
+    end
+
+    subgraph BUILD["build"]
+        B1["• build"]
+    end
+
+    subgraph SECURITY["security"]
+        S1["• audit"]
+        S2["• sast"]
+        S3["• secrets"]
+    end
+
+    subgraph DEPLOY["deploy"]
+        D1["• review"]
+        D2["• staging"]
+        D3["• production"]
+    end
+
+    VALIDATE --> TEST --> BUILD --> SECURITY --> DEPLOY
+
+    classDef stage fill:#e3f2fd,stroke:#1976d2
+    classDef security fill:#fff3e0,stroke:#f57c00
+    classDef deploy fill:#e8f5e9,stroke:#388e3c
+
+    class VALIDATE,TEST,BUILD stage
+    class SECURITY security
+    class DEPLOY deploy
 ```
 
 ## Stages

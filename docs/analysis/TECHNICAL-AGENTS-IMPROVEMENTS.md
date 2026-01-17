@@ -22,33 +22,40 @@ Cette analyse identifie les axes d'amélioration prioritaires pour les 3 skills 
 
 ### 1.1 Duplications Critiques Inter-Skills
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    DUPLICATIONS DÉTECTÉES                                │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  CI/CD (4 agents, 3 skills)                                             │
-│  ├── direction-technique/infrastructure/strategie-cicd.md              │
-│  ├── web-dev-process/agents/setup/cicd.md                               │
-│  ├── wordpress-gutenberg-expert/agents/tooling/cicd-pipelines.md       │
-│  └── wordpress-gutenberg-expert/agents/tooling/gitlab-ci.md            │
-│                                                                          │
-│  Code Review (2 agents quasi-identiques)                                │
-│  ├── direction-technique/qualite/code-review.md                         │
-│  └── web-dev-process/agents/development/code-review.md                  │
-│                                                                          │
-│  Architecture (3 agents avec overlap)                                   │
-│  ├── direction-technique/architecture/architecture-applicative.md      │
-│  ├── direction-technique/architecture/architecture-systeme.md          │
-│  └── web-dev-process/agents/design/architecture.md                      │
-│                                                                          │
-│  Accessibilité (4 contextes différents)                                 │
-│  ├── web-dev-process/agents/design/accessibility.md                     │
-│  ├── web-dev-process/agents/testing/accessibility.md                    │
-│  ├── wordpress-gutenberg-expert/agents/accessibility-expert.md         │
-│  └── design-system-foundations/docs/accessibility-checklist.md         │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph DUP["DUPLICATIONS DÉTECTÉES"]
+        direction TB
+
+        subgraph CICD["CI/CD (4 agents, 3 skills)"]
+            C1["direction-technique/infrastructure/strategie-cicd.md"]
+            C2["web-dev-process/agents/setup/cicd.md"]
+            C3["wordpress-gutenberg-expert/agents/tooling/cicd-pipelines.md"]
+            C4["wordpress-gutenberg-expert/agents/tooling/gitlab-ci.md"]
+        end
+
+        subgraph CR["Code Review (2 agents quasi-identiques)"]
+            CR1["direction-technique/qualite/code-review.md"]
+            CR2["web-dev-process/agents/development/code-review.md"]
+        end
+
+        subgraph ARCH["Architecture (3 agents avec overlap)"]
+            A1["direction-technique/architecture/architecture-applicative.md"]
+            A2["direction-technique/architecture/architecture-systeme.md"]
+            A3["web-dev-process/agents/design/architecture.md"]
+        end
+
+        subgraph A11Y["Accessibilité (4 contextes différents)"]
+            AC1["web-dev-process/agents/design/accessibility.md"]
+            AC2["web-dev-process/agents/testing/accessibility.md"]
+            AC3["wordpress-gutenberg-expert/agents/accessibility-expert.md"]
+            AC4["design-system-foundations/docs/accessibility-checklist.md"]
+        end
+    end
+
+    classDef duplicate fill:#ffebee,stroke:#c62828
+
+    class DUP,CICD,CR,ARCH,A11Y duplicate
 ```
 
 ### 1.2 Manque de Feedback Loop
@@ -61,17 +68,24 @@ Cette analyse identifie les axes d'amélioration prioritaires pour les 3 skills 
 
 ### 1.3 Absence de Mémoire Contextuelle
 
-```
-PROBLÈME ACTUEL:
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  Projet A   │    │  Projet B   │    │  Projet C   │
-│  Erreur X   │    │  Erreur X   │    │  Erreur X   │
-│  (découverte)    │  (répétée!) │    │  (répétée!) │
-└─────────────┘    └─────────────┘    └─────────────┘
-       ↓                  ↓                  ↓
-   Apprentissage      Perdu !            Perdu !
-       ↓
-   (Nulle part)
+```mermaid
+flowchart TB
+    subgraph PROBLEM["PROBLÈME ACTUEL"]
+        direction LR
+        PA["Projet A<br/>Erreur X<br/>(découverte)"]
+        PB["Projet B<br/>Erreur X<br/>(répétée!)"]
+        PC["Projet C<br/>Erreur X<br/>(répétée!)"]
+    end
+
+    PA -->|"Apprentissage"| LOST1["(Nulle part)"]
+    PB -->|"Perdu !"| LOST2["❌"]
+    PC -->|"Perdu !"| LOST3["❌"]
+
+    classDef project fill:#fff3e0,stroke:#f57c00
+    classDef lost fill:#ffebee,stroke:#c62828
+
+    class PA,PB,PC project
+    class LOST1,LOST2,LOST3 lost
 ```
 
 ### 1.4 Questions Insuffisantes au Niveau POURQUOI
@@ -154,35 +168,42 @@ const REQUIRED_QUESTION_SECTIONS = [
 
 ### 3.1 Vue d'Ensemble
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          LEARNING LOOP ARCHITECTURE                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                    APPRENTISSAGE GLOBAL                              │   │
-│  │              (partagé entre tous les projets)                        │   │
-│  │                                                                       │   │
-│  │  📁 .web-agency/learnings/                                               │   │
-│  │  ├── patterns/           # Patterns réutilisables                    │   │
-│  │  ├── anti-patterns/      # Erreurs à éviter                          │   │
-│  │  ├── decisions/          # Décisions archétypales                    │   │
-│  │  └── metrics/            # Métriques de succès                       │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                    ▲                                        │
-│                                    │ (consolidation périodique)             │
-│                                    │                                        │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐               │
-│  │   PROJET A     │  │   PROJET B     │  │   PROJET C     │               │
-│  │                │  │                │  │                │               │
-│  │ 📁 .learnings/ │  │ 📁 .learnings/ │  │ 📁 .learnings/ │               │
-│  │ ├── context.md │  │ ├── context.md │  │ ├── context.md │               │
-│  │ ├── decisions/ │  │ ├── decisions/ │  │ ├── decisions/ │               │
-│  │ ├── issues/    │  │ ├── issues/    │  │ ├── issues/    │               │
-│  │ └── successes/ │  │ └── successes/ │  │ └── successes/ │               │
-│  └────────────────┘  └────────────────┘  └────────────────┘               │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph LEARNING["LEARNING LOOP ARCHITECTURE"]
+        direction TB
+
+        subgraph GLOBAL["APPRENTISSAGE GLOBAL<br/>(partagé entre tous les projets)"]
+            GL["📁 .web-agency/learnings/"]
+            GP["├── patterns/ (Patterns réutilisables)"]
+            GAP["├── anti-patterns/ (Erreurs à éviter)"]
+            GD["├── decisions/ (Décisions archétypales)"]
+            GM["└── metrics/ (Métriques de succès)"]
+        end
+
+        subgraph PROJETS["PROJETS"]
+            direction LR
+            subgraph PA["PROJET A"]
+                PAL["📁 .learnings/<br/>├── context.md<br/>├── decisions/<br/>├── issues/<br/>└── successes/"]
+            end
+            subgraph PB["PROJET B"]
+                PBL["📁 .learnings/<br/>├── context.md<br/>├── decisions/<br/>├── issues/<br/>└── successes/"]
+            end
+            subgraph PC["PROJET C"]
+                PCL["📁 .learnings/<br/>├── context.md<br/>├── decisions/<br/>├── issues/<br/>└── successes/"]
+            end
+        end
+
+        PA -->|"consolidation<br/>périodique"| GLOBAL
+        PB -->|"consolidation<br/>périodique"| GLOBAL
+        PC -->|"consolidation<br/>périodique"| GLOBAL
+    end
+
+    classDef global fill:#e1f5fe,stroke:#01579b
+    classDef project fill:#e8f5e9,stroke:#388e3c
+
+    class GLOBAL,GL,GP,GAP,GD,GM global
+    class PA,PB,PC,PAL,PBL,PCL project
 ```
 
 ### 3.2 Structure des Fichiers
@@ -338,17 +359,36 @@ candidate_for_global: true
 
 ### 3.4 Mécanisme de Promotion
 
-```
-PROJET (spécifique)          →          GLOBAL (réutilisable)
-───────────────────────────────────────────────────────────────
+```mermaid
+flowchart LR
+    subgraph PROJET["PROJET (spécifique)"]
+        direction TB
+        P1["Issue spécifique"]
+        P2["occurrence_count >= 2"]
+        P3["candidate_for_global: true"]
+        P4["Validation"]
+        P1 --> P2 --> P3 --> P4
+    end
 
-Issue spécifique             →    Anti-pattern documenté
-  ↓                                     ↓
-occurrence_count >= 2        →    Candidat à promotion
-  ↓                                     ↓
-candidate_for_global: true   →    Review humain
-  ↓                                     ↓
-Validation                   →    Ajout dans patterns/ ou anti-patterns/
+    subgraph GLOBAL["GLOBAL (réutilisable)"]
+        direction TB
+        G1["Anti-pattern documenté"]
+        G2["Candidat à promotion"]
+        G3["Review humain"]
+        G4["Ajout dans patterns/<br/>ou anti-patterns/"]
+        G1 --> G2 --> G3 --> G4
+    end
+
+    P1 -.-> G1
+    P2 -.-> G2
+    P3 -.-> G3
+    P4 -.-> G4
+
+    classDef projet fill:#fff3e0,stroke:#f57c00
+    classDef global fill:#e1f5fe,stroke:#01579b
+
+    class PROJET,P1,P2,P3,P4 projet
+    class GLOBAL,G1,G2,G3,G4 global
 ```
 
 ### 3.5 Intégration avec les Agents
@@ -445,26 +485,41 @@ Chaque agent technique doit consulter les learnings pertinents :
 
 ### Dashboard suggéré
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    LEARNING LOOP DASHBOARD                       │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  📊 Patterns                    📊 Anti-patterns                │
-│  ────────────────               ────────────────                 │
-│  Total: 15                      Total: 8                         │
-│  Utilisés ce mois: 12           Évités ce mois: 6                │
-│  Nouveaux: 3                    Nouveaux: 2                      │
-│                                                                  │
-│  📊 Issues par projet           📊 Promotions                   │
-│  ────────────────               ────────────────                 │
-│  Projet A: 3 (2 résolues)       Candidats: 5                    │
-│  Projet B: 1 (1 résolue)        Validés: 3                       │
-│  Projet C: 4 (4 résolues)       En attente: 2                    │
-│                                                                  │
-│  📈 Tendance: Erreurs répétées ↓ 15% vs mois précédent          │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph DASHBOARD["LEARNING LOOP DASHBOARD"]
+        direction TB
+
+        subgraph METRICS["Métriques"]
+            direction LR
+            subgraph PATTERNS["📊 Patterns"]
+                PT["Total: 15<br/>Utilisés ce mois: 12<br/>Nouveaux: 3"]
+            end
+            subgraph ANTIPATTERNS["📊 Anti-patterns"]
+                AP["Total: 8<br/>Évités ce mois: 6<br/>Nouveaux: 2"]
+            end
+        end
+
+        subgraph DETAILS["Détails"]
+            direction LR
+            subgraph ISSUES["📊 Issues par projet"]
+                IS["Projet A: 3 (2 résolues)<br/>Projet B: 1 (1 résolue)<br/>Projet C: 4 (4 résolues)"]
+            end
+            subgraph PROMOTIONS["📊 Promotions"]
+                PR["Candidats: 5<br/>Validés: 3<br/>En attente: 2"]
+            end
+        end
+
+        TREND["📈 Tendance: Erreurs répétées ↓ 15% vs mois précédent"]
+    end
+
+    classDef dashboard fill:#e3f2fd,stroke:#1976d2
+    classDef positive fill:#e8f5e9,stroke:#388e3c
+    classDef neutral fill:#fff3e0,stroke:#f57c00
+
+    class DASHBOARD dashboard
+    class PATTERNS,ANTIPATTERNS,TREND positive
+    class ISSUES,PROMOTIONS neutral
 ```
 
 ---

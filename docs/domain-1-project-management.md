@@ -8,15 +8,23 @@
 
 ### Positionnement
 
-```
-CLIENT ←──────────────────────────────→ HUMAIN (Chef de projet)
-                    ↑                         ↑
-                    │                         │
-              Livrables                  Supervision
-              formatés                   & Validation
-                    │                         │
-                    └──────── AGENTS ─────────┘
-                         (Exécution opérationnelle)
+```mermaid
+flowchart TB
+    CLIENT["CLIENT"]
+    HUMAIN["HUMAIN<br/>(Chef de projet)"]
+    AGENTS["AGENTS<br/>(Exécution opérationnelle)"]
+
+    CLIENT <-->|"Relation directe"| HUMAIN
+    AGENTS -->|"Livrables<br/>formatés"| CLIENT
+    AGENTS -->|"Supervision<br/>& Validation"| HUMAIN
+
+    classDef human fill:#fff3e0,stroke:#f57c00
+    classDef agent fill:#e3f2fd,stroke:#1976d2
+    classDef client fill:#e8f5e9,stroke:#388e3c
+
+    class CLIENT client
+    class HUMAIN human
+    class AGENTS agent
 ```
 
 ### Principe de supervision
@@ -333,19 +341,23 @@ gantt
 **Mission** : Identifier, évaluer et suivre les risques projet.
 
 **Matrice de risques** :
+
+```mermaid
+quadrantChart
+    title Matrice de Risques (Impact vs Probabilité)
+    x-axis Probabilité Faible --> Probabilité Élevée
+    y-axis Impact Faible --> Impact Élevé
+    quadrant-1 Critique (Éviter)
+    quadrant-2 Élevé (Atténuer)
+    quadrant-3 Faible (Accepter)
+    quadrant-4 Modéré (Suivre)
 ```
-Impact
-  ↑
-  │  Modéré    │   Élevé     │  Critique
-  │  (Suivre)  │  (Atténuer) │  (Éviter)
-  ├────────────┼─────────────┼───────────
-  │  Faible    │   Modéré    │   Élevé
-  │  (Accepter)│  (Suivre)   │  (Atténuer)
-  ├────────────┼─────────────┼───────────
-  │  Néglig.   │   Faible    │   Modéré
-  │  (Ignorer) │  (Accepter) │  (Suivre)
-  └────────────┴─────────────┴───────────→ Probabilité
-```
+
+| Impact ↓ / Probabilité → | Faible | Moyenne | Élevée |
+|--------------------------|--------|---------|--------|
+| **Élevé** | Modéré (Suivre) | Élevé (Atténuer) | Critique (Éviter) |
+| **Moyen** | Faible (Accepter) | Modéré (Suivre) | Élevé (Atténuer) |
+| **Faible** | Négligeable (Ignorer) | Faible (Accepter) | Modéré (Suivre) |
 
 **Template registre des risques** :
 ```markdown

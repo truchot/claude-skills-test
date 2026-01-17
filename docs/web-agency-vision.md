@@ -155,32 +155,34 @@ Acquisition, visibilité, conversion et fidélisation.
 
 ## Interactions entre domaines
 
-```
-                    ┌─────────────────┐
-                    │   CLIENT        │
-                    └────────┬────────┘
-                             │
-                    ┌────────▼────────┐
-                    │  1. GESTION     │◄──── Point d'entrée
-                    │     PROJET      │
-                    └────────┬────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-┌───────▼───────┐   ┌────────▼────────┐   ┌──────▼──────┐
-│ 2. STRATÉGIE  │   │   3. DESIGN     │   │ 5. CONTENU  │
-└───────┬───────┘   └────────┬────────┘   └──────┬──────┘
-        │                    │                    │
-        └────────────────────┼────────────────────┘
-                             │
-                    ┌────────▼────────┐
-                    │  4. TECHNIQUE   │
-                    │  (web-dev-proc) │
-                    └────────┬────────┘
-                             │
-                    ┌────────▼────────┐
-                    │  6. MARKETING   │◄──── Post-lancement
-                    └─────────────────┘
+```mermaid
+flowchart TB
+    CLIENT["CLIENT"]
+    GP["1. GESTION PROJET<br/>◄ Point d'entrée"]
+    STRAT["2. STRATÉGIE"]
+    DESIGN["3. DESIGN"]
+    CONTENU["5. CONTENU"]
+    TECH["4. TECHNIQUE<br/>(web-dev-process)"]
+    MARKET["6. MARKETING<br/>◄ Post-lancement"]
+
+    CLIENT --> GP
+    GP --> STRAT
+    GP --> DESIGN
+    GP --> CONTENU
+    STRAT --> TECH
+    DESIGN --> TECH
+    CONTENU --> TECH
+    TECH --> MARKET
+
+    classDef client fill:#e8f5e9,stroke:#388e3c
+    classDef entry fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef domain fill:#fff3e0,stroke:#e65100
+    classDef exit fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    class CLIENT client
+    class GP entry
+    class STRAT,DESIGN,CONTENU,TECH domain
+    class MARKET exit
 ```
 
 ---
