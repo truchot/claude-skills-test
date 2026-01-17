@@ -6,20 +6,35 @@ Ce document décrit les changements apportés lors du refactoring SRP (Single Re
 
 ### Architecture à 3 Niveaux
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (direction-technique)                      │
-│  → Politiques, objectifs, décisions stratégiques                │
-│  → Pose les questions de clarification                          │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (web-dev-process)                              │
-│  → Process, workflows, checklists, standards                    │
-│  → Contextualisation en 3 couches (Métier/Agence/Projet)        │
-├─────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (wordpress-*, tech-specific)                │
-│  → Implémentation, code, configuration                          │
-│  → Exécution avec specs et critères d'acceptance                │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph N1["NIVEAU 1 : POURQUOI (direction-technique)"]
+        direction TB
+        P1["→ Politiques, objectifs, décisions stratégiques"]
+        P2["→ Pose les questions de clarification"]
+    end
+
+    subgraph N2["NIVEAU 2 : QUOI (web-dev-process)"]
+        direction TB
+        Q1["→ Process, workflows, checklists, standards"]
+        Q2["→ Contextualisation en 3 couches (Métier/Agence/Projet)"]
+    end
+
+    subgraph N3["NIVEAU 3 : COMMENT (wordpress-*, tech-specific)"]
+        direction TB
+        C1["→ Implémentation, code, configuration"]
+        C2["→ Exécution avec specs et critères d'acceptance"]
+    end
+
+    N1 --> N2 --> N3
+
+    classDef pourquoi fill:#e1f5fe,stroke:#01579b
+    classDef quoi fill:#fff3e0,stroke:#e65100
+    classDef comment fill:#e8f5e9,stroke:#2e7d32
+
+    class N1 pourquoi
+    class N2 quoi
+    class N3 comment
 ```
 
 ---

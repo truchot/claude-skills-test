@@ -12,20 +12,35 @@ Cette section analyse chaque skill à travers la grille de lecture établie par 
 
 ### Rappel du Framework
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (direction-technique)                          │
-│  → "Pourquoi on fait ça ? Quels objectifs ? Quelles politiques ?"   │
-│  → Output: Justifications, ADRs, Politiques, Standards, Objectifs   │
-├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (web-dev-process)                                  │
-│  → "Quoi mettre en place ? Quelles étapes ? Quels outils ?"         │
-│  → Output: Process, Templates, Checklists, Guides, Structures       │
-├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (wordpress-*, design-system-*)                  │
-│  → "Comment l'implémenter concrètement ? Quel code ?"               │
-│  → Output: Code, Configurations, Scripts, Commandes                 │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph N1["NIVEAU 1 : POURQUOI (direction-technique)"]
+        direction TB
+        Q1["→ Pourquoi on fait ça ? Quels objectifs ? Quelles politiques ?"]
+        O1["→ Output: Justifications, ADRs, Politiques, Standards, Objectifs"]
+    end
+
+    subgraph N2["NIVEAU 2 : QUOI (web-dev-process)"]
+        direction TB
+        Q2["→ Quoi mettre en place ? Quelles étapes ? Quels outils ?"]
+        O2["→ Output: Process, Templates, Checklists, Guides, Structures"]
+    end
+
+    subgraph N3["NIVEAU 3 : COMMENT (wordpress-*, design-system-*)"]
+        direction TB
+        Q3["→ Comment l'implémenter concrètement ? Quel code ?"]
+        O3["→ Output: Code, Configurations, Scripts, Commandes"]
+    end
+
+    N1 --> N2 --> N3
+
+    classDef pourquoi fill:#e1f5fe,stroke:#01579b
+    classDef quoi fill:#fff3e0,stroke:#e65100
+    classDef comment fill:#e8f5e9,stroke:#2e7d32
+
+    class N1 pourquoi
+    class N2 quoi
+    class N3 comment
 ```
 
 ---

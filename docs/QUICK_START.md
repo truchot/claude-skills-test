@@ -4,26 +4,31 @@ Guide rapide pour comprendre et utiliser les skills techniques.
 
 ## Quel Skill Utiliser ?
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     QUESTION RAPIDE                              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  Tu te demandes...              →  Utilise ce skill             │
-│                                                                  │
-│  📝 "POURQUOI on fait ça ?"    →  direction-technique           │
-│     Objectifs, contraintes,        (52 agents)                  │
-│     décisions stratégiques                                      │
-│                                                                  │
-│  📋 "QUOI mettre en place ?"   →  web-dev-process               │
-│     Process, étapes,               (61 agents)                  │
-│     checklists                                                  │
-│                                                                  │
-│  💻 "COMMENT l'implémenter ?"  →  wordpress-gutenberg-expert    │
-│     Code, configs,                 (41 agents)                  │
-│     scripts                        ou autre skill technique     │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph QUESTIONS["QUESTION RAPIDE"]
+        direction TB
+        Q1["📝 POURQUOI on fait ça ?<br/>Objectifs, contraintes,<br/>décisions stratégiques"]
+        Q2["📋 QUOI mettre en place ?<br/>Process, étapes,<br/>checklists"]
+        Q3["💻 COMMENT l'implémenter ?<br/>Code, configs,<br/>scripts"]
+    end
+
+    subgraph SKILLS["UTILISE CE SKILL"]
+        direction TB
+        S1["direction-technique<br/>(52 agents)"]
+        S2["web-dev-process<br/>(61 agents)"]
+        S3["wordpress-gutenberg-expert<br/>(41 agents)<br/>ou autre skill technique"]
+    end
+
+    Q1 --> S1
+    Q2 --> S2
+    Q3 --> S3
+
+    classDef question fill:#e3f2fd,stroke:#1976d2
+    classDef skill fill:#e8f5e9,stroke:#388e3c
+
+    class Q1,Q2,Q3 question
+    class S1,S2,S3 skill
 ```
 
 ## Exemples Concrets

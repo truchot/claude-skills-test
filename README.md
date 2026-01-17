@@ -8,21 +8,29 @@ Framework agnostique de gestion d'une agence web automatisée.
 
 > **Les skills exécutent, web-agency orchestre, les humains supervisent.**
 
-```
-CLIENT
-   │
-   ▼
-┌─────────────────────────────────────────────────────┐
-│              WEB-AGENCY (orchestrateur)             │
-│                                                     │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐            │
-│  │ project- │ │technical │ │ strategy │ ...        │
-│  │management│ │          │ │          │            │
-│  └──────────┘ └──────────┘ └──────────┘            │
-└─────────────────────────────────────────────────────┘
-   │
-   ▼
-HUMAIN (supervision)
+```mermaid
+flowchart TB
+    CLIENT["CLIENT"]
+
+    subgraph WA["WEB-AGENCY (orchestrateur)"]
+        PM["project-management"]
+        TECH["technical"]
+        STRAT["strategy"]
+        MORE["..."]
+    end
+
+    HUMAIN["HUMAIN (supervision)"]
+
+    CLIENT --> WA
+    WA --> HUMAIN
+
+    classDef client fill:#e8f5e9,stroke:#388e3c
+    classDef orchestrator fill:#e1f5fe,stroke:#01579b
+    classDef human fill:#fff3e0,stroke:#f57c00
+
+    class CLIENT client
+    class WA,PM,TECH,STRAT,MORE orchestrator
+    class HUMAIN human
 ```
 
 ## Skills Disponibles
