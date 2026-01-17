@@ -33,6 +33,46 @@ Tu génères des **templates de Value Objects** immuables et auto-validants.
 
 ---
 
+## Template Structure
+
+```mermaid
+classDiagram
+    class ValueObject~T~ {
+        -props: T
+        +equals(other: ValueObject~T~) boolean
+        #validate() void
+    }
+
+    class Email {
+        -value: string
+        +create(value: string)$ Email
+        +equals(other: Email) boolean
+        +domain() string
+    }
+
+    class Money {
+        -amount: Decimal
+        -currency: Currency
+        +of(amount, currency)$ Money
+        +add(other: Money) Money
+        +equals(other: Money) boolean
+    }
+
+    class Address {
+        -street: string
+        -city: string
+        -postalCode: PostalCode
+        +create(props)$ Address
+        +format() string
+    }
+
+    ValueObject <|-- Email
+    ValueObject <|-- Money
+    ValueObject <|-- Address
+```
+
+---
+
 ## Patterns de Value Objects
 
 ### 1. Simple Value (Wrapper)
