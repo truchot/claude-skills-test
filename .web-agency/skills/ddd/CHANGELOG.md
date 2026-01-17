@@ -17,7 +17,8 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 ### Modifié
 - Structure mise à jour : 34 agents total (17 tactical, 3 tooling)
 - Table de routage étendue avec nouveaux agents
-- Suite de tests complète avec 4 suites (777 tests)
+- Suite de tests complète avec 4 suites (813 tests)
+- Test runner amélioré : timing détaillé, sortie JSON, sélection de suites
 
 ---
 
