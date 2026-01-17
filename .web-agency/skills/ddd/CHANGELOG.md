@@ -4,6 +4,23 @@ Toutes les modifications notables de ce skill sont documentées ici.
 
 Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [1.4.0] - 2026-01-17
+
+### Ajouté
+
+#### Tactical
+- **domain-errors** : Gestion des erreurs métier typées (Result/Either patterns, error hierarchy)
+
+#### Tooling
+- **performance-guide** : Optimisation performance DDD (aggregate sizing, snapshots, projections)
+
+### Modifié
+- Structure mise à jour : 34 agents total (17 tactical, 3 tooling)
+- Table de routage étendue avec nouveaux agents
+- Suite de tests complète avec 4 suites (777 tests)
+
+---
+
 ## [1.3.0] - 2026-01-15
 
 ### Ajouté

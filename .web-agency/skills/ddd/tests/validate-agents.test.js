@@ -30,6 +30,7 @@ const EXPECTED_STRUCTURE = {
     'repositories',
     'domain-services',
     'domain-events',
+    'domain-errors',
     'factories',
     'specifications',
     'domain-primitives',
@@ -42,7 +43,8 @@ const EXPECTED_STRUCTURE = {
   ],
   'tooling': [
     'model-validator',
-    'pattern-selector'
+    'pattern-selector',
+    'performance-guide'
   ],
   'templates': [
     'aggregate-template',
@@ -157,8 +159,8 @@ const totalExpectedAgents = Object.values(EXPECTED_STRUCTURE)
   .reduce((sum, agents) => sum + agents.length, 0);
 test(
   `Total expected agents: ${totalExpectedAgents}`,
-  totalExpectedAgents === 32,
-  `Expected 32 agents, got ${totalExpectedAgents}`
+  totalExpectedAgents === 34,
+  `Expected 34 agents, got ${totalExpectedAgents}`
 );
 
 // Test each domain

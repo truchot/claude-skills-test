@@ -7,7 +7,7 @@ description: |
   un ubiquitous language partagé, (4) tu veux modéliser des entités et agrégats,
   (5) tu dois structurer du code selon Clean Architecture.
 metadata:
-  version: 1.3.0
+  version: 1.4.0
   status: active
   level: transversal
   domains:
@@ -65,7 +65,7 @@ ddd/
     │   ├── domain-storytelling.md
     │   └── example-mapping.md
     │
-    ├── tactical/           # COMMENT - Niveau implémentation (16 agents)
+    ├── tactical/           # COMMENT - Niveau implémentation (17 agents)
     │   ├── orchestrator.md
     │   ├── entities.md
     │   ├── value-objects.md
@@ -73,6 +73,7 @@ ddd/
     │   ├── repositories.md
     │   ├── domain-services.md
     │   ├── domain-events.md
+    │   ├── domain-errors.md
     │   ├── factories.md
     │   ├── specifications.md
     │   ├── domain-primitives.md
@@ -83,9 +84,10 @@ ddd/
     │   ├── saga-process-manager.md
     │   └── clean-architecture.md
     │
-    ├── tooling/            # OUTILS - Validation et qualité (2 agents)
+    ├── tooling/            # OUTILS - Validation et qualité (3 agents)
     │   ├── model-validator.md
-    │   └── pattern-selector.md
+    │   ├── pattern-selector.md
+    │   └── performance-guide.md
     │
     ├── templates/          # SCAFFOLDING - Templates de code (3 agents)
     │   ├── aggregate-template.md
@@ -117,7 +119,7 @@ ddd/
 | `domain-storytelling` | Narration visuelle des processus métier |
 | `example-mapping` | Découverte par exemples et règles métier (Given-When-Then) |
 
-### Tactical (Niveau implémentation) - 16 agents
+### Tactical (Niveau implémentation) - 17 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
@@ -128,6 +130,7 @@ ddd/
 | `repositories` | Concevoir les interfaces de persistance |
 | `domain-services` | Implémenter la logique métier transverse |
 | `domain-events` | Modéliser les événements du domaine |
+| `domain-errors` | Gestion des erreurs métier typées (Result, Either) |
 | `factories` | Encapsuler la création complexe d'agrégats |
 | `specifications` | Règles métier composables et réutilisables |
 | `domain-primitives` | Types primitifs typés (IDs, Email, Money...) |
@@ -138,12 +141,13 @@ ddd/
 | `saga-process-manager` | Orchestrer les processus multi-agrégats longs |
 | `clean-architecture` | Structurer le code en couches concentriques |
 
-### Tooling (Outils) - 2 agents
+### Tooling (Outils) - 3 agents
 
 | Agent | Responsabilité |
 |-------|----------------|
 | `model-validator` | Auditer un modèle DDD, détecter les anti-patterns |
 | `pattern-selector` | Aider à choisir le bon pattern selon le contexte |
+| `performance-guide` | Optimisation performance (snapshots, aggregate sizing) |
 
 ### Templates (Scaffolding) - 3 agents
 
@@ -196,8 +200,10 @@ ddd/
 | event sourcing, event store, replay, snapshot, historique, audit trail | tactical | event-sourcing |
 | saga, process manager, compensation, transaction distribuée, workflow long | tactical | saga-process-manager |
 | clean architecture, couche, layer, adapter, port | tactical | clean-architecture |
+| error, exception, domain error, result, either, validation error | tactical | domain-errors |
 | audit, validation, anti-pattern, qualité, review, santé modèle | tooling | model-validator |
 | quel pattern, choisir, décision, trade-off, comparaison, recommandation | tooling | pattern-selector |
+| performance, optimisation, snapshot, aggregate size, scaling | tooling | performance-guide |
 | template, scaffolding, générer, boilerplate, starter | templates | aggregate-template |
 | créer aggregate, structure aggregate | templates | aggregate-template |
 | créer value object, template vo | templates | value-object-template |

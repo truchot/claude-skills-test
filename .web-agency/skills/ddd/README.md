@@ -6,8 +6,8 @@ Skill de modélisation métier basé sur les principes du Domain-Driven Design.
 
 | Métrique | Valeur |
 |----------|--------|
-| Version | 1.3.0 |
-| Agents | 32 |
+| Version | 1.4.0 |
+| Agents | 34 |
 | Domaines | 6 (strategic, tactical, tooling, templates, case-studies, integrations) |
 | Niveau | Transversal |
 
@@ -28,8 +28,8 @@ ddd/
 ├── CHANGELOG.md          # Historique des versions
 └── agents/
     ├── strategic/        # 8 agents - Découverte et structuration
-    ├── tactical/         # 16 agents - Patterns d'implémentation
-    ├── tooling/          # 2 agents - Outils et aide à la décision
+    ├── tactical/         # 17 agents - Patterns d'implémentation
+    ├── tooling/          # 3 agents - Outils et aide à la décision
     ├── templates/        # 3 agents - Scaffolding et boilerplate
     ├── case-studies/     # 2 agents - Exemples end-to-end
     └── integrations/     # 1 agent - Intégration frameworks
@@ -44,20 +44,22 @@ Niveau conceptuel - **POURQUOI** et **QUOI**
 - Structuration : Bounded Contexts, Context Mapping, Ubiquitous Language
 - Priorisation : Core Domain Identification
 
-### Tactical (16 agents)
+### Tactical (17 agents)
 Niveau implémentation - **COMMENT**
 
 - Building blocks : Entities, Value Objects, Aggregates
 - Infrastructure : Repositories, Factories, Domain Services
 - Événements : Domain Events
+- Gestion d'erreurs : Domain Errors (Result/Either patterns)
 - Patterns avancés : CQRS, Event Sourcing, Saga/Process Manager
 - Architecture : Clean Architecture, Application Services, ACL
 
-### Tooling (2 agents)
+### Tooling (3 agents)
 Outils transverses
 
 - **model-validator** : Audit et détection d'anti-patterns
 - **pattern-selector** : Aide au choix du bon pattern
+- **performance-guide** : Optimisation (aggregate sizing, snapshots)
 
 ### Templates (3 agents)
 Scaffolding et boilerplate

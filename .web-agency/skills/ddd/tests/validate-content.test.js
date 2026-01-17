@@ -149,7 +149,7 @@ for (const agent of agents) {
 
   for (const ref of refs) {
     // Skip external skill references
-    if (['backend-developer', 'testing-process', 'devops', 'direction-technique', 'legacy-modernization', 'react-expert', 'nextjs-expert'].includes(ref)) {
+    if (['backend-developer', 'testing-process', 'devops', 'direction-technique', 'legacy-modernization', 'react-expert', 'nextjs-expert', 'frontend-developer'].includes(ref)) {
       continue;
     }
 

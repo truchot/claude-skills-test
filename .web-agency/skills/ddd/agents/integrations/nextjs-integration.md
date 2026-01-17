@@ -109,6 +109,8 @@ my-nextjs-app/
 import { NextRequest, NextResponse } from 'next/server';
 import { container } from '@/lib/di/container';
 import { GetOrdersHandler } from '@/application/queries/GetOrdersHandler';
+import { PlaceOrderHandler } from '@/application/commands/PlaceOrderHandler';
+import { DomainError } from '@/domain/shared/errors/DomainError';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -216,6 +218,9 @@ import { redirect } from 'next/navigation';
 import { container } from '@/lib/di/container';
 import { PlaceOrderHandler } from '@/application/commands/PlaceOrderHandler';
 import { CancelOrderHandler } from '@/application/commands/CancelOrderHandler';
+import { DomainError } from '@/domain/shared/errors/DomainError';
+import { OrderId } from '@/domain/ordering/OrderId';
+import { CancellationReason } from '@/domain/ordering/CancellationReason';
 import { z } from 'zod';
 
 // Schema de validation
