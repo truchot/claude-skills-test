@@ -81,7 +81,7 @@ Document structuré capturant la demande initiale d'un client, quel que soit le 
 
 ```markdown
 ---
-date_reception: 2024-01-15T10:30:00Z
+date_reception: 2026-01-18T10:30:00Z
 canal: email
 client:
   nom: Jean Dupont
@@ -131,7 +131,7 @@ client:
 
 ```markdown
 ---
-date_reception: 2024-01-15T10:30:00Z
+date_reception: 2026-01-18T10:30:00Z
 canal: email
 priority: normale
 client:
@@ -243,4 +243,4 @@ historique_client:
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | client-intake | Création initiale |
+| 1.0.0 | 2026-01-18 | client-intake | Création initiale |

@@ -768,4 +768,4 @@ test.describe('Authentication', () => {
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | testing-process | Création initiale |
+| 1.0.0 | 2026-01-18 | testing-process | Création initiale |

@@ -172,7 +172,7 @@ $message = sprintf(
 $price = number_format_i18n( 1234.56, 2 ); // "1 234,56" en français
 
 // Date formatting
-$date = date_i18n( get_option( 'date_format' ), strtotime( '2024-01-15' ) );
+$date = date_i18n( get_option( 'date_format' ), strtotime( '2026-01-18' ) );
 
 // Escaping + translation (preferred for output)
 echo esc_html__( 'Produit fait main', 'artisanat-blocks' );
@@ -258,7 +258,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-15T10:00:00+00:00\n"
+"POT-Creation-Date: 2026-01-18T10:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: artisanat-blocks\n"
@@ -322,7 +322,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Artisanat Blocks 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/artisanat/blocks/issues\n"
-"POT-Creation-Date: 2024-01-15T10:00:00+00:00\n"
+"POT-Creation-Date: 2026-01-18T10:00:00+00:00\n"
 "PO-Revision-Date: 2024-01-16T14:30:00+01:00\n"
 "Last-Translator: Marie Dupont <marie@artisanat.fr>\n"
 "Language-Team: French <fr@artisanat.fr>\n"
@@ -501,4 +501,4 @@ jobs:
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | wordpress-gutenberg-expert | Création initiale |
+| 1.0.0 | 2026-01-18 | wordpress-gutenberg-expert | Création initiale |

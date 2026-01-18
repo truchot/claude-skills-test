@@ -324,4 +324,4 @@ FLOW: Achat Produit
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | ux-ui-design | Création initiale |
+| 1.0.0 | 2026-01-18 | ux-ui-design | Création initiale |

@@ -661,4 +661,4 @@ const testimonials = await getFeaturedTestimonials({ minRating: 4 });
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | wordpress-gutenberg-expert | Création initiale |
+| 1.0.0 | 2026-01-18 | wordpress-gutenberg-expert | Création initiale |

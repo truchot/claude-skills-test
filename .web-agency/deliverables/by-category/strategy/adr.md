@@ -88,7 +88,7 @@ Document formalisant une décision technique importante avec son contexte, les o
 Accepté
 
 ## Date
-2024-01-15
+2026-01-18
 
 ## Contexte
 Notre application nécessite une base de données relationnelle pour stocker les données utilisateurs et commandes. Le volume estimé est de 100K utilisateurs et 1M de transactions par an.
@@ -144,4 +144,4 @@ Voir : `docs/adr/examples/0001-postgresql-complete.md`
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | direction-technique | Création initiale |
+| 1.0.0 | 2026-01-18 | direction-technique | Création initiale |

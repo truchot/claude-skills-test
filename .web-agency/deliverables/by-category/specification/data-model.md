@@ -435,4 +435,4 @@ INSERT INTO allowed_countries VALUES ('FR');
 
 | Version | Date | Auteur | Changements |
 |---------|------|--------|-------------|
-| 1.0.0 | 2024-01-15 | direction-technique | Création initiale |
+| 1.0.0 | 2026-01-18 | direction-technique | Création initiale |
