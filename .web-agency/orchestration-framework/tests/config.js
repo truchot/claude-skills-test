@@ -2,7 +2,7 @@
  * Centralized configuration for orchestration framework tests
  * @module tests/config
  *
- * NOTE: Since v4.1.0 refactoring, this is the orchestration framework (not a skill).
+ * NOTE: Since v4.2.0 refactoring, this is the orchestration framework (not a skill).
  * It coordinates skills but does not execute tasks directly.
  */
 
@@ -17,6 +17,13 @@ const WEB_AGENCY_ROOT = path.join(FRAMEWORK_ROOT, '..');
 
 /** @const {string} Base directory for all skills */
 const SKILLS_ROOT = path.join(WEB_AGENCY_ROOT, 'skills');
+
+// Validate paths at module load
+[FRAMEWORK_ROOT, WEB_AGENCY_ROOT, SKILLS_ROOT].forEach(p => {
+  if (!fs.existsSync(p)) {
+    throw new Error(`Required path does not exist: ${p}. Tests must be run from the correct location.`);
+  }
+});
 
 /** @const {string} Directory for project management skill (external) */
 const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
