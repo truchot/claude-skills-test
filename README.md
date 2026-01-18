@@ -43,11 +43,12 @@ flowchart TB
 
 ### Niveau 1 : Orchestration
 
-| Skill | Description | Agents | Statut |
-|-------|-------------|--------|--------|
-| [task-orchestrator](.web-agency/skills/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+| Composant | Description | Agents | Statut |
+|-----------|-------------|--------|--------|
+| [task-orchestrator](.web-agency/orchestration-framework/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+| [orchestration-framework](.web-agency/orchestration-framework/) | Routing, workflows, escalade | - | 🟢 Actif |
 
-> **Note** : Le framework d'orchestration (routing, workflows, escalade) est dans [`.web-agency/orchestration-framework/`](.web-agency/orchestration-framework/) - ce n'est pas un skill mais la documentation des règles de routage.
+> **Note** : Ces composants ne sont pas des skills métier mais la couche d'orchestration qui coordonne les skills.
 
 ### Niveau 2 : Stratégie (POURQUOI)
 

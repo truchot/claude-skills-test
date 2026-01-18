@@ -24,7 +24,7 @@ Référence: `.web-agency/orchestration-framework/`
 - Priorisation stratégique
 
 ### Orchestration par Domaine
-- `.web-agency/skills/task-orchestrator/` - Découpage et distribution des tâches
+- `.web-agency/orchestration-framework/task-orchestrator/` - Découpage et distribution des tâches
 - `.web-agency/skills/client-intake/` - Nouveaux projets clients
 
 ## Logique de Routage
