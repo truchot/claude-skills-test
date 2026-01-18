@@ -45,8 +45,9 @@ flowchart TB
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills | - | 🟢 Actif |
 | [task-orchestrator](.web-agency/skills/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+
+> **Note** : Le framework d'orchestration (routing, workflows, escalade) est dans [`.web-agency/orchestration-framework/`](.web-agency/orchestration-framework/) - ce n'est pas un skill mais la documentation des règles de routage.
 
 ### Niveau 2 : Stratégie (POURQUOI)
 
@@ -96,8 +97,8 @@ flowchart TB
 ```
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
+│   ├── orchestration-framework/   # Règles de routage et workflows (pas un skill)
 │   ├── skills/                    # 24 skills, 757 agents
-│   │   ├── web-agency/            # Meta-orchestrateur
 │   │   ├── client-intake/         # Niveau 0: Entrée
 │   │   ├── task-orchestrator/     # Niveau 1: Orchestration
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
@@ -134,8 +135,8 @@ NIVEAU 0: ENTRÉE
 └── client-intake (23)              # Réception des demandes
 
 NIVEAU 1: ORCHESTRATION
-├── web-agency                      # Meta-orchestrateur
 └── task-orchestrator (16)          # Gestion des tâches
+    (Règles dans .web-agency/orchestration-framework/)
 
 NIVEAU 2: STRATÉGIE (POURQUOI)
 ├── direction-technique (52)        # Stratégie technique
@@ -225,7 +226,7 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 ```bash
 # Tests par skill
-cd .web-agency/skills/web-agency/tests && bash run-tests.sh
+cd .web-agency/orchestration-framework/tests && bash run-tests.sh
 cd .web-agency/skills/web-dev-process/tests && bash run-tests.sh
 cd .web-agency/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 cd .web-agency/skills/frontend-developer/tests && node validate-skill.test.js

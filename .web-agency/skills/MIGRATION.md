@@ -184,7 +184,7 @@ Les skills v3 sont **additifs** :
 #### 3. Mise à Jour web-agency
 
 ```diff
-# .web-agency/skills/web-agency/SKILL.md
+# .web-agency/orchestration-framework/SKILL.md
 
 - version: 2.9.0
 + version: 3.1.0
@@ -304,7 +304,7 @@ La v1.0.0 est la version de création. Pas de migration nécessaire.
 ### Structure Initiale
 
 ```
-.web-agency/skills/web-agency/
+.web-agency/orchestration-framework/
 ├── SKILL.md           # Skill principal
 ├── README.md          # Documentation
 ├── CHANGELOG.md       # Historique

@@ -431,6 +431,6 @@ npm run test:hooks          # Check agent integration
 
 ## Ressources
 
-- [ADR-005: Frontières de Responsabilités](../skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005: Frontières de Responsabilités](../orchestration-framework/docs/adr/005-skill-responsibility-boundaries.md)
 - [Analyse SRP](../../docs/analysis/SRP-ANALYSIS.md)
 - [Améliorations Agents Techniques](../../docs/analysis/TECHNICAL-AGENTS-IMPROVEMENTS.md)

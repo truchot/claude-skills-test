@@ -18,7 +18,7 @@ Référence: `.web-agency/skills/project-management/`
 - Reporting et dashboards
 
 ### Orchestration Globale
-Référence: `.web-agency/skills/web-agency/`
+Référence: `.web-agency/orchestration-framework/`
 - Vue d'ensemble agence
 - Allocation ressources
 - Priorisation stratégique

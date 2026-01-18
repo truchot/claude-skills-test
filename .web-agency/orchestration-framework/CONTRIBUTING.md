@@ -187,7 +187,7 @@ const EXPECTED_ROUTING = {
 ### Étape 6 : Lancer les Tests
 
 ```bash
-cd .web-agency/skills/web-agency/tests
+cd .web-agency/orchestration-framework/tests
 bash run-tests.sh
 ```
 
@@ -300,7 +300,7 @@ Toujours nommés `orchestrator.md` dans leur répertoire.
 
 ```bash
 # OBLIGATOIRE : Lancer tous les tests
-cd .web-agency/skills/web-agency/tests
+cd .web-agency/orchestration-framework/tests
 bash run-tests.sh
 
 # Vérifier : 7 suites passent, 0 échec

@@ -138,6 +138,6 @@ npm run test:srp   # Validation SRP uniquement
 ## Ressources
 
 - [Architecture complète](./ARCHITECTURE.md)
-- [ADR-005 : Frontières entre skills](../.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005 : Frontières entre skills](../.web-agency/orchestration-framework/docs/adr/005-skill-responsibility-boundaries.md)
 - [Guide de migration v3.0](./analysis/MIGRATION.md)
 - [Analyse SRP](./analysis/SRP-ANALYSIS.md)
