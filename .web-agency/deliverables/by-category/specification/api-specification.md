@@ -4,6 +4,8 @@ name: Spécification API REST
 version: 1.0.0
 category: specification
 status: active
+phase: "3-conception"
+order: 3
 agents:
   - backend-developer/api/rest-design
   - backend-developer/api/graphql-design

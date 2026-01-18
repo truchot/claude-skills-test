@@ -1,0 +1,93 @@
+name: Validate Deliverables
+
+on:
+  push:
+    paths:
+      - '.web-agency/deliverables/**'
+      - '.web-agency/scripts/**'
+  pull_request:
+    paths:
+      - '.web-agency/deliverables/**'
+      - '.web-agency/scripts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Deliverable Files
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x .web-agency/scripts/*.sh
+
+      - name: Validate Frontmatter
+        id: frontmatter
+        run: |
+          echo "## Frontmatter Validation" >> $GITHUB_STEP_SUMMARY
+          if .web-agency/scripts/validate-frontmatter.sh 2>&1 | tee /tmp/frontmatter.log; then
+            echo "✅ All frontmatter valid" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Frontmatter errors found" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat /tmp/frontmatter.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+      - name: Validate Cross-References
+        id: crossrefs
+        if: always()
+        run: |
+          echo "## Cross-Reference Validation" >> $GITHUB_STEP_SUMMARY
+          if .web-agency/scripts/validate-crossrefs.sh 2>&1 | tee /tmp/crossrefs.log; then
+            echo "✅ All cross-references valid" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Cross-reference warnings found" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat /tmp/crossrefs.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Generate Coverage Report
+        if: always()
+        run: |
+          echo "## Deliverable Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Category | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          for dir in .web-agency/deliverables/by-category/*/; do
+            if [ -d "$dir" ]; then
+              name=$(basename "$dir")
+              count=$(find "$dir" -name "*.md" -type f 2>/dev/null | wc -l)
+              echo "| $name | $count |" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          total=$(find .web-agency/deliverables/by-category -name "*.md" -type f 2>/dev/null | wc -l)
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Total: $total deliverables**" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check for Schema Compliance
+        if: always()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Schema Compliance" >> $GITHUB_STEP_SUMMARY
+
+          # Check all files have required sections
+          missing=0
+          for file in .web-agency/deliverables/by-category/**/*.md; do
+            [ -f "$file" ] || continue
+            if ! grep -q "## Description" "$file"; then
+              echo "⚠️ Missing '## Description' in $(basename $file)" >> $GITHUB_STEP_SUMMARY
+              ((missing++))
+            fi
+            if ! grep -q "## Critères d'Acceptation" "$file"; then
+              echo "⚠️ Missing '## Critères d'Acceptation' in $(basename $file)" >> $GITHUB_STEP_SUMMARY
+              ((missing++))
+            fi
+          done
+
+          if [ $missing -eq 0 ]; then
+            echo "✅ All files have required sections" >> $GITHUB_STEP_SUMMARY
+          fi

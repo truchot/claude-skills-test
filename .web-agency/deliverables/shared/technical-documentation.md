@@ -4,6 +4,8 @@ name: Documentation Technique
 version: 1.0.0
 category: documentation
 status: active
+phase: "4-realisation"
+order: 10
 agents:
   - direction-technique/communication/documentation-technique
   - backend-developer/*/all
