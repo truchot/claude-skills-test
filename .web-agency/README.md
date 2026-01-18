@@ -8,7 +8,7 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 
 ```
 .web-agency/
-├── skills/          # 26 skills métier, 843 agents
+├── skills/          # 26 skills métier, 893 agents
 │   │
 │   │  NIVEAU 1 : POURQUOI (5 directions stratégiques)
 │   ├── direction-technique/     # Tech & Architecture

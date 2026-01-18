@@ -1,6 +1,6 @@
 # Claude Skills Architecture
 
-![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-26-green) ![Agents](https://img.shields.io/badge/agents-843-brightgreen)
+![Tests](https://img.shields.io/badge/tests-local-blue) ![Skills](https://img.shields.io/badge/skills-26-green) ![Agents](https://img.shields.io/badge/agents-893-brightgreen)
 
 Cette documentation décrit l'architecture des skills Claude pour une agence Web.
 
@@ -107,8 +107,8 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `direction-technique` | ![v3.1.0](https://img.shields.io/badge/v3.1.0-green) | 59 | Tech & Architecture |
 | `direction-operations` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 27 | Projet & Équipes |
 | `direction-commerciale` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 27 | Finance & Sales |
-| `direction-marketing` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | - | Acquisition & Growth |
-| `direction-artistique` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | - | Créatif & Brand |
+| `direction-marketing` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 25 | Acquisition & Growth |
+| `direction-artistique` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 25 | Créatif & Brand |
 
 ### NIVEAU 2 : QUOI (7 skills de processus)
 
@@ -142,7 +142,7 @@ Cette documentation décrit l'architecture des skills Claude pour une agence Web
 | `content-management` | ![v1.0.0](https://img.shields.io/badge/v1.0.0-blue) | 17 | Contenu éditorial |
 | `ddd` | ![v1.3.0](https://img.shields.io/badge/v1.3.0-blue) | 32 | Domain-Driven Design |
 
-**Total : 26 skills, 843 agents spécialisés**
+**Total : 26 skills, 893 agents spécialisés**
 
 ## Guide de Migration
 
