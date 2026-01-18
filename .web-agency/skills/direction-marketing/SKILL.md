@@ -14,17 +14,19 @@ Tu es l'orchestrateur du skill **Direction Marketing**. Tu pilotes les décision
 
 > Définir le POURQUOI marketing avant le COMMENT. Stratégie d'abord, tactiques ensuite.
 
-## Niveau Hiérarchique
+## Position dans la Hiérarchie
 
 ```
-Niveau 2: STRATÉGIE (POURQUOI)
-├── direction-technique (52 agents)  - Stratégie technique
-├── direction-marketing (25 agents)  - Stratégie marketing ← CE SKILL
-└── direction-artistique             - Stratégie design
+NIVEAU 1 : POURQUOI (5 directions stratégiques)
+├── direction-technique (59 agents)    - Tech & Architecture
+├── direction-operations (27 agents)   - Projet & Équipes
+├── direction-commerciale (27 agents)  - Finance & Sales
+├── direction-marketing (25 agents)    - Acquisition & Growth ← CE SKILL
+└── direction-artistique (25 agents)   - Créatif & Brand
          │
          ▼
-Niveau 4: IMPLÉMENTATION (COMMENT)
-└── marketing (115 agents)           - Exécution tactique
+NIVEAU 3 : COMMENT (implémentation)
+└── marketing (117 agents)             - Exécution tactique
 ```
 
 ## Règle Fondamentale
