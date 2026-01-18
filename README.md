@@ -91,17 +91,17 @@ flowchart TB
 | [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
 | [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
 
-**Total : 24 skills, 757 agents**
+**Total : 23 skills métier (741 agents) + orchestration-framework (16 agents task-orchestrator)**
 
 ## Architecture
 
 ```
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
-│   ├── orchestration-framework/   # Règles de routage et workflows (pas un skill)
-│   ├── skills/                    # 24 skills, 757 agents
+│   ├── orchestration-framework/   # Règles de routage et workflows
+│   │   └── task-orchestrator/     # Niveau 1: Orchestration (16 agents)
+│   ├── skills/                    # 23 skills métier, 741 agents
 │   │   ├── client-intake/         # Niveau 0: Entrée
-│   │   ├── task-orchestrator/     # Niveau 1: Orchestration
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
 │   │   ├── direction-marketing/   # Niveau 2: Stratégie
 │   │   ├── direction-artistique/  # Niveau 2: Stratégie
