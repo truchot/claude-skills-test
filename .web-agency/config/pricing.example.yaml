@@ -1,0 +1,98 @@
+# =============================================================================
+# TEMPLATE DE CONFIGURATION PRICING
+# =============================================================================
+#
+# INSTRUCTIONS :
+# 1. Copier ce fichier vers pricing.yaml
+# 2. Remplacer les valeurs XXX par vos tarifs réels
+# 3. Ne JAMAIS commiter pricing.yaml (protégé par .gitignore)
+#
+# Usage : cp pricing.example.yaml pricing.yaml && nano pricing.yaml
+# =============================================================================
+
+pricing:
+  # Version du schéma de configuration
+  schema_version: "1.0.0"
+
+  # Dernière mise à jour (à modifier manuellement)
+  last_updated: "YYYY-MM-DD"
+  updated_by: "your-name"
+
+  # ==========================================================================
+  # TAUX JOURNALIERS MOYENS (TJM)
+  # ==========================================================================
+  tjm:
+    # Profil Junior (0-2 ans d'expérience)
+    junior:
+      standard: XXX  # Remplacer par le TJM réel
+      premium: XXX   # Remplacer par le TJM premium
+
+    # Profil Confirmé (2-5 ans d'expérience)
+    confirmed:
+      standard: XXX
+      premium: XXX
+
+    # Profil Senior (5-8 ans d'expérience)
+    senior:
+      standard: XXX
+      premium: XXX
+
+    # Profil Expert/Lead (8+ ans d'expérience)
+    expert:
+      standard: XXX
+      premium: XXX
+
+  # ==========================================================================
+  # FORFAITS STANDARDS
+  # ==========================================================================
+  forfaits:
+    # Phase Discovery / Cadrage
+    discovery:
+      small: XXX      # Projet simple
+      medium: XXX     # Projet moyen
+      large: XXX      # Projet complexe
+
+    # Maintenance mensuelle
+    maintenance:
+      basic: XXX      # Support réactif
+      standard: XXX   # Support + évolutions mineures
+      premium: XXX    # Support prioritaire + évolutions
+
+  # ==========================================================================
+  # POLITIQUES DE REMISE
+  # ==========================================================================
+  discounts:
+    # Remise volume (basée sur le CA annuel)
+    volume:
+      threshold_1: 50000   # CA annuel seuil 1
+      discount_1: 5        # % de remise
+      threshold_2: 100000  # CA annuel seuil 2
+      discount_2: 10       # % de remise
+      threshold_3: 200000  # CA annuel seuil 3
+      discount_3: 15       # % de remise
+
+    # Remise engagement (contrat longue durée)
+    commitment:
+      months_6: 5          # % pour engagement 6 mois
+      months_12: 10        # % pour engagement 12 mois
+      months_24: 15        # % pour engagement 24 mois
+
+    # Remise maximale autorisée sans escalade
+    max_without_approval: 20  # %
+
+  # ==========================================================================
+  # SEUILS D'ESCALADE
+  # ==========================================================================
+  escalation:
+    # Montant projet nécessitant validation direction
+    project_amount_threshold: 50000
+
+    # Remise nécessitant validation direction
+    discount_threshold: 20  # %
+
+    # Marge minimale acceptable
+    minimum_margin: 25  # %
+
+# =============================================================================
+# FIN DU TEMPLATE
+# =============================================================================

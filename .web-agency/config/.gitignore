@@ -1,0 +1,23 @@
+# Configuration Confidentielle - Protection Locale
+# ================================================
+#
+# Ce .gitignore fournit une protection SUPPLÉMENTAIRE
+# au niveau du dossier config/ en plus du .gitignore racine.
+#
+# Raison : Double protection pour les fichiers critiques
+# Les fichiers sont ignorés par le .gitignore racine ET ce fichier.
+
+# Tarification (fichiers spécifiques à ce dossier)
+pricing.yaml
+pricing.yml
+
+# Pattern générique pour tous les secrets de ce dossier
+*.secret.yaml
+*.secret.yml
+*.local.yaml
+*.local.yml
+
+# Autoriser explicitement les templates
+!*.example.yaml
+!*.example.yml
+!README.md

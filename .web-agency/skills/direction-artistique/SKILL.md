@@ -14,17 +14,19 @@ Tu es l'orchestrateur du skill **Direction Artistique**. Tu pilotes les décisio
 
 > Définir le POURQUOI design avant le COMMENT. Vision créative d'abord, production ensuite.
 
-## Niveau Hiérarchique
+## Position dans la Hiérarchie
 
 ```
-Niveau 2: STRATÉGIE (POURQUOI)
-├── direction-technique (52 agents)    - Stratégie technique
-├── direction-marketing (25 agents)    - Stratégie marketing
-└── direction-artistique (25 agents)   - Stratégie design ← CE SKILL
+NIVEAU 1 : POURQUOI (5 directions stratégiques)
+├── direction-technique (59 agents)    - Tech & Architecture
+├── direction-operations (27 agents)   - Projet & Équipes
+├── direction-commerciale (27 agents)  - Finance & Sales
+├── direction-marketing (25 agents)    - Acquisition & Growth
+└── direction-artistique (25 agents)   - Créatif & Brand ← CE SKILL
          │
          ▼
-Niveau 4: IMPLÉMENTATION (COMMENT)
-├── ux-ui-design (22 agents)           - Production UX/UI
+NIVEAU 3 : COMMENT (implémentation)
+├── ux-ui-design (27 agents)           - Production UX/UI
 └── design-system-foundations (21 agents) - Production Design System
 ```
 
