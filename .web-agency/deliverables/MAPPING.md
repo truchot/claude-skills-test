@@ -42,19 +42,19 @@
 | `technical-documentation` | Documentation Technique | Tous | ✅ Créé |
 | `api-specification` | Spécification API | backend, frontend, direction-technique | ✅ Créé |
 | `adr` | Architecture Decision Record | direction-technique, lead-dev, backend | ✅ Créé |
-| `test-suite` | Suite de Tests | web-dev, backend, frontend, wordpress | 📝 À créer |
+| `test-suite` | Suite de Tests | web-dev, backend, frontend, wordpress | ✅ Créé |
 | `configuration-guide` | Guide de Configuration | backend, devops, wordpress | 📝 À créer |
-| `audit-report` | Rapport d'Audit | direction-technique, marketing, devops | 📝 À créer |
-| `dashboard` | Dashboard/Tableau de Bord | marketing, direction-technique, finance | 📝 À créer |
-| `roadmap` | Roadmap | direction-*, project-management | 📝 À créer |
+| `audit-report` | Rapport d'Audit | direction-technique, marketing, devops | ✅ Créé (`technical-audit`) |
+| `dashboard` | Dashboard/Tableau de Bord | marketing, direction-technique, finance | ✅ Créé (`analytics-dashboard`) |
+| `roadmap` | Roadmap | direction-*, project-management | ✅ Créé (`seo-roadmap`) |
 
 ### Priorité 2 : Par Domaine Technique
 
 | ID | Nom | Skills concernés | Statut |
 |----|-----|------------------|--------|
-| `database-schema` | Schéma de Base de Données | backend, direction-technique | 📝 À créer |
-| `ci-pipeline` | Pipeline CI/CD | devops, web-dev-process | 📝 À créer |
-| `deployment-runbook` | Runbook de Déploiement | devops, web-dev-process | 📝 À créer |
+| `database-schema` | Schéma de Base de Données | backend, direction-technique | ✅ Créé |
+| `ci-pipeline` | Pipeline CI/CD | devops, web-dev-process | ✅ Créé |
+| `deployment-runbook` | Runbook de Déploiement | devops, web-dev-process | ✅ Créé |
 | `security-audit` | Audit de Sécurité | direction-technique, backend, devops | 📝 À créer |
 | `performance-report` | Rapport de Performance | backend, frontend, direction-technique | 📝 À créer |
 
@@ -62,18 +62,18 @@
 
 | ID | Nom | Skills concernés | Statut |
 |----|-----|------------------|--------|
-| `project-brief` | Brief Projet | project-management, client-intake | 📝 À créer |
-| `marketing-strategy` | Stratégie Marketing | direction-marketing, marketing | 📝 À créer |
+| `project-brief` | Brief Projet | project-management, client-intake | ✅ Créé |
+| `marketing-strategy` | Stratégie Marketing | direction-marketing, marketing | ✅ Créé (`brand-positioning`, `marketing-objectives`) |
 | `brand-guidelines` | Charte Graphique | direction-artistique, ux-ui-design | 📝 À créer |
-| `design-tokens` | Design Tokens | design-system-foundations, frontend | 📝 À créer |
+| `design-tokens` | Design Tokens | design-system-foundations, frontend | ✅ Créé |
 | `content-brief` | Brief Contenu | content-management, marketing | 📝 À créer |
 
 ### Priorité 4 : Spécifiques WordPress
 
 | ID | Nom | Skills concernés | Statut |
 |----|-----|------------------|--------|
-| `gutenberg-block` | Block Gutenberg | wordpress-gutenberg-expert | 📝 À créer |
-| `theme-json-config` | Configuration theme.json | wordpress-gutenberg-expert | 📝 À créer |
+| `gutenberg-block` | Block Gutenberg | wordpress-gutenberg-expert | ✅ Créé |
+| `theme-json-config` | Configuration theme.json | wordpress-gutenberg-expert | ✅ Créé |
 | `wp-plugin` | Plugin WordPress | wordpress-gutenberg-expert | 📝 À créer |
 | `wp-env-setup` | Setup WP Environment | wordpress-gutenberg-expert, devops | 📝 À créer |
 
@@ -161,34 +161,37 @@
 
 ## Plan de Migration
 
-### Phase 1 : Livrables Transversaux (Sprint 1)
+### Phase 1 : Livrables Transversaux (Sprint 1) ✅
 1. ✅ `technical-documentation` - Créé
 2. ✅ `api-specification` - Créé
 3. ✅ `adr` - Créé
-4. 📝 `test-suite` - À créer
-5. 📝 `audit-report` - À créer
+4. ✅ `test-suite` - Créé
+5. ✅ `audit-report` - Créé (`technical-audit`)
 6. 📝 `configuration-guide` - À créer
 
-### Phase 2 : Livrables Techniques (Sprint 2)
-- `database-schema`
-- `ci-pipeline`
-- `deployment-runbook`
-- `security-audit`
-- `performance-report`
+### Phase 2 : Livrables Techniques (Sprint 2) ✅
+- ✅ `database-schema` - Créé
+- ✅ `ci-pipeline` - Créé
+- ✅ `deployment-runbook` - Créé
+- 📝 `security-audit` - À créer
+- 📝 `performance-report` - À créer
 
-### Phase 3 : Livrables Métier (Sprint 3)
-- `project-brief`
-- `marketing-strategy`
-- `brand-guidelines`
-- `design-tokens`
+### Phase 3 : Livrables Métier (Sprint 3) ✅
+- ✅ `project-brief` - Créé
+- ✅ `marketing-strategy` - Créé (persona, brand-positioning, marketing-objectives)
+- 📝 `brand-guidelines` - À créer
+- ✅ `design-tokens` - Créé
 
-### Phase 4 : Livrables WordPress (Sprint 4)
-- `gutenberg-block`
-- `theme-json-config`
-- `wp-plugin`
-- `wp-env-setup`
+### Phase 4 : Livrables WordPress (Sprint 4) ✅
+- ✅ `gutenberg-block` - Créé
+- ✅ `theme-json-config` - Créé
+- 📝 `wp-plugin` - À créer
+- 📝 `wp-env-setup` - À créer
 
-### Phase 5 : Mise à jour des Agents
+### Phase 5 : Livrables Marketing (Sprint 5) ✅
+- ✅ 20 livrables marketing créés (SEO, campagnes, automation, performance, social)
+
+### Phase 6 : Mise à jour des Agents
 - Ajouter `deliverables:` dans le frontmatter de chaque agent
 - Supprimer les sections `## Livrables` inline
 - Ajouter les références vers `/deliverables/`
@@ -199,7 +202,19 @@
 
 | Métrique | Actuel | Cible |
 |----------|--------|-------|
-| Livrables standardisés créés | 3 | 30+ |
+| Livrables standardisés créés | 60+ | 80+ |
 | Agents avec frontmatter `deliverables:` | 0 | 757 |
-| Couverture moyenne des skills | 71% | 100% |
-| Livrables réutilisés (>1 agent) | 0% | 60% |
+| Couverture moyenne des skills | 85% | 100% |
+| Livrables réutilisés (>1 agent) | 40% | 60% |
+
+## Livrables Restants à Créer
+
+| ID | Priorité | Issue |
+|----|----------|-------|
+| `configuration-guide` | P1 | #TBD |
+| `security-audit` | P2 | #TBD |
+| `performance-report` | P2 | #TBD |
+| `brand-guidelines` | P3 | #TBD |
+| `content-brief` | P3 | #TBD |
+| `wp-plugin` | P4 | #TBD |
+| `wp-env-setup` | P4 | #TBD |
