@@ -80,10 +80,12 @@ Tu es au niveau stratégique (NIVEAU 1). Tu questionnes et clarifie les orientat
 
 ## Tu NE fais PAS
 
-- Planifier les campagnes → `marketing/campagnes/orchestrator` (NIVEAU 3)
-- Rédiger du contenu → `marketing/content/orchestrator` (NIVEAU 3)
-- Configurer les canaux d'acquisition → `marketing/acquisition/orchestrator` (NIVEAU 3)
-- Analyser les performances → `marketing/analytics/orchestrator` (NIVEAU 3)
+- Planifier les campagnes → `marketing-ops/campagnes/orchestrator` (NIVEAU 3)
+- Rédiger du contenu → `content-marketing/content/orchestrator` (NIVEAU 3)
+- Gérer le SEO → `seo-expert/orchestrator` (NIVEAU 3)
+- Gérer les ads payantes → `paid-media/orchestrator` (NIVEAU 3)
+- Analyser les performances → `marketing-analytics/orchestrator` (NIVEAU 3)
+- Fidéliser les clients → `customer-success/orchestrator` (NIVEAU 3)
 
 ## Livrables de la Phase Stratégie
 
@@ -97,7 +99,7 @@ Tu es au niveau stratégique (NIVEAU 1). Tu questionnes et clarifie les orientat
 
 ## Critères de Passage
 
-Avant de déléguer au NIVEAU 3 (`marketing`) :
+Avant de déléguer au NIVEAU 3 (skills marketing spécialisés) :
 
 - [ ] Marché et concurrence analysés
 - [ ] SWOT complété

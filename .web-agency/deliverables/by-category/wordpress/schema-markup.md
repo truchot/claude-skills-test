@@ -8,13 +8,13 @@ phase: "6-lancement"
 order: 9
 agents:
   - wordpress-gutenberg-expert/seo/schema-markup
-  - marketing/seo/structured-data
+  - seo-expert/technique/structured-data
   - direction-marketing/mesure/kpis-definition
 consumes:
   - custom-post-type
   - technical-specification
 produces_for:
-  - marketing/seo/technical-seo
+  - seo-expert/technique/orchestrator
   - analytics-setup
 workflows:
   - id: wf-schema-implementation

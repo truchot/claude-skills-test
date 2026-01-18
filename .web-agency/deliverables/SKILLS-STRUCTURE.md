@@ -49,17 +49,45 @@
 │       │   ├── modelisation-donnees.md
 │       │   └── specification-api.md
 │       └── orchestrator.md
-├── marketing/
+├── seo-expert/
 │   └── agents/
-│       ├── acquisition/
-│       │   └── seo/
-│       │       ├── contenu/
-│       │       │   ├── recherche-mots-cles.md
-│       │       │   └── brief-redactionnel.md
-│       │       └── orchestrator.md
+│       ├── technique/
+│       │   └── orchestrator.md
+│       ├── contenu/
+│       │   ├── recherche-mots-cles.md
+│       │   └── brief-redactionnel.md
+│       └── orchestrator.md
+├── paid-media/
+│   └── agents/
+│       ├── sea/
+│       │   └── orchestrator.md
+│       ├── social-ads/
+│       │   └── orchestrator.md
+│       └── orchestrator.md
+├── marketing-analytics/
+│   └── agents/
+│       ├── tracking/
+│       │   └── orchestrator.md
+│       ├── attribution/
+│       │   └── orchestrator.md
+│       └── orchestrator.md
+├── content-marketing/
+│   └── agents/
 │       ├── content/
 │       │   ├── blog-articles.md
 │       │   └── copywriting.md
+│       └── orchestrator.md
+├── customer-success/
+│   └── agents/
+│       ├── lifecycle/
+│       │   └── orchestrator.md
+│       └── orchestrator.md
+├── marketing-ops/
+│   └── agents/
+│       ├── campagnes/
+│       │   └── orchestrator.md
+│       ├── automation/
+│       │   └── orchestrator.md
 │       └── orchestrator.md
 └── wordpress-gutenberg-expert/
     └── agents/
@@ -86,7 +114,7 @@ skill/domain/agent-name
 |-----------|----------------|
 | `backend-developer/api/rest-design` | `skills/backend-developer/agents/api/rest-design.md` |
 | `direction-technique/specification/specification-technique` | `skills/direction-technique/agents/specification/specification-technique.md` |
-| `marketing/acquisition/seo/contenu/recherche-mots-cles` | `skills/marketing/agents/acquisition/seo/contenu/recherche-mots-cles.md` |
+| `seo-expert/contenu/recherche-mots-cles` | `skills/seo-expert/agents/contenu/recherche-mots-cles.md` |
 
 ## Skills Disponibles
 
@@ -109,7 +137,12 @@ skill/domain/agent-name
 | `react-expert` | 4 | Expert React |
 | `nextjs-expert` | 4 | Expert Next.js |
 | `design-system-foundations` | 4 | Design system |
-| `marketing` | 4 | Marketing digital |
+| `seo-expert` | 4 | SEO et référencement |
+| `paid-media` | 4 | Publicité payante (SEA, Social Ads) |
+| `marketing-analytics` | 4 | Analytics et mesure marketing |
+| `content-marketing` | 4 | Contenu et social media |
+| `customer-success` | 4 | Fidélisation et rétention |
+| `marketing-ops` | 4 | Campagnes et automation |
 | `content-management` | 4 | Gestion de contenu |
 | `ux-ui-design` | 4 | UX/UI Design |
 | `legal-compliance` | 4 | Conformité légale |
@@ -128,7 +161,7 @@ Le script `validate-crossrefs.sh` vérifie que :
 ### Règles de Matching
 
 - Le format `skill/domain/agent` est converti en chemin `skills/skill/agents/domain/agent.md`
-- Les domaines imbriqués sont supportés : `marketing/acquisition/seo/contenu/agent`
+- Les domaines imbriqués sont supportés : `seo-expert/contenu/agent`
 - Les wildcards ne sont pas validés : `backend-developer/*/all` est ignoré
 
 ## Structure d'un Agent

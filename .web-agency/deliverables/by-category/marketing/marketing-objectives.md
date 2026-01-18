@@ -7,18 +7,18 @@ status: active
 phase: "2-strategy"
 order: 4
 agents:
-  - marketing/strategie/objectifs-marketing
-  - marketing/campagnes/orchestrator
-  - marketing/analytics/orchestrator
+  - direction-marketing/strategie/objectifs-marketing
+  - marketing-ops/campagnes/orchestrator
+  - marketing-analytics/orchestrator
 consumes:
   - project-brief
   - persona
   - brand-positioning
 produces_for:
-  - marketing/campagnes/planning-campagne
-  - marketing/campagnes/budget-allocation
-  - marketing/analytics/reporting
-  - marketing/performance/funnel-analysis
+  - marketing-ops/campagnes/planning-campagne
+  - marketing-ops/campagnes/budget-allocation
+  - marketing-analytics/reporting
+  - marketing-ops/performance/funnel-analysis
 workflows:
   - id: wf-marketing-objectives
     template: wf-strategy

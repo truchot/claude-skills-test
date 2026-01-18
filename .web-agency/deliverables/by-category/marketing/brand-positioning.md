@@ -7,18 +7,18 @@ status: active
 phase: "1-intake"
 order: 2
 agents:
-  - marketing/strategie/brand-positioning
-  - marketing/strategie/market-analysis
-  - marketing/content/ligne-editoriale
+  - direction-marketing/strategie/brand-positioning
+  - direction-marketing/strategie/market-analysis
+  - content-marketing/content/ligne-editoriale
 consumes:
   - client-request
   - project-brief
   - persona
 produces_for:
-  - marketing/content/ligne-editoriale
-  - marketing/content/copywriting
+  - content-marketing/content/ligne-editoriale
+  - content-marketing/content/copywriting
   - design/branding/identite-visuelle
-  - marketing/campagnes/orchestrator
+  - marketing-ops/campagnes/orchestrator
 workflows:
   - id: wf-brand-positioning
     template: wf-strategy
