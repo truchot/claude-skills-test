@@ -1,0 +1,31 @@
+# Fichiers de configuration confidentiels
+# NE PAS COMMITER les fichiers suivants
+
+# Tarification réelle
+pricing.yaml
+pricing.yml
+
+# Fichiers secrets
+*.secret.yaml
+*.secret.yml
+*.secrets.yaml
+*.secrets.yml
+
+# Configuration locale
+*.local.yaml
+*.local.yml
+
+# Credentials
+credentials.yaml
+credentials.yml
+api-keys.yaml
+api-keys.yml
+
+# Environnement
+.env
+.env.local
+.env.production
+
+# Note: Seuls les fichiers *.example.yaml doivent être versionnés
+!*.example.yaml
+!*.example.yml

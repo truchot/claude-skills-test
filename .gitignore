@@ -1,1 +1,29 @@
 node_modules/
+
+# =============================================================================
+# FICHIERS CONFIDENTIELS - NE PAS COMMITER
+# =============================================================================
+
+# Configuration pricing (tarifs réels)
+.web-agency/config/pricing.yaml
+.web-agency/config/pricing.yml
+
+# Fichiers secrets
+.web-agency/config/*.secret.yaml
+.web-agency/config/*.secret.yml
+.web-agency/config/*.secrets.yaml
+
+# Configuration locale
+.web-agency/config/*.local.yaml
+.web-agency/config/*.local.yml
+
+# Credentials et API keys
+.web-agency/config/credentials.yaml
+.web-agency/config/api-keys.yaml
+
+# Environnement
+.env
+.env.local
+.env.production
+.env.*.local
+
