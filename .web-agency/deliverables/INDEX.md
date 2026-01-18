@@ -20,7 +20,13 @@
     ├── design/
     ├── strategy/
     ├── report/
-    └── process/
+    ├── process/
+    ├── marketing/
+    ├── wordpress/
+    ├── legal/                  # NEW: Conformité juridique et RGPD
+    ├── support/                # NEW: Support client et SLAs
+    ├── commercial/             # NEW: Vente et propositions
+    └── finance/                # NEW: Facturation et budgets
 ```
 
 ## Catégories de Livrables
@@ -29,11 +35,17 @@
 |-----------|-------------|----------|
 | `documentation` | Documents techniques et fonctionnels | API docs, guides, README |
 | `specification` | Spécifications et définitions | Specs API, schémas de données |
-| `code` | Artefacts de code | Composants, modules, configs |
+| `code` | Artefacts de code | Composants, modules, configs, IaC |
 | `design` | Artefacts de design | Maquettes, tokens, guidelines |
 | `strategy` | Documents stratégiques | ADR, roadmaps, audits |
 | `report` | Rapports et analyses | Audits, tests, reviews |
 | `process` | Process et workflows | Checklists, templates projet |
+| `marketing` | Marketing et acquisition | SEO, campagnes, personas |
+| `wordpress` | WordPress et Gutenberg | Blocs, thèmes, CPT |
+| `legal` | Conformité juridique | RGPD, CGV, politiques |
+| `support` | Support client | FAQ, SLAs, knowledge base |
+| `commercial` | Vente et propositions | Devis, propositions |
+| `finance` | Finance et comptabilité | Factures, budgets |
 
 ## Livrables par Catégorie
 
@@ -84,6 +96,8 @@
 | `react-component` | Composant React | react-expert, frontend-developer | Active |
 | `api-endpoint` | Endpoint API | backend-developer/api | Active |
 | `ci-pipeline` | Pipeline CI/CD | devops/cicd | Active |
+| `docker-compose-config` | Configuration Docker Compose | devops/containerization, backend-developer | Active |
+| `infrastructure-as-code` | Infrastructure as Code (IaC) | devops/infrastructure | Active |
 
 ### Process
 
@@ -92,6 +106,35 @@
 | `project-brief` | Brief Projet | project-management/avant-projet | Active |
 | `sprint-planning` | Planning Sprint | project-management/execution | Active |
 | `deployment-checklist` | Checklist Déploiement | devops/deployment | Active |
+
+### Legal
+
+| ID | Nom | Agents producteurs | Statut |
+|----|-----|-------------------|--------|
+| `privacy-policy` | Politique de Confidentialité | legal-compliance/documents, legal-compliance/rgpd | Active |
+| `terms-of-service` | CGU / CGV | legal-compliance/documents, legal-compliance/contracts | Active |
+| `rgpd-compliance-report` | Rapport Conformité RGPD | legal-compliance/audit, legal-compliance/rgpd | Active |
+| `cookie-policy` | Politique de Cookies | legal-compliance/cookies | Active |
+
+### Support
+
+| ID | Nom | Agents producteurs | Statut |
+|----|-----|-------------------|--------|
+| `faq` | Foire Aux Questions | support-client/knowledge | Active |
+| `sla-definition` | Définition des SLAs | support-client/escalation, direction-operations | Active |
+
+### Commercial
+
+| ID | Nom | Agents producteurs | Statut |
+|----|-----|-------------------|--------|
+| `commercial-proposal` | Proposition Commerciale / Devis | commercial-crm/negotiation, commercial-crm/prospection | Active |
+
+### Finance
+
+| ID | Nom | Agents producteurs | Statut |
+|----|-----|-------------------|--------|
+| `invoice-template` | Template de Facture | finance-analytics/billing | Active |
+| `budget-plan` | Plan Budgétaire | finance-analytics/forecasting | Active |
 
 ## Matrice Agents → Livrables
 
