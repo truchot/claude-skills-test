@@ -1,9 +1,9 @@
 /**
- * Centralized configuration for web-agency skill tests
+ * Centralized configuration for orchestration framework tests
  * @module tests/config
  *
- * NOTE: Since v2.0.0 refactoring, web-agency is a meta-orchestrator.
- * Agents are now in separate skills (project-management, technical, etc.)
+ * NOTE: Since v4.1.0 refactoring, this is the orchestration framework (not a skill).
+ * It coordinates skills but does not execute tasks directly.
  */
 
 const fs = require('fs');
