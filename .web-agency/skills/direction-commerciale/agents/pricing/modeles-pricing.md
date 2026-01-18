@@ -57,12 +57,38 @@ Phase Run : Forfait maintenance
 
 ## Grille Tarifaire
 
+> **Note** : Les valeurs ci-dessous sont des **exemples indicatifs**.
+> Les tarifs réels doivent être configurés dans le fichier de configuration confidentiel :
+> `config/pricing.yaml` (non versionné, voir `.gitignore`)
+
 | Profil | TJM Standard | TJM Premium |
 |--------|--------------|-------------|
-| Junior | 400€ | 500€ |
-| Confirmé | 550€ | 650€ |
-| Senior | 700€ | 850€ |
-| Expert/Lead | 850€ | 1000€ |
+| Junior | `${PRICING_TJM_JUNIOR_STD}` | `${PRICING_TJM_JUNIOR_PREM}` |
+| Confirmé | `${PRICING_TJM_CONFIRMED_STD}` | `${PRICING_TJM_CONFIRMED_PREM}` |
+| Senior | `${PRICING_TJM_SENIOR_STD}` | `${PRICING_TJM_SENIOR_PREM}` |
+| Expert/Lead | `${PRICING_TJM_EXPERT_STD}` | `${PRICING_TJM_EXPERT_PREM}` |
+
+### Configuration
+
+Créer `config/pricing.yaml` avec la structure :
+
+```yaml
+# config/pricing.yaml (CONFIDENTIEL - ne pas commiter)
+pricing:
+  tjm:
+    junior:
+      standard: 400
+      premium: 500
+    confirmed:
+      standard: 550
+      premium: 650
+    senior:
+      standard: 700
+      premium: 850
+    expert:
+      standard: 850
+      premium: 1000
+```
 
 ## Escalade
 

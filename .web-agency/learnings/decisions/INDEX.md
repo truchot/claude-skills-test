@@ -4,6 +4,12 @@
 
 ## Décisions Documentées
 
+### Architecture & Conventions
+
+| Décision | Contexte | Défaut |
+|----------|----------|--------|
+| [ADR-007-naming-conventions](./ADR-007-naming-conventions.md) | Nommage français/anglais | Voir règles |
+
 ### Environnement & Tooling
 
 | Décision | Contexte | Défaut |
@@ -102,7 +108,7 @@ Nouveau Projet WordPress
 
 ## Statistiques
 
-- **Total décisions** : 12
+- **Total décisions** : 13
 - **Consultées ce mois** : 28
 - **Écarts documentés** : 3
-- **Dernière mise à jour** : 2024-12-24
+- **Dernière mise à jour** : 2025-01-18
