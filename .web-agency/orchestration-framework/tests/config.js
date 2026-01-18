@@ -9,11 +9,14 @@
 const fs = require('fs');
 const path = require('path');
 
-/** @const {string} Base directory for the web-agency skill */
-const SKILL_ROOT = path.join(__dirname, '..');
+/** @const {string} Base directory for the orchestration framework */
+const FRAMEWORK_ROOT = path.join(__dirname, '..');
+
+/** @const {string} Base directory for .web-agency */
+const WEB_AGENCY_ROOT = path.join(FRAMEWORK_ROOT, '..');
 
 /** @const {string} Base directory for all skills */
-const SKILLS_ROOT = path.join(SKILL_ROOT, '..');
+const SKILLS_ROOT = path.join(WEB_AGENCY_ROOT, 'skills');
 
 /** @const {string} Directory for project management skill (external) */
 const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
@@ -234,7 +237,8 @@ const EXPECTED_ROUTING = {
 };
 
 module.exports = {
-  SKILL_ROOT,
+  FRAMEWORK_ROOT,
+  WEB_AGENCY_ROOT,
   SKILLS_ROOT,
   PROJECT_MANAGEMENT_DIR,
   PROJECT_MANAGEMENT_AGENTS_DIR,

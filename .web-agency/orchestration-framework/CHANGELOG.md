@@ -1,8 +1,24 @@
 # Changelog
 
-Toutes les modifications notables du skill web-agency sont documentées ici.
+Toutes les modifications notables du framework d'orchestration sont documentées ici.
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
+
+## [4.1.0] - 2026-01-18
+
+### Changé
+
+- **BREAKING**: Déplacement de `.web-agency/skills/web-agency/` vers `.web-agency/orchestration-framework/`
+- Clarification : ce n'est pas un skill mais un framework de coordination
+- Mise à jour de `tests/config.js` pour refléter la nouvelle structure de chemins
+
+### Migration
+
+Si vous aviez des références à l'ancien chemin :
+```diff
+- .web-agency/skills/web-agency/
++ .web-agency/orchestration-framework/
+```
 
 ## [1.0.0] - 2025-12-21
 
