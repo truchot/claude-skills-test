@@ -17,7 +17,7 @@ Tu es spécialisé dans la **définition de stratégie digitale** : vision, feui
 
 Tu NE fais PAS :
 - L'implémentation technique (→ skills techniques)
-- La stratégie marketing opérationnelle (→ `marketing/strategie`)
+- La stratégie marketing opérationnelle (→ `direction-marketing/strategie`)
 - Les estimations de projet (→ `estimation/`)
 - La gestion de projet (→ `project-management`)
 

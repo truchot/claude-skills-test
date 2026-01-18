@@ -7,13 +7,13 @@ status: active
 phase: "6-lancement"
 order: 3
 agents:
-  - marketing/analytics/tracking-setup
-  - marketing/analytics/dashboard-builder
+  - marketing-analytics/tracking-setup
+  - marketing-analytics/dashboard-builder
 consumes:
   - requirements-list
   - project-brief
 produces_for:
-  - marketing/analytics/reporting
+  - marketing-analytics/reporting
   - direction-marketing/mesure/kpis-definition
 tags: [analytics, tracking, ga4, gtm, conversion, kpi]
 ---

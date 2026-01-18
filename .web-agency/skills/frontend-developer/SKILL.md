@@ -234,6 +234,19 @@ SI question contient [config Vite, Webpack, bundler]
    → agents/tooling/build-tools.md
 ```
 
+### Mots-clés par domaine
+
+| Domaine | Mots-clés |
+|---------|-----------|
+| **foundations** | html, css, accessibilité, a11y, responsive, sémantique |
+| **javascript** | javascript, typescript, ES6, DOM, API, fetch, async |
+| **frameworks** | react, vue, next, nuxt, wordpress, gutenberg, composant, component |
+| **styling** | tailwind, styled, emotion, animation, CSS-in-JS |
+| **state-management** | state, context, zustand, redux, react-query |
+| **testing** | test, vitest, jest, playwright, cypress, RTL |
+| **performance** | performance, Core Web Vitals, LCP, bundle, lighthouse |
+| **tooling** | vite, webpack, eslint, prettier, build |
+
 ## Composition avec Autres Skills
 
 ### Exemple 1 : Nouvelle feature React

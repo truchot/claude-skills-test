@@ -7,17 +7,17 @@ status: active
 phase: "3-conception"
 order: 11
 agents:
-  - marketing/campagnes/planning-campagne
-  - marketing/campagnes/orchestrator
-  - marketing/campagnes/coordination-canaux
+  - marketing-ops/campagnes/planning-campagne
+  - marketing-ops/campagnes/orchestrator
+  - marketing-ops/campagnes/coordination-canaux
 consumes:
   - marketing-objectives
   - persona
   - content-calendar
 produces_for:
-  - marketing/campagnes/budget-allocation
-  - marketing/campagnes/suivi-performance
-  - marketing/content/orchestrator
+  - marketing-ops/campagnes/budget-allocation
+  - marketing-ops/campagnes/suivi-performance
+  - content-marketing/content/orchestrator
 workflows:
   - id: wf-campaign-planning
     template: wf-planning

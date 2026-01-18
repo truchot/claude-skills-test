@@ -7,16 +7,16 @@ status: active
 phase: "6-maintenance"
 order: 10
 agents:
-  - marketing/acquisition/seo/pilotage/reporting-seo
-  - marketing/acquisition/seo/pilotage/analytics-seo
-  - marketing/acquisition/seo/pilotage/suivi-positions
+  - seo-expert/pilotage/reporting-seo
+  - seo-expert/pilotage/analytics-seo
+  - seo-expert/pilotage/suivi-positions
 consumes:
   - seo-roadmap
   - marketing-objectives
   - keyword-research
 produces_for:
-  - marketing/acquisition/seo/strategie/roadmap-seo
-  - marketing/analytics/orchestrator
+  - seo-expert/strategie/roadmap-seo
+  - marketing-analytics/orchestrator
 workflows:
   - id: wf-seo-report-monthly
     template: wf-report

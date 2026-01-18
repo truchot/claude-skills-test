@@ -7,15 +7,15 @@ status: active
 phase: "6-maintenance"
 order: 12
 agents:
-  - marketing/campagnes/suivi-performance
-  - marketing/analytics/orchestrator
-  - marketing/performance/funnel-analysis
+  - marketing-ops/campagnes/suivi-performance
+  - marketing-analytics/orchestrator
+  - marketing-ops/performance/funnel-analysis
 consumes:
   - campaign-planning
   - marketing-objectives
 produces_for:
-  - marketing/campagnes/orchestrator
-  - marketing/strategie/orchestrator
+  - marketing-ops/campagnes/orchestrator
+  - direction-marketing/strategie/orchestrator
 workflows:
   - id: wf-campaign-report
     template: wf-report

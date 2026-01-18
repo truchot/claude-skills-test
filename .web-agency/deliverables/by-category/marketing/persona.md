@@ -7,17 +7,17 @@ status: active
 phase: "1-intake"
 order: 1
 agents:
-  - marketing/strategie/persona-definition
-  - marketing/content/orchestrator
-  - marketing/campagnes/orchestrator
+  - direction-marketing/strategie/persona-definition
+  - content-marketing/content/orchestrator
+  - marketing-ops/campagnes/orchestrator
 consumes:
   - client-request
   - project-brief
 produces_for:
-  - marketing/content/ligne-editoriale
-  - marketing/content/copywriting
-  - marketing/campagnes/planning-campagne
-  - marketing/automation/lead-scoring
+  - content-marketing/content/ligne-editoriale
+  - content-marketing/content/copywriting
+  - marketing-ops/campagnes/planning-campagne
+  - marketing-ops/automation/lead-scoring
   - design/ux/user-research
 workflows:
   - id: wf-persona-creation

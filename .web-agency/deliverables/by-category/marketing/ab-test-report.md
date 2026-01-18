@@ -7,14 +7,14 @@ status: active
 phase: "4-realisation"
 order: 17
 agents:
-  - marketing/performance/experimentation
-  - marketing/analytics/orchestrator
+  - marketing-ops/performance/experimentation
+  - marketing-analytics/orchestrator
 consumes:
   - funnel-analysis
   - marketing-objectives
 produces_for:
-  - marketing/performance/conversion-optimization
-  - marketing/strategie/orchestrator
+  - marketing-ops/performance/conversion-optimization
+  - direction-marketing/strategie/orchestrator
 workflows:
   - id: wf-ab-test-design
     template: wf-creation

@@ -7,14 +7,14 @@ status: active
 phase: "4-realisation"
 order: 19
 agents:
-  - marketing/analytics/orchestrator
-  - marketing/performance/funnel-analysis
+  - marketing-analytics/orchestrator
+  - marketing-ops/performance/funnel-analysis
 consumes:
   - marketing-objectives
   - analytics-setup
 produces_for:
-  - marketing/strategie/orchestrator
-  - marketing/campagnes/suivi-performance
+  - direction-marketing/strategie/orchestrator
+  - marketing-ops/campagnes/suivi-performance
 workflows:
   - id: wf-dashboard-design
     template: wf-creation

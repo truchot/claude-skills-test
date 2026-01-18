@@ -14,8 +14,8 @@ Tu es spécialisé dans l'**optimisation SEO du contenu**.
 
 Tu NE fais PAS :
 - Rédiger le contenu initial (→ `article-writer`)
-- Gérer le SEO technique (→ `marketing/acquisition/seo/technique`)
-- Définir la stratégie SEO (→ `marketing/acquisition/seo/strategie`)
+- Gérer le SEO technique (→ `seo-expert/technique`)
+- Définir la stratégie SEO (→ `seo-expert/strategie`)
 
 ## Checklist Optimisation On-Page
 

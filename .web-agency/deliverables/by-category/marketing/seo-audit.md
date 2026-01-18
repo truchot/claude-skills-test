@@ -7,17 +7,17 @@ status: active
 phase: "2-strategy"
 order: 6
 agents:
-  - marketing/acquisition/seo/strategie/audit-global
-  - marketing/acquisition/seo/technique/orchestrator
-  - marketing/acquisition/seo/contenu/orchestrator
+  - seo-expert/strategie/audit-global
+  - seo-expert/technique/orchestrator
+  - seo-expert/contenu/orchestrator
 consumes:
   - client-request
   - project-brief
   - technical-audit
 produces_for:
-  - marketing/acquisition/seo/strategie/roadmap-seo
-  - marketing/acquisition/seo/contenu/recherche-mots-cles
-  - marketing/acquisition/seo/technique/core-web-vitals
+  - seo-expert/strategie/roadmap-seo
+  - seo-expert/contenu/recherche-mots-cles
+  - seo-expert/technique/core-web-vitals
 workflows:
   - id: wf-seo-audit
     template: wf-audit

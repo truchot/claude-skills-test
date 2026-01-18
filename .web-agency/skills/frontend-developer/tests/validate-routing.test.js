@@ -31,8 +31,8 @@ if (error) {
   reporter.summarize();
 }
 
-// Extract routing section
-const routingMatch = content.match(/##\s+Règles de Routage[\s\S]*?(?=##\s|$)/i);
+// Extract routing section (from "## Règles de Routage" to next "## " level-2 heading)
+const routingMatch = content.match(/## Règles de Routage[\s\S]*?(?=\n## [^#]|$)/i);
 const routingSection = routingMatch ? routingMatch[0].toLowerCase() : content.toLowerCase();
 
 reporter.section('Keyword Coverage');

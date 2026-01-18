@@ -8,7 +8,7 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 
 ```
 .web-agency/
-├── skills/          # 26 skills métier, 893 agents
+├── skills/          # 31 skills métier, ~900 agents
 │   │
 │   │  NIVEAU 1 : POURQUOI (5 directions stratégiques)
 │   ├── direction-technique/     # Tech & Architecture
@@ -26,7 +26,7 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 │   ├── client-intake/           # Qualification besoins
 │   ├── task-orchestrator/       # Priorisation et distribution
 │   │
-│   │  NIVEAU 3 : COMMENT (14 skills d'implémentation)
+│   │  NIVEAU 3 : COMMENT (19 skills d'implémentation)
 │   ├── frontend-developer/      # Code frontend
 │   ├── backend-developer/       # Code backend
 │   ├── devops/                  # CI/CD, infrastructure
@@ -35,7 +35,12 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 │   ├── wordpress-gutenberg-expert/ # Code WordPress
 │   ├── design-system-foundations/  # Design tokens
 │   ├── ux-ui-design/            # Maquettes, prototypes
-│   ├── marketing/               # Campagnes, SEO, content
+│   ├── seo-expert/              # SEO et référencement
+│   ├── paid-media/              # Publicité payante (SEA, Social Ads)
+│   ├── marketing-analytics/     # Data et attribution marketing
+│   ├── customer-success/        # Fidélisation, rétention
+│   ├── content-marketing/       # Contenu et social media
+│   ├── marketing-ops/           # Campagnes, automation
 │   ├── legal-compliance/        # RGPD, conformité
 │   ├── support-client/          # Tickets, FAQ
 │   ├── commercial-crm/          # Pipeline, CRM
@@ -76,12 +81,14 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 │                                                                         │
 │  → Processus et coordination, pas de code                               │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (14 skills d'implémentation)                        │
+│  NIVEAU 3 : COMMENT (19 skills d'implémentation)                        │
 │                                                                         │
 │  frontend-developer, backend-developer, devops, react-expert,           │
 │  nextjs-expert, wordpress-gutenberg-expert, design-system-foundations,  │
-│  ux-ui-design, marketing, legal-compliance, support-client,             │
-│  commercial-crm, finance-analytics, content-management, ddd             │
+│  ux-ui-design, seo-expert, paid-media, marketing-analytics,             │
+│  customer-success, content-marketing, marketing-ops, legal-compliance,  │
+│  support-client, commercial-crm, finance-analytics, content-management, │
+│  ddd                                                                    │
 │                                                                         │
 │  → Code réel et livrables concrets                                      │
 └─────────────────────────────────────────────────────────────────────────┘

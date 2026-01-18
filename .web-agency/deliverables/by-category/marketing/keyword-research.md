@@ -7,18 +7,18 @@ status: active
 phase: "2-strategy"
 order: 7
 agents:
-  - marketing/acquisition/seo/contenu/recherche-mots-cles
-  - marketing/acquisition/seo/strategie/opportunites-keywords
-  - marketing/acquisition/seo/contenu/semantique-seo
+  - seo-expert/contenu/recherche-mots-cles
+  - seo-expert/strategie/opportunites-keywords
+  - seo-expert/contenu/semantique-seo
 consumes:
   - persona
   - brand-positioning
   - seo-audit
 produces_for:
-  - marketing/acquisition/seo/contenu/brief-redactionnel
-  - marketing/acquisition/seo/strategie/roadmap-seo
-  - marketing/content/arborescence
-  - marketing/content/content-calendar
+  - seo-expert/contenu/brief-redactionnel
+  - seo-expert/strategie/roadmap-seo
+  - content-marketing/content/arborescence
+  - content-marketing/content/content-calendar
 workflows:
   - id: wf-keyword-research
     template: wf-audit

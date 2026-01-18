@@ -7,16 +7,16 @@ status: active
 phase: "2-strategy"
 order: 8
 agents:
-  - marketing/acquisition/seo/strategie/roadmap-seo
-  - marketing/acquisition/seo/orchestrator
+  - seo-expert/strategie/roadmap-seo
+  - seo-expert/orchestrator
 consumes:
   - seo-audit
   - keyword-research
   - marketing-objectives
 produces_for:
-  - marketing/acquisition/seo/contenu/brief-redactionnel
-  - marketing/acquisition/seo/technique/orchestrator
-  - marketing/acquisition/seo/netlinking/orchestrator
+  - seo-expert/contenu/brief-redactionnel
+  - seo-expert/technique/orchestrator
+  - seo-expert/netlinking/orchestrator
 workflows:
   - id: wf-seo-roadmap
     template: wf-planning

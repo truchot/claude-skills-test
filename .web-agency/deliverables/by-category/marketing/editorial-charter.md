@@ -7,18 +7,18 @@ status: active
 phase: "2-strategy"
 order: 3
 agents:
-  - marketing/content/ligne-editoriale
-  - marketing/content/copywriting
-  - marketing/content/blog-articles
+  - content-marketing/content/ligne-editoriale
+  - content-marketing/content/copywriting
+  - content-marketing/content/blog-articles
 consumes:
   - persona
   - brand-positioning
 produces_for:
-  - marketing/content/blog-articles
-  - marketing/content/social-media-content
-  - marketing/content/landing-pages
-  - marketing/content/copywriting
-  - marketing/acquisition/seo/contenu/brief-redactionnel
+  - content-marketing/content/blog-articles
+  - content-marketing/content/social-media-content
+  - content-marketing/content/landing-pages
+  - content-marketing/content/copywriting
+  - seo-expert/contenu/brief-redactionnel
 workflows:
   - id: wf-editorial-charter
     template: wf-strategy

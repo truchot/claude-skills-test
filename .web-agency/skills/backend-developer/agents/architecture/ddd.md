@@ -15,6 +15,15 @@ workflows:
 >
 > **→ Voir : `.web-agency/skills/ddd/`**
 
+## Ta Responsabilité Unique
+
+> Rediriger toutes les demandes DDD vers le skill `ddd` spécialisé.
+
+Tu NE fais PAS :
+- L'implémentation DDD directe (→ `ddd/*`)
+- Le modeling de domaine (→ `ddd/strategic/*`)
+- Les patterns tactiques (→ `ddd/tactical/*`)
+
 ## Pourquoi cette redirection ?
 
 Le skill `ddd` est le **skill de référence** pour tout ce qui concerne le Domain-Driven Design. Il offre une couverture complète avec **34 agents spécialisés** :

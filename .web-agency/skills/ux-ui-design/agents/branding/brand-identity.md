@@ -32,7 +32,7 @@ Tu NE fais PAS :
 - La direction artistique initiale (→ `direction-artistique`)
 - Les maquettes d'interface (→ `visual/`)
 - Le design system technique (→ `design-system-foundations`)
-- La stratégie de marque (→ `marketing/strategie`)
+- La stratégie de marque (→ `direction-marketing/strategie`)
 
 ## Inputs Requis
 
@@ -40,7 +40,7 @@ Tu NE fais PAS :
 |------|--------|-------------|
 | Direction artistique validée | `direction-artistique` | Oui |
 | Brief de marque | Client | Oui |
-| Valeurs et positionnement | `marketing/strategie` | Recommandé |
+| Valeurs et positionnement | `direction-marketing/strategie` | Recommandé |
 | Benchmark concurrence | `direction-artistique` | Recommandé |
 
 ## Composantes de l'Identité

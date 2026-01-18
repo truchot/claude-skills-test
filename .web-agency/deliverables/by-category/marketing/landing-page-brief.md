@@ -7,8 +7,8 @@ status: active
 phase: "3-conception"
 order: 18
 agents:
-  - marketing/performance/conversion-optimization
-  - marketing/content/landing-pages
+  - marketing-ops/performance/conversion-optimization
+  - content-marketing/content/landing-pages
   - design/ux/wireframes
 consumes:
   - persona
