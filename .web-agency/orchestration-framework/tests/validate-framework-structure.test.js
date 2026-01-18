@@ -56,9 +56,21 @@ console.log('\n📂 Verifying task-orchestrator structure:\n');
 const taskOrchestratorAgents = path.join(FRAMEWORK_ROOT, 'task-orchestrator', 'agents');
 test('task-orchestrator/agents directory exists', fs.existsSync(taskOrchestratorAgents));
 
+// Expected domains in task-orchestrator (queue, state-machine, execution, tracking)
+const EXPECTED_DOMAINS = ['execution', 'queue', 'state-machine', 'tracking'];
+
 if (fs.existsSync(taskOrchestratorAgents)) {
-  const domains = fs.readdirSync(taskOrchestratorAgents);
-  test(`task-orchestrator has ${domains.length} agent domains`, domains.length === 4);
+  const domains = fs.readdirSync(taskOrchestratorAgents).filter(d =>
+    fs.statSync(path.join(taskOrchestratorAgents, d)).isDirectory()
+  );
+
+  const hasAllDomains = EXPECTED_DOMAINS.every(d => domains.includes(d));
+  test(`task-orchestrator has expected domains (${EXPECTED_DOMAINS.join(', ')})`, hasAllDomains);
+
+  if (!hasAllDomains) {
+    console.log(`   Found: ${domains.join(', ')}`);
+    console.log(`   Expected: ${EXPECTED_DOMAINS.join(', ')}`);
+  }
 }
 
 console.log('\n==================================================\n');

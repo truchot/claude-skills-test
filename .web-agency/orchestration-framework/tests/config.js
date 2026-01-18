@@ -21,7 +21,11 @@ const SKILLS_ROOT = path.join(WEB_AGENCY_ROOT, 'skills');
 // Validate paths at module load
 [FRAMEWORK_ROOT, WEB_AGENCY_ROOT, SKILLS_ROOT].forEach(p => {
   if (!fs.existsSync(p)) {
-    throw new Error(`Required path does not exist: ${p}. Tests must be run from the correct location.`);
+    throw new Error(
+      `Required path does not exist: ${p}\n` +
+      `Tests must be run from: .web-agency/orchestration-framework/tests/\n` +
+      `Current directory: ${process.cwd()}`
+    );
   }
 });
 

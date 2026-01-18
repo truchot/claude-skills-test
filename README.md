@@ -245,9 +245,9 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.1.0** - 24 skills, 757 agents
+**v4.2.0** - 23 skills métier + orchestration-framework (757 agents total)
 
-Voir [CHANGELOG](.web-agency/skills/CHANGELOG.md) pour l'historique complet.
+Voir [CHANGELOG](.web-agency/orchestration-framework/CHANGELOG.md) pour l'historique complet.
 
 ## Licence
 
