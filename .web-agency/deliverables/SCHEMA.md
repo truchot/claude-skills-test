@@ -33,7 +33,7 @@ Chaque livrable **DOIT** avoir un frontmatter YAML valide en début de fichier.
 #### `category`
 
 ```yaml
-category: process | code | design | specification | report | strategy | documentation | marketing | wordpress
+category: process | code | design | specification | report | strategy | documentation | marketing | wordpress | legal | support | commercial | finance
 ```
 
 | Valeur | Description | Répertoire |
@@ -47,6 +47,10 @@ category: process | code | design | specification | report | strategy | document
 | `documentation` | Documentation | `by-category/documentation/` |
 | `marketing` | Livrables marketing | `by-category/marketing/` |
 | `wordpress` | Livrables WordPress | `by-category/wordpress/` |
+| `legal` | Conformité juridique et RGPD | `by-category/legal/` |
+| `support` | Support client et SLAs | `by-category/support/` |
+| `commercial` | Vente et propositions | `by-category/commercial/` |
+| `finance` | Finance et comptabilité | `by-category/finance/` |
 
 **Règle** : La valeur de `category` **DOIT** correspondre au répertoire parent du fichier.
 

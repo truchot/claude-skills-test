@@ -23,10 +23,10 @@
     ├── process/
     ├── marketing/
     ├── wordpress/
-    ├── legal/                  # NEW: Conformité juridique et RGPD
-    ├── support/                # NEW: Support client et SLAs
-    ├── commercial/             # NEW: Vente et propositions
-    └── finance/                # NEW: Facturation et budgets
+    ├── legal/
+    ├── support/
+    ├── commercial/
+    └── finance/
 ```
 
 ## Catégories de Livrables
