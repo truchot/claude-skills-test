@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# Run all validation tests for web-agency skill
+# Run all validation tests for orchestration framework
 #
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "🚀 Running Web Agency Skill Tests"
-echo "=================================="
+echo "🚀 Running Orchestration Framework Tests"
+echo "========================================"
 echo ""
 
 # Validate required skills exist before running tests
@@ -34,6 +34,7 @@ echo "✅ $VALIDATION_RESULT"
 echo ""
 
 TESTS=(
+  "validate-framework-structure.test.js"
   "validate-agents.test.js"
   "validate-routing.test.js"
   "validate-templates.test.js"

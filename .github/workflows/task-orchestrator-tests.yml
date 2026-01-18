@@ -3,12 +3,12 @@ name: Task Orchestrator Skill Tests
 on:
   pull_request:
     paths:
-      - '.web-agency/skills/task-orchestrator/**'
+      - '.web-agency/orchestration-framework/task-orchestrator/**'
   push:
     branches:
       - main
     paths:
-      - '.web-agency/skills/task-orchestrator/**'
+      - '.web-agency/orchestration-framework/task-orchestrator/**'
 
 jobs:
   test:
@@ -27,11 +27,11 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'npm'
-          cache-dependency-path: .web-agency/skills/task-orchestrator/tests/package.json
+          cache-dependency-path: .web-agency/orchestration-framework/task-orchestrator/tests/package.json
 
       - name: Run validation tests
         id: tests
-        working-directory: .web-agency/skills/task-orchestrator/tests
+        working-directory: .web-agency/orchestration-framework/task-orchestrator/tests
         run: |
           set +e
           OUTPUT=$(bash run-tests.sh 2>&1)
@@ -129,5 +129,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: .web-agency/skills/task-orchestrator/tests/
+          path: .web-agency/orchestration-framework/task-orchestrator/tests/
           retention-days: 7

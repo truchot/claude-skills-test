@@ -1,8 +1,38 @@
 # Changelog
 
-Toutes les modifications notables du skill web-agency sont documentées ici.
+Toutes les modifications notables du framework d'orchestration sont documentées ici.
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
+
+## [4.2.0] - 2026-01-18
+
+### Changé
+
+#### Restructuration du Framework d'Orchestration
+
+- **BREAKING**: Déplacement de `.web-agency/skills/web-agency/` vers `.web-agency/orchestration-framework/`
+- **BREAKING**: Déplacement de `task-orchestrator` vers `orchestration-framework/task-orchestrator/`
+- Déplacement de `skills/examples/` vers `.web-agency/examples/`
+- Déplacement de `skills/scripts/` vers `.web-agency/scripts/`
+- Renommage du workflow GitHub `web-agency-tests.yml` → `orchestration-framework-tests.yml`
+- Clarification : ce n'est pas un skill mais un framework de coordination
+- Mise à jour de `tests/config.js` pour refléter la nouvelle structure de chemins
+
+### Migration
+
+```diff
+- .web-agency/skills/web-agency/
++ .web-agency/orchestration-framework/
+
+- .web-agency/skills/task-orchestrator/
++ .web-agency/orchestration-framework/task-orchestrator/
+
+- .web-agency/skills/examples/
++ .web-agency/examples/
+
+- .web-agency/skills/scripts/
++ .web-agency/scripts/
+```
 
 ## [1.0.0] - 2025-12-21
 

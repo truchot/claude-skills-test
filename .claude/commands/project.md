@@ -18,13 +18,13 @@ Référence: `.web-agency/skills/project-management/`
 - Reporting et dashboards
 
 ### Orchestration Globale
-Référence: `.web-agency/skills/web-agency/`
+Référence: `.web-agency/orchestration-framework/`
 - Vue d'ensemble agence
 - Allocation ressources
 - Priorisation stratégique
 
 ### Orchestration par Domaine
-- `.web-agency/skills/task-orchestrator/` - Découpage et distribution des tâches
+- `.web-agency/orchestration-framework/task-orchestrator/` - Découpage et distribution des tâches
 - `.web-agency/skills/client-intake/` - Nouveaux projets clients
 
 ## Logique de Routage

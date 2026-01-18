@@ -114,14 +114,14 @@ Les tests valident la structure des agents, le routage, et les templates.
 ### Exécuter tous les tests
 
 ```bash
-cd .web-agency/skills/web-agency/tests
+cd .web-agency/orchestration-framework/tests
 bash run-tests.sh
 ```
 
 ### Exécuter un test spécifique
 
 ```bash
-cd .web-agency/skills/web-agency/tests
+cd .web-agency/orchestration-framework/tests
 
 # Tests de structure
 node validate-agents.test.js

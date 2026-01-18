@@ -7,10 +7,10 @@ Charge le meta-orchestrateur web-agency.
 
 ## Instructions
 
-Lire et appliquer les instructions du skill web-agency:
-- **SKILL**: `.web-agency/skills/web-agency/SKILL.md`
-- **Orchestration**: `.web-agency/skills/web-agency/orchestration/`
-- **Workflows**: `.web-agency/skills/web-agency/workflows/`
+Lire et appliquer les instructions du framework d'orchestration:
+- **SKILL**: `.web-agency/orchestration-framework/SKILL.md`
+- **Orchestration**: `.web-agency/orchestration-framework/orchestration/`
+- **Workflows**: `.web-agency/orchestration-framework/workflows/`
 
 ## Rôle
 

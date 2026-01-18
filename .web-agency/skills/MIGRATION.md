@@ -93,7 +93,7 @@ bash .github/workflows/validate-paths.yml
 bash .claude/tests/validate-routing-commands.sh
 
 # Vérifier le compte d'agents
-bash .web-agency/skills/scripts/verify-agent-count.sh
+bash .web-agency/scripts/verify-agent-count.sh
 ```
 
 ### Nouvelles Fonctionnalités v4.x
@@ -171,7 +171,7 @@ Les skills v3 sont **additifs** :
 ```bash
 # Nouveaux skills v3.0.0
 .web-agency/skills/client-intake/    # 23 agents
-.web-agency/skills/task-orchestrator/ # 16 agents
+.web-agency/orchestration-framework/task-orchestrator/ # 16 agents
 
 # Nouveaux skills v3.1.0
 .web-agency/skills/ux-ui-design/      # 22 agents
@@ -184,7 +184,7 @@ Les skills v3 sont **additifs** :
 #### 3. Mise à Jour web-agency
 
 ```diff
-# .web-agency/skills/web-agency/SKILL.md
+# .web-agency/orchestration-framework/SKILL.md
 
 - version: 2.9.0
 + version: 3.1.0
@@ -304,7 +304,7 @@ La v1.0.0 est la version de création. Pas de migration nécessaire.
 ### Structure Initiale
 
 ```
-.web-agency/skills/web-agency/
+.web-agency/orchestration-framework/
 ├── SKILL.md           # Skill principal
 ├── README.md          # Documentation
 ├── CHANGELOG.md       # Historique

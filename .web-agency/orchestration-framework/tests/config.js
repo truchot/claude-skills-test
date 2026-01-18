@@ -1,19 +1,33 @@
 /**
- * Centralized configuration for web-agency skill tests
+ * Centralized configuration for orchestration framework tests
  * @module tests/config
  *
- * NOTE: Since v2.0.0 refactoring, web-agency is a meta-orchestrator.
- * Agents are now in separate skills (project-management, technical, etc.)
+ * NOTE: Since v4.2.0 refactoring, this is the orchestration framework (not a skill).
+ * It coordinates skills but does not execute tasks directly.
  */
 
 const fs = require('fs');
 const path = require('path');
 
-/** @const {string} Base directory for the web-agency skill */
-const SKILL_ROOT = path.join(__dirname, '..');
+/** @const {string} Base directory for the orchestration framework */
+const FRAMEWORK_ROOT = path.join(__dirname, '..');
+
+/** @const {string} Base directory for .web-agency */
+const WEB_AGENCY_ROOT = path.join(FRAMEWORK_ROOT, '..');
 
 /** @const {string} Base directory for all skills */
-const SKILLS_ROOT = path.join(SKILL_ROOT, '..');
+const SKILLS_ROOT = path.join(WEB_AGENCY_ROOT, 'skills');
+
+// Validate paths at module load
+[FRAMEWORK_ROOT, WEB_AGENCY_ROOT, SKILLS_ROOT].forEach(p => {
+  if (!fs.existsSync(p)) {
+    throw new Error(
+      `Required path does not exist: ${p}\n` +
+      `Tests must be run from: .web-agency/orchestration-framework/tests/\n` +
+      `Current directory: ${process.cwd()}`
+    );
+  }
+});
 
 /** @const {string} Directory for project management skill (external) */
 const PROJECT_MANAGEMENT_DIR = path.join(SKILLS_ROOT, 'project-management');
@@ -234,7 +248,8 @@ const EXPECTED_ROUTING = {
 };
 
 module.exports = {
-  SKILL_ROOT,
+  FRAMEWORK_ROOT,
+  WEB_AGENCY_ROOT,
   SKILLS_ROOT,
   PROJECT_MANAGEMENT_DIR,
   PROJECT_MANAGEMENT_AGENTS_DIR,

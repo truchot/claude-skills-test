@@ -43,10 +43,12 @@ flowchart TB
 
 ### Niveau 1 : Orchestration
 
-| Skill | Description | Agents | Statut |
-|-------|-------------|--------|--------|
-| [web-agency](.web-agency/skills/web-agency/) | Méta-orchestrateur - compose les skills | - | 🟢 Actif |
-| [task-orchestrator](.web-agency/skills/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+| Composant | Description | Agents | Statut |
+|-----------|-------------|--------|--------|
+| [task-orchestrator](.web-agency/orchestration-framework/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+| [orchestration-framework](.web-agency/orchestration-framework/) | Routing, workflows, escalade | - | 🟢 Actif |
+
+> **Note** : Ces composants ne sont pas des skills métier mais la couche d'orchestration qui coordonne les skills.
 
 ### Niveau 2 : Stratégie (POURQUOI)
 
@@ -89,17 +91,17 @@ flowchart TB
 | [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
 | [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
 
-**Total : 24 skills, 757 agents**
+**Total : 23 skills métier (741 agents) + orchestration-framework (16 agents task-orchestrator)**
 
 ## Architecture
 
 ```
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
-│   ├── skills/                    # 24 skills, 757 agents
-│   │   ├── web-agency/            # Meta-orchestrateur
+│   ├── orchestration-framework/   # Règles de routage et workflows
+│   │   └── task-orchestrator/     # Niveau 1: Orchestration (16 agents)
+│   ├── skills/                    # 23 skills métier, 741 agents
 │   │   ├── client-intake/         # Niveau 0: Entrée
-│   │   ├── task-orchestrator/     # Niveau 1: Orchestration
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
 │   │   ├── direction-marketing/   # Niveau 2: Stratégie
 │   │   ├── direction-artistique/  # Niveau 2: Stratégie
@@ -134,8 +136,8 @@ NIVEAU 0: ENTRÉE
 └── client-intake (23)              # Réception des demandes
 
 NIVEAU 1: ORCHESTRATION
-├── web-agency                      # Meta-orchestrateur
 └── task-orchestrator (16)          # Gestion des tâches
+    (Règles dans .web-agency/orchestration-framework/)
 
 NIVEAU 2: STRATÉGIE (POURQUOI)
 ├── direction-technique (52)        # Stratégie technique
@@ -225,7 +227,7 @@ git clone https://github.com/truchot/claude-skills-test.git
 
 ```bash
 # Tests par skill
-cd .web-agency/skills/web-agency/tests && bash run-tests.sh
+cd .web-agency/orchestration-framework/tests && bash run-tests.sh
 cd .web-agency/skills/web-dev-process/tests && bash run-tests.sh
 cd .web-agency/skills/wordpress-gutenberg-expert/tests && bash run-tests.sh
 cd .web-agency/skills/frontend-developer/tests && node validate-skill.test.js
@@ -243,9 +245,9 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.1.0** - 24 skills, 757 agents
+**v4.2.0** - 23 skills métier + orchestration-framework (757 agents total)
 
-Voir [CHANGELOG](.web-agency/skills/CHANGELOG.md) pour l'historique complet.
+Voir [CHANGELOG](.web-agency/orchestration-framework/CHANGELOG.md) pour l'historique complet.
 
 ## Licence
 

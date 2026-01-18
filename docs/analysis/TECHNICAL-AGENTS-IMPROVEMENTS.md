@@ -564,6 +564,6 @@ C'est le cas le plus flagrant avec 4 agents qui parlent du même sujet dans 3 sk
 
 ### B. Références
 
-- [ADR-005: Frontières de Responsabilités](../.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md)
+- [ADR-005: Frontières de Responsabilités](../.web-agency/orchestration-framework/docs/adr/005-skill-responsibility-boundaries.md)
 - [SRP-ANALYSIS.md](./SRP-ANALYSIS.md)
 - [MIGRATION.md](./MIGRATION.md)

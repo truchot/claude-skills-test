@@ -758,7 +758,7 @@ Suite à cette analyse, les corrections suivantes ont été apportées :
 
 ### ADR-005 Créé
 
-Fichier : `.web-agency/skills/web-agency/docs/adr/005-skill-responsibility-boundaries.md`
+Fichier : `.web-agency/orchestration-framework/docs/adr/005-skill-responsibility-boundaries.md`
 
 Définit la séparation en 3 niveaux :
 - **Stratégie** (direction-technique) : Décider QUOI et POURQUOI

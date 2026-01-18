@@ -280,7 +280,7 @@ Run the compatibility check:
 
 ```bash
 # Validate all skill versions are compatible
-node .web-agency/skills/scripts/validate-migration.js
+node .web-agency/scripts/validate-migration.js
 
 # Check specific skill dependencies
 grep -r "→.*skill" .web-agency/skills/*/SKILL.md

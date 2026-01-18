@@ -225,13 +225,13 @@ Un script permet de détecter les références obsolètes dans votre codebase :
 
 ```bash
 # Scanner les références deprecated
-node .web-agency/skills/scripts/validate-migration.js
+node .web-agency/scripts/validate-migration.js
 
 # Voir ce qui serait corrigé sans modifier les fichiers
-node .web-agency/skills/scripts/validate-migration.js --dry-run
+node .web-agency/scripts/validate-migration.js --dry-run
 
 # Corriger automatiquement (expérimental)
-node .web-agency/skills/scripts/validate-migration.js --fix
+node .web-agency/scripts/validate-migration.js --fix
 ```
 
 #### Exemple de Sortie
