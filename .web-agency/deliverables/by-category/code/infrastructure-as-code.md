@@ -415,12 +415,13 @@ resource "aws_ecs_task_definition" "app" {
 
       environment = [
         { name = "NODE_ENV", value = var.environment },
-        { name = "PORT", value = tostring(var.app_port) },
-        { name = "DATABASE_URL", value = "postgresql://${var.db_username}:${random_password.db.result}@${aws_db_instance.main.endpoint}/${var.db_name}" }
+        { name = "PORT", value = tostring(var.app_port) }
       ]
 
+      # SECURITY: All sensitive values retrieved from Secrets Manager
       secrets = [
-        { name = "JWT_SECRET", valueFrom = aws_secretsmanager_secret.jwt.arn }
+        { name = "JWT_SECRET", valueFrom = aws_secretsmanager_secret.jwt.arn },
+        { name = "DATABASE_URL", valueFrom = aws_secretsmanager_secret.database_url.arn }
       ]
 
       logConfiguration = {
@@ -718,6 +719,19 @@ resource "aws_secretsmanager_secret_version" "jwt" {
   secret_string = var.jwt_secret
 }
 
+# SECURITY: Database connection string stored in Secrets Manager (not in env vars)
+resource "aws_secretsmanager_secret" "database_url" {
+  name        = "${local.name_prefix}/database-url"
+  description = "Database connection string for ${var.project_name}"
+
+  tags = local.common_tags
+}
+
+resource "aws_secretsmanager_secret_version" "database_url" {
+  secret_id = aws_secretsmanager_secret.database_url.id
+  secret_string = "postgresql://${var.db_username}:${random_password.db.result}@${aws_db_instance.main.endpoint}/${var.db_name}"
+}
+
 # ECS Execution Role
 resource "aws_iam_role" "ecs_execution" {
   name = "${local.name_prefix}-ecs-execution"
@@ -756,7 +770,8 @@ resource "aws_iam_role_policy" "ecs_execution_secrets" {
           "secretsmanager:GetSecretValue"
         ]
         Resource = [
-          aws_secretsmanager_secret.jwt.arn
+          aws_secretsmanager_secret.jwt.arn,
+          aws_secretsmanager_secret.database_url.arn
         ]
       }
     ]

@@ -58,13 +58,15 @@ Document structuré regroupant les questions fréquemment posées par les utilis
 
 | # | Critère | Seuil/Condition | Vérification | Obligatoire |
 |---|---------|-----------------|--------------|-------------|
-| 1 | Minimum de questions | ≥ 20 questions | Auto | Oui |
+| 1 | Minimum de questions | ≥ 10 questions (MVP), ≥ 20 recommandé | Auto | Oui |
 | 2 | Catégorisation | ≥ 3 catégories distinctes | Manuel | Oui |
 | 3 | Réponses complètes | 50-300 mots par réponse | Auto | Oui |
 | 4 | Schema.org FAQPage | JSON-LD valide | Auto | Oui |
 | 5 | Liens fonctionnels | 0 lien cassé | Auto | Oui |
 | 6 | Langage accessible | Niveau B1-B2 | Manuel | Oui |
 | 7 | Mise à jour régulière | < 3 mois depuis dernière MAJ | Auto | Oui |
+
+> **Note** : Le MVP nécessite au minimum 10 questions couvrant les cas les plus fréquents. L'objectif cible est de 20+ questions pour une couverture complète. Les exemples minimaux ci-dessous illustrent la structure, pas le volume final attendu.
 
 ## Prérequis (Inputs)
 

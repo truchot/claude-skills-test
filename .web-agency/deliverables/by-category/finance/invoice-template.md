@@ -359,6 +359,66 @@ Page 1/1 • Facture générée le 18/01/2026 à 10:30
 }
 ```
 
+## Régimes TVA Spéciaux
+
+### Franchise en base de TVA (Auto-entrepreneurs / Micro-entreprises)
+
+Si le vendeur est en franchise en base de TVA :
+
+```
+│  Montant total : 1 000,00 €                                           │
+│                                                                        │
+│  TVA non applicable, article 293 B du Code Général des Impôts        │
+```
+
+**Attention** : Ne jamais mentionner de TVA ni de N° TVA intracommunautaire.
+
+### Livraisons intracommunautaires (B2B vers UE)
+
+Pour les ventes B2B vers un autre État membre de l'UE :
+
+```
+│  Montant HT : 10 000,00 €                                             │
+│  TVA : 0,00 € (Autoliquidation)                                       │
+│  Total TTC : 10 000,00 €                                              │
+│                                                                        │
+│  Exonération de TVA - Livraison intracommunautaire                   │
+│  Article 262 ter I du CGI                                             │
+│  N° TVA acheteur : DE123456789                                        │
+```
+
+**Obligations** :
+- Vérifier le N° TVA du client via [VIES](https://ec.europa.eu/taxation_customs/vies/)
+- Mentionner les deux numéros de TVA (vendeur + acheteur)
+- Déclarer sur la DEB (Déclaration d'Échanges de Biens)
+
+### Exportations hors UE
+
+Pour les ventes hors Union Européenne :
+
+```
+│  Montant HT : 15 000,00 €                                             │
+│  TVA : 0,00 € (Exportation)                                           │
+│  Total : 15 000,00 €                                                  │
+│                                                                        │
+│  Exonération de TVA - Exportation hors UE                            │
+│  Article 262 I du CGI                                                 │
+```
+
+**Obligations** :
+- Conserver le DAU (Document Administratif Unique) ou attestation douanière
+- Preuve de sortie du territoire de l'UE
+
+### Autoliquidation (Sous-traitance BTP)
+
+Pour les travaux de construction en sous-traitance :
+
+```
+│  Montant HT : 5 000,00 €                                              │
+│  TVA : Autoliquidation par le preneur                                │
+│  Article 283-2 nonies du CGI                                          │
+```
+
 ## Anti-patterns
 
 | Anti-pattern | Pourquoi c'est problématique | Correction |
@@ -369,6 +429,9 @@ Page 1/1 • Facture générée le 18/01/2026 à 10:30
 | Pas de pénalités de retard | Mention obligatoire depuis 2013 | Toujours indiquer le taux |
 | Format non archivable | Problème de conservation | Utiliser PDF/A |
 | Conditions de paiement floues | Litiges sur les échéances | Délai explicite + date |
+| TVA sur franchise en base | Facturation interdite, reversement | Mention article 293 B obligatoire |
+| Pas de vérification VIES | Risque fiscal sur intracommunautaire | Toujours vérifier le N° TVA UE |
+| Export sans preuve douanière | Redressement TVA à 20% | Conserver DAU ou attestation |
 
 ## Références
 

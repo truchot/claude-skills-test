@@ -28,6 +28,37 @@ Chaque livrable **DOIT** avoir un frontmatter YAML valide en début de fichier.
 | `produces_for` | `array[string]` | Agents qui consomment ce livrable | `["backend-developer/api/rest-design"]` |
 | `workflows` | `array[object]` | Workflows associés | Voir ci-dessous |
 
+### Format des Paths d'Agents
+
+Les champs `agents` et `produces_for` utilisent des paths hiérarchiques au format :
+
+```
+skill/domain/agent-name
+```
+
+**Exemples :**
+- `direction-technique/specification/specification-technique`
+- `backend-developer/api/rest-design`
+- `marketing/acquisition/seo/contenu/recherche-mots-cles`
+
+**Wildcards supportés :**
+
+| Pattern | Description | Exemple |
+|---------|-------------|---------|
+| `skill/domain/*` | Tous les agents d'un domaine | `backend-developer/api/*` |
+| `skill/*/agent` | Agent dans tous les domaines | `frontend-developer/*/hooks` |
+| `skill/*/all` | Tous les agents d'un skill | `backend-developer/*/all` |
+
+**Usage courant des wildcards :**
+```yaml
+produces_for:
+  - backend-developer/*/all      # Tous les agents backend
+  - frontend-developer/*/all     # Tous les agents frontend
+  - devops/cicd/*               # Tous les agents CI/CD
+```
+
+> **Note** : Les wildcards sont principalement utilisés dans `produces_for` pour indiquer qu'un livrable est consommé par plusieurs agents. Dans `agents`, préférez lister explicitement chaque agent producteur.
+
 ### Valeurs Valides
 
 #### `category`
@@ -183,7 +214,7 @@ Après le frontmatter, chaque livrable **DOIT** contenir :
     },
     "category": {
       "type": "string",
-      "enum": ["process", "code", "design", "specification", "report", "strategy", "documentation", "marketing", "wordpress"]
+      "enum": ["process", "code", "design", "specification", "report", "strategy", "documentation", "marketing", "wordpress", "legal", "support", "commercial", "finance"]
     },
     "status": {
       "type": "string",

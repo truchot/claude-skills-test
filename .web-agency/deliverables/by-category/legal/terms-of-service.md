@@ -276,6 +276,28 @@ Conformément à l'article L612-1 du Code de la consommation, en cas de litige n
 
 Plateforme européenne de règlement en ligne des litiges : https://ec.europa.eu/consumers/odr
 
+---
+
+> **Comment choisir un médiateur de la consommation ?**
+>
+> Depuis le 1er janvier 2016, tout professionnel B2C doit désigner un médiateur de la consommation.
+>
+> **Étapes :**
+> 1. Consulter la [liste officielle des médiateurs agréés](https://www.economie.gouv.fr/mediation-conso/liste-des-mediateurs-references) (CECMC)
+> 2. Choisir un médiateur correspondant à votre secteur d'activité
+> 3. Signer une convention avec le médiateur choisi (coût : 50-500€/an selon volume)
+> 4. Afficher ses coordonnées sur vos CGV, site web et documents commerciaux
+>
+> **Médiateurs courants par secteur :**
+> - E-commerce général : [FEVAD](https://www.mediateurfevad.fr/)
+> - Services numériques : [Médiateur du e-commerce](https://www.mediateur-ecommerce.fr/)
+> - Multiservices : [MEDIATION-NET](https://www.mediation-net.com/)
+> - Artisanat : [CNPM](https://www.cnpm-mediation-consommation.eu/)
+>
+> **Sanctions** : L'absence de mention du médiateur est passible d'une amende de 15 000€ pour une société.
+
+---
+
 ## Article 11 - Données personnelles
 
 Le traitement des données personnelles est décrit dans notre [Politique de Confidentialité](/privacy-policy).
