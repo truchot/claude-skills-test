@@ -1,31 +1,23 @@
-# Fichiers de configuration confidentiels
-# NE PAS COMMITER les fichiers suivants
+# Configuration Confidentielle - Protection Locale
+# ================================================
+#
+# Ce .gitignore fournit une protection SUPPLÉMENTAIRE
+# au niveau du dossier config/ en plus du .gitignore racine.
+#
+# Raison : Double protection pour les fichiers critiques
+# Les fichiers sont ignorés par le .gitignore racine ET ce fichier.
 
-# Tarification réelle
+# Tarification (fichiers spécifiques à ce dossier)
 pricing.yaml
 pricing.yml
 
-# Fichiers secrets
+# Pattern générique pour tous les secrets de ce dossier
 *.secret.yaml
 *.secret.yml
-*.secrets.yaml
-*.secrets.yml
-
-# Configuration locale
 *.local.yaml
 *.local.yml
 
-# Credentials
-credentials.yaml
-credentials.yml
-api-keys.yaml
-api-keys.yml
-
-# Environnement
-.env
-.env.local
-.env.production
-
-# Note: Seuls les fichiers *.example.yaml doivent être versionnés
+# Autoriser explicitement les templates
 !*.example.yaml
 !*.example.yml
+!README.md
