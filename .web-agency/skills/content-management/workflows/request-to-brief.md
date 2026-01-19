@@ -284,9 +284,9 @@ sources:
 
 | Étape | Skill | Agent | Output |
 |-------|-------|-------|--------|
-| Définir persona | marketing | strategie/persona-definition | Detailed persona |
-| Mapper pain points | marketing | strategie/persona-definition | Pain points |
-| Identifier triggers | marketing | strategie/persona-definition | Decision triggers |
+| Définir persona | direction-marketing | positionnement/persona-builder | Detailed persona |
+| Mapper pain points | direction-marketing | positionnement/persona-builder | Pain points |
+| Identifier triggers | direction-marketing | positionnement/persona-builder | Decision triggers |
 
 ```json
 {

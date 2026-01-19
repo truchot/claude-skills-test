@@ -199,9 +199,9 @@ Les livrables suivants peuvent continuer en mode dégradé :
 ## Architecture
 
 ```
-direction-marketing (26 agents)
+direction-marketing (28 agents)
 │
-├── strategie/        (6) - Vision et roadmap marketing
+├── strategie/        (8) - Vision, analyse marché et roadmap marketing
 ├── positionnement/   (6) - Triptyque fondamental, marque, personas ⭐
 ├── acquisition/      (5) - Canaux, funnel, budget
 ├── mesure/           (5) - KPIs, analytics, ROI
@@ -210,7 +210,7 @@ direction-marketing (26 agents)
 
 ## Domaines et Agents
 
-### 1. strategie/ - Vision Marketing (6 agents)
+### 1. strategie/ - Vision Marketing (8 agents)
 
 Définition de la stratégie marketing globale.
 
@@ -218,8 +218,10 @@ Définition de la stratégie marketing globale.
 |-------|----------------|
 | `orchestrator` | Coordination stratégie marketing |
 | `audit-marche` | Analyse du marché et tendances |
+| `market-analysis` | Analyse de marché approfondie |
 | `competitor-analysis` | Benchmark concurrentiel |
 | `swot-marketing` | Analyse SWOT marketing |
+| `objectifs-marketing` | Définition des objectifs marketing |
 | `roadmap-marketing` | Planification stratégique |
 | `budget-strategy` | Stratégie budgétaire |
 
