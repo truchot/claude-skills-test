@@ -209,118 +209,15 @@ Tu NE fais PAS :
 
 ## Template de Sortie
 
-```markdown
-# Analyse Funnel - [Nom du Funnel]
+> **→ Utiliser le template complet** : `deliverables/by-category/marketing/funnel-analysis.md`
 
-## Vue d'Ensemble
-
-| Paramètre | Valeur |
-|-----------|--------|
-| **Funnel analysé** | [Description] |
-| **Période** | [Dates] |
-| **Volume total** | [X entrées] |
-| **Conversion finale** | [X%] |
-| **Benchmark** | [Y%] |
-
----
-
-## Visualisation du Funnel
-
-```
-[Étape 1] ────► [Étape 2] ────► [Étape 3] ────► [Étape 4]
-  100%           X%            Y%             Z%
-         -A%           -B%           -C%
-```
-
-### Tableau Détaillé
-
-| Étape | Volume | Taux Passage | Drop-off | vs. Benchmark |
-|-------|--------|--------------|----------|---------------|
-| [Étape 1] | X | - | - | - |
-| [Étape 2] | X | X% | -Y% | [+/-Z%] |
-| [Étape 3] | X | X% | -Y% | [+/-Z%] |
-| [Étape 4] | X | X% | -Y% | [+/-Z%] |
-
----
-
-## Points de Friction Identifiés
-
-### Friction #1 : [Étape X → Étape Y]
-
-| Aspect | Détail |
-|--------|--------|
-| **Drop-off** | -X% (Y visiteurs perdus) |
-| **Impact revenue** | ~X€/mois |
-| **Segmentation** | Mobile: -Z% vs Desktop |
-
-**Observations Qualitatives** :
-- [Observation heatmap]
-- [Observation recording]
-- [Feedback survey]
-
-**Cause Probable** : [Description de la cause]
-
-**Recommandation** : [Solution proposée]
-
----
-
-### Friction #2 : [Étape A → Étape B]
-
-[Même structure...]
-
----
-
-## Analyse par Segment
-
-### Par Device
-
-| Étape | Desktop | Mobile | Gap |
-|-------|---------|--------|-----|
-| [Étape 1→2] | X% | Y% | -Z% |
-| [Étape 2→3] | X% | Y% | -Z% |
-
-**Insight** : [Conclusion sur mobile]
-
-### Par Source de Trafic
-
-| Étape | Organic | Paid | Direct | Social |
-|-------|---------|------|--------|--------|
-| [Étape 1→2] | X% | Y% | Z% | W% |
-
-**Insight** : [Conclusion sur sources]
-
----
-
-## Opportunités d'Optimisation
-
-### Priorité Haute (Quick Wins)
-
-| Opportunité | Impact Potentiel | Effort |
-|-------------|------------------|--------|
-| [Opp 1] | +X% à étape Y | [Faible] |
-| [Opp 2] | +X% à étape Y | [Faible] |
-
-### Priorité Moyenne (Tests à Mener)
-
-| Test | Hypothèse | KPI |
-|------|-----------|-----|
-| [Test 1] | [Hypothèse] | [KPI] |
-
-### Priorité Basse (Long Terme)
-
-| Projet | Description | Timeline |
-|--------|-------------|----------|
-| [Projet 1] | [Description] | [Estimation] |
-
----
-
-## Prochaines Étapes
-
-1. [ ] Implémenter tracking manquant
-2. [ ] Corriger quick wins
-3. [ ] Prioriser tests A/B
-4. [ ] Revoir dans 30 jours
-```
+Ce template contient :
+- Vue d'ensemble avec métriques clés (volume, conversion, benchmark)
+- Visualisation du funnel avec taux de passage par étape
+- Points de friction identifiés avec impact revenue
+- Analyse par segment (device, source de trafic)
+- Opportunités d'optimisation priorisées (quick wins, tests, long terme)
+- Prochaines étapes actionnables
 
 ## Bonnes Pratiques
 
