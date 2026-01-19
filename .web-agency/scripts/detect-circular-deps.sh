@@ -1,8 +1,21 @@
 #!/bin/bash
 # Detect circular dependencies in deliverable consumes relationships
 # Implements DFS-based cycle detection
+#
+# Requirements: Bash 4.0+ (for associative arrays)
 
 set -e
+
+# Check Bash version (associative arrays require Bash 4+)
+if ((BASH_VERSINFO[0] < 4)); then
+  echo "❌ Error: Bash 4.0+ required for associative arrays"
+  echo "   Current version: $BASH_VERSION"
+  echo "   On macOS: brew install bash"
+  exit 2
+fi
+
+# Enable globstar for ** patterns and nullglob for empty matches
+shopt -s globstar nullglob
 
 DELIVERABLES_DIR=".web-agency/deliverables/by-category"
 declare -A DEPS

@@ -85,7 +85,9 @@ jobs:
 
       - name: Check for Schema Compliance
         if: always()
+        shell: bash
         run: |
+          shopt -s globstar nullglob
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## Schema Compliance" >> $GITHUB_STEP_SUMMARY
 

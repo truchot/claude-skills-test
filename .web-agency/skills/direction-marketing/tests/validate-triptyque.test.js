@@ -109,13 +109,19 @@ function validateContent(filePath, requiredSections) {
   // Validate sections using optimized single-pass approach
   // Split content into lines once, then check each required section
   const lines = content.split('\n');
-  const lineSet = new Set(lines.map(line => line.trim()));
 
   const missing = [];
   for (const section of requiredSections) {
-    // Check if any line starts with the section header
-    // More efficient than creating regex per section
-    const found = lines.some(line => line.trimStart().startsWith(section));
+    // Use exact matching to avoid partial matches
+    // e.g., "## Le Problème" should NOT match "## Le Problème en Une Phrase"
+    const found = lines.some(line => {
+      const trimmed = line.trimStart();
+      // Match exact header or header followed by whitespace/newline
+      return trimmed === section ||
+             trimmed.startsWith(section + '\n') ||
+             trimmed.startsWith(section + '\r') ||
+             trimmed.startsWith(section + ' ');
+    });
     if (!found) {
       missing.push(section);
     }
@@ -135,8 +141,9 @@ for (const [key, filePath] of Object.entries(TRIPTYQUE.files)) {
   const requiredSections = TRIPTYQUE.contentValidation[key];
 
   if (!requiredSections) {
-    console.log(`⚠️  ${key}: No validation rules defined`);
-    warnings++;
+    // Missing validation rules for triptyque files is a configuration error
+    console.log(`❌ ${key}: No validation rules defined in config.js`);
+    errors++;
     continue;
   }
 
