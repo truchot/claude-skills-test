@@ -28,9 +28,26 @@ TRAFFIC → LANDING → CONVERSION → REVENUE
 | Agent | Périmètre | Quand le solliciter |
 |-------|-----------|---------------------|
 | `conversion-optimization` | Optimisation globale des conversions | Stratégie CRO, audits, roadmaps |
-| `funnel-analysis` | Analyse de funnels | Identification des drop-offs, bottlenecks |
+| `funnel-optimization` | Optimisation du funnel | Améliorer les taux, corriger les frictions |
 | `personalization` | Personnalisation | Expériences personnalisées, segments |
 | `experimentation` | Tests & expérimentations | A/B tests, multivariés, feature flags |
+
+## Distinction avec marketing-analytics
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  IMPORTANT : Qui fait quoi pour le funnel ?                  │
+│                                                             │
+│  marketing-analytics/insights/funnel-analysis               │
+│  → DIAGNOSTIC : "Où sont les drop-offs ?"                   │
+│  → INPUT pour nous                                          │
+│                                                             │
+│  marketing-ops/performance/funnel-optimization              │
+│  → ACTION : "Comment améliorer les taux ?"                  │
+│  → Utilise le diagnostic pour agir                          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Arbre de Décision
 
@@ -40,8 +57,8 @@ Demande Performance/CRO
 ├─ Stratégie globale d'optimisation conversion ?
 │  └─ → conversion-optimization
 │
-├─ Analyse du funnel / où perdons-nous des visiteurs ?
-│  └─ → funnel-analysis
+├─ Améliorer les taux de conversion du funnel ?
+│  └─ → funnel-optimization
 │
 ├─ Personnalisation / expériences par segment ?
 │  └─ → personalization
@@ -50,12 +67,14 @@ Demande Performance/CRO
    └─ → experimentation
 ```
 
+Note : Pour le DIAGNOSTIC du funnel (mesurer les drop-offs), déléguer à `marketing-analytics/insights/funnel-analysis`.
+
 ## Règles de Routage
 
 | Mots-clés | Agent |
 |-----------|-------|
 | conversion, CRO, taux de conversion, optimiser | `conversion-optimization` |
-| funnel, entonnoir, drop-off, abandon, parcours | `funnel-analysis` |
+| améliorer funnel, corriger friction, optimiser parcours | `funnel-optimization` |
 | personnalisation, segment, ciblage, dynamique | `personalization` |
 | A/B test, test, expérimentation, hypothèse, variant | `experimentation` |
 
