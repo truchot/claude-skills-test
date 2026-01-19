@@ -116,9 +116,9 @@ const EXPECTED_ROUTING = {
  */
 const EXPECTED_CROSSREFS = {
   'marketing': [
-    'marketing/acquisition/seo/strategie',
-    'marketing/content/social-media-content',
-    'marketing/strategie'
+    'seo-expert/strategie',
+    'content-marketing/social-strategy',
+    'direction-marketing/strategie'
   ]
 };
 

@@ -112,16 +112,16 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | formulaire, card, modal, navigation | `design-system-foundations/molecules` |
 | layout, page template, hero | `design-system-foundations/templates` |
 
-### Marketing (Content & Stratégie)
+### Marketing (6 Skills Spécialisés)
 
 | Mots-clés | Skill |
 |-----------|-------|
-| **ligne éditoriale, ton de voix, persona contenu** | `marketing/content/ligne-editoriale` |
-| **arborescence, architecture information, menu** | `marketing/content/arborescence` |
-| copywriting, rédaction web, SEO éditorial | `marketing/content/copywriting` |
-| campagne marketing, acquisition, conversion | `marketing/acquisition` |
-| email marketing, newsletter, automation | `marketing/automation` |
-| analytics, KPIs marketing, attribution | `marketing/analytics` |
+| **SEO, référencement, keywords, backlinks** | `seo-expert` |
+| **Google Ads, SEA, Social Ads, Meta Ads** | `paid-media` |
+| **tracking, GA4, attribution, analytics** | `marketing-analytics` |
+| **ligne éditoriale, copywriting, contenu** | `content-marketing` |
+| **fidélisation, rétention, lifecycle** | `customer-success` |
+| **campagnes, email, automation** | `marketing-ops` |
 
 ### DevOps (Implémentation)
 
@@ -142,8 +142,8 @@ Ces domaines sont maintenant **disponibles** et couverts par les skills suivants
 |---------------------------------------|------------------|
 | audit, benchmark, stratégie digitale | `direction-technique/strategy` |
 | maquette, logo, charte, branding, DA | `ux-ui-design/branding` |
-| rédaction, copywriting, SEO éditorial | `marketing/content` |
-| SEO, SEA, analytics, social media | `marketing/acquisition` + `marketing/analytics` |
+| rédaction, copywriting, SEO éditorial | `content-marketing` |
+| SEO, SEA, analytics, social media | `seo-expert` + `paid-media` + `marketing-analytics` |
 
 > **Tous les domaines métiers sont désormais couverts.** L'agence web IA est complète.
 
@@ -194,10 +194,12 @@ Requête utilisateur
 │  └─ Tests utilisateurs ? → ux-ui-design/tests-utilisateurs
 │
 ├─ Concerne MARKETING ou CONTENU ?
-│  ├─ Ligne éditoriale, copywriting ? → marketing/content
-│  ├─ SEO, acquisition, campagnes ? → marketing/acquisition
-│  ├─ Email, automation ? → marketing/automation
-│  └─ Analytics, KPIs ? → marketing/analytics
+│  ├─ SEO, référencement ? → seo-expert
+│  ├─ Google Ads, Social Ads ? → paid-media
+│  ├─ Tracking, analytics, attribution ? → marketing-analytics
+│  ├─ Ligne éditoriale, copywriting ? → content-marketing
+│  ├─ Fidélisation, rétention ? → customer-success
+│  └─ Campagnes, email, automation ? → marketing-ops
 │
 ├─ Concerne STRATÉGIE DIGITALE ?
 │  ├─ Benchmark concurrentiel ? → direction-technique/strategy/benchmark

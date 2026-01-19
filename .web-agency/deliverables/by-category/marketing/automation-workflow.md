@@ -7,16 +7,16 @@ status: active
 phase: "4-realisation"
 order: 13
 agents:
-  - marketing/automation/workflow-builder
-  - marketing/automation/triggers-actions
-  - marketing/automation/multi-touch-sequences
+  - marketing-ops/automation/workflow-builder
+  - marketing-ops/automation/triggers-actions
+  - marketing-ops/automation/multi-touch-sequences
 consumes:
   - persona
   - marketing-objectives
   - lead-scoring-model
 produces_for:
-  - marketing/automation/orchestrator
-  - marketing/fidelisation/lifecycle/orchestrator
+  - marketing-ops/automation/orchestrator
+  - customer-success/lifecycle/orchestrator
 workflows:
   - id: wf-automation-design
     template: wf-creation

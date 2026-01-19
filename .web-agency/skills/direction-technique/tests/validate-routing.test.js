@@ -103,11 +103,16 @@ for (const domain of DOMAINS) {
   }
   if (!content) continue;
 
-  // Only check routing tables BEFORE the disambiguation section
+  // Only check routing tables BEFORE the disambiguation or coordination sections
+  // These sections reference other domains, not local agents
   const disambiguationIndex = content.indexOf('## Désambiguïsation');
-  const routingContent = disambiguationIndex > 0
-    ? content.substring(0, disambiguationIndex)
-    : content;
+  const coordinationIndex = content.indexOf('## Coordination');
+
+  let endIndex = content.length;
+  if (disambiguationIndex > 0) endIndex = Math.min(endIndex, disambiguationIndex);
+  if (coordinationIndex > 0) endIndex = Math.min(endIndex, coordinationIndex);
+
+  const routingContent = content.substring(0, endIndex);
 
   const tablePattern = /\|\s*`([a-z0-9-]+)`\s*\|/g;
   const referencedAgents = new Set();

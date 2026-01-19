@@ -59,7 +59,9 @@ Planification → Création → Révision → Validation → Publication → Ana
 
 | Skill | Interaction |
 |-------|-------------|
-| `marketing` | Stratégie contenu, SEO, campagnes |
+| `seo-expert` | SEO technique et stratégie |
+| `content-marketing` | Stratégie contenu |
+| `marketing-ops` | Campagnes et distribution |
 | `ux-ui-design` | UX writing, design contenu |
 | `web-dev-process` | Documentation technique |
 | `project-management` | Planning client |
@@ -69,7 +71,9 @@ Planification → Création → Révision → Validation → Publication → Ana
 ### Règle de Routage
 
 ```
-Stratégie et acquisition    →  marketing
+SEO stratégique             →  seo-expert
+Stratégie contenu           →  content-marketing
+Campagnes et acquisition    →  marketing-ops / paid-media
 Production et workflow      →  content-management
 ```
 
@@ -77,17 +81,17 @@ Production et workflow      →  content-management
 
 | Tâche | content-management | marketing | Notes |
 |-------|:------------------:|:---------:|-------|
-| **Stratégie SEO** (recherche keywords, roadmap) | | ✅ | `marketing/acquisition/seo/strategie` |
+| **Stratégie SEO** (recherche keywords, roadmap) | | ✅ | `seo-expert/strategie` |
 | **Optimisation SEO on-page** (meta, structure) | ✅ | | Application des guidelines SEO |
 | **Calendrier éditorial** | ✅ | | Workflow et planning |
-| **Stratégie de contenu** (personas, pillars) | | ✅ | `marketing/strategie` |
+| **Stratégie de contenu** (personas, pillars) | | ✅ | `content-marketing` |
 | **Rédaction d'articles** | ✅ | | Production du contenu |
 | **Copywriting conversion** | ✅ | | Copy pour pages/CTA |
-| **Copywriting campagnes** | | ✅ | `marketing/content/copywriting` |
+| **Copywriting campagnes** | | ✅ | `content-marketing/content/copywriting` |
 | **Gestion des assets** | ✅ | | Bibliothèque, optimisation |
-| **Distribution sociale** | | ✅ | `marketing/content/social-media-content` |
+| **Distribution sociale** | | ✅ | `content-marketing/social-strategy` |
 | **Traduction/i18n** | ✅ | | Localisation contenu |
-| **SEO international** (hreflang, geotargeting) | | ✅ | `marketing/acquisition/seo/international` |
+| **SEO international** (hreflang, geotargeting) | | ✅ | `seo-expert/international` |
 
 ### Exemples de Routage
 

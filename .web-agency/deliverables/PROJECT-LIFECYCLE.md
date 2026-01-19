@@ -164,8 +164,8 @@
 | # | Livrable | Agent producteur | Dépend de | Statut |
 |---|----------|------------------|-----------|--------|
 | 6.1 | `launch-checklist` | project-management/livraison/* | 5.4 | 📝 À créer |
-| 6.2 | `seo-audit` | marketing/seo/* | Application live | 📝 À créer |
-| 6.3 | `analytics-setup` | marketing/analytics/* | 5.5 | 📝 À créer |
+| 6.2 | `seo-audit` | seo-expert/* | Application live | 📝 À créer |
+| 6.3 | `analytics-setup` | marketing-analytics/* | 5.5 | 📝 À créer |
 | 6.4 | `marketing-strategy` | direction-marketing/* | 3.1 | 📝 À créer |
 | 6.5 | `content-calendar` | content-management/editorial/* | 6.4 | 📝 À créer |
 | 6.6 | `launch-report` | project-management/livraison/* | 6.1 | 📝 À créer |

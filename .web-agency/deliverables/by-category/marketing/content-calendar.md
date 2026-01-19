@@ -7,19 +7,19 @@ status: active
 phase: "2-strategy"
 order: 5
 agents:
-  - marketing/content/orchestrator
-  - marketing/content/blog-articles
-  - marketing/content/social-media-content
+  - content-marketing/content/orchestrator
+  - content-marketing/content/blog-articles
+  - content-marketing/content/social-media-content
 consumes:
   - persona
   - editorial-charter
   - marketing-objectives
   - seo-keyword-research
 produces_for:
-  - marketing/content/blog-articles
-  - marketing/content/social-media-content
-  - marketing/content/landing-pages
-  - marketing/acquisition/seo/contenu/brief-redactionnel
+  - content-marketing/content/blog-articles
+  - content-marketing/content/social-media-content
+  - content-marketing/content/landing-pages
+  - seo-expert/contenu/brief-redactionnel
 workflows:
   - id: wf-content-calendar-creation
     template: wf-planning
