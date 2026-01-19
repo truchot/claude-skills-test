@@ -42,13 +42,20 @@ console.log(`📁 Project root: ${PROJECT_ROOT}\n`);
 /**
  * Resolve and validate path stays within project boundaries
  * Prevents path traversal attacks
+ *
+ * Uses path.relative() for cross-platform compatibility (handles Windows
+ * case-insensitivity and different path separators)
  */
 function safePath(filePath) {
   const fullPath = path.resolve(PROJECT_ROOT, filePath);
 
-  // Security: Ensure resolved path is still within PROJECT_ROOT
-  if (!fullPath.startsWith(PROJECT_ROOT)) {
-    throw new Error(`Security: Path traversal detected - ${filePath} resolves outside project root`);
+  // Security: Use path.relative() for robust cross-platform checking
+  // If relative path starts with '..' it's outside project root
+  const relativePath = path.relative(PROJECT_ROOT, fullPath);
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    const error = new Error(`Security: Path traversal detected - ${filePath} resolves outside project root`);
+    error.isSecurityError = true;
+    throw error;
   }
 
   return fullPath;
@@ -73,7 +80,8 @@ function validateContent(filePath, requiredSections) {
       exists: false,
       valid: false,
       missing: requiredSections,
-      error: err.message
+      error: err.message,
+      isSecurityError: err.isSecurityError || false
     };
   }
 
@@ -98,16 +106,17 @@ function validateContent(filePath, requiredSections) {
     };
   }
 
-  // Validate sections using regex for exact markdown header matching
-  // Escapes special characters and matches at line start
+  // Validate sections using optimized single-pass approach
+  // Split content into lines once, then check each required section
+  const lines = content.split('\n');
+  const lineSet = new Set(lines.map(line => line.trim()));
+
   const missing = [];
   for (const section of requiredSections) {
-    // Escape regex special characters in section name
-    const escapedSection = section.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    // Match at start of line (multiline mode)
-    const regex = new RegExp(`^${escapedSection}`, 'm');
-
-    if (!regex.test(content)) {
+    // Check if any line starts with the section header
+    // More efficient than creating regex per section
+    const found = lines.some(line => line.trimStart().startsWith(section));
+    if (!found) {
       missing.push(section);
     }
   }
@@ -136,6 +145,12 @@ for (const [key, filePath] of Object.entries(TRIPTYQUE.files)) {
   if (result.error) {
     console.log(`❌ ${key}: ${result.error}`);
     errors++;
+
+    // Security errors halt execution immediately
+    if (result.isSecurityError) {
+      console.log('\n🛑 SECURITY ERROR: Halting execution');
+      process.exit(2);
+    }
     continue;
   }
 

@@ -68,6 +68,21 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Total: $total deliverables**" >> $GITHUB_STEP_SUMMARY
 
+      - name: Detect Circular Dependencies
+        id: circular
+        if: always()
+        run: |
+          echo "## Circular Dependency Check" >> $GITHUB_STEP_SUMMARY
+          if .web-agency/scripts/detect-circular-deps.sh 2>&1 | tee /tmp/circular.log; then
+            echo "✅ No circular dependencies" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Circular dependencies found" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat /tmp/circular.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
       - name: Check for Schema Compliance
         if: always()
         run: |

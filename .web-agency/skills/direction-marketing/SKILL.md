@@ -282,11 +282,63 @@ ls .project/marketing/persona.md 2>/dev/null || echo "❌ MANQUANT"
 
 Si le triptyque ne peut pas être créé immédiatement :
 
+#### Governance Rules
+
+| Aspect | Rule |
+|--------|------|
+| **Who can activate?** | Project lead, direction-marketing orchestrator, or sponsor |
+| **Max duration** | 14 days (hard limit) |
+| **Auto-deactivation** | When deadline passes OR triptyque completed |
+| **Tracking** | File `.project/.degraded-mode.yml` (version controlled) |
+| **Escalation** | If deadline extended more than once → sponsor approval required |
+
+#### Degraded Mode Tracking File
+
+Create `.project/.degraded-mode.yml` when activating:
+
+```yaml
+# .project/.degraded-mode.yml
+degraded_mode:
+  active: true
+  activated_at: 2025-01-15T10:00:00Z
+  activated_by: "project-lead"
+  reason: "Urgence business - Migration en cours"
+  deadline: 2025-01-29T23:59:59Z
+  responsible: "discovery-agent"
+  extensions: []
+  allowed_deliverables:
+    - seo-audit
+    - technical-audit
+  blocked_deliverables:
+    - editorial-charter
+    - keyword-research
+    - content-calendar
+    - brand-positioning
+```
+
+#### CI Check (Recommended)
+
+Add to your CI pipeline to catch expired degraded modes:
+
+```bash
+# Check if degraded mode has expired
+if [ -f ".project/.degraded-mode.yml" ]; then
+  deadline=$(yq '.degraded_mode.deadline' .project/.degraded-mode.yml)
+  if [ "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \> "$deadline" ]; then
+    echo "❌ Degraded mode expired! Complete triptyque or request extension."
+    exit 1
+  fi
+fi
+```
+
+#### Template de Notification
+
 ```markdown
 ## ⚠️ MODE DÉGRADÉ ACTIVÉ
 
 **Raison** : [Urgence business / Client existant / Migration en cours]
-**Deadline triptyque** : [Date limite pour compléter]
+**Activé par** : [Nom/Rôle]
+**Deadline triptyque** : [Date limite - max 14 jours]
 **Responsable** : [Qui va créer le triptyque]
 
 Les livrables suivants peuvent continuer en mode dégradé :
@@ -298,6 +350,8 @@ Les livrables suivants peuvent continuer en mode dégradé :
 - [ ] keyword-research
 - [ ] content-calendar
 - [ ] brand-positioning
+
+📁 Tracking: `.project/.degraded-mode.yml`
 ```
 
 ### Structure `.project/` Attendue
