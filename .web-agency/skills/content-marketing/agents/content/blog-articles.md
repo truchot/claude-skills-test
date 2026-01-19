@@ -260,3 +260,155 @@ Tu NE fais PAS :
 | Meta données | Title, description, URL |
 | Checklist SEO | Optimisations vérifiées |
 | Suggestions maillage | Liens internes proposés |
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Article SEO classique** :
+> "Écris un article de blog sur 'comment choisir un CRM pour PME'. Mot-clé principal : 'CRM PME'. Cible : dirigeants de PME. Longueur : 2000 mots. Ton : expert mais accessible."
+
+**Prompt 2 - Listicle** :
+> "Crée un article '10 erreurs à éviter en email marketing' pour notre blog. Notre persona est un responsable marketing de startup. Format listicle, 1500 mots."
+
+**Prompt 3 - Guide complet** :
+> "J'ai besoin d'une pillar page sur le 'marketing automation'. C'est notre thématique principale. 3000+ mots, très complet, avec sous-sections pour chaque aspect."
+
+---
+
+### Exemple de Livrable - Article How-To
+
+```markdown
+# Comment Créer une Stratégie de Content Marketing en 7 Étapes
+
+**Meta Description** (155 car.) :
+> "Découvrez comment créer une stratégie de content marketing efficace en 7 étapes. Guide pratique avec templates et exemples concrets pour booster votre visibilité."
+
+**URL suggérée** : /blog/strategie-content-marketing-guide
+
+**Mot-clé principal** : stratégie content marketing
+**Mots-clés secondaires** : plan content marketing, créer contenu, marketing de contenu
+**Longueur cible** : 2200 mots
+**Temps de lecture** : 11 min
+
+---
+
+## Introduction
+
+Vous publiez du contenu régulièrement mais les résultats ne suivent pas ? Vous n'êtes pas seul. 63% des entreprises n'ont pas de stratégie de content marketing documentée – et c'est souvent la raison de leur échec.
+
+Une stratégie de content marketing bien pensée peut transformer votre acquisition. HubSpot génère 80% de ses leads grâce au contenu. Mais par où commencer ?
+
+**Dans cet article, vous découvrirez :**
+- Les 7 étapes pour créer une stratégie content marketing solide
+- Les erreurs qui plombent 90% des stratégies
+- Un template gratuit pour structurer votre plan
+
+---
+
+## Étape 1 : Définir vos Objectifs Business
+
+Avant de créer du contenu, posez-vous LA question : pourquoi ?
+
+### Objectifs SMART
+
+Vos objectifs content doivent être :
+- **Spécifiques** : "Augmenter le trafic blog" → "Augmenter le trafic blog de 50%"
+- **Mesurables** : Avec des KPIs clairs
+- **Atteignables** : Réalistes avec vos ressources
+- **Relevant** : Alignés avec les objectifs business
+- **Temporels** : Avec une deadline
+
+> 💡 **Conseil** : Commencez par 1-2 objectifs maximum. Trop d'objectifs = aucun focus.
+
+### Exemples d'Objectifs Content
+
+| Objectif Business | Objectif Content | KPI |
+|-------------------|------------------|-----|
+| Générer des leads | +100 leads/mois via le blog | Formulaires remplis |
+| Améliorer SEO | Top 3 sur 10 mots-clés | Positions Google |
+| Établir l'autorité | 5 backlinks/mois | Liens entrants |
+
+---
+
+## Étape 2 : Connaître votre Audience
+
+Pas de bon contenu sans connaissance intime de votre cible.
+
+### Créer vos Personas Content
+
+Pour chaque persona, documentez :
+
+1. **Leurs questions** : Que tapent-ils dans Google ?
+2. **Leurs problèmes** : Qu'est-ce qui les empêche de dormir ?
+3. **Leur niveau** : Débutant, intermédiaire, expert ?
+4. **Leurs canaux** : Où consomment-ils du contenu ?
+
+[Suite de l'article...]
+
+---
+
+## Conclusion
+
+Créer une stratégie de content marketing demande du temps, mais c'est un investissement rentable. Les entreprises avec une stratégie documentée sont 3x plus susceptibles de reporter un ROI positif.
+
+Récapitulons les 7 étapes :
+1. Définir des objectifs SMART
+2. Connaître votre audience
+3. Auditer votre contenu existant
+4. Choisir vos formats et canaux
+5. Créer un calendrier éditorial
+6. Produire et distribuer
+7. Mesurer et optimiser
+
+**Prêt à passer à l'action ? Téléchargez notre template de stratégie content marketing gratuit →**
+```
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Type d'article | Longueur | Objectif |
+|-----------|----------------|----------|----------|
+| **Lancer un blog** | Pillar pages sur thématiques clés | 3000+ mots | SEO foundation |
+| **Générer des leads** | Guides pratiques avec CTA | 2000 mots | Conversion |
+| **Actualité secteur** | Articles news rapides | 500-800 mots | Fraîcheur |
+| **Comparatif concurrence** | Articles "X vs Y" | 1500-2500 mots | Considération |
+| **Nurturing** | Études de cas clients | 1000-1500 mots | Preuve sociale |
+| **Thought leadership** | Articles opinion/tendances | 1500-2000 mots | Autorité |
+
+---
+
+### Checklist Avant Publication
+
+```markdown
+## Validation Article : [Titre]
+
+### Contenu
+- [ ] Répond à l'intention de recherche
+- [ ] Apporte une vraie valeur (pas de blabla)
+- [ ] Exemples concrets inclus
+- [ ] Sources citées quand nécessaire
+
+### SEO
+- [ ] Mot-clé dans H1
+- [ ] Mot-clé dans les 100 premiers mots
+- [ ] Mot-clé dans au moins 1 H2
+- [ ] Meta description rédigée (155 car.)
+- [ ] URL optimisée
+- [ ] Images avec alt text
+
+### Structure
+- [ ] Introduction avec hook
+- [ ] Hiérarchie H1 > H2 > H3 respectée
+- [ ] Paragraphes courts (3-4 phrases max)
+- [ ] Listes à puces pour la lisibilité
+- [ ] Conclusion avec CTA
+
+### Maillage
+- [ ] 3-5 liens internes placés
+- [ ] 2-3 liens externes (sources fiables)
+- [ ] Ancres de liens naturelles
+```

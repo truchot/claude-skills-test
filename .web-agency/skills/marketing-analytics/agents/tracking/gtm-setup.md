@@ -179,3 +179,219 @@ Variable - DLV - Transaction ID
 - [ ] Variables nommées clairement
 - [ ] Preview mode testé
 - [ ] Container versionné et publié
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Setup initial** :
+> "Configure GTM pour mon site e-commerce. J'ai besoin de tracker : pages vues GA4, achats, ajouts panier, et le pixel Meta. Le site est sur Shopify."
+
+**Prompt 2 - Tracking événement spécifique** :
+> "Comment tracker les clics sur mes boutons CTA 'Demander une démo' avec GTM ? Je veux voir ça dans GA4 comme événement personnalisé."
+
+**Prompt 3 - Debug** :
+> "Mon tag GA4 ne se déclenche pas sur les pages produit. Comment diagnostiquer le problème ?"
+
+---
+
+### Exemple de Livrable - Configuration E-commerce
+
+```markdown
+# Configuration GTM - E-commerce [Client]
+
+## Container ID : GTM-XXXXXX
+
+---
+
+## Tags Configurés
+
+### 1. GA4 - Configuration
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Type | Google Analytics: GA4 Configuration |
+| Measurement ID | G-XXXXXXXXXX |
+| Trigger | Consent Initialized - Analytics |
+| Send Page View | Yes |
+
+### 2. GA4 - Purchase
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Type | Google Analytics: GA4 Event |
+| Event Name | purchase |
+| Configuration Tag | GA4 - Configuration |
+| Trigger | Custom Event - purchase |
+
+**Paramètres événement** :
+- `transaction_id` : {{DLV - transaction_id}}
+- `value` : {{DLV - ecommerce.value}}
+- `currency` : {{DLV - ecommerce.currency}}
+- `items` : {{DLV - ecommerce.items}}
+
+### 3. Meta Pixel - Base Code
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Type | Custom HTML |
+| Pixel ID | 123456789 |
+| Trigger | Consent Initialized - Marketing |
+
+```html
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '123456789');
+fbq('track', 'PageView');
+</script>
+```
+
+### 4. Meta Pixel - Purchase
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Type | Custom HTML |
+| Trigger | Custom Event - purchase |
+
+```html
+<script>
+fbq('track', 'Purchase', {
+  value: {{DLV - ecommerce.value}},
+  currency: '{{DLV - ecommerce.currency}}'
+});
+</script>
+```
+
+---
+
+## Triggers Configurés
+
+| Nom | Type | Condition |
+|-----|------|-----------|
+| Consent Initialized - Analytics | Custom Event | `consent_analytics` = `granted` |
+| Consent Initialized - Marketing | Custom Event | `consent_marketing` = `granted` |
+| Custom Event - purchase | Custom Event | Event = `purchase` |
+| Custom Event - add_to_cart | Custom Event | Event = `add_to_cart` |
+| Click - CTA Demo | Click | Click Text contains "Demander une démo" |
+
+---
+
+## Variables Data Layer
+
+| Nom Variable | Type | Data Layer Variable Name |
+|--------------|------|--------------------------|
+| DLV - transaction_id | Data Layer Variable | ecommerce.transaction_id |
+| DLV - ecommerce.value | Data Layer Variable | ecommerce.value |
+| DLV - ecommerce.currency | Data Layer Variable | ecommerce.currency |
+| DLV - ecommerce.items | Data Layer Variable | ecommerce.items |
+
+---
+
+## Data Layer Attendu
+
+### Page Produit
+```javascript
+dataLayer.push({
+  'event': 'view_item',
+  'ecommerce': {
+    'items': [{
+      'item_id': 'SKU123',
+      'item_name': 'Produit Example',
+      'price': 99.99,
+      'quantity': 1
+    }]
+  }
+});
+```
+
+### Ajout Panier
+```javascript
+dataLayer.push({
+  'event': 'add_to_cart',
+  'ecommerce': {
+    'items': [{
+      'item_id': 'SKU123',
+      'item_name': 'Produit Example',
+      'price': 99.99,
+      'quantity': 1
+    }]
+  }
+});
+```
+
+### Achat
+```javascript
+dataLayer.push({
+  'event': 'purchase',
+  'ecommerce': {
+    'transaction_id': 'T12345',
+    'value': 99.99,
+    'currency': 'EUR',
+    'items': [{
+      'item_id': 'SKU123',
+      'item_name': 'Produit Example',
+      'price': 99.99,
+      'quantity': 1
+    }]
+  }
+});
+```
+```
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Configuration GTM | Tags Principaux |
+|-----------|-------------------|-----------------|
+| **Site vitrine** | GA4 + Meta Pixel + Contact Form | Page View, Lead, Form Submit |
+| **E-commerce** | GA4 E-commerce + Meta CAPI + Google Ads | Purchase, Add to Cart, View Item |
+| **SaaS** | GA4 + LinkedIn + Custom Events | Sign Up, Trial Start, Upgrade |
+| **Lead Gen B2B** | GA4 + LinkedIn + Google Ads | Form Submit, Download, Demo Request |
+| **Média/Blog** | GA4 + Scroll Tracking + Engagement | Scroll Depth, Time on Page, Article Read |
+
+---
+
+### Debug Checklist
+
+```markdown
+## Debug GTM : [Problème]
+
+### Vérifications Préliminaires
+- [ ] GTM container bien installé (view source)
+- [ ] Preview mode activé
+- [ ] Page rechargée après changements
+
+### Si Tag Ne Fire Pas
+- [ ] Trigger existe et est actif
+- [ ] Conditions du trigger sont remplies
+- [ ] Data Layer event bien pushé (vérifier Summary > Data Layer)
+- [ ] Pas de conflit avec Consent Mode
+- [ ] Tag non en pause
+
+### Si Variable est Undefined
+- [ ] Data layer push AVANT le trigger
+- [ ] Nom exact de la variable (case sensitive)
+- [ ] Structure de l'objet correcte (ecommerce.value vs value)
+
+### Si Données Incorrectes
+- [ ] Vérifier valeurs dans Preview > Variables
+- [ ] Vérifier format (string vs number)
+- [ ] Vérifier encodage caractères spéciaux
+
+### Outils de Debug
+- GTM Preview Mode
+- GA4 DebugView
+- Meta Pixel Helper (extension Chrome)
+- Console navigateur (dataLayer dans console)
+```

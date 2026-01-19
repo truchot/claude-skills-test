@@ -364,3 +364,168 @@ Différences clés :
 
 Persona prioritaire : [Nom] (score X/15)
 ```
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Création complète** :
+> "Je lance une app de méditation pour les cadres stressés. J'ai déjà défini le problème (stress au travail, manque de temps) et les offres (app mobile avec séances courtes). Crée-moi 3 personas détaillés."
+
+**Prompt 2 - À partir de données** :
+> "Voici l'export de notre CRM avec les 500 derniers clients. Analyse ces données et crée les personas correspondants."
+
+**Prompt 3 - Persona B2B** :
+> "On vend du SaaS RH aux PME de 50-200 employés. Qui sont les décideurs ? Crée les personas du comité d'achat (DRH, DAF, CEO)."
+
+---
+
+### Exemple de Livrable - Persona SaaS B2B
+
+```markdown
+# Persona - Sophie, DRH de PME
+
+## Identité
+
+| Attribut | Valeur |
+|----------|--------|
+| **Prénom** | Sophie |
+| **Âge** | 42 ans |
+| **Situation** | Mariée, 2 enfants |
+| **Localisation** | Lyon et périphérie |
+| **Profession** | Directrice RH |
+| **Entreprise** | PME industrielle 120 salariés |
+| **Revenus** | 65-75K€/an |
+
+### Citation Caractéristique
+> "Je passe plus de temps à gérer l'administratif qu'à développer les talents."
+
+---
+
+## Lien avec le Problème Défini
+
+### Problème Ressenti
+Sophie subit directement le problème identifié : les process RH manuels
+lui prennent 60% de son temps, l'empêchant de se concentrer sur la
+stratégie RH et le développement des compétences.
+
+### Jobs-to-be-done
+- Automatiser les tâches répétitives (congés, notes de frais)
+- Avoir une vue consolidée des données RH
+- Libérer du temps pour les projets stratégiques
+- Prouver la valeur du département RH à la direction
+
+---
+
+## Profil Psychographique
+
+### Objectifs
+1. Digitaliser les process RH d'ici fin d'année
+2. Réduire le turnover de 15% à 10%
+3. Être reconnue comme business partner par le CODIR
+
+### Frustrations (Pain Points)
+1. **Outils disparates** : Excel, papier, 3 logiciels différents
+2. **Manque de temps** : Submergée par l'opérationnel
+3. **Budget limité** : Direction frileuse sur les investissements RH
+4. **Résistance au changement** : Équipe habituée aux anciens process
+
+### Motivations
+| Motivation | Intensité |
+|------------|-----------|
+| Efficacité opérationnelle | ████████░░ 80% |
+| Reconnaissance professionnelle | ██████░░░░ 60% |
+| Équilibre vie pro/perso | ████████░░ 80% |
+
+---
+
+## Comportement Digital
+
+### Canaux Préférés
+| Canal | Usage | Moment |
+|-------|-------|--------|
+| LinkedIn | Veille RH, networking | Pause déjeuner |
+| Webinars | Formation continue | Mardi/Jeudi matin |
+| Newsletters spécialisées | Actualités RH | Lundi matin |
+
+### Consommation Contenu
+| Type | Fréquence | Format préféré |
+|------|-----------|----------------|
+| Articles RH | 3-4/semaine | 5-10 min lecture |
+| Études de cas | 2/mois | PDF téléchargeables |
+| Webinars | 1-2/mois | 45 min max |
+
+---
+
+## Parcours d'Achat
+
+### Déclencheurs
+- Audit RH révèle des inefficacités majeures
+- Nouvelle directive RGPD à implémenter
+- Départ d'un collaborateur clé qui gérait "tout sur Excel"
+
+### Phase Découverte
+- **Questions** : "Comment digitaliser les RH d'une PME ?"
+- **Sources** : Google, LinkedIn, ANDRH
+- **Contenus** : Guides, comparatifs, témoignages PME
+
+### Phase Considération
+- **Critères** : Prix, facilité d'implémentation, support FR
+- **Comparaison** : 3-4 solutions shortlistées
+- **Influenceurs** : DAF (budget), DSI (technique)
+
+### Phase Décision
+- **Freins** : "Et si l'équipe n'adopte pas ?"
+- **Déclencheur** : ROI chiffré + période d'essai
+- **Temps** : 2-4 mois (cycle PME)
+
+---
+
+## Communication
+
+### Ton à Adopter
+- Professionnel mais accessible
+- Empathique sur les contraintes PME
+- Pragmatique et orienté résultats
+
+### Messages Clés
+1. "Gagnez 10h/semaine sur l'administratif RH"
+2. "Déploiement en 2 semaines, sans DSI"
+3. "Tarif PME : à partir de 3€/salarié/mois"
+
+### Mots à Utiliser
+- ✅ Simplifier, automatiser, gagner du temps
+- ✅ PME, terrain, concret, ROI
+
+### Mots à Éviter
+- ❌ Intelligence artificielle (trop tech)
+- ❌ Transformation digitale (buzzword)
+- ❌ Disruption (jargon startup)
+
+---
+
+## Score de Priorité
+
+| Critère | Score |
+|---------|-------|
+| Potentiel business | 5 ⭐ |
+| Accessibilité | 4 ⭐ |
+| Affinité produit | 5 ⭐ |
+| **Total** | **14/15** |
+
+### Segment : **PRIMAIRE**
+```
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Comment utiliser cet agent |
+|-----------|---------------------------|
+| **Lancement produit** | Créer 3-5 personas avant de définir le positionnement |
+| **Refonte stratégie** | Actualiser les personas existants avec données récentes |
+| **Nouveau marché** | Créer des personas pour le segment cible |
+| **Optimisation acquisition** | Affiner les personas pour améliorer le ciblage pub |
+| **Content strategy** | Définir les personas pour orienter la ligne éditoriale |
