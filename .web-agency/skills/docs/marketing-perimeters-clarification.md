@@ -67,13 +67,13 @@ Le skill `marketing-analytics` contient deux domaines qui peuvent sembler redond
 
 ## 2. Funnel Analysis (marketing-ops vs marketing-analytics)
 
-### Problème Identifié
+### Problème Identifié (Résolu)
 
-Deux agents "funnel-analysis" existent dans des skills différents :
-- `marketing-ops/performance/funnel-analysis.md`
-- `marketing-analytics/insights/funnel-analysis.md`
+L'ancien doublon a été résolu par renommage :
+- `marketing-ops/performance/funnel-optimization.md` ← (anciennement funnel-analysis.md)
+- `marketing-analytics/insights/funnel-analysis.md` ← (diagnostic, inchangé)
 
-### Solution : Renommage et Clarification
+### Architecture Clarifiée
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -225,7 +225,7 @@ L'attribution est présente à deux niveaux :
 | Problème | Action | Fichier(s) Concerné(s) |
 |----------|--------|------------------------|
 | Confusion analytics/reporting | Clarifier dans les orchestrators | `analytics/orchestrator.md`, `reporting/orchestrator.md` |
-| Duplication funnel-analysis | Renommer en `funnel-optimization` dans marketing-ops | `marketing-ops/performance/funnel-analysis.md` → `funnel-optimization.md` |
+| Duplication funnel-analysis | ✅ Renommé en `funnel-optimization` dans marketing-ops | `marketing-ops/performance/funnel-optimization.md` (fait) |
 | Attribution confuse | Enrichir le stratégique, clarifier les délégations | `direction-marketing/mesure/attribution-model.md` |
 
 ---

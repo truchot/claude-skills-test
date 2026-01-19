@@ -1,6 +1,7 @@
 ---
 name: automation-orchestrator
 description: Orchestration du marketing automation avancé
+domain: automation
 version: 1.0.0
 ---
 

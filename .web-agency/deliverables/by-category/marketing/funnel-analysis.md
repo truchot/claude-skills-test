@@ -7,8 +7,8 @@ status: active
 phase: "4-realisation"
 order: 16
 agents:
-  - marketing-ops/performance/funnel-analysis
-  - marketing-analytics/orchestrator
+  - marketing-analytics/insights/funnel-analysis
+  - marketing-ops/performance/funnel-optimization
 consumes:
   - marketing-objectives
   - analytics-setup

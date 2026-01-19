@@ -1,6 +1,7 @@
 ---
 name: acquisition-orchestrator
 description: Orchestrateur des canaux d'acquisition - SEO, SEA, Social Ads, Email, Growth
+domain: acquisition
 ---
 
 # Acquisition Marketing - Orchestrateur

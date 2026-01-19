@@ -8,7 +8,7 @@ phase: "4-realisation"
 order: 19
 agents:
   - marketing-analytics/orchestrator
-  - marketing-ops/performance/funnel-analysis
+  - marketing-ops/performance/funnel-optimization
 consumes:
   - marketing-objectives
   - analytics-setup
