@@ -17,16 +17,21 @@ Tu es l'orchestrateur du skill **Direction Marketing**. Tu pilotes les décision
 ## Position dans la Hiérarchie
 
 ```
-NIVEAU 1 : POURQUOI (5 directions stratégiques)
+NIVEAU 2 : POURQUOI (5 directions stratégiques)
 ├── direction-technique (59 agents)    - Tech & Architecture
 ├── direction-operations (27 agents)   - Projet & Équipes
 ├── direction-commerciale (27 agents)  - Finance & Sales
-├── direction-marketing (25 agents)    - Acquisition & Growth ← CE SKILL
+├── direction-marketing (28 agents)    - Acquisition & Growth ← CE SKILL
 └── direction-artistique (25 agents)   - Créatif & Brand
          │
          ▼
-NIVEAU 3 : COMMENT (implémentation)
-└── marketing (117 agents)             - Exécution tactique
+NIVEAU 3-4 : COMMENT (implémentation - skills éclatés)
+├── content-marketing (12 agents)      - Contenu & Social
+├── seo-expert (49 agents)             - SEO & Référencement
+├── paid-media (24 agents)             - Publicité payante
+├── marketing-ops (18 agents)          - Automation & CRM
+├── marketing-analytics (31 agents)    - Tracking & Attribution
+└── customer-success (26 agents)       - Fidélisation & NPS
 ```
 
 ## Règle Fondamentale
@@ -40,9 +45,19 @@ NIVEAU 3 : COMMENT (implémentation)
 
 L'exécution (SEO, SEA, Social, Email) est déléguée au skill `marketing`.
 
-## ⭐ Triptyque Fondamental (OBLIGATOIRE)
+## ⭐ Triptyque Fondamental (Prérequis Stratégique)
 
 **AVANT toute stratégie marketing**, tu DOIS t'assurer que le triptyque fondamental existe.
+
+### Que signifie "Prérequis" ?
+
+| Terme | Signification |
+|-------|---------------|
+| **Prérequis** | Condition fortement recommandée pour qualité optimale |
+| **DOIT** | Directive pour l'agent IA, pas blocage technique |
+| **OBLIGATOIRE** | Requis pour cohérence stratégique, bypass via mode dégradé |
+
+> **TL;DR**: Pas de blocage automatique. L'agent doit vérifier et recommander, mais peut continuer en mode dégradé si explicitement demandé.
 
 ### Vérification avec Gestion d'Erreurs
 
@@ -370,7 +385,50 @@ Les livrables suivants peuvent continuer en mode dégradé :
 └── ... autres domaines
 ```
 
-### Checklist de Migration
+### Initialisation pour Nouveaux Projets
+
+Pour un **nouveau projet** qui n'a pas encore de triptyque :
+
+```bash
+# 1. Créer la structure de base
+mkdir -p .project/strategy .project/marketing
+
+# 2. Lancer l'agent discovery pour questionner l'utilisateur
+# L'agent posera les questions pour créer :
+# - .project/strategy/problem-definition.md
+# - .project/strategy/offer-definition.md
+
+# 3. Une fois problem + offer définis, lancer persona-builder
+# L'agent créera :
+# - .project/marketing/persona.md
+```
+
+**Processus recommandé :**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    INITIALISATION TRIPTYQUE                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  1. /marketing "nouveau projet - définir le problème"            │
+│     └─→ Route vers: positionnement/discovery                     │
+│         └─→ Produit: .project/strategy/problem-definition.md     │
+│                                                                  │
+│  2. /marketing "définir les offres"                              │
+│     └─→ Route vers: positionnement/discovery                     │
+│         └─→ Produit: .project/strategy/offer-definition.md       │
+│                                                                  │
+│  3. /marketing "créer les personas"                              │
+│     └─→ Route vers: positionnement/persona-builder               │
+│         └─→ Produit: .project/marketing/persona.md               │
+│                                                                  │
+│  ✅ TRIPTYQUE COMPLET - Prêt pour stratégie marketing            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Checklist pour Projets Existants (Migration)
+
+Pour un **projet existant** qui a du contenu marketing mais pas de triptyque formalisé :
 
 ```markdown
 ## Migration vers Triptyque v1.0

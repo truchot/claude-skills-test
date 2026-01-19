@@ -70,6 +70,7 @@ const ROUTING_KEYWORDS = [
 ];
 
 // Triptyque validation configuration
+// Section headers must match actual deliverable templates exactly
 const TRIPTYQUE = {
   files: {
     problemDefinition: '.project/strategy/problem-definition.md',
@@ -77,21 +78,22 @@ const TRIPTYQUE = {
     persona: '.project/marketing/persona.md',
   },
   contentValidation: {
+    // Match actual templates in .web-agency/deliverables/by-category/
     problemDefinition: [
-      '## Le Problème en Une Phrase',
-      '## Qui est Impacté',
-      '## Quantification',
-      '## Causes Racines',
+      '## 1. Le Problème en Une Phrase',
+      '## 2. Contexte du Problème',
+      '## 3. Manifestations du Problème',
+      '## 4. Quantification du Problème',
     ],
     offerDefinition: [
-      '## Offre Principale',
-      '## Bénéfices Clés',
-      '## Pricing',
-      '## Différenciation',
+      '## 1. Vue d\'Ensemble des Offres',
+      '## 2. Offre Principale',
+      '## 5. Proposition de Valeur',
+      '## 6. Preuves et Crédibilité',
     ],
     persona: [
-      '## Identité',
-      '## Profil Psychographique',
+      '## Photo & Identité',
+      '## Objectifs & Motivations',
       '## Comportement Digital',
       '## Parcours d\'Achat',
     ],
