@@ -40,13 +40,73 @@ NIVEAU 3 : COMMENT (implémentation)
 
 L'exécution (SEO, SEA, Social, Email) est déléguée au skill `marketing`.
 
+## ⭐ Triptyque Fondamental (OBLIGATOIRE)
+
+**AVANT toute stratégie marketing**, tu DOIS t'assurer que le triptyque fondamental existe :
+
+```bash
+ls .project/strategy/problem-definition.md   # Problème défini ?
+ls .project/strategy/offer-definition.md     # Offres définies ?
+ls .project/marketing/persona.md             # Personas définis ?
+```
+
+**Si un fichier manque** → Déléguer à `positionnement/discovery` ou `positionnement/persona-builder`.
+
+### Le Triptyque
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              ⭐ TRIPTYQUE FONDAMENTAL ⭐                         │
+│              (Point de départ OBLIGATOIRE)                      │
+│                                                                 │
+│   ┌──────────────────┐                                          │
+│   │ 1. PROBLÈME      │  "Quel problème résolvons-nous ?"        │
+│   │                  │  → .project/strategy/problem-definition.md│
+│   │                  │  → Agent: positionnement/discovery       │
+│   └────────┬─────────┘                                          │
+│            │                                                    │
+│            ▼                                                    │
+│   ┌──────────────────┐                                          │
+│   │ 2. OFFRES        │  "Quelles solutions proposons-nous ?"    │
+│   │                  │  → .project/strategy/offer-definition.md │
+│   │                  │  → Agent: positionnement/discovery       │
+│   └────────┬─────────┘                                          │
+│            │                                                    │
+│            ▼                                                    │
+│   ┌──────────────────┐                                          │
+│   │ 3. PERSONAS      │  "À qui nous adressons-nous ?"           │
+│   │                  │  → .project/marketing/persona.md         │
+│   │                  │  → Agent: positionnement/persona-builder │
+│   └──────────────────┘                                          │
+│                                                                 │
+│  ⚠️ SANS CE TRIPTYQUE, AUCUNE STRATÉGIE NE PEUT COMMENCER      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Workflow de Vérification
+
+```
+Nouvelle demande marketing
+│
+├─ ÉTAPE 1 : Vérifier le triptyque
+│  ├─ problem-definition.md manquant → positionnement/discovery
+│  ├─ offer-definition.md manquant → positionnement/discovery
+│  └─ persona.md manquant → positionnement/persona-builder
+│
+├─ ÉTAPE 2 : Triptyque complet ✅
+│  └─ Continuer avec la stratégie demandée
+│
+└─ ÉTAPE 3 : Déléguer l'exécution
+   └─ → skill marketing/ pour SEO, SEA, Content, etc.
+```
+
 ## Architecture
 
 ```
-direction-marketing (25 agents)
+direction-marketing (26 agents)
 │
 ├── strategie/        (6) - Vision et roadmap marketing
-├── positionnement/   (5) - Marque, personas, différenciation
+├── positionnement/   (6) - Triptyque fondamental, marque, personas ⭐
 ├── acquisition/      (5) - Canaux, funnel, budget
 ├── mesure/           (5) - KPIs, analytics, ROI
 └── orchestration/    (4) - Coordination et délégation
@@ -67,17 +127,18 @@ Définition de la stratégie marketing globale.
 | `roadmap-marketing` | Planification stratégique |
 | `budget-strategy` | Stratégie budgétaire |
 
-### 2. positionnement/ - Identité Marque (5 agents)
+### 2. positionnement/ - Identité Marque (6 agents)
 
-Définition du positionnement et des cibles.
+Définition du positionnement et des cibles. **Contient le triptyque fondamental.**
 
-| Agent | Responsabilité |
-|-------|----------------|
-| `orchestrator` | Coordination positionnement |
-| `brand-positioning` | Positionnement de marque |
-| `persona-builder` | Création des personas |
-| `value-proposition` | Proposition de valeur |
-| `differentiation` | Stratégie de différenciation |
+| Agent | Responsabilité | Priorité |
+|-------|----------------|----------|
+| `orchestrator` | Coordination positionnement et triptyque | - |
+| `discovery` | **Définir problème + offres** | 🥇 PREMIER |
+| `persona-builder` | Création des personas | 🥈 Après discovery |
+| `brand-positioning` | Positionnement de marque | 🥉 Après personas |
+| `value-proposition` | Proposition de valeur | Après positionnement |
+| `differentiation` | Stratégie de différenciation | Après positionnement |
 
 ### 3. acquisition/ - Stratégie Canaux (5 agents)
 
