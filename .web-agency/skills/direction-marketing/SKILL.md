@@ -42,13 +42,42 @@ L'exécution (SEO, SEA, Social, Email) est déléguée au skill `marketing`.
 
 ## ⭐ Triptyque Fondamental (OBLIGATOIRE)
 
-**AVANT toute stratégie marketing**, tu DOIS t'assurer que le triptyque fondamental existe :
+**AVANT toute stratégie marketing**, tu DOIS t'assurer que le triptyque fondamental existe.
+
+### Vérification avec Gestion d'Erreurs
 
 ```bash
-ls .project/strategy/problem-definition.md   # Problème défini ?
-ls .project/strategy/offer-definition.md     # Offres définies ?
-ls .project/marketing/persona.md             # Personas définis ?
+# 1. Vérifier que .project/ existe
+if [ ! -d ".project" ]; then
+  echo "⚠️ PROJET NON INITIALISÉ"
+  echo "Action: Créer la structure .project/ avec project-management/avant-projet/cadrage"
+  exit 1
+fi
+
+# 2. Vérifier le triptyque
+MISSING=""
+[ ! -f ".project/strategy/problem-definition.md" ] && MISSING="$MISSING problem-definition"
+[ ! -f ".project/strategy/offer-definition.md" ] && MISSING="$MISSING offer-definition"
+[ ! -f ".project/marketing/persona.md" ] && MISSING="$MISSING persona"
+
+if [ -n "$MISSING" ]; then
+  echo "❌ TRIPTYQUE INCOMPLET - Manquant:$MISSING"
+  echo "Action: Déléguer à positionnement/discovery ou persona-builder"
+else
+  echo "✅ TRIPTYQUE COMPLET - Peut continuer"
+fi
 ```
+
+### Nature de l'Enforcement
+
+> **IMPORTANT** : Ces vérifications sont des **directives pour agents IA**, pas du code exécuté automatiquement.
+
+| Aspect | Comportement |
+|--------|--------------|
+| **Type** | Soft enforcement (documentation) |
+| **Exécuteur** | Agent IA qui lit ce prompt |
+| **Conséquence si ignoré** | Livrables de moindre qualité, incohérences |
+| **Override possible** | Oui, via mode dégradé documenté |
 
 **Si un fichier manque** → Déléguer à `positionnement/discovery` ou `positionnement/persona-builder`.
 
@@ -99,6 +128,124 @@ Nouvelle demande marketing
 └─ ÉTAPE 3 : Déléguer l'exécution
    └─ → skill marketing/ pour SEO, SEA, Content, etc.
 ```
+
+### 🔁 Boucles de Feedback (Itération)
+
+Le workflow n'est **pas strictement linéaire**. Des itérations sont possibles et attendues.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    BOUCLES DE FEEDBACK                          │
+│                                                                 │
+│   discovery ──────► persona-builder ──────► brand-positioning   │
+│       │                    │                      │             │
+│       │◄───────────────────┤                      │             │
+│       │     FEEDBACK 1     │◄─────────────────────┤             │
+│       │                         FEEDBACK 2        │             │
+│       │◄──────────────────────────────────────────┤             │
+│                         FEEDBACK 3                              │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+#### Quand Itérer ?
+
+| Feedback | Déclencheur | Action |
+|----------|-------------|--------|
+| **1. Personas → Discovery** | Persona révèle que le problème est mal défini | Mettre à jour `problem-definition.md` |
+| **2. Brand → Personas** | Positionnement suggère un segment non couvert | Ajouter/modifier un persona |
+| **3. Brand → Discovery** | USP révèle une offre manquante | Mettre à jour `offer-definition.md` |
+
+#### Processus d'Itération
+
+```markdown
+## Demande d'Itération
+
+**Agent demandeur** : [persona-builder / brand-positioning]
+**Document à modifier** : [problem-definition / offer-definition / persona]
+**Raison** : [Explication courte]
+**Modification proposée** : [Ce qui devrait changer]
+
+### Validation
+- [ ] Demande reviewée par l'agent responsable du document
+- [ ] Impact sur les documents dépendants évalué
+- [ ] Modification appliquée
+- [ ] Documents dépendants mis à jour si nécessaire
+```
+
+#### Règles d'Itération
+
+1. **Traçabilité** : Documenter pourquoi le changement est nécessaire
+2. **Cascade** : Si `problem-definition` change, vérifier `offer-definition` et `persona`
+3. **Limite** : Max 3 itérations par livrable, sinon escalade humaine
+4. **Version** : Incrémenter la version du document modifié
+
+### ✅ Workflow de Validation
+
+Chaque livrable du triptyque passe par un processus de validation.
+
+#### Rôles et Responsabilités
+
+| Rôle | Responsabilité | Qui ? |
+|------|----------------|-------|
+| **Créateur** | Produit le livrable | Agent IA |
+| **Reviewer** | Vérifie la qualité et cohérence | Agent orchestrateur |
+| **Validateur** | Approuve pour usage | Humain (client/sponsor) |
+
+#### Processus de Validation
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                     VALIDATION WORKFLOW                          │
+│                                                                  │
+│   CRÉATION          REVIEW             VALIDATION    PUBLICATION │
+│                                                                  │
+│   ┌─────────┐      ┌─────────┐        ┌─────────┐   ┌─────────┐ │
+│   │ Agent   │─────►│ Orchest │───────►│ Humain  │──►│ .project│ │
+│   │ crée    │      │ review  │        │ valide  │   │ /...    │ │
+│   └─────────┘      └────┬────┘        └────┬────┘   └─────────┘ │
+│                         │                  │                     │
+│                    ┌────▼────┐        ┌────▼────┐                │
+│                    │ Rejet ? │        │ Rejet ? │                │
+│                    │ → Retour│        │ → Retour│                │
+│                    └─────────┘        └─────────┘                │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+#### Critères de Validation par Livrable
+
+| Livrable | Critères Agent | Critères Humain |
+|----------|----------------|-----------------|
+| `problem-definition` | Structure complète, cohérent | Reflète bien la réalité business |
+| `offer-definition` | Lié au problème, pricing cohérent | Validé par product/sales |
+| `persona` | Basé sur données, actionnable | Reconnaissable par les équipes |
+| `brand-positioning` | Différenciant, ancré triptyque | Aligné avec vision direction |
+
+#### En Cas de Rejet
+
+```markdown
+## Rejet de Validation
+
+**Livrable** : [nom du fichier]
+**Rejeteur** : [Agent / Humain]
+**Raison** : [Explication]
+
+### Corrections Demandées
+1. [Correction 1]
+2. [Correction 2]
+
+### Délai
+- Correction attendue : [date]
+- Prochaine review : [date]
+```
+
+#### Escalade
+
+| Situation | Action |
+|-----------|--------|
+| 3+ rejets sur même livrable | Escalade vers direction-marketing orchestrator |
+| Désaccord agent/humain | Réunion de cadrage avec sponsor |
+| Blocage > 5 jours | Activation mode dégradé temporaire |
 
 ## 🔄 Guide de Migration (Projets Existants)
 
