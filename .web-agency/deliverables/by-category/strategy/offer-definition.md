@@ -7,15 +7,15 @@ status: active
 phase: "1-intake"
 order: 2
 agents:
-  - marketing/strategie/discovery
-  - marketing/strategie/orchestrator
+  - direction-marketing/positionnement/discovery
+  - direction-marketing/positionnement/orchestrator
   - project-management/avant-projet/cadrage
 consumes:
   - client-request
   - problem-definition
 produces_for:
-  - marketing/strategie/persona-builder
-  - marketing/strategie/brand-positioning
+  - direction-marketing/positionnement/persona-builder
+  - direction-marketing/positionnement/brand-positioning
   - marketing/content/landing-pages
   - marketing/content/copywriting
 workflows:

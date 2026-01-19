@@ -100,6 +100,102 @@ Nouvelle demande marketing
    └─ → skill marketing/ pour SEO, SEA, Content, etc.
 ```
 
+## 🔄 Guide de Migration (Projets Existants)
+
+### Scénario 1 : Nouveau Projet
+
+```bash
+# Workflow standard - triptyque obligatoire
+1. discovery → problem-definition.md
+2. discovery → offer-definition.md
+3. persona-builder → persona.md
+4. → Continuer avec la stratégie marketing
+```
+
+### Scénario 2 : Projet Existant SANS Triptyque
+
+**Projets en cours qui n'ont pas le triptyque fondamental.**
+
+```bash
+# Vérification
+ls .project/strategy/problem-definition.md 2>/dev/null || echo "❌ MANQUANT"
+ls .project/strategy/offer-definition.md 2>/dev/null || echo "❌ MANQUANT"
+ls .project/marketing/persona.md 2>/dev/null || echo "❌ MANQUANT"
+```
+
+**Options de migration :**
+
+| Situation | Action | Impact |
+|-----------|--------|--------|
+| Travail marketing en cours | **Pause** + Compléter triptyque | Qualité améliorée |
+| Travail marketing terminé | **Créer triptyque rétroactivement** | Documentation |
+| Urgence business | **Mode dégradé** (voir ci-dessous) | Risque qualité |
+
+### Mode Dégradé (Temporaire)
+
+Si le triptyque ne peut pas être créé immédiatement :
+
+```markdown
+## ⚠️ MODE DÉGRADÉ ACTIVÉ
+
+**Raison** : [Urgence business / Client existant / Migration en cours]
+**Deadline triptyque** : [Date limite pour compléter]
+**Responsable** : [Qui va créer le triptyque]
+
+Les livrables suivants peuvent continuer en mode dégradé :
+- [ ] seo-audit (pas de prérequis marketing)
+- [ ] technical-audit (pas de prérequis marketing)
+
+⛔ BLOQUÉ jusqu'au triptyque :
+- [ ] editorial-charter
+- [ ] keyword-research
+- [ ] content-calendar
+- [ ] brand-positioning
+```
+
+### Structure `.project/` Attendue
+
+```
+.project/
+├── strategy/
+│   ├── problem-definition.md    # 🥇 PREMIER (discovery)
+│   └── offer-definition.md      # 🥈 SECOND (discovery)
+├── marketing/
+│   ├── persona.md               # 🥉 TROISIÈME (persona-builder)
+│   ├── brand-positioning.md     # Après triptyque
+│   ├── seo-audit.md             # NIVEAU 0 (pas de prérequis mktg)
+│   ├── keyword-research.md      # Après persona + brand-positioning
+│   └── editorial-charter.md     # Après triptyque
+└── ... autres domaines
+```
+
+### Checklist de Migration
+
+```markdown
+## Migration vers Triptyque v1.0
+
+- [ ] **Étape 1** : Identifier si le projet a déjà des éléments du triptyque
+      - Documents existants sur le problème ?
+      - Documentation des offres ?
+      - Personas définis (même informellement) ?
+
+- [ ] **Étape 2** : Formaliser ce qui existe
+      - Convertir au format standard
+      - Placer dans .project/strategy/ ou .project/marketing/
+
+- [ ] **Étape 3** : Compléter ce qui manque
+      - Utiliser discovery pour problème/offres
+      - Utiliser persona-builder pour personas
+
+- [ ] **Étape 4** : Valider le triptyque
+      - Review par le client/sponsor
+      - Alignement équipe confirmé
+
+- [ ] **Étape 5** : Débloquer le travail marketing
+      - Retirer le mode dégradé si actif
+      - Reprendre le workflow standard
+```
+
 ## Architecture
 
 ```
