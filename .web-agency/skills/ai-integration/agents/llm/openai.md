@@ -68,20 +68,45 @@ for await (const chunk of stream) {
 // app/api/chat/route.ts
 import { OpenAIStream, StreamingTextResponse } from 'ai';
 import OpenAI from 'openai';
+import { z } from 'zod';
 
 const openai = new OpenAI();
 
+// Schema de validation pour les messages entrants
+const MessageSchema = z.object({
+  role: z.enum(['user', 'assistant', 'system']),
+  content: z.string().min(1).max(32000),
+});
+
+const ChatRequestSchema = z.object({
+  messages: z.array(MessageSchema).min(1).max(100),
+  model: z.enum(['gpt-4o', 'gpt-4o-mini']).optional().default('gpt-4o'),
+});
+
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const body = await req.json();
 
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o',
-    messages,
-    stream: true,
-  });
+    // Validation avec Zod
+    const { messages, model } = ChatRequestSchema.parse(body);
 
-  const stream = OpenAIStream(response);
-  return new StreamingTextResponse(stream);
+    const response = await openai.chat.completions.create({
+      model,
+      messages,
+      stream: true,
+    });
+
+    const stream = OpenAIStream(response);
+    return new StreamingTextResponse(stream);
+  } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      return Response.json(
+        { error: 'Invalid request', details: error.errors },
+        { status: 400 }
+      );
+    }
+    throw error;
+  }
 }
 ```
 

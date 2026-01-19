@@ -31,23 +31,40 @@ ai-integration/agents/prompting/patterns   # Prompt engineering
 
 Ce skill est au **NIVEAU 3 : IMPLÉMENTATION**. Il implémente les capacités IA dans les applications.
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : STRATÉGIE (direction-technique)                         │
-│  → POURQUOI : Quelle stratégie IA ? Build vs Buy ?                  │
-├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : OPÉRATIONS                                              │
-│  ┌────────────────────────────┐  ┌────────────────────────────┐    │
-│  │     web-dev-process        │  │       lead-dev             │    │
-│  │  QUOI : Process intégration│  │  QUI : Coordination        │    │
-│  └────────────────────────────┘  └────────────────────────────┘    │
-├─────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : IMPLÉMENTATION                                          │
-│  ┌────────────────────────────────────────────────────────────┐    │
-│  │              ai-integration ← CE SKILL                      │    │
-│  │  COMMENT : LLMs, RAG, vectors, prompts, ML ops              │    │
-│  └────────────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph N1["NIVEAU 1 : STRATÉGIE"]
+        DT[direction-technique]
+    end
+
+    subgraph N2["NIVEAU 2 : OPÉRATIONS"]
+        WDP[web-dev-process]
+        LD[lead-dev]
+    end
+
+    subgraph N3["NIVEAU 3 : IMPLÉMENTATION"]
+        AI[ai-integration]
+
+        subgraph DOMAINS["Domaines"]
+            LLM[llm/]
+            RAG[rag/]
+            VEC[vectors/]
+            PROMPT[prompting/]
+            AGENTS[agents/]
+            MLOPS[mlops/]
+        end
+    end
+
+    DT -->|stratégie IA| WDP
+    DT -->|budget, providers| AI
+    WDP -->|process| AI
+    LD -->|coordination| AI
+    AI --> DOMAINS
+
+    style N1 fill:#ffebee
+    style N2 fill:#fff3e0
+    style N3 fill:#e8f5e9
+    style AI fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
 ```
 
 ## Philosophie

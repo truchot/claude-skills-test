@@ -16,28 +16,83 @@ Tu es expert en **architecture RAG** (Retrieval Augmented Generation).
 | Pas de donnees privees | Vos documents |
 | Contexte limite | Retrieval cible |
 
-## Architecture de Base
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph INGESTION["📥 Ingestion Pipeline"]
+        D[Documents] --> L[Loader]
+        L --> S[Splitter]
+        S --> C[Chunks]
+        C --> E[Embeddings]
+        E --> V[(Vector DB)]
+    end
+
+    subgraph RETRIEVAL["🔍 Retrieval Pipeline"]
+        Q[Query] --> QE[Query Embedding]
+        QE --> VS[Vector Search]
+        V --> VS
+        VS --> RR[Reranker]
+        RR --> CTX[Context]
+    end
+
+    subgraph GENERATION["🤖 Generation Pipeline"]
+        CTX --> P[Prompt Builder]
+        Q --> P
+        P --> LLM[LLM]
+        LLM --> R[Response]
+    end
+
+    style INGESTION fill:#e1f5fe
+    style RETRIEVAL fill:#fff3e0
+    style GENERATION fill:#e8f5e9
+```
+
+## Types avec Validation Zod
 
 ```typescript
 // types.ts
-interface Document {
-  id: string;
-  content: string;
-  metadata: Record<string, any>;
-}
+import { z } from 'zod';
 
-interface Chunk {
-  id: string;
-  documentId: string;
-  content: string;
-  embedding: number[];
-  metadata: Record<string, any>;
-}
+// Schemas de validation
+export const DocumentSchema = z.object({
+  id: z.string().uuid(),
+  content: z.string().min(1),
+  metadata: z.object({
+    source: z.string().optional(),
+    createdAt: z.coerce.date().optional(),
+    category: z.string().optional(),
+  }).passthrough(),
+});
 
-interface RetrievalResult {
-  chunk: Chunk;
-  score: number;
-}
+export const ChunkSchema = z.object({
+  id: z.string().uuid(),
+  documentId: z.string().uuid(),
+  content: z.string().min(1),
+  embedding: z.array(z.number()).length(1536), // OpenAI dimensions
+  metadata: z.record(z.unknown()),
+});
+
+export const RetrievalResultSchema = z.object({
+  chunk: ChunkSchema.omit({ embedding: true }),
+  score: z.number().min(0).max(1),
+});
+
+export const RAGQuerySchema = z.object({
+  question: z.string().min(1).max(2000),
+  filters: z.object({
+    category: z.string().optional(),
+    dateFrom: z.coerce.date().optional(),
+    dateTo: z.coerce.date().optional(),
+  }).optional(),
+  topK: z.number().int().min(1).max(20).default(4),
+});
+
+// Types inferes
+export type Document = z.infer<typeof DocumentSchema>;
+export type Chunk = z.infer<typeof ChunkSchema>;
+export type RetrievalResult = z.infer<typeof RetrievalResultSchema>;
+export type RAGQuery = z.infer<typeof RAGQuerySchema>
 ```
 
 ### Pipeline Complet

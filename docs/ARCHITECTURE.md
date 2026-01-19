@@ -1,36 +1,72 @@
 # Architecture des Skills Techniques
 
+> Version 4.1.0 - 33 skills, ~965 agents
+
 ## Vue d'ensemble
 
 ```mermaid
 graph TB
-    subgraph "NIVEAU 1: POURQUOI"
-        DT[direction-technique<br/>52 agents]
+    subgraph "NIVEAU 1: POURQUOI (STRATÉGIE)"
+        DT[direction-technique<br/>59 agents]
     end
 
-    subgraph "NIVEAU 2: QUOI"
-        WDP[web-dev-process<br/>61 agents]
+    subgraph "NIVEAU 2: QUOI (OPÉRATIONS)"
+        WDP[web-dev-process<br/>64 agents]
+        LD[lead-dev<br/>27 agents]
+        TP[testing-process<br/>25 agents]
     end
 
-    subgraph "NIVEAU 3: COMMENT"
-        WGE[wordpress-gutenberg-expert<br/>41 agents]
-        DSF[design-system-foundations<br/>21 agents]
-        FUTURE[autres skills techniques<br/>à venir]
+    subgraph "NIVEAU 3: COMMENT (IMPLÉMENTATION)"
+        subgraph "Tech Core"
+            FE[frontend-developer<br/>33 agents]
+            BE[backend-developer<br/>38 agents]
+            DV[devops<br/>30 agents]
+        end
+
+        subgraph "Frameworks"
+            RE[react-expert<br/>28 agents]
+            NE[nextjs-expert<br/>35 agents]
+            WGE[wordpress-gutenberg<br/>42 agents]
+        end
+
+        subgraph "Specialized"
+            SE[security-expert<br/>24 agents]
+            AI[ai-integration<br/>40 agents]
+            LM[legacy-modernization<br/>30 agents]
+            DD[ddd<br/>34 agents]
+        end
+
+        subgraph "Design"
+            DSF[design-system<br/>21 agents]
+            UX[ux-ui-design<br/>27 agents]
+        end
     end
 
     DT -->|"Décisions<br/>stratégiques"| WDP
-    WDP -->|"Process<br/>contextualisé"| WGE
-    WDP -->|"Process<br/>contextualisé"| DSF
-    WDP -.->|"futur"| FUTURE
+    DT -->|"Politiques"| LD
+    WDP -->|"Process"| FE
+    WDP -->|"Process"| BE
+    LD -->|"Coordination"| RE
+    LD -->|"Coordination"| NE
 
     classDef pourquoi fill:#e1f5fe,stroke:#01579b
     classDef quoi fill:#fff3e0,stroke:#e65100
     classDef comment fill:#e8f5e9,stroke:#2e7d32
 
     class DT pourquoi
-    class WDP quoi
-    class WGE,DSF,FUTURE comment
+    class WDP,LD,TP quoi
+    class FE,BE,DV,RE,NE,WGE,SE,AI,LM,DD,DSF,UX comment
 ```
+
+## Statistiques
+
+| Métrique | Valeur |
+|----------|--------|
+| **Total Skills** | 33 |
+| **Total Agents** | ~965 |
+| **Niveau 1 (Stratégie)** | 5 skills, 166 agents |
+| **Niveau 2 (Opérations)** | 7 skills, 189 agents |
+| **Niveau 3 (Implémentation)** | 21 skills, 610 agents |
 
 ## Hiérarchie POURQUOI / QUOI / COMMENT
 

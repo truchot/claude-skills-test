@@ -154,7 +154,34 @@ async function loadUsers(users: NewUser[]): Promise<void> {
 
 ```typescript
 // migrate.ts
-async function migrateUsers(): Promise<MigrationResult> {
+import { z } from 'zod';
+import pLimit from 'p-limit';
+
+// Configuration avec validation
+const MigrationConfigSchema = z.object({
+  batchSize: z.number().int().min(100).max(10000).default(1000),
+  concurrency: z.number().int().min(1).max(10).default(3),
+  retryAttempts: z.number().int().min(0).max(5).default(3),
+});
+
+type MigrationConfig = z.infer<typeof MigrationConfigSchema>;
+
+// Constantes de retention (pas de magic numbers)
+const RETENTION_POLICIES = {
+  ACTIVITY_LOGS_DAYS: parseInt(process.env.RETENTION_ACTIVITY_LOGS || '365'),
+  MARKETING_CONSENT_DAYS: parseInt(process.env.RETENTION_MARKETING || '730'),
+} as const;
+
+/**
+ * Migration avec parallelisation controlee
+ *
+ * QUAND utiliser parallel vs sequential:
+ * - PARALLEL: Batches independants, pas de contraintes d'ordre
+ * - SEQUENTIAL: Foreign keys, ordre chronologique requis
+ */
+async function migrateUsers(config?: Partial<MigrationConfig>): Promise<MigrationResult> {
+  const { batchSize, concurrency, retryAttempts } = MigrationConfigSchema.parse(config ?? {});
+
   const stats = {
     extracted: 0,
     transformed: 0,
@@ -162,31 +189,79 @@ async function migrateUsers(): Promise<MigrationResult> {
     errors: 0,
   };
 
+  // Limiter la concurrence pour eviter de surcharger la DB
+  const limit = pLimit(concurrency);
+  const pendingBatches: Promise<void>[] = [];
+
   try {
-    for await (const batch of extractUsers(1000)) {
+    for await (const batch of extractUsers(batchSize)) {
       stats.extracted += batch.length;
 
-      const transformed = batch
-        .map((user) => {
-          try {
-            return transformUser(user);
-          } catch (error) {
-            stats.errors++;
-            logger.error('Transform error', { user, error });
-            return null;
-          }
-        })
-        .filter(Boolean);
+      // Traitement parallele des batches
+      const batchPromise = limit(async () => {
+        const transformed = batch
+          .map((user) => {
+            try {
+              return transformUser(user);
+            } catch (error: unknown) {
+              stats.errors++;
+              const message = error instanceof Error ? error.message : 'Unknown error';
+              logger.error('Transform error', { userId: user.id, error: message });
+              return null;
+            }
+          })
+          .filter((u): u is NewUser => u !== null);
 
-      stats.transformed += transformed.length;
+        stats.transformed += transformed.length;
 
-      await loadUsers(transformed);
-      stats.loaded += transformed.length;
+        // Retry avec backoff exponentiel
+        await retryWithBackoff(
+          () => loadUsers(transformed),
+          retryAttempts
+        );
+        stats.loaded += transformed.length;
+      });
+
+      pendingBatches.push(batchPromise);
     }
 
+    // Attendre tous les batches en cours
+    await Promise.all(pendingBatches);
+
     return { success: true, stats };
-  } catch (error) {
-    return { success: false, stats, error };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { success: false, stats, error: message };
+  }
+}
+
+// Helper pour retry avec backoff
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxAttempts: number,
+  baseDelay: number = 1000
+): Promise<T> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (error: unknown) {
+      if (attempt === maxAttempts) throw error;
+      const delay = baseDelay * Math.pow(2, attempt - 1);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+  throw new Error('Unreachable');
+}
+```
+
+### Migration Sequentielle (quand necessaire)
+
+```typescript
+// Utiliser quand l'ordre est important (FK, timestamps)
+async function migrateSequential(): Promise<MigrationResult> {
+  for await (const batch of extractUsers(1000)) {
+    // ⚠️ Sequential: chaque batch attend le precedent
+    await processBatch(batch);
   }
 }
 ```
