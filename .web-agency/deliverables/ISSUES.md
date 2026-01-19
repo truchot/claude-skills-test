@@ -119,7 +119,7 @@ Créer le template `content-brief` pour documenter les briefs de contenu (articl
 - Visual requirements
 - Deadline & workflow
 
-**Location**: `.web-agency/deliverables/by-category/marketing/content-brief.md`
+**Location**: `.web-agency/deliverables/by-category/content-marketing/content-brief.md`
 
 **Labels**: `enhancement`, `deliverable`, `P3`, `content`
 

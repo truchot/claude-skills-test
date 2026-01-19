@@ -14,7 +14,7 @@ consumes:
   - test-coverage-report
   - monitoring-setup
 produces_for:
-  - marketing/analytics/tracking-setup
+  - marketing-analytics/tracking-setup
   - support-client/resolution/technical-support
 tags: [launch, go-live, checklist, production, release]
 ---

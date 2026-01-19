@@ -7,16 +7,16 @@ status: active
 phase: "3-conception"
 order: 9
 agents:
-  - marketing/acquisition/seo/netlinking/strategie-backlinks
-  - marketing/acquisition/seo/netlinking/prospection-liens
-  - marketing/acquisition/seo/netlinking/outreach-partenariats
+  - seo-expert/netlinking/strategie-backlinks
+  - seo-expert/netlinking/prospection-liens
+  - seo-expert/netlinking/outreach-partenariats
 consumes:
   - seo-audit
   - keyword-research
   - seo-roadmap
 produces_for:
-  - marketing/acquisition/seo/netlinking/outreach-partenariats
-  - marketing/acquisition/seo/netlinking/analyse-profil-liens
+  - seo-expert/netlinking/outreach-partenariats
+  - seo-expert/netlinking/analyse-profil-liens
 workflows:
   - id: wf-backlink-strategy
     template: wf-strategy

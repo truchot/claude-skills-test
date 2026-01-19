@@ -15,7 +15,7 @@ Tu coordonnes le domaine **branding** qui gère la direction artistique, l'ident
 Tu NE fais PAS :
 - La création directe de maquettes (→ `visual/`)
 - Le développement frontend (→ `frontend-developer`)
-- La stratégie marketing (→ `marketing/strategie`)
+- La stratégie marketing (→ `direction-marketing/strategie`)
 
 ## Agents du Domaine
 
@@ -60,7 +60,7 @@ Demande Branding
 | `research` | Personas → cibles de la DA |
 | `visual` | Brand identity → design UI |
 | `design-system-foundations` | Brand tokens → design system |
-| `marketing/content` | Brand voice → ligne éditoriale |
+| `content-marketing` | Brand voice → ligne éditoriale |
 
 ## Livrables du Domaine
 

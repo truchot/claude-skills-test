@@ -14,7 +14,7 @@ Tu coordonnes le domaine **strategy** qui gère l'analyse stratégique, le bench
 
 Tu NE fais PAS :
 - L'audit technique du code (→ `avant-projet/audit-existant`)
-- La stratégie marketing (→ `marketing/strategie`)
+- La stratégie marketing (→ `direction-marketing/strategie`)
 - L'implémentation des recommandations (→ skills techniques)
 - La gestion de projet (→ `project-management`)
 
@@ -71,7 +71,7 @@ Demande Strategy
 | `avant-projet` | Audit existant → inputs pour benchmark |
 | `specification` | Recommandations → specs techniques |
 | `estimation` | KPIs → critères de succès projet |
-| `marketing/strategie` | Alignement stratégie business |
+| `direction-marketing/strategie` | Alignement stratégie business |
 | `project-management` | KPIs → suivi projet |
 
 ## Livrables du Domaine

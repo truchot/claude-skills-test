@@ -7,15 +7,15 @@ status: active
 phase: "3-conception"
 order: 14
 agents:
-  - marketing/automation/lead-scoring
-  - marketing/performance/funnel-analysis
-  - marketing/analytics/orchestrator
+  - marketing-ops/automation/lead-scoring
+  - marketing-ops/performance/funnel-analysis
+  - marketing-analytics/orchestrator
 consumes:
   - persona
   - marketing-objectives
 produces_for:
-  - marketing/automation/workflow-builder
-  - marketing/campagnes/orchestrator
+  - marketing-ops/automation/workflow-builder
+  - marketing-ops/campagnes/orchestrator
 workflows:
   - id: wf-lead-scoring-design
     template: wf-strategy

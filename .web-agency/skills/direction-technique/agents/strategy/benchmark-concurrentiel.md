@@ -17,8 +17,8 @@ Tu es spécialisé dans l'**analyse concurrentielle** : étude du marché, posit
 
 Tu NE fais PAS :
 - L'audit technique du site client (→ `avant-projet/audit-existant`)
-- La stratégie marketing (→ `marketing/strategie`)
-- L'analyse SEO des concurrents (→ `marketing/acquisition/seo`)
+- La stratégie marketing (→ `direction-marketing/strategie`)
+- L'analyse SEO des concurrents (→ `seo-expert`)
 - Les recommandations finales (→ `recommandations`)
 
 ## Inputs Requis

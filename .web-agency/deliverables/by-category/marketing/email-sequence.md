@@ -7,16 +7,16 @@ status: active
 phase: "4-realisation"
 order: 15
 agents:
-  - marketing/automation/multi-touch-sequences
-  - marketing/content/copywriting
-  - marketing/fidelisation/lifecycle/orchestrator
+  - marketing-ops/automation/multi-touch-sequences
+  - content-marketing/content/copywriting
+  - customer-success/lifecycle/orchestrator
 consumes:
   - persona
   - editorial-charter
   - automation-workflow
 produces_for:
-  - marketing/automation/workflow-builder
-  - marketing/fidelisation/lifecycle/onboarding
+  - marketing-ops/automation/workflow-builder
+  - customer-success/lifecycle/onboarding
 workflows:
   - id: wf-email-sequence-design
     template: wf-creation

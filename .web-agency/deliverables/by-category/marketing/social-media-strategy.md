@@ -7,17 +7,17 @@ status: active
 phase: "2-strategy"
 order: 20
 agents:
-  - marketing/social-strategy/platform-strategy
-  - marketing/social-strategy/engagement-strategy
-  - marketing/social-strategy/orchestrator
+  - content-marketing/social-strategy/platform-strategy
+  - content-marketing/social-strategy/engagement-strategy
+  - content-marketing/social-strategy/orchestrator
 consumes:
   - persona
   - brand-positioning
   - editorial-charter
   - marketing-objectives
 produces_for:
-  - marketing/content/social-media-content
-  - marketing/social-strategy/community-management
+  - content-marketing/content/social-media-content
+  - content-marketing/social-strategy/community-management
 workflows:
   - id: wf-social-strategy
     template: wf-strategy
