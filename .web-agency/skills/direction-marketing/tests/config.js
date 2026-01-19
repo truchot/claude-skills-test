@@ -19,15 +19,18 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   'strategie': [
     'orchestrator',
     'audit-marche',
+    'market-analysis',
     'competitor-analysis',
     'swot-marketing',
+    'objectifs-marketing',
     'roadmap-marketing',
     'budget-strategy'
   ],
   'positionnement': [
     'orchestrator',
-    'brand-positioning',
+    'discovery',
     'persona-builder',
+    'brand-positioning',
     'value-proposition',
     'differentiation'
   ],
@@ -53,7 +56,7 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   ]
 };
 
-const TOTAL_EXPECTED_AGENTS = 25;
+const TOTAL_EXPECTED_AGENTS = 28;
 
 const ROUTING_KEYWORDS = [
   'stratégie marketing',
@@ -66,10 +69,47 @@ const ROUTING_KEYWORDS = [
   'growth'
 ];
 
+// Triptyque validation configuration
+// Section headers must match actual deliverable templates exactly
+const TRIPTYQUE = {
+  files: {
+    problemDefinition: '.project/strategy/problem-definition.md',
+    offerDefinition: '.project/strategy/offer-definition.md',
+    persona: '.project/marketing/persona.md',
+  },
+  contentValidation: {
+    // Match actual templates in .web-agency/deliverables/by-category/
+    problemDefinition: [
+      '## 1. Le Problème en Une Phrase',
+      '## 2. Contexte du Problème',
+      '## 3. Manifestations du Problème',
+      '## 4. Quantification du Problème',
+    ],
+    offerDefinition: [
+      '## 1. Vue d\'Ensemble des Offres',
+      '## 2. Offre Principale',
+      '## 5. Proposition de Valeur',
+      '## 6. Preuves et Crédibilité',
+    ],
+    persona: [
+      '## Photo & Identité',
+      '## Objectifs & Motivations',
+      '## Comportement Digital',
+      '## Parcours d\'Achat',
+    ],
+  },
+  workflow: {
+    order: ['discovery', 'persona-builder', 'brand-positioning'],
+    maxIterations: 3,
+    escalationThresholdDays: 5,
+  },
+};
+
 module.exports = {
   SKILL_ROOT,
   DOMAINS,
   EXPECTED_AGENTS_PER_DOMAIN,
   TOTAL_EXPECTED_AGENTS,
-  ROUTING_KEYWORDS
+  ROUTING_KEYWORDS,
+  TRIPTYQUE
 };

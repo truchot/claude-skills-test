@@ -5,7 +5,7 @@ version: 1.0.0
 category: strategy
 status: active
 phase: "3-conception"
-order: 2
+order: 4
 agents:
   - direction-technique/architecture/adr
 consumes: []

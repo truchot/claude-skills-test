@@ -7,12 +7,14 @@ status: active
 phase: "1-intake"
 order: 1
 agents:
-  - direction-marketing/strategie/persona-definition
+  - direction-marketing/positionnement/persona-builder
   - content-marketing/content/orchestrator
   - marketing-ops/campagnes/orchestrator
 consumes:
   - client-request
   - project-brief
+  - problem-definition
+  - offer-definition
 produces_for:
   - content-marketing/content/ligne-editoriale
   - content-marketing/content/copywriting

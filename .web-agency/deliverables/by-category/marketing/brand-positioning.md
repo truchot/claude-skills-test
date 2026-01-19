@@ -7,7 +7,7 @@ status: active
 phase: "1-intake"
 order: 2
 agents:
-  - direction-marketing/strategie/brand-positioning
+  - direction-marketing/positionnement/brand-positioning
   - direction-marketing/strategie/market-analysis
   - content-marketing/content/ligne-editoriale
 consumes:
