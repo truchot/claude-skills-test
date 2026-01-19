@@ -209,53 +209,91 @@ Ce skill interagit avec :
 
 ## Gestion des Dépendances de Livrables
 
-> **RÈGLE CRITIQUE** : Avant de produire un livrable, tu DOIS vérifier que ses prérequis existent dans `.project/marketing/`.
+> **RÈGLE CRITIQUE** : Avant de produire un livrable, tu DOIS vérifier que ses prérequis existent. Le **triptyque fondamental** (Problème → Offres → Personas) est OBLIGATOIRE avant tout autre travail.
 
 ### Procédure de Vérification
 
 ```bash
-# Avant chaque tâche, vérifier l'existence des livrables prérequis
+# ÉTAPE 1 : Vérifier le triptyque fondamental (OBLIGATOIRE)
+ls .project/strategy/problem-definition.md   # Problème défini ?
+ls .project/strategy/offer-definition.md     # Offres définies ?
+ls .project/marketing/persona.md             # Personas définis ?
+
+# ÉTAPE 2 : Si triptyque OK, vérifier les prérequis du livrable demandé
 ls .project/marketing/<livrable-prerequis>.md
+```
+
+### Le Triptyque Fondamental
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              ⭐ TRIPTYQUE FONDAMENTAL ⭐                         │
+│              (Point de départ OBLIGATOIRE)                      │
+│                                                                 │
+│   ┌──────────────────┐                                          │
+│   │ 1. PROBLÈME      │  "Quel problème résolvons-nous ?"        │
+│   │                  │  → .project/strategy/problem-definition.md│
+│   │                  │  → Agent: strategie/discovery            │
+│   └────────┬─────────┘                                          │
+│            │                                                    │
+│            ▼                                                    │
+│   ┌──────────────────┐                                          │
+│   │ 2. OFFRES        │  "Quelles solutions proposons-nous ?"    │
+│   │                  │  → .project/strategy/offer-definition.md │
+│   │                  │  → Agent: strategie/discovery            │
+│   └────────┬─────────┘                                          │
+│            │                                                    │
+│            ▼                                                    │
+│   ┌──────────────────┐                                          │
+│   │ 3. PERSONAS      │  "À qui nous adressons-nous ?"           │
+│   │                  │  → .project/marketing/persona.md         │
+│   │                  │  → Agent: strategie/persona-definition   │
+│   └──────────────────┘                                          │
+│                                                                 │
+│  ⚠️ SANS CE TRIPTYQUE, AUCUN AUTRE LIVRABLE NE PEUT COMMENCER  │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ### Chaîne de Dépendances des Livrables
 
 ```
-NIVEAU 0 - FONDATIONS (aucun prérequis)
-├── persona.md                    → Agent: strategie/persona-builder
+NIVEAU -1 - TRIPTYQUE FONDAMENTAL (⭐ OBLIGATOIRE EN PREMIER)
+├── problem-definition.md         → Agent: strategie/discovery
+├── offer-definition.md           → Agent: strategie/discovery
+└── persona.md                    → Agent: strategie/persona-definition
 │
-NIVEAU 1 - STRATÉGIE DE BASE (requiert: persona)
+NIVEAU 0 - STRATÉGIE DE BASE (requiert: triptyque complet)
 ├── brand-positioning.md          → Agent: strategie/brand-positioning
 ├── marketing-objectives.md       → Agent: strategie/objectives-kpis
 │
-NIVEAU 2 - STRATÉGIE AVANCÉE (requiert: persona + brand-positioning)
+NIVEAU 1 - STRATÉGIE AVANCÉE (requiert: brand-positioning + marketing-objectives)
 ├── editorial-charter.md          → Agent: content/ligne-editoriale
 ├── social-media-strategy.md      → Agent: social-strategy/orchestrator
 │
-NIVEAU 3 - PLANIFICATION (requiert: editorial-charter + marketing-objectives)
+NIVEAU 2 - PLANIFICATION (requiert: editorial-charter + marketing-objectives)
 ├── content-calendar.md           → Agent: content/orchestrator
 ├── seo-audit.md                  → Agent: acquisition/seo/strategie/audit
 ├── campaign-planning.md          → Agent: campagnes/planning-campagne
 │
-NIVEAU 4 - EXÉCUTION SEO (requiert: seo-audit + persona)
+NIVEAU 3 - EXÉCUTION SEO (requiert: seo-audit + triptyque)
 ├── keyword-research.md           → Agent: acquisition/seo/contenu/recherche-mots-cles
 ├── backlink-strategy.md          → Agent: acquisition/seo/netlinking/orchestrator
 │
-NIVEAU 5 - EXÉCUTION AVANCÉE (requiert: keyword-research + marketing-objectives)
+NIVEAU 4 - EXÉCUTION AVANCÉE (requiert: keyword-research + marketing-objectives)
 ├── seo-roadmap.md                → Agent: acquisition/seo/strategie/roadmap-seo
 ├── landing-page-brief.md         → Agent: content/landing-pages
 ├── lead-scoring-model.md         → Agent: automation/lead-scoring
 │
-NIVEAU 6 - AUTOMATION (requiert: editorial-charter + lead-scoring-model)
+NIVEAU 5 - AUTOMATION (requiert: editorial-charter + lead-scoring-model)
 ├── automation-workflow.md        → Agent: automation/workflow-builder
 ├── email-sequence.md             → Agent: automation/multi-touch-sequences
 │
-NIVEAU 7 - ANALYTICS (requiert: automation-workflow + campaign-planning)
+NIVEAU 6 - ANALYTICS (requiert: automation-workflow + campaign-planning)
 ├── funnel-analysis.md            → Agent: performance/funnel-analysis
 ├── ab-test-report.md             → Agent: analytics/ab-testing
 ├── analytics-dashboard.md        → Agent: analytics/orchestrator
 │
-NIVEAU 8 - REPORTING (requiert: seo-roadmap + analytics-dashboard)
+NIVEAU 7 - REPORTING (requiert: seo-roadmap + analytics-dashboard)
 ├── seo-report.md                 → Agent: acquisition/seo/pilotage/reporting-seo
 └── campaign-report.md            → Agent: campagnes/suivi-performance
 ```
@@ -265,62 +303,79 @@ NIVEAU 8 - REPORTING (requiert: seo-roadmap + analytics-dashboard)
 ```
 Requête de livrable X
 │
-├─ Vérifier : `.project/marketing/X.md` existe ?
-│  ├─ OUI → Livrable déjà produit, proposer mise à jour ou passer au suivant
+├─ ÉTAPE 1 : Vérifier le triptyque fondamental
+│  ├─ problem-definition.md existe ?
+│  │  └─ NON → Déléguer à strategie/discovery (Phase Problème)
+│  ├─ offer-definition.md existe ?
+│  │  └─ NON → Déléguer à strategie/discovery (Phase Offres)
+│  ├─ persona.md existe ?
+│  │  └─ NON → Déléguer à strategie/persona-definition
+│  └─ Triptyque complet ✅ → Continuer
+│
+├─ ÉTAPE 2 : Vérifier le livrable demandé
+│  ├─ `.project/marketing/X.md` existe ?
+│  │  └─ OUI → Livrable déjà produit, proposer mise à jour
 │  └─ NON → Continuer
 │
-├─ Vérifier : Prérequis de X existent dans `.project/marketing/` ?
-│  ├─ OUI → ✅ Produire le livrable X avec l'agent approprié
-│  └─ NON → ⚠️ Identifier le prérequis manquant
-│           └─ Récursivement vérifier les prérequis du prérequis
-│              └─ Produire le premier livrable manquant de la chaîne
+├─ ÉTAPE 3 : Vérifier les prérequis de X
+│  ├─ Tous présents → ✅ Produire le livrable X
+│  └─ Manquants → ⚠️ Remonter la chaîne récursivement
 ```
 
 ### Matrice des Dépendances Rapide
 
 | Livrable | Prérequis obligatoires | Agent responsable |
 |----------|------------------------|-------------------|
-| `persona` | - | `strategie/persona-builder` |
-| `brand-positioning` | `persona` | `strategie/brand-positioning` |
-| `marketing-objectives` | `persona` | `strategie/objectives-kpis` |
-| `editorial-charter` | `persona`, `brand-positioning` | `content/ligne-editoriale` |
-| `content-calendar` | `persona`, `editorial-charter`, `marketing-objectives` | `content/orchestrator` |
-| `seo-audit` | - | `acquisition/seo/strategie/audit` |
-| `keyword-research` | `persona`, `brand-positioning`, `seo-audit` | `acquisition/seo/contenu/recherche-mots-cles` |
+| `problem-definition` | - | `strategie/discovery` |
+| `offer-definition` | `problem-definition` | `strategie/discovery` |
+| `persona` | `problem-definition`, `offer-definition` | `strategie/persona-definition` |
+| `brand-positioning` | **triptyque** | `strategie/brand-positioning` |
+| `marketing-objectives` | **triptyque** | `strategie/objectives-kpis` |
+| `editorial-charter` | **triptyque**, `brand-positioning` | `content/ligne-editoriale` |
+| `content-calendar` | **triptyque**, `editorial-charter`, `marketing-objectives` | `content/orchestrator` |
+| `seo-audit` | **triptyque** | `acquisition/seo/strategie/audit` |
+| `keyword-research` | **triptyque**, `seo-audit` | `acquisition/seo/contenu/recherche-mots-cles` |
 | `seo-roadmap` | `seo-audit`, `keyword-research`, `marketing-objectives` | `acquisition/seo/strategie/roadmap-seo` |
 | `backlink-strategy` | `seo-audit`, `keyword-research` | `acquisition/seo/netlinking/orchestrator` |
 | `seo-report` | `seo-roadmap`, `marketing-objectives`, `keyword-research` | `acquisition/seo/pilotage/reporting-seo` |
-| `campaign-planning` | `marketing-objectives`, `persona` | `campagnes/planning-campagne` |
+| `campaign-planning` | `marketing-objectives`, **triptyque** | `campagnes/planning-campagne` |
 | `campaign-report` | `campaign-planning` | `campagnes/suivi-performance` |
-| `automation-workflow` | `persona`, `editorial-charter` | `automation/workflow-builder` |
-| `lead-scoring-model` | `persona` | `automation/lead-scoring` |
-| `email-sequence` | `persona`, `editorial-charter`, `automation-workflow` | `automation/multi-touch-sequences` |
+| `automation-workflow` | **triptyque**, `editorial-charter` | `automation/workflow-builder` |
+| `lead-scoring-model` | **triptyque** | `automation/lead-scoring` |
+| `email-sequence` | **triptyque**, `editorial-charter`, `automation-workflow` | `automation/multi-touch-sequences` |
 | `funnel-analysis` | `marketing-objectives` | `performance/funnel-analysis` |
 | `ab-test-report` | `marketing-objectives` | `analytics/ab-testing` |
-| `landing-page-brief` | `persona`, `editorial-charter`, `marketing-objectives` | `content/landing-pages` |
+| `landing-page-brief` | **triptyque**, `editorial-charter`, `marketing-objectives` | `content/landing-pages` |
 | `analytics-dashboard` | `marketing-objectives` | `analytics/orchestrator` |
-| `social-media-strategy` | `persona`, `brand-positioning`, `editorial-charter`, `marketing-objectives` | `social-strategy/orchestrator` |
+| `social-media-strategy` | **triptyque**, `brand-positioning`, `editorial-charter`, `marketing-objectives` | `social-strategy/orchestrator` |
+
+**Légende** : **triptyque** = `problem-definition` + `offer-definition` + `persona`
 
 ### Exemple de Workflow
 
 ```
 Demande : "Créer la stratégie social media"
 
-1. Vérifier : `.project/marketing/social-media-strategy.md` existe ?
-   → NON, continuer
-
-2. Vérifier prérequis de social-media-strategy :
+1. Vérifier le triptyque fondamental :
+   - `.project/strategy/problem-definition.md` → ❌ MANQUANT
+   - `.project/strategy/offer-definition.md` → ❌ MANQUANT
    - `.project/marketing/persona.md` → ❌ MANQUANT
-   - `.project/marketing/brand-positioning.md` → ❌ MANQUANT
-   - `.project/marketing/editorial-charter.md` → ❌ MANQUANT
-   - `.project/marketing/marketing-objectives.md` → ❌ MANQUANT
 
-3. Identifier le premier prérequis manquant dans la chaîne :
-   → persona.md (niveau 0, aucun prérequis)
+2. Triptyque incomplet → Commencer par le début :
+   → Déléguer à strategie/discovery pour créer problem-definition.md
 
-4. Action : Déléguer à strategie/persona-builder pour créer persona.md
+3. Une fois problem-definition.md créé :
+   → Déléguer à strategie/discovery pour créer offer-definition.md
 
-5. Répéter jusqu'à ce que tous les prérequis soient satisfaits
+4. Une fois offer-definition.md créé :
+   → Déléguer à strategie/persona-definition pour créer persona.md
+
+5. Triptyque complet ✅ → Vérifier prérequis de social-media-strategy :
+   - brand-positioning.md → ❌ MANQUANT
+   - editorial-charter.md → ❌ MANQUANT
+   - marketing-objectives.md → ❌ MANQUANT
+
+6. Continuer la chaîne jusqu'à ce que tous les prérequis soient satisfaits
 ```
 
 ## Ressources
