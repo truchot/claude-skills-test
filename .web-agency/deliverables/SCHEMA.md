@@ -120,7 +120,7 @@ workflows:
     template: wf-creation    # Template de workflow
     phase: Conception        # Phase du workflow
     name: Création du X      # Nom lisible
-    duration: 2 jours        # Durée estimée
+    duration: 2 jours        # Durée estimée (voir note ci-dessous)
 ```
 
 **Templates disponibles** :
@@ -130,6 +130,59 @@ workflows:
 - `wf-report` : Workflow de reporting
 - `wf-planning` : Workflow de planification
 - `wf-strategy` : Workflow stratégique
+
+> **⚠️ Note sur `duration`** : Les durées sont des **estimations indicatives** à des fins de planification de capacité, pas des engagements contractuels. Elles peuvent varier selon la complexité du projet, les données disponibles, et l'expérience de l'équipe. Ne pas utiliser pour communiquer des délais aux clients.
+
+### Politique de Dépendances (`consumes`)
+
+Le champ `consumes` liste les livrables dont dépend le livrable actuel.
+
+#### Règle : Dépendances Directes Uniquement
+
+```yaml
+# ✅ CORRECT : Lister uniquement les dépendances directes
+consumes:
+  - problem-definition    # Dépendance directe
+  - offer-definition      # Dépendance directe
+
+# ❌ INCORRECT : Inclure les dépendances transitives
+consumes:
+  - client-request        # Transitif (via problem-definition)
+  - problem-definition
+  - offer-definition
+```
+
+#### Pourquoi Dépendances Directes ?
+
+| Approche | Avantages | Inconvénients |
+|----------|-----------|---------------|
+| **Directes uniquement** | Simple, maintenable, évite la redondance | Nécessite de comprendre la chaîne |
+| **Transitives incluses** | Explicite, tout visible | Verbeux, risque d'incohérence |
+
+**Notre choix** : Dépendances directes uniquement pour :
+- Réduire la duplication
+- Faciliter la maintenance
+- Éviter les incohérences lors des mises à jour
+
+#### Chaîne de Dépendances Implicite
+
+```
+client-request (NIVEAU 0)
+      ↓
+problem-definition (NIVEAU 1) - consumes: [client-request]
+      ↓
+offer-definition (NIVEAU 2) - consumes: [client-request, problem-definition]
+      ↓
+persona (NIVEAU 3) - consumes: [problem-definition, offer-definition]
+```
+
+> **Note** : Si un livrable consomme `persona`, il a implicitement accès à `problem-definition`, `offer-definition` et `client-request` via la chaîne.
+
+#### Exceptions
+
+Inclure une dépendance transitive si :
+1. Le livrable utilise **directement** le contenu du livrable transitif (pas juste indirectement)
+2. C'est nécessaire pour la **validation** (ex: vérifier cohérence avec la source)
 
 ## Exemple Complet
 

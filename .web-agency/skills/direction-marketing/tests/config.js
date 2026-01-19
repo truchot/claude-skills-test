@@ -19,15 +19,18 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   'strategie': [
     'orchestrator',
     'audit-marche',
+    'market-analysis',
     'competitor-analysis',
     'swot-marketing',
+    'objectifs-marketing',
     'roadmap-marketing',
     'budget-strategy'
   ],
   'positionnement': [
     'orchestrator',
-    'brand-positioning',
+    'discovery',
     'persona-builder',
+    'brand-positioning',
     'value-proposition',
     'differentiation'
   ],
@@ -53,7 +56,7 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   ]
 };
 
-const TOTAL_EXPECTED_AGENTS = 25;
+const TOTAL_EXPECTED_AGENTS = 28;
 
 const ROUTING_KEYWORDS = [
   'stratégie marketing',
@@ -66,10 +69,45 @@ const ROUTING_KEYWORDS = [
   'growth'
 ];
 
+// Triptyque validation configuration
+const TRIPTYQUE = {
+  files: {
+    problemDefinition: '.project/strategy/problem-definition.md',
+    offerDefinition: '.project/strategy/offer-definition.md',
+    persona: '.project/marketing/persona.md',
+  },
+  contentValidation: {
+    problemDefinition: [
+      '## Le Problème en Une Phrase',
+      '## Qui est Impacté',
+      '## Quantification',
+      '## Causes Racines',
+    ],
+    offerDefinition: [
+      '## Offre Principale',
+      '## Bénéfices Clés',
+      '## Pricing',
+      '## Différenciation',
+    ],
+    persona: [
+      '## Identité',
+      '## Profil Psychographique',
+      '## Comportement Digital',
+      '## Parcours d\'Achat',
+    ],
+  },
+  workflow: {
+    order: ['discovery', 'persona-builder', 'brand-positioning'],
+    maxIterations: 3,
+    escalationThresholdDays: 5,
+  },
+};
+
 module.exports = {
   SKILL_ROOT,
   DOMAINS,
   EXPECTED_AGENTS_PER_DOMAIN,
   TOTAL_EXPECTED_AGENTS,
-  ROUTING_KEYWORDS
+  ROUTING_KEYWORDS,
+  TRIPTYQUE
 };

@@ -156,13 +156,61 @@ Demande reçue
 │
 ├─ problem-definition.md existe ?
 │  ├─ NON → Lancer Phase 1 : Questionner sur le Problème
-│  └─ OUI → Continuer
+│  └─ OUI → Valider le contenu (voir ci-dessous)
 │
 ├─ offer-definition.md existe ?
 │  ├─ NON → Lancer Phase 2 : Questionner sur les Offres
-│  └─ OUI → Continuer
+│  └─ OUI → Valider le contenu (voir ci-dessous)
 │
-└─ Les deux existent ✅ → Transmettre brief à persona-builder
+└─ Les deux existent ET sont complets ✅ → Transmettre brief à persona-builder
+```
+
+### Validation du Contenu (Au-delà de l'Existence)
+
+> **IMPORTANT** : Un fichier qui existe mais est incomplet = fichier manquant
+
+#### Critères pour `problem-definition.md`
+
+| Section | Critère de Complétude |
+|---------|----------------------|
+| Le Problème en Une Phrase | Non vide, < 50 mots |
+| Qui est impacté | Au moins 1 segment identifié |
+| Quantification | Au moins 1 métrique (coût, temps, fréquence) |
+| Causes racines | Au moins 2 causes identifiées |
+
+```bash
+# Validation simplifiée
+grep -q "## Le Problème en Une Phrase" .project/strategy/problem-definition.md && \
+grep -q "## Quantification" .project/strategy/problem-definition.md && \
+echo "✅ Contenu valide" || echo "❌ Contenu incomplet"
+```
+
+#### Critères pour `offer-definition.md`
+
+| Section | Critère de Complétude |
+|---------|----------------------|
+| Offre Principale | Nom et description définis |
+| Bénéfices Clés | Au moins 3 bénéfices listés |
+| Pricing | Modèle de prix documenté |
+| Différenciation | Au moins 1 élément vs concurrence |
+
+```bash
+# Validation simplifiée
+grep -q "## Offre Principale" .project/strategy/offer-definition.md && \
+grep -q "## Pricing" .project/strategy/offer-definition.md && \
+echo "✅ Contenu valide" || echo "❌ Contenu incomplet"
+```
+
+#### Si Contenu Incomplet
+
+```markdown
+## ⚠️ Fichier Incomplet Détecté
+
+**Fichier** : [nom]
+**Sections manquantes** : [liste]
+
+Je vais compléter ces sections avec des questions ciblées.
+[Lancer les questions pour les sections manquantes uniquement]
 ```
 
 ## Format de Questionnaire
