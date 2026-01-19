@@ -253,16 +253,18 @@ marketing (EXÉCUTION) ← CE SKILL
 
 | Livrable | Prérequis | Ce skill produit |
 |----------|-----------|------------------|
+| `seo-audit` | project-brief, technical-audit | ✅ (NIVEAU 0 - pas de prérequis marketing) |
 | `editorial-charter` | triptyque, brand-positioning | ✅ |
 | `content-calendar` | editorial-charter, marketing-objectives | ✅ |
-| `seo-audit` | triptyque | ✅ |
-| `keyword-research` | seo-audit | ✅ |
+| `keyword-research` | persona, brand-positioning, seo-audit | ✅ |
 | `seo-roadmap` | seo-audit, keyword-research | ✅ |
 | `campaign-planning` | marketing-objectives | ✅ |
 | `automation-workflow` | editorial-charter | ✅ |
 | `landing-page-brief` | editorial-charter, marketing-objectives | ✅ |
 | `analytics-dashboard` | marketing-objectives | ✅ |
 | `social-media-strategy` | brand-positioning, editorial-charter | ✅ |
+
+> **Note** : `seo-audit` est le seul livrable marketing sans prérequis marketing (seulement project-level). Il peut être lancé en parallèle de la construction du triptyque.
 
 ## Ressources
 
