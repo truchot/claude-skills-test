@@ -13,42 +13,49 @@ WORKFLOW_SCHEMA=1.0.0
 MIN_CLAUDE_CODE_VERSION=1.0.0
 
 ## Statistics
-TOTAL_SKILLS=24
-TOTAL_AGENTS=757
+TOTAL_SKILLS=30
+TOTAL_AGENTS=871
 TOTAL_WORKFLOWS=9
 
 ## Skills Breakdown
 # Niveau 0: Entrée
-client-intake=23
-
-# Niveau 1: Orchestration
-task-orchestrator=16
+client-intake=28
 
 # Niveau 2: Stratégie
-direction-technique=52
-direction-marketing=25
+direction-technique=59
+direction-marketing=28
 direction-artistique=25
+direction-commerciale=27
+direction-operations=27
 
 # Niveau 3: Opérations
-project-management=24
+project-management=29
 lead-dev=27
-web-dev-process=61
+web-dev-process=64
 testing-process=25
 
 # Niveau 4: Implémentation
 frontend-developer=33
-backend-developer=32
+backend-developer=38
 devops=30
-wordpress-gutenberg-expert=41
+wordpress-gutenberg-expert=42
 react-expert=28
 nextjs-expert=35
 design-system-foundations=21
-marketing=115
 content-management=17
+ddd=34
+
+# Niveau 4: Marketing (Éclaté)
+content-marketing=12
+customer-success=26
+marketing-analytics=31
+marketing-ops=18
+paid-media=24
+seo-expert=49
 
 # Niveau 4: Fonctions Support
-ux-ui-design=22
+ux-ui-design=27
 legal-compliance=16
 support-client=16
-commercial-crm=17
+commercial-crm=18
 finance-analytics=17
