@@ -72,12 +72,16 @@ flowchart TB
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
 | [frontend-developer](.web-agency/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
-| [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture | 32 | 🟢 Actif |
+| [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture | 38 | 🟢 Actif |
 | [devops](.web-agency/skills/devops/) | CI/CD, containers, infrastructure | 30 | 🟢 Actif |
-| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | WordPress & Gutenberg | 41 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | WordPress & Gutenberg | 42 | 🟢 Actif |
 | [react-expert](.web-agency/skills/react-expert/) | Expert React | 28 | 🟢 Actif |
 | [nextjs-expert](.web-agency/skills/nextjs-expert/) | Expert Next.js | 35 | 🟢 Actif |
 | [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design | 21 | 🟢 Actif |
+| [ddd](.web-agency/skills/ddd/) | Domain-Driven Design | 34 | 🟢 Actif |
+| [security-expert](.web-agency/skills/security-expert/) | Sécurité applicative - OWASP, AppSec | 24 | 🟢 Actif |
+| [ai-integration](.web-agency/skills/ai-integration/) | Intégration IA/ML - LLMs, RAG, vectors | 40 | 🟢 Actif |
+| [legacy-modernization](.web-agency/skills/legacy-modernization/) | Modernisation legacy - Strangler Fig | 30 | 🟢 Actif |
 | [marketing](.web-agency/skills/marketing/) | Marketing digital complet | 115 | 🟢 Actif |
 | [content-management](.web-agency/skills/content-management/) | Gestion de contenu éditorial | 17 | 🟢 Actif |
 
@@ -91,7 +95,7 @@ flowchart TB
 | [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
 | [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
 
-**Total : 23 skills métier (741 agents) + orchestration-framework (16 agents task-orchestrator)**
+**Total : 26 skills métier (~965 agents) + orchestration-framework (16 agents task-orchestrator)**
 
 ## Architecture
 
@@ -100,7 +104,7 @@ flowchart TB
 ├── .web-agency/                   # Framework agnostique (instructions métier)
 │   ├── orchestration-framework/   # Règles de routage et workflows
 │   │   └── task-orchestrator/     # Niveau 1: Orchestration (16 agents)
-│   ├── skills/                    # 23 skills métier, 741 agents
+│   ├── skills/                    # 26 skills métier, ~965 agents
 │   │   ├── client-intake/         # Niveau 0: Entrée
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
 │   │   ├── direction-marketing/   # Niveau 2: Stratégie
@@ -116,6 +120,10 @@ flowchart TB
 │   │   ├── react-expert/
 │   │   ├── nextjs-expert/
 │   │   ├── design-system-foundations/
+│   │   ├── ddd/
+│   │   ├── security-expert/
+│   │   ├── ai-integration/
+│   │   ├── legacy-modernization/
 │   │   ├── marketing/
 │   │   ├── content-management/
 │   │   ├── ux-ui-design/          # Niveau 4: Support
@@ -152,12 +160,16 @@ NIVEAU 3: OPÉRATIONS (QUOI)
 
 NIVEAU 4: IMPLÉMENTATION (COMMENT)
 ├── frontend-developer (33)
-├── backend-developer (32)
+├── backend-developer (38)
 ├── devops (30)
-├── wordpress-gutenberg-expert (41)
+├── wordpress-gutenberg-expert (42)
 ├── react-expert (28)
 ├── nextjs-expert (35)
 ├── design-system-foundations (21)
+├── ddd (34)
+├── security-expert (24)
+├── ai-integration (40)
+├── legacy-modernization (30)
 ├── marketing (115)
 └── content-management (17)
 
@@ -245,7 +257,7 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.2.0** - 23 skills métier + orchestration-framework (757 agents total)
+**v4.3.0** - 26 skills métier + orchestration-framework (~965 agents total)
 
 Voir [CHANGELOG](.web-agency/orchestration-framework/CHANGELOG.md) pour l'historique complet.
 
