@@ -364,3 +364,52 @@ Différences clés :
 
 Persona prioritaire : [Nom] (score X/15)
 ```
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Création complète** :
+> "Je lance une app de méditation pour les cadres stressés. J'ai déjà défini le problème (stress au travail, manque de temps) et les offres (app mobile avec séances courtes). Crée-moi 3 personas détaillés."
+
+**Prompt 2 - À partir de données** :
+> "Voici l'export de notre CRM avec les 500 derniers clients. Analyse ces données et crée les personas correspondants."
+
+**Prompt 3 - Persona B2B** :
+> "On vend du SaaS RH aux PME de 50-200 employés. Qui sont les décideurs ? Crée les personas du comité d'achat (DRH, DAF, CEO)."
+
+---
+
+### Template de Livrable
+
+> **→ Utiliser le template complet** : `deliverables/by-category/marketing/persona.md`
+
+Ce template contient :
+- Structure complète avec identité, psychographie, comportement digital
+- Parcours d'achat détaillé (awareness → consideration → decision)
+- Jobs-to-be-done (JTBD)
+- Mapping émotionnel
+- Scénarios d'usage
+- Exemples B2B et B2C
+- Critères d'acceptation et anti-patterns
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Comment utiliser cet agent |
+|-----------|---------------------------|
+| **Lancement produit** | Créer 3-5 personas avant de définir le positionnement |
+| **Refonte stratégie** | Actualiser les personas existants avec données récentes |
+| **Nouveau marché** | Créer des personas pour le segment cible |
+| **Optimisation acquisition** | Affiner les personas pour améliorer le ciblage pub |
+| **Content strategy** | Définir les personas pour orienter la ligne éditoriale |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`

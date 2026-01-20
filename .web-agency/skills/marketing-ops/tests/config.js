@@ -31,7 +31,7 @@ const EXPECTED_AGENTS_PER_DOMAIN = {
   ],
   'performance': [
     'orchestrator',
-    'funnel-analysis',
+    'funnel-optimization',
     'conversion-optimization',
     'experimentation',
     'personalization'

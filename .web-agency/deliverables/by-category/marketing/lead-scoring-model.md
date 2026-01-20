@@ -8,7 +8,7 @@ phase: "3-conception"
 order: 14
 agents:
   - marketing-ops/automation/lead-scoring
-  - marketing-ops/performance/funnel-analysis
+  - marketing-ops/performance/funnel-optimization
   - marketing-analytics/orchestrator
 consumes:
   - persona

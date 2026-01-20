@@ -260,3 +260,56 @@ Tu NE fais PAS :
 | Meta données | Title, description, URL |
 | Checklist SEO | Optimisations vérifiées |
 | Suggestions maillage | Liens internes proposés |
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Article SEO classique** :
+> "Écris un article de blog sur 'comment choisir un CRM pour PME'. Mot-clé principal : 'CRM PME'. Cible : dirigeants de PME. Longueur : 2000 mots. Ton : expert mais accessible."
+
+**Prompt 2 - Listicle** :
+> "Crée un article '10 erreurs à éviter en email marketing' pour notre blog. Notre persona est un responsable marketing de startup. Format listicle, 1500 mots."
+
+**Prompt 3 - Guide complet** :
+> "J'ai besoin d'une pillar page sur le 'marketing automation'. C'est notre thématique principale. 3000+ mots, très complet, avec sous-sections pour chaque aspect."
+
+---
+
+### Templates de Livrables
+
+> **→ Calendrier éditorial** : `deliverables/by-category/marketing/content-calendar.md`
+> **→ Charte éditoriale** : `deliverables/by-category/marketing/editorial-charter.md`
+
+Ces templates contiennent :
+- Structure complète de planning par semaine/mois
+- Piliers de contenu et répartition
+- Workflow de production (brief → draft → review → publish)
+- Exemples Startup SaaS et E-commerce
+- Critères d'acceptation et anti-patterns
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Type d'article | Longueur | Objectif |
+|-----------|----------------|----------|----------|
+| **Lancer un blog** | Pillar pages sur thématiques clés | 3000+ mots | SEO foundation |
+| **Générer des leads** | Guides pratiques avec CTA | 2000 mots | Conversion |
+| **Actualité secteur** | Articles news rapides | 500-800 mots | Fraîcheur |
+| **Comparatif concurrence** | Articles "X vs Y" | 1500-2500 mots | Considération |
+| **Nurturing** | Études de cas clients | 1000-1500 mots | Preuve sociale |
+| **Thought leadership** | Articles opinion/tendances | 1500-2000 mots | Autorité |
+
+---
+
+### Checklist Avant Publication
+
+| Catégorie | Vérifications |
+|-----------|---------------|
+| **Contenu** | Intention de recherche, valeur réelle, exemples concrets, sources citées |
+| **SEO** | Mot-clé dans H1/intro/H2, meta description 155 car., URL optimisée, alt text images |
+| **Structure** | Hook intro, hiérarchie H1>H2>H3, paragraphes courts, listes à puces, CTA conclusion |
+| **Maillage** | 3-5 liens internes, 2-3 liens externes fiables, ancres naturelles |

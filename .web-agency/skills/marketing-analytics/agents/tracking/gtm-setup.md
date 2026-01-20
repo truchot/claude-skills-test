@@ -179,3 +179,58 @@ Variable - DLV - Transaction ID
 - [ ] Variables nommées clairement
 - [ ] Preview mode testé
 - [ ] Container versionné et publié
+
+---
+
+## Exemples Concrets
+
+### Exemple de Prompt Utilisateur
+
+**Prompt 1 - Setup initial** :
+> "Configure GTM pour mon site e-commerce. J'ai besoin de tracker : pages vues GA4, achats, ajouts panier, et le pixel Meta. Le site est sur Shopify."
+
+**Prompt 2 - Tracking événement spécifique** :
+> "Comment tracker les clics sur mes boutons CTA 'Demander une démo' avec GTM ? Je veux voir ça dans GA4 comme événement personnalisé."
+
+**Prompt 3 - Debug** :
+> "Mon tag GA4 ne se déclenche pas sur les pages produit. Comment diagnostiquer le problème ?"
+
+---
+
+### Template de Livrable
+
+> **→ Configuration Analytics complète** : `deliverables/by-category/code/analytics-setup.md`
+
+Ce template contient :
+- Plan de taggage complet (événements standard et custom)
+- Configuration GA4 et GTM détaillée
+- Implémentation code (Next.js, hooks React)
+- Consent Mode RGPD
+- Conversions & Goals GA4
+- Validation & Debug checklist
+- Dashboards et reporting
+
+---
+
+### Cas d'Usage Type
+
+| Situation | Configuration GTM | Tags Principaux |
+|-----------|-------------------|-----------------|
+| **Site vitrine** | GA4 + Meta Pixel + Contact Form | Page View, Lead, Form Submit |
+| **E-commerce** | GA4 E-commerce + Meta CAPI + Google Ads | Purchase, Add to Cart, View Item |
+| **SaaS** | GA4 + LinkedIn + Custom Events | Sign Up, Trial Start, Upgrade |
+| **Lead Gen B2B** | GA4 + LinkedIn + Google Ads | Form Submit, Download, Demo Request |
+| **Média/Blog** | GA4 + Scroll Tracking + Engagement | Scroll Depth, Time on Page, Article Read |
+
+---
+
+### Debug Checklist Rapide
+
+| Étape | Vérifications |
+|-------|---------------|
+| **Préliminaire** | Container installé, Preview mode activé, page rechargée |
+| **Tag ne fire pas** | Trigger existe, conditions remplies, Data Layer pushé, Consent Mode OK |
+| **Variable undefined** | Push avant trigger, nom exact (case sensitive), structure objet correcte |
+| **Données incorrectes** | Valeurs en Preview, format string/number, encodage caractères |
+
+**Outils** : GTM Preview, GA4 DebugView, Meta Pixel Helper, Console (`dataLayer`)

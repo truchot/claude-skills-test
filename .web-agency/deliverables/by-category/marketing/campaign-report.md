@@ -9,7 +9,7 @@ order: 12
 agents:
   - marketing-ops/campagnes/suivi-performance
   - marketing-analytics/orchestrator
-  - marketing-ops/performance/funnel-analysis
+  - marketing-ops/performance/funnel-optimization
 consumes:
   - campaign-planning
   - marketing-objectives

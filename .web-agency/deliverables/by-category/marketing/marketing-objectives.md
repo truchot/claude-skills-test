@@ -18,7 +18,7 @@ produces_for:
   - marketing-ops/campagnes/planning-campagne
   - marketing-ops/campagnes/budget-allocation
   - marketing-analytics/reporting
-  - marketing-ops/performance/funnel-analysis
+  - marketing-ops/performance/funnel-optimization
 workflows:
   - id: wf-marketing-objectives
     template: wf-strategy
