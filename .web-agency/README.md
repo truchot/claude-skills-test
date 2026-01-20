@@ -1,109 +1,123 @@
-# Web Agency Framework
-
-Framework agnostique de gestion d'une agence web automatisée.
-
-## Architecture
-
-Ce dossier contient toutes les instructions, skills et workflows indépendants de tout système d'IA spécifique.
-
-```
-.web-agency/
-├── skills/          # 31 skills métier, ~900 agents
-│   │
-│   │  NIVEAU 1 : POURQUOI (5 directions stratégiques)
-│   ├── direction-technique/     # Tech & Architecture
-│   ├── direction-operations/    # Projet & Équipes
-│   ├── direction-commerciale/   # Finance & Sales
-│   ├── direction-marketing/     # Acquisition & Growth
-│   ├── direction-artistique/    # Créatif & Brand
-│   │
-│   │  NIVEAU 2 : QUOI (7 skills de processus)
-│   ├── web-agency/              # Routage des demandes
-│   ├── project-management/      # Planning, coordination
-│   ├── lead-dev/                # Coordination équipe dev
-│   ├── web-dev-process/         # Méthodologie développement
-│   ├── testing-process/         # Stratégie tests
-│   ├── client-intake/           # Qualification besoins
-│   ├── task-orchestrator/       # Priorisation et distribution
-│   │
-│   │  NIVEAU 3 : COMMENT (19 skills d'implémentation)
-│   ├── frontend-developer/      # Code frontend
-│   ├── backend-developer/       # Code backend
-│   ├── devops/                  # CI/CD, infrastructure
-│   ├── react-expert/            # Code React
-│   ├── nextjs-expert/           # Code Next.js
-│   ├── wordpress-gutenberg-expert/ # Code WordPress
-│   ├── design-system-foundations/  # Design tokens
-│   ├── ux-ui-design/            # Maquettes, prototypes
-│   ├── seo-expert/              # SEO et référencement
-│   ├── paid-media/              # Publicité payante (SEA, Social Ads)
-│   ├── marketing-analytics/     # Data et attribution marketing
-│   ├── customer-success/        # Fidélisation, rétention
-│   ├── content-marketing/       # Contenu et social media
-│   ├── marketing-ops/           # Campagnes, automation
-│   ├── legal-compliance/        # RGPD, conformité
-│   ├── support-client/          # Tickets, FAQ
-│   ├── commercial-crm/          # Pipeline, CRM
-│   ├── finance-analytics/       # Facturation, KPIs
-│   ├── content-management/      # Contenu éditorial
-│   └── ddd/                     # Domain-Driven Design
-│
-├── learnings/       # Système de learning loop
-│   ├── patterns/             # Solutions réutilisables
-│   ├── anti-patterns/        # Erreurs à éviter
-│   ├── decisions/            # Décisions archétypales
-│   └── metrics/              # Critères de succès
-└── README.md        # Ce fichier
-```
+# Web Agency IA v2 - Architecture Orchestrée
 
 ## Philosophie
 
-### Séparation des responsabilités (ADR-006)
+**Même richesse, meilleure orchestration.**
+
+La v2 conserve tous les agents spécialisés de la v1 mais ajoute :
+1. Un **orchestrateur intelligent** comme point d'entrée unique
+2. Des **workflows métier** qui enchaînent les agents automatiquement
+3. Un **système d'état** qui maintient le contexte
+
+## Structure
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (5 directions stratégiques)                        │
-│                                                                         │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐       │
-│  │ direction-  │ │ direction-  │ │ direction-  │ │ direction-  │       │
-│  │ technique   │ │ operations  │ │ commerciale │ │ marketing   │       │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘       │
-│                        ┌─────────────┐                                  │
-│                        │ direction-  │                                  │
-│                        │ artistique  │                                  │
-│                        └─────────────┘                                  │
-│  → Décisions stratégiques, pas de code                                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (7 skills de processus)                                │
-│                                                                         │
-│  web-agency, project-management, lead-dev, web-dev-process,             │
-│  testing-process, client-intake, task-orchestrator                      │
-│                                                                         │
-│  → Processus et coordination, pas de code                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (19 skills d'implémentation)                        │
-│                                                                         │
-│  frontend-developer, backend-developer, devops, react-expert,           │
-│  nextjs-expert, wordpress-gutenberg-expert, design-system-foundations,  │
-│  ux-ui-design, seo-expert, paid-media, marketing-analytics,             │
-│  customer-success, content-marketing, marketing-ops, legal-compliance,  │
-│  support-client, commercial-crm, finance-analytics, content-management, │
-│  ddd                                                                    │
-│                                                                         │
-│  → Code réel et livrables concrets                                      │
-└─────────────────────────────────────────────────────────────────────────┘
+.web-agency/
+├── ORCHESTRATOR.md              # Point d'entrée unique - Chef d'orchestre
+│
+├── workflows/                   # Chaînes de production complètes
+│   ├── new-project.md           # Nouveau projet client
+│   ├── feature.md               # Développement feature
+│   ├── bugfix.md                # Correction de bug
+│   ├── code-review.md           # Revue de code
+│   ├── deployment.md            # Mise en production
+│   ├── audit.md                 # Audit technique/sécurité
+│   └── maintenance.md           # Maintenance et support
+│
+├── skills/                      # Agents spécialisés (granulaires)
+│   ├── intake/                  # Réception et qualification
+│   ├── strategy/                # Direction et décisions
+│   ├── project/                 # Gestion de projet
+│   ├── development/             # Développement
+│   ├── quality/                 # Qualité et tests
+│   ├── operations/              # DevOps et déploiement
+│   └── support/                 # Marketing et support
+│
+├── contexts/                    # Connaissances techniques
+│   ├── frontend.md
+│   ├── backend.md
+│   ├── devops.md
+│   ├── wordpress.md
+│   └── security.md
+│
+├── state/                       # État du projet (généré)
+│   └── current.json
+│
+└── config/                      # Configuration agence
+    └── settings.yaml
 ```
 
-## Intégration avec des systèmes d'IA
+## Comment ça fonctionne
 
-Ce framework est conçu pour être agnostique. Pour l'intégrer avec un système d'IA spécifique :
+### 1. L'utilisateur invoque une commande
+```
+/tech "J'ai besoin d'ajouter un système de paiement Stripe"
+```
 
-### Claude (Anthropic)
-Les skills sont automatiquement chargés par Claude Code.
+### 2. L'Orchestrateur analyse et route
+```
+→ Détecte : nouvelle feature technique
+→ Sélectionne workflow : feature.md
+→ Identifie étapes : spécification → architecture → dev → test → review → deploy
+```
 
-### Autres systèmes
-Les fichiers Markdown avec frontmatter YAML sont lisibles par tout système capable de parser ce format.
+### 3. Les agents s'exécutent en séquence
+```
+skills/strategy/specification.md      → Clarifie les besoins
+skills/strategy/architecture.md       → Conçoit la solution
+skills/development/backend.md         → Implémente l'API Stripe
+skills/development/frontend.md        → Implémente le checkout UI
+skills/quality/testing.md             → Tests automatisés
+skills/quality/code-review.md         → Review du code
+skills/operations/deployment.md       → Déploiement staging puis prod
+```
 
-## Version
+### 4. L'état est maintenu
+```json
+{
+  "current_task": "Intégration Stripe",
+  "workflow": "feature",
+  "step": 4,
+  "completed": ["spec", "archi", "backend"],
+  "in_progress": "frontend",
+  "pending": ["testing", "review", "deploy"]
+}
+```
 
-Voir `skills/VERSION` pour la version actuelle du framework.
+## Différences avec v1
+
+| Aspect | v1 | v2 |
+|--------|----|----|
+| Point d'entrée | 4 commandes manuelles | 1 orchestrateur intelligent |
+| Navigation | Manuelle (SKILL.md → agent) | Automatique (workflow) |
+| Enchaînement | L'utilisateur doit savoir | Le workflow gère |
+| État | Déconnecté | Intégré et persistant |
+| Agents | Identiques | Identiques (conservés) |
+
+## Commandes
+
+| Commande | Description |
+|----------|-------------|
+| `/tech` | Toute tâche technique (route automatiquement) |
+| `/design` | Tâches design/UX |
+| `/project` | Gestion de projet |
+| `/marketing` | Marketing/SEO/Contenu |
+
+L'orchestrateur détecte automatiquement le workflow approprié.
+
+## Workflows disponibles
+
+| Workflow | Déclencheur | Étapes clés |
+|----------|-------------|-------------|
+| `new-project` | Nouveau client/projet | Intake → Qualification → Estimation → Planning → Dev → Livraison |
+| `feature` | Nouvelle fonctionnalité | Spec → Archi → Dev → Test → Review → Deploy |
+| `bugfix` | Bug à corriger | Diagnostic → Fix → Test → Review → Deploy |
+| `code-review` | PR à reviewer | Analyse → Feedback → Corrections → Validation |
+| `deployment` | Mise en prod | Checklist → Build → Deploy → Smoke test → Monitoring |
+| `audit` | Audit demandé | Analyse → Rapport → Recommandations → Plan action |
+| `maintenance` | Support/évolution | Triage → Priorisation → Exécution → Communication |
+
+## Ancienne v1
+
+L'architecture détaillée de la v1 est conservée dans `.web-agency-v1/` pour référence.
+Les agents de la v1 sont **migrés et réorganisés** dans `skills/` avec une structure plus claire.

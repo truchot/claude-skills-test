@@ -1,91 +1,117 @@
-# /tech - Commande Technique Intelligente
+# /tech - Commande Technique
 
 ## Rôle
-Point d'entrée technique unifié qui route vers le bon agent en fonction du contexte.
+
+Point d'entrée pour toutes les tâches techniques. L'orchestrateur analyse ta demande et déclenche automatiquement le workflow approprié.
+
+## Architecture v2
+
+```
+/tech [demande]
+     │
+     ▼
+┌─────────────────────────────────────────┐
+│           ORCHESTRATOR                   │
+│  .web-agency/ORCHESTRATOR.md            │
+│                                          │
+│  1. Analyse la demande                   │
+│  2. Sélectionne le workflow              │
+│  3. Enchaîne les agents                  │
+│  4. Maintient l'état                     │
+└─────────────────────────────────────────┘
+     │
+     ▼
+┌─────────────────────────────────────────┐
+│           WORKFLOWS                      │
+│  .web-agency/workflows/                  │
+│                                          │
+│  • feature.md    → Nouvelle feature      │
+│  • bugfix.md     → Correction bug        │
+│  • deployment.md → Mise en prod          │
+│  • code-review.md→ Revue de code         │
+│  • audit.md      → Audit tech            │
+└─────────────────────────────────────────┘
+     │
+     ▼
+┌─────────────────────────────────────────┐
+│           AGENTS                         │
+│  .web-agency/skills/                     │
+│                                          │
+│  • strategy/     → Spec, Architecture    │
+│  • development/  → Frontend, Backend     │
+│  • quality/      → Tests, Code Review    │
+│  • operations/   → CI/CD, Deployment     │
+└─────────────────────────────────────────┘
+```
 
 ## Comportement
-1. **Analyse le contexte** de la demande utilisateur
-2. **Identifie le niveau** approprié (stratégie → opérations → implémentation)
-3. **Descend les niveaux** si des informations manquent
-4. **Route vers l'agent** le plus pertinent
 
-## Hiérarchie Technique
+1. **Charge l'orchestrateur** : `.web-agency/ORCHESTRATOR.md`
+2. **Analyse ta demande** et identifie :
+   - Le type : feature, bugfix, question, deployment...
+   - Le domaine : frontend, backend, devops, fullstack...
+   - L'urgence : P1-P4
+3. **Sélectionne le workflow** approprié
+4. **Exécute les agents** dans l'ordre défini
+5. **Maintient l'état** dans `.web-agency/state/`
 
-### Niveau 2 - Stratégie (POURQUOI)
-Référence: `.web-agency/skills/direction-technique/`
-- Architecture globale, décisions structurantes
-- Vision technique long terme
-- Standards et gouvernance
+## Détection automatique
 
-### Niveau 3 - Opérations (QUOI)
-Références:
-- `.web-agency/skills/lead-dev/` - Coordination développement
-- `.web-agency/skills/devops/` - Infrastructure et déploiement
-- `.web-agency/skills/testing-process/` - Stratégie de tests
+| Tu demandes... | Workflow déclenché | Agents impliqués |
+|----------------|-------------------|------------------|
+| Nouvelle feature | `feature.md` | specification → architecture → development → testing → review |
+| Corriger un bug | `bugfix.md` | diagnostic → fix → test → deploy |
+| Déployer | `deployment.md` | pre-deploy → build → staging → production |
+| Review une PR | `code-review.md` | analysis → security → feedback |
+| Créer un composant | `feature.md` (simplifié) | development/frontend.md |
+| Optimiser perf | `audit.md` | quality/performance.md |
 
-### Niveau 4 - Implémentation (COMMENT)
-Références:
-- `.web-agency/skills/frontend-developer/` - UI/composants
-- `.web-agency/skills/backend-developer/` - API/services
-- `.web-agency/skills/react-expert/` - React spécifique
-- `.web-agency/skills/nextjs-expert/` - Next.js spécifique
-- `.web-agency/skills/wordpress-gutenberg-expert/` - WordPress/Gutenberg
+## Contextes chargés à la demande
 
-## Algorithme de Routage
-
-### 1. Analyse des mots-clés
-
-| Mots-clés | Destination |
-|-----------|-------------|
-| architecture, vision, standards, gouvernance, stratégie tech | direction-technique |
-| planning, sprint, review, coordination, équipe | lead-dev |
-| CI/CD, deploy, docker, kubernetes, infra, monitoring | devops |
-| test, qualité, coverage, e2e, unit test | testing-process |
-| composant, UI, CSS, responsive, animation | frontend-developer |
-| API, database, auth, backend, serveur | backend-developer |
-| React, hooks, Redux, state | react-expert |
-| Next.js, SSR, ISR, App Router | nextjs-expert |
-| WordPress, Gutenberg, WP, plugin, theme | wordpress-gutenberg-expert |
-
-### 2. Analyse du contexte
-
-- **Fichiers mentionnés**: `.tsx` → React, `docker-compose.yml` → DevOps
-- **Stack du projet**: Détecté via `package.json`, config files
-- **Historique conversation**: Continuité avec requêtes précédentes
-
-### 3. Résolution d'ambiguïté
-
-```
-SI plusieurs skills possibles:
-  → Privilégier le niveau le plus haut (stratégie > opérations > implémentation)
-  → Demander clarification si vraiment ambigu
-
-SI aucun mot-clé clair:
-  → Analyser l'intention (nouveau projet? bug? optimisation?)
-  → Poser 1-2 questions ciblées maximum
-
-SI demande transverse (ex: "optimiser performances"):
-  → Identifier le goulet d'étranglement probable
-  → Router vers le domaine le plus impacté
-```
-
-### 4. Fallback
-
-Si indétermination après analyse:
-1. Proposer les 2-3 options les plus probables
-2. Laisser l'utilisateur choisir
-3. Ne jamais bloquer - toujours avancer
+| Domaine | Fichier |
+|---------|---------|
+| React, Next.js, CSS | `.web-agency/contexts/frontend.md` |
+| Node, API, Prisma | `.web-agency/contexts/backend.md` |
+| CI/CD, Docker, Deploy | `.web-agency/contexts/devops.md` |
+| WordPress, Gutenberg | `.web-agency/contexts/wordpress.md` |
+| OWASP, Auth, Crypto | `.web-agency/contexts/security.md` |
 
 ## Utilisation
 
 ```
-/tech [description de la demande]
+/tech [description de ta demande]
 ```
 
 ## Exemples
 
-- `/tech optimiser les performances` → Analyse contexte, route vers frontend/backend/devops selon cas
-- `/tech architecture microservices` → direction-technique (stratégie)
-- `/tech créer composant Button` → frontend-developer ou react-expert
-- `/tech pipeline CI/CD` → devops
-- `/tech review PR #123` → lead-dev
+```
+/tech Ajouter un système de paiement Stripe
+→ Workflow: feature
+→ Agents: specification → architecture → backend → frontend → testing
+
+/tech Le bouton de login ne fonctionne pas
+→ Workflow: bugfix
+→ Agents: diagnostic → fix → test → deploy
+
+/tech Déployer en production
+→ Workflow: deployment
+→ Agents: pre-deploy → build → staging → smoke-test → production
+
+/tech Review la PR #42
+→ Workflow: code-review
+→ Agents: context → analysis → security → feedback
+
+/tech Créer un composant Card réutilisable
+→ Workflow: feature (simplifié)
+→ Agent: development/frontend.md
+```
+
+## Pour les questions simples
+
+Si c'est juste une question technique (pas une tâche), l'orchestrateur répond directement en chargeant le contexte pertinent.
+
+```
+/tech Comment faire du SSR avec Next.js ?
+→ Charge: contexts/frontend.md
+→ Répond directement (pas de workflow)
+```
