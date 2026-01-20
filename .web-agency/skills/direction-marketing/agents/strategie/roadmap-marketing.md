@@ -445,3 +445,10 @@ Manager     Direction
 | Fiches initiatives | Détail de chaque initiative majeure | Template |
 | Calendrier marketing | Événements et temps forts | Calendrier |
 | Dashboard suivi | Métriques d'avancement | Dashboard |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`

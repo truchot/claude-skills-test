@@ -73,8 +73,8 @@ const ROUTING_KEYWORDS = [
 // @see docs/agent-template-standards.md
 const CONTENT_QUALITY = {
   minLines: {
-    standard: 50,
-    enriched: 150
+    standard: 100,
+    enriched: 200
   },
   requiredSections: [
     'Responsabilité',

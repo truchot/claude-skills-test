@@ -326,3 +326,10 @@ Volume élevé        Time Decay         Data-Driven
 | Specs implémentation | Pour équipe analytics | Brief technique |
 | Dashboard attribution | Visualisation des contributions | Template |
 | Plan de review | Calendrier de révision | Planning |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`

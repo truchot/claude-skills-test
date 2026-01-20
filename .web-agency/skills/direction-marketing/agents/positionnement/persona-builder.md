@@ -406,3 +406,10 @@ Ce template contient :
 | **Nouveau marché** | Créer des personas pour le segment cible |
 | **Optimisation acquisition** | Affiner les personas pour améliorer le ciblage pub |
 | **Content strategy** | Définir les personas pour orienter la ligne éditoriale |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`

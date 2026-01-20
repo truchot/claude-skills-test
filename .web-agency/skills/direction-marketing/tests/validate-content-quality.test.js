@@ -14,9 +14,9 @@ const fs = require('fs');
 const path = require('path');
 const { SKILL_ROOT, DOMAINS } = require('./config');
 
-// Configuration
-const MIN_AGENT_LINES = 50;
-const MIN_ENRICHED_AGENT_LINES = 150;
+// Configuration - aligned with docs/agent-template-standards.md
+const MIN_AGENT_LINES = 100;
+const MIN_ENRICHED_AGENT_LINES = 200;
 
 const REQUIRED_SECTIONS = [
   'Responsabilité',  // "Ta Responsabilité Unique" or "Ta Responsabilité"
