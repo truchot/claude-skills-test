@@ -1,0 +1,89 @@
+[
+  {
+    "query": "Le client veut un devis pour un site e-commerce",
+    "expected": "project-management/avant-projet"
+  },
+  {
+    "query": "Prépare un compte-rendu de la réunion",
+    "expected": "project-management/communication"
+  },
+  {
+    "query": "Où en est le planning du projet ?",
+    "expected": "project-management/pilotage"
+  },
+  {
+    "query": "Quelle stack choisir pour ce projet ?",
+    "expected": "direction-technique/avant-projet"
+  },
+  {
+    "query": "Comment architecturer le système d'authentification ?",
+    "expected": "direction-technique/architecture"
+  },
+  {
+    "query": "Quelles sont les normes RGPD à respecter ?",
+    "expected": "direction-technique/securite"
+  },
+  {
+    "query": "Review cette PR s'il te plaît",
+    "expected": "lead-dev/code-review"
+  },
+  {
+    "query": "Comment débloquer le dev junior sur ce bug ?",
+    "expected": "lead-dev/mentoring"
+  },
+  {
+    "query": "Prépare la release de vendredi",
+    "expected": "lead-dev/delivery"
+  },
+  {
+    "query": "Comment utiliser useEffect correctement ?",
+    "expected": "react-expert/hooks"
+  },
+  {
+    "query": "Quelle lib de state management choisir ?",
+    "expected": "react-expert/state"
+  },
+  {
+    "query": "Comment tester ce composant avec RTL ?",
+    "expected": "react-expert/testing"
+  },
+  {
+    "query": "Comment fonctionne le App Router ?",
+    "expected": "nextjs-expert/app-router"
+  },
+  {
+    "query": "Quand utiliser un Server Component ?",
+    "expected": "nextjs-expert/server-components"
+  },
+  {
+    "query": "Comment configurer le déploiement Vercel ?",
+    "expected": "nextjs-expert/deployment"
+  },
+  {
+    "query": "Configure le pipeline GitHub Actions",
+    "expected": "devops/cicd"
+  },
+  {
+    "query": "Comment écrire le Dockerfile ?",
+    "expected": "devops/containers"
+  },
+  {
+    "query": "Configure le déploiement Kubernetes",
+    "expected": "devops/kubernetes"
+  },
+  {
+    "query": "Comment améliorer les performances ?",
+    "expected": "direction-technique/performance",
+    "context": "Première question, pas de contexte techno"
+  },
+  {
+    "query": "Comment améliorer les performances du bundle React ?",
+    "expected": "frontend-developer/performance",
+    "context": "Contexte frontend explicite"
+  },
+  {
+    "query": "Configure les tests de performance",
+    "expected": "testing-process/performance",
+    "context": "Contexte testing explicite"
+  }
+]
