@@ -95,6 +95,73 @@ export type RetrievalResult = z.infer<typeof RetrievalResultSchema>;
 export type RAGQuery = z.infer<typeof RAGQuerySchema>
 ```
 
+### Configuration
+
+```typescript
+// config/rag.ts
+import { z } from 'zod';
+
+// Schema de configuration avec defaults
+const RAGConfigSchema = z.object({
+  // Chunking
+  chunkSize: z.coerce.number().int().min(100).max(4000).default(1000),
+  chunkOverlap: z.coerce.number().int().min(0).max(500).default(200),
+
+  // Retrieval
+  topK: z.coerce.number().int().min(1).max(50).default(4),
+  similarityThreshold: z.coerce.number().min(0).max(1).default(0.7),
+
+  // LLM
+  llmModel: z.string().default('gpt-4o'),
+  embeddingModel: z.string().default('text-embedding-3-small'),
+  temperature: z.coerce.number().min(0).max(2).default(0),
+
+  // Database
+  tableName: z.string().default('documents'),
+  embeddingDimension: z.coerce.number().int().default(1536),
+
+  // Timeouts (ms)
+  embeddingTimeout: z.coerce.number().int().default(30_000),
+  llmTimeout: z.coerce.number().int().default(60_000),
+  dbQueryTimeout: z.coerce.number().int().default(10_000),
+
+  // Connection pool
+  poolMin: z.coerce.number().int().min(1).default(2),
+  poolMax: z.coerce.number().int().min(1).default(10),
+  poolIdleTimeout: z.coerce.number().int().default(30_000),
+});
+
+export type RAGConfig = z.infer<typeof RAGConfigSchema>;
+
+// Charger depuis env avec validation
+export function loadRAGConfig(): RAGConfig {
+  return RAGConfigSchema.parse({
+    chunkSize: process.env.RAG_CHUNK_SIZE,
+    chunkOverlap: process.env.RAG_CHUNK_OVERLAP,
+    topK: process.env.RAG_TOP_K,
+    similarityThreshold: process.env.RAG_SIMILARITY_THRESHOLD,
+    llmModel: process.env.RAG_LLM_MODEL,
+    embeddingModel: process.env.RAG_EMBEDDING_MODEL,
+    temperature: process.env.RAG_TEMPERATURE,
+    tableName: process.env.RAG_TABLE_NAME,
+    embeddingDimension: process.env.RAG_EMBEDDING_DIMENSION,
+    embeddingTimeout: process.env.RAG_EMBEDDING_TIMEOUT,
+    llmTimeout: process.env.RAG_LLM_TIMEOUT,
+    dbQueryTimeout: process.env.RAG_DB_QUERY_TIMEOUT,
+    poolMin: process.env.RAG_POOL_MIN,
+    poolMax: process.env.RAG_POOL_MAX,
+    poolIdleTimeout: process.env.RAG_POOL_IDLE_TIMEOUT,
+  });
+}
+
+// Exemple .env
+// RAG_CHUNK_SIZE=1000
+// RAG_CHUNK_OVERLAP=200
+// RAG_TOP_K=4
+// RAG_LLM_MODEL=gpt-4o
+// RAG_EMBEDDING_MODEL=text-embedding-3-small
+```
+
 ### Pipeline Complet
 
 ```typescript
@@ -103,29 +170,50 @@ import { OpenAIEmbeddings } from '@langchain/openai';
 import { PGVectorStore } from '@langchain/community/vectorstores/pgvector';
 import { ChatOpenAI } from '@langchain/openai';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { loadRAGConfig, type RAGConfig } from './config/rag';
 
 class RAGPipeline {
   private embeddings: OpenAIEmbeddings;
-  private vectorStore: PGVectorStore;
+  private vectorStore: PGVectorStore | null = null;
   private llm: ChatOpenAI;
+  private splitter: RecursiveCharacterTextSplitter;
+  private config: RAGConfig;
+  private isInitialized = false;
 
-  constructor() {
+  constructor(config?: Partial<RAGConfig>) {
+    // Merge provided config with env/defaults
+    this.config = { ...loadRAGConfig(), ...config };
+
     this.embeddings = new OpenAIEmbeddings({
-      model: 'text-embedding-3-small',
+      model: this.config.embeddingModel,
+      timeout: this.config.embeddingTimeout,
     });
 
     this.llm = new ChatOpenAI({
-      model: 'gpt-4o',
-      temperature: 0,
+      model: this.config.llmModel,
+      temperature: this.config.temperature,
+      timeout: this.config.llmTimeout,
+    });
+
+    this.splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: this.config.chunkSize,
+      chunkOverlap: this.config.chunkOverlap,
     });
   }
 
-  async initialize() {
+  async initialize(): Promise<void> {
+    if (this.isInitialized) return;
+
     this.vectorStore = await PGVectorStore.initialize(this.embeddings, {
       postgresConnectionOptions: {
         connectionString: process.env.DATABASE_URL,
+        // Connection pool settings
+        max: this.config.poolMax,
+        min: this.config.poolMin,
+        idleTimeoutMillis: this.config.poolIdleTimeout,
+        connectionTimeoutMillis: this.config.dbQueryTimeout,
       },
-      tableName: 'documents',
+      tableName: this.config.tableName,
       columns: {
         idColumnName: 'id',
         vectorColumnName: 'embedding',
@@ -133,17 +221,25 @@ class RAGPipeline {
         metadataColumnName: 'metadata',
       },
     });
+
+    this.isInitialized = true;
+  }
+
+  // Cleanup resources
+  async close(): Promise<void> {
+    if (this.vectorStore) {
+      await this.vectorStore.end();
+      this.vectorStore = null;
+      this.isInitialized = false;
+    }
   }
 
   // 1. INGESTION
-  async ingest(documents: Document[]) {
-    const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-      chunkOverlap: 200,
-    });
+  async ingest(documents: Document[]): Promise<void> {
+    if (!this.vectorStore) throw new Error('Pipeline not initialized');
 
     for (const doc of documents) {
-      const chunks = await splitter.createDocuments(
+      const chunks = await this.splitter.createDocuments(
         [doc.content],
         [{ documentId: doc.id, ...doc.metadata }]
       );
@@ -153,19 +249,24 @@ class RAGPipeline {
   }
 
   // 2. RETRIEVAL
-  async retrieve(query: string, k: number = 4): Promise<RetrievalResult[]> {
-    const results = await this.vectorStore.similaritySearchWithScore(query, k);
+  async retrieve(query: string, k?: number): Promise<RetrievalResult[]> {
+    if (!this.vectorStore) throw new Error('Pipeline not initialized');
 
-    return results.map(([doc, score]) => ({
-      chunk: {
-        id: doc.id,
-        documentId: doc.metadata.documentId,
-        content: doc.pageContent,
-        embedding: [],
-        metadata: doc.metadata,
-      },
-      score,
-    }));
+    const topK = k ?? this.config.topK;
+    const results = await this.vectorStore.similaritySearchWithScore(query, topK);
+
+    return results
+      .filter(([, score]) => score >= this.config.similarityThreshold)
+      .map(([doc, score]) => ({
+        chunk: {
+          id: doc.id,
+          documentId: doc.metadata.documentId,
+          content: doc.pageContent,
+          embedding: [],
+          metadata: doc.metadata,
+        },
+        score,
+      }));
   }
 
   // 3. GENERATION
@@ -331,6 +432,79 @@ REPONSE:`;
 // 1. Evaluer la pertinence des documents
 // 2. Si faible: web search ou reformulation
 // 3. Generer avec documents corriges
+```
+
+## Configuration Recommandee
+
+### Connection Pool (PostgreSQL/pgvector)
+
+```typescript
+// Recommandations par environnement
+const POOL_CONFIGS = {
+  development: {
+    min: 2,
+    max: 5,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 5_000,
+  },
+  production: {
+    min: 5,
+    max: 20,
+    idleTimeoutMillis: 60_000,
+    connectionTimeoutMillis: 10_000,
+  },
+  serverless: {
+    min: 0,  // Scale to zero
+    max: 1,  // Un seul client par instance
+    idleTimeoutMillis: 10_000,
+    connectionTimeoutMillis: 5_000,
+  },
+};
+
+// Formule: max_connections = (num_cores * 2) + effective_spindle_count
+// Pour 4 cores: max = (4 * 2) + 1 = 9
+```
+
+### Timeouts Recommandes
+
+| Operation | Dev | Prod | Notes |
+|-----------|-----|------|-------|
+| **Embedding** | 30s | 30s | Stable, batch si > 100 docs |
+| **LLM** | 60s | 120s | Augmenter pour contexts longs |
+| **DB Query** | 5s | 10s | Index si > 10s |
+| **Total Request** | 120s | 300s | API Gateway timeout |
+
+### Resource Management
+
+```typescript
+// Pattern: Using with cleanup
+async function processQuery(question: string) {
+  const pipeline = new RAGPipeline();
+
+  try {
+    await pipeline.initialize();
+    return await pipeline.query(question);
+  } finally {
+    await pipeline.close(); // Toujours cleanup
+  }
+}
+
+// Pattern: Singleton pour API
+let pipelineInstance: RAGPipeline | null = null;
+
+export async function getPipeline(): Promise<RAGPipeline> {
+  if (!pipelineInstance) {
+    pipelineInstance = new RAGPipeline();
+    await pipelineInstance.initialize();
+
+    // Cleanup on process exit
+    process.on('SIGTERM', async () => {
+      await pipelineInstance?.close();
+      process.exit(0);
+    });
+  }
+  return pipelineInstance;
+}
 ```
 
 ## Voir Aussi
