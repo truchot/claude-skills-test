@@ -4,6 +4,72 @@ Historique consolidé de tous les changements de l'agence web IA full-automatis�
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
+## [4.3.0] - 2026-01-20
+
+### Ajouté
+
+- **Nouveau skill `security-expert`** (24 agents) - Sécurité applicative Niveau 4
+  - Domaine `appsec/` (5 agents) : SAST, DAST, IAST, SCA
+  - Domaine `secure-coding/` (5 agents) : Validation, auth, authz, cryptography
+  - Domaine `threat-modeling/` (5 agents) : STRIDE, attack-trees, risk-assessment
+  - Domaine `penetration/` (5 agents) : OWASP Top 10, API security, reporting
+  - Domaine `compliance/` (4 agents) : RGPD, SOC2, ISO27001, PCI-DSS
+
+- **Nouveau skill `ai-integration`** (40 agents) - Intégration IA/ML Niveau 4
+  - Domaine `llm/` (8 agents) : OpenAI, Claude, Mistral, Ollama, LangChain, Vercel AI
+  - Domaine `rag/` (7 agents) : Architecture, ingestion, chunking, retrieval, evaluation
+  - Domaine `vectors/` (6 agents) : pgvector, Pinecone, Weaviate, Qdrant, embeddings
+  - Domaine `prompting/` (6 agents) : Patterns, templates, output-parsing, guardrails
+  - Domaine `agents/` (6 agents) : Architecture, tools, memory, multi-agent
+  - Domaine `mlops/` (7 agents) : Deployment, fine-tuning, monitoring, versioning
+
+- **Nouveau skill `legacy-modernization`** (30 agents) - Modernisation legacy Niveau 4
+  - Domaine `assessment/` (6 agents) : Code analysis, dependency audit, metrics
+  - Domaine `strategies/` (6 agents) : Strangler Fig, Branch by Abstraction
+  - Domaine `migration/` (6 agents) : Data migration, API versioning, CDC
+  - Domaine `refactoring/` (6 agents) : Incremental patterns, seams
+  - Domaine `testing/` (6 agents) : Characterization tests, contract testing
+
+- **Tests de validation** pour les 3 nouveaux skills
+  - Structure : `tests/config.js`, `tests/utils.js`, `tests/validate-agents.test.js`, `tests/validate-domains.test.js`
+  - Exit code 1 si échec pour intégration CI
+
+### Amélioré
+
+- **Sécurité renforcée** dans tous les examples de code
+  - API key validation avec Zod AVANT instanciation clients
+  - Error handling complet pour JSON.parse
+  - Rate limiting avec jitter pour éviter thundering herd
+  - Transactions atomiques pour migrations data
+  - Gestion des secrets (Vault, AWS Secrets Manager)
+  - Sanitization des inputs utilisateur (injection prevention)
+
+- **Configuration externalisée**
+  - Schemas Zod pour toutes les configs
+  - Support env vars avec defaults sensibles
+  - Timeouts configurables (embedding, LLM, DB)
+  - Connection pools documentés (dev/prod/serverless)
+
+- **Resource management**
+  - Patterns close() pour cleanup
+  - Singleton avec SIGTERM handling
+  - AbortController pour annulation propre
+
+### Documentation
+
+- `docs/ARCHITECTURE.md` : Mise à jour stats, ajout nouveaux skills
+- `docs/reports/RAPPORT-ANALYSE-SKILLS-TECHNIQUES.md` : Plan d'action détaillé avec ROI
+- README.md : Ajout 4 skills au catalogue (ddd, security, ai, legacy)
+
+### Modifié
+
+- **Version** : 4.1.0 → 4.3.0
+- **Total skills métier** : 23 → 26 (+3 skills)
+- **Total agents** : ~757 → ~965 (+208 agents)
+- **Couverture** : +sécurité applicative, +intégration IA, +modernisation legacy
+
+---
+
 ## [4.1.0] - 2025-01-11
 
 ### Ajouté
