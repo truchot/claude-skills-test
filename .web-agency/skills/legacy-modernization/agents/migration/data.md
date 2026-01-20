@@ -116,9 +116,16 @@ function transformUser(legacy: LegacyUser): NewUser {
   const [firstName, ...lastNameParts] = legacy.name.split(' ');
   const lastName = lastNameParts.join(' ') || '';
 
-  const metadata = legacy.metadata
-    ? JSON.parse(legacy.metadata)
-    : {};
+  // Safe JSON parsing avec fallback
+  let metadata: Record<string, unknown> = {};
+  if (legacy.metadata) {
+    try {
+      metadata = JSON.parse(legacy.metadata);
+    } catch (error) {
+      logger.warn('Invalid metadata JSON', { userId: legacy.id });
+      // Continue avec metadata vide plutot que fail
+    }
+  }
 
   return {
     id: `user_${legacy.id}`,
@@ -127,8 +134,8 @@ function transformUser(legacy: LegacyUser): NewUser {
     email: legacy.email.toLowerCase(),
     createdAt: legacy.created_at,
     settings: {
-      theme: metadata.theme || 'light',
-      notifications: metadata.notifications ?? true,
+      theme: typeof metadata.theme === 'string' ? metadata.theme : 'light',
+      notifications: typeof metadata.notifications === 'boolean' ? metadata.notifications : true,
     },
   };
 }
@@ -142,10 +149,27 @@ import { PrismaClient } from '@prisma/client';
 
 const newDb = new PrismaClient();
 
-async function loadUsers(users: NewUser[]): Promise<void> {
-  await newDb.user.createMany({
-    data: users,
-    skipDuplicates: true,
+async function loadUsers(users: NewUser[]): Promise<LoadResult> {
+  // Transaction pour garantir l'atomicite du batch
+  return await newDb.$transaction(async (tx) => {
+    const result = await tx.user.createMany({
+      data: users,
+      skipDuplicates: true,
+    });
+
+    // Verifier que le batch est complet
+    if (result.count < users.length * 0.95) {
+      // Moins de 95% inseres = probleme potentiel
+      logger.warn('Batch incomplete', {
+        expected: users.length,
+        inserted: result.count,
+      });
+    }
+
+    return { inserted: result.count, skipped: users.length - result.count };
+  }, {
+    timeout: 30_000, // 30s timeout par batch
+    isolationLevel: 'ReadCommitted',
   });
 }
 ```
@@ -193,11 +217,21 @@ async function migrateUsers(config?: Partial<MigrationConfig>): Promise<Migratio
   const limit = pLimit(concurrency);
   const pendingBatches: Promise<void>[] = [];
 
+  // AbortController pour cancel propre en cas d'erreur critique
+  const abortController = new AbortController();
+  let criticalError: Error | null = null;
+
   try {
     for await (const batch of extractUsers(batchSize)) {
+      // Check si abort demande par un batch precedent
+      if (abortController.signal.aborted) {
+        logger.warn('Migration aborted, skipping remaining batches');
+        break;
+      }
+
       stats.extracted += batch.length;
 
-      // Traitement parallele des batches
+      // Traitement parallele des batches avec error isolation
       const batchPromise = limit(async () => {
         const transformed = batch
           .map((user) => {
@@ -214,7 +248,7 @@ async function migrateUsers(config?: Partial<MigrationConfig>): Promise<Migratio
 
         stats.transformed += transformed.length;
 
-        // Retry avec backoff exponentiel
+        // Retry avec backoff exponentiel + jitter
         await retryWithBackoff(
           () => loadUsers(transformed),
           retryAttempts
@@ -225,17 +259,33 @@ async function migrateUsers(config?: Partial<MigrationConfig>): Promise<Migratio
       pendingBatches.push(batchPromise);
     }
 
-    // Attendre tous les batches en cours
-    await Promise.all(pendingBatches);
+    // Attendre tous les batches avec Promise.allSettled pour isoler les erreurs
+    const results = await Promise.allSettled(pendingBatches);
+
+    // Analyser les resultats
+    const failures = results.filter(
+      (r): r is PromiseRejectedResult => r.status === 'rejected'
+    );
+
+    if (failures.length > 0) {
+      const failureReasons = failures.map(f => f.reason?.message || 'Unknown');
+      logger.error('Some batches failed', { count: failures.length, reasons: failureReasons });
+
+      // Decider si c'est un echec total (>10% failed)
+      if (failures.length / results.length > 0.1) {
+        return { success: false, stats, error: `${failures.length} batches failed` };
+      }
+    }
 
     return { success: true, stats };
   } catch (error: unknown) {
+    abortController.abort();
     const message = error instanceof Error ? error.message : 'Unknown error';
     return { success: false, stats, error: message };
   }
 }
 
-// Helper pour retry avec backoff
+// Helper pour retry avec backoff exponentiel + jitter
 async function retryWithBackoff<T>(
   fn: () => Promise<T>,
   maxAttempts: number,
@@ -246,7 +296,13 @@ async function retryWithBackoff<T>(
       return await fn();
     } catch (error: unknown) {
       if (attempt === maxAttempts) throw error;
-      const delay = baseDelay * Math.pow(2, attempt - 1);
+
+      // Exponential backoff avec jitter (±25%) pour eviter thundering herd
+      const exponentialDelay = baseDelay * Math.pow(2, attempt - 1);
+      const jitter = exponentialDelay * 0.25 * (Math.random() * 2 - 1);
+      const delay = Math.min(exponentialDelay + jitter, 30_000); // Cap a 30s
+
+      logger.debug('Retry scheduled', { attempt, delay, maxAttempts });
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
@@ -374,7 +430,14 @@ await consumer.subscribe({ topic: 'legacy.public.users' });
 
 await consumer.run({
   eachMessage: async ({ message }) => {
-    const payload = JSON.parse(message.value.toString());
+    // Safe JSON parsing
+    let payload: DebeziumPayload;
+    try {
+      payload = JSON.parse(message.value?.toString() || '{}');
+    } catch (error) {
+      logger.error('Invalid CDC message', { offset: message.offset });
+      return; // Skip malformed message
+    }
 
     if (payload.op === 'c' || payload.op === 'u') {
       // Create or Update

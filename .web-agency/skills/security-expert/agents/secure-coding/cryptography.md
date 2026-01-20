@@ -118,18 +118,27 @@ export function decrypt(
   iv: string,
   authTag: string
 ): string {
-  const decipher = crypto.createDecipheriv(
-    ALGORITHM,
-    key,
-    Buffer.from(iv, 'base64')
-  );
+  if (key.length !== KEY_LENGTH) {
+    throw new Error('Key must be 32 bytes for AES-256');
+  }
 
-  decipher.setAuthTag(Buffer.from(authTag, 'base64'));
+  try {
+    const decipher = crypto.createDecipheriv(
+      ALGORITHM,
+      key,
+      Buffer.from(iv, 'base64')
+    );
 
-  let decrypted = decipher.update(encrypted, 'base64', 'utf8');
-  decrypted += decipher.final('utf8');
+    decipher.setAuthTag(Buffer.from(authTag, 'base64'));
 
-  return decrypted;
+    let decrypted = decipher.update(encrypted, 'base64', 'utf8');
+    decrypted += decipher.final('utf8');
+
+    return decrypted;
+  } catch (error) {
+    // Ne pas exposer les details de l'erreur crypto
+    throw new Error('Decryption failed - invalid data or key');
+  }
 }
 
 // Usage
@@ -213,16 +222,21 @@ export function decryptWithPrivateKey(
   encrypted: string,
   privateKey: string
 ): string {
-  const decrypted = crypto.privateDecrypt(
-    {
-      key: privateKey,
-      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      oaepHash: 'sha256',
-    },
-    Buffer.from(encrypted, 'base64')
-  );
+  try {
+    const decrypted = crypto.privateDecrypt(
+      {
+        key: privateKey,
+        padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+        oaepHash: 'sha256',
+      },
+      Buffer.from(encrypted, 'base64')
+    );
 
-  return decrypted.toString('utf8');
+    return decrypted.toString('utf8');
+  } catch (error) {
+    // Ne pas exposer les details - peut indiquer une attaque
+    throw new Error('RSA decryption failed');
+  }
 }
 ```
 

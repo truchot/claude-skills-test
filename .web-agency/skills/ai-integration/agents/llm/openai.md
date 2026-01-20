@@ -20,15 +20,24 @@ npm install openai
 ```typescript
 // lib/openai.ts
 import OpenAI from 'openai';
+import { z } from 'zod';
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+// Validation AVANT instanciation (fail fast)
+const EnvSchema = z.object({
+  OPENAI_API_KEY: z.string()
+    .min(1, 'OPENAI_API_KEY is required')
+    .startsWith('sk-', 'Invalid API key format'),
+  OPENAI_ORG_ID: z.string().optional(),
 });
 
-// Validation au demarrage
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY is required');
-}
+const env = EnvSchema.parse(process.env);
+
+export const openai = new OpenAI({
+  apiKey: env.OPENAI_API_KEY,
+  organization: env.OPENAI_ORG_ID,
+  timeout: 30_000, // 30s timeout
+  maxRetries: 2,
+});
 ```
 
 ## Chat Completions
@@ -166,7 +175,14 @@ const response = await openai.chat.completions.create({
 
 const toolCall = response.choices[0].message.tool_calls?.[0];
 if (toolCall) {
-  const args = JSON.parse(toolCall.function.arguments);
+  // Safe JSON parsing avec validation
+  let args: { city: string; unit?: string };
+  try {
+    args = JSON.parse(toolCall.function.arguments);
+  } catch (error) {
+    throw new Error(`Invalid function arguments: ${toolCall.function.arguments}`);
+  }
+
   // Executer la fonction et renvoyer le resultat
   const weatherData = await getWeather(args.city, args.unit);
 
