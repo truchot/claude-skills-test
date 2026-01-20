@@ -409,3 +409,10 @@ Potentiel faible
 | Plan d'action | Actions priorisées | Liste |
 | Scorecard | KPIs de suivi | Dashboard |
 | Présentation | Synthèse exécutive | Slides |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`

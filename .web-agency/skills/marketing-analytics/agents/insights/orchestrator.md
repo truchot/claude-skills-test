@@ -57,6 +57,8 @@ Tu coordonnes les **analyses marketing** : funnel, cohortes, prédictif, segment
 | "Prédiction", "forecast", "ML" | `predictive-analytics` |
 | "Segment", "cluster", "persona" | `customer-segmentation` |
 
+> **Note** : `funnel-analysis` (ici) fait le **DIAGNOSTIC**. Pour l'**ACTION** d'optimisation, déléguer à `marketing-ops/performance/funnel-optimization`. Voir `docs/marketing-perimeters-clarification.md`.
+
 ## Types d'Analyses
 
 | Analyse | Question |

@@ -69,6 +69,34 @@ const ROUTING_KEYWORDS = [
   'growth'
 ];
 
+// Content quality standards
+// @see docs/agent-template-standards.md
+const CONTENT_QUALITY = {
+  minLines: {
+    standard: 50,
+    enriched: 150
+  },
+  requiredSections: [
+    'Responsabilité',
+    'Inputs',
+    'Livrables'
+  ],
+  recommendedSections: [
+    'Tu NE fais PAS',
+    'Template de Sortie',
+    'Bonnes Pratiques',
+    'Pièges à Éviter'
+  ],
+  requiredYamlFields: ['name', 'description', 'domain'],
+  enrichedAgents: [
+    'strategie/competitor-analysis',
+    'strategie/swot-marketing',
+    'strategie/roadmap-marketing',
+    'mesure/attribution-model',
+    'positionnement/persona-builder'
+  ]
+};
+
 // Triptyque validation configuration
 // Section headers must match actual deliverable templates exactly
 const TRIPTYQUE = {
@@ -111,5 +139,6 @@ module.exports = {
   EXPECTED_AGENTS_PER_DOMAIN,
   TOTAL_EXPECTED_AGENTS,
   ROUTING_KEYWORDS,
+  CONTENT_QUALITY,
   TRIPTYQUE
 };

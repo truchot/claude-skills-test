@@ -361,3 +361,10 @@ Prix bas
 | Mapping stratégique | Positionnement visuel | Graphique |
 | Note d'opportunités | Gaps et recommandations | Bullet points |
 | Dashboard veille | Métriques clés à suivre | Template |
+
+---
+
+## Références
+
+- **Architecture marketing** : `docs/marketing-perimeters-clarification.md`
+- **Standards templates** : `docs/agent-template-standards.md`
