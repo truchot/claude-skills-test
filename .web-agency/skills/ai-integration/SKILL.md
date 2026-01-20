@@ -281,18 +281,87 @@ ai-integration ──► devops (déploiement, infra)
 
 ## Sécurité et Bonnes Pratiques
 
-### API Keys
+### API Keys - Gestion des Secrets (CRITIQUE)
+
+**JAMAIS en code source. Toujours via secrets manager.**
+
+```bash
+# .gitignore (OBLIGATOIRE)
+.env
+.env.*
+!.env.example
+*.pem
+*credentials*.json
+```
+
+```bash
+# .env.example (template sans valeurs)
+OPENAI_API_KEY=sk-your-key-here
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+# Ne JAMAIS committer de vraies clés
+```
+
+```bash
+# pre-commit hook (.husky/pre-commit)
+#!/bin/sh
+# Detecter les secrets accidentels
+if git diff --cached --name-only | xargs grep -l "sk-[a-zA-Z0-9]\{20,\}" 2>/dev/null; then
+  echo "ERROR: Potential API key detected in commit!"
+  echo "Remove secrets and use environment variables."
+  exit 1
+fi
+```
+
+#### Production: Secrets Managers
 
 ```typescript
-// JAMAIS en code
-// .env
-OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
+// AWS Secrets Manager
+import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager';
 
-// Validation au démarrage
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY is required');
+async function getApiKey(secretName: string): Promise<string> {
+  const client = new SecretsManagerClient({ region: 'eu-west-1' });
+  const response = await client.send(
+    new GetSecretValueCommand({ SecretId: secretName })
+  );
+  return JSON.parse(response.SecretString!).apiKey;
 }
+
+// Initialisation au demarrage
+const OPENAI_API_KEY = await getApiKey('prod/openai-api-key');
+```
+
+```typescript
+// HashiCorp Vault
+import Vault from 'node-vault';
+
+const vault = Vault({
+  endpoint: process.env.VAULT_ADDR,
+  token: process.env.VAULT_TOKEN,
+});
+
+async function getSecret(path: string): Promise<string> {
+  const { data } = await vault.read(path);
+  return data.data.value;
+}
+
+const ANTHROPIC_API_KEY = await getSecret('secret/data/anthropic');
+```
+
+```typescript
+// Vercel/Next.js (Edge-safe)
+// Les secrets sont injectes via le dashboard, pas en code
+// Settings > Environment Variables > Add
+
+// Validation au runtime
+import { z } from 'zod';
+
+const EnvSchema = z.object({
+  OPENAI_API_KEY: z.string().startsWith('sk-'),
+  ANTHROPIC_API_KEY: z.string().startsWith('sk-ant-'),
+});
+
+// Fail fast si secrets manquants
+const env = EnvSchema.parse(process.env);
 ```
 
 ### Rate Limiting
@@ -312,9 +381,46 @@ const rateLimitedCall = limiter.wrap(openai.chat.completions.create);
 ### Prompt Injection Prevention
 
 ```typescript
-// Séparer instructions système et input utilisateur
+// Sanitize user input pour eviter les injections
+function sanitizeUserInput(input: string): string {
+  if (!input || typeof input !== 'string') {
+    return '';
+  }
+
+  return input
+    // Limite la longueur
+    .slice(0, 10000)
+    // Supprime les caracteres de controle
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+    // Normalise les whitespaces
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Detecter les tentatives d'injection
+function detectInjectionAttempt(input: string): boolean {
+  const patterns = [
+    /ignore\s+(all\s+)?(previous|above|prior)/i,
+    /disregard\s+(all\s+)?(instructions|rules)/i,
+    /you\s+are\s+now/i,
+    /new\s+instructions?:/i,
+    /system\s*:/i,
+    /\[INST\]/i,
+    /<\|im_start\|>/i,
+  ];
+  return patterns.some(p => p.test(input));
+}
+
+// Usage
 const systemPrompt = `Tu es un assistant. Réponds uniquement aux questions sur les produits.`;
-const userInput = sanitizeUserInput(req.body.message);
+const rawInput = req.body.message;
+const userInput = sanitizeUserInput(rawInput);
+
+// Verifier les injections
+if (detectInjectionAttempt(userInput)) {
+  logger.warn('Potential injection attempt', { input: userInput.slice(0, 100) });
+  return res.status(400).json({ error: 'Invalid input' });
+}
 
 const response = await openai.chat.completions.create({
   model: 'gpt-4',
