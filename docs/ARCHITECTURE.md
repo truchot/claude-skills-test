@@ -1,6 +1,6 @@
 # Architecture des Skills Techniques
 
-> Version 4.1.0 - 33 skills, ~965 agents
+> Version 4.3.0 - 26 skills métier, ~965 agents
 
 ## Vue d'ensemble
 
@@ -62,11 +62,13 @@ graph TB
 
 | Métrique | Valeur |
 |----------|--------|
-| **Total Skills** | 33 |
+| **Total Skills Métier** | 26 |
 | **Total Agents** | ~965 |
-| **Niveau 1 (Stratégie)** | 5 skills, 166 agents |
-| **Niveau 2 (Opérations)** | 7 skills, 189 agents |
-| **Niveau 3 (Implémentation)** | 21 skills, 610 agents |
+| **Niveau 2 (Stratégie)** | 3 skills (direction-*) |
+| **Niveau 3 (Opérations)** | 4 skills |
+| **Niveau 4 (Implémentation)** | 13 skills |
+| **Niveau 4 (Support)** | 5 skills |
+| **+ Orchestration** | task-orchestrator (16 agents) |
 
 ## Hiérarchie POURQUOI / QUOI / COMMENT
 
