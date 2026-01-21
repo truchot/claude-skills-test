@@ -258,6 +258,7 @@ Quand tu passes d'une étape à l'autre, résume :
 | `content.md` | Gestion de contenu |
 | `maintenance.md` | Maintenance applicative |
 | `documentation.md` | Gestion documentation projet |
+| `adoption.md` | Adoption progressive de la documentation |
 
 ---
 
@@ -310,6 +311,27 @@ Les templates sont dans `templates/project/` :
 - Feature Spec, Tech Brief
 - Review, Release Notes
 - Session Log, Runbook
+
+### Adoption progressive (projets existants)
+
+Pour un projet existant sans documentation, utiliser l'agent `adoption.md` :
+
+```bash
+/doc init-minimal     # Structure minimale (5 min)
+/doc status           # État actuel et recommandations
+/doc adopt-stack      # Documenter la stack
+/doc adopt-decision   # Créer un ADR rétroactif
+```
+
+**Principe** : Documenter au fil de l'eau, pas tout d'un coup.
+
+| Score | Niveau | Description |
+|-------|--------|-------------|
+| 1-2 | Minimal | Prêt à documenter |
+| 3-4 | Basique | Stack + 1 ADR |
+| 5-6 | Fonctionnel | ADR réguliers, sessions loggées |
+| 7-8 | Mature | Specs features, data model |
+| 9-10 | Exemplaire | Tout documenté et à jour |
 
 ## Réponse Directe (sans workflow)
 
