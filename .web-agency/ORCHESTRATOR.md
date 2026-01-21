@@ -250,12 +250,17 @@ Quand tu passes d'une étape à l'autre, résume :
 | `monitoring.md` | Surveillance |
 | `incident.md` | Gestion des incidents |
 
+### skills/marketing/ - Marketing
+| Agent | Rôle |
+|-------|------|
+| `seo.md` | SEO technique et on-page |
+| `content.md` | Stratégie contenu et rédaction |
+| `analytics.md` | Tracking, reporting, insights |
+| `growth.md` | Acquisition, conversion, A/B testing |
+
 ### skills/support/ - Support
 | Agent | Rôle |
 |-------|------|
-| `seo.md` | Optimisation SEO |
-| `analytics.md` | Analytics et reporting |
-| `content.md` | Gestion de contenu |
 | `maintenance.md` | Maintenance applicative |
 | `documentation.md` | Gestion documentation projet |
 | `adoption.md` | Adoption progressive de la documentation |

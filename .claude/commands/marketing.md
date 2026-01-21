@@ -18,18 +18,19 @@ Point d'entrée pour toutes les tâches marketing : SEO, contenu, analytics, str
      ▼
 ┌─────────────────────────────────────────┐
 │           AGENTS MARKETING               │
-│  .web-agency/skills/support/             │
+│  .web-agency/skills/marketing/           │
 │                                          │
 │  • seo.md        → SEO technique         │
-│  • analytics.md  → Analytics, reporting  │
-│  • content.md    → Contenu, rédaction    │
+│  • content.md    → Stratégie contenu     │
+│  • analytics.md  → Tracking, reporting   │
+│  • growth.md     → Acquisition, CRO      │
 └─────────────────────────────────────────┘
 ```
 
 ## Comportement
 
 1. **Analyse ta demande** marketing
-2. **Identifie le domaine** : SEO, contenu, analytics, performance
+2. **Identifie le domaine** : SEO, contenu, analytics, growth
 3. **Charge l'agent** spécialisé
 4. **Produit des livrables** actionnables
 
@@ -37,11 +38,18 @@ Point d'entrée pour toutes les tâches marketing : SEO, contenu, analytics, str
 
 | Tu demandes... | Agent | Output |
 |----------------|-------|--------|
-| Audit SEO | `support/seo.md` | Rapport + quick wins |
-| Optimiser une page | `support/seo.md` | Title, meta, structure |
-| Analyser les performances | `support/analytics.md` | Rapport + recommandations |
-| Créer du contenu | `support/content.md` | Brief éditorial |
-| Calendrier éditorial | `support/content.md` | Planning contenu |
+| Audit SEO | `marketing/seo.md` | Rapport + quick wins |
+| Optimiser une page | `marketing/seo.md` | Title, meta, structure |
+| Recherche mots-clés | `marketing/seo.md` | Keywords + opportunités |
+| Analyser les performances | `marketing/analytics.md` | Rapport + recommandations |
+| Plan de tracking | `marketing/analytics.md` | Events, conversions, data layer |
+| Créer du contenu | `marketing/content.md` | Brief éditorial |
+| Calendrier éditorial | `marketing/content.md` | Planning contenu |
+| Stratégie contenu | `marketing/content.md` | Piliers, mapping funnel |
+| Audit conversion | `marketing/growth.md` | Funnel analysis + quick wins |
+| Stratégie acquisition | `marketing/growth.md` | Mix canaux, budget, KPIs |
+| Plan A/B testing | `marketing/growth.md` | Hypothèses, tests, métriques |
+| Séquence email | `marketing/growth.md` | Nurturing sequence |
 
 ## Livrables types
 
@@ -115,20 +123,28 @@ Structure Hn:
 
 ```
 /marketing Audit SEO du site
-→ Agent: support/seo.md
-→ Output: Rapport complet + priorités
+→ Agent: marketing/seo.md
+→ Output: Rapport complet + priorités + roadmap
 
 /marketing Optimiser la page /services pour "agence web paris"
-→ Agent: support/seo.md
-→ Output: Title, meta, structure Hn, mots-clés
+→ Agent: marketing/seo.md
+→ Output: Title, meta, structure Hn, mots-clés LSI
 
 /marketing Rapport de performance mensuel
-→ Agent: support/analytics.md
-→ Output: KPIs, tendances, recommandations
+→ Agent: marketing/analytics.md
+→ Output: KPIs, tendances, insights, recommandations
 
 /marketing Brief pour article sur le headless commerce
-→ Agent: support/content.md
-→ Output: Structure, mots-clés, longueur, CTA
+→ Agent: marketing/content.md
+→ Output: Structure, mots-clés, longueur, CTA, sources
+
+/marketing Audit de conversion du funnel d'inscription
+→ Agent: marketing/growth.md
+→ Output: Taux par étape, frictions, tests A/B suggérés
+
+/marketing Stratégie d'acquisition avec 5000€/mois
+→ Agent: marketing/growth.md
+→ Output: Mix canaux, budget, KPIs cibles, quick wins
 ```
 
 ## Principes
