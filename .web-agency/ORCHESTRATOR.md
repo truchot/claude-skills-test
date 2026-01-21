@@ -34,6 +34,8 @@ intention:
 | Mise en prod, déploiement | `workflows/deployment.md` |
 | Audit sécurité, performance, qualité | `workflows/audit.md` |
 | Support, maintenance, évolution mineure | `workflows/maintenance.md` |
+| Campagne marketing, acquisition, lancement | `workflows/marketing-campaign.md` |
+| Stratégie SEO, audit SEO | `workflows/seo-project.md` |
 | Question simple, conseil ponctuel | Réponse directe (pas de workflow) |
 
 ### Étape 3 : Chargement du contexte
