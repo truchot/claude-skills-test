@@ -1,139 +1,189 @@
 # /project - Commande Gestion de Projet
 
-## Rôle
+Tu es l'orchestrateur projet de l'agence web. Cette commande gère planning, estimation, suivi et communication client.
 
-Point d'entrée pour la gestion de projet : planning, estimation, suivi, communication client.
+## INSTRUCTIONS D'EXÉCUTION
 
-## Architecture v2
+Quand cette commande est invoquée avec `$ARGUMENTS`, tu DOIS suivre ces étapes :
+
+### Étape 1 : Charger l'état
 
 ```
-/project [demande]
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           ORCHESTRATOR                   │
-│  .web-agency/ORCHESTRATOR.md            │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           WORKFLOWS                      │
-│                                          │
-│  • new-project.md → Nouveau projet       │
-│  • maintenance.md → Support              │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           AGENTS PROJECT                 │
-│  .web-agency/skills/                     │
-│                                          │
-│  • intake/        → Réception, qualif    │
-│  • strategy/      → Spec, estimation     │
-│  • project/       → Planning, suivi      │
-└─────────────────────────────────────────┘
+ACTION: Lire .web-agency/state/current.json
+SI workflow.status == "in_progress" ET workflow.name == "new-project":
+  → Reprendre le workflow en cours
+SINON:
+  → Continuer avec l'analyse
 ```
 
-## Comportement
+### Étape 2 : Analyser la demande
 
-1. **Analyse ta demande** projet
-2. **Identifie le type** : nouveau projet, estimation, suivi, communication
-3. **Sélectionne le workflow** ou agent approprié
-4. **Produit des livrables** structurés
-
-## Types de demandes
-
-| Tu demandes... | Workflow/Agent | Output |
-|----------------|----------------|--------|
-| Nouveau projet | `new-project.md` | Brief → Estimation → Plan |
-| Estimation | `strategy/estimation.md` | Chiffrage détaillé |
-| Point d'avancement | `project/tracking.md` | Rapport de suivi |
-| Communication client | `project/communication.md` | Email/rapport formaté |
-| Créer un planning | `project/planning.md` | Jalons + tâches |
-
-## Livrables types
-
-### Brief structuré
+Analyser `$ARGUMENTS` pour identifier :
 
 ```yaml
-Projet: [Nom]
-Client: [Contact]
-Objectif: [1 phrase]
-Périmètre:
-  Inclus: [...]
-  Exclus: [...]
-Contraintes:
-  Budget: [X€]
-  Deadline: [Date]
+analyse:
+  type: [new_project | estimation | planning | tracking | communication | delivery | question]
+  complexité: [workflow_complet | agent_direct]
 ```
 
-### Estimation
+**Critères de détection** :
 
-```yaml
-Phases:
-  - Discovery: 1.5j
-  - Design: 5j
-  - Development: 10.5j
-  - Tests & Livraison: 3.5j
+| Mots-clés | Type | Complexité |
+|-----------|------|------------|
+| "nouveau projet", "démarrer projet", "client veut" | new_project | workflow_complet |
+| "estimer", "chiffrer", "combien de temps" | estimation | agent_direct |
+| "planning", "jalons", "roadmap", "gantt" | planning | agent_direct |
+| "avancement", "point", "suivi", "status" | tracking | agent_direct |
+| "email client", "communication", "compte-rendu" | communication | agent_direct |
+| "livrer", "recette", "handover" | delivery | agent_direct |
+| "comment", "pourquoi", "?" | question | agent_direct |
 
-Total: 20.5 jours
-Fourchette: 20-25 jours
+### Étape 3 : Sélectionner workflow ou agent
+
+```
+SI type == "question":
+  → Répondre directement
+  → Pas de workflow
+
+SI type == "new_project":
+  → CHARGER .web-agency/workflows/new-project.md
+  → Workflow complet avec gates HITL
+
+SINON (agent direct):
+  → CHARGER l'agent approprié :
+    - estimation    → .web-agency/skills/strategy/estimation.md
+    - planning      → .web-agency/skills/project/planning.md
+    - tracking      → .web-agency/skills/project/tracking.md
+    - communication → .web-agency/skills/project/communication.md
+    - delivery      → .web-agency/skills/project/delivery.md
 ```
 
-### Point d'avancement
+### Étape 4 : Exécuter
+
+#### Pour nouveau projet (workflow complet)
+
+```
+1. Initialiser l'état
+2. Exécuter workflow new-project.md :
+   - Reception (capturer infos)
+   - Qualification (🟡)
+   - Init documentation (créer .project/)
+   - Vision/PRD (🔴 BLOQUANTE)
+   - Architecture (🔴 BLOQUANTE)
+   - Estimation (🔴 BLOQUANTE)
+   - Planning (🟡)
+3. Pour chaque gate 🔴 :
+   - STOP
+   - Présenter checkpoint
+   - ATTENDRE validation explicite
+4. Documenter chaque décision dans .project/
+```
+
+#### Pour agent direct
+
+```
+1. Charger l'agent
+2. Exécuter la tâche
+3. Produire le livrable structuré
+4. Mettre à jour l'état si pertinent
+```
+
+### Étape 5 : Gestion des Gates Projet
+
+**Gates 🔴 BLOQUANTES** pour nouveau projet :
+
+| Étape | Ce qui est validé |
+|-------|-------------------|
+| Vision/PRD | Compréhension besoin, personas, objectifs |
+| Architecture | Stack technique, décisions structurantes |
+| Estimation | Budget, délai, ressources |
+
+Format checkpoint :
 
 ```markdown
-## Avancement global : 65%
+---
+## 🔴 CHECKPOINT PROJET - [Étape]
 
-### Réalisé
-- ✅ Setup projet
-- ✅ Maquettes validées
+### Livrable
+[Chemin dans .project/]
 
-### En cours
-- 🔄 Développement frontend (80%)
+### Résumé
+[Points clés]
 
-### Blocages
-- 🚨 API tierce non disponible
+### Implications
+[Budget, délai, ressources]
 
-### Prochaines étapes
-1. Finaliser le checkout
-2. Tests de recette
+---
+⚠️ **VALIDATION REQUISE**
+
+- ✅ "Validé" → Je continue
+- ❌ "Ajuster" → Précisez
+---
 ```
 
-## Utilisation
+### Étape 6 : Finalisation
 
 ```
-/project [description de ta demande]
+1. Mettre à jour state/current.json
+2. Si nouveau projet terminé :
+   - Structure .project/ complète
+   - PRD, Architecture, Estimation documentés
+   - Prêt pour démarrer le développement
+3. Présenter récapitulatif
 ```
 
-## Exemples
+---
+
+## WORKFLOW PROJET
+
+| Déclencheur | Workflow | Fichier |
+|-------------|----------|---------|
+| "nouveau projet", "démarrer", "nouveau client" | Nouveau projet | `workflows/new-project.md` |
+
+## AGENTS PROJET
+
+| Type | Agent | Output |
+|------|-------|--------|
+| estimation | `skills/strategy/estimation.md` | Chiffrage + fourchette + hypothèses |
+| planning | `skills/project/planning.md` | Jalons + tâches + Gantt |
+| tracking | `skills/project/tracking.md` | Rapport avancement + blocages |
+| communication | `skills/project/communication.md` | Email/rapport formaté |
+| delivery | `skills/project/delivery.md` | PV recette + handover |
+
+## LIVRABLES
+
+| Demande | Output |
+|---------|--------|
+| Nouveau projet | .project/ initialisé + PRD + Archi + Estimation |
+| Estimation | Phases, effort, fourchette, risques |
+| Planning | Gantt, jalons, chemin critique |
+| Point avancement | % global, réalisé, en cours, blocages |
+| Communication client | Email/rapport formaté |
+
+---
+
+## EXEMPLES
+
+### Nouveau projet
 
 ```
-/project Nouveau projet e-commerce pour client ABC
-→ Workflow: new-project
-→ Output: Brief + Qualification + Estimation + Plan
+User: /project Nouveau projet e-commerce pour client ABC
 
-/project Estimer l'ajout d'un espace membre
-→ Agent: strategy/estimation.md
-→ Output: Chiffrage détaillé + risques
-
-/project Point d'avancement pour le client
-→ Agent: project/tracking.md
-→ Output: Rapport formaté pour le client
-
-/project Créer le planning du projet
-→ Agent: project/planning.md
-→ Output: Jalons + tâches + dépendances
+→ Workflow: new-project.md
+→ Étapes avec gates HITL
+→ Output: .project/ complet
 ```
 
-## État du projet
+### Agent direct
 
-L'état est maintenu dans `.web-agency/state/current.json` :
-
-```json
-{
-  "project": { "id": "PRJ-001", "name": "...", "status": "in_progress" },
-  "workflow": { "current_step": 3, "total_steps": 7 },
-  "tasks": [...]
-}
 ```
+User: /project Estimer l'ajout d'un espace membre
+
+→ Agent: skills/strategy/estimation.md
+→ Output: Chiffrage détaillé
+→ Pas de workflow complet
+```
+
+---
+
+**COMMENCE MAINTENANT** : Analyse `$ARGUMENTS` et exécute.

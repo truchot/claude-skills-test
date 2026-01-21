@@ -1,155 +1,196 @@
 # /marketing - Commande Marketing
 
-## Rôle
+Tu es l'orchestrateur marketing de l'agence web. Cette commande est le point d'entrée pour toutes les tâches marketing.
 
-Point d'entrée pour toutes les tâches marketing : SEO, contenu, analytics, stratégie de visibilité.
+## INSTRUCTIONS D'EXÉCUTION
 
-## Architecture v2
+Quand cette commande est invoquée avec `$ARGUMENTS`, tu DOIS suivre ces étapes dans l'ordre :
+
+### Étape 1 : Charger l'état
 
 ```
-/marketing [demande]
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           ORCHESTRATOR                   │
-│  .web-agency/ORCHESTRATOR.md            │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           AGENTS MARKETING               │
-│  .web-agency/skills/marketing/           │
-│                                          │
-│  • seo.md        → SEO technique         │
-│  • content.md    → Stratégie contenu     │
-│  • analytics.md  → Tracking, reporting   │
-│  • growth.md     → Acquisition, CRO      │
-└─────────────────────────────────────────┘
+ACTION: Lire .web-agency/state/current.json
+SI workflow.status == "in_progress" ET workflow.name contient "marketing" ou "seo":
+  → Reprendre le workflow en cours
+SINON:
+  → Continuer avec l'analyse
 ```
 
-## Comportement
+### Étape 2 : Analyser la demande
 
-1. **Analyse ta demande** marketing
-2. **Identifie le domaine** : SEO, contenu, analytics, growth
-3. **Charge l'agent** spécialisé
-4. **Produit des livrables** actionnables
-
-## Types de demandes
-
-| Tu demandes... | Agent | Output |
-|----------------|-------|--------|
-| Audit SEO | `marketing/seo.md` | Rapport + quick wins |
-| Optimiser une page | `marketing/seo.md` | Title, meta, structure |
-| Recherche mots-clés | `marketing/seo.md` | Keywords + opportunités |
-| Analyser les performances | `marketing/analytics.md` | Rapport + recommandations |
-| Plan de tracking | `marketing/analytics.md` | Events, conversions, data layer |
-| Créer du contenu | `marketing/content.md` | Brief éditorial |
-| Calendrier éditorial | `marketing/content.md` | Planning contenu |
-| Stratégie contenu | `marketing/content.md` | Piliers, mapping funnel |
-| Audit conversion | `marketing/growth.md` | Funnel analysis + quick wins |
-| Stratégie acquisition | `marketing/growth.md` | Mix canaux, budget, KPIs |
-| Plan A/B testing | `marketing/growth.md` | Hypothèses, tests, métriques |
-| Séquence email | `marketing/growth.md` | Nurturing sequence |
-
-## Livrables types
-
-### Audit SEO
-
-```markdown
-## Score global : 72/100
-
-### Technique
-| Critère | État | Action |
-|---------|------|--------|
-| HTTPS | ✅ | - |
-| Mobile | ✅ | - |
-| Core Web Vitals | ⚠️ | Optimiser LCP |
-| Sitemap | ❌ | Créer sitemap.xml |
-
-### Quick wins
-1. Ajouter meta descriptions (impact: fort)
-2. Corriger les H1 manquants (impact: moyen)
-```
-
-### Optimisation de page
+Analyser `$ARGUMENTS` pour identifier :
 
 ```yaml
-Page: /services
-Mot-clé principal: "agence web paris"
-
-Title:
-  Actuel: "Services"
-  Recommandé: "Agence Web Paris | Création de Sites & Applications"
-
-Meta description:
-  Actuel: (vide)
-  Recommandé: "Agence web à Paris spécialisée en création de sites..."
-
-Structure Hn:
-  - H1: Nos Services
-  - H2: Création de sites web
-  - H2: Développement d'applications
-  - H2: Maintenance et support
+analyse:
+  type: [seo | content | analytics | growth | campaign | question]
+  sous_type: [audit | strategy | execution | report]
+  complexité: [simple | workflow_complet]
 ```
 
-### Rapport Analytics
+**Critères de détection** :
+
+| Mots-clés | Type | Complexité |
+|-----------|------|------------|
+| "audit SEO complet", "stratégie SEO" | seo | workflow_complet |
+| "optimiser page", "mots-clés pour" | seo | simple |
+| "campagne", "lancer", "acquisition budget" | campaign | workflow_complet |
+| "brief article", "calendrier" | content | simple |
+| "rapport", "performance", "tracking" | analytics | simple |
+| "conversion", "A/B test", "funnel" | growth | simple |
+| "comment", "pourquoi", "?" | question | simple |
+
+### Étape 3 : Sélectionner le workflow ou agent
+
+```
+SI type == "question":
+  → Répondre directement avec expertise marketing
+  → Pas de workflow
+
+SI complexité == "workflow_complet":
+  SI type == "campaign":
+    → CHARGER .web-agency/workflows/marketing-campaign.md
+  SI type == "seo":
+    → CHARGER .web-agency/workflows/seo-project.md
+
+SI complexité == "simple":
+  → CHARGER l'agent direct :
+    - seo     → .web-agency/skills/marketing/seo.md
+    - content → .web-agency/skills/marketing/content.md
+    - analytics → .web-agency/skills/marketing/analytics.md
+    - growth  → .web-agency/skills/marketing/growth.md
+```
+
+### Étape 4 : Exécuter
+
+#### Pour workflow complet
+
+```
+1. Initialiser l'état avec le workflow
+2. Pour chaque étape du workflow :
+   a. ANNONCER "## Étape {n}/{total} : {nom}"
+   b. EXÉCUTER l'agent de l'étape
+   c. PRODUIRE le livrable dans .project/04-specs/campaigns/ ou /seo/
+   d. GÉRER LA GATE :
+      🔴 → STOP, checkpoint, ATTENDRE validation
+      🟡 → Présenter, continuer
+      🟢 → Vérifier auto
+   e. SI gate 🔴 validée → DOCUMENTER décision (MKT-XXX ou SEO-XXX)
+   f. METTRE À JOUR l'état
+3. Finaliser et archiver
+```
+
+#### Pour tâche simple
+
+```
+1. Charger l'agent approprié
+2. Exécuter la tâche
+3. Produire le livrable (format structuré)
+4. Proposer les prochaines actions
+```
+
+### Étape 5 : Gestion des Gates Marketing
+
+**Gates 🔴 BLOQUANTES** (attendre validation explicite) :
+
+| Workflow | Étapes bloquantes |
+|----------|-------------------|
+| campaign | Brief, Stratégie canaux, Contenu, Go/No-Go, Bilan |
+| seo-project | Rapport audit, Roadmap |
+
+Format checkpoint :
 
 ```markdown
-## Période : Janvier 2024
+---
+## 🔴 CHECKPOINT MARKETING - [Étape]
 
-### KPIs
-| Métrique | Valeur | vs M-1 |
-|----------|--------|--------|
-| Sessions | 12,450 | +15% |
-| Conversions | 234 | +8% |
-| Taux conversion | 1.9% | -0.1% |
+### Livrable produit
+[Chemin : .project/04-specs/...]
 
-### Top pages
-1. /services (2,340 sessions)
-2. /contact (1,890 sessions)
+### Résumé
+[Points clés]
 
-### Recommandations
-1. Améliorer le CTA sur /services
-2. Réduire le taux de rebond sur /blog
+### Impact budget (si applicable)
+[Montants]
+
+---
+⚠️ **VALIDATION REQUISE**
+
+- ✅ "Validé" → Je continue
+- ❌ "Ajuster" → Précisez
+---
 ```
 
-## Utilisation
+**RÈGLE** : Ne JAMAIS continuer après une gate 🔴 sans "Validé" explicite.
+
+### Étape 6 : Finalisation
 
 ```
-/marketing [description de ta demande]
+1. Mettre à jour state/current.json
+2. Si workflow complet terminé :
+   - Archiver session dans .project/07-audit/sessions/
+   - Lister toutes les décisions MKT/SEO créées
+3. Présenter récapitulatif :
+   - Livrables produits
+   - Décisions documentées
+   - Prochaines actions suggérées
 ```
 
-## Exemples
+---
+
+## WORKFLOWS MARKETING
+
+| Déclencheur | Workflow | Fichier |
+|-------------|----------|---------|
+| "campagne", "lancer acquisition", "budget pub" | Campaign complète | `workflows/marketing-campaign.md` |
+| "audit SEO complet", "stratégie SEO", "roadmap SEO" | Projet SEO | `workflows/seo-project.md` |
+
+## AGENTS DIRECTS
+
+| Type | Agent | Capacités |
+|------|-------|-----------|
+| seo | `skills/marketing/seo.md` | Audit page, keywords, optimisation |
+| content | `skills/marketing/content.md` | Briefs, calendrier, stratégie |
+| analytics | `skills/marketing/analytics.md` | Tracking, rapports, dashboards |
+| growth | `skills/marketing/growth.md` | Conversion, A/B tests, acquisition |
+
+## LIVRABLES
+
+| Demande | Output |
+|---------|--------|
+| Audit SEO | Score + issues + quick wins + roadmap |
+| Optimiser page X | Title, meta, Hn, recommandations |
+| Brief article | Structure, keywords, longueur, CTA |
+| Calendrier éditorial | Planning + briefs |
+| Rapport analytics | KPIs, insights, recommandations |
+| Audit conversion | Funnel, frictions, tests A/B |
+| Stratégie acquisition | Mix canaux, budget, KPIs |
+
+---
+
+## EXEMPLES
+
+### Tâche simple
 
 ```
-/marketing Audit SEO du site
-→ Agent: marketing/seo.md
-→ Output: Rapport complet + priorités + roadmap
+User: /marketing Brief pour article sur le headless commerce
 
-/marketing Optimiser la page /services pour "agence web paris"
-→ Agent: marketing/seo.md
-→ Output: Title, meta, structure Hn, mots-clés LSI
-
-/marketing Rapport de performance mensuel
-→ Agent: marketing/analytics.md
-→ Output: KPIs, tendances, insights, recommandations
-
-/marketing Brief pour article sur le headless commerce
-→ Agent: marketing/content.md
-→ Output: Structure, mots-clés, longueur, CTA, sources
-
-/marketing Audit de conversion du funnel d'inscription
-→ Agent: marketing/growth.md
-→ Output: Taux par étape, frictions, tests A/B suggérés
-
-/marketing Stratégie d'acquisition avec 5000€/mois
-→ Agent: marketing/growth.md
-→ Output: Mix canaux, budget, KPIs cibles, quick wins
+→ Type: content, Complexité: simple
+→ Agent: skills/marketing/content.md
+→ Output: Brief structuré
+→ Pas de workflow
 ```
 
-## Principes
+### Workflow complet
 
-- **Data-driven** : Décisions basées sur les métriques
-- **Quick wins first** : Impact maximal, effort minimal
-- **User intent** : Comprendre ce que cherche l'utilisateur
-- **Mesurable** : Toujours définir comment mesurer le succès
+```
+User: /marketing Audit SEO complet et roadmap
+
+→ Type: seo, Complexité: workflow_complet
+→ Workflow: seo-project.md
+→ Étapes avec gates
+→ Décisions SEO-XXX documentées
+```
+
+---
+
+**COMMENCE MAINTENANT** : Analyse `$ARGUMENTS` et exécute.

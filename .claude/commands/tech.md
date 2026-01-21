@@ -1,117 +1,250 @@
 # /tech - Commande Technique
 
-## Rôle
+Tu es l'orchestrateur technique de l'agence web. Cette commande est le point d'entrée pour toutes les tâches techniques.
 
-Point d'entrée pour toutes les tâches techniques. L'orchestrateur analyse ta demande et déclenche automatiquement le workflow approprié.
+## INSTRUCTIONS D'EXÉCUTION
 
-## Architecture v2
+Quand cette commande est invoquée avec `$ARGUMENTS`, tu DOIS suivre ces étapes dans l'ordre :
+
+### Étape 1 : Charger l'état
 
 ```
-/tech [demande]
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           ORCHESTRATOR                   │
-│  .web-agency/ORCHESTRATOR.md            │
-│                                          │
-│  1. Analyse la demande                   │
-│  2. Sélectionne le workflow              │
-│  3. Enchaîne les agents                  │
-│  4. Maintient l'état                     │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           WORKFLOWS                      │
-│  .web-agency/workflows/                  │
-│                                          │
-│  • feature.md    → Nouvelle feature      │
-│  • bugfix.md     → Correction bug        │
-│  • deployment.md → Mise en prod          │
-│  • code-review.md→ Revue de code         │
-│  • audit.md      → Audit tech            │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│           AGENTS                         │
-│  .web-agency/skills/                     │
-│                                          │
-│  • strategy/     → Spec, Architecture    │
-│  • development/  → Frontend, Backend     │
-│  • quality/      → Tests, Code Review    │
-│  • operations/   → CI/CD, Deployment     │
-└─────────────────────────────────────────┘
+ACTION: Lire .web-agency/state/current.json
+SI le fichier contient un workflow.status == "in_progress":
+  → Reprendre le workflow en cours
+SINON:
+  → Continuer avec l'analyse de la demande
 ```
 
-## Comportement
+### Étape 2 : Analyser la demande
 
-1. **Charge l'orchestrateur** : `.web-agency/ORCHESTRATOR.md`
-2. **Analyse ta demande** et identifie :
-   - Le type : feature, bugfix, question, deployment...
-   - Le domaine : frontend, backend, devops, fullstack...
-   - L'urgence : P1-P4
-3. **Sélectionne le workflow** approprié
-4. **Exécute les agents** dans l'ordre défini
-5. **Maintient l'état** dans `.web-agency/state/`
+Analyser `$ARGUMENTS` pour identifier :
 
-## Détection automatique
+```yaml
+analyse:
+  type: [feature | bugfix | deployment | review | audit | question]
+  domaine: [frontend | backend | fullstack | devops | database]
+  urgence: [P1 | P2 | P3 | P4]
+  complexité: [simple | moyenne | complexe]
+```
 
-| Tu demandes... | Workflow déclenché | Agents impliqués |
-|----------------|-------------------|------------------|
-| Nouvelle feature | `feature.md` | specification → architecture → development → testing → review |
-| Corriger un bug | `bugfix.md` | diagnostic → fix → test → deploy |
-| Déployer | `deployment.md` | pre-deploy → build → staging → production |
-| Review une PR | `code-review.md` | analysis → security → feedback |
-| Créer un composant | `feature.md` (simplifié) | development/frontend.md |
-| Optimiser perf | `audit.md` | quality/performance.md |
+**Critères de détection** :
 
-## Contextes chargés à la demande
+| Mots-clés | Type |
+|-----------|------|
+| "ajouter", "créer", "nouveau", "implémenter" | feature |
+| "bug", "erreur", "ne fonctionne pas", "corriger" | bugfix |
+| "déployer", "mettre en prod", "release" | deployment |
+| "review", "PR", "pull request", "relire" | review |
+| "audit", "vérifier", "analyser", "optimiser" | audit |
+| "comment", "pourquoi", "c'est quoi", "?" | question |
+
+### Étape 3 : Sélectionner et charger le workflow
+
+```
+SI type == "question":
+  → Charger le contexte pertinent (.web-agency/contexts/*.md)
+  → Répondre directement, pas de workflow
+SINON:
+  → Charger le workflow approprié :
+    - feature   → .web-agency/workflows/feature.md
+    - bugfix    → .web-agency/workflows/bugfix.md
+    - deployment→ .web-agency/workflows/deployment.md
+    - review    → .web-agency/workflows/code-review.md
+    - audit     → .web-agency/workflows/audit.md
+```
+
+### Étape 4 : Initialiser l'état
+
+```
+ACTION: Mettre à jour .web-agency/state/current.json
+
+{
+  "workflow": {
+    "name": "[workflow sélectionné]",
+    "started_at": "[timestamp]",
+    "current_step": 1,
+    "status": "in_progress"
+  },
+  "steps": [liste des étapes du workflow],
+  "context": {
+    "domaine": "[domaine détecté]",
+    "urgence": "[urgence]"
+  }
+}
+```
+
+### Étape 5 : Exécuter le workflow
+
+Pour chaque étape du workflow :
+
+```
+1. ANNONCER l'étape :
+   "## Étape {n}/{total} : {nom_étape}"
+
+2. CHARGER l'agent :
+   Lire .web-agency/skills/{agent}.md
+
+3. EXÉCUTER l'agent :
+   Suivre les instructions de l'agent
+   Produire les livrables dans .project/ si applicable
+
+4. VÉRIFIER LA GATE :
+   🔴 BLOQUANTE → STOP, présenter le checkpoint, ATTENDRE validation
+   🟡 INFORMATIVE → Présenter, proposer de continuer
+   🟢 AUTO → Vérifier automatiquement (tests, lint)
+
+5. METTRE À JOUR l'état :
+   steps[n].status = "completed"
+   current_step += 1
+
+6. PASSER à l'étape suivante (sauf si gate bloquante)
+```
+
+### Étape 6 : Gestion des Gates
+
+#### 🔴 Gate BLOQUANTE
+
+```markdown
+---
+## 🔴 CHECKPOINT - [Nom de l'étape]
+
+### Livrables produits
+[Liste avec chemins]
+
+### Résumé
+[Ce qui a été fait]
+
+### Points d'attention
+[Si applicable]
+
+---
+⚠️ **JE NE PEUX PAS CONTINUER SANS VOTRE VALIDATION**
+
+Répondez :
+- ✅ "Validé" → Je continue
+- ❌ "Ajuster" → Précisez les modifications
+- ❓ Questions → Je clarifie
+---
+```
+
+**RÈGLE ABSOLUE** : Ne JAMAIS passer une gate 🔴 sans réponse explicite.
+
+#### 🟡 Gate INFORMATIVE
+
+```markdown
+---
+## 🟡 Point de progression
+
+**Fait** : [Résumé]
+**Livrable** : [Chemin]
+
+Je continue avec [prochaine étape] ?
+---
+```
+
+Si pas de réponse immédiate, continuer après avoir présenté.
+
+#### 🟢 Gate AUTO
+
+Exécuter les vérifications automatiques (lint, tests, build).
+- Si OK → Continuer
+- Si FAIL → Présenter l'erreur, proposer de corriger
+
+### Étape 7 : Finalisation
+
+```
+ACTION: Quand workflow terminé
+
+1. Mettre à jour state/current.json :
+   workflow.status = "completed"
+
+2. Archiver dans .project/07-audit/sessions/ si projet existe
+
+3. Présenter le récapitulatif :
+   "## ✅ Workflow terminé
+   - [Résumé des étapes]
+   - [Livrables produits]
+   - [Prochaines actions suggérées]"
+```
+
+---
+
+## WORKFLOWS DISPONIBLES
+
+| Workflow | Fichier | Étapes principales |
+|----------|---------|-------------------|
+| feature | `workflows/feature.md` | qualification → spec → archi → dev → test → review → deploy |
+| bugfix | `workflows/bugfix.md` | diagnostic → fix → test → deploy |
+| deployment | `workflows/deployment.md` | pre-check → build → staging → prod |
+| code-review | `workflows/code-review.md` | context → analysis → security → feedback |
+| audit | `workflows/audit.md` | scope → analysis → report → recommendations |
+
+## AGENTS DISPONIBLES
+
+| Catégorie | Agents |
+|-----------|--------|
+| strategy/ | specification, architecture, estimation, decision, task-breakdown |
+| development/ | frontend, backend, database, integration |
+| quality/ | testing, code-review, security-check, performance |
+| operations/ | deployment, ci-cd, monitoring, incident |
+
+## CONTEXTES DISPONIBLES
 
 | Domaine | Fichier |
 |---------|---------|
-| React, Next.js, CSS | `.web-agency/contexts/frontend.md` |
-| Node, API, Prisma | `.web-agency/contexts/backend.md` |
-| CI/CD, Docker, Deploy | `.web-agency/contexts/devops.md` |
-| WordPress, Gutenberg | `.web-agency/contexts/wordpress.md` |
-| OWASP, Auth, Crypto | `.web-agency/contexts/security.md` |
+| Frontend (React, Next.js) | `contexts/frontend.md` |
+| Backend (Node, API) | `contexts/backend.md` |
+| DevOps (CI/CD, Docker) | `contexts/devops.md` |
+| Sécurité (OWASP) | `contexts/security.md` |
 
-## Utilisation
+---
 
-```
-/tech [description de ta demande]
-```
+## EXEMPLES D'EXÉCUTION
 
-## Exemples
+### Exemple 1 : Feature simple
 
 ```
-/tech Ajouter un système de paiement Stripe
-→ Workflow: feature
-→ Agents: specification → architecture → backend → frontend → testing
+User: /tech Créer un composant Button réutilisable
 
-/tech Le bouton de login ne fonctionne pas
-→ Workflow: bugfix
-→ Agents: diagnostic → fix → test → deploy
-
-/tech Déployer en production
-→ Workflow: deployment
-→ Agents: pre-deploy → build → staging → smoke-test → production
-
-/tech Review la PR #42
-→ Workflow: code-review
-→ Agents: context → analysis → security → feedback
-
-/tech Créer un composant Card réutilisable
-→ Workflow: feature (simplifié)
-→ Agent: development/frontend.md
+Orchestrateur:
+1. Analyse: type=feature, domaine=frontend, complexité=simple
+2. Workflow: feature.md (simplifié)
+3. Agent: development/frontend.md
+4. Gate: 🟢 AUTO (pas de spec nécessaire pour composant simple)
+5. Exécution directe
 ```
 
-## Pour les questions simples
-
-Si c'est juste une question technique (pas une tâche), l'orchestrateur répond directement en chargeant le contexte pertinent.
+### Exemple 2 : Feature complexe
 
 ```
-/tech Comment faire du SSR avec Next.js ?
-→ Charge: contexts/frontend.md
-→ Répond directement (pas de workflow)
+User: /tech Implémenter un système d'authentification OAuth
+
+Orchestrateur:
+1. Analyse: type=feature, domaine=fullstack, complexité=complexe
+2. Workflow: feature.md (complet)
+3. Étapes:
+   - qualification (🟡)
+   - specification (🔴 BLOQUANTE)
+   - architecture (🔴 BLOQUANTE)
+   - estimation (🔴 BLOQUANTE)
+   - development
+   - testing (🟢 AUTO)
+   - review (🟡)
+   - deployment (🔴 BLOQUANTE avant prod)
 ```
+
+### Exemple 3 : Question
+
+```
+User: /tech Comment gérer l'état global dans Next.js 14 ?
+
+Orchestrateur:
+1. Analyse: type=question
+2. Charge: contexts/frontend.md
+3. Répond directement (pas de workflow)
+```
+
+---
+
+**COMMENCE MAINTENANT** : Analyse la demande `$ARGUMENTS` et exécute le workflow approprié.
