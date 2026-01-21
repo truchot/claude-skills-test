@@ -145,7 +145,7 @@ success_criteria:
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/MKT-001-brief-campagne.md`
+**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-001-brief.md`
 
 ---
 
@@ -255,7 +255,7 @@ timeline:
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/MKT-002-channel-strategy.md`
+**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-002-channels.md`
 
 ---
 
@@ -390,7 +390,7 @@ if_fail: escalade vers humain
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/MKT-003-go-live.md`
+**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-003-go-live.md`
 
 ---
 
@@ -502,7 +502,7 @@ Dois-je appliquer ces ajustements ?
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/MKT-004-campaign-learnings.md`
+**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-004-learnings.md`
 
 ---
 
@@ -513,10 +513,7 @@ Dois-je appliquer ces ajustements ?
 ```
 .project/
 ├── 03-architecture/decisions/
-│   ├── MKT-001-brief-campagne.md       ← Décision brief
-│   ├── MKT-002-channel-strategy.md     ← Décision canaux
-│   ├── MKT-003-go-live.md              ← Décision lancement
-│   └── MKT-004-campaign-learnings.md   ← Décision learnings
+│   └── ADR-*.md                         ← Décisions TECHNIQUES uniquement
 │
 ├── 04-specs/campaigns/
 │   └── CAMP-001-lancement-produit/
@@ -524,10 +521,15 @@ Dois-je appliquer ces ajustements ?
 │       ├── audience.md                  ← Personas ciblés
 │       ├── channel-strategy.md          ← Stratégie canaux
 │       ├── tracking-plan.md             ← Plan de mesure
-│       └── content-briefs/
-│           ├── ad-copies.md
-│           ├── landing-page.md
-│           └── email-sequence.md
+│       ├── content-briefs/
+│       │   ├── ad-copies.md
+│       │   ├── landing-page.md
+│       │   └── email-sequence.md
+│       └── decisions/                   ← Décisions MARKETING (par campagne)
+│           ├── MKT-001-brief.md
+│           ├── MKT-002-channels.md
+│           ├── MKT-003-go-live.md
+│           └── MKT-004-learnings.md
 │
 ├── 05-quality/campaigns/
 │   └── CAMP-001/
@@ -538,8 +540,7 @@ Dois-je appliquer ces ajustements ?
 │
 └── 07-audit/sessions/
     └── 2024-01-15-campaign-CAMP001/
-        ├── session.md                   ← Log complet IA
-        └── decisions/                   ← Copies décisions
+        └── session.md                   ← Log complet IA
 ```
 
 ### state.json

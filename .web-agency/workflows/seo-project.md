@@ -149,7 +149,7 @@ Si toutes les recommandations sont implémentées :
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/SEO-001-audit-findings.md`
+**Décision documentée** : `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-001-audit-findings.md`
 
 ---
 
@@ -230,7 +230,7 @@ Si toutes les recommandations sont implémentées :
 ---
 ```
 
-**Décision documentée** : `.project/03-architecture/decisions/SEO-002-roadmap.md`
+**Décision documentée** : `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-002-roadmap.md`
 
 ---
 
@@ -301,8 +301,7 @@ Dois-je ajuster la stratégie ?
 ```
 .project/
 ├── 03-architecture/decisions/
-│   ├── SEO-001-audit-findings.md
-│   └── SEO-002-roadmap.md
+│   └── ADR-*.md                      ← Décisions TECHNIQUES uniquement
 │
 ├── 04-specs/seo/
 │   └── {{PROJECT_ID}}/
@@ -310,7 +309,10 @@ Dois-je ajuster la stratégie ?
 │       ├── audit-onpage.md
 │       ├── audit-keywords.md
 │       ├── audit-complet.md
-│       └── roadmap.md
+│       ├── roadmap.md
+│       └── decisions/                ← Décisions SEO (par projet)
+│           ├── SEO-001-audit-findings.md
+│           └── SEO-002-roadmap.md
 │
 ├── 05-quality/seo/
 │   └── {{PROJECT_ID}}/
