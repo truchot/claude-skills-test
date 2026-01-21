@@ -91,6 +91,93 @@ Maintiens `state/current.json` :
 }
 ```
 
+## Human-in-the-Loop (HITL) - Gates
+
+Chaque workflow contient des **Gates** (points de contrôle) où tu dois interagir avec l'humain.
+
+### Types de Gates
+
+| Gate | Symbole | Comportement |
+|------|---------|--------------|
+| **BLOQUANTE** | 🔴 | STOP - Attend validation explicite avant de continuer |
+| **INFORMATIVE** | 🟡 | PAUSE - Présente et propose de continuer |
+| **AUTO** | 🟢 | CHECK - Vérifie automatiquement (tests, lint) |
+
+### Comportement aux Gates
+
+#### 🔴 Gate BLOQUANTE
+
+```markdown
+---
+## 🔴 CHECKPOINT - Validation OBLIGATOIRE
+
+### Livrables produits
+[Liste des livrables avec résumé]
+
+### Résumé
+[Ce qui a été fait]
+
+### Points d'attention
+[Points nécessitant attention]
+
+---
+
+⚠️ **JE NE PEUX PAS CONTINUER SANS VOTRE VALIDATION**
+
+Validez-vous :
+- [ ] [Point 1]
+- [ ] [Point 2]
+
+**Répondez** :
+- ✅ **"Validé"** → Je continue
+- ❌ **"Ajuster"** → Précisez les modifications
+- ❓ **Questions** → Je clarifie
+
+---
+```
+
+**RÈGLE ABSOLUE** : Tu ne passes JAMAIS une gate bloquante sans réponse explicite de l'utilisateur.
+
+#### 🟡 Gate INFORMATIVE
+
+```markdown
+---
+## 🟡 Point de progression
+
+**Ce qui a été fait** : [Résumé]
+**Livrable** : [Résumé du livrable]
+
+Dois-je continuer avec [étape suivante] ?
+(Si pas de réponse, je continue dans 1 message)
+
+---
+```
+
+#### 🟢 Gate AUTO
+
+```yaml
+auto_checks:
+  - lint: 0 errors
+  - type-check: 0 errors
+  - tests: all pass
+  - build: success
+
+on_success: Continue automatiquement
+on_failure: Escalade vers humain
+```
+
+### Gates par défaut dans les workflows
+
+| Workflow | Estimation | Spec | Implémentation | Review | Deploy Prod |
+|----------|------------|------|----------------|--------|-------------|
+| feature | 🔴 | 🔴 | 🟢 | 🟡 | 🔴 |
+| bugfix | 🟡 | 🟡 | 🟢 | 🟡 | 🔴 (ou 🟡 si P1) |
+| deployment | - | - | - | - | 🔴 |
+
+Référence complète : `GATES.md`
+
+---
+
 ## Règles d'Orchestration
 
 ### Règle 1 : Un workflow à la fois
@@ -102,10 +189,13 @@ Ne démarre pas un nouveau workflow si un autre est en cours. Propose de :
 ### Règle 2 : Pas de saut d'étape
 Respecte l'ordre des étapes du workflow. Si l'utilisateur veut sauter une étape, demande confirmation et documente pourquoi.
 
-### Règle 3 : Escalade proactive
+### Règle 3 : Respecter les Gates
+**CRITIQUE** : Tu ne passes JAMAIS une gate 🔴 BLOQUANTE sans validation explicite de l'utilisateur. C'est le pattern Human-in-the-Loop qui garantit la qualité et le contrôle.
+
+### Règle 4 : Escalade proactive
 Si un agent rencontre un blocage ou une ambiguïté, escalade immédiatement à l'utilisateur plutôt que de deviner.
 
-### Règle 4 : Résumé à chaque transition
+### Règle 5 : Résumé à chaque transition
 Quand tu passes d'une étape à l'autre, résume :
 - Ce qui a été fait
 - Ce qui va être fait
