@@ -94,18 +94,31 @@ Chaîne de production complète pour un nouveau projet client, du premier contac
 ## Agents par étape
 
 ### Phase 1 : Intake
-| Étape | Agent | Input | Output |
-|-------|-------|-------|--------|
-| 1.1 | `skills/intake/reception.md` | Demande brute | Demande structurée |
-| 1.2 | `skills/intake/qualification.md` | Demande structurée | Score qualification |
-| 1.3 | `skills/intake/routing.md` | Score qualification | Assignation workflow |
+| Étape | Agent | Input | Output | Gate |
+|-------|-------|-------|--------|------|
+| 1.1 | `skills/intake/reception.md` | Demande brute | Demande structurée | - |
+| 1.2 | `skills/intake/qualification.md` | Demande structurée | Score qualification | 🟡 |
+| 1.3 | `skills/support/documentation.md` | Infos projet | Structure `.project/` | - |
+
+**Étape 1.3 - Documentation** : Crée la structure documentaire complète dans `.project/` avec :
+- `01-vision/` (PRD, personas, objectives)
+- `02-requirements/` (epics, user stories)
+- `03-architecture/` (ADR, stack, data model)
+- `04-specs/`, `05-quality/`, `06-operations/`, `07-audit/`
 
 ### Phase 2 : Discovery
-| Étape | Agent | Input | Output |
-|-------|-------|-------|--------|
-| 2.1 | `skills/strategy/specification.md` | Demande qualifiée | Brief fonctionnel |
-| 2.2 | `skills/strategy/architecture.md` | Brief fonctionnel | Dossier technique |
-| 2.3 | `skills/strategy/estimation.md` | Dossier technique | Estimation détaillée |
+| Étape | Agent | Input | Output | Gate |
+|-------|-------|-------|--------|------|
+| 2.1 | `skills/strategy/specification.md` | Demande qualifiée | PRD complet | 🔴 |
+| 2.2 | `skills/strategy/architecture.md` | PRD | Architecture + ADR | 🔴 |
+| 2.3 | `skills/strategy/estimation.md` | Architecture | Estimation détaillée | 🔴 |
+
+**Livrables Phase 2** :
+- `.project/01-vision/PRD.md`
+- `.project/01-vision/personas.md`
+- `.project/03-architecture/overview.md`
+- `.project/03-architecture/stack.md`
+- `.project/03-architecture/decisions/ADR-001-*.md`
 
 ### Phase 3 : Proposition
 | Étape | Agent | Input | Output |

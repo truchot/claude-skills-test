@@ -257,6 +257,59 @@ Quand tu passes d'une étape à l'autre, résume :
 | `analytics.md` | Analytics et reporting |
 | `content.md` | Gestion de contenu |
 | `maintenance.md` | Maintenance applicative |
+| `documentation.md` | Gestion documentation projet |
+
+---
+
+## Documentation & Traçabilité
+
+### Structure documentaire projet
+
+Chaque projet doit avoir une structure `.project/` pour la traçabilité :
+
+```
+.project/
+├── README.md                    # Vue d'ensemble
+├── state.json                   # État temps réel
+├── 01-vision/                   # PRD, Personas, Objectifs
+├── 02-requirements/             # Epics, User Stories
+├── 03-architecture/             # ADR, Stack, Data Model
+├── 04-specs/                    # Specs features
+├── 05-quality/                  # Tests, Reviews
+├── 06-operations/               # Environnements, Releases
+└── 07-audit/                    # Changelog, Sessions IA
+```
+
+### Initialisation projet
+
+Pour un nouveau projet, l'agent `documentation.md` crée cette structure à partir des templates dans `templates/project/`.
+
+### Traçabilité des livrables
+
+Chaque livrable produit par un agent doit être :
+1. Créé dans le bon dossier `.project/`
+2. Référencé dans `state.json`
+3. Loggé dans une session `07-audit/sessions/`
+
+### Où trouver quoi ?
+
+| Question | Réponse |
+|----------|---------|
+| "Où est le PRD ?" | `.project/01-vision/PRD.md` |
+| "Où sont les ADR ?" | `.project/03-architecture/decisions/` |
+| "Où sont les User Stories ?" | `.project/02-requirements/user-stories/` |
+| "Qui a fait quoi ?" | `.project/07-audit/sessions/` |
+| "Quel est l'état actuel ?" | `.project/state.json` |
+
+### Templates disponibles
+
+Les templates sont dans `templates/project/` :
+- PRD, Personas, Objectives
+- Epic, User Story
+- ADR, Stack, Data Model
+- Feature Spec, Tech Brief
+- Review, Release Notes
+- Session Log, Runbook
 
 ## Réponse Directe (sans workflow)
 
