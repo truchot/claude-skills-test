@@ -61,37 +61,55 @@ Pour chaque étape du workflow :
 
 ### Étape 5 : Gestion de l'état
 
-Maintiens `state/current.json` :
+Maintiens `state/current.json` (voir `state/README.md` pour détails) :
 
 ```json
 {
+  "version": "1.0",
+  "initialized_at": "2024-01-15T10:00:00Z",
   "project": {
     "id": "PRJ-001",
     "name": "Nom du projet",
-    "client": "Nom client"
+    "client": "Nom client",
+    "path": ".project/"
   },
   "workflow": {
     "name": "feature",
     "started_at": "2024-01-15T10:00:00Z",
     "current_step": 3,
-    "total_steps": 7
+    "total_steps": 7,
+    "status": "in_progress"
   },
   "steps": [
-    {"name": "specification", "status": "completed", "output": "..."},
-    {"name": "architecture", "status": "completed", "output": "..."},
-    {"name": "development", "status": "in_progress", "output": null},
+    {"name": "specification", "status": "completed", "output_path": "..."},
+    {"name": "architecture", "status": "completed", "output_path": "..."},
+    {"name": "development", "status": "in_progress"},
     {"name": "testing", "status": "pending"},
     {"name": "review", "status": "pending"},
     {"name": "deployment", "status": "pending"}
   ],
+  "gates_pending": [],
   "context": {
     "stack": ["Next.js", "TypeScript", "Prisma"],
+    "loaded_contexts": ["technical.md"],
     "key_decisions": [],
     "blockers": []
   },
   "updated_at": "2024-01-15T14:30:00Z"
 }
 ```
+
+#### Opérations sur l'état
+
+| Quand | Action |
+|-------|--------|
+| Début session | Lire `state/current.json` |
+| Projet identifié | Mettre à jour `project` |
+| Workflow démarré | Initialiser `workflow` et `steps` |
+| Étape complétée | Mettre à jour `steps[n].status` |
+| Gate atteinte | Ajouter à `gates_pending` |
+| Gate validée | Retirer de `gates_pending`, continuer |
+| Workflow terminé | Archiver dans `.project/`, reset state |
 
 ## Human-in-the-Loop (HITL) - Gates
 
