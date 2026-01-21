@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.local/schemas/state.json",
+  "title": "Web Agency State",
+  "description": "Schema for orchestrator session state",
+  "type": "object",
+  "required": ["version"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Schema version"
+    },
+    "initialized_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Session initialization timestamp"
+    },
+    "project": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^PRJ-\\d{3}$",
+          "description": "Project ID"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Project name"
+        },
+        "client": {
+          "type": "string",
+          "description": "Client name"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to .project/ directory"
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "workflow": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["feature", "bugfix", "deployment", "code-review", "audit", "new-project", "marketing-campaign", "seo-project"],
+          "description": "Active workflow name"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Workflow start timestamp"
+        },
+        "current_step": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Current step number"
+        },
+        "total_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total steps in workflow"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["in_progress", "completed", "paused", "cancelled"],
+          "description": "Workflow status"
+        }
+      },
+      "required": ["name", "status"]
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Step name"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "in_progress", "completed", "skipped"],
+            "description": "Step status"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Path to deliverable produced"
+          },
+          "gate": {
+            "type": "string",
+            "enum": ["bloquante", "informative", "auto"],
+            "description": "Gate type for this step"
+          },
+          "validated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When gate was validated"
+          }
+        },
+        "required": ["name", "status"]
+      }
+    },
+    "gates_pending": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "Step name waiting for validation"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["bloquante", "informative"],
+            "description": "Gate type"
+          },
+          "waiting_for": {
+            "type": "string",
+            "enum": ["validation", "input", "review"],
+            "description": "What the gate is waiting for"
+          },
+          "deliverable": {
+            "type": "string",
+            "description": "Path to deliverable to review"
+          },
+          "since": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When gate was reached"
+          }
+        },
+        "required": ["step", "type"]
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "domaine": {
+          "type": "string",
+          "enum": ["tech", "marketing", "design", "project"],
+          "description": "Primary domain"
+        },
+        "stack": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Tech stack"
+        },
+        "loaded_contexts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Context files loaded"
+        },
+        "key_decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "decision": {"type": "string"},
+              "adr": {"type": "string"},
+              "date": {"type": "string", "format": "date"}
+            }
+          },
+          "description": "Decisions made during session"
+        },
+        "blockers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Active blockers"
+        },
+        "notes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Session notes"
+        }
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

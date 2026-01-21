@@ -7,8 +7,21 @@ Gestion de l'état de l'orchestrateur et des workflows.
 ```
 state/
 ├── README.md           ← Ce fichier
+├── schema.json         ← JSON Schema de validation
 ├── current.json        ← État de la session courante
 └── history/            ← Historique des sessions (optionnel)
+```
+
+## JSON Schema
+
+Le fichier `schema.json` définit la structure valide de l'état. Utilisez-le pour :
+- Valider `current.json`
+- Documenter les types attendus
+- Générer des types TypeScript si besoin
+
+```bash
+# Valider avec ajv (si installé)
+ajv validate -s state/schema.json -d state/current.json
 ```
 
 ## current.json
