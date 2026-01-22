@@ -272,69 +272,87 @@ Quand tu passes d'une étape à l'autre, résume :
 - Ce qui va être fait
 - Les décisions prises
 
-## Mapping Agents
+## Mapping Skills
+
+Les skills suivent le format [Agent Skills](https://agentskills.io/) : chaque skill est un dossier contenant un `SKILL.md` avec frontmatter YAML.
+
+```
+skills/
+├── intake/
+│   ├── router/SKILL.md
+│   ├── reception/SKILL.md
+│   └── qualification/SKILL.md
+├── strategy/
+│   ├── architect/SKILL.md
+│   ├── specification/SKILL.md
+│   ├── estimation/SKILL.md
+│   ├── decision/SKILL.md
+│   └── task-breakdown/SKILL.md
+└── ...
+```
 
 ### skills/intake/ - Réception
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `reception.md` | Parser et structurer les demandes entrantes |
-| `qualification.md` | Évaluer complexité, urgence, faisabilité |
-| `routing.md` | Router vers le bon workflow/skill |
+| `router/` | Analyse et route les demandes vers le bon workflow |
+| `reception/` | Premier contact, extrait l'essentiel |
+| `qualification/` | Évalue complexité, urgence, estime +30% |
 
 ### skills/strategy/ - Direction
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `specification.md` | Clarifier et formaliser les besoins |
-| `architecture.md` | Concevoir la solution technique |
-| `estimation.md` | Estimer effort, coût, délai |
-| `decision.md` | Prendre les décisions techniques |
+| `architect/` | Conçoit l'architecture technique, rédige ADRs |
+| `specification/` | Clarifie et formalise les besoins |
+| `estimation/` | Estime effort avec ranges min-max |
+| `decision/` | Prend et documente les décisions techniques |
+| `task-breakdown/` | Découpe en tâches < 1 jour |
 
 ### skills/project/ - Gestion
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `planning.md` | Planifier les tâches et jalons |
-| `tracking.md` | Suivre l'avancement |
-| `communication.md` | Communiquer avec le client |
-| `delivery.md` | Gérer la livraison |
+| `planning/` | Planifie sprints et roadmaps |
+| `tracking/` | Suit l'avancement avec métriques |
+| `communication/` | Rédige communications adaptées à l'audience |
+| `delivery/` | Coordonne les livraisons et releases |
 
 ### skills/development/ - Développement
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `frontend.md` | Développement UI/UX |
-| `backend.md` | Développement API/serveur |
-| `database.md` | Modélisation et requêtes |
-| `integration.md` | Intégrations tierces |
+| `frontend/` | Développement UI/UX, mobile-first |
+| `backend/` | Développement API sécurisé |
+| `database/` | Modélisation et requêtes optimisées |
+| `integration/` | Intégrations API tierces |
 
 ### skills/quality/ - Qualité
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `testing.md` | Tests automatisés |
-| `code-review.md` | Revue de code |
-| `security-check.md` | Vérifications sécurité |
-| `performance.md` | Optimisation performance |
+| `testing/` | Tests unitaires et d'intégration |
+| `code-review/` | Revue de code constructive |
+| `security-check/` | Audit sécurité OWASP |
+| `performance/` | Optimisation avec métriques |
 
 ### skills/operations/ - Opérations
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `ci-cd.md` | Pipeline CI/CD |
-| `deployment.md` | Déploiement |
-| `monitoring.md` | Surveillance |
-| `incident.md` | Gestion des incidents |
+| `ci-cd/` | Configuration pipelines CI/CD |
+| `deployment/` | Déploiement zero-downtime |
+| `monitoring/` | Alertes basées sur SLOs |
+| `incident/` | Gestion d'incidents avec timeline |
 
 ### skills/marketing/ - Marketing
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `seo.md` | SEO technique et on-page |
-| `content.md` | Stratégie contenu et rédaction |
-| `analytics.md` | Tracking, reporting, insights |
-| `growth.md` | Acquisition, conversion, A/B testing |
+| `seo/` | SEO technique et on-page |
+| `content/` | Copywriting conversion |
+| `analytics/` | Analyse data-driven |
+| `growth/` | Expériences et optimisation funnel |
 
 ### skills/support/ - Support
-| Agent | Rôle |
+| Skill | Rôle |
 |-------|------|
-| `maintenance.md` | Maintenance applicative |
-| `documentation.md` | Gestion documentation projet |
-| `adoption.md` | Adoption progressive de la documentation |
+| `maintenance/` | Maintenance et refactoring progressif |
+| `documentation/` | Documentation technique et utilisateur |
+| `adoption/` | Onboarding et time-to-value |
 
 ---
 
@@ -549,15 +567,16 @@ solution:
   3. Recharger le contexte nécessaire
 ```
 
-#### Agent non trouvé
+#### Skill non trouvé
 
 ```yaml
-symptôme: "Agent X référencé mais fichier manquant"
-cause: Chemin incorrect ou agent non créé
+symptôme: "Skill X référencé mais fichier manquant"
+cause: Chemin incorrect ou SKILL.md non créé
 solution:
   1. Vérifier le mapping dans ORCHESTRATOR.md
-  2. Vérifier que le fichier existe dans skills/
-  3. Créer l'agent si manquant (voir templates)
+  2. Vérifier que skills/category/name/SKILL.md existe
+  3. Valider avec: skills-ref validate skills/category/name
+  4. Créer le skill si manquant (voir format SKILL.md)
 ```
 
 #### Token limit atteint
@@ -576,8 +595,14 @@ solution:
 Pour vérifier que l'architecture est complète :
 
 ```bash
-# Vérifier que tous les agents existent
-ls -la .web-agency/skills/**/*.md
+# Vérifier que tous les skills existent
+ls -la .web-agency/skills/**/SKILL.md
+
+# Valider un skill (format Agent Skills)
+skills-ref validate .web-agency/skills/router
+
+# Générer le XML des skills disponibles pour prompts
+skills-ref to-prompt .web-agency/skills/*/
 
 # Vérifier l'état
 cat .web-agency/state/current.json | jq
