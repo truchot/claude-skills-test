@@ -1,33 +1,33 @@
 # Memory Protocol
 
-Ce fichier définit comment l'agence **mémorise** et **réutilise** les connaissances.
+This file defines how the agency **memorizes** and **reuses** knowledge.
 
 ---
 
-## Architecture Mémoire
+## Memory Architecture
 
 ```
 memory/
-├── short-term/              # Session courante
-│   └── current.json         # État volatile
+├── short-term/              # Current session
+│   └── current.json         # Volatile state
 │
-├── long-term/               # Persistant cross-sessions
-│   ├── decisions.json       # Index des décisions (ADR, MKT, etc.)
-│   ├── patterns.json        # Patterns appris du projet
-│   ├── errors.json          # Erreurs à éviter
-│   └── preferences.json     # Préférences utilisateur
+├── long-term/               # Persistent cross-sessions
+│   ├── decisions.json       # Decision index (ADR, MKT, etc.)
+│   ├── patterns.json        # Patterns learned from project
+│   ├── errors.json          # Errors to avoid
+│   └── preferences.json     # User preferences
 │
-└── retrieval.md             # Ce fichier (comment utiliser)
+└── retrieval.md             # This file (how to use)
 ```
 
 ---
 
 ## Short-Term Memory
 
-### Objectif
-Maintenir le contexte de la **session courante**.
+### Objective
+Maintain context for the **current session**.
 
-### Contenu
+### Content
 ```json
 {
   "session_id": "SES-2024-001",
@@ -42,24 +42,24 @@ Maintenir le contexte de la **session courante**.
     "key_facts": [
       "Client: ACME Corp",
       "Stack: Next.js + Prisma",
-      "Deadline: 15 février"
+      "Deadline: February 15"
     ],
     "decisions_this_session": ["D-001", "D-002"],
     "artifacts_created": [".project/specs/feature-x.md"]
   },
   "conversation": {
-    "summary": "Développement feature authentification OAuth",
-    "last_action": "Architecture validée",
-    "pending": "Implémentation backend"
+    "summary": "OAuth authentication feature development",
+    "last_action": "Architecture validated",
+    "pending": "Backend implementation"
   }
 }
 ```
 
 ### Lifecycle
-- **Créé** : Au début de chaque session/workflow
-- **Mis à jour** : Après chaque action significative
-- **Archivé** : À la fin du workflow → `.project/07-audit/sessions/`
-- **Reset** : Nouvelle session = nouvel état
+- **Created**: At the start of each session/workflow
+- **Updated**: After each significant action
+- **Archived**: At workflow end → `.project/07-audit/sessions/`
+- **Reset**: New session = new state
 
 ---
 
@@ -67,7 +67,7 @@ Maintenir le contexte de la **session courante**.
 
 ### 1. Decisions Index (`decisions.json`)
 
-Index de toutes les décisions prises sur le projet.
+Index of all decisions made on the project.
 
 ```json
 {
@@ -77,32 +77,32 @@ Index de toutes les décisions prises sur le projet.
     {
       "id": "ADR-001",
       "type": "architecture",
-      "title": "Utilisation de PostgreSQL",
+      "title": "Use PostgreSQL",
       "date": "2024-01-10",
       "status": "accepted",
       "path": ".project/03-architecture/decisions/ADR-001.md",
       "tags": ["database", "infrastructure"],
-      "summary": "PostgreSQL choisi pour relations complexes et JSONB"
+      "summary": "PostgreSQL chosen for complex relations and JSONB"
     },
     {
       "id": "MKT-001",
       "type": "marketing",
-      "title": "Stratégie SEO content-first",
+      "title": "Content-first SEO strategy",
       "date": "2024-01-12",
       "status": "accepted",
       "path": ".project/04-specs/seo/SEO-001/decisions/MKT-001.md",
       "tags": ["seo", "content"],
-      "summary": "Focus sur contenu long-form avant link building"
+      "summary": "Focus on long-form content before link building"
     }
   ]
 }
 ```
 
-**Usage** : Avant de prendre une décision, consulter si une décision similaire existe.
+**Usage**: Before making a decision, check if a similar decision exists.
 
 ### 2. Patterns (`patterns.json`)
 
-Patterns spécifiques appris du projet.
+Project-specific patterns learned.
 
 ```json
 {
@@ -112,7 +112,7 @@ Patterns spécifiques appris du projet.
       {
         "id": "PAT-001",
         "name": "API Response Format",
-        "description": "Format standard des réponses API",
+        "description": "Standard format for API responses",
         "example": "{ success: boolean, data?: T, error?: { code, message } }",
         "applies_to": ["backend", "api"]
       }
@@ -120,8 +120,8 @@ Patterns spécifiques appris du projet.
     "process": [
       {
         "id": "PAT-002",
-        "name": "Review avant merge",
-        "description": "Toujours review par tech lead avant merge sur main",
+        "name": "Review before merge",
+        "description": "Always review by tech lead before merge to main",
         "applies_to": ["workflow", "code-review"]
       }
     ],
@@ -129,7 +129,7 @@ Patterns spécifiques appris du projet.
       {
         "id": "PAT-003",
         "name": "Feature branches",
-        "description": "Format: feat/TICKET-description-courte",
+        "description": "Format: feat/TICKET-short-description",
         "example": "feat/AUTH-001-oauth-google",
         "applies_to": ["git", "branches"]
       }
@@ -138,11 +138,11 @@ Patterns spécifiques appris du projet.
 }
 ```
 
-**Usage** : Appliquer les patterns du projet plutôt que des conventions génériques.
+**Usage**: Apply project patterns rather than generic conventions.
 
 ### 3. Errors (`errors.json`)
 
-Erreurs passées à ne pas répéter.
+Past errors not to repeat.
 
 ```json
 {
@@ -152,37 +152,37 @@ Erreurs passées à ne pas répéter.
       "id": "ERR-001",
       "date": "2024-01-08",
       "type": "technical",
-      "description": "Déploiement sans migration DB",
-      "consequence": "500 errors en prod pendant 30min",
-      "prevention": "Toujours vérifier pending migrations avant deploy",
+      "description": "Deployment without DB migration",
+      "consequence": "500 errors in prod for 30min",
+      "prevention": "Always verify pending migrations before deploy",
       "related_agent": "deployment"
     },
     {
       "id": "ERR-002",
       "date": "2024-01-11",
       "type": "process",
-      "description": "Feature livrée sans validation client",
-      "consequence": "Refonte complète du design",
-      "prevention": "Gate BLOQUANTE sur maquettes avant implémentation",
+      "description": "Feature delivered without client validation",
+      "consequence": "Complete design rework",
+      "prevention": "BLOCKING gate on mockups before implementation",
       "related_agent": "specification"
     }
   ]
 }
 ```
 
-**Usage** : Au début d'une tâche similaire, rappeler les erreurs passées.
+**Usage**: At the start of a similar task, recall past errors.
 
 ### 4. Preferences (`preferences.json`)
 
-Préférences utilisateur/projet.
+User/project preferences.
 
 ```json
 {
   "version": "1.0",
   "user": {
-    "communication_style": "concis",
-    "detail_level": "technique",
-    "language": "fr",
+    "communication_style": "concise",
+    "detail_level": "technical",
+    "language": "en",
     "timezone": "Europe/Paris"
   },
   "project": {
@@ -208,26 +208,26 @@ Préférences utilisateur/projet.
 
 ## Retrieval Protocol
 
-### Quand Consulter la Mémoire
+### When to Query Memory
 
-| Situation | Mémoire à consulter |
-|-----------|---------------------|
-| Nouvelle décision technique | `decisions.json` (ADR existants) |
-| Génération de code | `patterns.json` (conventions projet) |
-| Déploiement | `errors.json` (erreurs passées) |
-| Communication client | `preferences.json` (style) |
-| Reprise de session | `short-term/current.json` |
+| Situation | Memory to consult |
+|-----------|-------------------|
+| New technical decision | `decisions.json` (existing ADRs) |
+| Code generation | `patterns.json` (project conventions) |
+| Deployment | `errors.json` (past errors) |
+| Client communication | `preferences.json` (style) |
+| Session resume | `short-term/current.json` |
 
-### Comment Consulter
+### How to Query
 
 ```yaml
-# Au début d'une tâche
+# At the start of a task
 memory_retrieval:
-  query: "[type de tâche]"
+  query: "[task type]"
   search_in:
-    - decisions: "tags contenant '[domaine]'"
-    - patterns: "applies_to contenant '[contexte]'"
-    - errors: "related_agent = '[agent actuel]'"
+    - decisions: "tags containing '[domain]'"
+    - patterns: "applies_to containing '[context]'"
+    - errors: "related_agent = '[current agent]'"
 
   results:
     relevant_decisions: [...]
@@ -235,63 +235,63 @@ memory_retrieval:
     past_errors: [...]
 ```
 
-### Format de Rappel dans le Contexte
+### Memory Context Format in Agent
 
-Quand un agent charge du contexte mémoire :
+When an agent loads memory context:
 
 ```markdown
 ## MEMORY CONTEXT
 
-### Décisions pertinentes
-- **ADR-001**: PostgreSQL pour la DB (relations complexes)
-- **ADR-003**: JWT avec refresh tokens (auth)
+### Relevant Decisions
+- **ADR-001**: PostgreSQL for DB (complex relations)
+- **ADR-003**: JWT with refresh tokens (auth)
 
-### Patterns à appliquer
+### Patterns to Apply
 - API Response: `{ success, data?, error? }`
 - Branches: `feat/TICKET-description`
 
-### Erreurs à éviter
-- ⚠️ ERR-001: Toujours vérifier migrations avant deploy
+### Errors to Avoid
+- ⚠️ ERR-001: Always verify migrations before deploy
 ```
 
 ---
 
-## Mise à Jour de la Mémoire
+## Memory Updates
 
-### Automatique
-- `short-term/current.json` : Après chaque action
-- `decisions.json` : Quand un ADR/MKT est créé
+### Automatic
+- `short-term/current.json`: After each action
+- `decisions.json`: When an ADR/MKT is created
 
-### Sur Trigger
-- `patterns.json` : Quand un pattern est identifié/validé
-- `errors.json` : Après un incident ou erreur significative
-- `preferences.json` : Sur demande explicite utilisateur
+### On Trigger
+- `patterns.json`: When a pattern is identified/validated
+- `errors.json`: After an incident or significant error
+- `preferences.json`: On explicit user request
 
-### Format de Mise à Jour
+### Update Format
 
 ```yaml
 memory_update:
-  target: "[fichier mémoire]"
+  target: "[memory file]"
   operation: "add | update | remove"
   entry:
-    [contenu selon le schema du fichier]
-  reason: "[pourquoi cette mise à jour]"
+    [content according to file schema]
+  reason: "[why this update]"
 ```
 
 ---
 
-## Synchronisation avec .project/
+## Synchronization with .project/
 
-La mémoire long-term est synchronisée avec `.project/` :
+Long-term memory is synchronized with `.project/`:
 
 | Memory | .project/ equivalent |
 |--------|---------------------|
-| `decisions.json` | Index de `03-architecture/decisions/` + `04-specs/*/decisions/` |
-| `patterns.json` | Extrait de `03-architecture/conventions.md` |
-| `errors.json` | Log de `07-audit/incidents/` |
-| `preferences.json` | Config dans `.project/config.json` |
+| `decisions.json` | Index of `03-architecture/decisions/` + `04-specs/*/decisions/` |
+| `patterns.json` | Extracted from `03-architecture/conventions.md` |
+| `errors.json` | Log of `07-audit/incidents/` |
+| `preferences.json` | Config in `.project/config.json` |
 
-### Commande de Sync
+### Sync Command
 
 ```bash
 # Rebuild memory from .project/
@@ -303,9 +303,9 @@ La mémoire long-term est synchronisée avec `.project/` :
 
 ---
 
-## Initialisation Projet
+## Project Initialization
 
-Pour un nouveau projet :
+For a new project:
 
 ```json
 // memory/long-term/decisions.json
@@ -340,4 +340,4 @@ Pour un nouveau projet :
 }
 ```
 
-Les fichiers se remplissent au fil du projet.
+Files fill up as the project progresses.

@@ -1,323 +1,323 @@
-# Workflow : Développement Feature
+# Workflow: Feature Development
 
-Chaîne de production complète pour développer une nouvelle fonctionnalité, avec **Human-in-the-Loop** (HITL) aux étapes clés.
+Complete production chain for developing a new feature, with **Human-in-the-Loop** (HITL) at key steps.
 
-## Principe HITL
+## HITL Principle
 
 ```
-🔴 GATE BLOQUANTE = L'IA s'arrête et attend validation humaine
-🟡 GATE INFORMATIVE = L'IA présente et propose de continuer
-🟢 GATE AUTO = Vérification automatique (tests, lint)
+🔴 BLOCKING GATE = AI stops and waits for human validation
+🟡 ADVISORY GATE = AI presents and proposes to continue
+🟢 AUTO GATE = Automatic verification (tests, lint)
 ```
 
-## Vue d'ensemble
+## Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  1. QUALIFICATION                                                │
-│     Agent: intake/qualification.md                               │
-│     Livrable: Brief technique                                    │
-│     HITL: 🟡 INFORMATIVE                                         │
+│     Skill: intake/qualification.md                               │
+│     Deliverable: Technical brief                                 │
+│     HITL: 🟡 ADVISORY                                            │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  2. ESTIMATION & DÉCOUPAGE                                       │
-│     Agents: strategy/estimation.md + strategy/task-breakdown.md  │
-│     Livrables: Estimation, Découpage, Risques                    │
-│     HITL: 🔴 BLOQUANTE ⚠️ Pas d'implémentation sans validation   │
+│  2. ESTIMATION & BREAKDOWN                                       │
+│     Skills: strategy/estimation.md + strategy/task-breakdown.md  │
+│     Deliverables: Estimation, Task breakdown, Risks              │
+│     HITL: 🔴 BLOCKING ⚠️ No implementation without validation    │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  3. SPÉCIFICATION TECHNIQUE                                      │
-│     Agents: strategy/specification.md + strategy/architecture.md │
-│     Livrables: Spec technique, Architecture, ADR                 │
-│     HITL: 🔴 BLOQUANTE ⚠️ Pas de code sans spec validée          │
+│  3. TECHNICAL SPECIFICATION                                      │
+│     Skills: strategy/specification.md + strategy/architecture.md │
+│     Deliverables: Technical spec, Architecture, ADR              │
+│     HITL: 🔴 BLOCKING ⚠️ No code without validated spec          │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  4. IMPLÉMENTATION                                               │
-│     Agents: development/frontend.md, development/backend.md      │
-│     Livrables: Code, Tests unitaires                             │
-│     HITL: 🟢 AUTO (tests passent, lint OK)                       │
-│     Mode: AUTONOME (specs validées)                              │
+│  4. IMPLEMENTATION                                               │
+│     Skills: development/frontend.md, development/backend.md      │
+│     Deliverables: Code, Unit tests                               │
+│     HITL: 🟢 AUTO (tests pass, lint OK)                          │
+│     Mode: AUTONOMOUS (specs validated)                           │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  5. CODE REVIEW                                                  │
-│     Agent: quality/code-review.md                                │
-│     Livrable: Rapport de review                                  │
-│     HITL: 🟡 INFORMATIVE (présente les findings)                 │
+│     Skill: quality/code-review.md                                │
+│     Deliverable: Review report                                   │
+│     HITL: 🟡 ADVISORY (presents findings)                        │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  6. DÉPLOIEMENT                                                  │
-│     Agent: operations/deployment.md                              │
-│     Étapes: Staging → Production                                 │
-│     HITL: 🔴 BLOQUANTE avant prod ⚠️                             │
+│  6. DEPLOYMENT                                                   │
+│     Skill: operations/deployment.md                              │
+│     Steps: Staging → Production                                  │
+│     HITL: 🔴 BLOCKING before prod ⚠️                             │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Étape 1 : Qualification
+## Step 1: Qualification
 
-### Agent
+### Skill
 `skills/intake/qualification.md`
 
-### Objectif
-Comprendre et formaliser le besoin avant tout travail.
+### Objective
+Understand and formalize the need before any work.
 
 ### Process
-1. Analyser la demande utilisateur
-2. Clarifier les ambiguïtés (poser des questions)
-3. Identifier contexte, utilisateurs, contraintes, dépendances
+1. Analyze the user request
+2. Clarify ambiguities (ask questions)
+3. Identify context, users, constraints, dependencies
 
-### Livrable : Brief Technique
+### Deliverable: Technical Brief
 
 ```markdown
-# Brief Technique : [Nom de la feature]
+# Technical Brief: [Feature Name]
 
-## Contexte
-[Pourquoi cette feature ? Quel problème résout-elle ?]
+## Context
+[Why this feature? What problem does it solve?]
 
-## Description fonctionnelle
-[Ce qui doit être fait, du point de vue utilisateur]
+## Functional Description
+[What needs to be done, from the user's perspective]
 
-## Utilisateurs cibles
-[Qui va utiliser cette feature ?]
+## Target Users
+[Who will use this feature?]
 
-## Critères d'acceptation
-- [ ] [Critère 1 - vérifiable]
-- [ ] [Critère 2 - vérifiable]
-- [ ] [Critère 3 - vérifiable]
+## Acceptance Criteria
+- [ ] [Criterion 1 - verifiable]
+- [ ] [Criterion 2 - verifiable]
+- [ ] [Criterion 3 - verifiable]
 
-## Contraintes identifiées
-- [Contrainte 1]
-- [Contrainte 2]
+## Identified Constraints
+- [Constraint 1]
+- [Constraint 2]
 
-## Dépendances
-- [Dépendance externe ou interne]
+## Dependencies
+- [External or internal dependency]
 
-## Questions ouvertes
-- [Question non résolue → à clarifier]
+## Open Questions
+- [Unresolved question → to clarify]
 
-## Priorité
+## Priority
 [P1/P2/P3/P4] - [Justification]
 ```
 
-### HITL : 🟡 INFORMATIVE
+### HITL: 🟡 ADVISORY
 
 ```markdown
 ---
-## 🟡 Brief technique prêt
+## 🟡 Technical brief ready
 
-**Feature** : [Nom]
-**Critères d'acceptation** : [N] définis
-**Contraintes** : [Liste courte]
+**Feature**: [Name]
+**Acceptance criteria**: [N] defined
+**Constraints**: [Short list]
 
-Confirmez-vous ce périmètre avant estimation ?
+Do you confirm this scope before estimation?
 
-→ Si OK, je passe à l'estimation et découpage.
-→ Si ajustements, dites-moi ce qu'il faut préciser.
+→ If OK, I proceed to estimation and breakdown.
+→ If adjustments needed, tell me what to clarify.
 ---
 ```
 
 ---
 
-## Étape 2 : Estimation & Découpage
+## Step 2: Estimation & Breakdown
 
-### Agents
+### Skills
 - `skills/strategy/estimation.md`
 - `skills/strategy/task-breakdown.md`
 - `skills/strategy/risk-analysis.md`
 
-### Objectif
-**OBLIGATOIRE avant toute implémentation** : estimer l'effort, découper en tâches, identifier les risques.
+### Objective
+**MANDATORY before any implementation**: estimate effort, break down into tasks, identify risks.
 
-### Livrable 1 : Estimation Macro
+### Deliverable 1: Macro Estimation
 
 ```markdown
-# Estimation : [Nom de la feature]
+# Estimation: [Feature Name]
 
-## Estimation globale
+## Global Estimation
 
-| Métrique | Valeur |
-|----------|--------|
-| Complexité | [S/M/L/XL] |
-| Effort estimé | [X] jours/homme |
-| Durée calendaire | [Y] jours |
-| Fourchette | [Min] - [Max] jours |
+| Metric | Value |
+|--------|-------|
+| Complexity | [S/M/L/XL] |
+| Estimated effort | [X] person-days |
+| Calendar duration | [Y] days |
+| Range | [Min] - [Max] days |
 
-## Répartition
+## Breakdown
 
-| Domaine | Effort | Justification |
-|---------|--------|---------------|
-| Spécification | Xh | [Pourquoi] |
-| Backend | Xh | [Pourquoi] |
-| Frontend | Xh | [Pourquoi] |
-| Tests | Xh | [Pourquoi] |
-| Review & Deploy | Xh | [Pourquoi] |
+| Domain | Effort | Justification |
+|--------|--------|---------------|
+| Specification | Xh | [Why] |
+| Backend | Xh | [Why] |
+| Frontend | Xh | [Why] |
+| Tests | Xh | [Why] |
+| Review & Deploy | Xh | [Why] |
 
-## Hypothèses
-- [Hypothèse 1 : condition pour que l'estimation tienne]
-- [Hypothèse 2]
+## Assumptions
+- [Assumption 1: condition for estimation to hold]
+- [Assumption 2]
 
-## Facteurs de variabilité
-| Facteur | Impact si réalisé |
-|---------|-------------------|
-| [Facteur 1] | +X jours |
-| [Facteur 2] | +Y jours |
+## Variability Factors
+| Factor | Impact if realized |
+|--------|-------------------|
+| [Factor 1] | +X days |
+| [Factor 2] | +Y days |
 ```
 
-### Livrable 2 : Découpage en Tâches
+### Deliverable 2: Task Breakdown
 
 ```markdown
-# Découpage : [Nom de la feature]
+# Task Breakdown: [Feature Name]
 
-## Tâches identifiées
+## Identified Tasks
 
-### Tâche 1 : [Titre clair et actionnable]
-- **Domaine** : [Backend/Frontend/DevOps/Full-stack]
-- **Effort** : [X]h
-- **Dépendances** : [Aucune / Tâche N]
-- **Definition of Done** :
-  - [ ] [Critère 1]
-  - [ ] [Critère 2]
+### Task 1: [Clear and actionable title]
+- **Domain**: [Backend/Frontend/DevOps/Full-stack]
+- **Effort**: [X]h
+- **Dependencies**: [None / Task N]
+- **Definition of Done**:
+  - [ ] [Criterion 1]
+  - [ ] [Criterion 2]
 
-### Tâche 2 : [Titre]
+### Task 2: [Title]
 ...
 
-## Ordre d'exécution recommandé
+## Recommended Execution Order
 
-1. [Tâche X] - Bloquante pour les autres
-2. [Tâche Y] - Peut commencer après X
-3. [Tâche Z] - Parallélisable avec Y
+1. [Task X] - Blocking for others
+2. [Task Y] - Can start after X
+3. [Task Z] - Parallelizable with Y
 
-## Dépendances externes
+## External Dependencies
 
-| Dépendance | Responsable | Statut | Bloquant ? |
-|------------|-------------|--------|------------|
-| [API tierce] | [Qui] | [À confirmer] | [Oui/Non] |
+| Dependency | Responsible | Status | Blocking? |
+|------------|-------------|--------|-----------|
+| [Third-party API] | [Who] | [To confirm] | [Yes/No] |
 ```
 
-### Livrable 3 : Analyse des Risques
+### Deliverable 3: Risk Analysis
 
 ```markdown
-# Risques : [Nom de la feature]
+# Risks: [Feature Name]
 
-## Matrice des risques
+## Risk Matrix
 
-### 🔴 Élevés (à traiter avant de commencer)
+### 🔴 High (to address before starting)
 
-| Risque | Probabilité | Impact | Mitigation |
-|--------|-------------|--------|------------|
-| [Risque] | Haute | Élevé | [Action concrète] |
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| [Risk] | High | High | [Concrete action] |
 
-### 🟡 Moyens (à surveiller)
+### 🟡 Medium (to monitor)
 
-| Risque | Probabilité | Impact | Mitigation |
-|--------|-------------|--------|------------|
-| [Risque] | Moyenne | Moyen | [Action] |
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| [Risk] | Medium | Medium | [Action] |
 
-### 🟢 Faibles (acceptés)
+### 🟢 Low (accepted)
 
-| Risque | Probabilité | Impact | Mitigation |
-|--------|-------------|--------|------------|
-| [Risque] | Faible | Faible | [Accepté / Monitor] |
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| [Risk] | Low | Low | [Accepted / Monitor] |
 
-## Plan de contingence
+## Contingency Plan
 
-Si [risque majeur] se réalise :
+If [major risk] materializes:
 → [Action 1]
 → [Action 2]
-→ [Point de décision : abandonner / pivoter / continuer]
+→ [Decision point: abandon / pivot / continue]
 ```
 
-### HITL : 🔴 BLOQUANTE
+### HITL: 🔴 BLOCKING
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation OBLIGATOIRE
+## 🔴 CHECKPOINT - MANDATORY Validation
 
-### Livrables produits
+### Deliverables produced
 
-| Livrable | Résumé |
-|----------|--------|
-| Estimation | [X] j/h, fourchette [Min-Max] |
-| Découpage | [N] tâches |
-| Risques | [X] élevés, [Y] moyens |
+| Deliverable | Summary |
+|-------------|---------|
+| Estimation | [X] p/d, range [Min-Max] |
+| Breakdown | [N] tasks |
+| Risks | [X] high, [Y] medium |
 
-### Points clés
+### Key Points
 
-- **Effort total** : [X] jours/homme
-- **Durée estimée** : [Y] jours calendaires
-- **Tâches critiques** : [Liste]
-- **Risques majeurs** : [Liste]
+- **Total effort**: [X] person-days
+- **Estimated duration**: [Y] calendar days
+- **Critical tasks**: [List]
+- **Major risks**: [List]
 
-### Hypothèses à valider
+### Assumptions to validate
 
-- [ ] [Hypothèse 1]
-- [ ] [Hypothèse 2]
+- [ ] [Assumption 1]
+- [ ] [Assumption 2]
 
 ---
 
-⚠️ **JE NE PEUX PAS PASSER À LA SPÉCIFICATION SANS VOTRE VALIDATION**
+⚠️ **I CANNOT PROCEED TO SPECIFICATION WITHOUT YOUR VALIDATION**
 
-Validez-vous :
-- [ ] L'estimation globale
-- [ ] Le découpage en tâches
-- [ ] Les risques identifiés
-- [ ] Les hypothèses
+Do you validate:
+- [ ] The global estimation
+- [ ] The task breakdown
+- [ ] The identified risks
+- [ ] The assumptions
 
-**Répondez** :
-- ✅ **"Validé"** → Je passe à la spécification technique
-- ❌ **"Ajuster"** → Précisez ce qu'il faut revoir
-- ❓ **Questions** → Je clarifie avant de continuer
+**Reply**:
+- ✅ **"Validated"** → I proceed to technical specification
+- ❌ **"Adjust"** → Specify what to review
+- ❓ **Questions** → I clarify before continuing
 
 ---
 ```
 
 ---
 
-## Étape 3 : Spécification Technique
+## Step 3: Technical Specification
 
-### Agents
+### Skills
 - `skills/strategy/specification.md`
 - `skills/strategy/architecture.md`
 
-### Objectif
-Définir **COMMENT** implémenter. Aucun code n'est écrit avant validation de la spec.
+### Objective
+Define **HOW** to implement. No code is written before spec validation.
 
-### Livrable 1 : Spécification Technique
+### Deliverable 1: Technical Specification
 
 ```markdown
-# Spécification Technique : [Feature]
+# Technical Specification: [Feature]
 
-## 1. Résumé de l'approche
-[2-3 paragraphes expliquant la solution technique choisie]
+## 1. Approach Summary
+[2-3 paragraphs explaining the chosen technical solution]
 
 ## 2. Architecture
 
-### Composants impactés
-| Composant | Action | Description |
+### Impacted Components
+| Component | Action | Description |
 |-----------|--------|-------------|
-| [Composant] | Créer/Modifier | [Ce qui change] |
+| [Component] | Create/Modify | [What changes] |
 
-### Diagramme
+### Diagram
 ```
-[Schéma ASCII ou référence Mermaid]
+[ASCII schema or Mermaid reference]
 ```
 
-## 3. Modèle de données
+## 3. Data Model
 
-### Nouvelles entités
+### New Entities
 ```prisma
-model NouvelleEntite {
+model NewEntity {
   id        String   @id @default(cuid())
   // ...
 }
@@ -325,24 +325,24 @@ model NouvelleEntite {
 
 ### Modifications
 ```prisma
-model EntiteExistante {
-  // Ajout de champ
-  nouveauChamp String?
+model ExistingEntity {
+  // Field addition
+  newField String?
 }
 ```
 
 ### Migrations
-- [ ] Migration 1 : [Description + réversibilité]
+- [ ] Migration 1: [Description + reversibility]
 
 ## 4. API
 
 ### Endpoints
-| Méthode | Route | Description | Auth |
-|---------|-------|-------------|------|
-| POST | /api/xxx | Créer | Oui |
-| GET | /api/xxx/:id | Lire | Oui |
+| Method | Route | Description | Auth |
+|--------|-------|-------------|------|
+| POST | /api/xxx | Create | Yes |
+| GET | /api/xxx/:id | Read | Yes |
 
-### Contrats
+### Contracts
 ```typescript
 // Request
 interface CreateXxxRequest {
@@ -364,12 +364,12 @@ type CreateXxxError =
 
 ## 5. Frontend
 
-### Composants
-| Composant | Responsabilité | Props |
+### Components
+| Component | Responsibility | Props |
 |-----------|----------------|-------|
-| [Composant] | [Rôle] | [Props principales] |
+| [Component] | [Role] | [Main props] |
 
-### État
+### State
 ```typescript
 interface FeatureState {
   data: Xxx[];
@@ -381,147 +381,147 @@ interface FeatureState {
 ### Routes/Pages
 | Route | Page | Description |
 |-------|------|-------------|
-| /xxx | XxxPage | Liste des xxx |
+| /xxx | XxxPage | List of xxx |
 
-## 6. Tests requis
+## 6. Required Tests
 
-### Unitaires (obligatoires)
-- [ ] [Fonction/Composant] : [Cas testé]
+### Unit (mandatory)
+- [ ] [Function/Component]: [Test case]
 
-### Intégration (obligatoires)
-- [ ] [Endpoint] : [Scénario]
+### Integration (mandatory)
+- [ ] [Endpoint]: [Scenario]
 
-### E2E (si parcours critique)
-- [ ] [Parcours utilisateur]
+### E2E (if critical path)
+- [ ] [User journey]
 
-## 7. Sécurité
+## 7. Security
 
-- **Authentification** : [Requise/Non]
-- **Autorisation** : [Règles]
-- **Validation** : [Schéma Zod]
-- **Données sensibles** : [Mesures]
+- **Authentication**: [Required/No]
+- **Authorization**: [Rules]
+- **Validation**: [Zod schema]
+- **Sensitive data**: [Measures]
 
 ## 8. Performance
 
-- **Pagination** : [Oui/Non, stratégie]
-- **Cache** : [Stratégie]
-- **Lazy loading** : [Oui/Non]
+- **Pagination**: [Yes/No, strategy]
+- **Cache**: [Strategy]
+- **Lazy loading**: [Yes/No]
 
-## 9. Hors scope (explicite)
+## 9. Out of Scope (explicit)
 
-- [Ce qui n'est PAS fait dans cette feature]
-- [Ce qui sera fait dans une future itération]
+- [What is NOT done in this feature]
+- [What will be done in a future iteration]
 ```
 
-### Livrable 2 : ADR (Architecture Decision Record)
+### Deliverable 2: ADR (Architecture Decision Record)
 
-*Uniquement si décision structurante*
+*Only if structural decision*
 
 ```markdown
-# ADR-XXX : [Titre de la décision]
+# ADR-XXX: [Decision Title]
 
-## Statut
-[Proposé / Accepté / Déprécié]
+## Status
+[Proposed / Accepted / Deprecated]
 
-## Contexte
-[Pourquoi cette décision doit être prise maintenant]
+## Context
+[Why this decision must be made now]
 
-## Options considérées
+## Options Considered
 
-### Option A : [Nom]
-**Avantages** :
+### Option A: [Name]
+**Pros**:
 - [+1]
 
-**Inconvénients** :
+**Cons**:
 - [-1]
 
-### Option B : [Nom]
-**Avantages** :
+### Option B: [Name]
+**Pros**:
 - [+1]
 
-**Inconvénients** :
+**Cons**:
 - [-1]
 
-## Décision
-[L'option choisie et pourquoi]
+## Decision
+[The chosen option and why]
 
-## Conséquences
-- [Conséquence 1]
-- [Conséquence 2]
+## Consequences
+- [Consequence 1]
+- [Consequence 2]
 
-## Références
-- [Lien vers documentation externe si pertinent]
+## References
+- [Link to external documentation if relevant]
 ```
 
-### HITL : 🔴 BLOQUANTE
+### HITL: 🔴 BLOCKING
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation OBLIGATOIRE
+## 🔴 CHECKPOINT - MANDATORY Validation
 
-### Spécification produite
+### Specification produced
 
-| Élément | Détail |
+| Element | Detail |
 |---------|--------|
-| Architecture | [Résumé en 1 ligne] |
-| Data model | [N] entités ([X] nouvelles, [Y] modifiées) |
+| Architecture | [1-line summary] |
+| Data model | [N] entities ([X] new, [Y] modified) |
 | API | [N] endpoints |
-| Frontend | [N] composants |
-| ADR | [Oui : titre / Non] |
+| Frontend | [N] components |
+| ADR | [Yes: title / No] |
 
-### Décisions techniques prises
+### Technical decisions made
 
-1. [Décision 1] : [Choix fait]
-2. [Décision 2] : [Choix fait]
+1. [Decision 1]: [Choice made]
+2. [Decision 2]: [Choice made]
 
-### Points d'attention
+### Points of attention
 
-- [Point 1 nécessitant votre attention]
+- [Point 1 requiring your attention]
 - [Point 2]
 
 ---
 
-⚠️ **JE NE PEUX PAS ÉCRIRE DE CODE SANS VOTRE VALIDATION**
+⚠️ **I CANNOT WRITE CODE WITHOUT YOUR VALIDATION**
 
-Validez-vous :
-- [ ] L'architecture proposée
-- [ ] Le modèle de données
-- [ ] Les choix techniques
-- [ ] Le périmètre (scope vs hors-scope)
+Do you validate:
+- [ ] The proposed architecture
+- [ ] The data model
+- [ ] The technical choices
+- [ ] The scope (in-scope vs out-of-scope)
 
-**Répondez** :
-- ✅ **"Validé"** → Je commence l'implémentation
-- ❌ **"Ajuster"** → Précisez les points à revoir
-- ❓ **Questions** → Je clarifie
+**Reply**:
+- ✅ **"Validated"** → I start implementation
+- ❌ **"Adjust"** → Specify points to review
+- ❓ **Questions** → I clarify
 
 ---
 ```
 
 ---
 
-## Étape 4 : Implémentation
+## Step 4: Implementation
 
-### Agents
+### Skills
 - `skills/development/frontend.md`
 - `skills/development/backend.md`
 - `skills/development/database.md`
 
-### Mode : AUTONOME
+### Mode: AUTONOMOUS
 
-La spécification a été validée. L'implémentation suit le plan sans interruption.
+The specification has been validated. Implementation follows the plan without interruption.
 
 ### Process
-1. Suivre la spécification tâche par tâche
-2. Écrire les tests en parallèle du code
-3. Respecter les conventions du projet
-4. Commits atomiques et descriptifs
+1. Follow the specification task by task
+2. Write tests alongside the code
+3. Respect project conventions
+4. Atomic and descriptive commits
 
-### Livrables
-- Code source implémenté
-- Tests unitaires
-- Tests d'intégration
+### Deliverables
+- Implemented source code
+- Unit tests
+- Integration tests
 
-### HITL : 🟢 AUTO
+### HITL: 🟢 AUTO
 
 ```yaml
 auto_checks:
@@ -531,134 +531,134 @@ auto_checks:
   - npm run build       # Success
 
 on_failure:
-  - Tentative de correction automatique
-  - Si échec répété → escalade humaine
+  - Attempt automatic correction
+  - If repeated failure → human escalation
 ```
 
 ---
 
-## Étape 5 : Code Review
+## Step 5: Code Review
 
-### Agent
+### Skill
 `skills/quality/code-review.md`
 
-### Livrable : Rapport de Review
+### Deliverable: Review Report
 
 ```markdown
-# Code Review : [Feature]
+# Code Review: [Feature]
 
-## Verdict : [APPROVED / CHANGES_REQUESTED]
+## Verdict: [APPROVED / CHANGES_REQUESTED]
 
-## Résumé
+## Summary
 
-| Critère | Statut | Commentaire |
-|---------|--------|-------------|
-| Fonctionnel | ✅/⚠️/❌ | [Note] |
-| Lisibilité | ✅/⚠️/❌ | [Note] |
+| Criterion | Status | Comment |
+|-----------|--------|---------|
+| Functional | ✅/⚠️/❌ | [Note] |
+| Readability | ✅/⚠️/❌ | [Note] |
 | Tests | ✅/⚠️/❌ | [Note] |
 | Performance | ✅/⚠️/❌ | [Note] |
-| Sécurité | ✅/⚠️/❌ | [Note] |
+| Security | ✅/⚠️/❌ | [Note] |
 
-## Points positifs
-- [Ce qui est bien fait]
+## Positive Points
+- [What is well done]
 
-## À corriger
+## To Fix
 
-### 🔴 Bloquants
-| Fichier | Ligne | Problème | Suggestion |
-|---------|-------|----------|------------|
+### 🔴 Blockers
+| File | Line | Problem | Suggestion |
+|------|------|---------|------------|
 | [file] | [L] | [Issue] | [Fix] |
 
-### 🟡 Recommandés
-| Fichier | Ligne | Problème | Suggestion |
-|---------|-------|----------|------------|
+### 🟡 Recommended
+| File | Line | Problem | Suggestion |
+|------|------|---------|------------|
 | [file] | [L] | [Issue] | [Fix] |
 
-### 🟢 Suggestions (optionnel)
-| Fichier | Ligne | Suggestion |
-|---------|-------|------------|
+### 🟢 Suggestions (optional)
+| File | Line | Suggestion |
+|------|------|------------|
 | [file] | [L] | [Improvement] |
 ```
 
-### HITL : 🟡 INFORMATIVE
+### HITL: 🟡 ADVISORY
 
 ```markdown
 ---
-## 🟡 Review terminée
+## 🟡 Review completed
 
-**Verdict** : [APPROVED / CHANGES_REQUESTED]
-**Bloquants** : [N]
-**Recommandés** : [M]
+**Verdict**: [APPROVED / CHANGES_REQUESTED]
+**Blockers**: [N]
+**Recommended**: [M]
 
-[Si APPROVED] : Prêt pour déploiement. Dois-je continuer ?
+[If APPROVED]: Ready for deployment. Should I continue?
 
-[Si CHANGES_REQUESTED] : [N] corrections nécessaires.
-Dois-je les appliquer ?
+[If CHANGES_REQUESTED]: [N] corrections needed.
+Should I apply them?
 
 ---
 ```
 
 ---
 
-## Étape 6 : Déploiement
+## Step 6: Deployment
 
-### Agent
+### Skill
 `skills/operations/deployment.md`
 
 ### Process
-1. Merge dans main (si feature branch)
-2. Déploiement staging
-3. Smoke tests staging
-4. **GATE BLOQUANTE** - Validation pour prod
-5. Déploiement production
-6. Vérification post-deploy
+1. Merge to main (if feature branch)
+2. Staging deployment
+3. Staging smoke tests
+4. **BLOCKING GATE** - Validation for prod
+5. Production deployment
+6. Post-deploy verification
 
-### HITL : 🔴 BLOQUANTE (avant production)
+### HITL: 🔴 BLOCKING (before production)
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Déploiement Production
+## 🔴 CHECKPOINT - Production Deployment
 
-### Statut staging
+### Staging Status
 
-| Check | Statut |
+| Check | Status |
 |-------|--------|
-| Déployé | ✅ |
-| Smoke tests | ✅ [N]/[N] passés |
-| Erreurs logs | ✅ Aucune |
-| Performance | ✅ Normale |
+| Deployed | ✅ |
+| Smoke tests | ✅ [N]/[N] passed |
+| Log errors | ✅ None |
+| Performance | ✅ Normal |
 
-### URL staging pour test
+### Staging URL for testing
 [URL]
 
-### Changements inclus
+### Changes included
 - [Feature/Fix 1]
 - [Feature/Fix 2]
 
-### Risques déploiement
-| Risque | Mitigation |
-|--------|------------|
-| [Risque] | [Plan rollback] |
+### Deployment Risks
+| Risk | Mitigation |
+|------|------------|
+| [Risk] | [Rollback plan] |
 
 ---
 
-⚠️ **PRÊT POUR PRODUCTION**
+⚠️ **READY FOR PRODUCTION**
 
-Avez-vous testé sur staging ?
+Have you tested on staging?
 
-**Répondez** :
-- ✅ **"Go prod"** → Je déploie en production
-- ⏸️ **"Attendre"** → Je reste en staging
-- 🔍 **"Tester d'abord"** → Prenez le temps, je reste en attente
+**Reply**:
+- ✅ **"Go prod"** → I deploy to production
+- ⏸️ **"Wait"** → I stay in staging
+- 🔍 **"Test first"** → Take your time, I remain on standby
 
 ---
 ```
 
 ---
 
-## Raccourcis pour features simples
+## Shortcuts for Simple Features
 
-Si la feature est **triviale** (< 2h, pas de changement de data model, pas d'API) :
+If the feature is **trivial** (< 2h, no data model change, no API):
 
 ```yaml
 simplified_flow:
@@ -670,28 +670,28 @@ simplified_flow:
     - low_risk
 
   steps:
-    1. Brief rapide (🟡 informative)
-    2. Implémentation directe (🟢 auto)
-    3. Review rapide (🟡 informative)
-    4. Déploiement (🟡 informative, pas bloquante)
+    1. Quick brief (🟡 advisory)
+    2. Direct implementation (🟢 auto)
+    3. Quick review (🟡 advisory)
+    4. Deployment (🟡 advisory, not blocking)
 
-  example: "Changer la couleur d'un bouton"
+  example: "Change a button color"
 ```
 
-L'orchestrateur détecte automatiquement si le raccourci s'applique.
+The orchestrator automatically detects if the shortcut applies.
 
 ---
 
-## Critères de sortie du workflow
+## Workflow Exit Criteria
 
 ```markdown
-□ Brief technique validé
-□ Estimation et découpage validés
-□ Spécification technique validée
-□ Code implémenté selon spec
-□ Tests passants (unit, integration)
-□ Code review approuvé
-□ Déployé en staging + smoke tests OK
-□ Déployé en production
-□ Monitoring OK (pas de régression)
+□ Technical brief validated
+□ Estimation and breakdown validated
+□ Technical specification validated
+□ Code implemented according to spec
+□ Tests passing (unit, integration)
+□ Code review approved
+□ Deployed to staging + smoke tests OK
+□ Deployed to production
+□ Monitoring OK (no regression)
 ```

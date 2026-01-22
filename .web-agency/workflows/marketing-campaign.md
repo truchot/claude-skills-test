@@ -1,201 +1,201 @@
-# Workflow : Campagne Marketing
+# Workflow: Marketing Campaign
 
-Workflow complet pour une campagne marketing, de la stratégie à l'analyse des résultats.
+Complete workflow for a marketing campaign, from strategy to results analysis.
 
-## Déclencheurs
+## Triggers
 
-- "Lancer une campagne"
-- "Stratégie marketing pour..."
-- "Acquisition pour le lancement"
-- "Plan marketing"
+- "Launch a campaign"
+- "Marketing strategy for..."
+- "Acquisition for launch"
+- "Marketing plan"
 
-## Étapes avec Gates HITL
+## Steps with HITL Gates
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ 1. BRIEF & OBJECTIFS        │ Définir les objectifs SMART       │
-│    Agent: strategy          │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation objectifs + budget      │
+│ 1. BRIEF & OBJECTIVES       │ Define SMART objectives           │
+│    Skill: strategy          │                                    │
+│    🔴 BLOCKING Gate         │ Objectives + budget validation     │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 2. AUDIENCE & PERSONAS      │ Définir les cibles                 │
-│    Agent: content           │                                    │
-│    🟡 Gate INFORMATIVE      │ Validation personas                │
+│ 2. AUDIENCE & PERSONAS      │ Define targets                     │
+│    Skill: content           │                                    │
+│    🟡 ADVISORY Gate         │ Personas validation                │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 3. STRATÉGIE CANAUX         │ Mix canaux + budget allocation     │
-│    Agent: growth            │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation budget + canaux         │
+│ 3. CHANNEL STRATEGY         │ Channel mix + budget allocation    │
+│    Skill: growth            │                                    │
+│    🔴 BLOCKING Gate         │ Budget + channels validation       │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 4. CONTENU & CRÉATIFS       │ Briefs contenu, messages clés      │
-│    Agent: content           │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation messages + ton          │
+│ 4. CONTENT & CREATIVES      │ Content briefs, key messages       │
+│    Skill: content           │                                    │
+│    🔴 BLOCKING Gate         │ Messages + tone validation         │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 5. TRACKING SETUP           │ Plan de mesure, pixels, events     │
-│    Agent: analytics         │                                    │
-│    🟢 Gate AUTO             │ Vérification technique             │
+│ 5. TRACKING SETUP           │ Measurement plan, pixels, events   │
+│    Skill: analytics         │                                    │
+│    🟢 AUTO Gate             │ Technical verification             │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 6. LANCEMENT                │ Go live campagnes                  │
-│    Agent: growth            │                                    │
-│    🔴 Gate BLOQUANTE        │ Go/No-Go avant dépenses            │
+│ 6. LAUNCH                   │ Campaigns go live                  │
+│    Skill: growth            │                                    │
+│    🔴 BLOCKING Gate         │ Go/No-Go before spend              │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 7. MONITORING & OPTIM       │ Suivi quotidien, ajustements       │
-│    Agent: analytics         │                                    │
-│    🟡 Gate INFORMATIVE      │ Rapport hebdomadaire               │
+│ 7. MONITORING & OPTIM       │ Daily tracking, adjustments        │
+│    Skill: analytics         │                                    │
+│    🟡 ADVISORY Gate         │ Weekly report                      │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 8. BILAN & LEARNINGS        │ Analyse finale, recommandations    │
-│    Agent: analytics         │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation learnings + next steps  │
+│ 8. REVIEW & LEARNINGS       │ Final analysis, recommendations    │
+│    Skill: analytics         │                                    │
+│    🔴 BLOCKING Gate         │ Learnings + next steps validation  │
 └─────────────────────────────┴────────────────────────────────────┘
 ```
 
-## Détail des étapes
+## Step Details
 
-### Étape 1 : Brief & Objectifs
+### Step 1: Brief & Objectives
 
-**Agent** : `skills/strategy/specification.md` + contexte marketing
+**Skill**: `skills/strategy/specification.md` + marketing context
 
-**Output** :
+**Output**:
 - `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/brief.md`
 
-**Contenu du brief** :
+**Brief content**:
 ```yaml
 campaign:
   id: "CAMP-001"
-  name: "Lancement produit X"
+  name: "Product X Launch"
   type: [acquisition | awareness | retention | activation]
 
 context:
-  why: "Pourquoi cette campagne maintenant"
-  product: "Produit/service concerné"
-  market: "Contexte marché"
+  why: "Why this campaign now"
+  product: "Product/service concerned"
+  market: "Market context"
 
 objectives:
   primary:
-    metric: "Leads qualifiés"
+    metric: "Qualified leads"
     target: 500
     baseline: 0
     deadline: "2024-03-31"
 
   secondary:
-    - metric: "Trafic site"
+    - metric: "Site traffic"
       target: "+50%"
     - metric: "Brand awareness"
       target: "+20 points"
 
 budget:
-  total: 15000€
+  total: $15000
   breakdown:
-    paid: 10000€
-    content: 3000€
-    tools: 2000€
+    paid: $10000
+    content: $3000
+    tools: $2000
 
 constraints:
-  - "Pas de comparaison directe concurrents"
-  - "Tone of voice approuvé uniquement"
+  - "No direct competitor comparison"
+  - "Approved tone of voice only"
 
 success_criteria:
-  - "CPA < 30€"
+  - "CPA < $30"
   - "ROAS > 3"
 ```
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation Brief Campagne
+## 🔴 CHECKPOINT - Campaign Brief Validation
 
-### Campagne : {{CAMPAIGN_NAME}}
+### Campaign: {{CAMPAIGN_NAME}}
 
-| Attribut | Valeur |
-|----------|--------|
+| Attribute | Value |
+|-----------|-------|
 | **Type** | {{TYPE}} |
-| **Objectif principal** | {{OBJECTIVE}} |
-| **Budget total** | {{BUDGET}}€ |
-| **Durée** | {{DURATION}} |
+| **Primary objective** | {{OBJECTIVE}} |
+| **Total budget** | ${{BUDGET}} |
+| **Duration** | {{DURATION}} |
 
-### Objectifs SMART
+### SMART Objectives
 
-| Objectif | Métrique | Cible | Actuel | Deadline |
-|----------|----------|-------|--------|----------|
-| Principal | {{METRIC}} | {{TARGET}} | {{BASELINE}} | {{DATE}} |
-| Secondaire | {{METRIC}} | {{TARGET}} | - | - |
+| Objective | Metric | Target | Current | Deadline |
+|-----------|--------|--------|---------|----------|
+| Primary | {{METRIC}} | {{TARGET}} | {{BASELINE}} | {{DATE}} |
+| Secondary | {{METRIC}} | {{TARGET}} | - | - |
 
-### Budget proposé
+### Proposed Budget
 
-| Poste | Montant | % |
-|-------|---------|---|
-| Paid media | {{X}}€ | {{Y%}} |
-| Contenu | {{X}}€ | {{Y%}} |
-| Outils | {{X}}€ | {{Y%}} |
+| Item | Amount | % |
+|------|--------|---|
+| Paid media | ${{X}} | {{Y%}} |
+| Content | ${{X}} | {{Y%}} |
+| Tools | ${{X}} | {{Y%}} |
 
-### Points d'attention
+### Points of Attention
 
 - {{POINT_1}}
 - {{POINT_2}}
 
 ---
 
-⚠️ **VALIDATION REQUISE AVANT DE CONTINUER**
+⚠️ **VALIDATION REQUIRED BEFORE CONTINUING**
 
-- [ ] Les objectifs sont réalistes et alignés avec la stratégie
-- [ ] Le budget est approuvé
-- [ ] Les contraintes sont comprises
+- [ ] Objectives are realistic and aligned with strategy
+- [ ] Budget is approved
+- [ ] Constraints are understood
 
-**Décision** : Validé / À ajuster / Refusé
+**Decision**: Validated / To adjust / Rejected
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-001-brief.md`
+**Documented decision**: `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-001-brief.md`
 
 ---
 
-### Étape 2 : Audience & Personas
+### Step 2: Audience & Personas
 
-**Agent** : `skills/marketing/content.md`
+**Skill**: `skills/marketing/content.md`
 
-**Output** :
+**Output**:
 - `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/audience.md`
 
-**🟡 Gate INFORMATIVE** : Présente les personas et propose de continuer
+**🟡 ADVISORY Gate**: Presents personas and proposes to continue
 
 ---
 
-### Étape 3 : Stratégie Canaux
+### Step 3: Channel Strategy
 
-**Agent** : `skills/marketing/growth.md`
+**Skill**: `skills/marketing/growth.md`
 
-**Output** :
+**Output**:
 - `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/channel-strategy.md`
 
-**Contenu** :
+**Content**:
 ```yaml
 channels:
   - name: "Google Ads - Search"
     objective: "Capture intent"
-    budget: 5000€
+    budget: $5000
     kpis:
-      cpc_target: 2€
+      cpc_target: $2
       ctr_target: 5%
       conversions_target: 200
     audiences:
-      - "Keywords transactionnels"
-      - "Remarketing site"
+      - "Transactional keywords"
+      - "Site remarketing"
 
   - name: "LinkedIn Ads"
     objective: "B2B awareness + leads"
-    budget: 3000€
+    budget: $3000
     kpis:
-      cpm_target: 15€
+      cpm_target: $15
       leads_target: 50
     audiences:
-      - "Decision makers tech"
-      - "Lookalike clients"
+      - "Tech decision makers"
+      - "Client lookalikes"
 
   - name: "Content / SEO"
     objective: "Organic traffic"
-    budget: 2000€ (production)
+    budget: $2000 (production)
     content:
-      - "5 articles piliers"
+      - "5 pillar articles"
       - "1 lead magnet"
 
 funnel_mapping:
@@ -209,77 +209,77 @@ timeline:
   week_5_6: "Optimization"
 ```
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation Stratégie Canaux
+## 🔴 CHECKPOINT - Channel Strategy Validation
 
-### Mix canaux proposé
+### Proposed Channel Mix
 
-| Canal | Budget | % | Objectif |
-|-------|--------|---|----------|
-| Google Ads | {{X}}€ | {{Y%}} | {{OBJ}} |
-| LinkedIn | {{X}}€ | {{Y%}} | {{OBJ}} |
-| Content | {{X}}€ | {{Y%}} | {{OBJ}} |
+| Channel | Budget | % | Objective |
+|---------|--------|---|-----------|
+| Google Ads | ${{X}} | {{Y%}} | {{OBJ}} |
+| LinkedIn | ${{X}} | {{Y%}} | {{OBJ}} |
+| Content | ${{X}} | {{Y%}} | {{OBJ}} |
 
-### Projection de résultats
+### Results Projection
 
-| KPI | Cible | Confiance |
-|-----|-------|-----------|
-| Leads | {{X}} | Haute |
-| CPA moyen | {{X}}€ | Moyenne |
-| ROAS | {{X}} | Moyenne |
+| KPI | Target | Confidence |
+|-----|--------|------------|
+| Leads | {{X}} | High |
+| Average CPA | ${{X}} | Medium |
+| ROAS | {{X}} | Medium |
 
-### Alternatives considérées
+### Alternatives Considered
 
-| Option | Pour | Contre | Décision |
-|--------|------|--------|----------|
-| Facebook Ads | Large reach | B2B moins efficace | Rejeté |
-| TikTok | Tendance | Pas notre cible | Rejeté |
+| Option | For | Against | Decision |
+|--------|-----|---------|----------|
+| Facebook Ads | Large reach | Less effective B2B | Rejected |
+| TikTok | Trending | Not our target | Rejected |
 
-### Risques
+### Risks
 
-| Risque | Impact | Mitigation |
-|--------|--------|------------|
-| CPC élevé | Budget insuffisant | Ajuster keywords |
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| High CPC | Insufficient budget | Adjust keywords |
 
 ---
 
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- [ ] Mix canaux validé
-- [ ] Budget par canal approuvé
-- [ ] Objectifs par canal réalistes
+- [ ] Channel mix validated
+- [ ] Budget per channel approved
+- [ ] Objectives per channel realistic
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-002-channels.md`
+**Documented decision**: `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-002-channels.md`
 
 ---
 
-### Étape 4 : Contenu & Créatifs
+### Step 4: Content & Creatives
 
-**Agent** : `skills/marketing/content.md`
+**Skill**: `skills/marketing/content.md`
 
-**Output** :
+**Output**:
 - `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/content-briefs/`
   - `ad-copies.md`
   - `landing-page.md`
   - `email-sequence.md`
   - `lead-magnet.md`
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation Contenu
+## 🔴 CHECKPOINT - Content Validation
 
-### Messages clés
+### Key Messages
 
-| Message | Cible | Canal |
-|---------|-------|-------|
+| Message | Target | Channel |
+|---------|--------|---------|
 | "{{MESSAGE_1}}" | {{PERSONA}} | Ads |
 | "{{MESSAGE_2}}" | {{PERSONA}} | Landing |
 
@@ -288,43 +288,43 @@ timeline:
 - {{TOV_1}}
 - {{TOV_2}}
 
-### Créatifs requis
+### Required Creatives
 
-| Type | Quantité | Statut |
+| Type | Quantity | Status |
 |------|----------|--------|
-| Ad copies | {{X}} variations | 📝 Brief prêt |
-| Visuels | {{X}} formats | ⏳ En attente |
-| Landing page | {{X}} | 📝 Brief prêt |
+| Ad copies | {{X}} variations | 📝 Brief ready |
+| Visuals | {{X}} formats | ⏳ Pending |
+| Landing page | {{X}} | 📝 Brief ready |
 
-### Exemples d'ad copies
+### Ad Copy Examples
 
-**Variation A** :
+**Variation A**:
 > {{AD_COPY_A}}
 
-**Variation B** :
+**Variation B**:
 > {{AD_COPY_B}}
 
 ---
 
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- [ ] Messages clés approuvés
-- [ ] Tone of voice respecté
-- [ ] Pas de claims problématiques
+- [ ] Key messages approved
+- [ ] Tone of voice respected
+- [ ] No problematic claims
 
 ---
 ```
 
 ---
 
-### Étape 5 : Tracking Setup
+### Step 5: Tracking Setup
 
-**Agent** : `skills/marketing/analytics.md`
+**Skill**: `skills/marketing/analytics.md`
 
-**Output** :
+**Output**:
 - `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/tracking-plan.md`
 
-**🟢 Gate AUTO** : Vérification technique
+**🟢 AUTO Gate**: Technical verification
 
 ```yaml
 checks:
@@ -341,191 +341,191 @@ checks:
   - attribution_model: "data-driven"
 
 result: PASS / FAIL
-if_fail: escalade vers humain
+if_fail: escalate to human
 ```
 
 ---
 
-### Étape 6 : Lancement
+### Step 6: Launch
 
-**Agent** : `skills/marketing/growth.md`
+**Skill**: `skills/marketing/growth.md`
 
-**🔴 Gate BLOQUANTE** : Go/No-Go
+**🔴 BLOCKING Gate**: Go/No-Go
 
 ```markdown
 ---
-## 🔴 GO/NO-GO - Lancement Campagne
+## 🔴 GO/NO-GO - Campaign Launch
 
-### Checklist pré-lancement
+### Pre-launch Checklist
 
-| Item | Statut | Responsable |
-|------|--------|-------------|
-| Brief validé | ✅ | {{WHO}} |
-| Budget débloqué | ✅ | {{WHO}} |
-| Créatifs prêts | ✅ | {{WHO}} |
+| Item | Status | Owner |
+|------|--------|-------|
+| Brief validated | ✅ | {{WHO}} |
+| Budget released | ✅ | {{WHO}} |
+| Creatives ready | ✅ | {{WHO}} |
 | Landing page live | ✅ | {{WHO}} |
-| Tracking vérifié | ✅ | Auto |
-| Emails configurés | ✅ | {{WHO}} |
+| Tracking verified | ✅ | Auto |
+| Emails configured | ✅ | {{WHO}} |
 
-### Risques résiduels
+### Residual Risks
 
-| Risque | Niveau | Accepté ? |
-|--------|--------|-----------|
-| {{RISK}} | Faible | ✅ |
+| Risk | Level | Accepted? |
+|------|-------|-----------|
+| {{RISK}} | Low | ✅ |
 
-### Dépenses J1
+### Day 1 Spend
 
-| Canal | Budget J1 |
-|-------|-----------|
-| Google Ads | {{X}}€ |
-| LinkedIn | {{X}}€ |
+| Channel | Day 1 Budget |
+|---------|--------------|
+| Google Ads | ${{X}} |
+| LinkedIn | ${{X}} |
 
 ---
 
-⚠️ **DÉCISION REQUISE**
+⚠️ **DECISION REQUIRED**
 
-**GO** : Lancer les campagnes
-**NO-GO** : Reporter (préciser raison)
+**GO**: Launch campaigns
+**NO-GO**: Postpone (specify reason)
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-003-go-live.md`
+**Documented decision**: `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-003-go-live.md`
 
 ---
 
-### Étape 7 : Monitoring & Optimisation
+### Step 7: Monitoring & Optimization
 
-**Agent** : `skills/marketing/analytics.md`
+**Skill**: `skills/marketing/analytics.md`
 
-**Output** :
+**Output**:
 - `.project/05-quality/campaigns/{{CAMPAIGN_ID}}/reports/`
   - `week-1.md`
   - `week-2.md`
   - ...
 
-**🟡 Gate INFORMATIVE** : Rapport hebdomadaire
+**🟡 ADVISORY Gate**: Weekly report
 
 ```markdown
-## 🟡 Rapport Semaine {{N}}
+## 🟡 Report Week {{N}}
 
-### Performance vs Objectifs
+### Performance vs Objectives
 
-| KPI | Cible | Actuel | Tendance | Status |
-|-----|-------|--------|----------|--------|
+| KPI | Target | Current | Trend | Status |
+|-----|--------|---------|-------|--------|
 | Leads | {{X}} | {{Y}} | {{+/-Z%}} | 🟢/🟡/🔴 |
-| CPA | {{X}}€ | {{Y}}€ | {{+/-Z%}} | 🟢/🟡/🔴 |
-| Budget spent | {{X}}€ | {{Y}}€ | - | - |
+| CPA | ${{X}} | ${{Y}} | {{+/-Z%}} | 🟢/🟡/🔴 |
+| Budget spent | ${{X}} | ${{Y}} | - | - |
 
-### Top performers
+### Top Performers
 
-| Canal | ROAS | Action |
-|-------|------|--------|
+| Channel | ROAS | Action |
+|---------|------|--------|
 | {{CHANNEL}} | {{X}} | Scale +20% |
 
 ### Underperformers
 
-| Canal | Issue | Action |
-|-------|-------|--------|
-| {{CHANNEL}} | CPA élevé | Pause + optimize |
+| Channel | Issue | Action |
+|---------|-------|--------|
+| {{CHANNEL}} | High CPA | Pause + optimize |
 
-### Ajustements proposés
+### Proposed Adjustments
 
-1. {{AJUSTEMENT_1}}
-2. {{AJUSTEMENT_2}}
+1. {{ADJUSTMENT_1}}
+2. {{ADJUSTMENT_2}}
 
-Dois-je appliquer ces ajustements ?
+Should I apply these adjustments?
 ```
 
 ---
 
-### Étape 8 : Bilan & Learnings
+### Step 8: Review & Learnings
 
-**Agent** : `skills/marketing/analytics.md`
+**Skill**: `skills/marketing/analytics.md`
 
-**Output** :
-- `.project/05-quality/campaigns/{{CAMPAIGN_ID}}/bilan-final.md`
-- `.project/07-audit/sessions/{{SESSION_ID}}/` (log complet)
+**Output**:
+- `.project/05-quality/campaigns/{{CAMPAIGN_ID}}/final-review.md`
+- `.project/07-audit/sessions/{{SESSION_ID}}/` (complete log)
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Bilan Campagne
+## 🔴 CHECKPOINT - Campaign Review
 
-### Résultats finaux
+### Final Results
 
-| Objectif | Cible | Résultat | Écart | Statut |
-|----------|-------|----------|-------|--------|
+| Objective | Target | Result | Variance | Status |
+|-----------|--------|--------|----------|--------|
 | Leads | {{X}} | {{Y}} | {{+/-Z%}} | ✅/❌ |
-| CPA | {{X}}€ | {{Y}}€ | {{+/-Z%}} | ✅/❌ |
+| CPA | ${{X}} | ${{Y}} | {{+/-Z%}} | ✅/❌ |
 | ROAS | {{X}} | {{Y}} | {{+/-Z%}} | ✅/❌ |
 
 ### Budget
 
-| Poste | Prévu | Dépensé | Écart |
-|-------|-------|---------|-------|
-| Total | {{X}}€ | {{Y}}€ | {{+/-Z}}€ |
+| Item | Planned | Spent | Variance |
+|------|---------|-------|----------|
+| Total | ${{X}} | ${{Y}} | {{+/-Z}}$ |
 
-### Performance par canal
+### Performance by Channel
 
-| Canal | Budget | Leads | CPA | ROAS | Verdict |
-|-------|--------|-------|-----|------|---------|
-| Google | {{X}}€ | {{Y}} | {{Z}}€ | {{W}} | ⭐ Top |
-| LinkedIn | {{X}}€ | {{Y}} | {{Z}}€ | {{W}} | 👎 Sous perf |
+| Channel | Budget | Leads | CPA | ROAS | Verdict |
+|---------|--------|-------|-----|------|---------|
+| Google | ${{X}} | {{Y}} | ${{Z}} | {{W}} | ⭐ Top |
+| LinkedIn | ${{X}} | {{Y}} | ${{Z}} | {{W}} | 👎 Underperformed |
 
-### Learnings clés
+### Key Learnings
 
 1. **{{LEARNING_1}}**
-   - Contexte : {{CONTEXT}}
-   - Action future : {{ACTION}}
+   - Context: {{CONTEXT}}
+   - Future action: {{ACTION}}
 
 2. **{{LEARNING_2}}**
-   - Contexte : {{CONTEXT}}
-   - Action future : {{ACTION}}
+   - Context: {{CONTEXT}}
+   - Future action: {{ACTION}}
 
-### Recommandations next steps
+### Next Steps Recommendations
 
-| Action | Priorité | Impact | Effort |
+| Action | Priority | Impact | Effort |
 |--------|----------|--------|--------|
-| {{ACTION_1}} | P1 | Haut | Moyen |
-| {{ACTION_2}} | P2 | Moyen | Faible |
+| {{ACTION_1}} | P1 | High | Medium |
+| {{ACTION_2}} | P2 | Medium | Low |
 
 ---
 
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- [ ] Résultats analysés et compris
-- [ ] Learnings documentés
-- [ ] Prochaines actions définies
+- [ ] Results analyzed and understood
+- [ ] Learnings documented
+- [ ] Next actions defined
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-004-learnings.md`
+**Documented decision**: `.project/04-specs/campaigns/{{CAMPAIGN_ID}}/decisions/MKT-004-learnings.md`
 
 ---
 
-## Traçabilité complète
+## Complete Traceability
 
-### Structure projet
+### Project Structure
 
 ```
 .project/
 ├── 03-architecture/decisions/
-│   └── ADR-*.md                         ← Décisions TECHNIQUES uniquement
+│   └── ADR-*.md                         ← TECHNICAL decisions only
 │
 ├── 04-specs/campaigns/
-│   └── CAMP-001-lancement-produit/
-│       ├── brief.md                     ← Brief initial
-│       ├── audience.md                  ← Personas ciblés
-│       ├── channel-strategy.md          ← Stratégie canaux
-│       ├── tracking-plan.md             ← Plan de mesure
+│   └── CAMP-001-product-launch/
+│       ├── brief.md                     ← Initial brief
+│       ├── audience.md                  ← Target personas
+│       ├── channel-strategy.md          ← Channel strategy
+│       ├── tracking-plan.md             ← Measurement plan
 │       ├── content-briefs/
 │       │   ├── ad-copies.md
 │       │   ├── landing-page.md
 │       │   └── email-sequence.md
-│       └── decisions/                   ← Décisions MARKETING (par campagne)
+│       └── decisions/                   ← MARKETING decisions (per campaign)
 │           ├── MKT-001-brief.md
 │           ├── MKT-002-channels.md
 │           ├── MKT-003-go-live.md
@@ -536,11 +536,11 @@ Dois-je appliquer ces ajustements ?
 │       └── reports/
 │           ├── week-1.md
 │           ├── week-2.md
-│           └── bilan-final.md
+│           └── final-review.md
 │
 └── 07-audit/sessions/
     └── 2024-01-15-campaign-CAMP001/
-        └── session.md                   ← Log complet IA
+        └── session.md                   ← Complete AI log
 ```
 
 ### state.json
@@ -550,7 +550,7 @@ Dois-je appliquer ces ajustements ?
   "campaigns": [
     {
       "id": "CAMP-001",
-      "name": "Lancement produit X",
+      "name": "Product X Launch",
       "status": "completed",
       "started_at": "2024-01-15",
       "completed_at": "2024-03-01",
@@ -568,26 +568,26 @@ Dois-je appliquer ces ajustements ?
 
 ---
 
-## Responsabilité et autonomie
+## Responsibility and Autonomy
 
-### Qui décide quoi ?
+### Who Decides What?
 
-| Décision | Qui valide | Gate |
-|----------|------------|------|
-| Objectifs & budget | Direction | 🔴 |
+| Decision | Who Validates | Gate |
+|----------|---------------|------|
+| Objectives & budget | Leadership | 🔴 |
 | Personas | Marketing Lead | 🟡 |
-| Mix canaux | Direction + Marketing | 🔴 |
-| Messages & ton | Marketing + Brand | 🔴 |
-| Ajustements < 10% budget | Marketing (autonome) | 🟢 |
-| Ajustements > 10% budget | Direction | 🔴 |
-| Go live | Direction | 🔴 |
-| Learnings | Marketing | 🔴 (pour forcer doc) |
+| Channel mix | Leadership + Marketing | 🔴 |
+| Messages & tone | Marketing + Brand | 🔴 |
+| Adjustments < 10% budget | Marketing (autonomous) | 🟢 |
+| Adjustments > 10% budget | Leadership | 🔴 |
+| Go live | Leadership | 🔴 |
+| Learnings | Marketing | 🔴 (to force doc) |
 
-### Audit trail
+### Audit Trail
 
-Chaque décision est tracée avec :
-- **Qui** a pris la décision
-- **Quand** elle a été prise
-- **Quoi** a été décidé
-- **Pourquoi** (contexte, alternatives)
-- **Impact** mesuré a posteriori
+Each decision is tracked with:
+- **Who** made the decision
+- **When** it was made
+- **What** was decided
+- **Why** (context, alternatives)
+- **Impact** measured afterwards

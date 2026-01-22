@@ -1,15 +1,15 @@
 # Handoff Protocol
 
-Ce fichier définit comment les agents **communiquent** et **passent le relais**.
+This file defines how agents **communicate** and **pass the baton**.
 
 ---
 
-## Principe
+## Principle
 
-Un handoff est un **transfert structuré** de contexte et de responsabilité entre :
-- Deux agents
-- Un agent et l'orchestrateur
-- Un agent et l'humain
+A handoff is a **structured transfer** of context and responsibility between:
+- Two agents
+- An agent and the orchestrator
+- An agent and the human
 
 ```
 ┌─────────────┐                    ┌─────────────┐
@@ -25,52 +25,52 @@ Un handoff est un **transfert structuré** de contexte et de responsabilité ent
 
 ---
 
-## Structure du Handoff Package
+## Handoff Package Structure
 
 ```yaml
 handoff:
-  # Métadonnées
+  # Metadata
   id: "HO-2024-001"
   timestamp: "2024-01-15T14:30:00Z"
 
-  # Qui
+  # Who
   from:
     agent: "[agent-id]"
-    step: "[workflow step si applicable]"
+    step: "[workflow step if applicable]"
   to:
     agent: "[agent-id]"
-    reason: "[pourquoi cet agent]"
+    reason: "[why this agent]"
 
-  # Contexte transféré
+  # Transferred context
   context:
     summary: |
-      [Résumé en 2-3 phrases de ce qui a été fait]
+      [2-3 sentence summary of what was done]
 
     decisions:
       - id: "D-001"
-        decision: "[décision prise]"
-        rationale: "[pourquoi]"
+        decision: "[decision made]"
+        rationale: "[why]"
 
     artifacts:
-      - path: "[chemin vers fichier créé]"
+      - path: "[path to created file]"
         type: "[spec | code | doc | config]"
-        description: "[ce que c'est]"
+        description: "[what it is]"
 
     open_questions:
-      - question: "[question non résolue]"
+      - question: "[unresolved question]"
         priority: "[high | medium | low]"
-        context: "[contexte additionnel]"
+        context: "[additional context]"
 
-  # Attentes
+  # Expectations
   expectations:
-    deliverable: "[ce qu'on attend de l'agent suivant]"
+    deliverable: "[what is expected from the next agent]"
     constraints:
-      - "[contrainte 1]"
-      - "[contrainte 2]"
+      - "[constraint 1]"
+      - "[constraint 2]"
     success_criteria:
-      - "[critère 1 pour considérer la tâche réussie]"
+      - "[criterion 1 for considering task successful]"
 
-  # État workflow
+  # Workflow state
   workflow_state:
     name: "[workflow name]"
     current_step: [N]
@@ -80,11 +80,11 @@ handoff:
 
 ---
 
-## Types de Handoff
+## Handoff Types
 
 ### 1. Sequential (Workflow)
 
-Agent → Agent suivant dans le workflow.
+Agent → Next agent in the workflow.
 
 ```yaml
 handoff:
@@ -93,16 +93,16 @@ handoff:
     step: 2
   to:
     agent: architecture
-    reason: "Specs validées, passage à la conception"
+    reason: "Specs validated, moving to design"
   context:
-    summary: "User stories définies et validées par le client"
+    summary: "User stories defined and validated by client"
     artifacts:
       - path: ".project/02-requirements/user-stories/US-001.md"
 ```
 
-### 2. Delegation (Spécialiste)
+### 2. Delegation (Specialist)
 
-Agent → Agent spécialisé pour une sous-tâche.
+Agent → Specialized agent for a sub-task.
 
 ```yaml
 handoff:
@@ -111,20 +111,20 @@ handoff:
     step: 3
   to:
     agent: security-check
-    reason: "Besoin validation sécurité avant finalisation"
+    reason: "Need security validation before finalization"
   expectations:
-    deliverable: "Rapport de risques sur l'architecture proposée"
+    deliverable: "Risk report on proposed architecture"
     constraints:
-      - "Focus sur authentification et données sensibles"
+      - "Focus on authentication and sensitive data"
     success_criteria:
-      - "Aucun risque critique non adressé"
+      - "No unaddressed critical risks"
   context:
-    summary: "Architecture API définie, besoin review sécurité"
+    summary: "API architecture defined, needs security review"
 ```
 
-### 3. Escalation (Humain)
+### 3. Escalation (Human)
 
-Agent → Humain pour décision/validation.
+Agent → Human for decision/validation.
 
 ```yaml
 handoff:
@@ -133,164 +133,164 @@ handoff:
     step: 2
   to:
     agent: human
-    reason: "Décision business requise"
+    reason: "Business decision required"
   context:
-    summary: "Deux approches possibles avec trade-offs significatifs"
+    summary: "Two possible approaches with significant trade-offs"
     decisions:
       - id: "pending"
-        decision: "Choix entre approche A (rapide, dette) ou B (robuste, long)"
-        rationale: "Dépend de la priorité business"
+        decision: "Choice between approach A (fast, debt) or B (robust, long)"
+        rationale: "Depends on business priority"
     open_questions:
-      - question: "Quelle est la priorité : time-to-market ou maintenabilité ?"
+      - question: "What is the priority: time-to-market or maintainability?"
         priority: high
   expectations:
-    deliverable: "Choix validé avec justification"
+    deliverable: "Validated choice with justification"
 ```
 
-### 4. Return (Retour)
+### 4. Return
 
-Agent spécialisé → Agent appelant.
+Specialized agent → Calling agent.
 
 ```yaml
 handoff:
   from:
     agent: security-check
-    step: null  # Pas dans le workflow principal
+    step: null  # Not in main workflow
   to:
     agent: architecture
-    reason: "Review sécurité terminée"
+    reason: "Security review completed"
   context:
-    summary: "2 risques identifiés, recommandations fournies"
+    summary: "2 risks identified, recommendations provided"
     artifacts:
       - path: ".project/05-quality/security/review-2024-01.md"
     decisions:
       - id: "SEC-001"
-        decision: "JWT avec refresh token rotation"
-        rationale: "Balance sécurité/UX"
+        decision: "JWT with refresh token rotation"
+        rationale: "Security/UX balance"
 ```
 
 ---
 
-## Règles de Handoff
+## Handoff Rules
 
-### 1. Jamais de Contexte Implicite
+### 1. Never Implicit Context
 
 ```yaml
-# INTERDIT
+# FORBIDDEN
 context:
-  summary: "C'est fait"
+  summary: "It's done"
 
-# OBLIGATOIRE
+# REQUIRED
 context:
-  summary: "Spécifications complétées : 3 epics, 12 user stories, personas définis"
+  summary: "Specifications completed: 3 epics, 12 user stories, personas defined"
   artifacts:
     - path: ".project/02-requirements/epics/EP-001.md"
     - path: ".project/02-requirements/user-stories/"
 ```
 
-### 2. Artifacts Toujours Référencés
+### 2. Artifacts Always Referenced
 
-Tout fichier créé doit être dans `artifacts` avec son chemin exact.
+Every created file must be in `artifacts` with its exact path.
 
-### 3. Open Questions Documentées
+### 3. Open Questions Documented
 
-Si l'agent n'a pas pu tout résoudre, les questions ouvertes sont explicites.
+If the agent couldn't resolve everything, open questions are explicit.
 
-### 4. Success Criteria Mesurables
+### 4. Measurable Success Criteria
 
 ```yaml
-# MAUVAIS
+# BAD
 success_criteria:
-  - "Faire du bon code"
+  - "Write good code"
 
-# BON
+# GOOD
 success_criteria:
-  - "Tests unitaires > 80% coverage"
-  - "Aucune vulnérabilité OWASP Top 10"
-  - "Build passe en CI"
+  - "Unit tests > 80% coverage"
+  - "No OWASP Top 10 vulnerabilities"
+  - "Build passes in CI"
 ```
 
 ---
 
-## Réception d'un Handoff
+## Receiving a Handoff
 
-Quand un agent reçoit un handoff, il DOIT :
+When an agent receives a handoff, it MUST:
 
-### 1. Valider le Package
+### 1. Validate the Package
 
 ```yaml
 validation:
-  - [ ] summary présent et compréhensible
-  - [ ] tous les artifacts existent
-  - [ ] expectations.deliverable clair
-  - [ ] contraintes compatibles avec mes capacités
+  - [ ] summary present and understandable
+  - [ ] all artifacts exist
+  - [ ] expectations.deliverable clear
+  - [ ] constraints compatible with my capabilities
 ```
 
-### 2. Accuser Réception
+### 2. Acknowledge Receipt
 
 ```yaml
 acknowledgment:
   received: true
-  from: "[agent source]"
+  from: "[source agent]"
   understood:
-    task: "[reformulation de la tâche]"
-    constraints: "[contraintes comprises]"
-  questions: []  # ou liste de clarifications si besoin
+    task: "[task reformulation]"
+    constraints: "[understood constraints]"
+  questions: []  # or list of clarifications if needed
   starting: true
 ```
 
-### 3. Signaler les Problèmes
+### 3. Signal Problems
 
-Si le handoff est incomplet ou ambigu :
+If the handoff is incomplete or ambiguous:
 
 ```yaml
 acknowledgment:
   received: true
   understood: partial
   blockers:
-    - "Artifact .project/specs/feature.md non trouvé"
-    - "Contrainte 'rapidement' non mesurable"
+    - "Artifact .project/specs/feature.md not found"
+    - "Constraint 'quickly' not measurable"
   action: request_clarification
 ```
 
 ---
 
-## Handoff vers Human (Gate)
+## Handoff to Human (Gate)
 
-Cas spécial : les gates HITL sont des handoffs vers l'humain.
+Special case: HITL gates are handoffs to the human.
 
 ```yaml
 handoff:
   from:
-    agent: "[agent actuel]"
+    agent: "[current agent]"
   to:
     agent: human
-    reason: "Gate BLOQUANTE atteinte"
+    reason: "BLOCKING gate reached"
 
   gate:
-    type: bloquante
-    name: "[nom de la gate]"
-    step: "[étape workflow]"
+    type: blocking
+    name: "[gate name]"
+    step: "[workflow step]"
 
   context:
-    summary: "[ce qui a été fait]"
+    summary: "[what was done]"
     artifacts: [...]
 
   validation_request:
     items:
-      - "[point 1 à valider]"
-      - "[point 2 à valider]"
+      - "[point 1 to validate]"
+      - "[point 2 to validate]"
     options:
-      approve: "Continuer avec l'étape suivante"
-      reject: "Ajustements requis"
-      question: "Clarification nécessaire"
+      approve: "Continue with next step"
+      reject: "Adjustments required"
+      question: "Clarification needed"
 ```
 
 ---
 
-## Persistance
+## Persistence
 
-Chaque handoff est loggé dans l'état :
+Each handoff is logged in state:
 
 ```json
 // state/current.json
@@ -307,7 +307,7 @@ Chaque handoff est loggé dans l'état :
 }
 ```
 
-Et archivé dans le projet :
+And archived in the project:
 
 ```
 .project/07-audit/sessions/SESSION-ID/

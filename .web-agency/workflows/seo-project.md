@@ -1,60 +1,60 @@
-# Workflow : Projet SEO
+# Workflow: SEO Project
 
-Workflow complet pour un projet SEO, de l'audit initial au suivi des résultats.
+Complete workflow for an SEO project, from initial audit to results tracking.
 
-## Déclencheurs
+## Triggers
 
-- "Audit SEO"
-- "Améliorer le référencement"
-- "Stratégie SEO"
-- "Optimiser pour Google"
+- "SEO audit"
+- "Improve search rankings"
+- "SEO strategy"
+- "Optimize for Google"
 
-## Étapes avec Gates HITL
+## Steps with HITL Gates
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│ 1. AUDIT TECHNIQUE          │ Crawl, Core Web Vitals, erreurs   │
-│    Agent: seo               │                                    │
-│    🟢 Gate AUTO             │ Checks automatiques                │
+│ 1. TECHNICAL AUDIT          │ Crawl, Core Web Vitals, errors    │
+│    Skill: seo               │                                    │
+│    🟢 AUTO Gate             │ Automatic checks                   │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 2. AUDIT ON-PAGE            │ Titles, metas, Hn, contenu        │
-│    Agent: seo               │                                    │
-│    🟡 Gate INFORMATIVE      │ Présentation findings              │
+│ 2. ON-PAGE AUDIT            │ Titles, metas, Hn, content        │
+│    Skill: seo               │                                    │
+│    🟡 ADVISORY Gate         │ Findings presentation              │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 3. AUDIT MOTS-CLÉS          │ Positions, opportunités, gaps     │
-│    Agent: seo               │                                    │
-│    🟡 Gate INFORMATIVE      │ Présentation opportunités          │
+│ 3. KEYWORD AUDIT            │ Positions, opportunities, gaps    │
+│    Skill: seo               │                                    │
+│    🟡 ADVISORY Gate         │ Opportunities presentation         │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 4. RAPPORT COMPLET          │ Synthèse + priorisation           │
-│    Agent: seo               │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation audit + priorités       │
+│ 4. COMPLETE REPORT          │ Synthesis + prioritization        │
+│    Skill: seo               │                                    │
+│    🔴 BLOCKING Gate         │ Audit + priorities validation      │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 5. ROADMAP SEO              │ Plan d'action priorisé            │
-│    Agent: seo + estimation  │                                    │
-│    🔴 Gate BLOQUANTE        │ Validation roadmap + ressources    │
+│ 5. SEO ROADMAP              │ Prioritized action plan           │
+│    Skill: seo + estimation  │                                    │
+│    🔴 BLOCKING Gate         │ Roadmap + resources validation     │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 6. IMPLÉMENTATION           │ Exécution des optimisations       │
-│    Agent: seo + dev         │                                    │
-│    🟢 Gate AUTO             │ Vérification technique             │
+│ 6. IMPLEMENTATION           │ Optimization execution            │
+│    Skill: seo + dev         │                                    │
+│    🟢 AUTO Gate             │ Technical verification             │
 ├─────────────────────────────┼────────────────────────────────────┤
-│ 7. SUIVI MENSUEL            │ Positions, trafic, conversions    │
-│    Agent: analytics         │                                    │
-│    🟡 Gate INFORMATIVE      │ Rapport mensuel                    │
+│ 7. MONTHLY TRACKING         │ Positions, traffic, conversions   │
+│    Skill: analytics         │                                    │
+│    🟡 ADVISORY Gate         │ Monthly report                     │
 └─────────────────────────────┴────────────────────────────────────┘
 ```
 
-## Détail des étapes
+## Step Details
 
-### Étape 1 : Audit Technique
+### Step 1: Technical Audit
 
-**Agent** : `skills/marketing/seo.md`
+**Skill**: `skills/marketing/seo.md`
 
-**Output** :
-- `.project/04-specs/seo/{{PROJECT_ID}}/audit-technique.md`
+**Output**:
+- `.project/04-specs/seo/{{PROJECT_ID}}/technical-audit.md`
 
-**Checks automatiques** :
+**Automatic checks**:
 ```yaml
-technique:
+technical:
   https:
     status: ✅ | ❌
     issue: "Mixed content"
@@ -88,229 +88,229 @@ technique:
 
 ---
 
-### Étape 4 : Rapport Complet
+### Step 4: Complete Report
 
-**Agent** : `skills/marketing/seo.md`
+**Skill**: `skills/marketing/seo.md`
 
-**Output** :
-- `.project/04-specs/seo/{{PROJECT_ID}}/audit-complet.md`
+**Output**:
+- `.project/04-specs/seo/{{PROJECT_ID}}/complete-audit.md`
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation Audit SEO
+## 🔴 CHECKPOINT - SEO Audit Validation
 
-### Score global : {{SCORE}}/100
+### Overall Score: {{SCORE}}/100
 
-| Catégorie | Score | Priorité |
-|-----------|-------|----------|
-| Technique | {{X}}/100 | {{P}} |
+| Category | Score | Priority |
+|----------|-------|----------|
+| Technical | {{X}}/100 | {{P}} |
 | On-page | {{X}}/100 | {{P}} |
-| Contenu | {{X}}/100 | {{P}} |
+| Content | {{X}}/100 | {{P}} |
 | Backlinks | {{X}}/100 | {{P}} |
 
-### Top 10 Issues (par impact)
+### Top 10 Issues (by impact)
 
 | # | Issue | Impact | Effort | Pages |
 |---|-------|--------|--------|-------|
-| 1 | {{ISSUE}} | Haut | Faible | {{N}} |
-| 2 | {{ISSUE}} | Haut | Moyen | {{N}} |
+| 1 | {{ISSUE}} | High | Low | {{N}} |
+| 2 | {{ISSUE}} | High | Medium | {{N}} |
 | ... | ... | ... | ... | ... |
 
-### Opportunités mots-clés
+### Keyword Opportunities
 
-| Mot-clé | Volume | Position | Potentiel |
+| Keyword | Volume | Position | Potential |
 |---------|--------|----------|-----------|
-| {{KW}} | {{VOL}} | {{POS}} | +{{X}} trafic |
+| {{KW}} | {{VOL}} | {{POS}} | +{{X}} traffic |
 
-### Quick wins identifiés
+### Quick Wins Identified
 
-1. **{{QW_1}}** - Impact: +{{X%}} trafic
-2. **{{QW_2}}** - Impact: +{{X%}} trafic
-3. **{{QW_3}}** - Impact: +{{X%}} trafic
+1. **{{QW_1}}** - Impact: +{{X%}} traffic
+2. **{{QW_2}}** - Impact: +{{X%}} traffic
+3. **{{QW_3}}** - Impact: +{{X%}} traffic
 
-### Estimation impact global
+### Estimated Global Impact
 
-Si toutes les recommandations sont implémentées :
-- Trafic organique : +{{X%}} à 6 mois
-- Positions top 10 : +{{Y}} mots-clés
+If all recommendations are implemented:
+- Organic traffic: +{{X%}} at 6 months
+- Top 10 positions: +{{Y}} keywords
 
 ---
 
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- [ ] Audit compris et accepté
-- [ ] Priorités validées
-- [ ] Budget pour implémentation discuté
+- [ ] Audit understood and accepted
+- [ ] Priorities validated
+- [ ] Implementation budget discussed
 
-**Décision** : Continuer vers roadmap / Ajuster priorités / Stop
+**Decision**: Continue to roadmap / Adjust priorities / Stop
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-001-audit-findings.md`
+**Documented decision**: `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-001-audit-findings.md`
 
 ---
 
-### Étape 5 : Roadmap SEO
+### Step 5: SEO Roadmap
 
-**Agent** : `skills/marketing/seo.md` + `skills/strategy/estimation.md`
+**Skill**: `skills/marketing/seo.md` + `skills/strategy/estimation.md`
 
-**Output** :
+**Output**:
 - `.project/04-specs/seo/{{PROJECT_ID}}/roadmap.md`
 
-**🔴 Gate BLOQUANTE** :
+**🔴 BLOCKING Gate**:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT - Validation Roadmap SEO
+## 🔴 CHECKPOINT - SEO Roadmap Validation
 
-### Phase 1 : Quick Wins (Mois 1)
+### Phase 1: Quick Wins (Month 1)
 
-| Action | Impact | Effort | Responsable |
-|--------|--------|--------|-------------|
-| {{ACTION_1}} | Haut | 2h | {{WHO}} |
-| {{ACTION_2}} | Haut | 4h | {{WHO}} |
-| {{ACTION_3}} | Moyen | 2h | {{WHO}} |
+| Action | Impact | Effort | Owner |
+|--------|--------|--------|-------|
+| {{ACTION_1}} | High | 2h | {{WHO}} |
+| {{ACTION_2}} | High | 4h | {{WHO}} |
+| {{ACTION_3}} | Medium | 2h | {{WHO}} |
 
-**Effort total Phase 1** : {{X}} jours
-**Impact attendu** : +{{Y%}} trafic
+**Total Phase 1 Effort**: {{X}} days
+**Expected Impact**: +{{Y%}} traffic
 
-### Phase 2 : Fondations (Mois 2-3)
+### Phase 2: Foundations (Months 2-3)
 
-| Action | Impact | Effort | Responsable |
-|--------|--------|--------|-------------|
-| {{ACTION}} | Haut | {{X}}j | {{WHO}} |
+| Action | Impact | Effort | Owner |
+|--------|--------|--------|-------|
+| {{ACTION}} | High | {{X}}d | {{WHO}} |
 
-**Effort total Phase 2** : {{X}} jours
+**Total Phase 2 Effort**: {{X}} days
 
-### Phase 3 : Contenu (Mois 3-6)
+### Phase 3: Content (Months 3-6)
 
-| Action | Volume | Effort | Responsable |
-|--------|--------|--------|-------------|
-| Articles piliers | {{X}} | {{Y}}j | {{WHO}} |
-| Optimisation existant | {{X}} pages | {{Y}}j | {{WHO}} |
+| Action | Volume | Effort | Owner |
+|--------|--------|--------|-------|
+| Pillar articles | {{X}} | {{Y}}d | {{WHO}} |
+| Existing optimization | {{X}} pages | {{Y}}d | {{WHO}} |
 
-**Effort total Phase 3** : {{X}} jours
+**Total Phase 3 Effort**: {{X}} days
 
-### Phase 4 : Autorité (Mois 6+)
+### Phase 4: Authority (Month 6+)
 
-| Action | Objectif | Effort |
+| Action | Objective | Effort |
 |--------|----------|--------|
-| Link building | +{{X}} backlinks | {{Y}}j/mois |
+| Link building | +{{X}} backlinks | {{Y}}d/month |
 
-### Budget total
+### Total Budget
 
-| Phase | Effort | Coût estimé |
-|-------|--------|-------------|
-| Phase 1 | {{X}}j | {{Y}}€ |
-| Phase 2 | {{X}}j | {{Y}}€ |
-| Phase 3 | {{X}}j | {{Y}}€ |
-| Phase 4 | {{X}}j/mois | {{Y}}€/mois |
-| **Total** | **{{X}}j** | **{{Y}}€** |
+| Phase | Effort | Estimated Cost |
+|-------|--------|----------------|
+| Phase 1 | {{X}}d | ${{Y}} |
+| Phase 2 | {{X}}d | ${{Y}} |
+| Phase 3 | {{X}}d | ${{Y}} |
+| Phase 4 | {{X}}d/month | ${{Y}}/month |
+| **Total** | **{{X}}d** | **${{Y}}** |
 
-### Projection résultats
+### Results Projection
 
-| Mois | Trafic organique | Positions top 10 |
-|------|------------------|------------------|
-| M0 (actuel) | {{X}} | {{Y}} |
+| Month | Organic Traffic | Top 10 Positions |
+|-------|-----------------|------------------|
+| M0 (current) | {{X}} | {{Y}} |
 | M3 | {{X}} | {{Y}} |
 | M6 | {{X}} | {{Y}} |
 | M12 | {{X}} | {{Y}} |
 
 ---
 
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- [ ] Roadmap approuvée
-- [ ] Budget validé
-- [ ] Ressources assignées
+- [ ] Roadmap approved
+- [ ] Budget validated
+- [ ] Resources assigned
 
 ---
 ```
 
-**Décision documentée** : `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-002-roadmap.md`
+**Documented decision**: `.project/04-specs/seo/{{PROJECT_ID}}/decisions/SEO-002-roadmap.md`
 
 ---
 
-### Étape 7 : Suivi Mensuel
+### Step 7: Monthly Tracking
 
-**Agent** : `skills/marketing/analytics.md`
+**Skill**: `skills/marketing/analytics.md`
 
-**Output** :
+**Output**:
 - `.project/05-quality/seo/{{PROJECT_ID}}/reports/`
   - `month-1.md`
   - `month-2.md`
   - ...
 
-**🟡 Gate INFORMATIVE** :
+**🟡 ADVISORY Gate**:
 
 ```markdown
-## 🟡 Rapport SEO - Mois {{N}}
+## 🟡 SEO Report - Month {{N}}
 
-### KPIs vs Objectifs
+### KPIs vs Objectives
 
-| KPI | Objectif | Actuel | Δ M-1 | Status |
-|-----|----------|--------|-------|--------|
-| Trafic organique | {{X}} | {{Y}} | {{+/-Z%}} | 🟢/🟡/🔴 |
-| Positions top 10 | {{X}} | {{Y}} | {{+/-Z}} | 🟢/🟡/🔴 |
-| Positions top 3 | {{X}} | {{Y}} | {{+/-Z}} | 🟢/🟡/🔴 |
-| CTR moyen | {{X%}} | {{Y%}} | {{+/-Z%}} | 🟢/🟡/🔴 |
+| KPI | Objective | Current | Δ M-1 | Status |
+|-----|----------|---------|-------|--------|
+| Organic traffic | {{X}} | {{Y}} | {{+/-Z%}} | 🟢/🟡/🔴 |
+| Top 10 positions | {{X}} | {{Y}} | {{+/-Z}} | 🟢/🟡/🔴 |
+| Top 3 positions | {{X}} | {{Y}} | {{+/-Z}} | 🟢/🟡/🔴 |
+| Average CTR | {{X%}} | {{Y%}} | {{+/-Z%}} | 🟢/🟡/🔴 |
 
-### Mouvements de positions
+### Position Movements
 
 #### Gains 🟢
 
-| Mot-clé | Avant | Après | Volume |
-|---------|-------|-------|--------|
+| Keyword | Before | After | Volume |
+|---------|--------|-------|--------|
 | {{KW}} | {{X}} | {{Y}} | {{VOL}} |
 
-#### Pertes 🔴
+#### Losses 🔴
 
-| Mot-clé | Avant | Après | Action |
-|---------|-------|-------|--------|
+| Keyword | Before | After | Action |
+|---------|--------|-------|--------|
 | {{KW}} | {{X}} | {{Y}} | {{ACTION}} |
 
-### Actions réalisées ce mois
+### Actions Completed This Month
 
 | Action | Status | Impact |
 |--------|--------|--------|
-| {{ACTION_1}} | ✅ | En cours de mesure |
+| {{ACTION_1}} | ✅ | Being measured |
 | {{ACTION_2}} | ✅ | +{{X%}} |
 
-### Actions prévues mois prochain
+### Planned Actions Next Month
 
 1. {{ACTION_1}}
 2. {{ACTION_2}}
 
-### Recommandations
+### Recommendations
 
 - {{RECO_1}}
 - {{RECO_2}}
 
-Dois-je ajuster la stratégie ?
+Should I adjust the strategy?
 ```
 
 ---
 
-## Traçabilité
+## Traceability
 
-### Structure projet
+### Project Structure
 
 ```
 .project/
 ├── 03-architecture/decisions/
-│   └── ADR-*.md                      ← Décisions TECHNIQUES uniquement
+│   └── ADR-*.md                      ← TECHNICAL decisions only
 │
 ├── 04-specs/seo/
 │   └── {{PROJECT_ID}}/
-│       ├── audit-technique.md
-│       ├── audit-onpage.md
-│       ├── audit-keywords.md
-│       ├── audit-complet.md
+│       ├── technical-audit.md
+│       ├── onpage-audit.md
+│       ├── keywords-audit.md
+│       ├── complete-audit.md
 │       ├── roadmap.md
-│       └── decisions/                ← Décisions SEO (par projet)
+│       └── decisions/                ← SEO decisions (per project)
 │           ├── SEO-001-audit-findings.md
 │           └── SEO-002-roadmap.md
 │
@@ -329,15 +329,15 @@ Dois-je ajuster la stratégie ?
 ### Conventions
 
 ```yaml
-décisions:
+decisions:
   prefix: "SEO-"
   format: "SEO-001-description.md"
 
-rapports:
-  fréquence: mensuel
-  rétention: illimitée
+reports:
+  frequency: monthly
+  retention: unlimited
 
 reviews:
-  audit: annuel (recommandé)
-  roadmap: trimestriel
+  audit: annual (recommended)
+  roadmap: quarterly
 ```

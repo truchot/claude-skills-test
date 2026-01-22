@@ -1,14 +1,14 @@
-# Execution Engine - Pattern REACT
+# Execution Engine - REACT Pattern
 
-Ce fichier définit comment un agent **exécute** une tâche de manière structurée.
+This file defines how an agent **executes** a task in a structured manner.
 
 ---
 
-## Le Pattern REACT
+## The REACT Pattern
 
 **R**easoning + **A**cting = REACT
 
-Chaque agent suit un cycle itératif :
+Each agent follows an iterative cycle:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -30,162 +30,162 @@ Chaque agent suit un cycle itératif :
 
 ---
 
-## Format de Sortie
+## Output Format
 
-### Pendant l'exécution
+### During Execution
 
 ```yaml
 step: [N]
 thought: |
-  [Analyse de la situation actuelle]
-  [Ce que je sais / ce qui me manque]
-  [Stratégie choisie]
+  [Analysis of current situation]
+  [What I know / what I'm missing]
+  [Chosen strategy]
 action: [action_id]
 action_input:
-  [paramètres de l'action]
+  [action parameters]
 ```
 
-### Après observation
+### After Observation
 
 ```yaml
 observation: |
-  [Résultat factuel de l'action]
+  [Factual result of the action]
 reflection: |
-  [Analyse du résultat]
-  [Est-ce suffisant ?]
-  [Prochaine étape logique]
+  [Result analysis]
+  [Is it sufficient?]
+  [Logical next step]
 decision: [continue | done | escalate]
-reason: [justification courte]
+reason: [short justification]
 ```
 
 ---
 
-## Actions Standard
+## Standard Actions
 
-Chaque agent peut utiliser ces actions de base :
+Each agent can use these base actions:
 
 | Action | Description | Input |
 |--------|-------------|-------|
-| `analyze` | Analyser des données/code | `{target, focus}` |
-| `search` | Chercher dans le contexte | `{query, scope}` |
-| `generate` | Produire du contenu | `{type, spec}` |
-| `validate` | Vérifier une assertion | `{assertion, data}` |
-| `transform` | Convertir un format | `{input, from, to}` |
-| `compare` | Comparer deux éléments | `{a, b, criteria}` |
-| `request_info` | Demander info manquante | `{question, context}` |
-| `delegate` | Passer à un autre agent | `{agent_id, task}` |
-| `escalate` | Remonter à l'humain | `{reason, context}` |
+| `analyze` | Analyze data/code | `{target, focus}` |
+| `search` | Search in context | `{query, scope}` |
+| `generate` | Produce content | `{type, spec}` |
+| `validate` | Verify an assertion | `{assertion, data}` |
+| `transform` | Convert a format | `{input, from, to}` |
+| `compare` | Compare two elements | `{a, b, criteria}` |
+| `request_info` | Request missing info | `{question, context}` |
+| `delegate` | Pass to another agent | `{agent_id, task}` |
+| `escalate` | Escalate to human | `{reason, context}` |
 
-Les agents peuvent définir des actions spécifiques dans leur `REACT_CYCLE`.
+Agents can define specific actions in their `REACT_CYCLE`.
 
 ---
 
-## Règles d'Exécution
+## Execution Rules
 
-### 1. Maximum d'Itérations
+### 1. Maximum Iterations
 
 ```yaml
 default_max_iterations: 5
 on_max_reached: escalate
 ```
 
-Un agent ne doit pas boucler indéfiniment. Après N itérations sans `done`, escalader.
+An agent must not loop indefinitely. After N iterations without `done`, escalate.
 
-### 2. Thought Obligatoire
+### 2. Thought is Mandatory
 
-**Jamais d'action sans thought préalable.**
+**Never action without prior thought.**
 
 ```yaml
-# INTERDIT
+# FORBIDDEN
 action: generate
 action_input: {type: code}
 
-# OBLIGATOIRE
+# REQUIRED
 thought: |
-  L'utilisateur veut un composant React.
-  Je dois générer un composant fonctionnel avec TypeScript.
+  The user wants a React component.
+  I need to generate a functional component with TypeScript.
 action: generate
 action_input: {type: code, spec: "React FC with TypeScript"}
 ```
 
-### 3. Reflection Honnête
+### 3. Honest Reflection
 
-La reflection doit être **critique**, pas complaisante :
+Reflection must be **critical**, not complacent:
 
 ```yaml
-# MAUVAIS
-reflection: "Ça a bien marché, je continue."
+# BAD
+reflection: "It went well, I continue."
 
-# BON
+# GOOD
 reflection: |
-  L'analyse a identifié 3 problèmes de sécurité.
-  Cependant, je n'ai pas vérifié les dépendances.
-  Je dois continuer avec une analyse des imports.
+  The analysis identified 3 security issues.
+  However, I didn't verify dependencies.
+  I must continue with import analysis.
 ```
 
-### 4. Escalation Proactive
+### 4. Proactive Escalation
 
-Escalader **avant** de deviner :
+Escalate **before** guessing:
 
 ```yaml
 escalate_triggers:
-  - Ambiguïté non résoluble par le contexte
-  - Décision business/stratégique
-  - Risque sécurité identifié
-  - Conflit avec contraintes existantes
-  - Information manquante critique
+  - Ambiguity not resolvable from context
+  - Business/strategic decision
+  - Identified security risk
+  - Conflict with existing constraints
+  - Critical missing information
 ```
 
 ---
 
 ## Chain of Verification (CoVe)
 
-Avant de produire l'output final, chaque agent DOIT vérifier :
+Before producing final output, each agent MUST verify:
 
 ```yaml
 verification:
   completeness:
-    question: "Ai-je répondu à TOUTES les exigences du contract.input ?"
-    check: [liste des required inputs traités]
+    question: "Did I address ALL requirements from contract.input?"
+    check: [list of required inputs processed]
 
   consistency:
-    question: "Mon output est-il cohérent avec le contexte fourni ?"
-    check: [références au contexte utilisées]
+    question: "Is my output consistent with the provided context?"
+    check: [context references used]
 
   correctness:
-    question: "Y a-t-il des erreurs factuelles ou logiques ?"
-    check: [assertions vérifiées]
+    question: "Are there factual or logical errors?"
+    check: [assertions verified]
 
   constraints:
-    question: "Mon output respecte-t-il TOUTES les contraintes ?"
-    check: [contraintes du contract validées]
+    question: "Does my output respect ALL constraints?"
+    check: [contract constraints validated]
 ```
 
-**Si une vérification échoue** → Réviser avant de soumettre.
+**If a verification fails** → Revise before submitting.
 
 ---
 
-## États de Sortie
+## Exit States
 
-| État | Signification | Action suivante |
-|------|---------------|-----------------|
-| `done` | Tâche complétée avec succès | Output final + handoff |
-| `done_partial` | Tâche partiellement complétée | Output partiel + raison |
-| `escalate` | Intervention humaine requise | Question/contexte pour humain |
-| `delegate` | Autre agent requis | Handoff vers agent spécifié |
-| `blocked` | Impossible de continuer | Raison du blocage |
+| State | Meaning | Next Action |
+|-------|---------|-------------|
+| `done` | Task completed successfully | Final output + handoff |
+| `done_partial` | Task partially completed | Partial output + reason |
+| `escalate` | Human intervention required | Question/context for human |
+| `delegate` | Another agent required | Handoff to specified agent |
+| `blocked` | Cannot continue | Reason for blockage |
 
 ---
 
-## Exemple Complet
+## Complete Example
 
 ```yaml
-# Itération 1
+# Iteration 1
 step: 1
 thought: |
-  On me demande d'auditer la sécurité de ce code JavaScript.
-  Je vois un fichier de 50 lignes avec des appels API.
-  Je commence par chercher les patterns dangereux courants.
+  I'm asked to audit the security of this JavaScript code.
+  I see a 50-line file with API calls.
+  I start by looking for common dangerous patterns.
 action: analyze
 action_input:
   target: code
@@ -193,23 +193,23 @@ action_input:
 
 ---
 observation: |
-  Trouvé:
-  - L.12: eval() avec variable
-  - L.34: innerHTML sans sanitization
+  Found:
+  - L.12: eval() with variable
+  - L.34: innerHTML without sanitization
   - L.45: SQL string concatenation
 reflection: |
-  3 vulnérabilités critiques identifiées.
-  Je dois maintenant vérifier s'il y a des protections ailleurs.
-  Notamment: CSP headers, input validation, prepared statements.
+  3 critical vulnerabilities identified.
+  I must now check if there are protections elsewhere.
+  Specifically: CSP headers, input validation, prepared statements.
 decision: continue
-reason: "Besoin de vérifier les mitigations possibles"
+reason: "Need to verify possible mitigations"
 
 ---
-# Itération 2
+# Iteration 2
 step: 2
 thought: |
-  J'ai 3 vulnérabilités. Je cherche maintenant des mitigations.
-  Si aucune mitigation, ce sont des criticals confirmés.
+  I have 3 vulnerabilities. I'm now looking for mitigations.
+  If no mitigation, these are confirmed criticals.
 action: search
 action_input:
   query: "sanitize|escape|prepared|CSP"
@@ -217,51 +217,51 @@ action_input:
 
 ---
 observation: |
-  Aucune occurrence trouvée.
-  Pas de fonction de sanitization.
-  Pas de prepared statements.
+  No occurrences found.
+  No sanitization function.
+  No prepared statements.
 reflection: |
-  Aucune mitigation en place.
-  Les 3 vulnérabilités sont confirmées critiques.
-  J'ai assez d'information pour produire le rapport.
+  No mitigation in place.
+  All 3 vulnerabilities are confirmed critical.
+  I have enough information to produce the report.
 decision: done
-reason: "Analyse complète, vulnérabilités confirmées"
+reason: "Analysis complete, vulnerabilities confirmed"
 
 ---
 # Verification
 verification:
-  completeness: ✓ Code analysé, vulnérabilités listées
-  consistency: ✓ Lignes correspondent au code fourni
-  correctness: ✓ Patterns reconnus sont bien des vulnérabilités
-  constraints: ✓ Max issues respecté, suggestions fournies
+  completeness: ✓ Code analyzed, vulnerabilities listed
+  consistency: ✓ Lines match provided code
+  correctness: ✓ Recognized patterns are indeed vulnerabilities
+  constraints: ✓ Max issues respected, suggestions provided
 
 ---
-# Output final
-[Output selon contract.output.schema]
+# Final output
+[Output according to contract.output.schema]
 ```
 
 ---
 
-## Intégration avec les Agents
+## Integration with Agents
 
-Dans chaque fichier `.agent.md`, la section `REACT_CYCLE` définit :
+In each `.agent.md` file, the `REACT_CYCLE` section defines:
 
 ```markdown
 ## REACT_CYCLE
 
-### Thoughts typiques
-- [Question type 1 que l'agent se pose]
-- [Question type 2]
+### Typical Thoughts
+- [Type question 1 the agent asks itself]
+- [Type question 2]
 
-### Actions spécifiques
-- `action_specifique_1`: [description]
-- `action_specifique_2`: [description]
+### Specific Actions
+- `specific_action_1`: [description]
+- `specific_action_2`: [description]
 
-### Critères de done
-- [Condition 1 pour considérer la tâche finie]
+### Done Criteria
+- [Condition 1 to consider task finished]
 - [Condition 2]
 
-### Triggers d'escalation
-- [Situation 1 qui nécessite escalation]
+### Escalation Triggers
+- [Situation 1 requiring escalation]
 - [Situation 2]
 ```
