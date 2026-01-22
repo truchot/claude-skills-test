@@ -1,50 +1,50 @@
 # State Management
 
-Gestion de l'état de l'orchestrateur et des workflows.
+Orchestrator and workflow state management.
 
-## Fichiers
+## Files
 
 ```
 state/
-├── README.md           ← Ce fichier
-├── schema.json         ← JSON Schema de validation
-├── current.json        ← État de la session courante
-└── history/            ← Historique des sessions (optionnel)
+├── README.md           ← This file
+├── schema.json         ← JSON Schema validation
+├── current.json        ← Current session state
+└── history/            ← Session history (optional)
 ```
 
 ## JSON Schema
 
-Le fichier `schema.json` définit la structure valide de l'état. Utilisez-le pour :
-- Valider `current.json`
-- Documenter les types attendus
-- Générer des types TypeScript si besoin
+The `schema.json` file defines the valid state structure. Use it to:
+- Validate `current.json`
+- Document expected types
+- Generate TypeScript types if needed
 
 ```bash
-# Valider avec ajv (si installé)
+# Validate with ajv (if installed)
 ajv validate -s state/schema.json -d state/current.json
 ```
 
 ## current.json
 
-État temps réel de la session de travail.
+Real-time state of the work session.
 
 ### Structure
 
 ```json
 {
   "version": "1.0",
-  "initialized_at": "2024-01-15T10:00:00Z",
+  "initialized_at": "2026-01-22T10:00:00Z",
 
   "project": {
     "id": "PRJ-001",
-    "name": "Nom du projet",
-    "client": "Nom client",
+    "name": "Project name",
+    "client": "Client name",
     "path": ".project/"
   },
 
   "workflow": {
     "name": "feature",
-    "started_at": "2024-01-15T10:00:00Z",
+    "started_at": "2026-01-22T10:00:00Z",
     "current_step": 3,
     "total_steps": 7,
     "status": "in_progress",
@@ -59,14 +59,14 @@ ajv validate -s state/schema.json -d state/current.json
       {
         "name": "specification",
         "status": "completed",
-        "gate": "bloquante",
+        "gate": "blocking",
         "validated_at": "...",
         "output_path": ".project/04-specs/..."
       },
       {
         "name": "estimation",
         "status": "in_progress",
-        "gate": "bloquante"
+        "gate": "blocking"
       }
     ]
   },
@@ -76,9 +76,9 @@ ajv validate -s state/schema.json -d state/current.json
     "loaded_contexts": ["technical.md", "security.md"],
     "key_decisions": [
       {
-        "decision": "Utiliser Prisma",
+        "decision": "Use Prisma",
         "adr": "ADR-001",
-        "date": "2024-01-15"
+        "date": "2026-01-22"
       }
     ],
     "blockers": [],
@@ -88,56 +88,56 @@ ajv validate -s state/schema.json -d state/current.json
   "gates_pending": [
     {
       "step": "estimation",
-      "type": "bloquante",
+      "type": "blocking",
       "waiting_for": "validation",
       "deliverable": ".project/04-specs/features/F001/estimation.md"
     }
   ],
 
-  "updated_at": "2024-01-15T14:30:00Z"
+  "updated_at": "2026-01-22T14:30:00Z"
 }
 ```
 
-## Cycle de vie
+## Lifecycle
 
-### 1. Initialisation
+### 1. Initialization
 
-Quand l'orchestrateur démarre une session :
+When orchestrator starts a session:
 
 ```json
 {
   "version": "1.0",
-  "initialized_at": "2024-01-15T10:00:00Z",
+  "initialized_at": "2026-01-22T10:00:00Z",
   "project": null,
   "workflow": null,
   "context": {}
 }
 ```
 
-### 2. Projet chargé
+### 2. Project Loaded
 
-Quand un projet est identifié :
+When a project is identified:
 
 ```json
 {
   "project": {
     "id": "PRJ-001",
-    "name": "Mon Projet",
+    "name": "My Project",
     "client": "Client X",
     "path": ".project/"
   }
 }
 ```
 
-### 3. Workflow démarré
+### 3. Workflow Started
 
-Quand un workflow commence :
+When a workflow begins:
 
 ```json
 {
   "workflow": {
     "name": "feature",
-    "started_at": "2024-01-15T10:00:00Z",
+    "started_at": "2026-01-22T10:00:00Z",
     "current_step": 1,
     "total_steps": 7,
     "status": "in_progress",
@@ -148,9 +148,9 @@ Quand un workflow commence :
 }
 ```
 
-### 4. Étape complétée
+### 4. Step Completed
 
-Quand une étape est terminée :
+When a step is finished:
 
 ```json
 {
@@ -160,7 +160,7 @@ Quand une étape est terminée :
       {
         "name": "qualification",
         "status": "completed",
-        "completed_at": "2024-01-15T10:30:00Z",
+        "completed_at": "2026-01-22T10:30:00Z",
         "output_path": ".project/..."
       },
       {"name": "specification", "status": "in_progress"}
@@ -169,16 +169,16 @@ Quand une étape est terminée :
 }
 ```
 
-### 5. Gate en attente
+### 5. Gate Pending
 
-Quand une gate bloquante est atteinte :
+When a blocking gate is reached:
 
 ```json
 {
   "gates_pending": [
     {
       "step": "specification",
-      "type": "bloquante",
+      "type": "blocking",
       "waiting_for": "validation",
       "deliverable": ".project/04-specs/..."
     }
@@ -186,41 +186,41 @@ Quand une gate bloquante est atteinte :
 }
 ```
 
-### 6. Workflow terminé
+### 6. Workflow Completed
 
-Quand le workflow est complet :
+When workflow is complete:
 
 ```json
 {
   "workflow": {
     "status": "completed",
-    "completed_at": "2024-01-15T16:00:00Z"
+    "completed_at": "2026-01-22T16:00:00Z"
   },
   "gates_pending": []
 }
 ```
 
-## Opérations
+## Operations
 
-### Lecture
+### Read
 
 ```yaml
 action: read_state
-usage: Au début de chaque interaction pour récupérer le contexte
+usage: At the start of each interaction to recover context
 ```
 
-### Mise à jour
+### Update
 
 ```yaml
 action: update_state
 triggers:
-  - Projet identifié
-  - Workflow démarré
-  - Étape démarrée/complétée
-  - Gate atteinte
-  - Gate validée
-  - Décision prise
-  - Contexte chargé
+  - Project identified
+  - Workflow started
+  - Step started/completed
+  - Gate reached
+  - Gate validated
+  - Decision made
+  - Context loaded
 ```
 
 ### Reset
@@ -228,75 +228,75 @@ triggers:
 ```yaml
 action: reset_state
 when:
-  - Nouveau projet
-  - Abandon workflow
-  - Demande explicite
+  - New project
+  - Workflow abandoned
+  - Explicit request
 ```
 
-## Règles
+## Rules
 
 ```yaml
-règles:
-  - Toujours lire l'état au début
-  - Mettre à jour après chaque action significative
-  - Ne jamais avoir deux workflows actifs
-  - Garder l'état synchronisé avec .project/state.json
-  - Logger les transitions importantes
+rules:
+  - Always read state at the beginning
+  - Update after each significant action
+  - Never have two active workflows
+  - Keep state synchronized with .project/state.json
+  - Log important transitions
 
 invariants:
-  - Si workflow.status == "in_progress" alors gates_pending peut être non vide
-  - Si gates_pending non vide alors workflow.status != "completed"
+  - If workflow.status == "in_progress" then gates_pending can be non-empty
+  - If gates_pending non-empty then workflow.status != "completed"
   - current_step <= total_steps
 ```
 
-## Synchronisation avec .project/
+## Synchronization with .project/
 
-L'état de l'orchestrateur (`state/current.json`) et l'état du projet (`.project/state.json`) sont liés :
+Orchestrator state (`state/current.json`) and project state (`.project/state.json`) are linked:
 
 | state/current.json | .project/state.json |
 |--------------------|---------------------|
-| Session courante | Données persistantes projet |
-| Workflow en cours | Historique workflows |
-| Gates pending | Décisions archivées |
-| Contexte temporaire | Configuration projet |
+| Current session | Persistent project data |
+| Active workflow | Workflow history |
+| Pending gates | Archived decisions |
+| Temporary context | Project configuration |
 
-### Sync au démarrage
+### Sync at Startup
 
-1. Lire `state/current.json`
-2. Si projet identifié, charger `.project/state.json`
-3. Fusionner les contextes
+1. Read `state/current.json`
+2. If project identified, load `.project/state.json`
+3. Merge contexts
 
-### Sync à la fin
+### Sync at End
 
-1. Archiver le workflow dans `.project/state.json`
-2. Mettre à jour les métriques
-3. Reset `state/current.json` si workflow terminé
+1. Archive workflow in `.project/state.json`
+2. Update metrics
+3. Reset `state/current.json` if workflow completed
 
-## Persistance
+## Persistence
 
-### Session active
-
-```
-state/current.json  ← État en mémoire de travail
-```
-
-### Fin de session
+### Active Session
 
 ```
-.project/state.json           ← État projet mis à jour
-.project/07-audit/sessions/   ← Session archivée
-state/current.json            ← Reset pour prochaine session
+state/current.json  ← Working memory state
+```
+
+### Session End
+
+```
+.project/state.json           ← Updated project state
+.project/07-audit/sessions/   ← Archived session
+state/current.json            ← Reset for next session
 ```
 
 ## Debugging
 
-### Vérifier l'état
+### Check State
 
 ```bash
 cat .web-agency/state/current.json | jq
 ```
 
-### Reset manuel
+### Manual Reset
 
 ```bash
 echo '{"version":"1.0","initialized_at":null,"project":null,"workflow":null,"context":{}}' > .web-agency/state/current.json
