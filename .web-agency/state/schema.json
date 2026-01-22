@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://web-agency.local/schemas/state.json",
-  "title": "Web Agency State",
-  "description": "Schema for orchestrator session state",
+  "title": "APEX Method State",
+  "description": "Schema for APEX orchestrator session state",
   "type": "object",
   "required": ["version"],
   "properties": {
@@ -43,10 +43,16 @@
     "workflow": {
       "type": ["object", "null"],
       "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "APEX workflow level (0-4)"
+        },
         "name": {
           "type": "string",
-          "enum": ["feature", "bugfix", "deployment", "code-review", "audit", "new-project", "marketing-campaign", "seo-project", "maintenance"],
-          "description": "Active workflow name"
+          "enum": ["hotfix", "task", "story", "feature", "product"],
+          "description": "Workflow name corresponding to level"
         },
         "started_at": {
           "type": "string",
@@ -69,7 +75,26 @@
           "description": "Workflow status"
         }
       },
-      "required": ["name", "status"]
+      "required": ["level", "name", "status"]
+    },
+    "active_role": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "product-manager",
+        "tech-architect",
+        "lead-developer",
+        "developer",
+        "qa-engineer",
+        "ux-designer",
+        "devops-engineer",
+        "project-manager",
+        "marketing-lead",
+        "commercial-lead",
+        "support-lead",
+        "scrum-master"
+      ],
+      "description": "Currently active APEX role"
     },
     "steps": {
       "type": "array",
@@ -99,13 +124,21 @@
           },
           "gate": {
             "type": "string",
-            "enum": ["blocking", "informative", "auto"],
+            "enum": ["blocking", "advisory", "automatic"],
             "description": "Gate type for this step"
           },
           "validated_at": {
             "type": "string",
             "format": "date-time",
             "description": "When gate was validated"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role responsible for this step"
+          },
+          "skill": {
+            "type": "string",
+            "description": "Skill used for this step"
           }
         },
         "required": ["name", "status"]
@@ -122,7 +155,7 @@
           },
           "type": {
             "type": "string",
-            "enum": ["blocking", "informative"],
+            "enum": ["blocking", "advisory"],
             "description": "Gate type"
           },
           "waiting_for": {
@@ -148,7 +181,7 @@
       "properties": {
         "domain": {
           "type": "string",
-          "enum": ["tech", "marketing", "design", "project"],
+          "enum": ["tech", "marketing", "design", "project", "commercial", "support"],
           "description": "Primary domain"
         },
         "stack": {
@@ -161,6 +194,11 @@
           "items": {"type": "string"},
           "description": "Context files loaded"
         },
+        "loaded_knowledge": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Knowledge files loaded in this session"
+        },
         "key_decisions": {
           "type": "array",
           "items": {
@@ -168,7 +206,8 @@
             "properties": {
               "decision": {"type": "string"},
               "adr": {"type": "string"},
-              "date": {"type": "string", "format": "date"}
+              "date": {"type": "string", "format": "date"},
+              "role": {"type": "string", "description": "Role that made the decision"}
             }
           },
           "description": "Decisions made during session"
@@ -183,6 +222,33 @@
           "items": {"type": "string"},
           "description": "Session notes"
         }
+      }
+    },
+    "knowledge_captured": {
+      "type": "array",
+      "description": "Knowledge items captured during this session",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["pattern", "case", "rule", "checklist"],
+            "description": "Type of knowledge"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path to knowledge file"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief summary of the knowledge"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["type", "path"]
       }
     },
     "updated_at": {
