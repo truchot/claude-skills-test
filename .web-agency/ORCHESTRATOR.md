@@ -507,14 +507,242 @@ solution:
   3. Document decision trail
 ```
 
+## Two-Phase Execution Model
+
+> **Reference**: See `core/phase-gates.md` for complete documentation.
+
+### Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 1: PLANNING                                          │
+│  PM → Tech Architect → Output: PRD + Architecture + ADRs    │
+│                                                              │
+│  🔴 PLANNING GATE - Must pass before development            │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  PHASE 2: DEVELOPMENT                                        │
+│  Lead Dev → Developer → QA → DevOps                         │
+│  Rules: Architecture FROZEN, Changes require CR             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Phase Transitions
+
+| From | To | Gate | Requirement |
+|------|----|----- |-------------|
+| Planning | Development | 🔴 BLOCKING | All planning artifacts approved |
+| Development | Planning | CR Required | Change Request for frozen artifacts |
+
+### Frozen Artifacts During Development
+
+Once planning is approved, these cannot change without a Change Request:
+- `.project/03-architecture/overview.md`
+- `.project/03-architecture/stack.md`
+- `.project/03-architecture/api-contract.yaml`
+- `.project/03-architecture/data-model.md`
+- `.project/03-architecture/decisions/ADR-*.md`
+
+## Context Loading Protocol
+
+> **Reference**: See `core/context-loader.md` for complete documentation.
+
+### Automatic Context Loading
+
+The AI automatically loads context based on request analysis:
+
+```yaml
+context_loading:
+  always:
+    - state/current.json
+    - project-types/{detected_type}.md
+
+  by_role:
+    tech_architect: [architecture/*.md, knowledge/patterns/technical/*]
+    product_manager: [01-vision/*.md, 02-requirements/*]
+    developer: [03-architecture/stack.md, 04-specs/features/{current}/*]
+
+  by_keyword:
+    security: [contexts/security.md, knowledge/rules/security.md]
+    performance: [knowledge/patterns/performance/*]
+    database: [03-architecture/data-model.md]
+
+  by_phase:
+    planning: [roles/product-manager/*, roles/tech-architect/*]
+    development: [roles/developer/*, roles/lead-developer/*]
+```
+
+### Context Loading Checklist
+
+Before processing any request:
+- [ ] State loaded (state/current.json)
+- [ ] Project type identified
+- [ ] Role context loaded
+- [ ] Keyword context loaded
+- [ ] Phase context loaded
+
+## Compiled Agents
+
+> **Reference**: See `compiled-agents/README.md` for details.
+
+For complex tasks, use **compiled agents** - self-contained files with everything embedded:
+
+```
+compiled-agents/
+├── tech-architect/
+│   ├── api-design.compiled.md
+│   └── ...
+├── lead-developer/
+│   ├── code-review.compiled.md
+│   └── ...
+└── developer/
+    └── ...
+```
+
+### When to Use Compiled Agents
+
+| Situation | Use |
+|-----------|-----|
+| Full task execution | Compiled agent |
+| Quick reference | Original agent file |
+| Need complete procedure | Compiled agent |
+
+## Executable Checklists
+
+> **Reference**: See `checklists/schema.yaml` for format.
+
+Checklists can be validated automatically:
+
+```yaml
+# Example: checklists/planning-gate.checklist.yaml
+checklist:
+  id: planning-gate
+  gate_type: blocking
+
+  sections:
+    - id: prd
+      items:
+        - id: prd-exists
+          auto_check:
+            type: file_exists
+            path: ".project/01-vision/PRD.md"
+          required: true
+
+        - id: stakeholder-approval
+          auto_check: null  # Manual
+          manual_prompt: "Has the PRD been approved?"
+          required: true
+```
+
+### Available Checklists
+
+| Checklist | Gate | Purpose |
+|-----------|------|---------|
+| `planning-gate.checklist.yaml` | 🔴 | Validates planning completion |
+| `pre-deployment.checklist.yaml` | 🔴 | Validates deployment readiness |
+
+## State Management v2
+
+> **Reference**: See `state/schema-v2.json` for complete schema.
+
+Enhanced state tracking with step-level detail:
+
+```json
+{
+  "version": "2.0",
+  "session": {
+    "id": "uuid",
+    "started_at": "...",
+    "last_activity": "..."
+  },
+  "phase": {
+    "current": "development",
+    "planning_approved": true,
+    "frozen_artifacts": [...]
+  },
+  "current_task": {
+    "role": "developer",
+    "agent": "frontend-implementation",
+    "progress": {
+      "current_step": 3,
+      "total_steps": 5,
+      "steps_completed": [...]
+    },
+    "artifacts_in_progress": [...]
+  },
+  "checkpoints": [
+    {"name": "pre-implementation", "snapshot_path": "..."}
+  ]
+}
+```
+
+### New State Features
+
+| Feature | Purpose |
+|---------|---------|
+| `current_task` | Track active task with step-level detail |
+| `checkpoints` | Named save points for recovery |
+| `phase` | Track planning vs development phase |
+| `change_requests` | Track CRs during development |
+| `context_loaded` | What context files are loaded |
+
+## Routing Rules
+
+> **Reference**: See `core/routing-rules.md` for complete routing matrix.
+
+### Role Routing
+
+```yaml
+role_keywords:
+  tech_architect: [architecture, stack, technology, API design, security]
+  product_manager: [requirements, scope, priority, roadmap, PRD]
+  lead_developer: [estimate, review, sprint, standards, breakdown]
+  developer: [implement, code, build, fix, test]
+```
+
+### Disambiguation
+
+When keywords overlap:
+```yaml
+"API":
+  if_context: "design/architecture" → tech_architect.api_design
+  else: → developer.backend_implementation
+
+"database":
+  if_context: "schema/design" → tech_architect.data_modeling
+  else: → developer.backend_implementation
+```
+
+## Project Types
+
+> **Reference**: See `project-types/*.md` for configurations.
+
+Different project types have adjusted workflows:
+
+| Type | Complexity | HITL Gates | Focus |
+|------|------------|------------|-------|
+| `showcase` | L1-L2 | Relaxed | Performance, SEO |
+| `ecommerce` | L2-L3 | Standard | Payment, inventory |
+| `saas` | L3-L4 | Strict | Multi-tenancy, subscriptions |
+
 ## References
 
 | Subject | File |
 |---------|------|
 | APEX Method | `APEX.md` |
 | Roles | `roles/*/ROLE.md` |
+| Compiled Agents | `compiled-agents/*/` |
 | Skills | `skills/*/SKILL.md` |
 | Workflows | `workflows/level-*.md` |
 | Knowledge | `knowledge/README.md` |
-| State Schema | `state/schema.json` |
+| State Schema v1 | `state/schema.json` |
+| State Schema v2 | `state/schema-v2.json` |
 | Gates Reference | `GATES.md` |
+| Context Loader | `core/context-loader.md` |
+| Phase Gates | `core/phase-gates.md` |
+| Routing Rules | `core/routing-rules.md` |
+| Checklists | `checklists/*.checklist.yaml` |
+| Project Types | `project-types/*.md` |
+| Analysis | `analysis/APEX-vs-BMAD-analysis.md` |

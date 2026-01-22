@@ -1,0 +1,177 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTABLE CHECKLIST SCHEMA
+# ═══════════════════════════════════════════════════════════════════════════════
+# Version: 1.0
+# Purpose: Define format for checklists that can be validated automatically
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema:
+  version: "1.0"
+
+  checklist:
+    type: object
+    required: [id, name, gate_type, sections]
+
+    properties:
+      id:
+        type: string
+        pattern: "^[a-z-]+$"
+        description: "Unique identifier (kebab-case)"
+
+      name:
+        type: string
+        description: "Human-readable name"
+
+      description:
+        type: string
+        description: "What this checklist validates"
+
+      gate_type:
+        type: string
+        enum: ["blocking", "advisory", "automatic"]
+        description: "HITL gate type"
+
+      applies_to:
+        type: object
+        description: "When this checklist applies"
+        properties:
+          roles:
+            type: array
+            items: {type: string}
+          phases:
+            type: array
+            items: {type: string}
+            enum_values: ["planning", "development"]
+          workflow_levels:
+            type: array
+            items: {type: integer}
+
+      sections:
+        type: array
+        items:
+          $ref: "#/definitions/section"
+
+  section:
+    type: object
+    required: [id, name, items]
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/item"
+
+  item:
+    type: object
+    required: [id, description, required]
+    properties:
+      id:
+        type: string
+        description: "Unique item ID within checklist"
+
+      description:
+        type: string
+        description: "Human-readable check description"
+
+      required:
+        type: boolean
+        description: "Is this item required for gate passage?"
+
+      auto_check:
+        type: object
+        nullable: true
+        description: "Automatic validation configuration"
+        properties:
+          type:
+            type: string
+            enum: ["command", "file_exists", "file_not_exists", "grep", "grep_not", "json_path", "api"]
+
+          # For type: command
+          command:
+            type: string
+            description: "Shell command to run"
+          success_condition:
+            type: string
+            description: "Condition for success (exit_code == 0, output contains X)"
+
+          # For type: file_exists / file_not_exists
+          path:
+            type: string
+            description: "File path or glob pattern"
+
+          # For type: grep / grep_not
+          pattern:
+            type: string
+            description: "Regex pattern to search"
+          files:
+            type: string
+            description: "Files to search (glob)"
+
+          # For type: json_path
+          file:
+            type: string
+          json_path:
+            type: string
+          expected:
+            type: any
+
+      manual_prompt:
+        type: string
+        description: "Question to ask human if manual check"
+
+      evidence_required:
+        type: boolean
+        default: false
+        description: "Does this need documentation/screenshot?"
+
+      skip_conditions:
+        type: array
+        description: "Conditions when this check can be skipped"
+        items:
+          type: object
+          properties:
+            when:
+              type: string
+            reason:
+              type: string
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION RESULT FORMAT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation_result:
+  checklist_id: string
+  validated_at: datetime
+  validated_by: string
+
+  overall_status:
+    type: string
+    enum: ["passed", "failed", "partial"]
+
+  sections:
+    - section_id: string
+      status: string
+      items:
+        - item_id: string
+          status: "passed" | "failed" | "skipped" | "manual_pending"
+          checked_at: datetime
+          checked_by: string | "auto"
+          evidence: string | null
+          notes: string | null
+
+  blocking_failures:
+    type: array
+    description: "Required items that failed"
+
+  warnings:
+    type: array
+    description: "Non-required items that failed"
+
+  can_proceed:
+    type: boolean
+    computed: "blocking_failures.length == 0"

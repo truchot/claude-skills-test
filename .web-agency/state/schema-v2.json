@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.local/schemas/state-v2.json",
+  "title": "APEX Method State v2",
+  "description": "Enhanced schema with step-level tracking, task progress, and checkpoints",
+  "type": "object",
+  "required": ["version", "session"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "2.0",
+      "description": "Schema version"
+    },
+
+    "session": {
+      "type": "object",
+      "description": "Current session information",
+      "required": ["id", "started_at", "last_activity"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique session identifier"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_activity": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "paused", "completed", "abandoned"],
+          "default": "active"
+        }
+      }
+    },
+
+    "project": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^PRJ-\\d{3}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "client": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["showcase", "ecommerce", "saas", "wordpress", "custom"],
+          "description": "Project type for config loading"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "type"]
+    },
+
+    "phase": {
+      "type": "object",
+      "description": "Current execution phase (Planning or Development)",
+      "properties": {
+        "current": {
+          "type": "string",
+          "enum": ["planning", "development"],
+          "description": "Current phase"
+        },
+        "planning_approved": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether planning gate has passed"
+        },
+        "planning_approved_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "frozen_artifacts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Paths to frozen artifacts during development"
+        }
+      }
+    },
+
+    "workflow": {
+      "type": ["object", "null"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "name": {
+          "type": "string",
+          "enum": ["hotfix", "task", "story", "feature", "product"]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "current_step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["in_progress", "completed", "paused", "blocked", "cancelled"]
+        },
+        "steps": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/workflowStep"}
+        }
+      },
+      "required": ["level", "name", "status"]
+    },
+
+    "current_task": {
+      "type": ["object", "null"],
+      "description": "Detailed tracking of the current task in progress",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Task identifier"
+        },
+        "description": {
+          "type": "string",
+          "description": "What is being done"
+        },
+        "role": {
+          "type": "string",
+          "description": "Active role"
+        },
+        "agent": {
+          "type": ["string", "null"],
+          "description": "Active sub-agent"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "progress": {
+          "type": "object",
+          "properties": {
+            "current_step": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "total_steps": {
+              "type": ["integer", "null"]
+            },
+            "percentage": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "steps_completed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "step": {"type": "integer"},
+                  "action": {"type": "string"},
+                  "output": {"type": "string"},
+                  "completed_at": {"type": "string", "format": "date-time"}
+                },
+                "required": ["step", "action"]
+              }
+            }
+          }
+        },
+        "pending_decisions": {
+          "type": "array",
+          "description": "Decisions waiting for input",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {"type": "string"},
+              "context": {"type": "string"},
+              "options": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "default": {"type": "string"},
+              "blocking": {"type": "boolean", "default": false}
+            },
+            "required": ["question"]
+          }
+        },
+        "artifacts_in_progress": {
+          "type": "array",
+          "description": "Files being created or modified",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {"type": "string"},
+              "status": {
+                "type": "string",
+                "enum": ["creating", "partial", "reviewing", "complete"]
+              },
+              "completion_percentage": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "last_updated": {"type": "string", "format": "date-time"}
+            },
+            "required": ["path", "status"]
+          }
+        }
+      },
+      "required": ["description", "role"]
+    },
+
+    "context_loaded": {
+      "type": "array",
+      "description": "Files loaded into context for this session",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {"type": "string"},
+          "type": {
+            "type": "string",
+            "enum": ["always", "role", "keyword", "phase", "manual"]
+          },
+          "loaded_at": {"type": "string", "format": "date-time"},
+          "summary": {
+            "type": "string",
+            "description": "Brief summary if file was summarized"
+          }
+        },
+        "required": ["path", "type", "loaded_at"]
+      }
+    },
+
+    "decisions": {
+      "type": "array",
+      "description": "Decisions made during this session",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "decision": {"type": "string"},
+          "alternatives_considered": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "rationale": {"type": "string"},
+          "adr_path": {"type": ["string", "null"]},
+          "made_by": {"type": "string"},
+          "made_at": {"type": "string", "format": "date-time"}
+        },
+        "required": ["description", "decision", "made_by", "made_at"]
+      }
+    },
+
+    "gates_pending": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "step": {"type": "string"},
+          "type": {
+            "type": "string",
+            "enum": ["blocking", "advisory"]
+          },
+          "waiting_for": {
+            "type": "string",
+            "enum": ["validation", "input", "review", "approval"]
+          },
+          "deliverable": {"type": "string"},
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "item": {"type": "string"},
+                "checked": {"type": "boolean"},
+                "checked_at": {"type": ["string", "null"], "format": "date-time"}
+              }
+            }
+          },
+          "since": {"type": "string", "format": "date-time"}
+        },
+        "required": ["step", "type"]
+      }
+    },
+
+    "checkpoints": {
+      "type": "array",
+      "description": "Named save points for recovery",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "snapshot_path": {
+            "type": "string",
+            "description": "Path to state snapshot file"
+          },
+          "trigger": {
+            "type": "string",
+            "enum": ["manual", "pre_gate", "post_gate", "phase_change", "auto"]
+          }
+        },
+        "required": ["name", "created_at", "snapshot_path"]
+      }
+    },
+
+    "change_requests": {
+      "type": "array",
+      "description": "Change requests during development phase",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "pattern": "^CR-\\d{3}$"},
+          "title": {"type": "string"},
+          "artifact_to_change": {"type": "string"},
+          "reason": {"type": "string"},
+          "impact": {"type": "string"},
+          "status": {
+            "type": "string",
+            "enum": ["pending", "approved", "rejected", "implemented"]
+          },
+          "created_at": {"type": "string", "format": "date-time"},
+          "resolved_at": {"type": ["string", "null"], "format": "date-time"}
+        },
+        "required": ["id", "title", "artifact_to_change", "reason", "status"]
+      }
+    },
+
+    "metrics": {
+      "type": "object",
+      "description": "Session metrics for learning",
+      "properties": {
+        "tasks_completed": {"type": "integer", "default": 0},
+        "gates_passed_first_try": {"type": "integer", "default": 0},
+        "gates_required_rework": {"type": "integer", "default": 0},
+        "decisions_made": {"type": "integer", "default": 0},
+        "context_loads": {"type": "integer", "default": 0},
+        "checkpoints_created": {"type": "integer", "default": 0}
+      }
+    },
+
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+
+  "$defs": {
+    "workflowStep": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in_progress", "completed", "skipped", "blocked"]
+        },
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "output_path": {"type": "string"},
+        "gate": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["blocking", "advisory", "automatic"]
+            },
+            "status": {
+              "type": "string",
+              "enum": ["pending", "passed", "failed"]
+            },
+            "validated_at": {"type": "string", "format": "date-time"},
+            "validated_by": {"type": "string"}
+          }
+        },
+        "role": {"type": "string"},
+        "agent": {"type": "string"},
+        "notes": {"type": "string"}
+      },
+      "required": ["name", "status"]
+    }
+  }
+}
