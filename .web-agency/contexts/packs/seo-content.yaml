@@ -1,0 +1,125 @@
+# Context Pack: SEO & Content
+# Use when: SEO optimization, content strategy, meta tags, structured data
+
+name: "SEO & Content"
+description: "Context for SEO optimization, content creation, meta tags, and structured data"
+version: "1.0"
+
+# Detection rules
+detection:
+  keywords:
+    - "SEO"
+    - "meta"
+    - "sitemap"
+    - "robots"
+    - "schema"
+    - "structured data"
+    - "canonical"
+    - "title"
+    - "description"
+    - "keywords"
+    - "content"
+    - "blog"
+  file_patterns:
+    - "**/sitemap*"
+    - "**/robots*"
+    - "**/*meta*"
+    - "**/blog/**"
+    - "**/content/**"
+
+# Stack sections to extract (if project has tech stack)
+stack_sections:
+  - framework        # For meta tag implementation
+  - seo              # SEO tools (next-seo, etc.)
+  - analytics        # GA4, GTM
+  - cms              # If using headless CMS
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-seo*"
+  - "ADR-*-content*"
+  - "ADR-*-analytics*"
+
+# Knowledge patterns to include
+patterns:
+  - "marketing/seo-checklist.md"
+  - "marketing/content-strategy.md"
+  - "marketing/structured-data.md"
+
+# Standards to apply
+standards:
+  - seo:
+      focus: ["title-length", "meta-description", "headings", "alt-text"]
+  - content:
+      focus: ["readability", "keyword-density", "internal-linking"]
+  - technical:
+      focus: ["page-speed", "mobile-friendly", "core-web-vitals"]
+
+# Context files to load
+contexts:
+  - "seo.md"
+  - "content.md"
+  - "analytics.md"
+
+# Common related file patterns
+related_file_patterns:
+  - "src/app/layout.tsx"           # Root metadata
+  - "src/app/**/page.tsx"          # Page metadata
+  - "src/components/SEO/**/*.tsx"  # SEO components
+  - "public/sitemap.xml"
+  - "public/robots.txt"
+  - "next-sitemap.config.js"
+
+# Key extractions
+key_extractions:
+  - name: "Metadata Config"
+    search: "metadata|generateMetadata"
+    files: ["src/app/**/page.tsx", "src/app/**/layout.tsx"]
+
+  - name: "Structured Data"
+    search: "application/ld\\+json|schema\\.org"
+    files: ["src/components/**/*.tsx"]
+
+  - name: "SEO Components"
+    search: "export.*SEO|export.*Meta"
+    files: ["src/components/**/*.tsx"]
+
+# Template hints
+implementation_hints:
+  meta_template: |
+    export const metadata: Metadata = {
+      title: '[Page Title] | [Brand]',      // 50-60 chars
+      description: '[Description]',          // 150-160 chars
+      keywords: ['keyword1', 'keyword2'],
+      openGraph: {
+        title: '[OG Title]',
+        description: '[OG Description]',
+        images: ['/og-image.jpg'],
+      },
+      twitter: {
+        card: 'summary_large_image',
+      },
+    };
+
+  structured_data_template: |
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "[Type]",
+      "name": "[Name]",
+      "description": "[Description]"
+    }
+    </script>
+
+  checklist:
+    - "Unique title for each page (50-60 chars)"
+    - "Meta description (150-160 chars)"
+    - "One H1 per page"
+    - "Logical heading hierarchy (H1 → H2 → H3)"
+    - "Alt text on all images"
+    - "Internal links with descriptive anchor text"
+    - "Canonical URL set"
+    - "Open Graph tags for social sharing"
+    - "Structured data where applicable"
+    - "Mobile-friendly (responsive)"
+    - "Page load under 3 seconds"

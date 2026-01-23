@@ -67,23 +67,61 @@ The Story Generation Protocol transforms basic task definitions (T-XXX) from the
 
 ### Phase 1: Context Extraction
 
+> **NEW**: Use Context Packs to accelerate extraction. See `contexts/packs/README.md`
+
 ```yaml
 step_1_identify_context_needs:
-  action: "Analyze task to identify what context is needed"
+  action: "Detect or select Context Pack, then customize"
 
-  questions:
-    - "What part of the stack does this touch?"
-    - "Are there ADRs that affect how this should be implemented?"
-    - "What patterns apply to this type of work?"
-    - "What existing code does this interact with?"
-    - "What standards must be followed?"
+  # FAST PATH: Use Context Pack
+  context_pack_detection:
+    auto_detect: true
+    available_packs:
+      - "api-endpoint.yaml"      # API/endpoint tasks
+      - "react-component.yaml"   # UI component tasks
+      - "database-schema.yaml"   # Database/Prisma tasks
+      - "authentication.yaml"    # Auth/security tasks
+      - "testing.yaml"           # Test writing tasks
+      - "seo-content.yaml"       # SEO/content tasks
+
+    detection_method: |
+      1. Match task keywords against pack detection rules
+      2. Match file patterns if task specifies files
+      3. If no match, fall back to manual extraction
+
+  # MANUAL PATH: Custom extraction (if no pack matches)
+  manual_extraction:
+    questions:
+      - "What part of the stack does this touch?"
+      - "Are there ADRs that affect how this should be implemented?"
+      - "What patterns apply to this type of work?"
+      - "What existing code does this interact with?"
+      - "What standards must be followed?"
 
   output:
+    context_pack: "api-endpoint" # or null if manual
     stack_areas: ["frontend", "backend", "database", ...]
     relevant_adrs: ["ADR-001", "ADR-003", ...]
     applicable_patterns: ["api-design.md", "error-handling.md", ...]
     related_files: ["src/lib/auth.ts", "src/api/users.ts", ...]
     standards_needed: ["typescript", "testing", "naming", ...]
+```
+
+#### Using Context Packs
+
+```yaml
+# If context pack detected/selected:
+pack_usage:
+  step_1: "Load pack definition from contexts/packs/{pack}.yaml"
+  step_2: "Extract stack_sections specified in pack"
+  step_3: "Match ADRs using pack's adr_patterns"
+  step_4: "Load patterns specified in pack"
+  step_5: "Apply standards from pack"
+  step_6: "Search for related files using pack's patterns"
+  step_7: "Run key_extractions to find specific code"
+  step_8: "Include implementation_hints in story"
+
+# Benefit: 3x faster story generation with consistent context
 ```
 
 ### Phase 2: Context Loading
@@ -466,12 +504,47 @@ A good story passes this checklist:
 
 ---
 
+## Post-Execution: Learning Capture
+
+After story execution, extract learnings to improve future stories:
+
+```yaml
+post_story_workflow:
+  trigger: "Story marked as 'Done'"
+
+  steps:
+    1_analyze:
+      action: "Review execution log and deviations"
+      source: "Story Section 8 (Execution Log)"
+
+    2_extract:
+      action: "Identify reusable insights"
+      types: ["pattern", "edge_case", "gotcha", "estimation_insight"]
+
+    3_update:
+      action: "Add to knowledge base"
+      destinations:
+        - "knowledge/patterns/" # New patterns
+        - "knowledge/cases/"    # Edge cases
+        - "knowledge/rules/"    # Rules & gotchas
+        - "contexts/packs/"     # Pack improvements
+
+    4_document:
+      action: "Complete Learning Capture section (11) in story"
+```
+
+See `core/learning-capture.md` for full protocol.
+
+---
+
 ## References
 
 - `templates/STORY-TEMPLATE.md` - Full story template
 - `templates/SESSION-PLAN.md` - How stories link to tasks
 - `intake/PROTOCOL.md` - DECOMPOSE stage integration
 - `core/task-management.md` - Task system overview
+- `core/learning-capture.md` - Learning extraction protocol
+- `contexts/packs/README.md` - Context Packs system
 
 ---
 

@@ -11,6 +11,7 @@
 | **ID** | STORY-XXX |
 | **Parent** | T-XXX (from Session Plan) |
 | **Session Plan** | `.project/plans/PLAN-{date}-{slug}.md` |
+| **Context Pack** | [pack-name] or "Manual extraction" |
 | **Status** | Draft / Ready / In Progress / Review / Done |
 | **Agent** | [role]/[agent] |
 | **Gate** | 🔴 BLOCKING / 🟡 ADVISORY / 🟢 AUTOMATIC |
@@ -326,6 +327,61 @@ describe('[Feature]', () => {
 
 ---
 
+## 11. Learning Capture
+
+> **Complete after story execution** - Extract insights for future stories.
+> See `core/learning-capture.md` for full protocol.
+
+### 11.1 Deviations Analysis
+
+| Planned | Actual | Root Cause | Learning Type |
+|---------|--------|------------|---------------|
+| [What was planned] | [What happened] | [Why] | pattern / case / gotcha / - |
+| | | | |
+| | | | |
+
+### 11.2 Discoveries
+
+| Finding | Reusable? | Destination |
+|---------|-----------|-------------|
+| [What was discovered] | Yes / No | [Where to document] |
+| | | |
+
+### 11.3 Gotchas Encountered
+
+| Gotcha | Solution | Added to Rules? |
+|--------|----------|-----------------|
+| [Problem encountered] | [How solved] | ☐ Yes → `knowledge/rules/gotchas.md` |
+| | | |
+
+### 11.4 Knowledge Updates Made
+
+| Type | File | Change |
+|------|------|--------|
+| pattern | `knowledge/patterns/[path]` | [What was added] |
+| case | `knowledge/cases/[path]` | [What was added] |
+| rule | `knowledge/rules/[path]` | [What was updated] |
+| pack | `contexts/packs/[pack].yaml` | [What was improved] |
+
+### 11.5 Estimation Accuracy
+
+| Estimated | Actual | Delta | Reason |
+|-----------|--------|-------|--------|
+| [X hours] | [Y hours] | [+/- Z%] | [Why different] |
+
+**Update estimation rules?** ☐ Yes → Add to `knowledge/rules/estimation.md`
+
+### 11.6 Context Pack Feedback
+
+**Pack used**: [pack name] or "None (manual extraction)"
+
+| Missing from Pack | Should Add |
+|-------------------|------------|
+| [What was missing] | ☐ Yes → Update pack |
+| | |
+
+---
+
 ## References
 
 | Document | Path |
@@ -334,6 +390,8 @@ describe('[Feature]', () => {
 | Architecture | `.project/03-architecture/` |
 | ADRs | `.project/04-adr/` |
 | Patterns | `knowledge/patterns/` |
+| Context Packs | `contexts/packs/` |
+| Learning Protocol | `core/learning-capture.md` |
 
 ---
 

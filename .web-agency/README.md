@@ -374,7 +374,11 @@ For L2+ complexity tasks, generate **Context-Engineered Stories** that embed all
 SESSION PLAN (T-XXX tasks)
        │
        ▼
-CONTEXT EXTRACTION
+CONTEXT PACK DETECTION
+  • api-endpoint / react-component / database-schema / ...
+       │
+       ▼
+CONTEXT EXTRACTION (3x faster with packs)
   • Stack/Architecture → Embedded
   • Relevant ADRs → Embedded
   • Applicable Patterns → Embedded
@@ -385,6 +389,12 @@ STORY-XXX.md (self-contained)
        │
        ▼
 AGENT EXECUTION (no external files needed)
+       │
+       ▼
+LEARNING CAPTURE
+  • Deviations → patterns/
+  • Gotchas → rules/
+  • Edge cases → cases/
 ```
 
 **Benefits:**
@@ -392,7 +402,11 @@ AGENT EXECUTION (no external files needed)
 - Eliminates context loss between sessions/agents
 - Makes task execution predictable and reliable
 - Enables parallel agent work with consistent context
+- **NEW**: Context Packs accelerate story generation 3x
+- **NEW**: Learning Capture improves future stories
 
 **References:**
 - `core/story-generation.md` - Full generation protocol
 - `templates/STORY-TEMPLATE.md` - Story template with all sections
+- `contexts/packs/README.md` - Context Packs system
+- `core/learning-capture.md` - Learning extraction protocol

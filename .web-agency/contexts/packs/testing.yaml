@@ -1,0 +1,130 @@
+# Context Pack: Testing
+# Use when: Writing unit tests, integration tests, e2e tests
+
+name: "Testing"
+description: "Context for writing and maintaining tests (unit, integration, e2e)"
+version: "1.0"
+
+# Detection rules
+detection:
+  keywords:
+    - "test"
+    - "spec"
+    - "unit"
+    - "integration"
+    - "e2e"
+    - "coverage"
+    - "mock"
+    - "fixture"
+    - "assertion"
+  file_patterns:
+    - "**/*.test.ts"
+    - "**/*.test.tsx"
+    - "**/*.spec.ts"
+    - "**/tests/**"
+    - "**/__tests__/**"
+
+# Stack sections to extract
+stack_sections:
+  - testing          # Vitest, Jest, Testing Library
+  - e2e              # Playwright, Cypress
+  - coverage         # Coverage requirements
+  - mocking          # MSW, manual mocks
+  - ci               # CI test execution
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-testing*"
+  - "ADR-*-quality*"
+  - "ADR-*-coverage*"
+  - "ADR-*-e2e*"
+
+# Knowledge patterns to include
+patterns:
+  - "technical/testing-strategy.md"
+  - "technical/test-patterns.md"
+  - "technical/mocking.md"
+  - "technical/e2e-testing.md"
+
+# Standards to apply
+standards:
+  - testing:
+      focus: ["naming", "structure", "assertions", "coverage"]
+  - typescript:
+      focus: ["test-types", "mock-types"]
+
+# Context files to load
+contexts:
+  - "frontend.md"  # For component testing
+  - "backend.md"   # For API testing
+
+# Common related file patterns
+related_file_patterns:
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "vitest.config.ts"
+  - "jest.config.js"
+  - "playwright.config.ts"
+  - "src/test/**/*.ts"
+  - "src/__mocks__/**/*.ts"
+
+# Key extractions
+key_extractions:
+  - name: "Test Config"
+    search: "defineConfig|module.exports"
+    files: ["vitest.config.ts", "jest.config.js"]
+
+  - name: "Test Utilities"
+    search: "export.*function|export.*const"
+    files: ["src/test/**/*.ts"]
+
+  - name: "Existing Test Patterns"
+    search: "describe\\(|it\\(|test\\("
+    files: ["**/*.test.ts"]
+
+# Template hints
+implementation_hints:
+  structure: |
+    src/
+    ├── components/
+    │   └── Button/
+    │       ├── Button.tsx
+    │       └── Button.test.tsx    # Co-located
+    ├── lib/
+    │   └── utils.test.ts          # Co-located
+    └── test/
+        ├── setup.ts               # Global setup
+        ├── utils.ts               # Test helpers
+        └── mocks/                 # Shared mocks
+
+  checklist:
+    - "Test behavior, not implementation"
+    - "Use descriptive test names (should X when Y)"
+    - "Arrange-Act-Assert pattern"
+    - "One assertion per test (ideally)"
+    - "Mock external dependencies, not internal"
+    - "Test edge cases and error states"
+    - "Maintain test isolation"
+    - "Keep tests fast (mock slow operations)"
+    - "Aim for meaningful coverage, not 100%"
+
+  test_template: |
+    describe('[Unit/Feature]', () => {
+      // Setup
+      beforeEach(() => {
+        // Reset state
+      });
+
+      describe('[Scenario]', () => {
+        it('should [expected behavior] when [condition]', () => {
+          // Arrange
+          const input = {};
+
+          // Act
+          const result = functionUnderTest(input);
+
+          // Assert
+          expect(result).toEqual(expected);
+        });
+      });
+    });
