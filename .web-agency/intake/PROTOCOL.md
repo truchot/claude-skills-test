@@ -298,6 +298,7 @@ decomposition:
       depends_on: []
       gate: "🔴"
       effort: "2h"
+      story: "STORY-001" # Reference to generated story (if applicable)
 
   critical_path: ["T-001", "T-002", "T-005", "T-007"]
   parallel_tracks:
@@ -308,7 +309,51 @@ decomposition:
 
   total_effort: "29 hours"
   estimated_duration: "4 days"
+
+  stories_to_generate: ["T-003", "T-004", "T-005"] # Tasks needing stories
 ```
+
+### Story Generation (Context Engineering)
+
+> **NEW**: For L2+ complexity, generate self-contained stories with embedded context.
+
+After decomposing into tasks, identify which tasks need **Context-Engineered Stories**:
+
+```yaml
+story_generation_criteria:
+  generate_story_when:
+    - "Task touches architectural decisions (ADRs)"
+    - "Task requires specific patterns to follow"
+    - "Task will be executed in different session/agent"
+    - "Task involves multiple files/components"
+    - "Complexity is L2 or higher"
+
+  skip_story_when:
+    - "L0-L1 simple tasks"
+    - "Pure documentation tasks"
+    - "Single-file changes with obvious context"
+```
+
+For each task requiring a story:
+
+1. **Extract Context** from:
+   - `.project/03-architecture/stack.md` → Stack & tech decisions
+   - `.project/04-adr/ADR-XXX.md` → Relevant architectural decisions
+   - `knowledge/patterns/` → Applicable patterns
+   - `knowledge/rules/` → Code standards
+   - Existing source code → Related files
+
+2. **Generate Story** using `templates/STORY-TEMPLATE.md`
+   - Embed ALL needed context directly
+   - Break into detailed implementation steps
+   - Define technical spec and tests
+   - Document dependencies
+
+3. **Store Story** in `.project/stories/STORY-XXX-{slug}.md`
+
+4. **Link to Task** in Session Plan
+
+See `core/story-generation.md` for full protocol.
 
 ---
 

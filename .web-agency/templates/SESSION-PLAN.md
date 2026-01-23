@@ -118,6 +118,7 @@ Example: `.project/plans/PLAN-2026-01-23-stripe-integration.md`
 - **Depends On**: [None / T-XXX]
 - **Gate**: 🔴 / 🟡 / 🟢
 - **Effort**: [X hours]
+- **Story**: [`.project/stories/STORY-XXX-{slug}.md` or "N/A" for simple tasks]
 - **Acceptance Criteria**:
   - [ ] [Criterion 1]
   - [ ] [Criterion 2]
@@ -138,6 +139,17 @@ T-004 ───────┤
              │
              └──────► T-005
 ```
+
+### Generated Stories
+
+> **Context-Engineered Stories** - Self-contained execution guides with embedded context.
+> See `core/story-generation.md` for the protocol.
+
+| Task | Story | Status |
+|------|-------|--------|
+| T-002 | `.project/stories/STORY-002-{slug}.md` | ☐ Generated |
+| T-003 | `.project/stories/STORY-003-{slug}.md` | ☐ Generated |
+| T-004 | N/A (simple task) | - |
 
 ---
 

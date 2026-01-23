@@ -1,0 +1,486 @@
+# Story Generation Protocol
+
+> **Transform tasks into self-contained, context-engineered stories**
+
+---
+
+## Overview
+
+The Story Generation Protocol transforms basic task definitions (T-XXX) from the Session Plan into **hyper-detailed, self-contained stories** (STORY-XXX) that embed all necessary context for execution.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   STORY GENERATION FLOW                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  SESSION PLAN (T-XXX tasks)                                      │
+│       │                                                          │
+│       ▼                                                          │
+│  ┌─────────────────────────────────────────┐                     │
+│  │         CONTEXT EXTRACTION              │                     │
+│  │  • Stack/Architecture → Section 2.1     │                     │
+│  │  • Relevant ADRs → Section 2.2          │                     │
+│  │  • Applicable Patterns → Section 2.3    │                     │
+│  │  • Code Standards → Section 2.4         │                     │
+│  │  • Related Code → Section 2.5           │                     │
+│  └─────────────────────────────────────────┘                     │
+│       │                                                          │
+│       ▼                                                          │
+│  ┌─────────────────────────────────────────┐                     │
+│  │         STORY SYNTHESIS                 │                     │
+│  │  • Break into detailed steps            │                     │
+│  │  • Define technical spec                │                     │
+│  │  • Set testing requirements             │                     │
+│  │  • Document dependencies                │                     │
+│  └─────────────────────────────────────────┘                     │
+│       │                                                          │
+│       ▼                                                          │
+│  STORY-XXX.md (self-contained)                                   │
+│       │                                                          │
+│       ▼                                                          │
+│  AGENT EXECUTION (no external context needed)                    │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## When to Generate Stories
+
+| Complexity | Story Generation | Rationale |
+|------------|------------------|-----------|
+| **L0** (Quick) | ❌ Not needed | Simple enough to execute directly |
+| **L1** (Task) | ⚡ Optional | Generate if context-heavy |
+| **L2** (Story) | ✅ Recommended | Benefits from embedded context |
+| **L3** (Epic) | ✅ Required | Must decompose into stories |
+| **L4** (Saga) | ✅ Required | Must decompose into stories |
+
+**Rule**: Generate stories for any task that:
+- Requires understanding architectural decisions
+- Touches multiple files/components
+- Needs specific patterns to be followed
+- Will be executed in a different session/agent
+
+---
+
+## Story Generation Procedure
+
+### Phase 1: Context Extraction
+
+```yaml
+step_1_identify_context_needs:
+  action: "Analyze task to identify what context is needed"
+
+  questions:
+    - "What part of the stack does this touch?"
+    - "Are there ADRs that affect how this should be implemented?"
+    - "What patterns apply to this type of work?"
+    - "What existing code does this interact with?"
+    - "What standards must be followed?"
+
+  output:
+    stack_areas: ["frontend", "backend", "database", ...]
+    relevant_adrs: ["ADR-001", "ADR-003", ...]
+    applicable_patterns: ["api-design.md", "error-handling.md", ...]
+    related_files: ["src/lib/auth.ts", "src/api/users.ts", ...]
+    standards_needed: ["typescript", "testing", "naming", ...]
+```
+
+### Phase 2: Context Loading
+
+```yaml
+step_2_load_context:
+  action: "Load and extract relevant portions of context files"
+
+  sources:
+    stack_architecture:
+      path: ".project/03-architecture/stack.md"
+      extract: "Only sections relevant to task's stack areas"
+
+    adrs:
+      path: ".project/04-adr/ADR-XXX.md"
+      extract: "Decision + Consequences (not full history)"
+
+    patterns:
+      path: "knowledge/patterns/{pattern}.md"
+      extract: "Key rules + anti-patterns (not full examples)"
+
+    code_standards:
+      path: "knowledge/rules/{standard}.md"
+      extract: "Rules that apply to this task type"
+
+    existing_code:
+      path: "[identified related files]"
+      extract: "Key functions/interfaces this task interacts with"
+
+  output: "Condensed context for embedding (not full files)"
+```
+
+### Phase 3: Story Synthesis
+
+```yaml
+step_3_synthesize_story:
+  action: "Create detailed story from task + context"
+
+  components:
+    objective:
+      what: "Transform task description into clear deliverable"
+      why: "Connect to user value from Session Plan"
+      criteria: "Derive from task acceptance criteria"
+
+    embedded_context:
+      principle: "Include ONLY what's needed for THIS story"
+      format: "Condensed, actionable extracts"
+      goal: "Agent can execute without loading other files"
+
+    implementation_plan:
+      breakdown: "Split into 2-4 hour subtasks max"
+      steps: "Specific, actionable instructions"
+      validation: "How to verify each subtask"
+
+    technical_spec:
+      interfaces: "Define API contracts upfront"
+      database: "Schema changes if any"
+      components: "Structure for new code"
+
+    testing:
+      unit: "Key test cases for logic"
+      integration: "End-to-end scenarios"
+      manual: "What to check by hand"
+
+    dependencies:
+      depends_on: "What must complete before this"
+      blocks: "What this enables"
+```
+
+### Phase 4: Story Validation
+
+```yaml
+step_4_validate_story:
+  action: "Ensure story is self-contained and executable"
+
+  checklist:
+    completeness:
+      - "Can an agent execute this without asking questions?"
+      - "Is all needed context embedded?"
+      - "Are steps specific enough to follow?"
+
+    accuracy:
+      - "Does embedded context match source files?"
+      - "Are patterns correctly applied?"
+      - "Is technical spec feasible?"
+
+    scope:
+      - "Is the story sized appropriately (2-8 hours)?"
+      - "Is scope clear (what's in/out)?"
+      - "Are dependencies correctly identified?"
+
+  if_issues:
+    too_big: "Split into multiple stories"
+    missing_context: "Load and embed more context"
+    unclear_steps: "Add more detail to implementation plan"
+```
+
+---
+
+## Context Extraction Templates
+
+### 2.1 Stack & Architecture Extract
+
+```yaml
+# From: .project/03-architecture/stack.md
+# Extract: Only stack elements relevant to story
+
+# Example for a "Create API endpoint" story:
+extract_for_api_story:
+  framework: "Next.js 14 App Router"
+  language: "TypeScript 5.x strict mode"
+  api_style: "Route handlers in app/api/"
+  database: "PostgreSQL + Prisma"
+  validation: "Zod schemas"
+  auth: "NextAuth.js v5"
+
+# Example for a "Create React component" story:
+extract_for_component_story:
+  framework: "Next.js 14 App Router"
+  language: "TypeScript 5.x strict mode"
+  styling: "Tailwind CSS + shadcn/ui"
+  state: "React hooks + Context"
+  testing: "Vitest + Testing Library"
+```
+
+### 2.2 ADR Extract
+
+```yaml
+# From: .project/04-adr/ADR-XXX.md
+# Extract: Decision + Impact (not full context/alternatives)
+
+extract_format:
+  adr_id: "ADR-XXX"
+  title: "[Decision title]"
+  decision: "[What was decided - 1-2 sentences]"
+  consequence_for_story: "[How this affects this specific story]"
+
+# Example:
+example_extract:
+  adr_id: "ADR-003"
+  title: "Use Prisma for database access"
+  decision: "All database access via Prisma ORM with typed queries"
+  consequence_for_story: "Must define Prisma model before API, use prisma client"
+```
+
+### 2.3 Pattern Extract
+
+```yaml
+# From: knowledge/patterns/{domain}/{pattern}.md
+# Extract: Key rules + anti-patterns relevant to story
+
+extract_format:
+  pattern_name: "[Name]"
+  key_rules:
+    - "[Rule 1 - actionable]"
+    - "[Rule 2 - actionable]"
+  anti_patterns:
+    - "[What NOT to do]"
+  example_snippet: |
+    // Brief code example if helpful
+    [10-20 lines max]
+
+# Example for API pattern:
+example_extract:
+  pattern_name: "REST API Design"
+  key_rules:
+    - "Use plural nouns for resources (/users not /user)"
+    - "Return appropriate HTTP status codes"
+    - "Validate input with Zod before processing"
+    - "Wrap responses in { data: ... } or { error: ... }"
+  anti_patterns:
+    - "Don't expose internal errors to client"
+    - "Don't use verbs in URLs"
+```
+
+### 2.4 Code Standards Extract
+
+```yaml
+# From: knowledge/rules/{standard}.md
+# Extract: Rules that apply to this story's code
+
+extract_format:
+  domain: "[typescript|react|api|testing|...]"
+  rules:
+    - "[Applicable rule 1]"
+    - "[Applicable rule 2]"
+
+# Example for TypeScript story:
+example_extract:
+  domain: "typescript"
+  rules:
+    - "No 'any' types - use 'unknown' + type guards"
+    - "Export interfaces from .types.ts files"
+    - "Use const assertions for literal types"
+```
+
+### 2.5 Related Code Extract
+
+```yaml
+# From: Source code files
+# Extract: Interfaces/functions this story interacts with
+
+extract_format:
+  file: "[path/to/file.ts]"
+  relevance: "[Why this matters for the story]"
+  code_snippet: |
+    // Key interface or function
+    // 10-30 lines that story needs to understand
+
+# Example:
+example_extract:
+  file: "src/lib/auth.ts"
+  relevance: "Story must check user authentication"
+  code_snippet: |
+    export async function getServerSession() {
+      // ... implementation
+    }
+
+    export interface Session {
+      user: {
+        id: string;
+        email: string;
+        role: 'admin' | 'user';
+      }
+    }
+```
+
+---
+
+## Story File Location
+
+```
+.project/stories/
+├── STORY-001-{slug}.md
+├── STORY-002-{slug}.md
+└── ...
+```
+
+Naming convention: `STORY-{number}-{short-slug}.md`
+
+Examples:
+- `STORY-001-stripe-webhook-handler.md`
+- `STORY-002-pricing-page-component.md`
+- `STORY-003-subscription-api.md`
+
+---
+
+## Integration with APEX Pipeline
+
+### In DECOMPOSE Stage
+
+```yaml
+decompose_with_stories:
+  step_1: "Create T-XXX tasks in Session Plan (existing)"
+  step_2: "For each T-XXX where story needed:"
+  step_3: "  → Generate STORY-XXX using this protocol"
+  step_4: "  → Store in .project/stories/"
+  step_5: "Session Plan references stories"
+```
+
+### Session Plan Updates
+
+Add to SESSION-PLAN.md Section 6 (Tasks):
+
+```markdown
+#### T-003: Create webhook handler
+
+- **Description**: Implement Stripe webhook handler
+- **Story**: `.project/stories/STORY-003-stripe-webhook.md`
+- **Agent**: tech/backend-developer
+- **Gate**: 🟢
+- **Effort**: 4h
+```
+
+### Execution Flow
+
+```
+1. Agent receives task T-003
+2. Agent loads STORY-003-stripe-webhook.md
+3. Story contains ALL needed context
+4. Agent executes without loading other files
+5. Agent updates story execution log
+6. Story handed off to next stage
+```
+
+---
+
+## Example: Generating a Story
+
+### Input: Task from Session Plan
+
+```markdown
+#### T-003: Create Stripe webhook handler
+
+- **Description**: Implement endpoint to receive Stripe events
+- **Deliverable**: `/api/webhooks/stripe` endpoint
+- **Agent**: tech/backend
+- **Depends On**: T-002 (DB schema)
+- **Gate**: 🟢
+- **Effort**: 4h
+```
+
+### Context Extraction
+
+```yaml
+context_needs:
+  stack_areas: ["api", "database"]
+  relevant_adrs: ["ADR-003 (Prisma)", "ADR-007 (Stripe)"]
+  applicable_patterns: ["api-design.md", "error-handling.md", "webhook-security.md"]
+  related_files: ["src/lib/stripe.ts", "prisma/schema.prisma"]
+  standards_needed: ["typescript", "api-validation"]
+```
+
+### Generated Story (abbreviated)
+
+See full template in `templates/STORY-TEMPLATE.md`
+
+```markdown
+# Story: STORY-003 Stripe Webhook Handler
+
+## 1. Objective
+### What
+Create `/api/webhooks/stripe` endpoint to receive and process Stripe events
+
+### Why
+Enable real-time subscription updates when users upgrade/downgrade/cancel
+
+## 2. Embedded Context
+
+### 2.1 Stack
+framework: "Next.js 14 App Router"
+api_style: "Route handlers"
+database: "PostgreSQL + Prisma"
+
+### 2.2 Relevant ADRs
+- ADR-003: Use Prisma → Must update subscription via Prisma
+- ADR-007: Stripe Integration → Use official SDK, verify signatures
+
+### 2.3 Applicable Patterns
+- Webhook Security: Verify signature, idempotency keys
+- Error Handling: Never expose internal errors
+
+### 2.4 Related Code
+[Stripe client setup, Subscription model]
+
+## 3. Implementation Plan
+1. Create route handler file (0.5h)
+2. Implement signature verification (1h)
+3. Handle subscription events (2h)
+4. Add tests (0.5h)
+
+[... full details in each section ...]
+```
+
+---
+
+## Quality Criteria
+
+A good story passes this checklist:
+
+### Self-Containment Test
+- [ ] Agent can start immediately without asking questions
+- [ ] No need to load `.project/` or `knowledge/` files
+- [ ] All decisions already made and documented
+
+### Specificity Test
+- [ ] Steps are concrete, not vague
+- [ ] Expected outputs defined for each step
+- [ ] Validation criteria are testable
+
+### Scope Test
+- [ ] Completable in 2-8 hours
+- [ ] Clear what's included/excluded
+- [ ] Dependencies explicitly listed
+
+### Context Accuracy Test
+- [ ] Embedded context matches source files
+- [ ] Patterns correctly interpreted
+- [ ] Standards properly applied
+
+---
+
+## References
+
+- `templates/STORY-TEMPLATE.md` - Full story template
+- `templates/SESSION-PLAN.md` - How stories link to tasks
+- `intake/PROTOCOL.md` - DECOMPOSE stage integration
+- `core/task-management.md` - Task system overview
+
+---
+
+## Inspired By
+
+This protocol adapts the "hyper-detailed stories" concept from the [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD), where stories are self-contained documents with embedded context that eliminate the "telephone game" effect between planning and execution.
+
+Key BMAD principles adopted:
+- **Self-contained stories** with embedded architectural context
+- **Document synthesis** from multiple sources into single artifact
+- **Execution tracking** within the story document
+- **Handoff notes** for continuity between agents/sessions

@@ -352,6 +352,8 @@ The orchestrator automatically detects the appropriate workflow level.
 | **Contract Template** | `contracts/template.md` |
 | **Session Plan (T-000)** | `templates/SESSION-PLAN.md` |
 | **Task Management** | `core/task-management.md` |
+| **Story Generation** | `core/story-generation.md` |
+| **Story Template** | `templates/STORY-TEMPLATE.md` |
 | Gates Reference | `GATES.md` |
 | Roles & Agents | `roles/*/agents/*.md` |
 | State Schema v2 | `state/schema-v2.json` |
@@ -359,3 +361,38 @@ The orchestrator automatically detects the appropriate workflow level.
 | Phase Gates | `core/phase-gates.md` |
 | Checklists | `checklists/` |
 | Analysis v3 | `analysis/APEX-v3-request-to-tasks.md` |
+
+---
+
+## Context Engineering (Stories)
+
+> **NEW**: Self-contained stories with embedded context for reliable execution.
+
+For L2+ complexity tasks, generate **Context-Engineered Stories** that embed all necessary context directly into the story document:
+
+```
+SESSION PLAN (T-XXX tasks)
+       │
+       ▼
+CONTEXT EXTRACTION
+  • Stack/Architecture → Embedded
+  • Relevant ADRs → Embedded
+  • Applicable Patterns → Embedded
+  • Related Code → Embedded
+       │
+       ▼
+STORY-XXX.md (self-contained)
+       │
+       ▼
+AGENT EXECUTION (no external files needed)
+```
+
+**Benefits:**
+- Agents don't need to load external context files
+- Eliminates context loss between sessions/agents
+- Makes task execution predictable and reliable
+- Enables parallel agent work with consistent context
+
+**References:**
+- `core/story-generation.md` - Full generation protocol
+- `templates/STORY-TEMPLATE.md` - Story template with all sections
