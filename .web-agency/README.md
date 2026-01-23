@@ -53,18 +53,34 @@ Load the agent file and follow its procedure:
 3. **Use output format** → Format output correctly
 4. **Respect gates** → 🔴 STOP, 🟡 PAUSE, 🟢 AUTO
 
-### Step 4: Update State
+### Step 4: Create Tasks with Dependencies
 
-After completing task, update `state/current.json`:
+Use Claude Code's native **Tasks** system for tracking:
 
-```json
-{
-  "current_task": {
-    "status": "completed",
-    "output_path": "[path to deliverable]"
-  }
-}
+```bash
+# For multi-session projects, start with shared task list:
+CLAUDE_CODE_TASK_LIST_ID=project-name claude
 ```
+
+Create tasks with explicit dependencies:
+```yaml
+tasks:
+  - id: T-001
+    description: "Write architecture ADR"
+    depends_on: []
+
+  - id: T-002
+    description: "Design API contract"
+    depends_on: [T-001]
+
+  - id: T-003
+    description: "Implement backend"
+    depends_on: [T-002]
+```
+
+Tasks are stored in `~/.claude/tasks/` and broadcast to all sessions.
+
+> **Reference**: See `core/task-management.md` for full protocol.
 
 ---
 
@@ -313,10 +329,11 @@ The orchestrator automatically detects the appropriate workflow level.
 | Orchestrator | `ORCHESTRATOR.md` |
 | Gates Reference | `GATES.md` |
 | Roles & Agents | `roles/*/agents/*.md` |
+| **Task Management** | `core/task-management.md` |
 | State Schema v1 | `state/schema.json` |
 | State Schema v2 | `state/schema-v2.json` |
 | Context Loader | `core/context-loader.md` |
 | Phase Gates | `core/phase-gates.md` |
 | Checklists | `checklists/` |
 | Analysis BMAD | `analysis/APEX-vs-BMAD-analysis.md` |
-| Analysis v2 | `analysis/APEX-v2-structural-improvements.md` |
+| Analysis v3 | `analysis/APEX-v3-request-to-tasks.md` |
