@@ -1,5 +1,142 @@
 # Web Agency IA - APEX Method
 
+---
+
+## 🚀 Quick Start (AI Entry Point)
+
+### Step 1: Identify Task Type
+
+```yaml
+task_types:
+  code_review:      → compiled-agents/lead-developer/code-review.compiled.md
+  api_design:       → compiled-agents/tech-architect/api-design.compiled.md
+  frontend_impl:    → compiled-agents/developer/frontend-implementation.compiled.md
+  backend_impl:     → compiled-agents/developer/backend-implementation.compiled.md
+  testing:          → compiled-agents/developer/testing.compiled.md
+  estimation:       → compiled-agents/lead-developer/estimation.compiled.md
+  task_breakdown:   → compiled-agents/lead-developer/task-breakdown.compiled.md
+  prd_writing:      → compiled-agents/product-manager/prd-writer.compiled.md
+  prioritization:   → compiled-agents/product-manager/prioritization.compiled.md
+```
+
+### Step 2: Load Context
+
+```yaml
+always_load:
+  - state/current.json              # Current session state
+  - .project/03-architecture/stack.md  # Tech stack (if exists)
+
+by_task:
+  code_review:
+    - knowledge/rules/code-standards.md
+    - .project/03-architecture/decisions/ADR-*.md
+
+  api_design:
+    - knowledge/patterns/technical/api-*.md
+    - .project/03-architecture/api-contract.yaml
+
+  frontend_impl:
+    - contexts/frontend.md
+    - knowledge/patterns/technical/react-*.md
+
+  backend_impl:
+    - contexts/backend.md
+    - knowledge/patterns/technical/node-*.md
+```
+
+### Step 3: Execute Compiled Agent
+
+Load the compiled agent file and follow its procedure:
+
+1. **Read Quick Reference** → Understand triggers, outputs, gates
+2. **Follow Full Procedure** → Execute phases in order
+3. **Use Output Template** → Format output correctly
+4. **Respect Gates** → 🔴 STOP, 🟡 PAUSE, 🟢 AUTO
+
+### Step 4: Update State
+
+After completing task, update `state/current.json`:
+
+```json
+{
+  "current_task": {
+    "status": "completed",
+    "output_path": "[path to deliverable]"
+  }
+}
+```
+
+---
+
+### Quick Reference: Gate Behavior
+
+| Gate | Action | Rule |
+|------|--------|------|
+| 🔴 BLOCKING | **STOP** | Wait for explicit user validation |
+| 🟡 ADVISORY | **PAUSE** | Present result, propose to continue |
+| 🟢 AUTOMATIC | **CHECK** | Run tests/lint, continue if pass |
+
+### Quick Reference: When Stuck
+
+```yaml
+missing_context:
+  action: "ASK user for missing information"
+  do_not: "Guess or assume"
+
+ambiguous_requirement:
+  action: "CLARIFY before proceeding"
+  do_not: "Interpret freely"
+
+blocked_by_gate:
+  action: "WAIT for user response"
+  do_not: "Continue without validation"
+
+error_during_execution:
+  action: "STOP, report error, propose fix"
+  do_not: "Hide errors or continue broken"
+```
+
+### Skill Discovery: Find the Right Agent
+
+**By keyword search:**
+
+| Keywords | Agent |
+|----------|-------|
+| review, PR, merge, code quality | `lead-developer/code-review` |
+| API, endpoint, REST, contract | `tech-architect/api-design` |
+| React, component, UI, frontend | `developer/frontend-implementation` |
+| Node, service, backend, server | `developer/backend-implementation` |
+| test, unit, integration, coverage | `developer/testing` |
+| estimate, effort, story points | `lead-developer/estimation` |
+| breakdown, tasks, WBS, decompose | `lead-developer/task-breakdown` |
+| PRD, requirements, user story | `product-manager/prd-writer` |
+| priority, RICE, MoSCoW, backlog | `product-manager/prioritization` |
+
+**By output needed:**
+
+| Output | Agent |
+|--------|-------|
+| Review decision (approve/reject) | `code-review` |
+| OpenAPI spec / API contract | `api-design` |
+| React component code | `frontend-implementation` |
+| API endpoint code | `backend-implementation` |
+| Test files | `testing` |
+| Effort estimation | `estimation` |
+| Task list with dependencies | `task-breakdown` |
+| PRD document | `prd-writer` |
+| Prioritized backlog | `prioritization` |
+
+**By role:**
+
+| Role | Agents |
+|------|--------|
+| tech-architect | `api-design` |
+| lead-developer | `code-review`, `estimation`, `task-breakdown` |
+| developer | `frontend-implementation`, `backend-implementation`, `testing` |
+| product-manager | `prd-writer`, `prioritization` |
+
+---
+
 ## Philosophy
 
 **Agent-based Procedural EXecution for predictable, scalable AI operations.**
@@ -175,7 +312,11 @@ The orchestrator automatically detects the appropriate workflow level.
 | APEX Method | `APEX.md` |
 | Orchestrator | `ORCHESTRATOR.md` |
 | Gates Reference | `GATES.md` |
-| State Schema | `state/schema.json` |
-| Usage Guide | `HOW_TO.md` |
-| Examples | `EXAMPLES.md` |
-| Troubleshooting | `TROUBLESHOOTING.md` |
+| State Schema v1 | `state/schema.json` |
+| State Schema v2 | `state/schema-v2.json` |
+| Compiled Agents | `compiled-agents/` |
+| Context Loader | `core/context-loader.md` |
+| Phase Gates | `core/phase-gates.md` |
+| Checklists | `checklists/` |
+| Analysis BMAD | `analysis/APEX-vs-BMAD-analysis.md` |
+| Analysis v2 | `analysis/APEX-v2-structural-improvements.md` |
