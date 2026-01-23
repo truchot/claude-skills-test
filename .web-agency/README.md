@@ -16,7 +16,7 @@ CLASSIFY → CLARIFY → DECOMPOSE → CONTRACT → (User Approval) → EXECUTE
 |-------|--------|-----------|
 | **CLASSIFY** | Domain + Type + Complexity | `intake/classification.yaml` |
 | **CLARIFY** | Ask structured questions | `intake/templates/{type}.yaml` |
-| **DECOMPOSE** | Create tasks with dependencies | Claude Tasks |
+| **DECOMPOSE** | T-000 (Plan doc) + tasks with dependencies | Claude Tasks |
 | **CONTRACT** | Present plan, get approval (🔴) | `contracts/template.md` |
 
 > **Rule**: No execution without approved contract.
@@ -350,6 +350,7 @@ The orchestrator automatically detects the appropriate workflow level.
 | **Classification** | `intake/classification.yaml` |
 | **Intake Templates** | `intake/templates/*.yaml` |
 | **Contract Template** | `contracts/template.md` |
+| **Session Plan (T-000)** | `templates/SESSION-PLAN.md` |
 | **Task Management** | `core/task-management.md` |
 | Gates Reference | `GATES.md` |
 | Roles & Agents | `roles/*/agents/*.md` |

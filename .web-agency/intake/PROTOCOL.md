@@ -182,14 +182,43 @@ Break the clarified request into discrete, trackable tasks with dependencies.
 
 ```yaml
 decompose:
-  step_1: "Identify deliverables (what will be produced)"
-  step_2: "Map deliverables to responsible agents"
-  step_3: "Create tasks from deliverables"
-  step_4: "Define dependencies between tasks"
-  step_5: "Identify gates (checkpoints)"
-  step_6: "Estimate effort per task"
-  step_7: "Create tasks using Claude Tasks system"
+  step_1: "Create T-000: Session Plan document"
+  step_2: "Identify deliverables (what will be produced)"
+  step_3: "Map deliverables to responsible agents"
+  step_4: "Create tasks from deliverables"
+  step_5: "Define dependencies between tasks"
+  step_6: "Identify gates (checkpoints)"
+  step_7: "Estimate effort per task"
+  step_8: "Create tasks using Claude Tasks system"
 ```
+
+### T-000: Session Plan (MANDATORY)
+
+> **"Doc as Truth"** - The plan document is the authoritative reference.
+
+Every decomposition MUST start with T-000:
+
+```yaml
+- id: T-000
+  description: "Create session plan document"
+  deliverable: ".project/plans/PLAN-{YYYY-MM-DD}-{slug}.md"
+  depends_on: []
+  gate: 🟢
+  effort: "0h (created during CONTRACT phase)"
+  template: "templates/SESSION-PLAN.md"
+```
+
+**Why T-000 is mandatory:**
+- Serves as proof for client
+- Reference throughout project
+- Fallback if task system fails
+- Captures all decisions made
+- Enables iterative updates
+
+All other tasks depend on T-000 existing.
+
+### Reference
+Use `templates/SESSION-PLAN.md` for the plan document format.
 
 ### Decomposition Rules
 
@@ -215,9 +244,12 @@ task:
 
 ### Common Patterns
 
+> **Note**: All patterns start with T-000 (Session Plan) implicitly.
+
 #### New Feature Pattern
 ```yaml
 tasks:
+  - T-000: Session plan document              # 🟢 (mandatory)
   - T-001: Architecture decision (ADR)        # 🔴
   - T-002: Technical design / API contract    # 🔴
   - T-003: Database migration                 # 🟢
@@ -230,6 +262,7 @@ tasks:
 #### Bugfix Pattern
 ```yaml
 tasks:
+  - T-000: Session plan document              # 🟢 (mandatory)
   - T-001: Reproduce and analyze              # 🟢
   - T-002: Identify root cause                # 🟢
   - T-003: Implement fix                      # 🟢
@@ -240,6 +273,7 @@ tasks:
 #### Enhancement Pattern
 ```yaml
 tasks:
+  - T-000: Session plan document              # 🟢 (mandatory)
   - T-001: Analyze current implementation     # 🟢
   - T-002: Design enhancement                 # 🟡
   - T-003: Implement changes                  # 🟢
@@ -340,7 +374,8 @@ User: "Add Stripe payments"
                     │
                     ▼
 ┌─ DECOMPOSE ─────────────────────────────────────┐
-│ T-001: ADR (2h) 🔴                               │
+│ T-000: Session Plan 🟢 (Doc as Truth)            │
+│ T-001: ADR (2h) 🔴 → depends T-000               │
 │ T-002: API Design (3h) 🔴 → depends T-001        │
 │ T-003: DB Schema (2h) 🟢 → depends T-002         │
 │ T-004: Webhooks (4h) 🟢 → depends T-003          │
@@ -349,6 +384,7 @@ User: "Add Stripe payments"
 │ T-007: Checkout UI (6h) 🟢 → depends T-005,T-006 │
 │ T-008: Tests (4h) 🔴 → depends T-004,T-005,T-007 │
 │                                                  │
+│ Deliverable: .project/plans/PLAN-2026-01-23-stripe.md │
 │ Total: 29h (~4 days)                             │
 └──────────────────────────────────────────────────┘
                     │
@@ -374,17 +410,17 @@ User: "Add Stripe payments"
 
 ---
 
-## Files in this Directory
+## Files Reference
 
 | File | Purpose |
 |------|---------|
-| `PROTOCOL.md` | This document - full protocol |
-| `classification.yaml` | Classification matrix |
-| `templates/new-feature.yaml` | Intake questions for new features |
-| `templates/bugfix.yaml` | Intake questions for bugfixes |
-| `templates/enhancement.yaml` | Intake questions for enhancements |
-| `templates/question.yaml` | Intake for questions/help |
-| `templates/review.yaml` | Intake for code reviews |
+| `intake/PROTOCOL.md` | This document - full protocol |
+| `intake/classification.yaml` | Classification matrix |
+| `intake/templates/new-feature.yaml` | Intake questions for new features |
+| `intake/templates/bugfix.yaml` | Intake questions for bugfixes |
+| `intake/templates/enhancement.yaml` | Intake questions for enhancements |
+| `contracts/template.md` | Contract presentation format |
+| **`templates/SESSION-PLAN.md`** | **T-000: Plan document template (Doc as Truth)** |
 
 ---
 
