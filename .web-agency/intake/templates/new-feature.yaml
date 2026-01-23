@@ -1,0 +1,155 @@
+# Intake Template: New Feature
+# Use these questions when classifying a request as type: new_feature
+
+template:
+  type: new_feature
+  description: "Intake questions for building something new"
+
+  # ============================================================
+  # REQUIRED QUESTIONS - Always ask these
+  # ============================================================
+  required:
+    - id: problem
+      question: "What problem does this solve?"
+      why: "Ensures we build the right thing"
+      format: "free_text"
+      example: "Users can't pay for premium features"
+      validation: "Must describe a user need or business goal"
+
+    - id: user
+      question: "Who is the primary user?"
+      why: "Focuses the solution on real users"
+      format: "free_text"
+      example: "Paying customers on web app"
+      validation: "Must identify a specific user group"
+
+    - id: success_criteria
+      question: "How do we know it's successful?"
+      why: "Defines measurable done criteria"
+      format: "free_text"
+      example: "Users can complete payment in <30 seconds with 95% success rate"
+      validation: "Should be specific and measurable"
+
+    - id: out_of_scope
+      question: "What's explicitly OUT of scope?"
+      why: "Prevents scope creep and sets boundaries"
+      format: "free_text"
+      example: "Mobile app payments, international currencies, invoicing"
+      validation: "Should list what we won't do"
+
+  # ============================================================
+  # CONDITIONAL QUESTIONS - Ask if condition is met
+  # ============================================================
+  conditional:
+    - id: integration
+      condition: "involves third-party service OR API"
+      question: "Which service/API will be integrated?"
+      example: "Stripe Payments API"
+
+    - id: existing_code
+      condition: "related feature exists OR enhancement to existing"
+      question: "What exists today that this builds on?"
+      example: "We have a cart but no checkout flow"
+
+    - id: data_model
+      condition: "involves storing new data"
+      question: "What new data needs to be stored?"
+      example: "Subscription records, payment history, invoices"
+
+    - id: security
+      condition: "involves sensitive data OR auth OR payments"
+      question: "What are the security requirements?"
+      example: "PCI compliance, encrypted storage, audit logging"
+
+    - id: timeline
+      condition: "user mentions deadline OR urgency"
+      question: "Is there a specific deadline?"
+      example: "Need to launch before Q2 ends"
+
+    - id: dependencies
+      condition: "requires other work first"
+      question: "What needs to be completed before this?"
+      example: "User authentication system must be in place"
+
+  # ============================================================
+  # CONTEXT TO LOAD - Files to read after questions
+  # ============================================================
+  context_to_load:
+    always:
+      - path: ".project/03-architecture/stack.md"
+        reason: "Understand tech constraints"
+      - path: "state/current.json"
+        reason: "Check for in-progress work"
+
+    if_exists:
+      - path: ".project/02-requirements/PRD.md"
+        reason: "Understand product context"
+      - path: ".project/03-architecture/decisions/ADR-*.md"
+        reason: "Understand past decisions"
+
+    by_domain:
+      payments:
+        - path: "knowledge/patterns/technical/payments.md"
+        - path: "contexts/security.md"
+      auth:
+        - path: "knowledge/patterns/technical/auth.md"
+        - path: "contexts/security.md"
+      api:
+        - path: "knowledge/patterns/technical/api-design.md"
+      frontend:
+        - path: "contexts/frontend.md"
+      backend:
+        - path: "contexts/backend.md"
+
+  # ============================================================
+  # DECOMPOSITION HINTS - Guide task breakdown
+  # ============================================================
+  decomposition_hints:
+    typical_tasks:
+      - "Architecture decision (ADR)"
+      - "Technical design / API contract"
+      - "Database schema / migration"
+      - "Backend implementation"
+      - "Frontend implementation"
+      - "Integration tests"
+      - "Documentation"
+      - "Code review"
+
+    typical_gates:
+      - task: "Architecture decision"
+        gate: "🔴 BLOCKING"
+        reason: "Major decisions need approval"
+      - task: "Technical design"
+        gate: "🔴 BLOCKING"
+        reason: "Design needs review before code"
+      - task: "Backend complete"
+        gate: "🟡 ADVISORY"
+        reason: "Checkpoint before frontend"
+      - task: "All implementation"
+        gate: "🔴 BLOCKING"
+        reason: "Full review before deploy"
+
+    parallel_opportunities:
+      - "Frontend and Backend (after design)"
+      - "Tests and Documentation (after implementation)"
+
+  # ============================================================
+  # OUTPUT FORMAT
+  # ============================================================
+  output:
+    format: "yaml"
+    structure:
+      classification:
+        domain: "[from classification]"
+        type: "new_feature"
+        complexity: "[L0-L4]"
+      answers:
+        problem: "[answer]"
+        user: "[answer]"
+        success_criteria: "[answer]"
+        out_of_scope: "[answer]"
+        # ... conditional answers if asked
+      context_loaded:
+        - path: "[file path]"
+          summary: "[brief summary]"
+      ready_for_decomposition: true

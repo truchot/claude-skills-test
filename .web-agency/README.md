@@ -4,6 +4,25 @@
 
 ## 🚀 Quick Start (AI Entry Point)
 
+### Step 0: Intake Pipeline (BEFORE any work)
+
+For any non-trivial request, run the intake pipeline:
+
+```
+CLASSIFY → CLARIFY → DECOMPOSE → CONTRACT → (User Approval) → EXECUTE
+```
+
+| Stage | Action | Reference |
+|-------|--------|-----------|
+| **CLASSIFY** | Domain + Type + Complexity | `intake/classification.yaml` |
+| **CLARIFY** | Ask structured questions | `intake/templates/{type}.yaml` |
+| **DECOMPOSE** | Create tasks with dependencies | Claude Tasks |
+| **CONTRACT** | Present plan, get approval (🔴) | `contracts/template.md` |
+
+> **Rule**: No execution without approved contract.
+
+---
+
 ### Step 1: Identify Task Type
 
 ```yaml
@@ -327,13 +346,15 @@ The orchestrator automatically detects the appropriate workflow level.
 |---------|------|
 | APEX Method | `APEX.md` |
 | Orchestrator | `ORCHESTRATOR.md` |
+| **Intake Protocol** | `intake/PROTOCOL.md` |
+| **Classification** | `intake/classification.yaml` |
+| **Intake Templates** | `intake/templates/*.yaml` |
+| **Contract Template** | `contracts/template.md` |
+| **Task Management** | `core/task-management.md` |
 | Gates Reference | `GATES.md` |
 | Roles & Agents | `roles/*/agents/*.md` |
-| **Task Management** | `core/task-management.md` |
-| State Schema v1 | `state/schema.json` |
 | State Schema v2 | `state/schema-v2.json` |
 | Context Loader | `core/context-loader.md` |
 | Phase Gates | `core/phase-gates.md` |
 | Checklists | `checklists/` |
-| Analysis BMAD | `analysis/APEX-vs-BMAD-analysis.md` |
 | Analysis v3 | `analysis/APEX-v3-request-to-tasks.md` |

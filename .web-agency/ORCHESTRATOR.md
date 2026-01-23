@@ -58,6 +58,37 @@ flowchart TB
     UPDATE --> LEARN
 ```
 
+## Intake Pipeline (Stage 0)
+
+> **Reference**: See `intake/PROTOCOL.md` for complete documentation.
+
+Before any execution, ALL requests go through the intake pipeline:
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ 1. CLASSIFY │ → │ 2. CLARIFY  │ → │ 3. DECOMPOSE│ → │ 4. CONTRACT │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+      │                  │                  │                  │
+      ▼                  ▼                  ▼                  ▼
+  Domain+Type       Questions          Task List         🔴 User
+  +Complexity       Answered           +Dependencies     Approval
+```
+
+### Stage Actions
+
+| Stage | Action | Reference |
+|-------|--------|-----------|
+| **CLASSIFY** | Identify domain, type, complexity | `intake/classification.yaml` |
+| **CLARIFY** | Ask structured intake questions | `intake/templates/{type}.yaml` |
+| **DECOMPOSE** | Create tasks with dependencies | Claude Tasks system |
+| **CONTRACT** | Present plan for approval | `contracts/template.md` |
+
+### Critical Rule
+
+> **No execution without approved contract.**
+
+The CONTRACT stage is a 🔴 BLOCKING gate. Never start implementation until the user approves the plan.
+
 ## APEX Three-Layer Architecture
 
 ### Layer 1: ROLES (WHO decides)
@@ -706,6 +737,11 @@ Different project types have adjusted workflows:
 | Subject | File |
 |---------|------|
 | APEX Method | `APEX.md` |
+| **Intake Protocol** | `intake/PROTOCOL.md` |
+| **Classification** | `intake/classification.yaml` |
+| **Intake Templates** | `intake/templates/*.yaml` |
+| **Contract Template** | `contracts/template.md` |
+| **Task Management** | `core/task-management.md` |
 | Roles | `roles/*/ROLE.md` |
 | Agents | `roles/*/agents/*.md` |
 | Skills | `skills/*/SKILL.md` |
@@ -719,4 +755,4 @@ Different project types have adjusted workflows:
 | Routing Rules | `core/routing-rules.md` |
 | Checklists | `checklists/*.checklist.yaml` |
 | Project Types | `project-types/*.md` |
-| Analysis | `analysis/APEX-vs-BMAD-analysis.md` |
+| Analysis v3 | `analysis/APEX-v3-request-to-tasks.md` |
