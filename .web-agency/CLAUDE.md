@@ -26,6 +26,7 @@ See `intake/PROTOCOL.md` for the complete protocol.
 | **Orchestration** | `.web-agency/ORCHESTRATOR.md` |
 | **Intake pipeline** | `.web-agency/intake/PROTOCOL.md` |
 | **Task management** | `.web-agency/core/task-management.md` |
+| **Commercial (avant-projet)** | `.web-agency/commercial/README.md` |
 
 ---
 
