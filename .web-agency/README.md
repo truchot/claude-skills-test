@@ -8,15 +8,15 @@
 
 ```yaml
 task_types:
-  code_review:      → compiled-agents/lead-developer/code-review.compiled.md
-  api_design:       → compiled-agents/tech-architect/api-design.compiled.md
-  frontend_impl:    → compiled-agents/developer/frontend-implementation.compiled.md
-  backend_impl:     → compiled-agents/developer/backend-implementation.compiled.md
-  testing:          → compiled-agents/developer/testing.compiled.md
-  estimation:       → compiled-agents/lead-developer/estimation.compiled.md
-  task_breakdown:   → compiled-agents/lead-developer/task-breakdown.compiled.md
-  prd_writing:      → compiled-agents/product-manager/prd-writer.compiled.md
-  prioritization:   → compiled-agents/product-manager/prioritization.compiled.md
+  code_review:      → roles/lead-developer/agents/code-review.md
+  api_design:       → roles/tech-architect/agents/api-design.md
+  frontend_impl:    → roles/developer/agents/frontend-implementation.md
+  backend_impl:     → roles/developer/agents/backend-implementation.md
+  testing:          → roles/developer/agents/testing.md
+  estimation:       → roles/lead-developer/agents/estimation.md
+  task_breakdown:   → roles/lead-developer/agents/task-breakdown.md
+  prd_writing:      → roles/product-manager/agents/prd-writer.md
+  prioritization:   → roles/product-manager/agents/prioritization.md
 ```
 
 ### Step 2: Load Context
@@ -44,14 +44,14 @@ by_task:
     - knowledge/patterns/technical/node-*.md
 ```
 
-### Step 3: Execute Compiled Agent
+### Step 3: Execute Agent
 
-Load the compiled agent file and follow its procedure:
+Load the agent file and follow its procedure:
 
-1. **Read Quick Reference** → Understand triggers, outputs, gates
-2. **Follow Full Procedure** → Execute phases in order
-3. **Use Output Template** → Format output correctly
-4. **Respect Gates** → 🔴 STOP, 🟡 PAUSE, 🟢 AUTO
+1. **Read triggers/outputs** → Understand when to use and what to produce
+2. **Follow procedure** → Execute phases in order
+3. **Use output format** → Format output correctly
+4. **Respect gates** → 🔴 STOP, 🟡 PAUSE, 🟢 AUTO
 
 ### Step 4: Update State
 
@@ -312,9 +312,9 @@ The orchestrator automatically detects the appropriate workflow level.
 | APEX Method | `APEX.md` |
 | Orchestrator | `ORCHESTRATOR.md` |
 | Gates Reference | `GATES.md` |
+| Roles & Agents | `roles/*/agents/*.md` |
 | State Schema v1 | `state/schema.json` |
 | State Schema v2 | `state/schema-v2.json` |
-| Compiled Agents | `compiled-agents/` |
 | Context Loader | `core/context-loader.md` |
 | Phase Gates | `core/phase-gates.md` |
 | Checklists | `checklists/` |

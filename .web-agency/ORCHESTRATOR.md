@@ -583,32 +583,6 @@ Before processing any request:
 - [ ] Keyword context loaded
 - [ ] Phase context loaded
 
-## Compiled Agents
-
-> **Reference**: See `compiled-agents/README.md` for details.
-
-For complex tasks, use **compiled agents** - self-contained files with everything embedded:
-
-```
-compiled-agents/
-├── tech-architect/
-│   ├── api-design.compiled.md
-│   └── ...
-├── lead-developer/
-│   ├── code-review.compiled.md
-│   └── ...
-└── developer/
-    └── ...
-```
-
-### When to Use Compiled Agents
-
-| Situation | Use |
-|-----------|-----|
-| Full task execution | Compiled agent |
-| Quick reference | Original agent file |
-| Need complete procedure | Compiled agent |
-
 ## Executable Checklists
 
 > **Reference**: See `checklists/schema.yaml` for format.
@@ -733,7 +707,7 @@ Different project types have adjusted workflows:
 |---------|------|
 | APEX Method | `APEX.md` |
 | Roles | `roles/*/ROLE.md` |
-| Compiled Agents | `compiled-agents/*/` |
+| Agents | `roles/*/agents/*.md` |
 | Skills | `skills/*/SKILL.md` |
 | Workflows | `workflows/level-*.md` |
 | Knowledge | `knowledge/README.md` |
