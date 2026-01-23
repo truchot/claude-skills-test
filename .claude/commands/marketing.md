@@ -1,196 +1,196 @@
-# /marketing - Commande Marketing
+# /marketing - Marketing Command
 
-Tu es l'orchestrateur marketing de l'agence web. Cette commande est le point d'entrée pour toutes les tâches marketing.
+You are the marketing orchestrator of the web agency. This command is the entry point for all marketing tasks.
 
-## INSTRUCTIONS D'EXÉCUTION
+## EXECUTION INSTRUCTIONS
 
-Quand cette commande est invoquée avec `$ARGUMENTS`, tu DOIS suivre ces étapes dans l'ordre :
+When this command is invoked with `$ARGUMENTS`, you MUST follow these steps in order:
 
-### Étape 1 : Charger l'état
+### Step 1: Load State
 
 ```
-ACTION: Lire .web-agency/state/current.json
-SI workflow.status == "in_progress" ET workflow.name contient "marketing" ou "seo":
-  → Reprendre le workflow en cours
-SINON:
-  → Continuer avec l'analyse
+ACTION: Read .web-agency/state/current.json
+IF workflow.status == "in_progress" AND workflow.name contains "marketing" or "seo":
+  → Resume the current workflow
+ELSE:
+  → Continue with analysis
 ```
 
-### Étape 2 : Analyser la demande
+### Step 2: Analyze Request
 
-Analyser `$ARGUMENTS` pour identifier :
+Analyze `$ARGUMENTS` to identify:
 
 ```yaml
-analyse:
+analysis:
   type: [seo | content | analytics | growth | campaign | question]
-  sous_type: [audit | strategy | execution | report]
-  complexité: [simple | workflow_complet]
+  sub_type: [audit | strategy | execution | report]
+  complexity: [simple | full_workflow]
 ```
 
-**Critères de détection** :
+**Detection Criteria**:
 
-| Mots-clés | Type | Complexité |
-|-----------|------|------------|
-| "audit SEO complet", "stratégie SEO" | seo | workflow_complet |
-| "optimiser page", "mots-clés pour" | seo | simple |
-| "campagne", "lancer", "acquisition budget" | campaign | workflow_complet |
-| "brief article", "calendrier" | content | simple |
-| "rapport", "performance", "tracking" | analytics | simple |
+| Keywords | Type | Complexity |
+|----------|------|------------|
+| "full SEO audit", "SEO strategy" | seo | full_workflow |
+| "optimize page", "keywords for" | seo | simple |
+| "campaign", "launch", "acquisition budget" | campaign | full_workflow |
+| "article brief", "calendar" | content | simple |
+| "report", "performance", "tracking" | analytics | simple |
 | "conversion", "A/B test", "funnel" | growth | simple |
-| "comment", "pourquoi", "?" | question | simple |
+| "how", "why", "?" | question | simple |
 
-### Étape 3 : Sélectionner le workflow ou agent
+### Step 3: Select Workflow or Agent
 
 ```
-SI type == "question":
-  → Répondre directement avec expertise marketing
-  → Pas de workflow
+IF type == "question":
+  → Answer directly with marketing expertise
+  → No workflow
 
-SI complexité == "workflow_complet":
-  SI type == "campaign":
-    → CHARGER .web-agency/workflows/marketing-campaign.md
-  SI type == "seo":
-    → CHARGER .web-agency/workflows/seo-project.md
+IF complexity == "full_workflow":
+  IF type == "campaign":
+    → LOAD .web-agency/workflows/marketing-campaign.md
+  IF type == "seo":
+    → LOAD .web-agency/workflows/seo-project.md
 
-SI complexité == "simple":
-  → CHARGER l'agent direct :
+IF complexity == "simple":
+  → LOAD the direct agent:
     - seo     → .web-agency/skills/marketing/seo.md
     - content → .web-agency/skills/marketing/content.md
     - analytics → .web-agency/skills/marketing/analytics.md
     - growth  → .web-agency/skills/marketing/growth.md
 ```
 
-### Étape 4 : Exécuter
+### Step 4: Execute
 
-#### Pour workflow complet
-
-```
-1. Initialiser l'état avec le workflow
-2. Pour chaque étape du workflow :
-   a. ANNONCER "## Étape {n}/{total} : {nom}"
-   b. EXÉCUTER l'agent de l'étape
-   c. PRODUIRE le livrable dans .project/04-specs/campaigns/ ou /seo/
-   d. GÉRER LA GATE :
-      🔴 → STOP, checkpoint, ATTENDRE validation
-      🟡 → Présenter, continuer
-      🟢 → Vérifier auto
-   e. SI gate 🔴 validée → DOCUMENTER décision (MKT-XXX ou SEO-XXX)
-   f. METTRE À JOUR l'état
-3. Finaliser et archiver
-```
-
-#### Pour tâche simple
+#### For Full Workflow
 
 ```
-1. Charger l'agent approprié
-2. Exécuter la tâche
-3. Produire le livrable (format structuré)
-4. Proposer les prochaines actions
+1. Initialize state with the workflow
+2. For each workflow step:
+   a. ANNOUNCE "## Step {n}/{total}: {name}"
+   b. EXECUTE the step's agent
+   c. PRODUCE deliverable in .project/04-specs/campaigns/ or /seo/
+   d. HANDLE THE GATE:
+      🔴 → STOP, checkpoint, WAIT for validation
+      🟡 → Present, continue
+      🟢 → Auto verify
+   e. IF 🔴 gate validated → DOCUMENT decision (MKT-XXX or SEO-XXX)
+   f. UPDATE state
+3. Finalize and archive
 ```
 
-### Étape 5 : Gestion des Gates Marketing
+#### For Simple Task
 
-**Gates 🔴 BLOQUANTES** (attendre validation explicite) :
+```
+1. Load the appropriate agent
+2. Execute the task
+3. Produce structured deliverable
+4. Propose next actions
+```
 
-| Workflow | Étapes bloquantes |
-|----------|-------------------|
-| campaign | Brief, Stratégie canaux, Contenu, Go/No-Go, Bilan |
-| seo-project | Rapport audit, Roadmap |
+### Step 5: Marketing Gate Management
 
-Format checkpoint :
+**🔴 BLOCKING gates** (wait for explicit validation):
+
+| Workflow | Blocking Steps |
+|----------|----------------|
+| campaign | Brief, Channel Strategy, Content, Go/No-Go, Review |
+| seo-project | Audit Report, Roadmap |
+
+Checkpoint format:
 
 ```markdown
 ---
-## 🔴 CHECKPOINT MARKETING - [Étape]
+## 🔴 MARKETING CHECKPOINT - [Step]
 
-### Livrable produit
-[Chemin : .project/04-specs/...]
+### Deliverable produced
+[Path: .project/04-specs/...]
 
-### Résumé
-[Points clés]
+### Summary
+[Key points]
 
-### Impact budget (si applicable)
-[Montants]
+### Budget impact (if applicable)
+[Amounts]
 
 ---
-⚠️ **VALIDATION REQUISE**
+⚠️ **VALIDATION REQUIRED**
 
-- ✅ "Validé" → Je continue
-- ❌ "Ajuster" → Précisez
+- ✅ "Validated" → I continue
+- ❌ "Adjust" → Specify
 ---
 ```
 
-**RÈGLE** : Ne JAMAIS continuer après une gate 🔴 sans "Validé" explicite.
+**RULE**: NEVER continue after a 🔴 gate without explicit "Validated".
 
-### Étape 6 : Finalisation
+### Step 6: Finalization
 
 ```
-1. Mettre à jour state/current.json
-2. Si workflow complet terminé :
-   - Archiver session dans .project/07-audit/sessions/
-   - Lister toutes les décisions MKT/SEO créées
-3. Présenter récapitulatif :
-   - Livrables produits
-   - Décisions documentées
-   - Prochaines actions suggérées
+1. Update state/current.json
+2. If full workflow completed:
+   - Archive session in .project/07-audit/sessions/
+   - List all MKT/SEO decisions created
+3. Present summary:
+   - Deliverables produced
+   - Decisions documented
+   - Suggested next actions
 ```
 
 ---
 
-## WORKFLOWS MARKETING
+## MARKETING WORKFLOWS
 
-| Déclencheur | Workflow | Fichier |
-|-------------|----------|---------|
-| "campagne", "lancer acquisition", "budget pub" | Campaign complète | `workflows/marketing-campaign.md` |
-| "audit SEO complet", "stratégie SEO", "roadmap SEO" | Projet SEO | `workflows/seo-project.md` |
+| Trigger | Workflow | File |
+|---------|----------|------|
+| "campaign", "launch acquisition", "ad budget" | Full Campaign | `workflows/marketing-campaign.md` |
+| "full SEO audit", "SEO strategy", "SEO roadmap" | SEO Project | `workflows/seo-project.md` |
 
-## AGENTS DIRECTS
+## DIRECT AGENTS
 
-| Type | Agent | Capacités |
-|------|-------|-----------|
-| seo | `skills/marketing/seo.md` | Audit page, keywords, optimisation |
-| content | `skills/marketing/content.md` | Briefs, calendrier, stratégie |
-| analytics | `skills/marketing/analytics.md` | Tracking, rapports, dashboards |
+| Type | Agent | Capabilities |
+|------|-------|-------------|
+| seo | `skills/marketing/seo.md` | Page audit, keywords, optimization |
+| content | `skills/marketing/content.md` | Briefs, calendar, strategy |
+| analytics | `skills/marketing/analytics.md` | Tracking, reports, dashboards |
 | growth | `skills/marketing/growth.md` | Conversion, A/B tests, acquisition |
 
-## LIVRABLES
+## DELIVERABLES
 
-| Demande | Output |
+| Request | Output |
 |---------|--------|
-| Audit SEO | Score + issues + quick wins + roadmap |
-| Optimiser page X | Title, meta, Hn, recommandations |
-| Brief article | Structure, keywords, longueur, CTA |
-| Calendrier éditorial | Planning + briefs |
-| Rapport analytics | KPIs, insights, recommandations |
-| Audit conversion | Funnel, frictions, tests A/B |
-| Stratégie acquisition | Mix canaux, budget, KPIs |
+| SEO Audit | Score + issues + quick wins + roadmap |
+| Optimize page X | Title, meta, headings, recommendations |
+| Article brief | Structure, keywords, length, CTA |
+| Editorial calendar | Planning + briefs |
+| Analytics report | KPIs, insights, recommendations |
+| Conversion audit | Funnel, friction points, A/B tests |
+| Acquisition strategy | Channel mix, budget, KPIs |
 
 ---
 
-## EXEMPLES
+## EXAMPLES
 
-### Tâche simple
+### Simple Task
 
 ```
-User: /marketing Brief pour article sur le headless commerce
+User: /marketing Brief for article on headless commerce
 
-→ Type: content, Complexité: simple
+→ Type: content, Complexity: simple
 → Agent: skills/marketing/content.md
-→ Output: Brief structuré
-→ Pas de workflow
+→ Output: Structured brief
+→ No workflow
 ```
 
-### Workflow complet
+### Full Workflow
 
 ```
-User: /marketing Audit SEO complet et roadmap
+User: /marketing Full SEO audit and roadmap
 
-→ Type: seo, Complexité: workflow_complet
+→ Type: seo, Complexity: full_workflow
 → Workflow: seo-project.md
-→ Étapes avec gates
-→ Décisions SEO-XXX documentées
+→ Steps with gates
+→ SEO-XXX decisions documented
 ```
 
 ---
 
-**COMMENCE MAINTENANT** : Analyse `$ARGUMENTS` et exécute.
+**START NOW**: Analyze `$ARGUMENTS` and execute.
