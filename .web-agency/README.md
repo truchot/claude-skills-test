@@ -404,9 +404,14 @@ LEARNING CAPTURE
 - Enables parallel agent work with consistent context
 - **NEW**: Context Packs accelerate story generation 3x
 - **NEW**: Learning Capture improves future stories
+- **NEW**: Context Inheritance reduces duplication for child stories
+- **NEW**: Staleness Detection prevents outdated context issues
 
 **References:**
 - `core/story-generation.md` - Full generation protocol
-- `templates/STORY-TEMPLATE.md` - Story template with all sections
+- `templates/STORY-TEMPLATE.md` - Story template (standalone/parent)
+- `templates/STORY-TEMPLATE-CHILD.md` - Child story template (inherited)
 - `contexts/packs/README.md` - Context Packs system
 - `core/learning-capture.md` - Learning extraction protocol
+- `core/context-inheritance.md` - Parent→Child inheritance
+- `core/context-staleness.md` - Staleness detection

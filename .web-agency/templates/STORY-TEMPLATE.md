@@ -9,14 +9,25 @@
 | Field | Value |
 |-------|-------|
 | **ID** | STORY-XXX |
-| **Parent** | T-XXX (from Session Plan) |
+| **Type** | Standalone / Parent / Child |
+| **Task Parent** | T-XXX (from Session Plan) |
+| **Story Parent** | [STORY-YYY or "None" if standalone/parent] |
+| **Children** | [STORY-XXXa, STORY-XXXb or "None"] |
 | **Session Plan** | `.project/plans/PLAN-{date}-{slug}.md` |
 | **Context Pack** | [pack-name] or "Manual extraction" |
+| **Context Mode** | Full / Inherited |
 | **Status** | Draft / Ready / In Progress / Review / Done |
 | **Agent** | [role]/[agent] |
 | **Gate** | 🔴 BLOCKING / 🟡 ADVISORY / 🟢 AUTOMATIC |
 | **Effort** | [X hours] |
 | **Created** | [YYYY-MM-DD] |
+
+<!--
+Context Mode:
+- Full: This story embeds all context (standalone or parent)
+- Inherited: This story inherits from Story Parent, adds only delta
+  → See core/context-inheritance.md for inheritance protocol
+-->
 
 ---
 
@@ -39,6 +50,31 @@
 
 > **This section contains ALL context needed to execute this story.**
 > The executing agent should NOT need to load additional files.
+
+### 2.0 Context Freshness
+
+> **Staleness tracking** - Hashes of source files at extraction time.
+> See `core/context-staleness.md` for the staleness detection protocol.
+
+| Source File | Hash | Extracted | Status |
+|-------------|------|-----------|--------|
+| `.project/03-architecture/stack.md` | `[hash]` | [YYYY-MM-DD] | ✅ Fresh |
+| `.project/04-adr/ADR-XXX.md` | `[hash]` | [YYYY-MM-DD] | ✅ Fresh |
+| `knowledge/patterns/[pattern].md` | `[hash]` | [YYYY-MM-DD] | ✅ Fresh |
+| `src/[related-file].ts` | `[hash]` | [YYYY-MM-DD] | ✅ Fresh |
+
+**Last Staleness Check**: [Not yet checked]
+**Check Result**: [Pending first check]
+
+<!--
+Before execution, verify hashes match current files.
+If stale (hash mismatch):
+  - 🔴 Critical files (architecture, ADRs): Refresh required
+  - 🟡 High files (patterns, rules): Recommend refresh
+  - 🟢 Low files (code): Continue with warning
+-->
+
+---
 
 ### 2.1 Stack & Architecture (from `.project/03-architecture/`)
 
@@ -392,6 +428,9 @@ describe('[Feature]', () => {
 | Patterns | `knowledge/patterns/` |
 | Context Packs | `contexts/packs/` |
 | Learning Protocol | `core/learning-capture.md` |
+| Context Inheritance | `core/context-inheritance.md` |
+| Staleness Detection | `core/context-staleness.md` |
+| Child Story Template | `templates/STORY-TEMPLATE-CHILD.md` |
 
 ---
 

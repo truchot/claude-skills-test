@@ -124,6 +124,58 @@ pack_usage:
 # Benefit: 3x faster story generation with consistent context
 ```
 
+### Phase 1b: Inheritance Check (for Child Stories)
+
+> **NEW**: If generating a child story, inherit from parent instead of full extraction.
+> See `core/context-inheritance.md` for the inheritance protocol.
+
+```yaml
+step_1b_check_inheritance:
+  action: "Determine if this is a child story"
+
+  is_child_story:
+    when:
+      - "Task is part of a decomposed epic"
+      - "Parent story already exists with full context"
+      - "Context overlap with parent > 70%"
+
+  if_child:
+    action: "Use inheritance instead of full extraction"
+    steps:
+      - "Load parent story"
+      - "Identify additions (what child needs that parent lacks)"
+      - "Identify exclusions (what parent has that child doesn't need)"
+      - "Identify overrides (what child needs differently)"
+      - "Use STORY-TEMPLATE-CHILD.md"
+
+  if_standalone:
+    action: "Continue with full context extraction (Phase 2)"
+```
+
+### Phase 1c: Hash Computation (for Staleness Detection)
+
+> **NEW**: Compute hashes of source files for staleness detection.
+> See `core/context-staleness.md` for the staleness protocol.
+
+```yaml
+step_1c_compute_hashes:
+  action: "Record source file hashes for freshness tracking"
+
+  for_each_source_file:
+    - file: "[path to source file]"
+      hash: "sha256(content)[:12]"  # First 12 chars of SHA-256
+      extracted_at: "[ISO timestamp]"
+
+  output:
+    context_sources:
+      - file: ".project/03-architecture/stack.md"
+        hash: "a1b2c3d4e5f6"
+        extracted_at: "2025-01-24T10:30:00Z"
+      # ... for each source file
+
+  purpose: "Enable staleness detection before story execution"
+```
+
 ### Phase 2: Context Loading
 
 ```yaml
@@ -504,6 +556,61 @@ A good story passes this checklist:
 
 ---
 
+## Pre-Execution: Staleness Check
+
+Before executing a story, verify embedded context is still fresh:
+
+```yaml
+pre_execution_staleness_check:
+  trigger: "Agent loads story for execution"
+
+  procedure:
+    step_1:
+      action: "Parse context_sources from story Section 2.0"
+      extract: "List of {file, hash, extracted_at}"
+
+    step_2:
+      action: "For each source file"
+      sub_steps:
+        - "Check file exists"
+        - "Compute current hash: sha256(content)[:12]"
+        - "Compare with stored hash"
+
+    step_3:
+      action: "Classify staleness severity"
+      levels:
+        critical: # 🔴 Architecture, ADRs, Schema
+          files: [".project/03-architecture/*", ".project/04-adr/*", "prisma/*"]
+          action: "Block execution, require refresh"
+
+        high: # 🟡 Patterns, Rules
+          files: ["knowledge/patterns/*", "knowledge/rules/*"]
+          action: "Warn, recommend refresh"
+
+        low: # 🟢 Source code, Tests
+          files: ["src/*", "**/*.test.ts"]
+          action: "Note for awareness, continue"
+
+    step_4:
+      action: "Present results and options"
+      if_all_fresh: "Proceed with execution"
+      if_some_stale:
+        options:
+          - "Refresh stale context (recommended)"
+          - "Continue with warning"
+          - "Abort execution"
+
+  refresh_procedure:
+    - "Re-extract context from stale files"
+    - "Update embedded content in story"
+    - "Update hash and timestamp"
+    - "Log refresh in execution log"
+```
+
+See `core/context-staleness.md` for full staleness detection protocol.
+
+---
+
 ## Post-Execution: Learning Capture
 
 After story execution, extract learnings to improve future stories:
@@ -539,11 +646,14 @@ See `core/learning-capture.md` for full protocol.
 
 ## References
 
-- `templates/STORY-TEMPLATE.md` - Full story template
+- `templates/STORY-TEMPLATE.md` - Full story template (standalone/parent)
+- `templates/STORY-TEMPLATE-CHILD.md` - Child story template (inherited context)
 - `templates/SESSION-PLAN.md` - How stories link to tasks
 - `intake/PROTOCOL.md` - DECOMPOSE stage integration
 - `core/task-management.md` - Task system overview
 - `core/learning-capture.md` - Learning extraction protocol
+- `core/context-inheritance.md` - Parent→Child context inheritance
+- `core/context-staleness.md` - Staleness detection and refresh
 - `contexts/packs/README.md` - Context Packs system
 
 ---
