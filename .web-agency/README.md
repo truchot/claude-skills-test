@@ -406,6 +406,8 @@ LEARNING CAPTURE
 - **NEW**: Learning Capture improves future stories
 - **NEW**: Context Inheritance reduces duplication for child stories
 - **NEW**: Staleness Detection prevents outdated context issues
+- **NEW**: Context Compression optimizes tokens (minimal/standard/verbose)
+- **NEW**: Cross-Story Memory enables real-time discovery sharing
 
 **References:**
 - `core/story-generation.md` - Full generation protocol
@@ -415,3 +417,5 @@ LEARNING CAPTURE
 - `core/learning-capture.md` - Learning extraction protocol
 - `core/context-inheritance.md` - Parent→Child inheritance
 - `core/context-staleness.md` - Staleness detection
+- `core/context-compression.md` - Token optimization (3 detail levels)
+- `core/cross-story-memory.md` - Parallel agent memory sharing

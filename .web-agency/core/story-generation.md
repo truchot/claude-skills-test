@@ -176,6 +176,45 @@ step_1c_compute_hashes:
   purpose: "Enable staleness detection before story execution"
 ```
 
+### Phase 1d: Determine Compression Level
+
+> **NEW**: Select context detail level based on task complexity.
+> See `core/context-compression.md` for the compression protocol.
+
+```yaml
+step_1d_determine_compression:
+  action: "Select appropriate detail level for context"
+
+  auto_detection:
+    minimal:  # ~500 tokens
+      when:
+        - complexity: ["L0", "L1"]
+        - estimated_time: "< 2 hours"
+        - files_affected: "<= 2"
+      content: "Stack one-liner, ADR decisions only, key rules"
+
+    standard:  # ~1500 tokens (default)
+      when:
+        - complexity: "L2"
+        - estimated_time: "2-8 hours"
+      content: "Stack yaml, ADR+consequence, rules+anti-patterns"
+
+    verbose:  # ~3000 tokens
+      when:
+        - complexity: ["L3", "L4"]
+        - estimated_time: "> 8 hours"
+        - flags: ["high_risk", "new_developer"]
+      content: "Full details, examples, rationale"
+
+  manual_override:
+    field: "context_detail_level"
+    values: ["minimal", "standard", "verbose"]
+
+  output:
+    detail_level: "standard"
+    token_budget: 1500
+```
+
 ### Phase 2: Context Loading
 
 ```yaml
@@ -556,6 +595,47 @@ A good story passes this checklist:
 
 ---
 
+## Pre-Execution: Memory Check
+
+> **NEW**: Check session memory for discoveries from parallel stories.
+> See `core/cross-story-memory.md` for the memory protocol.
+
+```yaml
+pre_execution_memory_check:
+  trigger: "Agent loads story for execution"
+
+  procedure:
+    step_1:
+      action: "Load session memory"
+      path: ".project/memory/current-session.json"
+
+    step_2:
+      action: "Filter relevant entries"
+      criteria:
+        applies_to: ["my-story-id", "all"]
+        types: ["discovery", "gotcha", "decision", "blocker", "completion"]
+
+    step_3:
+      action: "Display unacknowledged entries"
+      format: |
+        📬 Memory Updates (X new)
+        - From STORY-001: [gotcha] Rate limit is 100/min
+        - From STORY-002: [completion] Auth middleware ready
+
+    step_4:
+      action: "Acknowledge entries after reading"
+      update: "Add my-story-id to acknowledged_by"
+
+  benefits:
+    - "Avoid re-discovering same issues"
+    - "Know when dependencies complete"
+    - "Coordinate parallel work"
+```
+
+See `core/cross-story-memory.md` for full memory protocol.
+
+---
+
 ## Pre-Execution: Staleness Check
 
 Before executing a story, verify embedded context is still fresh:
@@ -654,6 +734,8 @@ See `core/learning-capture.md` for full protocol.
 - `core/learning-capture.md` - Learning extraction protocol
 - `core/context-inheritance.md` - Parent→Child context inheritance
 - `core/context-staleness.md` - Staleness detection and refresh
+- `core/context-compression.md` - Token optimization with detail levels
+- `core/cross-story-memory.md` - Parallel agent memory sharing
 - `contexts/packs/README.md` - Context Packs system
 
 ---

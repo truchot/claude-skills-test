@@ -16,6 +16,7 @@
 | **Session Plan** | `.project/plans/PLAN-{date}-{slug}.md` |
 | **Context Pack** | [pack-name] or "Manual extraction" |
 | **Context Mode** | Full / Inherited |
+| **Context Detail** | Minimal (~500 tokens) / Standard (~1500) / Verbose (~3000) |
 | **Status** | Draft / Ready / In Progress / Review / Done |
 | **Agent** | [role]/[agent] |
 | **Gate** | 🔴 BLOCKING / 🟡 ADVISORY / 🟢 AUTOMATIC |
@@ -309,6 +310,23 @@ describe('[Feature]', () => {
 | Planned | Actual | Reason |
 |---------|--------|--------|
 | [What was planned] | [What was done] | [Why changed] |
+
+### 8.4 Memory Interactions
+
+> **Cross-Story Memory** - Discoveries shared with/from parallel stories.
+> See `core/cross-story-memory.md` for the memory protocol.
+
+**Memory Read (Start of Execution)**:
+| From Story | Type | Content | Applied? |
+|------------|------|---------|----------|
+| STORY-XXX | gotcha | [What they discovered] | ✅ / ❌ |
+| STORY-YYY | completion | [What they finished] | ✅ Unblocked |
+
+**Memory Write (During Execution)**:
+| Type | Content | Applies To |
+|------|---------|------------|
+| discovery | [What I discovered] | STORY-YYY / all |
+| gotcha | [Problem + solution] | all |
 
 ---
 
