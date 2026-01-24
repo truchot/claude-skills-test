@@ -1,0 +1,99 @@
+# Context Pack: API Endpoint
+# Use when: Creating or modifying REST API endpoints
+
+name: "API Endpoint"
+description: "Context for creating/modifying REST API endpoints, route handlers, and API logic"
+version: "1.0"
+
+# Detection rules (auto-select this pack)
+detection:
+  keywords:
+    - "endpoint"
+    - "api"
+    - "route"
+    - "handler"
+    - "REST"
+    - "webhook"
+    - "controller"
+  file_patterns:
+    - "**/api/**"
+    - "**/routes/**"
+    - "**/*handler*"
+    - "**/*controller*"
+
+# Stack sections to extract
+stack_sections:
+  - framework        # Next.js, Express, etc.
+  - language         # TypeScript config
+  - api_style        # Route handlers, controllers
+  - database         # ORM, queries
+  - validation       # Zod, Joi, etc.
+  - auth             # Authentication method
+  - error_handling   # Error response format
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-api*"
+  - "ADR-*-rest*"
+  - "ADR-*-validation*"
+  - "ADR-*-error*"
+  - "ADR-*-auth*"
+
+# Knowledge patterns to include
+patterns:
+  - "technical/api-design.md"
+  - "technical/error-handling.md"
+  - "technical/validation.md"
+  - "technical/rest-conventions.md"
+
+# Standards to apply
+standards:
+  - typescript:
+      focus: ["interfaces", "strict-types", "no-any"]
+  - api:
+      focus: ["http-methods", "status-codes", "response-format"]
+  - security:
+      focus: ["input-validation", "auth-checks", "rate-limiting"]
+
+# Context files to load
+contexts:
+  - "backend.md"
+  - "security.md"
+
+# Common related file patterns
+related_file_patterns:
+  - "src/app/api/**/*.ts"
+  - "src/lib/api/*.ts"
+  - "src/lib/validation/*.ts"
+  - "src/types/api.ts"
+  - "prisma/schema.prisma"
+
+# Key extractions (specific code to find and embed)
+key_extractions:
+  - name: "API Response Types"
+    search: "interface.*Response|type.*Response"
+    files: ["src/types/**/*.ts"]
+
+  - name: "Validation Schemas"
+    search: "z\\.object|schema"
+    files: ["src/lib/validation/**/*.ts"]
+
+  - name: "Auth Middleware"
+    search: "getServerSession|withAuth|authenticate"
+    files: ["src/lib/auth.ts", "src/middleware.ts"]
+
+# Template hints (for story generation)
+implementation_hints:
+  structure: |
+    src/app/api/{resource}/
+    ├── route.ts          # GET, POST handlers
+    ├── [id]/route.ts     # GET, PUT, DELETE by ID
+    └── schema.ts         # Zod validation schemas
+
+  checklist:
+    - "Validate input with Zod before processing"
+    - "Check authentication/authorization"
+    - "Use proper HTTP status codes"
+    - "Wrap responses in standard format"
+    - "Handle errors gracefully"
+    - "Add rate limiting if public"

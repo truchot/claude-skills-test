@@ -1,0 +1,195 @@
+# Intake Template: Bugfix
+# Use these questions when classifying a request as type: bugfix
+
+template:
+  type: bugfix
+  description: "Intake questions for fixing something broken"
+
+  # ============================================================
+  # REQUIRED QUESTIONS - Always ask these
+  # ============================================================
+  required:
+    - id: expected
+      question: "What should happen? (Expected behavior)"
+      why: "Defines the correct behavior"
+      format: "free_text"
+      example: "User clicks 'Submit' and sees a success message"
+      validation: "Must describe the intended behavior"
+
+    - id: actual
+      question: "What actually happens? (Actual behavior)"
+      why: "Identifies the bug symptom"
+      format: "free_text"
+      example: "User clicks 'Submit' and gets a 500 error"
+      validation: "Must describe what's wrong"
+
+    - id: reproduce
+      question: "Steps to reproduce?"
+      why: "Enables debugging and verification"
+      format: "numbered_list"
+      example: |
+        1. Go to /checkout
+        2. Fill in payment details
+        3. Click 'Submit'
+        4. See error 500
+      validation: "Should be specific, reproducible steps"
+
+    - id: frequency
+      question: "How often does it happen? (always/sometimes/rare)"
+      why: "Helps prioritize and diagnose"
+      format: "choice"
+      options:
+        - "Always (100%)"
+        - "Often (>50%)"
+        - "Sometimes (10-50%)"
+        - "Rarely (<10%)"
+        - "Only once so far"
+      example: "Always on Safari, sometimes on Chrome"
+
+  # ============================================================
+  # CONDITIONAL QUESTIONS - Ask if condition is met
+  # ============================================================
+  conditional:
+    - id: environment
+      condition: "not specified in initial request"
+      question: "Which environment? (production/staging/local)"
+      example: "Production"
+
+    - id: browser_device
+      condition: "frontend OR UI bug"
+      question: "Which browser/device?"
+      example: "Safari 17 on macOS, iPhone 15"
+
+    - id: recent_change
+      condition: "bug started recently OR user mentions 'was working'"
+      question: "What changed before it broke?"
+      example: "Deployed new version yesterday"
+
+    - id: affected_users
+      condition: "production issue"
+      question: "How many users affected?"
+      example: "All users trying to checkout (~100/day)"
+
+    - id: error_message
+      condition: "there's an error message OR log"
+      question: "What's the exact error message?"
+      example: "TypeError: Cannot read property 'id' of undefined"
+
+    - id: workaround
+      condition: "user might know a workaround"
+      question: "Is there a workaround?"
+      example: "Refreshing the page sometimes helps"
+
+  # ============================================================
+  # CONTEXT TO LOAD - Files to check
+  # ============================================================
+  context_to_load:
+    always:
+      - path: "state/current.json"
+        reason: "Check for related in-progress work"
+
+    if_available:
+      - path: "Error logs"
+        reason: "Find stack trace"
+      - path: "Recent commits to affected area"
+        reason: "Identify potential cause"
+      - path: "Related test files"
+        reason: "Check test coverage"
+
+    by_symptom:
+      api_error:
+        - path: "API endpoint code"
+        - path: "API logs"
+      frontend_error:
+        - path: "Component code"
+        - path: "Browser console logs"
+      database_error:
+        - path: "Migration files"
+        - path: "Database logs"
+
+  # ============================================================
+  # SEVERITY ASSESSMENT
+  # ============================================================
+  severity:
+    critical:
+      signals:
+        - "production down"
+        - "data loss"
+        - "security breach"
+        - "payment failures"
+        - "all users affected"
+      complexity: L0
+      action: "Immediate fix, skip normal process"
+
+    major:
+      signals:
+        - "feature unusable"
+        - "many users affected"
+        - "workaround difficult"
+        - "business impact"
+      complexity: L1
+      action: "Prioritize, fix within 24h"
+
+    minor:
+      signals:
+        - "edge case"
+        - "few users affected"
+        - "easy workaround"
+        - "cosmetic issue"
+      complexity: L1
+      action: "Schedule in next sprint"
+
+  # ============================================================
+  # DECOMPOSITION HINTS
+  # ============================================================
+  decomposition_hints:
+    typical_tasks:
+      - "Reproduce bug locally"
+      - "Identify root cause"
+      - "Implement fix"
+      - "Add regression test"
+      - "Code review"
+      - "Deploy fix"
+
+    typical_gates:
+      - task: "Root cause identified"
+        gate: "🟢 AUTOMATIC"
+        reason: "Continue to fix"
+      - task: "Fix implemented"
+        gate: "🟡 ADVISORY"
+        reason: "Quick review before deploy"
+      - task: "Regression test added"
+        gate: "🟢 AUTOMATIC"
+        reason: "Tests must pass"
+
+    fast_track:
+      condition: "Critical severity"
+      skip:
+        - "Detailed documentation"
+        - "Full code review (post-fix review OK)"
+      keep:
+        - "Root cause analysis"
+        - "Regression test"
+        - "Basic verification"
+
+  # ============================================================
+  # OUTPUT FORMAT
+  # ============================================================
+  output:
+    format: "yaml"
+    structure:
+      classification:
+        domain: "[from classification]"
+        type: "bugfix"
+        complexity: "[L0-L1 typically]"
+        severity: "[critical|major|minor]"
+      answers:
+        expected: "[answer]"
+        actual: "[answer]"
+        reproduce: "[steps]"
+        frequency: "[answer]"
+        # ... conditional answers
+      context_loaded:
+        - path: "[file path]"
+          summary: "[brief summary]"
+      ready_for_decomposition: true

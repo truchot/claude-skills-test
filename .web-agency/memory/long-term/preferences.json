@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "last_updated": null,
+  "user": {
+    "communication_style": "concis",
+    "detail_level": "technique",
+    "language": "fr"
+  },
+  "project": {
+    "formality": "professional",
+    "documentation_depth": "detailed",
+    "commit_style": "conventional",
+    "review_strictness": "high"
+  },
+  "agents": {}
+}

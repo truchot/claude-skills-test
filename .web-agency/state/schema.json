@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://web-agency.local/schemas/state.json",
+  "title": "APEX Method State",
+  "description": "Schema for APEX orchestrator session state",
+  "type": "object",
+  "required": ["version"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Schema version"
+    },
+    "initialized_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Session initialization timestamp"
+    },
+    "project": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^PRJ-\\d{3}$",
+          "description": "Project ID"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Project name"
+        },
+        "client": {
+          "type": "string",
+          "description": "Client name"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to .project/ directory"
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "workflow": {
+      "type": ["object", "null"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "APEX workflow level (0-4)"
+        },
+        "name": {
+          "type": "string",
+          "enum": ["hotfix", "task", "story", "feature", "product"],
+          "description": "Workflow name corresponding to level"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Workflow start timestamp"
+        },
+        "current_step": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Current step number"
+        },
+        "total_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total steps in workflow"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["in_progress", "completed", "paused", "cancelled"],
+          "description": "Workflow status"
+        }
+      },
+      "required": ["level", "name", "status"]
+    },
+    "active_role": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "product-manager",
+        "tech-architect",
+        "lead-developer",
+        "developer",
+        "qa-engineer",
+        "ux-designer",
+        "devops-engineer",
+        "project-manager",
+        "marketing-lead",
+        "commercial-lead",
+        "support-lead",
+        "scrum-master"
+      ],
+      "description": "Currently active APEX role"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Step name"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "in_progress", "completed", "skipped"],
+            "description": "Step status"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Path to deliverable produced"
+          },
+          "gate": {
+            "type": "string",
+            "enum": ["blocking", "advisory", "automatic"],
+            "description": "Gate type for this step"
+          },
+          "validated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When gate was validated"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role responsible for this step"
+          },
+          "skill": {
+            "type": "string",
+            "description": "Skill used for this step"
+          }
+        },
+        "required": ["name", "status"]
+      }
+    },
+    "gates_pending": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "Step name waiting for validation"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["blocking", "advisory"],
+            "description": "Gate type"
+          },
+          "waiting_for": {
+            "type": "string",
+            "enum": ["validation", "input", "review"],
+            "description": "What the gate is waiting for"
+          },
+          "deliverable": {
+            "type": "string",
+            "description": "Path to deliverable to review"
+          },
+          "since": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When gate was reached"
+          }
+        },
+        "required": ["step", "type"]
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "enum": ["tech", "marketing", "design", "project", "commercial", "support"],
+          "description": "Primary domain"
+        },
+        "stack": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Tech stack"
+        },
+        "loaded_contexts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Context files loaded"
+        },
+        "loaded_knowledge": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Knowledge files loaded in this session"
+        },
+        "key_decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "decision": {"type": "string"},
+              "adr": {"type": "string"},
+              "date": {"type": "string", "format": "date"},
+              "role": {"type": "string", "description": "Role that made the decision"}
+            }
+          },
+          "description": "Decisions made during session"
+        },
+        "blockers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Active blockers"
+        },
+        "notes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Session notes"
+        }
+      }
+    },
+    "knowledge_captured": {
+      "type": "array",
+      "description": "Knowledge items captured during this session",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["pattern", "case", "rule", "checklist"],
+            "description": "Type of knowledge"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path to knowledge file"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief summary of the knowledge"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["type", "path"]
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

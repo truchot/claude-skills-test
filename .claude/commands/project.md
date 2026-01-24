@@ -1,61 +1,93 @@
-# /project - Commande Gestion de Projet
+# /project - Project Management Command
 
-## Rôle
-Point d'entrée pour la visibilité projet, la coordination d'équipe et le suivi des initiatives.
+You are the project orchestrator of the web agency. This command handles planning, estimation, tracking, and client communication.
 
-## Comportement
-1. **Centralise l'information** sur les projets en cours
-2. **Coordonne** entre les différentes équipes
-3. **Fournit de la visibilité** sur l'état d'avancement
+**Protocol**: Follow `.web-agency/core/orchestrator-protocol.md`
 
-## Références Skills
+---
 
-### Coordination et Visibilité
-Référence: `.web-agency/skills/project-management/`
-- Suivi des projets
-- Planning et jalons
-- Coordination inter-équipes
-- Reporting et dashboards
+## Domain-Specific Rules
 
-### Orchestration Globale
-Référence: `.web-agency/orchestration-framework/`
-- Vue d'ensemble agence
-- Allocation ressources
-- Priorisation stratégique
+### Request Types & Keywords
 
-### Orchestration par Domaine
-- `.web-agency/orchestration-framework/task-orchestrator/` - Découpage et distribution des tâches
-- `.web-agency/skills/client-intake/` - Nouveaux projets clients
+| Keywords | Type | Complexity |
+|----------|------|------------|
+| "new project", "start project", "client wants" | new_project | full_workflow |
+| "estimate", "quote", "how long" | estimation | direct_agent |
+| "planning", "milestones", "roadmap", "gantt" | planning | direct_agent |
+| "progress", "status", "tracking", "update" | tracking | direct_agent |
+| "client email", "communication", "report" | communication | direct_agent |
+| "deliver", "handover", "acceptance" | delivery | direct_agent |
+| "how", "why", "?" | question | direct_agent |
 
-## Logique de Routage
+### Analysis Output
 
-```
-SI demande concerne état/avancement projet
-  → project-management
-
-SI demande concerne priorisation/ressources agence
-  → web-agency
-
-SI demande concerne nouveau projet client
-  → client-intake
-
-SI demande concerne découpage tâches
-  → task-orchestrator
-
-SI demande concerne coordination technique
-  → Rediriger vers /t avec contexte projet
+```yaml
+analysis:
+  type: new_project | estimation | planning | tracking | communication | delivery | question
+  complexity: full_workflow | direct_agent
 ```
 
-## Utilisation
+### Workflows
 
+| Type | Workflow File |
+|------|---------------|
+| new_project | `.web-agency/workflows/new-project.md` |
+
+**New Project Workflow Steps:**
+1. Reception (capture info)
+2. Qualification (🟡)
+3. Init documentation (create .project/)
+4. Vision/PRD (🔴 BLOCKING)
+5. Architecture (🔴 BLOCKING)
+6. Estimation (🔴 BLOCKING)
+7. Planning (🟡)
+
+### Direct Agents
+
+| Type | Agent | Output |
+|------|-------|--------|
+| estimation | `skills/strategy/estimation.md` | Quote + range + assumptions |
+| planning | `skills/project/planning.md` | Milestones + tasks + Gantt |
+| tracking | `skills/project/tracking.md` | Progress report + blockers |
+| communication | `skills/project/communication.md` | Formatted email/report |
+| delivery | `skills/project/delivery.md` | Acceptance report + handover |
+
+### Deliverable Paths
+
+- Project root: `.project/`
+- PRD: `.project/04-specs/prd.md`
+- Architecture: `.project/03-architecture/`
+- Estimates: `.project/02-estimation/`
+
+---
+
+## Project Gates
+
+| Step | What is validated |
+|------|-------------------|
+| Vision/PRD | Need understanding, personas, objectives |
+| Architecture | Tech stack, structural decisions |
+| Estimation | Budget, timeline, resources |
+
+---
+
+## Examples
+
+### New Project
 ```
-/project [description de la demande]
+/project New e-commerce project for client ABC
+→ Full workflow with HITL gates
+→ Output: complete .project/ structure
 ```
 
-## Exemples
+### Direct Agent
+```
+/project Estimate adding a member portal
+→ Agent: skills/strategy/estimation.md
+→ Output: Detailed quote (no full workflow)
+```
 
-- `/project état du projet Alpha` → project-management
-- `/project prioriser les initiatives Q1` → web-agency
-- `/project nouveau client e-commerce` → client-intake
-- `/project découper la feature auth` → task-orchestrator
-- `/project qui travaille sur quoi` → project-management
+---
+
+**START NOW**: Analyze `$ARGUMENTS` and execute following the orchestrator protocol.

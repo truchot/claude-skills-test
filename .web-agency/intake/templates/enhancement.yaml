@@ -1,0 +1,180 @@
+# Intake Template: Enhancement
+# Use these questions when classifying a request as type: enhancement
+
+template:
+  type: enhancement
+  description: "Intake questions for improving something that exists"
+
+  # ============================================================
+  # REQUIRED QUESTIONS - Always ask these
+  # ============================================================
+  required:
+    - id: current_state
+      question: "What exists today? (Current state)"
+      why: "Establishes baseline for improvement"
+      format: "free_text"
+      example: "Login form with email/password only, no validation feedback"
+      validation: "Must describe existing functionality"
+
+    - id: desired_state
+      question: "What should it become? (Desired state)"
+      why: "Defines the target improvement"
+      format: "free_text"
+      example: "Login with real-time validation, social login options, remember me"
+      validation: "Must describe the improved state"
+
+    - id: reason
+      question: "Why is this improvement needed?"
+      why: "Justifies the effort and guides decisions"
+      format: "free_text"
+      example: "Users complain about confusing error messages, 30% abandon login"
+      validation: "Should tie to user need or business metric"
+
+    - id: scope
+      question: "What's in scope for this enhancement?"
+      why: "Prevents scope creep"
+      format: "free_text"
+      example: "Validation UX only, not adding new auth providers"
+      validation: "Should be specific"
+
+  # ============================================================
+  # CONDITIONAL QUESTIONS - Ask if condition is met
+  # ============================================================
+  conditional:
+    - id: breaking_changes
+      condition: "modifying existing behavior OR API"
+      question: "Are breaking changes acceptable?"
+      options:
+        - "No, must be backward compatible"
+        - "Yes, but need migration path"
+        - "Yes, can break existing behavior"
+      example: "No, existing integrations must keep working"
+
+    - id: metrics
+      condition: "user mentions performance OR user feedback"
+      question: "What metrics will measure success?"
+      example: "Login success rate > 95%, error rate < 5%"
+
+    - id: existing_tests
+      condition: "modifying existing code"
+      question: "Are there existing tests we need to maintain?"
+      example: "Yes, 15 unit tests for login component"
+
+    - id: related_areas
+      condition: "enhancement might affect other features"
+      question: "What other areas might be affected?"
+      example: "Registration form uses same validation, signup flow"
+
+    - id: rollback
+      condition: "risky change OR affects many users"
+      question: "Do we need a rollback plan?"
+      example: "Yes, feature flag to revert to old behavior"
+
+  # ============================================================
+  # CONTEXT TO LOAD
+  # ============================================================
+  context_to_load:
+    always:
+      - path: "Existing code for feature being enhanced"
+        reason: "Understand current implementation"
+      - path: "Related tests"
+        reason: "Understand test coverage"
+      - path: "state/current.json"
+        reason: "Check for conflicts"
+
+    if_exists:
+      - path: "Original PRD/spec for the feature"
+        reason: "Understand original intent"
+      - path: "Related ADRs"
+        reason: "Understand past decisions"
+      - path: "User feedback/tickets"
+        reason: "Understand pain points"
+
+  # ============================================================
+  # ENHANCEMENT TYPES
+  # ============================================================
+  enhancement_types:
+    performance:
+      signals: ["slow", "faster", "optimize", "speed", "latency"]
+      typical_tasks:
+        - "Profile current performance"
+        - "Identify bottlenecks"
+        - "Implement optimization"
+        - "Benchmark improvement"
+        - "Update tests"
+
+    ux:
+      signals: ["confusing", "easier", "clearer", "user experience", "usability"]
+      typical_tasks:
+        - "Audit current UX"
+        - "Design improvements"
+        - "Implement UI changes"
+        - "User testing (if applicable)"
+        - "Update tests"
+
+    refactor:
+      signals: ["clean up", "refactor", "technical debt", "maintainable"]
+      typical_tasks:
+        - "Analyze current code"
+        - "Design improved structure"
+        - "Refactor incrementally"
+        - "Ensure tests pass"
+        - "Code review"
+
+    feature_extension:
+      signals: ["add", "extend", "also", "support for"]
+      typical_tasks:
+        - "Understand current feature"
+        - "Design extension"
+        - "Implement extension"
+        - "Update/add tests"
+        - "Update documentation"
+
+  # ============================================================
+  # DECOMPOSITION HINTS
+  # ============================================================
+  decomposition_hints:
+    typical_tasks:
+      - "Analyze current implementation"
+      - "Design enhancement"
+      - "Implement changes"
+      - "Update existing tests"
+      - "Add new tests if needed"
+      - "Code review"
+      - "Update documentation"
+
+    typical_gates:
+      - task: "Design enhancement"
+        gate: "🟡 ADVISORY"
+        reason: "Validate approach before coding"
+      - task: "Implementation complete"
+        gate: "🟡 ADVISORY"
+        reason: "Review before merge"
+
+    considerations:
+      - "Maintain backward compatibility unless explicitly approved"
+      - "Keep existing tests passing"
+      - "Consider feature flags for risky changes"
+      - "Update documentation if user-facing"
+
+  # ============================================================
+  # OUTPUT FORMAT
+  # ============================================================
+  output:
+    format: "yaml"
+    structure:
+      classification:
+        domain: "[from classification]"
+        type: "enhancement"
+        complexity: "[L1-L2 typically]"
+        enhancement_type: "[performance|ux|refactor|feature_extension]"
+      answers:
+        current_state: "[answer]"
+        desired_state: "[answer]"
+        reason: "[answer]"
+        scope: "[answer]"
+        # ... conditional answers
+      context_loaded:
+        - path: "[file path]"
+          summary: "[brief summary]"
+      ready_for_decomposition: true
