@@ -477,6 +477,59 @@ Moving to [Next step]...
 - [Suggested next actions]
 ```
 
+## Advanced Reasoning Protocol
+
+> **Reference**: See `core/advanced-reasoning.md` for complete documentation.
+
+### When to Activate
+
+Activate advanced reasoning for:
+- Complex architectural decisions with multiple valid approaches
+- High-stakes choices (security, performance, cost implications)
+- Ambiguous requirements needing deep analysis
+- User explicitly requests thorough analysis (`/deep-analysis`)
+- Level 2+ workflows with significant uncertainty
+
+### Protocol Pipeline
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│  1. TREE OF THOUGHTS (ToT)                                        │
+│     Explore 3 distinct approaches before committing               │
+│                           ↓                                       │
+│  2. SELF-CONSISTENCY                                              │
+│     Validate via 3 lenses: Pragmatic, Perfectionist, Skeptic      │
+│                           ↓                                       │
+│  3. CHAIN-OF-THOUGHT (CoT)                                        │
+│     Explicit step-by-step reasoning with audit trail              │
+│                           ↓                                       │
+│  4. ADVERSARIAL REVIEW                                            │
+│     Devil's advocate: challenge assumptions, find weaknesses      │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+### Integration with Request Analysis
+
+```yaml
+analysis:
+  type: [new_project | feature | bugfix | ...]
+  domain: [tech | design | project | marketing | ...]
+  urgency: [P0 | P1 | P2 | P3]
+  complexity: [L0 | L1 | L2 | L3 | L4]
+  requires_advanced_reasoning: [true | false]  # NEW
+  reasoning_trigger: "[why advanced reasoning needed]"
+```
+
+### Abbreviated Mode
+
+For time-sensitive situations, use abbreviated pipeline:
+- ToT: 2 approaches (instead of 3)
+- Self-consistency: 2 lenses (Pragmatic + Skeptic)
+- CoT: Max 3 steps
+- Adversarial: Assumption + Critic attacks only
+
+---
+
 ## Context and Token Management
 
 ### Loading Strategy
@@ -737,6 +790,7 @@ Different project types have adjusted workflows:
 | Subject | File |
 |---------|------|
 | APEX Method | `APEX.md` |
+| **Advanced Reasoning** | `core/advanced-reasoning.md` |
 | **Intake Protocol** | `intake/PROTOCOL.md` |
 | **Classification** | `intake/classification.yaml` |
 | **Intake Templates** | `intake/templates/*.yaml` |
