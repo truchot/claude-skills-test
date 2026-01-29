@@ -1,0 +1,105 @@
+# Context Pack: React Component
+# Use when: Creating or modifying React/Next.js components
+
+name: "React Component"
+description: "Context for creating/modifying React components, pages, and UI elements"
+version: "1.0"
+
+# Detection rules
+detection:
+  keywords:
+    - "component"
+    - "UI"
+    - "page"
+    - "form"
+    - "button"
+    - "modal"
+    - "layout"
+    - "widget"
+    - "card"
+  file_patterns:
+    - "**/components/**"
+    - "**/app/**/*.tsx"
+    - "**/pages/**/*.tsx"
+    - "**/*Component*"
+
+# Stack sections to extract
+stack_sections:
+  - framework        # Next.js App Router, Pages Router
+  - language         # TypeScript config
+  - styling          # Tailwind, CSS modules, styled-components
+  - ui_library       # shadcn/ui, Material UI, etc.
+  - state            # React hooks, Context, Zustand
+  - forms            # React Hook Form, Formik
+  - testing          # Testing Library, Jest
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-frontend*"
+  - "ADR-*-component*"
+  - "ADR-*-styling*"
+  - "ADR-*-state*"
+  - "ADR-*-ui*"
+
+# Knowledge patterns to include
+patterns:
+  - "technical/react-patterns.md"
+  - "technical/component-design.md"
+  - "technical/accessibility.md"
+  - "technical/performance.md"
+
+# Standards to apply
+standards:
+  - typescript:
+      focus: ["component-props", "event-handlers", "generics"]
+  - react:
+      focus: ["hooks-rules", "key-props", "memo-usage"]
+  - accessibility:
+      focus: ["aria-labels", "keyboard-nav", "semantic-html"]
+  - styling:
+      focus: ["tailwind-conventions", "responsive-design"]
+
+# Context files to load
+contexts:
+  - "frontend.md"
+
+# Common related file patterns
+related_file_patterns:
+  - "src/components/**/*.tsx"
+  - "src/components/**/*.types.ts"
+  - "src/hooks/*.ts"
+  - "src/lib/utils.ts"
+  - "src/styles/**/*.css"
+
+# Key extractions
+key_extractions:
+  - name: "UI Components"
+    search: "export.*function|export.*const.*="
+    files: ["src/components/ui/**/*.tsx"]
+
+  - name: "Custom Hooks"
+    search: "export.*function use"
+    files: ["src/hooks/**/*.ts"]
+
+  - name: "Shared Types"
+    search: "interface|type.*="
+    files: ["src/types/**/*.ts"]
+
+# Template hints
+implementation_hints:
+  structure: |
+    src/components/{ComponentName}/
+    ├── {ComponentName}.tsx       # Main component
+    ├── {ComponentName}.test.tsx  # Tests
+    ├── {ComponentName}.types.ts  # TypeScript types
+    └── index.ts                  # Re-export
+
+  checklist:
+    - "Define props interface with JSDoc"
+    - "Use semantic HTML elements"
+    - "Add aria-labels for accessibility"
+    - "Handle loading and error states"
+    - "Make responsive (mobile-first)"
+    - "Add keyboard navigation if interactive"
+    - "Memoize expensive computations"
+    - "Write unit tests for logic"

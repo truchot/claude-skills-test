@@ -1,0 +1,40 @@
+{
+  "project": {
+    "id": "{{PROJECT_ID}}",
+    "name": "{{PROJECT_NAME}}",
+    "client": "{{CLIENT_NAME}}",
+    "created_at": "{{CREATED_DATE}}",
+    "status": "active"
+  },
+  "team": {
+    "product_owner": "{{PO_NAME}}",
+    "tech_lead": "{{TL_NAME}}",
+    "developers": []
+  },
+  "workflow": {
+    "current": null,
+    "history": []
+  },
+  "documents": {
+    "prd": {
+      "status": "draft",
+      "path": "01-vision/PRD.md",
+      "last_updated": null
+    },
+    "architecture": {
+      "status": "draft",
+      "path": "03-architecture/overview.md",
+      "last_updated": null
+    }
+  },
+  "epics": [],
+  "user_stories": [],
+  "features": [],
+  "releases": [],
+  "metrics": {
+    "sessions_count": 0,
+    "deliverables_count": 0,
+    "decisions_count": 0
+  },
+  "updated_at": "{{UPDATED_DATE}}"
+}

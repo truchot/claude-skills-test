@@ -1,0 +1,102 @@
+# Context Pack: Database Schema
+# Use when: Creating or modifying database models, migrations, queries
+
+name: "Database Schema"
+description: "Context for database changes, Prisma models, migrations, and data layer"
+version: "1.0"
+
+# Detection rules
+detection:
+  keywords:
+    - "schema"
+    - "model"
+    - "migration"
+    - "table"
+    - "prisma"
+    - "database"
+    - "query"
+    - "relation"
+    - "index"
+  file_patterns:
+    - "**/prisma/**"
+    - "**/models/**"
+    - "**/db/**"
+    - "**/*schema*"
+    - "**/*migration*"
+
+# Stack sections to extract
+stack_sections:
+  - database         # PostgreSQL, MySQL, etc.
+  - orm              # Prisma, Drizzle, TypeORM
+  - language         # TypeScript for type generation
+  - migrations       # Migration strategy
+  - seeding          # Seed data approach
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-database*"
+  - "ADR-*-prisma*"
+  - "ADR-*-data*"
+  - "ADR-*-schema*"
+  - "ADR-*-migration*"
+
+# Knowledge patterns to include
+patterns:
+  - "technical/database-design.md"
+  - "technical/prisma-patterns.md"
+  - "technical/data-modeling.md"
+  - "technical/query-optimization.md"
+
+# Standards to apply
+standards:
+  - database:
+      focus: ["naming-conventions", "indexing", "normalization"]
+  - prisma:
+      focus: ["relation-syntax", "type-safety", "migrations"]
+  - security:
+      focus: ["sensitive-data", "encryption", "access-control"]
+
+# Context files to load
+contexts:
+  - "backend.md"
+
+# Common related file patterns
+related_file_patterns:
+  - "prisma/schema.prisma"
+  - "prisma/migrations/**/*.sql"
+  - "prisma/seed.ts"
+  - "src/lib/db.ts"
+  - "src/lib/prisma.ts"
+
+# Key extractions
+key_extractions:
+  - name: "Current Schema"
+    search: "model.*\\{"
+    files: ["prisma/schema.prisma"]
+
+  - name: "Prisma Client Usage"
+    search: "prisma\\."
+    files: ["src/lib/**/*.ts", "src/app/api/**/*.ts"]
+
+  - name: "Database Types"
+    search: "type.*=.*Prisma"
+    files: ["src/types/**/*.ts"]
+
+# Template hints
+implementation_hints:
+  structure: |
+    prisma/
+    ├── schema.prisma        # Main schema file
+    ├── migrations/          # Generated migrations
+    └── seed.ts              # Seed data
+
+  checklist:
+    - "Use clear, descriptive model names (singular)"
+    - "Add indexes for frequently queried fields"
+    - "Define relations with explicit naming"
+    - "Consider soft delete (deletedAt) for important data"
+    - "Add createdAt/updatedAt timestamps"
+    - "Validate data constraints at DB level"
+    - "Run `prisma generate` after schema changes"
+    - "Create migration with `prisma migrate dev`"
+    - "Update seed data if needed"

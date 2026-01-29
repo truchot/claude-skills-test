@@ -1,0 +1,361 @@
+# APEX Request Classification Matrix
+# Use this to mechanically classify user requests
+
+classification:
+  version: "1.0"
+
+  # ============================================================
+  # STEP 1: DOMAIN CLASSIFICATION
+  # ============================================================
+  domains:
+    tech:
+      description: "Technical implementation, code, infrastructure"
+      triggers:
+        - code
+        - api
+        - database
+        - bug
+        - feature
+        - deploy
+        - test
+        - implement
+        - build
+        - fix
+        - refactor
+        - migrate
+        - endpoint
+        - component
+        - service
+        - backend
+        - frontend
+        - server
+        - security
+        - performance
+      command: "/tech"
+      primary_roles:
+        - tech-architect
+        - lead-developer
+        - developer
+        - devops-engineer
+
+    design:
+      description: "UX, UI, design system, accessibility"
+      triggers:
+        - ui
+        - ux
+        - component design
+        - design system
+        - accessibility
+        - a11y
+        - wireframe
+        - mockup
+        - prototype
+        - layout
+        - color
+        - typography
+        - icon
+        - responsive
+      command: "/design"
+      primary_roles:
+        - ux-designer
+
+    project:
+      description: "Project management, planning, coordination"
+      triggers:
+        - estimate
+        - plan
+        - timeline
+        - sprint
+        - priority
+        - roadmap
+        - milestone
+        - deadline
+        - resource
+        - schedule
+        - backlog
+        - velocity
+      command: "/project"
+      primary_roles:
+        - project-manager
+        - scrum-master
+        - product-manager
+
+    marketing:
+      description: "Marketing, SEO, content, growth"
+      triggers:
+        - seo
+        - content
+        - campaign
+        - analytics
+        - growth
+        - conversion
+        - traffic
+        - social
+        - email
+        - landing page
+        - funnel
+        - metrics
+      command: "/marketing"
+      primary_roles:
+        - marketing-lead
+
+    commercial:
+      description: "Sales, proposals, client relations"
+      triggers:
+        - proposal
+        - quote
+        - client
+        - contract
+        - pricing
+        - negotiation
+        - deal
+        - prospect
+        - lead
+        - crm
+      command: "/commercial"
+      primary_roles:
+        - commercial-lead
+
+    support:
+      description: "Documentation, maintenance, customer support"
+      triggers:
+        - documentation
+        - docs
+        - readme
+        - help
+        - guide
+        - tutorial
+        - maintenance
+        - ticket
+        - support
+        - issue
+      command: "/support"
+      primary_roles:
+        - support-lead
+
+  # ============================================================
+  # STEP 2: REQUEST TYPE CLASSIFICATION
+  # ============================================================
+  types:
+    new_feature:
+      description: "Building something that doesn't exist"
+      triggers:
+        - add
+        - create
+        - implement
+        - build
+        - new
+        - introduce
+        - develop
+        - make
+      intake_template: "templates/new-feature.yaml"
+      typical_complexity: L2-L3
+      requires:
+        - problem_statement
+        - success_criteria
+        - scope_boundaries
+
+    enhancement:
+      description: "Improving something that exists"
+      triggers:
+        - improve
+        - optimize
+        - refactor
+        - update
+        - enhance
+        - upgrade
+        - extend
+        - better
+        - faster
+      intake_template: "templates/enhancement.yaml"
+      typical_complexity: L1-L2
+      requires:
+        - current_state
+        - desired_state
+        - reason_for_change
+
+    bugfix:
+      description: "Fixing something broken"
+      triggers:
+        - fix
+        - bug
+        - broken
+        - error
+        - issue
+        - not working
+        - crash
+        - fail
+        - wrong
+        - incorrect
+      intake_template: "templates/bugfix.yaml"
+      typical_complexity: L0-L1
+      requires:
+        - expected_behavior
+        - actual_behavior
+        - reproduction_steps
+
+    question:
+      description: "Seeking information or explanation"
+      triggers:
+        - how
+        - why
+        - what
+        - explain
+        - help
+        - understand
+        - "?"
+        - can you
+        - is it possible
+      intake_template: "templates/question.yaml"
+      typical_complexity: L0
+      requires:
+        - context
+
+    review:
+      description: "Evaluating existing work"
+      triggers:
+        - review
+        - check
+        - audit
+        - evaluate
+        - assess
+        - analyze
+        - inspect
+        - validate
+      intake_template: "templates/review.yaml"
+      typical_complexity: L1
+      requires:
+        - artifact_to_review
+        - review_criteria
+
+    deployment:
+      description: "Releasing to environment"
+      triggers:
+        - deploy
+        - release
+        - ship
+        - publish
+        - launch
+        - go live
+        - push to prod
+      intake_template: "templates/deployment.yaml"
+      typical_complexity: L1-L2
+      requires:
+        - target_environment
+        - release_scope
+
+  # ============================================================
+  # STEP 3: COMPLEXITY ASSESSMENT
+  # ============================================================
+  complexity:
+    L0_hotfix:
+      name: "Hotfix"
+      description: "Critical production issue"
+      max_duration: "2 hours"
+      signals:
+        - production
+        - urgent
+        - critical
+        - down
+        - emergency
+        - asap
+        - blocker
+      gates: "🟢 All automatic"
+      primary_role: developer
+
+    L1_task:
+      name: "Task"
+      description: "Small, well-defined work item"
+      max_duration: "1 day"
+      signals:
+        - small
+        - simple
+        - quick
+        - minor
+        - trivial
+        - single file
+        - straightforward
+      gates: "🟡 Code review"
+      primary_role: developer
+
+    L2_story:
+      name: "Story"
+      description: "User story or feature part"
+      max_duration: "5 days"
+      signals:
+        - story
+        - user story
+        - feature part
+        - module
+        - multiple files
+        - some complexity
+      gates: "🟡 Multiple checkpoints"
+      primary_role: lead-developer
+
+    L3_feature:
+      name: "Feature"
+      description: "Complete feature or epic"
+      max_duration: "4 weeks"
+      signals:
+        - feature
+        - epic
+        - multiple components
+        - integration
+        - significant
+        - cross-cutting
+      gates: "🔴 PRD, Architecture, Deploy"
+      primary_role: product-manager
+
+    L4_product:
+      name: "Product"
+      description: "New product or major initiative"
+      max_duration: "months"
+      signals:
+        - product
+        - mvp
+        - platform
+        - system
+        - greenfield
+        - from scratch
+        - major
+      gates: "🔴 Full governance"
+      primary_role: product-manager
+
+  # ============================================================
+  # DISAMBIGUATION RULES
+  # ============================================================
+  disambiguation:
+    # When keywords could match multiple domains
+    api:
+      if_context: "design OR architecture OR contract"
+      then: tech-architect
+      else: developer
+
+    database:
+      if_context: "schema OR design OR model"
+      then: tech-architect
+      else: developer
+
+    component:
+      if_context: "UI OR design OR visual"
+      then: design
+      else: tech
+
+    test:
+      if_context: "user testing OR usability"
+      then: design
+      else: tech
+
+  # ============================================================
+  # OUTPUT TEMPLATE
+  # ============================================================
+  output_template:
+    request: "[Original request text]"
+    domain: "[tech|design|project|marketing|commercial|support]"
+    type: "[new_feature|enhancement|bugfix|question|review|deployment]"
+    complexity: "[L0|L1|L2|L3|L4]"
+    confidence: "[0.0-1.0]"
+    intake_template: "[path to template]"
+    primary_role: "[role name]"
+    clarification_needed: "[true|false]"
+    clarification_question: "[question if needed]"

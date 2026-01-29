@@ -1,0 +1,256 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PRE-DEPLOYMENT CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checklist:
+  id: pre-deployment
+  name: "Pre-Deployment Checklist"
+  description: "Validates that code is ready for production deployment"
+  gate_type: blocking
+  version: "1.0"
+
+  applies_to:
+    roles: ["devops-engineer", "lead-developer"]
+    phases: ["development"]
+    workflow_levels: [2, 3, 4]
+
+  sections:
+    # ─────────────────────────────────────────────────────────────────────────
+    # CODE QUALITY
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: code-quality
+      name: "Code Quality"
+      description: "Ensure code meets quality standards"
+      items:
+        - id: tests-pass
+          description: "All tests pass"
+          required: true
+          auto_check:
+            type: command
+            command: "npm test"
+            success_condition: "exit_code == 0"
+
+        - id: lint-pass
+          description: "Linter passes with no errors"
+          required: true
+          auto_check:
+            type: command
+            command: "npm run lint"
+            success_condition: "exit_code == 0"
+
+        - id: type-check
+          description: "TypeScript type check passes"
+          required: true
+          auto_check:
+            type: command
+            command: "npm run type-check"
+            success_condition: "exit_code == 0"
+
+        - id: build-succeeds
+          description: "Production build succeeds"
+          required: true
+          auto_check:
+            type: command
+            command: "npm run build"
+            success_condition: "exit_code == 0"
+
+        - id: no-console-logs
+          description: "No console.log in production code"
+          required: true
+          auto_check:
+            type: grep_not
+            pattern: "console\\.log\\("
+            files: "src/**/*.{ts,tsx}"
+          skip_conditions:
+            - when: "file is test file"
+              reason: "console.log allowed in tests"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # SECURITY
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: security
+      name: "Security"
+      description: "Security validations"
+      items:
+        - id: no-secrets
+          description: "No hardcoded secrets in codebase"
+          required: true
+          auto_check:
+            type: grep_not
+            pattern: "(password|secret|api_key|apikey)\\s*[:=]\\s*['\"][^'\"]+['\"]"
+            files: "src/**/*.{ts,tsx,js,jsx}"
+
+        - id: no-env-example-secrets
+          description: ".env.example has no real secrets"
+          required: true
+          auto_check:
+            type: grep_not
+            pattern: "^[A-Z_]+=.{10,}"
+            files: ".env.example"
+
+        - id: dependencies-audit
+          description: "No known vulnerabilities in dependencies"
+          required: true
+          auto_check:
+            type: command
+            command: "npm audit --audit-level=high"
+            success_condition: "exit_code == 0"
+
+        - id: security-review-done
+          description: "Security review completed for sensitive changes"
+          required: true
+          auto_check: null
+          manual_prompt: "Have sensitive code paths been reviewed for security?"
+          skip_conditions:
+            - when: "No auth/payment/data changes"
+              reason: "No sensitive changes in this release"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # DATABASE
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: database
+      name: "Database"
+      description: "Database migration checks"
+      items:
+        - id: migrations-tested
+          description: "Database migrations tested on staging"
+          required: true
+          auto_check: null
+          manual_prompt: "Have migrations been run successfully on staging?"
+          evidence_required: true
+
+        - id: rollback-tested
+          description: "Rollback procedure tested"
+          required: false
+          auto_check: null
+          manual_prompt: "Has rollback been tested?"
+
+        - id: backup-verified
+          description: "Recent database backup exists"
+          required: true
+          auto_check: null
+          manual_prompt: "Is there a recent database backup (< 24h)?"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # CONFIGURATION
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: configuration
+      name: "Configuration"
+      description: "Environment configuration checks"
+      items:
+        - id: env-vars-set
+          description: "All required environment variables configured"
+          required: true
+          auto_check: null
+          manual_prompt: "Are all env vars set in production?"
+          evidence_required: true
+
+        - id: feature-flags
+          description: "Feature flags configured correctly"
+          required: false
+          auto_check: null
+          manual_prompt: "Are feature flags set as intended for this release?"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # MONITORING
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: monitoring
+      name: "Monitoring"
+      description: "Observability checks"
+      items:
+        - id: error-tracking
+          description: "Error tracking is configured"
+          required: true
+          auto_check:
+            type: grep
+            pattern: "Sentry|Bugsnag|Rollbar"
+            files: "src/**/*.{ts,tsx}"
+          skip_conditions:
+            - when: "Internal tool"
+              reason: "Error tracking optional for internal tools"
+
+        - id: alerts-configured
+          description: "Alerts configured for critical paths"
+          required: false
+          auto_check: null
+          manual_prompt: "Are monitoring alerts set up?"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # DOCUMENTATION
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: documentation
+      name: "Documentation"
+      description: "Documentation checks"
+      items:
+        - id: changelog-updated
+          description: "CHANGELOG updated with changes"
+          required: true
+          auto_check:
+            type: file_exists
+            path: "CHANGELOG.md"
+
+        - id: api-docs-updated
+          description: "API documentation updated if API changed"
+          required: false
+          auto_check: null
+          manual_prompt: "Is API documentation up to date?"
+          skip_conditions:
+            - when: "No API changes"
+              reason: "API unchanged"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # DEPLOYMENT
+    # ─────────────────────────────────────────────────────────────────────────
+    - id: deployment
+      name: "Deployment"
+      description: "Deployment readiness"
+      items:
+        - id: staging-tested
+          description: "Changes tested on staging environment"
+          required: true
+          auto_check: null
+          manual_prompt: "Have all changes been tested on staging?"
+          evidence_required: true
+
+        - id: rollback-plan
+          description: "Rollback plan documented"
+          required: true
+          auto_check: null
+          manual_prompt: "Is there a rollback plan if deployment fails?"
+
+        - id: deployment-window
+          description: "Deployment scheduled in appropriate window"
+          required: true
+          auto_check: null
+          manual_prompt: "Is deployment during an approved maintenance window?"
+          skip_conditions:
+            - when: "Hotfix"
+              reason: "Hotfixes can deploy outside window"
+
+        - id: team-notified
+          description: "Team notified of deployment"
+          required: true
+          auto_check: null
+          manual_prompt: "Has the team been notified?"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# USAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# To validate this checklist:
+#
+# 1. Run auto-checks first:
+#    - Execute each auto_check and record results
+#
+# 2. Present manual checks:
+#    - Show manual_prompt for items without auto_check
+#    - Collect yes/no + evidence if required
+#
+# 3. Compute result:
+#    - If any required item fails → gate fails
+#    - If only optional items fail → gate passes with warnings
+#
+# 4. Store validation:
+#    - Save to .project/07-audit/validations/pre-deployment-{date}.json
+#
+# ═══════════════════════════════════════════════════════════════════════════════

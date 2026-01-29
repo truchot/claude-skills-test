@@ -1,91 +1,94 @@
-# /tech - Commande Technique Intelligente
+# /tech - Technical Command
 
-## Rôle
-Point d'entrée technique unifié qui route vers le bon agent en fonction du contexte.
+You are the technical orchestrator of the web agency.
 
-## Comportement
-1. **Analyse le contexte** de la demande utilisateur
-2. **Identifie le niveau** approprié (stratégie → opérations → implémentation)
-3. **Descend les niveaux** si des informations manquent
-4. **Route vers l'agent** le plus pertinent
+**Protocol**: Follow `.web-agency/core/orchestrator-protocol.md`
 
-## Hiérarchie Technique
+---
 
-### Niveau 2 - Stratégie (POURQUOI)
-Référence: `.web-agency/skills/direction-technique/`
-- Architecture globale, décisions structurantes
-- Vision technique long terme
-- Standards et gouvernance
+## Domain-Specific Rules
 
-### Niveau 3 - Opérations (QUOI)
-Références:
-- `.web-agency/skills/lead-dev/` - Coordination développement
-- `.web-agency/skills/devops/` - Infrastructure et déploiement
-- `.web-agency/skills/testing-process/` - Stratégie de tests
+### Request Types & Keywords
 
-### Niveau 4 - Implémentation (COMMENT)
-Références:
-- `.web-agency/skills/frontend-developer/` - UI/composants
-- `.web-agency/skills/backend-developer/` - API/services
-- `.web-agency/skills/react-expert/` - React spécifique
-- `.web-agency/skills/nextjs-expert/` - Next.js spécifique
-- `.web-agency/skills/wordpress-gutenberg-expert/` - WordPress/Gutenberg
+| Keywords | Type |
+|----------|------|
+| "add", "create", "new", "implement" | feature |
+| "bug", "error", "not working", "fix" | bugfix |
+| "deploy", "push to prod", "release" | deployment |
+| "review", "PR", "pull request" | review |
+| "audit", "check", "analyze", "optimize" | audit |
+| "how", "why", "what is", "?" | question |
 
-## Algorithme de Routage
+### Analysis Output
 
-### 1. Analyse des mots-clés
-
-| Mots-clés | Destination |
-|-----------|-------------|
-| architecture, vision, standards, gouvernance, stratégie tech | direction-technique |
-| planning, sprint, review, coordination, équipe | lead-dev |
-| CI/CD, deploy, docker, kubernetes, infra, monitoring | devops |
-| test, qualité, coverage, e2e, unit test | testing-process |
-| composant, UI, CSS, responsive, animation | frontend-developer |
-| API, database, auth, backend, serveur | backend-developer |
-| React, hooks, Redux, state | react-expert |
-| Next.js, SSR, ISR, App Router | nextjs-expert |
-| WordPress, Gutenberg, WP, plugin, theme | wordpress-gutenberg-expert |
-
-### 2. Analyse du contexte
-
-- **Fichiers mentionnés**: `.tsx` → React, `docker-compose.yml` → DevOps
-- **Stack du projet**: Détecté via `package.json`, config files
-- **Historique conversation**: Continuité avec requêtes précédentes
-
-### 3. Résolution d'ambiguïté
-
-```
-SI plusieurs skills possibles:
-  → Privilégier le niveau le plus haut (stratégie > opérations > implémentation)
-  → Demander clarification si vraiment ambigu
-
-SI aucun mot-clé clair:
-  → Analyser l'intention (nouveau projet? bug? optimisation?)
-  → Poser 1-2 questions ciblées maximum
-
-SI demande transverse (ex: "optimiser performances"):
-  → Identifier le goulet d'étranglement probable
-  → Router vers le domaine le plus impacté
+```yaml
+analysis:
+  type: feature | bugfix | deployment | review | audit | question
+  domain: frontend | backend | fullstack | devops | database
+  urgency: P1 | P2 | P3 | P4
+  complexity: simple | medium | complex
 ```
 
-### 4. Fallback
+### Workflows
 
-Si indétermination après analyse:
-1. Proposer les 2-3 options les plus probables
-2. Laisser l'utilisateur choisir
-3. Ne jamais bloquer - toujours avancer
+| Type | Workflow File |
+|------|---------------|
+| feature | `.web-agency/workflows/feature.md` |
+| bugfix | `.web-agency/workflows/bugfix.md` |
+| deployment | `.web-agency/workflows/deployment.md` |
+| review | `.web-agency/workflows/code-review.md` |
+| audit | `.web-agency/workflows/audit.md` |
+| question | *No workflow - answer directly* |
 
-## Utilisation
+### Direct Agents
 
+| Category | Agents |
+|----------|--------|
+| strategy/ | specification, architecture, estimation, decision, task-breakdown |
+| development/ | frontend, backend, database, integration |
+| quality/ | testing, code-review, security-check, performance |
+| operations/ | deployment, ci-cd, monitoring, incident |
+
+### Contexts
+
+| Domain | File |
+|--------|------|
+| Frontend (React, Next.js) | `contexts/frontend.md` |
+| Backend (Node, API) | `contexts/backend.md` |
+| DevOps (CI/CD, Docker) | `contexts/devops.md` |
+| Security (OWASP) | `contexts/security.md` |
+
+### Deliverable Paths
+
+- Specs: `.project/04-specs/`
+- Architecture: `.project/03-architecture/`
+- Tests: `.project/05-tests/`
+
+---
+
+## Examples
+
+### Simple Feature
 ```
-/tech [description de la demande]
+/tech Create a reusable Button component
+→ Type: feature, Domain: frontend, Complexity: simple
+→ Direct agent execution
 ```
 
-## Exemples
+### Complex Feature
+```
+/tech Implement an OAuth authentication system
+→ Type: feature, Domain: fullstack, Complexity: complex
+→ Full workflow with 🔴 gates at spec, architecture, deployment
+```
 
-- `/tech optimiser les performances` → Analyse contexte, route vers frontend/backend/devops selon cas
-- `/tech architecture microservices` → direction-technique (stratégie)
-- `/tech créer composant Button` → frontend-developer ou react-expert
-- `/tech pipeline CI/CD` → devops
-- `/tech review PR #123` → lead-dev
+### Question
+```
+/tech How to manage global state in Next.js 14?
+→ Type: question
+→ Load contexts/frontend.md, answer directly
+```
+
+---
+
+**START NOW**: Analyze `$ARGUMENTS` and execute following the orchestrator protocol.

@@ -1,0 +1,110 @@
+# Context Pack: Authentication
+# Use when: Implementing auth features, permissions, user management
+
+name: "Authentication"
+description: "Context for authentication, authorization, permissions, and user management"
+version: "1.0"
+
+# Detection rules
+detection:
+  keywords:
+    - "auth"
+    - "login"
+    - "logout"
+    - "session"
+    - "permission"
+    - "role"
+    - "user"
+    - "password"
+    - "token"
+    - "JWT"
+    - "OAuth"
+  file_patterns:
+    - "**/auth/**"
+    - "**/*auth*"
+    - "**/session*"
+    - "**/middleware*"
+
+# Stack sections to extract
+stack_sections:
+  - auth             # NextAuth, Clerk, Auth0
+  - session          # Session strategy
+  - database         # User storage
+  - security         # Security measures
+  - api_protection   # API auth middleware
+
+# ADR patterns to match
+adr_patterns:
+  - "ADR-*-auth*"
+  - "ADR-*-security*"
+  - "ADR-*-session*"
+  - "ADR-*-user*"
+  - "ADR-*-permission*"
+
+# Knowledge patterns to include
+patterns:
+  - "technical/authentication.md"
+  - "technical/authorization.md"
+  - "technical/security-best-practices.md"
+  - "technical/session-management.md"
+
+# Standards to apply
+standards:
+  - security:
+      focus: ["password-hashing", "token-handling", "CSRF", "XSS"]
+  - auth:
+      focus: ["session-config", "callback-handling", "error-messages"]
+  - api:
+      focus: ["protected-routes", "middleware", "error-responses"]
+
+# Context files to load
+contexts:
+  - "security.md"
+  - "backend.md"
+
+# Common related file patterns
+related_file_patterns:
+  - "src/lib/auth.ts"
+  - "src/lib/auth/**/*.ts"
+  - "src/app/api/auth/**/*.ts"
+  - "src/middleware.ts"
+  - "src/types/auth.ts"
+  - "prisma/schema.prisma"  # User model
+
+# Key extractions
+key_extractions:
+  - name: "Auth Config"
+    search: "NextAuth|authOptions|Auth"
+    files: ["src/lib/auth.ts", "src/app/api/auth/**/*.ts"]
+
+  - name: "Session Type"
+    search: "interface.*Session|type.*Session"
+    files: ["src/types/**/*.ts"]
+
+  - name: "User Model"
+    search: "model User"
+    files: ["prisma/schema.prisma"]
+
+  - name: "Protected Routes"
+    search: "getServerSession|withAuth"
+    files: ["src/app/**/*.ts", "src/middleware.ts"]
+
+# Template hints
+implementation_hints:
+  structure: |
+    src/
+    ├── lib/auth.ts              # Auth config
+    ├── middleware.ts            # Route protection
+    ├── app/api/auth/[...nextauth]/route.ts
+    └── types/auth.ts            # Session types
+
+  checklist:
+    - "Never store plain-text passwords"
+    - "Use httpOnly cookies for session"
+    - "Implement CSRF protection"
+    - "Validate session on every protected request"
+    - "Log auth events for security audit"
+    - "Handle auth errors without exposing details"
+    - "Implement rate limiting on login"
+    - "Use secure password requirements"
+    - "Test authentication flows thoroughly"

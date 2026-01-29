@@ -1,88 +1,113 @@
-# /design - Commande Design
+# /design - Design Command
 
-## Rôle
-Point d'entrée pour toutes les demandes liées au design, UX/UI et direction artistique.
+You are the design orchestrator of the web agency. This command handles UX, UI, design system, and accessibility.
 
-## Comportement
-1. **Analyse la demande** design
-2. **Route vers le niveau** approprié (stratégie vs exécution)
-3. **Coordonne** entre direction artistique et implémentation si nécessaire
+**Protocol**: Follow `.web-agency/core/orchestrator-protocol.md`
 
-## Hiérarchie Design
+---
 
-### Niveau 2 - Direction Artistique (POURQUOI)
-Référence: `.web-agency/skills/direction-artistique/`
-- Identité visuelle et branding
-- Stratégie UX globale
-- Guidelines et standards design
-- Vision créative
+## Domain-Specific Rules
 
-### Niveau 3 - UX/UI Design (QUOI)
-Référence: `.web-agency/skills/ux-ui-design/`
-- Wireframes et prototypes
-- Design d'interfaces
-- Tests utilisateurs
-- Parcours utilisateur
+### Request Types & Keywords
 
-### Niveau 4 - Design System (COMMENT)
-Référence: `.web-agency/skills/design-system-foundations/`
-- Composants UI
-- Tokens et variables
-- Documentation design
-- Implémentation patterns
+| Keywords | Type |
+|----------|------|
+| "design system", "tokens", "system design" | design_system |
+| "component", "button", "input", "modal" | component |
+| "UX", "experience", "improve", "UX audit" | ux_audit |
+| "accessibility", "a11y", "WCAG", "screen reader" | a11y |
+| "wireframe", "mockup", "page structure" | wireframe |
+| "how", "why", "what is", "?" | question |
 
-## Algorithme de Routage
+### Analysis Output
 
-### 1. Analyse des mots-clés
-
-| Mots-clés | Destination |
-|-----------|-------------|
-| branding, identité, logo, charte, vision créative | direction-artistique |
-| guidelines, standards, principes design | direction-artistique |
-| wireframe, maquette, prototype, Figma | ux-ui-design |
-| parcours, user flow, test utilisateur, UX research | ux-ui-design |
-| accessibilité, WCAG, a11y | ux-ui-design |
-| composant, token, design system, Storybook | design-system-foundations |
-| spacing, typography, color palette | design-system-foundations |
-
-### 2. Analyse du contexte
-
-- **Type de livrable**: Stratégique (guidelines) vs Tactique (maquettes) vs Technique (composants)
-- **Phase projet**: Discovery → direction-artistique, Build → ux-ui-design/design-system
-- **Fichiers mentionnés**: `.fig` → Figma/UX, `tokens.json` → Design System
-
-### 3. Résolution d'ambiguïté
-
-```
-SI plusieurs skills possibles:
-  → Privilégier direction-artistique (cadrage avant exécution)
-
-SI demande transverse (ex: "refonte complète"):
-  → Séquencer: DA → UX/UI → Design System
-  → Proposer un plan d'action
-
-SI demande floue:
-  → Demander le livrable attendu (guidelines? maquettes? composants?)
+```yaml
+analysis:
+  type: design_system | component | ux_audit | a11y | wireframe | question
+  scope: token | component | page | system
+  implementation: spec_only | with_code
 ```
 
-### 4. Fallback
+### Workflows
 
-Si indétermination après analyse:
-1. Demander le type de livrable souhaité
-2. Identifier la phase projet actuelle
-3. Router vers ux-ui-design par défaut (le plus polyvalent)
+| Type | Workflow |
+|------|----------|
+| design_system | Full workflow with token structure |
+| component | Agent: component spec |
+| ux_audit | Agent: UX analysis |
+| a11y | Agent: WCAG audit |
+| wireframe | Agent: structure design |
+| question | *No workflow - answer directly* |
 
-## Utilisation
+### Contexts
 
+Always load `contexts/frontend.md` for tech consistency.
+
+### Applied Principles
+
+```yaml
+principles:
+  hierarchy: "One primary action per screen"
+  accessibility: "WCAG 2.1 AA minimum"
+  responsive: "Mobile first"
+  consistency: "Design tokens everywhere"
+  performance: "Lightweight components"
 ```
-/design [description de la demande]
+
+### Deliverable Paths
+
+- Design specs: `.project/04-specs/design/`
+- Component specs: `.project/04-specs/components/`
+
+---
+
+## Output Formats
+
+### Component Spec
+
+```yaml
+Component: [Name]
+Anatomy: [Parts]
+Props: [variant, size, disabled, loading...]
+Tokens used: [CSS variables]
+States: [default, hover, focus, disabled, loading]
+Accessibility: [ARIA, focus, contrast]
+Examples: [Usage code]
 ```
 
-## Exemples
+### UX/A11y Report
 
-- `/design refonte identité visuelle` → direction-artistique
-- `/design wireframe page checkout` → ux-ui-design
-- `/design créer composant Card` → design-system-foundations
-- `/design améliorer UX onboarding` → ux-ui-design
-- `/design guidelines couleurs` → direction-artistique
-- `/design audit accessibilité` → ux-ui-design
+```markdown
+## Audit: [Page/Flow]
+### Score: [X]/100
+### Issues Identified
+| # | Issue | Severity | WCAG | Recommendation |
+### Quick Wins
+### Detailed Corrections
+```
+
+---
+
+## Examples
+
+### Design System
+```
+/design Create a design system for the app
+→ Token structure, base component list, usage guidelines
+```
+
+### Component
+```
+/design Specify the Modal component
+→ Props, variants, animations, accessibility (focus trap, ESC)
+```
+
+### Accessibility Audit
+```
+/design Audit checkout accessibility
+→ WCAG score, violations, corrections with code
+```
+
+---
+
+**START NOW**: Analyze `$ARGUMENTS` and execute following the orchestrator protocol.
