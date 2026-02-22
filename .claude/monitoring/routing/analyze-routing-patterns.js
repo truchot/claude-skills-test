@@ -1,0 +1,742 @@
+#!/usr/bin/env node
+/**
+ * Routing Pattern Analyzer
+ *
+ * Analyzes agent invocation patterns and routing paths to identify:
+ * - Frequently used agents vs underutilized agents
+ * - Common routing paths
+ * - Bottlenecks in routing hierarchy
+ * - Potential dead-end routes
+ *
+ * Usage:
+ *   node analyze-routing-patterns.js [command]
+ *
+ * Commands:
+ *   paths      - Analyze all possible routing paths
+ *   coverage   - Check routing coverage completeness
+ *   ambiguity  - Detect routing ambiguity hotspots
+ *   optimize   - Generate optimization suggestions
+ *
+ * @module monitoring/routing/analyze-routing-patterns
+ */
+
+const fs = require('fs');
+const path = require('path');
+const {
+  SKILLS_ROOT,
+  ROUTING_THRESHOLDS,
+  MONITORED_SKILLS,
+  validateMonitoredSkills
+} = require('./config');
+
+/**
+ * Validate that a path is within SKILLS_ROOT to prevent path traversal
+ * Resolves symlinks to prevent symlink-based attacks
+ * @param {string} targetPath - Path to validate
+ * @returns {boolean} True if path is safe
+ */
+function isPathWithinSkillsRoot(targetPath) {
+  try {
+    // Use realpathSync to resolve symlinks and get canonical path
+    // This prevents symlink attacks where a symlink points outside SKILLS_ROOT
+    const resolvedPath = fs.existsSync(targetPath)
+      ? fs.realpathSync(targetPath)
+      : path.resolve(targetPath);
+    const resolvedRoot = fs.realpathSync(SKILLS_ROOT);
+    return resolvedPath.startsWith(resolvedRoot + path.sep) || resolvedPath === resolvedRoot;
+  } catch (err) {
+    // If we can't resolve the path, assume it's unsafe
+    console.warn(`Path resolution failed for ${targetPath}: ${err.message}`);
+    return false;
+  }
+}
+
+/**
+ * Safe path join that validates result is within SKILLS_ROOT
+ * @param {...string} segments - Path segments to join
+ * @returns {string|null} Joined path or null if outside SKILLS_ROOT
+ */
+function safePathJoin(...segments) {
+  const joined = path.join(...segments);
+  if (!isPathWithinSkillsRoot(joined)) {
+    console.warn(`Path traversal attempt blocked: ${joined}`);
+    return null;
+  }
+  return joined;
+}
+
+/**
+ * Build routing graph from skill definitions
+ * Uses Set for O(1) leaf node lookups and adjacency map for O(1) edge lookups
+ * @returns {Object} Routing graph structure
+ * @throws {Error} If MONITORED_SKILLS configuration is invalid
+ */
+function buildRoutingGraph() {
+  // Validate configuration before building graph
+  const validation = validateMonitoredSkills(MONITORED_SKILLS);
+  if (!validation.valid) {
+    const errorMsg = `Invalid MONITORED_SKILLS configuration:\n  - ${validation.errors.join('\n  - ')}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
+  }
+
+  const graph = {
+    nodes: new Map(),
+    edges: [],
+    edgesBySource: new Map(), // Adjacency map for O(1) edge lookup
+    entryPoints: [],
+    leafNodes: new Set() // Set for O(1) membership testing
+  };
+
+  /**
+   * Add edge with O(1) lookup support
+   * @param {Object} edge - Edge to add
+   */
+  function addEdge(edge) {
+    graph.edges.push(edge);
+    if (!graph.edgesBySource.has(edge.from)) {
+      graph.edgesBySource.set(edge.from, []);
+    }
+    graph.edgesBySource.get(edge.from).push(edge);
+  }
+
+  // Add entry point (web-agency meta-orchestrator)
+  graph.entryPoints.push('web-agency');
+
+  for (const [skillName, config] of Object.entries(MONITORED_SKILLS)) {
+    const skillPath = safePathJoin(SKILLS_ROOT, skillName);
+    if (!skillPath || !fs.existsSync(skillPath)) continue;
+
+    // Add skill node
+    graph.nodes.set(skillName, {
+      type: config.isMetaOrchestrator ? 'meta-orchestrator' : 'skill',
+      agentCount: config.expectedAgents,
+      hasOrchestrator: config.hasOrchestrator,
+      domains: []
+    });
+
+    // Scan for domains and agents
+    const agentsDir = safePathJoin(skillPath, 'agents');
+    if (agentsDir && fs.existsSync(agentsDir)) {
+      let domains = [];
+      try {
+        domains = fs.readdirSync(agentsDir).filter(d => {
+          try {
+            const domainPath = safePathJoin(agentsDir, d);
+            return domainPath && fs.statSync(domainPath).isDirectory();
+          } catch (statErr) {
+            console.warn(`Failed to stat ${d} in ${agentsDir}: ${statErr.message}`);
+            return false;
+          }
+        });
+      } catch (readErr) {
+        console.warn(`Failed to read agents directory ${agentsDir}: ${readErr.message}`);
+      }
+
+      domains.forEach(domain => {
+        const domainId = `${skillName}/${domain}`;
+        graph.nodes.set(domainId, {
+          type: 'domain',
+          skill: skillName,
+          agents: []
+        });
+
+        // Add edge from skill to domain
+        addEdge({
+          from: skillName,
+          to: domainId,
+          type: 'contains'
+        });
+
+        // Add agent nodes
+        const domainPath = safePathJoin(agentsDir, domain);
+        if (!domainPath) return;
+
+        let files = [];
+        try {
+          files = fs.readdirSync(domainPath).filter(f => f.endsWith('.md'));
+        } catch (readErr) {
+          console.warn(`Failed to read domain directory ${domainPath}: ${readErr.message}`);
+          return;
+        }
+
+        files.forEach(file => {
+          const agentName = file.replace('.md', '');
+          const agentId = `${domainId}/${agentName}`;
+
+          const isOrchestrator = agentName === 'orchestrator';
+          graph.nodes.set(agentId, {
+            type: isOrchestrator ? 'orchestrator' : 'agent',
+            domain: domainId,
+            skill: skillName
+          });
+
+          // Add edge from domain to agent
+          addEdge({
+            from: isOrchestrator ? skillName : domainId,
+            to: agentId,
+            type: isOrchestrator ? 'orchestrates' : 'routes-to'
+          });
+
+          // Track leaf nodes (non-orchestrator agents) - O(1) Set.add
+          if (!isOrchestrator) {
+            graph.leafNodes.add(agentId);
+          }
+        });
+
+        graph.nodes.get(skillName).domains.push(domain);
+      });
+    }
+  }
+
+  return graph;
+}
+
+/**
+ * Analyze all possible routing paths
+ * Uses O(1) lookups for performance and enforces path limit for memory safety
+ * @param {Object} graph - Routing graph
+ * @returns {Object} Path analysis
+ */
+function analyzeRoutingPaths(graph) {
+  const paths = [];
+  const pathDepths = [];
+  const cycles = [];
+  const depthLimitExceeded = [];
+  let pathLimitReached = false;
+
+  // Use backtracking to avoid memory allocation on each recursive call
+  const currentPath = [];
+  const visiting = new Set();
+
+  // DFS to find all paths from entry to leaf (with cycle detection, depth limit, and path limit)
+  function findPaths(nodeId, depth) {
+    // Path limit check FIRST to prevent memory exhaustion
+    if (paths.length >= ROUTING_THRESHOLDS.maxPaths) {
+      pathLimitReached = true;
+      return;
+    }
+
+    // Depth limit check to prevent stack overflow
+    if (depth >= ROUTING_THRESHOLDS.maxExplorationDepth) {
+      depthLimitExceeded.push([...currentPath, nodeId]);
+      return;
+    }
+
+    // Cycle detection: check if we're revisiting a node in current path
+    if (visiting.has(nodeId)) {
+      cycles.push([...currentPath, nodeId]);
+      return;
+    }
+
+    const node = graph.nodes.get(nodeId);
+    if (!node) return;
+
+    // Backtracking: add to path and visiting set
+    currentPath.push(nodeId);
+    visiting.add(nodeId);
+
+    try {
+      // Check if leaf node - O(1) Set.has instead of Array.includes
+      if (graph.leafNodes.has(nodeId)) {
+        paths.push([...currentPath]);
+        pathDepths.push(depth);
+        return;
+      }
+
+      // Find outgoing edges - O(1) Map lookup instead of O(n) filter
+      const outEdges = graph.edgesBySource.get(nodeId) || [];
+
+      if (outEdges.length === 0 && depth > 0) {
+        // Dead end that's not an entry
+        paths.push([...currentPath]);
+        pathDepths.push(depth);
+        return;
+      }
+
+      for (const edge of outEdges) {
+        if (pathLimitReached) break;
+        findPaths(edge.to, depth + 1);
+      }
+    } finally {
+      // Backtracking: remove from path and visiting set
+      currentPath.pop();
+      visiting.delete(nodeId);
+    }
+  }
+
+  for (const entry of graph.entryPoints) {
+    if (pathLimitReached) break;
+    findPaths(entry, 0);
+  }
+
+  return {
+    totalPaths: paths.length,
+    avgPathDepth: pathDepths.length > 0
+      ? pathDepths.reduce((a, b) => a + b, 0) / pathDepths.length
+      : 0,
+    maxPathDepth: pathDepths.length > 0 ? Math.max(...pathDepths) : 0,
+    minPathDepth: pathDepths.length > 0 ? Math.min(...pathDepths) : 0,
+    pathDepthDistribution: pathDepths.reduce((acc, d) => {
+      acc[d] = (acc[d] || 0) + 1;
+      return acc;
+    }, {}),
+    longestPaths: paths
+      .map((p, i) => ({ path: p, depth: pathDepths[i] }))
+      .sort((a, b) => b.depth - a.depth)
+      .slice(0, 5),
+    deadEnds: paths.filter((p, i) => {
+      const lastNode = p[p.length - 1];
+      return !graph.leafNodes.has(lastNode) && pathDepths[i] > 0;
+    }),
+    cycles: cycles,
+    hasCycles: cycles.length > 0,
+    depthLimitExceeded: depthLimitExceeded,
+    hasDepthLimitExceeded: depthLimitExceeded.length > 0,
+    pathLimitReached: pathLimitReached,
+    pathLimit: ROUTING_THRESHOLDS.maxPaths
+  };
+}
+
+/**
+ * Analyze routing coverage
+ * Uses O(1) edge lookups via adjacency map
+ * @param {Object} graph - Routing graph
+ * @returns {Object} Coverage analysis
+ */
+function analyzeCoverage(graph) {
+  const reachableFromEntry = new Set();
+  const unreachableNodes = [];
+
+  // BFS from entry points using O(1) edge lookups
+  function markReachable(startNode) {
+    const queue = [startNode];
+    while (queue.length > 0) {
+      const node = queue.shift();
+      if (reachableFromEntry.has(node)) continue;
+
+      reachableFromEntry.add(node);
+
+      // O(1) lookup via adjacency map instead of O(n) filter
+      const outEdges = graph.edgesBySource.get(node) || [];
+      for (const edge of outEdges) {
+        if (!reachableFromEntry.has(edge.to)) {
+          queue.push(edge.to);
+        }
+      }
+    }
+  }
+
+  graph.entryPoints.forEach(entry => markReachable(entry));
+
+  // Find unreachable nodes
+  graph.nodes.forEach((_, nodeId) => {
+    if (!reachableFromEntry.has(nodeId)) {
+      unreachableNodes.push(nodeId);
+    }
+  });
+
+  // Calculate coverage metrics
+  const totalNodes = graph.nodes.size;
+  const reachableCount = reachableFromEntry.size;
+  const coverageRatio = totalNodes > 0 ? reachableCount / totalNodes : 1;
+
+  return {
+    totalNodes,
+    reachableNodes: reachableCount,
+    unreachableNodes: unreachableNodes.length,
+    coverageRatio,
+    coveragePercent: (coverageRatio * 100).toFixed(1),
+    meetsMinimum: coverageRatio >= ROUTING_THRESHOLDS.minAgentCoverage,
+    unreachableList: unreachableNodes
+  };
+}
+
+/**
+ * Detect routing ambiguity hotspots
+ * Uses O(1) edge lookups via adjacency map
+ * @param {Object} graph - Routing graph
+ * @returns {Object} Ambiguity analysis
+ */
+function detectAmbiguity(graph) {
+  const ambiguityHotspots = [];
+  const branchingFactors = [];
+
+  // Calculate branching factor for each non-leaf node using O(1) lookups
+  graph.nodes.forEach((node, nodeId) => {
+    if (node.type === 'agent') return; // Skip leaf nodes
+
+    // O(1) lookup via adjacency map instead of O(n) filter
+    const outEdges = graph.edgesBySource.get(nodeId) || [];
+    const branchingFactor = outEdges.length;
+
+    branchingFactors.push(branchingFactor);
+
+    // High branching factor indicates potential ambiguity
+    if (branchingFactor > ROUTING_THRESHOLDS.branchingFactor.high) {
+      ambiguityHotspots.push({
+        node: nodeId,
+        type: node.type,
+        branchingFactor,
+        severity: branchingFactor > ROUTING_THRESHOLDS.branchingFactor.critical ? 'critical' : 'high',
+        targets: outEdges.map(e => e.to)
+      });
+    } else if (branchingFactor > ROUTING_THRESHOLDS.branchingFactor.medium) {
+      ambiguityHotspots.push({
+        node: nodeId,
+        type: node.type,
+        branchingFactor,
+        severity: 'medium',
+        targets: outEdges.map(e => e.to)
+      });
+    }
+  });
+
+  const avgBranchingFactor = branchingFactors.length > 0
+    ? branchingFactors.reduce((a, b) => a + b, 0) / branchingFactors.length
+    : 0;
+
+  return {
+    totalHotspots: ambiguityHotspots.length,
+    criticalHotspots: ambiguityHotspots.filter(h => h.severity === 'critical').length,
+    highHotspots: ambiguityHotspots.filter(h => h.severity === 'high').length,
+    mediumHotspots: ambiguityHotspots.filter(h => h.severity === 'medium').length,
+    avgBranchingFactor: avgBranchingFactor.toFixed(2),
+    maxBranchingFactor: branchingFactors.length > 0 ? Math.max(...branchingFactors) : 0,
+    hotspots: ambiguityHotspots.sort((a, b) => b.branchingFactor - a.branchingFactor)
+  };
+}
+
+/**
+ * Generate optimization suggestions
+ * @param {Object} pathAnalysis - Path analysis results
+ * @param {Object} coverageAnalysis - Coverage analysis results
+ * @param {Object} ambiguityAnalysis - Ambiguity analysis results
+ * @returns {Object} Optimization suggestions
+ */
+function generateOptimizations(pathAnalysis, coverageAnalysis, ambiguityAnalysis) {
+  const optimizations = [];
+
+  // Path depth optimizations
+  if (pathAnalysis.maxPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth) {
+    optimizations.push({
+      category: 'path-depth',
+      priority: 'high',
+      issue: `Maximum path depth (${pathAnalysis.maxPathDepth}) exceeds threshold (${ROUTING_THRESHOLDS.maxRoutingDepth})`,
+      suggestion: 'Consider flattening the routing hierarchy or creating direct routes for common paths',
+      affectedPaths: pathAnalysis.longestPaths.map(p => p.path.join(' → '))
+    });
+  }
+
+  // Coverage optimizations
+  if (!coverageAnalysis.meetsMinimum) {
+    optimizations.push({
+      category: 'coverage',
+      priority: 'high',
+      issue: `Coverage (${coverageAnalysis.coveragePercent}%) below minimum (${ROUTING_THRESHOLDS.minAgentCoverage * 100}%)`,
+      suggestion: 'Add routing rules to reach unreachable agents',
+      unreachableAgents: coverageAnalysis.unreachableList.slice(0, 10)
+    });
+  }
+
+  // Dead-end optimizations
+  if (pathAnalysis.deadEnds.length > 0) {
+    optimizations.push({
+      category: 'dead-ends',
+      priority: 'medium',
+      issue: `${pathAnalysis.deadEnds.length} dead-end routes detected`,
+      suggestion: 'Remove or fix dead-end routing paths',
+      deadEnds: pathAnalysis.deadEnds.slice(0, 5).map(p => p.join(' → '))
+    });
+  }
+
+  // Ambiguity optimizations
+  if (ambiguityAnalysis.criticalHotspots > 0) {
+    const criticalHotspots = ambiguityAnalysis.hotspots.filter(h => h.severity === 'critical');
+    optimizations.push({
+      category: 'ambiguity',
+      priority: 'critical',
+      issue: `${ambiguityAnalysis.criticalHotspots} critical ambiguity hotspots with branching factor > 20`,
+      suggestion: 'Split high-branching nodes into sub-categories or add disambiguation keywords',
+      hotspots: criticalHotspots.map(h => ({
+        node: h.node,
+        branchingFactor: h.branchingFactor
+      }))
+    });
+  }
+
+  // Branching factor optimization
+  if (parseFloat(ambiguityAnalysis.avgBranchingFactor) > 8) {
+    optimizations.push({
+      category: 'branching',
+      priority: 'medium',
+      issue: `Average branching factor (${ambiguityAnalysis.avgBranchingFactor}) is high`,
+      suggestion: 'Consider hierarchical grouping to reduce decision points at each level'
+    });
+  }
+
+  return {
+    totalOptimizations: optimizations.length,
+    criticalCount: optimizations.filter(o => o.priority === 'critical').length,
+    highCount: optimizations.filter(o => o.priority === 'high').length,
+    mediumCount: optimizations.filter(o => o.priority === 'medium').length,
+    optimizations: optimizations.sort((a, b) => {
+      const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    })
+  };
+}
+
+/**
+ * Format analysis results for display
+ * @param {Object} analysis - Complete analysis
+ * @returns {string} Formatted output
+ */
+function formatAnalysis(analysis) {
+  let output = `
+╔══════════════════════════════════════════════════════════════════╗
+║            ROUTING PATTERN ANALYSIS                              ║
+╠══════════════════════════════════════════════════════════════════╣
+║  Generated: ${new Date().toISOString().substring(0, 19).padEnd(42)}     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📍 ROUTING PATHS
+────────────────────────────────────────────
+  Total Paths:        ${String(analysis.paths.totalPaths).padStart(5)}
+  Avg Path Depth:     ${analysis.paths.avgPathDepth.toFixed(2).padStart(5)} ${analysis.paths.avgPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth ? '⚠️' : '✓'}
+  Max Path Depth:     ${String(analysis.paths.maxPathDepth).padStart(5)} ${analysis.paths.maxPathDepth > ROUTING_THRESHOLDS.maxRoutingDepth ? '⚠️' : '✓'}
+  Dead Ends:          ${String(analysis.paths.deadEnds.length).padStart(5)} ${analysis.paths.deadEnds.length > 0 ? '⚠️' : '✓'}
+
+📊 COVERAGE
+────────────────────────────────────────────
+  Total Nodes:        ${String(analysis.coverage.totalNodes).padStart(5)}
+  Reachable:          ${String(analysis.coverage.reachableNodes).padStart(5)}
+  Unreachable:        ${String(analysis.coverage.unreachableNodes).padStart(5)} ${analysis.coverage.unreachableNodes > 0 ? '⚠️' : '✓'}
+  Coverage:           ${analysis.coverage.coveragePercent.padStart(4)}% ${analysis.coverage.meetsMinimum ? '✓' : '⚠️'}
+
+🎯 AMBIGUITY HOTSPOTS
+────────────────────────────────────────────
+  Total Hotspots:     ${String(analysis.ambiguity.totalHotspots).padStart(5)}
+  Critical:           ${String(analysis.ambiguity.criticalHotspots).padStart(5)} ${analysis.ambiguity.criticalHotspots > 0 ? '🔴' : '✓'}
+  High:               ${String(analysis.ambiguity.highHotspots).padStart(5)} ${analysis.ambiguity.highHotspots > 0 ? '🟡' : '✓'}
+  Medium:             ${String(analysis.ambiguity.mediumHotspots).padStart(5)}
+  Avg Branching:      ${analysis.ambiguity.avgBranchingFactor.padStart(5)}
+  Max Branching:      ${String(analysis.ambiguity.maxBranchingFactor).padStart(5)}
+`;
+
+  if (analysis.ambiguity.hotspots.length > 0) {
+    output += `
+  Top Hotspots:`;
+    analysis.ambiguity.hotspots.slice(0, 5).forEach(h => {
+      const icon = h.severity === 'critical' ? '🔴' : h.severity === 'high' ? '🟡' : '○';
+      output += `\n    ${icon} ${h.node}: ${h.branchingFactor} branches`;
+    });
+  }
+
+  output += `
+
+📈 PATH DEPTH DISTRIBUTION
+────────────────────────────────────────────`;
+
+  const maxDepth = Math.max(...Object.keys(analysis.paths.pathDepthDistribution).map(Number));
+  for (let d = 0; d <= maxDepth; d++) {
+    const count = analysis.paths.pathDepthDistribution[d] || 0;
+    const bar = '█'.repeat(Math.min(Math.ceil(count / 5), 30));
+    output += `\n  Depth ${d}: ${String(count).padStart(4)} ${bar}`;
+  }
+
+  if (analysis.optimizations.totalOptimizations > 0) {
+    output += `
+
+🔧 OPTIMIZATION RECOMMENDATIONS
+────────────────────────────────────────────
+  Total:              ${analysis.optimizations.totalOptimizations}
+  Critical:           ${analysis.optimizations.criticalCount} 🔴
+  High:               ${analysis.optimizations.highCount} 🟡
+  Medium:             ${analysis.optimizations.mediumCount}
+`;
+
+    analysis.optimizations.optimizations.forEach(opt => {
+      const icon = opt.priority === 'critical' ? '🔴' : opt.priority === 'high' ? '🟡' : '○';
+      output += `\n  ${icon} [${opt.category.toUpperCase()}] ${opt.issue}`;
+      output += `\n     → ${opt.suggestion}`;
+    });
+  }
+
+  output += '\n';
+  return output;
+}
+
+/**
+ * Run complete routing pattern analysis
+ * @returns {Object} Complete analysis results
+ * @throws {Error} If critical graph building fails
+ */
+function runAnalysis() {
+  let graph;
+  try {
+    graph = buildRoutingGraph();
+  } catch (err) {
+    console.error(`Failed to build routing graph: ${err.message}`);
+    throw err;
+  }
+
+  // Validate graph structure
+  if (!graph || !graph.nodes || !(graph.nodes instanceof Map)) {
+    throw new Error('Invalid graph structure: nodes Map is missing');
+  }
+  if (!graph.edgesBySource || !(graph.edgesBySource instanceof Map)) {
+    throw new Error('Invalid graph structure: edgesBySource Map is missing');
+  }
+  if (!graph.leafNodes || !(graph.leafNodes instanceof Set)) {
+    throw new Error('Invalid graph structure: leafNodes Set is missing');
+  }
+  const pathAnalysis = analyzeRoutingPaths(graph);
+  const coverageAnalysis = analyzeCoverage(graph);
+  const ambiguityAnalysis = detectAmbiguity(graph);
+  const optimizations = generateOptimizations(pathAnalysis, coverageAnalysis, ambiguityAnalysis);
+
+  return {
+    timestamp: new Date().toISOString(),
+    graph: {
+      nodeCount: graph.nodes.size,
+      edgeCount: graph.edges.length,
+      entryPoints: graph.entryPoints,
+      leafNodeCount: graph.leafNodes.size
+    },
+    paths: pathAnalysis,
+    coverage: coverageAnalysis,
+    ambiguity: ambiguityAnalysis,
+    optimizations
+  };
+}
+
+/**
+ * Validate analysis results and exit with error if critical issues found
+ * @param {Object} analysis - Analysis results
+ * @param {boolean} strict - Whether to fail on warnings
+ * @returns {number} Exit code (0 = success, 1 = error)
+ */
+function validateAnalysis(analysis, strict = false) {
+  const errors = [];
+
+  // Critical: cycles detected
+  if (analysis.paths.hasCycles) {
+    errors.push(`CRITICAL: ${analysis.paths.cycles.length} cycle(s) detected in routing graph`);
+    analysis.paths.cycles.slice(0, 3).forEach(cycle => {
+      errors.push(`  → ${cycle.join(' → ')}`);
+    });
+  }
+
+  // Critical: depth limit exceeded
+  if (analysis.paths.hasDepthLimitExceeded) {
+    errors.push(`CRITICAL: ${analysis.paths.depthLimitExceeded.length} path(s) exceeded depth limit`);
+  }
+
+  // Strict mode: fail on coverage issues
+  if (strict && !analysis.coverage.meetsMinimum) {
+    errors.push(`ERROR: Coverage (${analysis.coverage.coveragePercent}%) below minimum threshold`);
+  }
+
+  // Strict mode: fail on critical ambiguity hotspots
+  if (strict && analysis.ambiguity.criticalHotspots > 0) {
+    errors.push(`ERROR: ${analysis.ambiguity.criticalHotspots} critical ambiguity hotspot(s) detected`);
+  }
+
+  if (errors.length > 0) {
+    console.error('\n🔴 VALIDATION FAILED\n');
+    errors.forEach(err => console.error(err));
+    return 1;
+  }
+
+  return 0;
+}
+
+// Main execution
+if (require.main === module) {
+  try {
+    const args = process.argv.slice(2);
+    const strict = args.includes('--strict');
+    const command = args.find(a => !a.startsWith('--')) || 'all';
+    const analysis = runAnalysis();
+
+    switch (command) {
+      case 'paths':
+        console.log(JSON.stringify(analysis.paths, null, 2));
+        break;
+
+      case 'coverage':
+        console.log(JSON.stringify(analysis.coverage, null, 2));
+        break;
+
+      case 'ambiguity':
+        console.log(JSON.stringify(analysis.ambiguity, null, 2));
+        break;
+
+      case 'optimize':
+        console.log(JSON.stringify(analysis.optimizations, null, 2));
+        break;
+
+      case 'all':
+      case 'summary':
+        console.log(formatAnalysis(analysis));
+        break;
+
+      case 'json':
+        console.log(JSON.stringify(analysis, null, 2));
+        break;
+
+      case 'validate':
+        // Validation-only mode for CI/CD
+        const exitCode = validateAnalysis(analysis, strict);
+        if (exitCode === 0) {
+          console.log('✓ Routing validation passed');
+        }
+        process.exit(exitCode);
+        break;
+
+      case 'help':
+      case '--help':
+      case '-h':
+        console.log(`Usage: node analyze-routing-patterns.js [command] [options]
+
+Commands:
+  all       Complete analysis with visual summary (default)
+  paths     Analyze routing paths (JSON)
+  coverage  Check routing coverage (JSON)
+  ambiguity Detect ambiguity hotspots (JSON)
+  optimize  Generate optimization suggestions (JSON)
+  json      Full analysis as JSON
+  validate  Validate routing and exit with error code if issues found
+
+Options:
+  --strict  Fail on warnings (coverage issues, critical hotspots)
+
+Examples:
+  node analyze-routing-patterns.js
+  node analyze-routing-patterns.js ambiguity
+  node analyze-routing-patterns.js validate --strict
+  node analyze-routing-patterns.js json | jq '.optimizations'
+`);
+        break;
+
+      default:
+        console.error(`Unknown command: ${command}. Use 'all', 'paths', 'coverage', 'ambiguity', 'optimize', 'json', 'validate', or 'help'.`);
+        process.exit(1);
+    }
+
+    // Always validate after analysis (except for validate command which handles its own exit)
+    if (command !== 'validate') {
+      const exitCode = validateAnalysis(analysis, false);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+    }
+  } catch (err) {
+    console.error(`Error analyzing routing patterns: ${err.message}`);
+    console.error(err.stack);
+    process.exit(1);
+  }
+}
+
+module.exports = { runAnalysis, buildRoutingGraph };
