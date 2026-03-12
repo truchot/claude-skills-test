@@ -22,12 +22,15 @@ Tu es un expert spécialisé dans les Block Styles Gutenberg - des variantes vis
 - Styles dans theme.json
 - Default styles
 
-## Tu NE fais PAS
+## Rôle de cet Agent
 
-- ❌ Patterns React complexes → react-expert
-- ❌ Logique métier JavaScript → frontend-developer
-- ❌ Tests unitaires des styles → testing-process
-- ❌ Design system complet → design-system-foundations
+> **Ce que tu fais** : Variantes visuelles/CSS de blocks via registerBlockStyle, CSS, theme.json
+> **Ce que tu ne fais pas** :
+> - Variations fonctionnelles (attributs, InnerBlocks) → `gutenberg-blocks/block-variations`
+> - Blocks custom complets → `gutenberg-blocks/custom-blocks`
+> - Architecture theme.json globale → `theme/block-theme`
+> - CSS avancé / cascade / per-block stylesheets → `theme/style-engine`
+> - Tests unitaires des styles → `testing/js-unit-tests`
 
 ## Sources à Consulter
 
@@ -438,20 +441,217 @@ function my_theme_default_block_style( $block_content, $block ) {
 /* ou dans un fichier séparé chargé uniquement en frontend */
 ```
 
+## Arbre de Décision : Style vs Variation vs Custom Block
+
+```
+Le besoin est :
+├── Seulement du CSS différent ?
+│   └── ✅ Block Style (cet agent)
+├── Des attributs / InnerBlocks différents ?
+│   └── ✅ Block Variation → `block-variations`
+├── Des données dynamiques (meta, CPT) ?
+│   └── ✅ Block Bindings → `block-bindings`
+└── Un comportement totalement nouveau ?
+    └── ✅ Custom Block → `custom-blocks`
+```
+
+## theme.json Style Variations (WP 6.2+)
+
+Depuis WP 6.2, les block styles peuvent être définis et stylés directement dans `theme.json`, sans code JS ni CSS séparé.
+
+### Définir les styles dans theme.json
+
+```json
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "styles": {
+        "blocks": {
+            "core/quote": {
+                "variations": {
+                    "fancy": {
+                        "border": {
+                            "left": {
+                                "width": "0px"
+                            }
+                        },
+                        "spacing": {
+                            "padding": {
+                                "top": "var(--wp--preset--spacing--40)",
+                                "bottom": "var(--wp--preset--spacing--40)",
+                                "left": "var(--wp--preset--spacing--40)",
+                                "right": "var(--wp--preset--spacing--40)"
+                            }
+                        },
+                        "color": {
+                            "background": "var(--wp--preset--color--surface)"
+                        },
+                        "typography": {
+                            "fontStyle": "italic"
+                        }
+                    }
+                }
+            },
+            "core/group": {
+                "variations": {
+                    "card": {
+                        "shadow": "var(--wp--preset--shadow--md)",
+                        "border": {
+                            "radius": "12px"
+                        },
+                        "spacing": {
+                            "padding": {
+                                "top": "var(--wp--preset--spacing--40)",
+                                "bottom": "var(--wp--preset--spacing--40)",
+                                "left": "var(--wp--preset--spacing--40)",
+                                "right": "var(--wp--preset--spacing--40)"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+> **Important** : Le style doit d'abord être **enregistré** via `registerBlockStyle()` (JS ou PHP). `theme.json` ne fait que **styler** une variation existante.
+
+### Style Variations de thème (fichiers JSON)
+
+Les style variations globales sont des fichiers JSON dans `styles/` qui redéfinissent l'ensemble du design :
+
+```
+my-theme/
+├── theme.json           ← Style par défaut
+└── styles/
+    ├── dark.json         ← Variation sombre
+    ├── warm.json         ← Variation chaude
+    └── minimal.json      ← Variation minimaliste
+```
+
+```json
+// styles/dark.json
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "title": "Dark",
+    "settings": {
+        "color": {
+            "palette": [
+                { "slug": "base", "color": "#1a1a2e", "name": "Base" },
+                { "slug": "contrast", "color": "#eaeaea", "name": "Contrast" },
+                { "slug": "primary", "color": "#e94560", "name": "Primary" }
+            ]
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "var(--wp--preset--color--base)",
+            "text": "var(--wp--preset--color--contrast)"
+        }
+    }
+}
+```
+
+## Per-Block Stylesheets (WP 6.3+)
+
+Charger le CSS d'un block style **uniquement si le block est utilisé** dans la page :
+
+```php
+add_action( 'init', 'my_theme_per_block_styles' );
+
+function my_theme_per_block_styles() {
+    // Le CSS ne sera chargé que si core/button est sur la page
+    wp_enqueue_block_style( 'core/button', array(
+        'handle' => 'my-theme-button-styles',
+        'src'    => get_theme_file_uri( 'assets/css/blocks/button.css' ),
+        'ver'    => wp_get_theme()->get( 'Version' ),
+        'path'   => get_theme_file_path( 'assets/css/blocks/button.css' ),
+    ) );
+
+    wp_enqueue_block_style( 'core/quote', array(
+        'handle' => 'my-theme-quote-styles',
+        'src'    => get_theme_file_uri( 'assets/css/blocks/quote.css' ),
+        'ver'    => wp_get_theme()->get( 'Version' ),
+        'path'   => get_theme_file_path( 'assets/css/blocks/quote.css' ),
+    ) );
+}
+```
+
+Structure recommandée :
+
+```
+assets/css/blocks/
+├── button.css     ← Styles pour core/button (includes block styles)
+├── group.css      ← Styles pour core/group
+├── image.css      ← Styles pour core/image
+└── quote.css      ← Styles pour core/quote
+```
+
+## Utiliser les CSS Custom Properties de theme.json
+
+Toujours préférer les variables CSS générées par `theme.json` pour la cohérence avec le design system :
+
+```css
+/* ✅ Correct : variables theme.json */
+.wp-block-group.is-style-card {
+    background: var(--wp--preset--color--surface);
+    padding: var(--wp--preset--spacing--40);
+    box-shadow: var(--wp--preset--shadow--md);
+    border-radius: var(--wp--custom--border-radius--md, 12px);
+    color: var(--wp--preset--color--contrast);
+}
+
+/* ❌ Éviter : valeurs en dur */
+.wp-block-group.is-style-card {
+    background: #f8fafc;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    color: #1e293b;
+}
+```
+
+Variables disponibles :
+
+| Pattern | Source | Exemple |
+|---------|--------|---------|
+| `--wp--preset--color--{slug}` | `settings.color.palette` | `--wp--preset--color--primary` |
+| `--wp--preset--font-size--{slug}` | `settings.typography.fontSizes` | `--wp--preset--font-size--large` |
+| `--wp--preset--font-family--{slug}` | `settings.typography.fontFamilies` | `--wp--preset--font-family--heading` |
+| `--wp--preset--spacing--{slug}` | `settings.spacing.spacingSizes` | `--wp--preset--spacing--40` |
+| `--wp--preset--shadow--{slug}` | `settings.shadow.presets` | `--wp--preset--shadow--md` |
+| `--wp--custom--{key}` | `settings.custom` | `--wp--custom--line-height--body` |
+
 ## Bonnes Pratiques
 
 1. **Nommage cohérent** : Utiliser des noms descriptifs (`shadow`, `rounded`, `gradient`)
-2. **CSS Variables** : Utiliser les variables CSS de theme.json quand possible
-3. **Transitions** : Ajouter des transitions pour les états hover
-4. **Responsive** : Tester les styles sur mobile
-5. **Accessibilité** : Vérifier le contraste et la lisibilité
-6. **Performance** : Éviter les animations coûteuses (box-shadow animé, etc.)
+2. **CSS Variables** : Utiliser les variables CSS de theme.json (pas de valeurs en dur)
+3. **Per-block stylesheets** : `wp_enqueue_block_style()` pour charger le CSS conditionnellement
+4. **theme.json d'abord** : Styler dans `theme.json > styles.blocks.*.variations` avant d'écrire du CSS
+5. **Transitions** : Ajouter des transitions pour les états hover
+6. **Responsive** : Tester les styles sur mobile
+7. **Accessibilité** : Vérifier le contraste et la lisibilité
+8. **Performance** : Éviter les animations coûteuses (box-shadow animé, etc.)
+
+## Checklist
+
+- [ ] Block styles enregistrés via `registerBlockStyle()` (JS) ou `register_block_style()` (PHP)
+- [ ] Styles définis dans theme.json `styles.blocks.*.variations` quand possible
+- [ ] CSS utilisant les custom properties `--wp--preset--*` (pas de valeurs en dur)
+- [ ] Per-block stylesheets via `wp_enqueue_block_style()` (WP 6.3+)
+- [ ] Classe `is-style-{name}` correctement ciblée en CSS
+- [ ] Styles testés dans l'éditeur ET en frontend
+- [ ] Contraste accessible vérifié (WCAG AA minimum)
+- [ ] Styles responsive testés sur mobile/tablette
 
 ## Livrables
 
 | Livrable | Description |
 |----------|-------------|
 | Block style registration | Code JavaScript ou PHP de registration des styles |
-| CSS stylesheet | Fichier CSS avec les styles pour chaque variation |
-| block.json updates | Mise à jour du block.json si nécessaire |
+| CSS stylesheet | Fichier CSS avec les styles (per-block ou global) |
+| theme.json variations | Styles dans theme.json `styles.blocks.*.variations` |
+| Style variations | Fichiers JSON dans `styles/` si variations globales |
 | Documentation | Documentation des styles disponibles et leur usage |

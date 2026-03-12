@@ -113,6 +113,139 @@ wp_interactivity_state( 'myPlugin', array(
 ) );
 ```
 
+## Patterns Avancés
+
+### Accordion / Tabs
+
+```php
+<!-- render.php -->
+<div
+    <?php echo get_block_wrapper_attributes(); ?>
+    data-wp-interactive="myPlugin/accordion"
+    <?php echo wp_interactivity_data_wp_context( array(
+        'activeIndex' => 0,
+        'items' => $items,
+    ) ); ?>
+>
+    <template data-wp-each="context.items">
+        <div class="accordion-item">
+            <button
+                data-wp-on--click="actions.selectItem"
+                data-wp-class--active="callbacks.isActive"
+                data-wp-bind--aria-expanded="callbacks.isActive"
+            >
+                <span data-wp-text="context.item.title"></span>
+            </button>
+            <div
+                data-wp-bind--hidden="!callbacks.isActive"
+                role="region"
+            >
+                <div data-wp-text="context.item.content"></div>
+            </div>
+        </div>
+    </template>
+</div>
+```
+
+```javascript
+// view.js
+import { store, getContext, getElement } from '@wordpress/interactivity';
+
+store( 'myPlugin/accordion', {
+    actions: {
+        selectItem() {
+            const ctx = getContext();
+            const { ref } = getElement();
+            const index = [ ...ref.parentElement.parentElement.children ].indexOf( ref.parentElement );
+            ctx.activeIndex = ctx.activeIndex === index ? -1 : index;
+        },
+    },
+    callbacks: {
+        isActive() {
+            const ctx = getContext();
+            const { ref } = getElement();
+            const index = [ ...ref.parentElement.parentElement.children ].indexOf( ref.parentElement );
+            return ctx.activeIndex === index;
+        },
+    },
+} );
+```
+
+### Communication entre stores
+
+```javascript
+// Block A : expose son state
+store( 'pluginA', {
+    state: {
+        selectedId: null,
+    },
+    actions: {
+        select() {
+            const ctx = getContext();
+            const state = store( 'pluginA' ).state;
+            state.selectedId = ctx.id;
+        },
+    },
+} );
+
+// Block B : lit le state de A
+store( 'pluginB', {
+    callbacks: {
+        isHighlighted() {
+            const ctx = getContext();
+            const { state } = store( 'pluginA' );
+            return state.selectedId === ctx.id;
+        },
+    },
+} );
+```
+
+### Fetch API avec gestion d'erreur
+
+```javascript
+store( 'myPlugin', {
+    actions: {
+        *loadMore() {
+            const ctx = getContext();
+            ctx.isLoading = true;
+            ctx.error = null;
+            try {
+                const response = yield fetch(
+                    `/wp-json/wp/v2/posts?page=${ ctx.page + 1 }`
+                );
+                if ( ! response.ok ) throw new Error( response.statusText );
+                const posts = yield response.json();
+                ctx.posts = [ ...ctx.posts, ...posts ];
+                ctx.page += 1;
+            } catch ( e ) {
+                ctx.error = e.message;
+            } finally {
+                ctx.isLoading = false;
+            }
+        },
+    },
+} );
+```
+
+## Avertissements WP 6.8+
+
+> **Deprecation** : L'opérateur `!` dans les directives (`!context.isOpen`) émet un avertissement de dépréciation dans WP 6.8. Utiliser des computed states à la place :
+
+```javascript
+// ❌ Déprécié dans WP 6.8
+// data-wp-bind--hidden="!context.isOpen"
+
+// ✅ Recommandé
+store( 'myPlugin', {
+    state: {
+        get isClosed() {
+            return ! getContext().isOpen;
+        },
+    },
+} );
+// data-wp-bind--hidden="state.isClosed"
+```
+
 ## Checklist
 
 - [ ] `supports.interactivity: true` dans block.json
@@ -120,6 +253,8 @@ wp_interactivity_state( 'myPlugin', array(
 - [ ] Context pour données par instance
 - [ ] Generators pour async (`*fetchData`)
 - [ ] ARIA avec `wp-bind`
+- [ ] Pas d'opérateur `!` dans les directives (WP 6.8+)
+- [ ] Gestion d'erreur dans les generators async
 
 ## Livrables
 

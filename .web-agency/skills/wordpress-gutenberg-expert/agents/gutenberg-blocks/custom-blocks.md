@@ -17,9 +17,12 @@ Tu es un expert spécialisé dans la création de blocks Gutenberg from scratch.
 
 > **Ce que tu fais** : Création de blocks Gutenberg (structure, block.json, edit/save)
 > **Ce que tu ne fais pas** :
-> - Block patterns → `gutenberg-blocks/patterns`
-> - InnerBlocks/compositions → `gutenberg-blocks/inner-blocks`
-> - Block styles existants → `gutenberg-blocks/block-styles`
+> - Block patterns → `theme/templates-patterns`
+> - Block styles (variantes CSS) → `gutenberg-blocks/block-styles`
+> - Block variations (variantes fonctionnelles) → `gutenberg-blocks/block-variations`
+> - Block Bindings (connexion données) → `gutenberg-blocks/block-bindings`
+> - Data stores / state management → `gutenberg-blocks/data-stores`
+> - Interactivité frontend → `theme/interactivity-api`
 
 ## Ton Domaine
 
@@ -515,6 +518,224 @@ npm run lint:css
 npm run format
 ```
 
+## block.json v3 — Nouveautés WP 6.5+
+
+### viewScriptModule (WP 6.5+)
+
+Utilise les ES modules au lieu de scripts classiques :
+
+```json
+{
+    "viewScriptModule": "file:./view.js"
+}
+```
+
+> **Préférer `viewScriptModule`** à `viewScript` pour l'Interactivity API et les modules ES modernes.
+
+### Block Hooks (WP 6.5+)
+
+Insertion automatique dans d'autres blocks :
+
+```json
+{
+    "blockHooks": {
+        "core/post-content": "after",
+        "core/navigation": "lastChild"
+    }
+}
+```
+
+Voir → `gutenberg-blocks/block-hooks` pour les détails.
+
+### Selectors (WP 6.3+)
+
+Permet de cibler différentes parties du block en CSS via theme.json :
+
+```json
+{
+    "selectors": {
+        "root": ".wp-block-my-plugin-my-block",
+        "border": ".wp-block-my-plugin-my-block > .inner",
+        "typography": {
+            "root": ".wp-block-my-plugin-my-block > .content"
+        }
+    }
+}
+```
+
+## Arbre de Décision : Quel type de block ?
+
+```
+Besoin d'afficher des données custom dans un block natif ?
+├── Oui → Block Bindings API (→ block-bindings)
+│         Pas besoin de custom block !
+└── Non → Le block change seulement visuellement ?
+    ├── Oui → Block Style (→ block-styles)
+    └── Non → Le block est une config prédéfinie d'un block existant ?
+        ├── Oui → Block Variation (→ block-variations)
+        └── Non → CRÉER UN CUSTOM BLOCK (ce agent)
+```
+
+## InnerBlocks — Blocks imbriqués
+
+```js
+import { useBlockProps, useInnerBlocksProps, InnerBlocks } from '@wordpress/block-editor';
+
+export default function Edit() {
+    const blockProps = useBlockProps();
+    const ALLOWED_BLOCKS = [ 'core/heading', 'core/paragraph', 'core/image' ];
+    const TEMPLATE = [
+        [ 'core/heading', { level: 3, placeholder: 'Title' } ],
+        [ 'core/paragraph', { placeholder: 'Content...' } ],
+    ];
+
+    const innerBlocksProps = useInnerBlocksProps(
+        blockProps,
+        {
+            allowedBlocks: ALLOWED_BLOCKS,
+            template: TEMPLATE,
+            templateLock: false, // false | 'all' | 'insert' | 'contentOnly'
+            orientation: 'vertical',
+        }
+    );
+
+    return <div { ...innerBlocksProps } />;
+}
+
+export function save() {
+    const blockProps = useBlockProps.save();
+    return (
+        <div { ...blockProps }>
+            <InnerBlocks.Content />
+        </div>
+    );
+}
+```
+
+### Template Lock Options
+
+| Option | Comportement |
+|--------|-------------|
+| `false` | Pas de restriction |
+| `'all'` | Aucune modification possible (ni ajout, ni suppression, ni déplacement) |
+| `'insert'` | Pas d'ajout/suppression, mais déplacement autorisé |
+| `'contentOnly'` | Seul le contenu est éditable (WP 6.1+) |
+
+## Block Context — Partager des données parent→enfant
+
+### Parent block (fournit le contexte)
+
+```json
+{
+    "name": "my-plugin/parent",
+    "providesContext": {
+        "my-plugin/parentId": "parentId",
+        "my-plugin/color": "selectedColor"
+    }
+}
+```
+
+### Child block (consomme le contexte)
+
+```json
+{
+    "name": "my-plugin/child",
+    "usesContext": [ "my-plugin/parentId", "my-plugin/color" ]
+}
+```
+
+```js
+// edit.js du child
+export default function Edit( { context } ) {
+    const parentId = context['my-plugin/parentId'];
+    const color = context['my-plugin/color'];
+    // ...
+}
+```
+
+```php
+// render.php du child
+$parent_id = $block->context['my-plugin/parentId'] ?? null;
+$color = $block->context['my-plugin/color'] ?? '';
+```
+
+## Accessibilité (a11y)
+
+### Checklist a11y pour blocks custom
+
+- [ ] Tous les éléments interactifs sont atteignables au clavier
+- [ ] `role` et `aria-*` appropriés pour les composants custom
+- [ ] Labels visibles ou `aria-label` pour les contrôles de la sidebar
+- [ ] Contraste suffisant (WCAG 2.1 AA minimum)
+- [ ] Focus visible sur tous les éléments interactifs
+- [ ] Pas d'info transmise uniquement par la couleur
+
+### Exemple avec ARIA
+
+```js
+<div { ...blockProps } role="region" aria-label={ title || __( 'Custom block', 'my-plugin' ) }>
+    <button
+        aria-expanded={ isOpen }
+        aria-controls={ `content-${ clientId }` }
+        onClick={ () => setAttributes( { isOpen: ! isOpen } ) }
+    >
+        { __( 'Toggle', 'my-plugin' ) }
+    </button>
+    <div id={ `content-${ clientId }` } hidden={ ! isOpen }>
+        <InnerBlocks.Content />
+    </div>
+</div>
+```
+
+## Transforms — Convertir entre blocks
+
+```js
+import { createBlock } from '@wordpress/blocks';
+
+registerBlockType( metadata.name, {
+    edit: Edit,
+    save,
+    transforms: {
+        from: [
+            {
+                type: 'block',
+                blocks: [ 'core/paragraph' ],
+                transform: ( { content } ) => {
+                    return createBlock( 'my-plugin/my-block', { content } );
+                },
+            },
+            {
+                type: 'shortcode',
+                tag: 'my_shortcode',
+                transform: ( { named: { title, content } } ) => {
+                    return createBlock( 'my-plugin/my-block', { title, content } );
+                },
+            },
+        ],
+        to: [
+            {
+                type: 'block',
+                blocks: [ 'core/paragraph' ],
+                transform: ( { content } ) => {
+                    return createBlock( 'core/paragraph', { content } );
+                },
+            },
+        ],
+    },
+} );
+```
+
+## Checklist
+
+- [ ] block.json avec `apiVersion: 3` et `$schema`
+- [ ] `edit.js` avec `useBlockProps()`
+- [ ] `save.js` avec `useBlockProps.save()` (ou `render.php` pour dynamic)
+- [ ] Block supports configurés (color, typography, spacing)
+- [ ] Accessibilité vérifiée (clavier, ARIA, contraste)
+- [ ] Transforms définis (from/to) si pertinent
+- [ ] InnerBlocks si le block est un conteneur
+- [ ] Texte internationalisé avec `__()` et text-domain
+
 ## Livrables
 
 | Livrable | Description |
@@ -525,3 +746,4 @@ npm run format
 | Frontend styles | Fichiers SCSS pour le frontend (style.scss) |
 | Plugin PHP | Fichier de registration du block |
 | Build files | Fichiers compilés dans build/ |
+| Transforms | Configuration from/to pour la conversion entre blocks |

@@ -113,6 +113,95 @@ Fichiers JSON dans `styles/` qui redéfinissent les couleurs/typo.
 | **Archive** | archive-{type} → archive → index |
 | **Taxonomy** | taxonomy-{tax}-{term} → taxonomy-{tax} → taxonomy → archive → index |
 
+## Pattern Overrides (WP 6.5+)
+
+Les Pattern Overrides permettent de créer des patterns synchronisés dont certaines zones sont éditables par instance.
+
+### Rendre un attribut overridable
+
+Dans l'éditeur, sélectionner un block dans un pattern synced → activer "Allow overrides" dans les options avancées.
+
+En markup, cela ajoute un `metadata.bindings` :
+
+```html
+<!-- wp:heading {"metadata":{"bindings":{"content":{"source":"core/pattern-overrides"}},"name":"title"}} -->
+<h2 class="wp-block-heading"></h2>
+<!-- /wp:heading -->
+```
+
+### Cas d'usage
+
+| Pattern | Éléments overridables |
+|---------|----------------------|
+| Card produit | Titre, image, prix, lien |
+| Testimonial | Nom, photo, citation |
+| Team member | Nom, rôle, bio, photo |
+| CTA section | Titre, description, URL du bouton |
+
+## Template complète d'exemple
+
+### single.html
+
+```html
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group">
+    <!-- wp:post-featured-image {"isLink":true} /-->
+    <!-- wp:post-title {"level":1} /-->
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+    <div class="wp-block-group">
+        <!-- wp:post-date /-->
+        <!-- wp:post-author {"showAvatar":false} /-->
+        <!-- wp:post-terms {"term":"category"} /-->
+    </div>
+    <!-- /wp:group -->
+    <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+    <!-- wp:post-terms {"term":"post_tag"} /-->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->
+```
+
+## Pattern complète d'exemple
+
+### patterns/hero-banner.php
+
+```php
+<?php
+/**
+ * Title: Hero Banner
+ * Slug: my-theme/hero-banner
+ * Categories: featured, my-theme
+ * Keywords: hero, banner, landing
+ * Block Types: core/post-content
+ * Post Types: page
+ * Viewport Width: 1400
+ */
+?>
+<!-- wp:cover {"dimRatio":50,"overlayColor":"contrast","isUserOverlayColor":true,"minHeight":600,"align":"full","layout":{"type":"constrained"}} -->
+<div class="wp-block-cover alignfull" style="min-height:600px">
+    <span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim"></span>
+    <div class="wp-block-cover__inner-container">
+        <!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"3.5rem"}},"textColor":"base"} -->
+        <h1 class="wp-block-heading has-text-align-center has-base-color has-text-color" style="font-size:3.5rem">Titre principal</h1>
+        <!-- /wp:heading -->
+        <!-- wp:paragraph {"align":"center","textColor":"base","fontSize":"large"} -->
+        <p class="has-text-align-center has-base-color has-text-color has-large-font-size">Sous-titre descriptif du site ou de la page.</p>
+        <!-- /wp:paragraph -->
+        <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+        <div class="wp-block-buttons">
+            <!-- wp:button {"backgroundColor":"primary","textColor":"base"} -->
+            <div class="wp-block-button"><a class="wp-block-button__link has-base-color has-primary-background-color has-text-color has-background wp-element-button">Découvrir</a></div>
+            <!-- /wp:button -->
+        </div>
+        <!-- /wp:buttons -->
+    </div>
+</div>
+<!-- /wp:cover -->
+```
+
 ## Checklist
 
 - [ ] index.html (fallback obligatoire)
@@ -120,6 +209,8 @@ Fichiers JSON dans `styles/` qui redéfinissent les couleurs/typo.
 - [ ] Patterns avec header PHP
 - [ ] Style variations dans `styles/`
 - [ ] Catégories de patterns enregistrées
+- [ ] Pattern overrides configurés pour les patterns réutilisables
+- [ ] Templates complètes testées avec différents contenus
 
 ## Livrables
 
@@ -130,3 +221,4 @@ Fichiers JSON dans `styles/` qui redéfinissent les couleurs/typo.
 | Block patterns | Fichiers PHP de patterns avec headers de métadonnées |
 | Style variations | Fichiers JSON dans styles/ pour variantes visuelles |
 | Pattern categories | Code PHP d'enregistrement des catégories de patterns |
+| Pattern overrides | Patterns synchronisés avec zones éditables |
