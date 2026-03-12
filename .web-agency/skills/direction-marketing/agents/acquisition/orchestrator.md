@@ -1,5 +1,5 @@
 ---
-name: acquisition-orchestrator
+name: dirmkt-acquisition-orchestrator
 description: Coordonne la stratégie d'acquisition
 domain: acquisition
 ---

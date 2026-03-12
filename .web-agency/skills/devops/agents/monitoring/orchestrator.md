@@ -1,5 +1,5 @@
 ---
-name: monitoring-orchestrator
+name: devops-monitoring-orchestrator
 description: Orchestrateur du domaine Monitoring - Prometheus, Grafana, logs
 ---
 

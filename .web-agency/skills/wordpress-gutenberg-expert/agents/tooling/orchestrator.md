@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-tooling-orchestrator
 description: Tooling Orchestrator
 ---
 

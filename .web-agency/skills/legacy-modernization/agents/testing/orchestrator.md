@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: legacy-testing-orchestrator
 description: Orchestrateur du domaine testing - Strategies de test pour legacy
 ---
 

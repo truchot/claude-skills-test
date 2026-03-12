@@ -1,5 +1,5 @@
 ---
-name: security-orchestrator
+name: webdev-testing-security
 description: Orchestrateur pour les tests de sécurité
 workflows:
   - template: wf-audit

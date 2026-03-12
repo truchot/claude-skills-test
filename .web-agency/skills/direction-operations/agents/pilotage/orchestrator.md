@@ -1,5 +1,5 @@
 ---
-name: pilotage-orchestrator
+name: dirops-pilotage-orchestrator
 description: Orchestrateur du domaine Pilotage Portefeuille
 ---
 

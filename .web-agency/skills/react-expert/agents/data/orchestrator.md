@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-data-orchestrator
 description: Routes data fetching and server state questions to specialized agents
 ---
 

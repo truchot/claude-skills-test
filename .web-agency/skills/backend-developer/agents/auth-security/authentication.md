@@ -1,5 +1,5 @@
 ---
-name: authentication
+name: backend-auth-security-authentication
 description: Implémentation de l'authentification - JWT, OAuth2, sessions, MFA
 workflows:
   - id: auth-creation

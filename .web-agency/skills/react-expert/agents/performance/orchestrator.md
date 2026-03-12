@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-performance-orchestrator
 description: Routes performance optimization questions to specialized agents
 ---
 

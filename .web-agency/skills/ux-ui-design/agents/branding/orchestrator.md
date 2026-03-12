@@ -1,5 +1,5 @@
 ---
-name: branding-orchestrator
+name: uxui-branding-orchestrator
 description: Orchestre le domaine branding - direction artistique, identité visuelle et motion design
 version: 1.0.0
 ---

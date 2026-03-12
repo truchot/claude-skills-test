@@ -1,5 +1,5 @@
 ---
-name: avant-projet-orchestrator
+name: pm-avant-projet-orchestrator
 description: Orchestrateur de la phase avant-projet - Brief, estimation et proposition commerciale
 ---
 

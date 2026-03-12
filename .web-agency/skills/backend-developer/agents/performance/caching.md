@@ -1,5 +1,5 @@
 ---
-name: caching
+name: backend-performance-caching
 description: Stratégies de cache - Redis, in-memory, CDN, cache patterns
 workflows:
   - id: cache-setup

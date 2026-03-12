@@ -1,5 +1,5 @@
 ---
-name: unit
+name: testproc-types-unit
 description: Tests unitaires - isolation et mocking
 workflows:
   - id: unit-test-setup

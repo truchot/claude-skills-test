@@ -1,5 +1,5 @@
 ---
-name: performance-orchestrator
+name: backend-performance-orchestrator
 description: Coordonne les agents spécialisés en optimisation des performances backend
 ---
 

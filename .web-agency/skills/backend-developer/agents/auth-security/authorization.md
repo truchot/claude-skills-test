@@ -1,5 +1,5 @@
 ---
-name: authorization
+name: backend-auth-security-authorization
 description: Contrôle d'accès - RBAC, ABAC, permissions et policies
 workflows:
   - id: authz-creation

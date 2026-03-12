@@ -1,5 +1,5 @@
 ---
-name: reporting
+name: secexp-penetration-reporting
 description: Expert rapports de penetration testing - Documentation et remediation
 ---
 

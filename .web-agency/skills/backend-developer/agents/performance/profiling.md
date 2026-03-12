@@ -1,5 +1,5 @@
 ---
-name: profiling
+name: backend-performance-profiling
 description: Profiling, APM, tracing et analyse des performances
 workflows:
   - id: profiling-setup

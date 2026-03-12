@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-gutenberg-blocks-orchestrator
 description: Gutenberg Orchestrator
 ---
 

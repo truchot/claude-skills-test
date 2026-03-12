@@ -1,5 +1,5 @@
 ---
-name: article-writer
+name: cms-redaction-article-writer
 description: Rédige des articles de blog, guides et tutoriels
 version: 1.0.0
 ---

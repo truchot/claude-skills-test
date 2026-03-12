@@ -1,5 +1,5 @@
 ---
-name: strategy-orchestrator
+name: dirtech-strategy-orchestrator
 description: Orchestre le domaine strategy - benchmark, stratégie digitale, recommandations et KPIs
 version: 1.0.0
 ---

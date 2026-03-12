@@ -1,5 +1,5 @@
 ---
-name: profiling
+name: testproc-performance-profiling
 description: Profiling et optimisation
 workflows:
   - id: profiling-analysis

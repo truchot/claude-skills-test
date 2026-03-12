@@ -1,5 +1,5 @@
 ---
-name: mocking
+name: react-testing-mocking
 description: Mocks, spies, and MSW for testing
 workflows:
   - id: mocking-setup

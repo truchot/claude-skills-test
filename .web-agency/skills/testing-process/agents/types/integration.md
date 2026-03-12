@@ -1,5 +1,5 @@
 ---
-name: integration
+name: testproc-types-integration
 description: Tests d'intégration - composants multiples
 workflows:
   - id: integration-test-setup

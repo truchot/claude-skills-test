@@ -1,5 +1,5 @@
 ---
-name: avant-projet-orchestrator
+name: dirtech-avant-projet-orchestrator
 description: Orchestrateur du domaine Avant-Projet Technique - Cadrage et études préliminaires
 ---
 

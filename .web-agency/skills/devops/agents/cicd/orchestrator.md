@@ -1,5 +1,5 @@
 ---
-name: cicd-orchestrator
+name: devops-cicd-orchestrator
 description: Orchestrateur du domaine CI/CD - Pipelines, GitHub Actions, GitLab CI
 ---
 

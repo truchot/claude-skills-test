@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: mktanalytics-testing-orchestrator
 description: Orchestrateur Testing - A/B tests et expérimentation
 domain: testing
 ---

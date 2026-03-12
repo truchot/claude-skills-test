@@ -1,5 +1,5 @@
 ---
-name: performance-orchestrator
+name: testproc-performance-orchestrator
 description: Orchestrateur du domaine Tests de Performance
 ---
 

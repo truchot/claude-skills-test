@@ -1,5 +1,5 @@
 ---
-name: mocking
+name: nextjs-testing-mocking
 description: Mocking API, DB et services
 workflows:
   - id: mocking-setup

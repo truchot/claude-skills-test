@@ -1,5 +1,5 @@
 ---
-name: gitlab-ci
+name: devops-cicd-gitlab-ci
 description: Configuration et optimisation de GitLab CI/CD
 workflows:
   - id: gitlab-setup

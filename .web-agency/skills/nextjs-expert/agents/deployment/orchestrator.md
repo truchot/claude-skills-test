@@ -1,5 +1,5 @@
 ---
-name: deployment-orchestrator
+name: nextjs-deployment-orchestrator
 description: Coordination du déploiement Next.js
 ---
 

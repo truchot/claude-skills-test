@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: backend-testing-orchestrator
 description: Coordonne les agents spécialisés en tests backend
 ---
 

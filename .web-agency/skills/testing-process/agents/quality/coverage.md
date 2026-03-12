@@ -1,5 +1,5 @@
 ---
-name: coverage
+name: testproc-quality-coverage
 description: Couverture de code et analyse
 workflows:
   - id: coverage-audit

@@ -1,5 +1,5 @@
 ---
-name: branding-orchestrator
+name: da-branding-orchestrator
 description: Coordonne la définition de l'identité de marque
 domain: branding
 ---

@@ -1,5 +1,5 @@
 ---
-name: strategy-orchestrator
+name: testproc-strategy-orchestrator
 description: Orchestrateur du domaine Stratégie de Tests
 ---
 

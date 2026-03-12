@@ -1,5 +1,5 @@
 ---
-name: validation
+name: secexp-secure-coding-validation
 description: Expert validation et sanitization des entrees - Protection contre injections
 ---
 

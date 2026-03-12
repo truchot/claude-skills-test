@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-theme-orchestrator
 description: Theme Orchestrator
 ---
 

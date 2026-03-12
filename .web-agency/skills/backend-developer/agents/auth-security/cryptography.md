@@ -1,5 +1,5 @@
 ---
-name: cryptography
+name: backend-auth-security-cryptography
 description: Chiffrement, hashing, gestion des secrets et bonnes pratiques crypto
 workflows:
   - id: crypto-implementation

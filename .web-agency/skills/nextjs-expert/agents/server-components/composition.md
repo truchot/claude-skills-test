@@ -1,5 +1,5 @@
 ---
-name: composition
+name: nextjs-server-components-composition
 description: Patterns de composition Server/Client Components
 workflows:
   - id: composition-patterns

@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-testing-orchestrator
 description: Routes testing questions to specialized agents
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-hooks-orchestrator
 description: Routes hooks domain questions to specialized agents
 ---
 

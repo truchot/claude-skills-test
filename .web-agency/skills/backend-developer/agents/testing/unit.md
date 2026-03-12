@@ -1,5 +1,5 @@
 ---
-name: unit
+name: backend-testing-unit
 description: Tests unitaires, mocks, stubs, spies et isolation
 workflows:
   - id: unit-test-setup

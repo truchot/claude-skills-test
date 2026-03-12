@@ -1,5 +1,5 @@
 ---
-name: budget-allocation
+name: dirmkt-acquisition-budget-allocation
 description: Allocation et répartition du budget par canal
 domain: acquisition
 ---

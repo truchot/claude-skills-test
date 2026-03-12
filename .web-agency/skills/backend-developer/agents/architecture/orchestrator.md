@@ -1,5 +1,5 @@
 ---
-name: architecture-orchestrator
+name: backend-architecture-orchestrator
 description: Coordonne les agents spécialisés en architecture logicielle backend
 ---
 

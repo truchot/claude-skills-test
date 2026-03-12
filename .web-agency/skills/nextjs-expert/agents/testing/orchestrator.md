@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: nextjs-testing-orchestrator
 description: Coordination des tests Next.js
 ---
 

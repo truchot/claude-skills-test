@@ -1,5 +1,5 @@
 ---
-name: budget-allocation
+name: mktops-campagnes-budget-allocation
 description: Allocation et optimisation du budget marketing par canal
 workflows:
   - id: budget-allocation-creation

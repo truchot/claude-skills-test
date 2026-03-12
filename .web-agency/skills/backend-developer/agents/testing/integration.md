@@ -1,5 +1,5 @@
 ---
-name: integration
+name: backend-testing-integration
 description: Tests d'intégration, test database, containers
 workflows:
   - id: integration-setup

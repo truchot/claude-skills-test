@@ -1,5 +1,5 @@
 ---
-name: code-review-orchestrator
+name: leaddev-code-review-orchestrator
 description: Coordination de la revue de code et de l'assurance qualité quotidienne
 ---
 

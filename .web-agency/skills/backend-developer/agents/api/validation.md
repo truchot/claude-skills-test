@@ -1,5 +1,5 @@
 ---
-name: validation
+name: backend-api-validation
 description: Validation des payloads, paramètres et données entrantes dans les APIs
 workflows:
   - id: validation-setup

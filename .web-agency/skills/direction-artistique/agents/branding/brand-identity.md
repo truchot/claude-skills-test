@@ -1,5 +1,5 @@
 ---
-name: brand-identity
+name: da-branding-brand-identity
 description: Définition de l'identité de marque
 domain: branding
 ---

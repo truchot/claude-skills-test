@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-design-orchestrator
 description: Design Orchestrator
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: code-review-orchestrator
+name: tm-collaboration-code-review-orchestrator
 description: Assignation optimale des reviewers par expertise, charge et objectifs de montée en compétence
 workflows:
   - template: wf-audit
