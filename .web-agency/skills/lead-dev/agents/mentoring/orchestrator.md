@@ -58,6 +58,25 @@ PRINCIPES :
 ```
 
 
+## Red Flags
+
+| Signal | Seuil | Action |
+|--------|-------|--------|
+| Onboarding > 2 semaines | Nouveau dev pas autonome | Revoir le programme d'intégration |
+| Même erreur après feedback | 3+ répétitions | Changer d'approche pédagogique |
+| Dev démotivé ou isolé | Signal comportemental | Proposer pair programming |
+| Écart de niveau trop grand | Junior sur tâche senior | Réassigner via task-delegation |
+
+## Escalades
+
+| Situation | Cible | Quand |
+|-----------|-------|-------|
+| Besoin formation structurée | `direction-technique/communication` | Au-delà du mentoring informel |
+| Gestion carrière / RH | `team-management/career` | Évaluation, progression, 1:1 |
+| Compétence manquante équipe | `team-management/skills-tracking` | Gap critique non comblable |
+| Onboarding process à revoir | `team-management/onboarding` | Process d'intégration structurel |
+| Problème performance humaine | `team-management/performance` | Sous-performance persistante |
+
 ## Livrables
 
 | Livrable | Description |

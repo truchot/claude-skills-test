@@ -77,6 +77,24 @@ Besoin de delivery ?
 ```
 
 
+## Red Flags
+
+| Signal | Seuil | Action |
+|--------|-------|--------|
+| Release retardée | > 2 jours de retard | Revoir le scope ou escalader |
+| Hotfix en production | > 2 par semaine | Analyser les root causes |
+| Rollback nécessaire | Tout rollback | Post-mortem obligatoire |
+
+## Escalades
+
+| Situation | Cible | Quand |
+|-----------|-------|-------|
+| Stratégie déploiement à revoir | `direction-technique/infrastructure` | Blue-green, canary, politique |
+| Configuration CI/CD bloquée | `devops/cicd` | Pipeline cassée, secrets manquants |
+| Incident post-deploy | `incident-management/detection` | Erreurs 5xx, panne, dégradation |
+| Besoin monitoring avancé | `devops/monitoring` | Alertes, Grafana, observabilité |
+| Décision go/no-go stratégique | `direction-technique` | Impact business majeur |
+
 ## Livrables
 
 | Livrable | Description |
