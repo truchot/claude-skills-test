@@ -39,13 +39,13 @@ flowchart TB
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [client-intake](.web-agency/skills/client-intake/) | Réception et qualification des demandes | 23 | 🟢 Actif |
+| [client-intake](.web-agency/skills/client-intake/) | Réception et qualification des demandes | 29 | 🟢 Actif |
 
 ### Niveau 1 : Orchestration
 
 | Composant | Description | Agents | Statut |
 |-----------|-------------|--------|--------|
-| [task-orchestrator](.web-agency/orchestration-framework/task-orchestrator/) | Gestion des tâches et priorisation | 16 | 🟢 Actif |
+| [task-orchestrator](.web-agency/orchestration-framework/task-orchestrator/) | Gestion des tâches et priorisation | 20 | 🟢 Actif |
 | [orchestration-framework](.web-agency/orchestration-framework/) | Routing, workflows, escalade | - | 🟢 Actif |
 
 > **Note** : Ces composants ne sont pas des skills métier mais la couche d'orchestration qui coordonne les skills.
@@ -54,48 +54,55 @@ flowchart TB
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [direction-technique](.web-agency/skills/direction-technique/) | Stratégie technique, architecture | 52 | 🟢 Actif |
-| [direction-marketing](.web-agency/skills/direction-marketing/) | Stratégie marketing, positionnement | 25 | 🟢 Actif |
-| [direction-artistique](.web-agency/skills/direction-artistique/) | Stratégie design, branding | 25 | 🟢 Actif |
+| [direction-technique](.web-agency/skills/direction-technique/) | Stratégie technique, architecture | 61 | 🟢 Actif |
+| [direction-marketing](.web-agency/skills/direction-marketing/) | Stratégie marketing, positionnement | 29 | 🟢 Actif |
+| [direction-artistique](.web-agency/skills/direction-artistique/) | Stratégie design, branding | 26 | 🟢 Actif |
+| [direction-commerciale](.web-agency/skills/direction-commerciale/) | Stratégie commerciale, business dev | 29 | 🟢 Actif |
+| [direction-operations](.web-agency/skills/direction-operations/) | Stratégie opérationnelle | 29 | 🟢 Actif |
 
 ### Niveau 3 : Opérations
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [project-management](.web-agency/skills/project-management/) | Gestion de projet & relation client | 24 | 🟢 Actif |
-| [lead-dev](.web-agency/skills/lead-dev/) | Coordination technique | 27 | 🟢 Actif |
-| [web-dev-process](.web-agency/skills/web-dev-process/) | Process de développement (7 phases) | 61 | 🟢 Actif |
-| [testing-process](.web-agency/skills/testing-process/) | Stratégie et process de test | 25 | 🟢 Actif |
+| [project-management](.web-agency/skills/project-management/) | Gestion de projet & relation client | 39 | 🟢 Actif |
+| [lead-dev](.web-agency/skills/lead-dev/) | Coordination technique | 29 | 🟢 Actif |
+| [web-dev-process](.web-agency/skills/web-dev-process/) | Process de développement (7 phases) | 74 | 🟢 Actif |
+| [testing-process](.web-agency/skills/testing-process/) | Stratégie et process de test | 27 | 🟢 Actif |
 
 ### Niveau 4 : Implémentation
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [frontend-developer](.web-agency/skills/frontend-developer/) | Développement front-end moderne | 33 | 🟢 Actif |
+| [frontend-developer](.web-agency/skills/frontend-developer/) | Développement front-end moderne | 34 | 🟢 Actif |
 | [backend-developer](.web-agency/skills/backend-developer/) | Backend - APIs, databases, architecture | 38 | 🟢 Actif |
-| [devops](.web-agency/skills/devops/) | CI/CD, containers, infrastructure | 30 | 🟢 Actif |
-| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | WordPress & Gutenberg | 42 | 🟢 Actif |
-| [react-expert](.web-agency/skills/react-expert/) | Expert React | 28 | 🟢 Actif |
-| [nextjs-expert](.web-agency/skills/nextjs-expert/) | Expert Next.js | 35 | 🟢 Actif |
-| [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design | 21 | 🟢 Actif |
+| [devops](.web-agency/skills/devops/) | CI/CD, containers, infrastructure | 32 | 🟢 Actif |
+| [wordpress-gutenberg-expert](.web-agency/skills/wordpress-gutenberg-expert/) | WordPress & Gutenberg | 58 | 🟢 Actif |
+| [react-expert](.web-agency/skills/react-expert/) | Expert React | 29 | 🟢 Actif |
+| [nextjs-expert](.web-agency/skills/nextjs-expert/) | Expert Next.js | 37 | 🟢 Actif |
+| [design-system-foundations](.web-agency/skills/design-system-foundations/) | Design System - Atomic Design | 30 | 🟢 Actif |
 | [ddd](.web-agency/skills/ddd/) | Domain-Driven Design | 34 | 🟢 Actif |
-| [security-expert](.web-agency/skills/security-expert/) | Sécurité applicative - OWASP, AppSec | 24 | 🟢 Actif |
-| [ai-integration](.web-agency/skills/ai-integration/) | Intégration IA/ML - LLMs, RAG, vectors | 40 | 🟢 Actif |
-| [legacy-modernization](.web-agency/skills/legacy-modernization/) | Modernisation legacy - Strangler Fig | 30 | 🟢 Actif |
-| [marketing](.web-agency/skills/marketing/) | Marketing digital complet | 115 | 🟢 Actif |
-| [content-management](.web-agency/skills/content-management/) | Gestion de contenu éditorial | 17 | 🟢 Actif |
+| [security-expert](.web-agency/skills/security-expert/) | Sécurité applicative - OWASP, AppSec | 26 | 🟢 Actif |
+| [ai-integration](.web-agency/skills/ai-integration/) | Intégration IA/ML - LLMs, RAG, vectors | 14 | 🟢 Actif |
+| [legacy-modernization](.web-agency/skills/legacy-modernization/) | Modernisation legacy - Strangler Fig | 10 | 🟢 Actif |
+| [seo-expert](.web-agency/skills/seo-expert/) | SEO technique et stratégique | 48 | 🟢 Actif |
+| [content-marketing](.web-agency/skills/content-marketing/) | Marketing de contenu | 13 | 🟢 Actif |
+| [marketing-analytics](.web-agency/skills/marketing-analytics/) | Analytics et data marketing | 32 | 🟢 Actif |
+| [marketing-ops](.web-agency/skills/marketing-ops/) | Opérations marketing, automation | 18 | 🟢 Actif |
+| [paid-media](.web-agency/skills/paid-media/) | Publicité payante, acquisition | 25 | 🟢 Actif |
+| [content-management](.web-agency/skills/content-management/) | Gestion de contenu éditorial | 25 | 🟢 Actif |
 
 ### Niveau 4 : Fonctions Support
 
 | Skill | Description | Agents | Statut |
 |-------|-------------|--------|--------|
-| [ux-ui-design](.web-agency/skills/ux-ui-design/) | Design UX/UI | 22 | 🟢 Actif |
-| [legal-compliance](.web-agency/skills/legal-compliance/) | Juridique et conformité | 16 | 🟢 Actif |
-| [support-client](.web-agency/skills/support-client/) | Support client | 16 | 🟢 Actif |
-| [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 17 | 🟢 Actif |
-| [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 17 | 🟢 Actif |
+| [ux-ui-design](.web-agency/skills/ux-ui-design/) | Design UX/UI | 28 | 🟢 Actif |
+| [legal-compliance](.web-agency/skills/legal-compliance/) | Juridique et conformité | 17 | 🟢 Actif |
+| [support-client](.web-agency/skills/support-client/) | Support client | 17 | 🟢 Actif |
+| [commercial-crm](.web-agency/skills/commercial-crm/) | Commercial et CRM | 19 | 🟢 Actif |
+| [finance-analytics](.web-agency/skills/finance-analytics/) | Finance et analytics | 18 | 🟢 Actif |
+| [customer-success](.web-agency/skills/customer-success/) | Suivi client et satisfaction | 27 | 🟢 Actif |
 
-**Total : 26 skills métier (~965 agents) + orchestration-framework (16 agents task-orchestrator)**
+**Total : 33 skills métier (1 001 agents) + orchestration-framework (20 agents task-orchestrator) = 1 021 agents**
 
 ## Architecture
 
@@ -103,12 +110,14 @@ flowchart TB
 .
 ├── .web-agency/                   # Framework agnostique (instructions métier)
 │   ├── orchestration-framework/   # Règles de routage et workflows
-│   │   └── task-orchestrator/     # Niveau 1: Orchestration (16 agents)
-│   ├── skills/                    # 26 skills métier, ~965 agents
+│   │   └── task-orchestrator/     # Niveau 1: Orchestration (20 agents)
+│   ├── skills/                    # 33 skills métier, 1 001 agents
 │   │   ├── client-intake/         # Niveau 0: Entrée
 │   │   ├── direction-technique/   # Niveau 2: Stratégie
 │   │   ├── direction-marketing/   # Niveau 2: Stratégie
 │   │   ├── direction-artistique/  # Niveau 2: Stratégie
+│   │   ├── direction-commerciale/ # Niveau 2: Stratégie
+│   │   ├── direction-operations/  # Niveau 2: Stratégie
 │   │   ├── project-management/    # Niveau 3: Opérations
 │   │   ├── lead-dev/
 │   │   ├── web-dev-process/
@@ -124,13 +133,18 @@ flowchart TB
 │   │   ├── security-expert/
 │   │   ├── ai-integration/
 │   │   ├── legacy-modernization/
-│   │   ├── marketing/
+│   │   ├── seo-expert/
+│   │   ├── content-marketing/
+│   │   ├── marketing-analytics/
+│   │   ├── marketing-ops/
+│   │   ├── paid-media/
 │   │   ├── content-management/
 │   │   ├── ux-ui-design/          # Niveau 4: Support
 │   │   ├── legal-compliance/
 │   │   ├── support-client/
 │   │   ├── commercial-crm/
-│   │   └── finance-analytics/
+│   │   ├── finance-analytics/
+│   │   └── customer-success/
 │   └── learnings/                 # Learning loop system
 │
 └── .claude/                       # Interface Claude (commandes uniquement)
@@ -141,44 +155,51 @@ flowchart TB
 
 ```
 NIVEAU 0: ENTRÉE
-└── client-intake (23)              # Réception des demandes
+└── client-intake (29)              # Réception des demandes
 
 NIVEAU 1: ORCHESTRATION
-└── task-orchestrator (16)          # Gestion des tâches
+└── task-orchestrator (20)          # Gestion des tâches
     (Règles dans .web-agency/orchestration-framework/)
 
 NIVEAU 2: STRATÉGIE (POURQUOI)
-├── direction-technique (52)        # Stratégie technique
-├── direction-marketing (25)        # Stratégie marketing
-└── direction-artistique (25)       # Stratégie design
+├── direction-technique (61)        # Stratégie technique
+├── direction-marketing (29)        # Stratégie marketing
+├── direction-artistique (26)       # Stratégie design
+├── direction-commerciale (29)      # Stratégie commerciale
+└── direction-operations (29)       # Stratégie opérationnelle
 
 NIVEAU 3: OPÉRATIONS (QUOI)
-├── project-management (24)         # Gestion de projet
-├── lead-dev (27)                   # Coordination technique
-├── web-dev-process (61)            # Process de développement
-└── testing-process (25)            # Process de test
+├── project-management (39)         # Gestion de projet
+├── lead-dev (29)                   # Coordination technique
+├── web-dev-process (74)            # Process de développement
+└── testing-process (27)            # Process de test
 
 NIVEAU 4: IMPLÉMENTATION (COMMENT)
-├── frontend-developer (33)
+├── frontend-developer (34)
 ├── backend-developer (38)
-├── devops (30)
-├── wordpress-gutenberg-expert (42)
-├── react-expert (28)
-├── nextjs-expert (35)
-├── design-system-foundations (21)
+├── devops (32)
+├── wordpress-gutenberg-expert (58)
+├── react-expert (29)
+├── nextjs-expert (37)
+├── design-system-foundations (30)
 ├── ddd (34)
-├── security-expert (24)
-├── ai-integration (40)
-├── legacy-modernization (30)
-├── marketing (115)
-└── content-management (17)
+├── security-expert (26)
+├── ai-integration (14)
+├── legacy-modernization (10)
+├── seo-expert (48)
+├── content-marketing (13)
+├── marketing-analytics (32)
+├── marketing-ops (18)
+├── paid-media (25)
+└── content-management (25)
 
 NIVEAU 4: SUPPORT
-├── ux-ui-design (22)
-├── legal-compliance (16)
-├── support-client (16)
-├── commercial-crm (17)
-└── finance-analytics (17)
+├── ux-ui-design (28)
+├── legal-compliance (17)
+├── support-client (17)
+├── commercial-crm (19)
+├── finance-analytics (18)
+└── customer-success (27)
 ```
 
 ### Workflow type : Nouveau projet
@@ -257,7 +278,7 @@ cd .web-agency/skills/backend-developer/tests && bash run-tests.sh
 
 ## Version
 
-**v4.3.0** - 26 skills métier + orchestration-framework (~965 agents total)
+**v4.4.0** - 33 skills métier + orchestration-framework (1 021 agents total)
 
 Voir [CHANGELOG](.web-agency/orchestration-framework/CHANGELOG.md) pour l'historique complet.
 
