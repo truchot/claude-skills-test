@@ -2,6 +2,8 @@
 
 ## Date : 2026-03-12
 
+> **Sources** : Analyse du repo existant (42 agents, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
+
 ---
 
 ## 1. Cartographie de l'existant
@@ -41,12 +43,14 @@ Le skill existant est **solide et bien structuré** avec 37+ agents répartis en
 | **wp-env** | Environnement Docker officiel pour dev/test | Stable, recommandé | Oui |
 | **@wordpress/scripts** | Build tooling (webpack, babel, lint) | Stable | Oui |
 | **@wordpress/create-block** | Scaffolding de blocks | Stable | Oui |
-| **wp-now** | Alternative légère à wp-env (WASM via WordPress Playground) | Mature | **NON** |
-| **WordPress Playground** | WordPress dans le navigateur via WASM | Mature, stratégique | **NON** |
-| **Studio by WordPress.com** | App desktop locale (remplace Local) | Recommandé | **NON** |
+| **wp-now** | Alternative légère à wp-env (WASM via WordPress Playground) | Mature, successeur: @wp-playground/cli | **NON** |
+| **WordPress Playground** | WordPress dans le navigateur via WASM | Mature, stratégique, Xdebug support (nov 2025) | **NON** |
+| **wp-env Playground runtime** | wp-env sans Docker via Playground WASM (fév 2026) | **Nouveau, game-changer** | **NON** |
+| **Studio by WordPress.com** | App desktop locale avec IA intégrée et sync WordPress.com | Recommandé | **NON** |
 | **Create Block Theme** | Plugin pour exporter/créer des block themes depuis l'éditeur | Officiel, mature | **Partiellement** |
 | **Trellis (Roots)** | Provisioning + déploiement Ansible pour Bedrock | Stable | **NON** |
-| **wp scaffold block** | Scaffold de block via WP-CLI | Stable | Partiellement |
+| **@wordpress/scripts v2** | Discussion pour remplacer Webpack par esbuild | En discussion | Partiellement |
+| **wp scaffold block** | Scaffold de block via WP-CLI (deprecated → create-block) | Deprecated | Partiellement |
 
 ### 2.2 Gutenberg / Full Site Editing
 
@@ -57,14 +61,17 @@ Le skill existant est **solide et bien structuré** avec 37+ agents répartis en
 | **Block Patterns** | Compositions réutilisables | Standard | Oui |
 | **Synced Patterns** | Ex-reusable blocks, synchronisés | Mature | **Partiellement** |
 | **Style Variations** | Palettes alternatives par thème | Mature | Oui |
-| **Block Bindings API** | Connecter blocks à des sources de données custom | **Nouveau, stratégique** | **NON** |
-| **Interactivity API** | Interactivité déclarative côté client | Stable | Oui |
-| **Data Views** | Interface admin moderne (remplace tables WP) | **Nouveau** | **NON** |
+| **Block Bindings API** | Connecter blocks à des sources de données custom (post-meta, post-data, term-data + custom sources) | **Mature en WP 6.9, stratégique** | **NON** |
+| **Interactivity API** | Interactivité déclarative côté client | Stable (deprecation warnings `!` en 6.8) | Oui (à mettre à jour) |
+| **Data Views + DataForm** | Interface admin moderne (remplace tables WP) | **Nouveau, APIs stables** | **NON** |
+| **Commands API** | Palette de commandes Cmd+K dans l'éditeur | Stable | **NON** |
 | **Block Hooks** | Insertion automatique de blocks dans le layout | **Nouveau** | **NON** |
 | **Section Styles** | Styles scopés à une section de page | **Nouveau** | **NON** |
 | **Font Library** | Gestion centralisée des polices | Stable | **Partiellement** |
-| **Pattern Overrides** | Surcharges de contenu dans synced patterns | **Nouveau** | **NON** |
+| **Pattern Overrides** | Surcharges de contenu dans synced patterns (headings, paragraphs, images, buttons) | **Stable, très puissant** | **NON** |
 | **Custom Fields in Editor** | Intégration native via Block Bindings | Stratégique | **NON** |
+| **WordPress Telex** | Génération de blocks par IA en langage naturel | **Annoncé WordCamp US 2025** | **NON** |
+| **WP 6.9 on-demand CSS** | CSS à la demande pour classic themes (-30-65%) | Stable | **NON** |
 
 ### 2.3 Workflows automatisés & Déploiement
 
@@ -589,3 +596,55 @@ Le skill `wordpress-gutenberg-expert` existant est une **base solide** avec une 
 4. **Le processus de migration/refonte** — le cas d'usage le plus fréquent en agence
 
 En ajoutant 13 nouveaux agents et 3 workflows orchestrateurs, le skill deviendrait un outil véritablement complet pour piloter des projets WordPress de A à Z, de la découverte au go-live.
+
+---
+
+## 10. Contexte marché et données clés (2025-2026)
+
+### 10.1 Adoption FSE
+
+- **+145% d'adoption** des block themes en 2025
+- **500+ block themes** dans le répertoire WordPress (vs 78 début 2023)
+- **75% des nouveaux thèmes** utilisent les capacités FSE
+
+### 10.2 Écosystème d'outils convergent vers Playground
+
+```
+                    WordPress Playground (WASM)
+                    /        |         \
+                   /         |          \
+              wp-now    wp-env runtime    Studio
+              (CLI)     (sans Docker)     (GUI)
+```
+
+L'écosystème converge vers **Playground comme fondation technique** :
+- **wp-now** (et son successeur `@wp-playground/cli`) pour le dev ultra-rapide
+- **wp-env** intègre désormais Playground comme runtime alternatif (fév 2026)
+- **Studio** est construit sur Playground avec GUI + IA intégrée
+
+**Décision architecturale clé** : SQLite (Playground, rapide, portable) vs MySQL (Docker wp-env, parité production)
+
+### 10.3 Block Libraries les plus performantes
+
+| Plugin | Installs | Approche | Performance |
+|--------|----------|----------|-------------|
+| **Spectra** | 1M+ | Feature-rich, motion effects | Bonne |
+| **Kadence Blocks** | 400K+ | All-in-one, WCAG 2.2 | Excellente |
+| **GenerateBlocks** | 200K+ | Minimaliste (6 blocs), ultra-léger | Excellente |
+| **GreenShift** | 50K+ | Flexbox/Grid CSS natif, animations | Bonne |
+
+**Recommandation** : Gutenberg natif + Kadence ou GenerateBlocks est le stack recommandé pour les nouveaux projets (vs page builders).
+
+### 10.4 Page Builders vs Gutenberg en 2026
+
+| Scénario | Recommandation |
+|----------|---------------|
+| Sites content-focused, blogs | **Gutenberg natif** |
+| Performance-critical | **Gutenberg + Kadence/GenerateBlocks** |
+| Pages marketing complexes | Elementor (mais en perte de terrain) |
+| Agence / handoff client | **Gutenberg** (pérennité) ou Beaver Builder |
+| Nouveaux projets long terme | **Gutenberg** (les page builders ajoutent une couche d'abstraction = refonte pas refactoring) |
+
+### 10.5 WordPress Telex (à surveiller)
+
+Annoncé à WordCamp US 2025, **WordPress Telex** est une initiative pour la génération de blocks en langage naturel. Cela pourrait transformer la création de contenu et de patterns. À intégrer dans nos workflows quand l'API sera disponible.
