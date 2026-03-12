@@ -2,7 +2,7 @@
 
 ## Date : 2026-03-12
 
-> **Sources** : Analyse du repo existant (42 agents, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
+> **Sources** : Analyse du repo existant (37 agents dans le skill wordpress-gutenberg-expert, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
 
 ---
 
