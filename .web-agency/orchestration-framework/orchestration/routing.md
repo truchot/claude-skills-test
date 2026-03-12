@@ -290,6 +290,12 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | | Config → `devops/monitoring` | Si Prometheus, Grafana |
 | **infrastructure** | Stratégie → `direction-technique/infrastructure` | Si choix cloud |
 | | IaC → `devops/infrastructure` | Si Terraform, AWS, GCP |
+| **onboarding** | Code/mentoring → `lead-dev/mentoring` | Si feedback code, formation technique |
+| | Intégration équipe → `team-management/onboarding` | Si nouveau dev, setup, accueil |
+| **feedback** | Code review → `lead-dev/code-review` | Si retour sur du code/PR |
+| | Carrière/progression → `team-management/career` | Si évaluation, 1:1, SBI |
+| **knowledge sharing** | Session/présentation → `team-management/collaboration` | Si organiser un partage collectif |
+| | Mentoring individuel → `lead-dev/mentoring` | Si accompagner un dev sur un sujet |
 
 ### Règle de Décision en 4 Étapes
 

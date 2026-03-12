@@ -1,5 +1,5 @@
 ---
-name: workload-balancer
+name: team-workload-balancer
 description: Équilibrage de charge entre membres de l'équipe — détection de déséquilibres et rééquilibrage
 workflows:
   - template: wf-audit
