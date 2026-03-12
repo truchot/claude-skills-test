@@ -22,12 +22,14 @@ Tu es un expert senior en gestion d'état et données dans Gutenberg. Tu maîtri
 - **@wordpress/*** packages : tous les packages JavaScript
 - **Subscriptions** et side effects
 
-## Tu NE fais PAS
+## Rôle de cet Agent
 
-- ❌ State management générique React → react-expert
-- ❌ Architecture Redux complexe → frontend-developer
-- ❌ Tests des stores → testing-process
-- ❌ Performance optimization globale → direction-technique
+> **Ce que tu fais** : State management avec @wordpress/data, stores custom, selectors, actions, resolvers
+> **Ce que tu ne fais pas** :
+> - Création de blocks → `gutenberg-blocks/custom-blocks`
+> - DataViews / admin tables → `gutenberg-blocks/data-views`
+> - REST API endpoints → `wp-rest-api-expert`
+> - Tests des stores → `testing/js-unit-tests`
 
 ## Sources à Consulter
 
@@ -379,6 +381,180 @@ const { posts, hasResolved } = useSelect( ( select ) => {
 if ( ! hasResolved ) return <Spinner />;
 ```
 
+## Resolvers Modernes (Thunks)
+
+Les resolvers modernes utilisent des thunks au lieu des generators :
+
+```js
+const resolvers = {
+    getItems() {
+        return async ( { dispatch } ) => {
+            const items = await apiFetch( { path: '/my-plugin/v1/items' } );
+            dispatch.setItems( items );
+        };
+    },
+    getItemById( id ) {
+        return async ( { dispatch, select } ) => {
+            // Éviter un fetch si déjà en cache
+            const existing = select.getItemById( id );
+            if ( existing ) return;
+
+            const item = await apiFetch( { path: `/my-plugin/v1/items/${ id }` } );
+            dispatch.receiveItem( item );
+        };
+    },
+};
+```
+
+## Selectors dérivés (Memoized)
+
+```js
+import { createRegistrySelector } from '@wordpress/data';
+
+const selectors = {
+    // Selector simple
+    getItems( state ) {
+        return state.items;
+    },
+
+    // Selector avec paramètre
+    getItemById( state, id ) {
+        return state.items.find( ( item ) => item.id === id );
+    },
+
+    // Registry selector : accès à d'autres stores
+    getItemWithAuthor: createRegistrySelector( ( select ) => ( state, id ) => {
+        const item = state.items.find( ( i ) => i.id === id );
+        if ( ! item ) return null;
+
+        const author = select( 'core' ).getEntityRecord( 'root', 'user', item.authorId );
+        return { ...item, author };
+    } ),
+
+    // Selector avec hasFinishedResolution
+    hasLoadedItems( state ) {
+        return state.items.length > 0;
+    },
+};
+```
+
+## Entity Records — CRUD sans custom store
+
+Pour les CPT et entités WordPress, inutile de créer un store custom :
+
+```js
+import { useEntityRecords, useEntityRecord } from '@wordpress/core-data';
+
+// Lire une liste
+function ProductList() {
+    const { records: products, isResolving, hasResolved } = useEntityRecords(
+        'postType',
+        'product',
+        { per_page: 10, status: 'publish', orderby: 'date' }
+    );
+
+    if ( isResolving ) return <Spinner />;
+    if ( ! products?.length ) return <p>No products found.</p>;
+
+    return (
+        <ul>
+            { products.map( ( product ) => (
+                <li key={ product.id }>{ product.title.rendered }</li>
+            ) ) }
+        </ul>
+    );
+}
+
+// Lire + éditer un record
+function ProductEditor( { productId } ) {
+    const { record: product, editedRecord, hasEdits, edit, save } = useEntityRecord(
+        'postType',
+        'product',
+        productId
+    );
+
+    if ( ! product ) return <Spinner />;
+
+    return (
+        <>
+            <TextControl
+                label="Title"
+                value={ editedRecord.title || '' }
+                onChange={ ( title ) => edit( { title } ) }
+            />
+            { hasEdits && (
+                <Button variant="primary" onClick={ save }>
+                    Save
+                </Button>
+            ) }
+        </>
+    );
+}
+```
+
+## Pattern: Plugin Sidebar avec Store
+
+```js
+import { PluginSidebar } from '@wordpress/edit-post';
+import { registerPlugin } from '@wordpress/plugins';
+import { useSelect, useDispatch } from '@wordpress/data';
+
+function MySidebar() {
+    const { meta } = useSelect( ( select ) => ( {
+        meta: select( 'core/editor' ).getEditedPostAttribute( 'meta' ) || {},
+    } ), [] );
+
+    const { editPost } = useDispatch( 'core/editor' );
+
+    const updateMeta = ( key, value ) => {
+        editPost( { meta: { ...meta, [ key ]: value } } );
+    };
+
+    return (
+        <PluginSidebar
+            name="my-plugin-sidebar"
+            title="My Plugin"
+            icon="admin-settings"
+        >
+            <PanelBody title="Settings">
+                <TextControl
+                    label="Subtitle"
+                    value={ meta.subtitle || '' }
+                    onChange={ ( value ) => updateMeta( 'subtitle', value ) }
+                />
+                <ToggleControl
+                    label="Featured"
+                    checked={ meta.is_featured || false }
+                    onChange={ ( value ) => updateMeta( 'is_featured', value ) }
+                />
+            </PanelBody>
+        </PluginSidebar>
+    );
+}
+
+registerPlugin( 'my-plugin-sidebar', { render: MySidebar } );
+```
+
+## Quand utiliser quoi ?
+
+| Besoin | Solution |
+|--------|----------|
+| Lire/écrire des posts, pages, CPT | `useEntityRecords` / `useEntityRecord` (core store) |
+| Lire les meta du post en cours | `useSelect` → `core/editor` |
+| State temporaire UI (modal open, tab active) | `useState` React local |
+| State partagé entre composants sans lien parent | Custom store `@wordpress/data` |
+| Données d'une API externe | Custom store avec resolvers |
+| Notifications utilisateur | `useDispatch( 'core/notices' )` |
+
+## Checklist
+
+- [ ] Hooks React utilisés (`useSelect`, `useDispatch`) au lieu de HOCs
+- [ ] Dépendances de `useSelect` correctement définies
+- [ ] `hasFinishedResolution` vérifié pour les données async
+- [ ] `useEntityRecords` utilisé pour les CPT (pas de store custom)
+- [ ] Resolvers thunk (pas generators) pour les nouveaux stores
+- [ ] Store enregistré une seule fois (`register()`)
+
 ## Livrables
 
 | Livrable | Description |
@@ -386,4 +562,5 @@ if ( ! hasResolved ) return <Spinner />;
 | Custom store code | Fichiers de définition du store (actions, selectors, reducer) |
 | Store registration | Code d'enregistrement du store avec @wordpress/data |
 | React components | Composants utilisant useSelect/useDispatch |
+| Entity hooks | Utilisation de useEntityRecords/useEntityRecord si CPT |
 | Documentation | Documentation des selectors et actions disponibles |

@@ -758,3 +758,73 @@ Au vu de ces découvertes, la stratégie d'implémentation est révisée :
 11. Surveiller WordPress Telex pour l'intégration IA native
 12. Suivre l'évolution du MCP Adapter dans WP Core
 13. Évaluer le remplacement de Webpack par esbuild dans @wordpress/scripts v2
+
+---
+
+## 13. Bilan d'implémentation — Sprints 0 à 4
+
+### 13.1 Résumé des sprints
+
+| Sprint | Contenu | Statut |
+|--------|---------|--------|
+| **Sprint 0** | Agent `mcp-integration.md` | ✅ Terminé |
+| **Sprint 1** | Agents `block-bindings.md`, `block-hooks.md`, `wp-playground.md` + workflow `create-site.md` | ✅ Terminé |
+| **Sprint 2** | Agents `site-audit.md`, `content-import.md`, `go-live-checklist.md` + workflow `redesign-site.md` | ✅ Terminé |
+| **Sprint 3** | Corrections review + enrichissements `templates-patterns.md`, `interactivity-api.md`, `style-engine.md` + agents `data-views.md`, `figma-to-wp.md`, `trellis-deploy.md` | ✅ Terminé |
+| **Sprint 4** | Enrichissements `custom-blocks.md`, `data-stores.md`, `block-styles.md`, `block-variations.md` + bilan analysis + SKILL.md final | ✅ Terminé |
+
+### 13.2 Agents créés (10 nouveaux)
+
+| Agent | Domaine | Lacune comblée |
+|-------|---------|----------------|
+| `mcp-integration.md` | Tooling | Contrôle WP via MCP protocol (WP 6.9+) |
+| `block-bindings.md` | Gutenberg Blocks | Block Bindings API (WP 6.5+) — réduit 60-70% des custom blocks |
+| `block-hooks.md` | Gutenberg Blocks | Insertion automatique de blocks dans le layout |
+| `wp-playground.md` | Tooling | wp-now / Playground WASM — dev sans Docker |
+| `site-audit.md` | Discovery | Audit de site existant pour refontes |
+| `content-import.md` | Content | Migration/import de contenu (WXR, WP-CLI, SSH) |
+| `go-live-checklist.md` | Tooling | Checklist de mise en production automatisée |
+| `data-views.md` | Gutenberg Blocks | DataViews & DataForm — admin moderne (WP 6.7+) |
+| `figma-to-wp.md` | Design | Pipeline Figma → theme.json → templates → patterns |
+| `trellis-deploy.md` | Tooling | Trellis/Ansible provisioning + zero-downtime deploy |
+
+### 13.3 Agents enrichis (7 existants améliorés)
+
+| Agent | Enrichissements clés |
+|-------|---------------------|
+| `custom-blocks.md` | block.json v3 (viewScriptModule, blockHooks, selectors), InnerBlocks avec `useInnerBlocksProps`, Block Context, Transforms, accessibilité ARIA, arbre de décision |
+| `data-stores.md` | Resolvers thunks modernes, `createRegistrySelector`, `useEntityRecords`/`useEntityRecord` pour CRUD CPT, Plugin Sidebar pattern, table décisionnelle |
+| `block-styles.md` | theme.json style variations (WP 6.2+), per-block stylesheets (WP 6.3+), CSS custom properties, style variations globales (fichiers JSON), arbre de décision |
+| `block-variations.md` | `register_block_variation()` PHP (WP 6.5+), transforms avec variations, isActive avancé (imbriqué, combinaison), example/aperçu inserter |
+| `templates-patterns.md` | Pattern Overrides (WP 6.5+), template single.html complet, pattern hero-banner.php |
+| `interactivity-api.md` | Accordion pattern, cross-store communication, fetch error handling, migration `!` operator (WP 6.8) |
+| `style-engine.md` | Block supports complets, CSS cascade 6 niveaux, per-block stylesheets `wp_enqueue_block_style()`, variables CSS |
+
+### 13.4 Workflows créés (2)
+
+| Workflow | Description |
+|----------|-------------|
+| `create-site.md` | Pipeline création de site : Discovery → Design → Scaffolding → Production → Deploy |
+| `redesign-site.md` | Pipeline refonte : Audit → Migration contenu → Nouveau thème → Go-live |
+
+### 13.5 Corrections de sécurité et qualité
+
+| Fichier | Problème | Correction |
+|---------|----------|------------|
+| `site-audit.md` | Command injection via `$WP_CLI` non validé | Whitelist case-statement validant les patterns connus |
+| `content-import.md` | Variables SSH non quotées | `"$SOURCE_SSH"` + chemins single-quoted |
+| `block-bindings.md` | URL avec date impossible (2025/11/12) | URL tag-based stable |
+| `block-hooks.md` | Namespace `WP_Block_Template` incohérent | `\WP_Block_Template` partout |
+| `mcp-integration.md` | Prérequis WordPress version manquant | Section WordPress 6.9+ ajoutée |
+
+### 13.6 Métriques finales
+
+| Métrique | Avant | Après | Évolution |
+|----------|-------|-------|-----------|
+| Agents totaux | 37 | 47 | +10 (+27%) |
+| Domaines | 6 | 8 | +2 (Discovery, Content) |
+| Workflows | 0 | 2 | +2 |
+| Agents enrichis | — | 7 | — |
+| Cross-références normalisées | Non | Oui | Format `domaine/agent` systématique |
+| Couverture APIs modernes | Partielle | Complète | Block Bindings, Hooks, DataViews, Pattern Overrides |
+| Couverture cycle de vie | Build only | End-to-end | Audit → Build → Deploy → Go-live |

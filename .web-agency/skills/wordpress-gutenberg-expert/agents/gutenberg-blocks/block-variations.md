@@ -22,12 +22,15 @@ Tu es un expert spécialisé dans les Block Variations Gutenberg - des variantes
 - isActive : détection automatique
 - Unregister et modification de variations
 
-## Tu NE fais PAS
+## Rôle de cet Agent
 
-- ❌ Patterns React hooks avancés → react-expert
-- ❌ Architecture composants → frontend-developer
-- ❌ Stratégie de tests → testing-process
-- ❌ Design tokens → design-system-foundations
+> **Ce que tu fais** : Variations fonctionnelles de blocks (attributs, InnerBlocks, scope, isActive)
+> **Ce que tu ne fais pas** :
+> - Styles purement visuels/CSS → `gutenberg-blocks/block-styles`
+> - Blocks custom complets → `gutenberg-blocks/custom-blocks`
+> - Block Bindings pour données dynamiques → `gutenberg-blocks/block-bindings`
+> - Patterns réutilisables → `theme/templates-patterns`
+> - Tests unitaires → `testing/js-unit-tests`
 
 ## Sources à Consulter
 
@@ -350,19 +353,198 @@ domReady( () => {
 } );
 ```
 
+## Arbre de Décision : Variation vs Style vs Pattern vs Custom Block
+
+```
+Le besoin est :
+├── Seulement du CSS différent ?
+│   └── ✅ Block Style → `block-styles`
+├── Des attributs / InnerBlocks prédéfinis ?
+│   └── ✅ Block Variation (cet agent)
+├── Un agencement réutilisable de blocks ?
+│   └── ✅ Pattern → `theme/templates-patterns`
+├── Des données dynamiques liées à des meta/CPT ?
+│   └── ✅ Block Bindings → `block-bindings`
+└── Un comportement totalement nouveau ?
+    └── ✅ Custom Block → `custom-blocks`
+```
+
+## Enregistrer via PHP (WP 6.5+)
+
+Depuis WP 6.5, `register_block_variation()` est disponible côté PHP (plus besoin de JS pour les cas simples) :
+
+```php
+add_action( 'init', 'my_theme_register_block_variations' );
+
+function my_theme_register_block_variations() {
+    register_block_variation( 'core/group', array(
+        'name'        => 'card',
+        'title'       => __( 'Card', 'my-theme' ),
+        'description' => __( 'A card layout with shadow and rounded corners', 'my-theme' ),
+        'category'    => 'design',
+        'icon'        => 'id-alt',
+        'attributes'  => array(
+            'className' => 'wp-block-card',
+            'style'     => array(
+                'border'  => array( 'radius' => '12px' ),
+                'shadow'  => 'var(--wp--preset--shadow--md)',
+                'spacing' => array(
+                    'padding' => array(
+                        'top'    => 'var(--wp--preset--spacing--40)',
+                        'bottom' => 'var(--wp--preset--spacing--40)',
+                        'left'   => 'var(--wp--preset--spacing--40)',
+                        'right'  => 'var(--wp--preset--spacing--40)',
+                    ),
+                ),
+            ),
+        ),
+        'innerBlocks' => array(
+            array( 'core/image', array( 'sizeSlug' => 'large' ) ),
+            array( 'core/heading', array( 'level' => 3, 'placeholder' => 'Card Title' ) ),
+            array( 'core/paragraph', array( 'placeholder' => 'Card description...' ) ),
+        ),
+        'scope'       => array( 'inserter', 'transform' ),
+        'isActive'    => array( 'className' ),
+    ) );
+}
+```
+
+## Transforms avec Variations
+
+Les variations avec `scope: ['transform']` apparaissent dans le block switcher. Pour les transformations complexes, combiner avec les Block Transforms :
+
+```js
+registerBlockVariation( 'core/group', {
+    name: 'testimonial',
+    title: 'Testimonial',
+    icon: 'format-quote',
+    attributes: {
+        className: 'is-testimonial',
+    },
+    innerBlocks: [
+        [ 'core/quote', {} ],
+        [ 'core/group', { layout: { type: 'flex' } }, [
+            [ 'core/image', { width: 60, height: 60, className: 'is-style-rounded' } ],
+            [ 'core/group', {}, [
+                [ 'core/paragraph', { placeholder: 'Author name', className: 'testimonial-author' } ],
+                [ 'core/paragraph', { placeholder: 'Role / Company', className: 'testimonial-role' } ],
+            ] ],
+        ] ],
+    ],
+    scope: [ 'inserter', 'transform' ],
+    isActive: ( { className } ) => className?.includes( 'is-testimonial' ),
+} );
+```
+
+## isActive — Patterns Avancés
+
+### Par attribut imbriqué (query variations)
+
+```js
+// Variation active basée sur le postType dans query
+registerBlockVariation( 'core/query', {
+    name: 'products-grid',
+    title: 'Products Grid',
+    attributes: {
+        query: {
+            postType: 'product',
+            perPage: 9,
+        },
+        displayLayout: { type: 'flex', columns: 3 },
+    },
+    // isActive vérifie un attribut imbriqué
+    isActive: [ 'query.postType' ],
+    scope: [ 'inserter' ],
+} );
+```
+
+### Combinaison de critères
+
+```js
+{
+    isActive: ( blockAttributes, variationAttributes ) => {
+        return (
+            blockAttributes.query?.postType === 'product' &&
+            blockAttributes.displayLayout?.type === 'flex' &&
+            blockAttributes.displayLayout?.columns === 3
+        );
+    },
+}
+```
+
+### Attention aux pièges isActive
+
+```js
+// ❌ Problème : className peut contenir d'autres classes
+isActive: ( { className } ) => className === 'my-class'
+
+// ✅ Correct : vérifier si la classe est présente parmi d'autres
+isActive: ( { className } ) => className?.split( ' ' ).includes( 'my-class' )
+
+// ✅ Ou utiliser la forme array (comparaison exacte de la valeur d'attribut)
+isActive: [ 'namespace' ] // quand l'attribut a une valeur unique
+```
+
+## Example — Aperçu dans l'Inserter
+
+```js
+registerBlockVariation( 'core/group', {
+    name: 'pricing-card',
+    title: 'Pricing Card',
+    icon: 'money-alt',
+    example: {
+        attributes: {
+            className: 'is-pricing-card',
+        },
+        innerBlocks: [
+            {
+                name: 'core/heading',
+                attributes: { level: 3, content: 'Pro Plan' },
+            },
+            {
+                name: 'core/heading',
+                attributes: { level: 2, content: '$29/mo' },
+            },
+            {
+                name: 'core/list',
+                attributes: {
+                    values: '<li>Feature A</li><li>Feature B</li><li>Feature C</li>',
+                },
+            },
+        ],
+    },
+    // ...rest
+} );
+```
+
 ## Bonnes Pratiques
 
 1. **Nommer clairement** : Le `name` doit être unique et descriptif
 2. **Utiliser isActive** : Pour que WordPress détecte la bonne variation
 3. **Définir le scope** : Ne pas afficher partout si pas nécessaire
-4. **Tester les transformations** : Vérifier que `transform` fonctionne
-5. **Documenter** : Description claire pour les utilisateurs
+4. **PHP quand possible** : `register_block_variation()` (WP 6.5+) pour i18n et pas de JS
+5. **Tester les transformations** : Vérifier que `transform` fonctionne
+6. **Fournir un example** : Pour un aperçu utile dans l'inserter
+7. **CSS Variables** : Utiliser les variables `--wp--preset--*` dans les attributs de style
+8. **Documenter** : Description claire pour les utilisateurs
+
+## Checklist
+
+- [ ] Variation enregistrée via `registerBlockVariation()` (JS) ou `register_block_variation()` (PHP, WP 6.5+)
+- [ ] `isActive` correctement défini pour détecter la variation
+- [ ] `scope` limité aux contextes pertinents (`inserter`, `transform`, `block`)
+- [ ] `innerBlocks` avec placeholders utiles
+- [ ] `example` fourni pour l'aperçu dans l'inserter
+- [ ] CSS utilisant les custom properties `--wp--preset--*`
+- [ ] Transformations testées (scope `transform`)
+- [ ] Variation testée après sauvegarde et rechargement de l'éditeur
 
 ## Livrables
 
 | Livrable | Description |
 |----------|-------------|
-| Variation registration | Code JavaScript de registration des variations |
+| Variation registration | Code JavaScript ou PHP de registration des variations |
 | CSS styles | Styles CSS spécifiques aux variations |
 | innerBlocks templates | Configuration des blocks imbriqués par défaut |
+| Example config | Configuration d'aperçu pour l'inserter |
 | Documentation | Guide d'utilisation des variations disponibles |
