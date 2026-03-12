@@ -19,7 +19,7 @@ jobs:
 
       - name: Get changed agent files
         id: changed
-        uses: tj-actions/changed-files@v41
+        uses: step-security/changed-files@v45
         with:
           files: |
             .web-agency/skills/**/agents/**/*.md
@@ -46,28 +46,42 @@ jobs:
               continue
             fi
 
-            # Extract frontmatter
-            FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$file")
+            # Check closing frontmatter delimiter
+            if ! sed -n '2,$ p' "$file" | grep -q '^---$'; then
+              echo "❌ ERROR: $file missing closing --- delimiter"
+              ERRORS=$((ERRORS + 1))
+              continue
+            fi
+
+            # Extract frontmatter (between first and second ---)
+            FRONTMATTER=$(sed -n '2,/^---$/p' "$file" | head -n -1)
+
+            FILE_ERRORS=0
 
             # Check required fields: name
             if ! echo "$FRONTMATTER" | grep -q '^name:'; then
               echo "❌ ERROR: $file missing 'name' in frontmatter"
               ERRORS=$((ERRORS + 1))
+              FILE_ERRORS=$((FILE_ERRORS + 1))
             fi
 
             # Check required fields: description
             if ! echo "$FRONTMATTER" | grep -q '^description:'; then
               echo "❌ ERROR: $file missing 'description' in frontmatter"
               ERRORS=$((ERRORS + 1))
+              FILE_ERRORS=$((FILE_ERRORS + 1))
             fi
 
             # Check required fields: workflows
             if ! echo "$FRONTMATTER" | grep -q '^workflows:'; then
               echo "❌ ERROR: $file missing 'workflows' in frontmatter"
               ERRORS=$((ERRORS + 1))
+              FILE_ERRORS=$((FILE_ERRORS + 1))
             fi
 
-            echo "  ✅ Frontmatter OK"
+            if [ "$FILE_ERRORS" -eq 0 ]; then
+              echo "  ✅ Frontmatter OK"
+            fi
           done
 
           if [ $ERRORS -gt 0 ]; then

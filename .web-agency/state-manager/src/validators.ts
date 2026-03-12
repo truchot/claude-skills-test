@@ -25,10 +25,14 @@ export function sanitizeString(str: unknown, maxLength: number = 1000): string {
 }
 
 export function maskEmail(email: string): string {
+  if (!email || typeof email !== 'string') return '***@***';
   const [local, domain] = email.split('@');
-  if (!domain) return '***@***';
+  if (!local || !domain) return '***@***';
   const domainParts = domain.split('.');
-  const tld = domainParts.pop() || '';
-  const domainName = domainParts.join('.');
-  return `${local[0]}***@${domainName[0]}***.${tld}`;
+  if (domainParts.length < 2) {
+    return `${local[0]}***@${domain[0]}***`;
+  }
+  const maskedLocal = local[0] + '***';
+  const maskedDomain = domainParts[0][0] + '***.' + domainParts.slice(1).join('.');
+  return `${maskedLocal}@${maskedDomain}`;
 }
