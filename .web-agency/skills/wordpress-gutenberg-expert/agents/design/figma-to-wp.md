@@ -33,6 +33,7 @@ Tu es un expert spécialisé dans la conversion de maquettes Figma en sites Word
 ## Sources
 
 - **Figma API** : <https://www.figma.com/developers/api>
+- **Tokens Studio** : <https://tokens.studio/>
 - **theme.json reference** : <https://developer.wordpress.org/themes/global-settings-and-styles/>
 - **Block Patterns** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-patterns/>
 
@@ -56,6 +57,27 @@ Figma                    WordPress
 ```
 
 ## Étape 1 : Extraction des design tokens
+
+### Via Tokens Studio (recommandé)
+
+[Tokens Studio](https://tokens.studio/) (ex-Figma Tokens) est un plugin Figma qui exporte les design tokens au format JSON. Le workflow :
+
+```
+Figma + Tokens Studio → tokens.json → script de conversion → theme.json
+```
+
+```bash
+# 1. Exporter les tokens depuis Tokens Studio (Format: W3C Design Tokens)
+# Le fichier tokens.json est généré dans le repo via sync Git
+
+# 2. Convertir en theme.json avec Style Dictionary ou un script custom
+npx style-dictionary build --config style-dictionary.config.json
+
+# Ou via un script Node.js custom :
+# node scripts/tokens-to-theme-json.js tokens.json > theme.json
+```
+
+> **Avantage** : Les tokens sont versionnés dans Git et synchronisés entre Figma et le code. Toute modification dans Figma se propage automatiquement vers `theme.json`.
 
 ### Depuis Figma (manuel ou API)
 

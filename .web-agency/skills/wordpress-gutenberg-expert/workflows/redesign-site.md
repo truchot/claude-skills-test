@@ -37,18 +37,56 @@ Agents :         Agents :          Agents :          Agents :       Agents :
 ./scripts/audit-site.sh "ssh user@old-server 'cd /var/www/site && wp'"
 ```
 
+### Analyse technique
+
+```bash
+# Inventaire du contenu
+wp post list --post_type=page --fields=ID,post_title,post_parent,menu_order --format=table
+wp post list --post_type=post --format=count
+wp post-type list --fields=name,label,count --format=table
+
+# Plugins et dépendances
+wp plugin list --fields=name,status,version,update --format=table
+
+# Stack technique
+wp core version
+wp eval 'echo phpversion();'
+wp option get template
+wp option get stylesheet
+
+# Performance baseline
+# Capturer les Core Web Vitals via PageSpeed Insights API ou Lighthouse CLI
+npx lighthouse https://old-site.com --output=json --output-path=./audit/lighthouse.json
+
+# SEO : vérifier robots.txt, sitemap, meta tags
+curl -s https://old-site.com/robots.txt
+curl -s https://old-site.com/sitemap.xml | head -20
+```
+
+### Catégorisation des plugins
+
+| Catégorie | Action | Exemples |
+|-----------|--------|----------|
+| **Garder** | Installer sur le nouveau site | WooCommerce, Gravity Forms, WPML |
+| **Remplacer** | Alternative native/moderne | Page builder → Gutenberg patterns |
+| **Supprimer** | Plus nécessaire | Plugins de compatibilité, doublons |
+| **Intégrer** | Fonctionnalité dans le thème/plugin custom | Shortcodes custom → blocks |
+
 ### Livrables Phase 1
 
 - [ ] Inventaire complet du contenu (pages, articles, CPT, médias)
 - [ ] Liste des plugins avec catégorisation (garder/remplacer/supprimer)
-- [ ] Performance baseline (Core Web Vitals)
+- [ ] Performance baseline (Core Web Vitals via Lighthouse)
 - [ ] Arborescence du site documentée
 - [ ] Dépendances critiques identifiées (WooCommerce, ACF, WPML, etc.)
 - [ ] Export WXR + dump SQL du site source
+- [ ] Mapping shortcodes/widgets existants → équivalents Gutenberg
 
 ## Phase 2 : Design du nouveau site
 
-### Agents : `design/design-tokens` + `theme/block-theme`
+### Agents : `design/figma-to-wp` + `design/design-tokens` + `theme/block-theme`
+
+Si une maquette Figma est disponible, utiliser le pipeline `figma-to-wp` pour l'extraction des design tokens via Tokens Studio.
 
 ### Mapping ancien → nouveau
 
@@ -99,7 +137,7 @@ wp db import old-site-backup.sql
 wp search-replace 'https://ancien-site.com' 'http://localhost:8888' --all-tables
 
 # 3. Synchroniser les uploads
-rsync -avz user@old-server:/var/www/site/wp-content/uploads/ ./uploads/
+rsync -av user@old-server:/var/www/site/wp-content/uploads/ ./uploads/
 
 # 4. Régénérer les thumbnails
 wp media regenerate --yes
@@ -117,10 +155,41 @@ wp rewrite flush
 
 ```bash
 # Générer la liste des anciennes URLs
-wp post list --post_type=page,post --fields=ID,post_name --format=csv > urls.csv
+wp post list --post_type=page,post --fields=ID,post_name,guid --format=csv > urls.csv
+
+# Comparer les anciennes et nouvelles URLs pour détecter les changements
+# diff old-urls.csv new-urls.csv
 
 # Créer les redirections si les slugs changent
-# Utiliser le plugin Redirection ou un mu-plugin
+# Option A : Plugin Redirection (GUI pour le client)
+wp plugin install redirection --activate
+
+# Option B : mu-plugin pour les redirections statiques (plus performant)
+cat > wp-content/mu-plugins/redirections.php << 'PHPEOF'
+<?php
+add_action( 'template_redirect', function() {
+    $redirects = array(
+        '/ancien-slug/' => '/nouveau-slug/',
+    );
+    $request = $_SERVER['REQUEST_URI'];
+    if ( isset( $redirects[ $request ] ) ) {
+        wp_redirect( home_url( $redirects[ $request ] ), 301 );
+        exit;
+    }
+} );
+PHPEOF
+```
+
+### Vérification post-migration
+
+```bash
+# Scanner les liens cassés
+wp eval-file check-links.php
+
+# Vérifier les images manquantes
+wp db query "SELECT ID, guid FROM wp_posts WHERE post_type='attachment'" --skip-column-names | while read id url; do
+    curl -sI "$url" | head -1 | grep -q "200" || echo "BROKEN: $id $url"
+done
 ```
 
 ### Livrables Phase 4

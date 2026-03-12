@@ -113,6 +113,13 @@ vault_wordpress_sites:
       nonce_salt: "generateme"
 ```
 
+> **SÉCURITÉ** : Ne **JAMAIS** commiter un fichier vault non chiffré. Ajouter un pre-commit hook ou utiliser `.gitattributes` pour forcer le chiffrement :
+> ```bash
+> # .gitattributes (dans trellis/)
+> group_vars/*/vault.yml diff=ansible-vault merge=ansible-vault
+> ```
+> Vérifier avant chaque commit : `trellis vault view production` doit afficher `$ANSIBLE_VAULT;1.1;AES256` comme première ligne du fichier.
+
 ### Chiffrer le vault
 
 ```bash

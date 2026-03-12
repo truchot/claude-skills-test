@@ -283,6 +283,8 @@ function useDataViewsWithRest( postType ) {
 }
 ```
 
+> **Pagination** : Toujours passer `per_page` et `page` à l'API REST. Le header `X-WP-Total` donne le nombre total d'items, et `X-WP-TotalPages` le nombre de pages. Ces deux valeurs alimentent `paginationInfo` du composant DataViews. Sans pagination côté serveur, toutes les données sont chargées en mémoire — problématique au-delà de ~100 items.
+
 ## Exemple complet : Admin page custom
 
 ```javascript

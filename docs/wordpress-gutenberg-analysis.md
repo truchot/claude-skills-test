@@ -1,5 +1,7 @@
 # Analyse approfondie : Skills WordPress & Gutenberg
 
+> **Note** : Ce document est un artefact de planification. Il peut être archivé ou supprimé après merge si l'équipe le juge approprié. Les décisions et spécifications vivent dans les agents et workflows eux-mêmes.
+
 ## Date : 2026-03-12
 
 > **Sources** : Analyse du repo existant (37 agents dans le skill wordpress-gutenberg-expert, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
@@ -771,7 +773,8 @@ Au vu de ces découvertes, la stratégie d'implémentation est révisée :
 | **Sprint 1** | Agents `block-bindings.md`, `block-hooks.md`, `wp-playground.md` + workflow `create-site.md` | ✅ Terminé |
 | **Sprint 2** | Agents `site-audit.md`, `content-import.md`, `go-live-checklist.md` + workflow `redesign-site.md` | ✅ Terminé |
 | **Sprint 3** | Corrections review + enrichissements `templates-patterns.md`, `interactivity-api.md`, `style-engine.md` + agents `data-views.md`, `figma-to-wp.md`, `trellis-deploy.md` | ✅ Terminé |
-| **Sprint 4** | Enrichissements `custom-blocks.md`, `data-stores.md`, `block-styles.md`, `block-variations.md` + bilan analysis + SKILL.md final | ✅ Terminé |
+| **Sprint 4** | Enrichissements `custom-blocks.md`, `data-stores.md`, `block-styles.md`, `block-variations.md` + bilan analysis + SKILL.md v1.1.0 | ✅ Terminé |
+| **Review fixes** | Version gate MCP, vault warning Trellis, rsync -z removal, Tokens Studio, redesign-site enrichment, pagination hints DataViews | ✅ Terminé |
 
 ### 13.2 Agents créés (10 nouveaux)
 

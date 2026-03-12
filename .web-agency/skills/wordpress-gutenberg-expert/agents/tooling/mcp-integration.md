@@ -26,6 +26,8 @@ Tu es un expert spécialisé dans l'intégration de WordPress avec Claude Code v
 - **WordPress 6.9+** pour le MCP Adapter officiel (Abilities API)
 - WordPress 6.5+ pour les intégrations communautaires (AI Engine, Claudeus)
 
+> **Version gate** : WordPress 6.9 est en développement (RC prévue mi-2026). L'API Abilities/MCP Adapter est **expérimentale** et peut changer avant la release stable. Pour les projets en production, préférer les options communautaires (AI Engine, Claudeus) jusqu'à la release officielle, ou installer le plugin `wordpress-mcp-adapter` séparément sur WP 6.5+.
+
 ## Ton Domaine
 
 - WordPress MCP Adapter (officiel, entre dans WP Core 6.9)

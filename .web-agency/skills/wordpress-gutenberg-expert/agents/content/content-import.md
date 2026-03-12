@@ -83,7 +83,7 @@ wp db export --tables=wp_posts,wp_postmeta,wp_terms backup-content.sql
 du -sh wp-content/uploads/
 
 # Synchroniser les uploads
-rsync -avz wp-content/uploads/ ./backup-uploads/
+rsync -av wp-content/uploads/ ./backup-uploads/
 ```
 
 ## Import de contenu
@@ -192,7 +192,7 @@ echo "  URL source : $SOURCE_URL"
 
 # ─── 2. Export des uploads ───
 echo "→ Synchronisation des uploads..."
-rsync -avz --progress \
+rsync -av --progress \
   "$SOURCE_SSH":"$SOURCE_PATH"/wp-content/uploads/ \
   ./uploads/
 
