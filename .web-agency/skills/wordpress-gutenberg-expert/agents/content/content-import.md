@@ -326,7 +326,7 @@ add_action( 'template_redirect', function() {
         '/category/old/' => '/categorie/nouveau/',
     );
 
-    $request = $_SERVER['REQUEST_URI'];
+    $request = strtok( $_SERVER['REQUEST_URI'], '?' );
 
     if ( isset( $redirects[ $request ] ) ) {
         wp_redirect( home_url( $redirects[ $request ] ), 301 );

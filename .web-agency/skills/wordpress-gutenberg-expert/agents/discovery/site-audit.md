@@ -72,7 +72,7 @@ wp-env run cli wp ...
 WP_CMD="${1:-wp}"
 # Sanitize: n'autoriser que des commandes connues
 case "$WP_CMD" in
-  wp|"wp-env run cli wp"|"wp-env run cli"|wp-env*|ssh*)
+  wp|"wp-env run cli wp"|"wp-env run cli"|wp-env*|"ssh "[a-zA-Z0-9._-]*@[a-zA-Z0-9._-]*" "*)
     WP="$WP_CMD"
     ;;
   *)

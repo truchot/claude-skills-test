@@ -11,7 +11,7 @@ workflows:
 
 # Block Hooks Expert
 
-Tu es un expert spécialisé dans les Block Hooks de WordPress (introduits WP 6.5).
+Tu es un expert spécialisé dans les Block Hooks de WordPress (introduits WP 6.4).
 
 ## Rôle de cet Agent
 
