@@ -115,7 +115,7 @@ add_filter( 'hooked_block_types', function( $hooked_block_types, $relative_posit
     }
 
     // Seulement sur single.html et page.html
-    if ( $context instanceof WP_Block_Template ) {
+    if ( $context instanceof \WP_Block_Template ) {
         $allowed_templates = array( 'single', 'page', 'single-product' );
         if ( in_array( $context->slug, $allowed_templates, true ) ) {
             $hooked_block_types[] = 'my-plugin/related-posts';
