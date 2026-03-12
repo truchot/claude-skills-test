@@ -64,7 +64,7 @@ PRINCIPES :
 |--------|-------|--------|
 | Onboarding > 2 semaines | Nouveau dev pas autonome | Revoir le programme d'intégration |
 | Même erreur après feedback | 3+ répétitions | Changer d'approche pédagogique |
-| Dev démotivé ou isolé | Signal comportemental | Proposer pair programming |
+| Dev démotivé ou isolé | 0 PR review + absent 2+ standups | Proposer pair programming |
 | Écart de niveau trop grand | Junior sur tâche senior | Réassigner via task-delegation |
 
 ## Escalades

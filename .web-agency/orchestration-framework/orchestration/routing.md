@@ -205,11 +205,14 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 
 | Mots-clés | Skill |
 |-----------|-------|
-| HTML, CSS, JavaScript, TypeScript, composant | `frontend-developer/core` |
+| HTML, CSS, JavaScript, TypeScript, composant | `frontend-developer/foundations` |
+| React, Vue, Angular, framework frontend | `frontend-developer/frameworks` |
+| ES6+, async/await, closures, modules JS | `frontend-developer/javascript` |
 | Tailwind, Sass, CSS Modules, styled-components | `frontend-developer/styling` |
+| Redux, Zustand, Context, state frontend | `frontend-developer/state-management` |
 | Core Web Vitals, lazy loading, bundle size | `frontend-developer/performance` |
 | Jest, Vitest, RTL, Cypress, Playwright | `frontend-developer/testing` |
-| Accessibility, WCAG, ARIA, a11y | `frontend-developer/accessibility` |
+| Webpack, Vite, ESLint, Prettier, tooling frontend | `frontend-developer/tooling` |
 
 ### React Expert (Implémentation)
 
@@ -241,6 +244,10 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | entity, value object, aggregate, repository, domain event | `ddd/tactical` |
 | event storming, domain storytelling, example mapping | `ddd/strategic` |
 | CQRS, event sourcing, saga, anti-corruption layer | `ddd/tactical` |
+| DDD pattern selector, model validator, performance | `ddd/tooling` |
+| aggregate template, value object template | `ddd/templates` |
+| e-commerce domain, anemic to rich migration | `ddd/case-studies` |
+| Next.js DDD, intégration framework DDD | `ddd/integrations` |
 
 ### Security Expert (Implémentation)
 
@@ -362,8 +369,11 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 
 | Mots-clés | Skill |
 |-----------|-------|
-| legacy, modernisation, refactoring progressif | `legacy-modernization` |
-| migration code, strangler fig, réécriture | `legacy-modernization` |
+| audit legacy, évaluation code existant, dette | `legacy-modernization/assessment` |
+| stratégie modernisation, strangler fig, roadmap legacy | `legacy-modernization/strategies` |
+| migration code, réécriture progressive, extraction | `legacy-modernization/migration` |
+| refactoring legacy, clean code, découplage | `legacy-modernization/refactoring` |
+| tests legacy, couverture rétroactive, golden master | `legacy-modernization/testing` |
 
 ### ✅ Domaines Récemment Ajoutés (v4.3.0)
 

@@ -13,7 +13,7 @@ Diriger vers le bon agent de delivery selon le besoin : planification de release
 
 ## Tu NE fais PAS
 
-- ❌ Stratégie de déploiement globale → `direction-technique/infrastructure`
+- ❌ Définir la stratégie de déploiement globale → `direction-technique/infrastructure`
 - ❌ Configuration CI/CD → `direction-technique/infrastructure/strategie-cicd`
 - ❌ Gestion des environnements → `direction-technique/infrastructure/environnements`
 - ❌ Monitoring post-deploy → `direction-technique/infrastructure`
@@ -89,7 +89,7 @@ Besoin de delivery ?
 
 | Situation | Cible | Quand |
 |-----------|-------|-------|
-| Stratégie déploiement à revoir | `direction-technique/infrastructure` | Blue-green, canary, politique |
+| Besoin d'une nouvelle stratégie deploy | `direction-technique/infrastructure` | Passage blue-green, canary, politique globale |
 | Configuration CI/CD bloquée | `devops/cicd` | Pipeline cassée, secrets manquants |
 | Incident post-deploy | `incident-management/detection` | Erreurs 5xx, panne, dégradation |
 | Besoin monitoring avancé | `devops/monitoring` | Alertes, Grafana, observabilité |
