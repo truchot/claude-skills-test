@@ -32,6 +32,13 @@ import {
   EventCategory,
 } from '../types/project';
 
+import {
+  isValidUUID,
+  isValidEmail,
+  sanitizeString,
+  maskEmail,
+} from './validators';
+
 // ============================================================
 // CONFIGURATION
 // ============================================================
@@ -65,33 +72,11 @@ const stateManager = getStateManager({
 });
 
 // ============================================================
-// SECURITY VALIDATORS
+// INPUT SANITIZATION (delegates to shared validators)
 // ============================================================
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-function isValidEmail(email: string): boolean {
-  return EMAIL_REGEX.test(email) && email.length <= 254;
-}
-
-function isValidUUID(id: string): boolean {
-  return UUID_REGEX.test(id);
-}
-
 function sanitizeInput(input: string, maxLength: number = 500): string {
-  // Remove control characters and limit length
-  return input.replace(/[\x00-\x1F\x7F]/g, '').trim().slice(0, maxLength);
-}
-
-function maskEmail(email: string): string {
-  // Mask email for logging: john@example.com -> j***@e***.com
-  const [local, domain] = email.split('@');
-  if (!domain) return '***@***';
-  const domainParts = domain.split('.');
-  const maskedLocal = local[0] + '***';
-  const maskedDomain = domainParts[0][0] + '***.' + domainParts.slice(1).join('.');
-  return `${maskedLocal}@${maskedDomain}`;
+  return sanitizeString(input, maxLength).trim();
 }
 
 // ============================================================

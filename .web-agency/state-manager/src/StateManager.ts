@@ -29,31 +29,12 @@ import {
   StateSnapshot,
 } from '../types/project';
 
-// ============================================================
-// SECURITY VALIDATORS
-// ============================================================
-
-const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ISO_DATE_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
-
-function isValidUUID(str: string): boolean {
-  return typeof str === 'string' && UUID_REGEX.test(str);
-}
-
-function isValidEmail(str: string): boolean {
-  return typeof str === 'string' && EMAIL_REGEX.test(str) && str.length <= 254;
-}
-
-function isValidISODate(str: string): boolean {
-  return typeof str === 'string' && ISO_DATE_REGEX.test(str);
-}
-
-function sanitizeString(str: unknown, maxLength: number = 1000): string {
-  if (typeof str !== 'string') return '';
-  // Remove control characters and limit length
-  return str.replace(/[\x00-\x1F\x7F]/g, '').slice(0, maxLength);
-}
+import {
+  isValidUUID,
+  isValidEmail,
+  isValidISODate,
+  sanitizeString,
+} from './validators';
 
 function validateClient(client: unknown): client is Client {
   if (!client || typeof client !== 'object') return false;
