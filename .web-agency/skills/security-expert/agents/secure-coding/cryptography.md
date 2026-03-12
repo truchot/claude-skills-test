@@ -1,5 +1,5 @@
 ---
-name: cryptography
+name: secexp-secure-coding-cryptography
 description: Expert chiffrement et hachage - AES, RSA, bcrypt, signatures
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: security-orchestrator
+name: testproc-security-orchestrator
 description: Orchestrateur du domaine Tests de Sécurité
 ---
 

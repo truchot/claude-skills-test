@@ -1,5 +1,5 @@
 ---
-name: performance-orchestrator
+name: mktops-performance-orchestrator
 description: Orchestration de l'optimisation des conversions et performance marketing
 version: 1.0.0
 ---

@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: uxui-testing-orchestrator
 description: Orchestre les tests utilisateurs et l'analyse des résultats
 version: 1.0.0
 ---

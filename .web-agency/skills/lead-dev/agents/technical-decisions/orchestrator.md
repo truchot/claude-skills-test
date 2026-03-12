@@ -65,6 +65,25 @@ Type de décision ?
 ```
 
 
+## Red Flags
+
+| Signal | Seuil | Action |
+|--------|-------|--------|
+| Décision sans documentation | Toute décision > scope local | Exiger un ADR léger |
+| Librairie abandonnée choisie | < 100 downloads/semaine | Reconsidérer le choix |
+| Refactoring sans tests | Toute situation | Bloquer et exiger des tests |
+| Dette technique croissante | Score > 8/10 | Prioriser dans le sprint |
+
+## Escalades
+
+| Situation | Cible | Quand |
+|-----------|-------|-------|
+| Décision impactant la stack | `direction-technique` | Changement de framework/langage |
+| Évaluation techno approfondie | `tech-radar/evaluation` | Besoin d'analyse formelle adopt/hold |
+| Dépendance critique à auditer | `tech-radar/tracking` | CVE, dépréciation majeure |
+| Architecture à revoir | `direction-technique/architecture` | Impact structurel |
+| Impact budget/timeline | `project-management/pilotage` | Refactoring coûteux |
+
 ## Livrables
 
 | Livrable | Description |

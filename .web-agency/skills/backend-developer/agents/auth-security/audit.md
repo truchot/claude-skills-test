@@ -1,5 +1,5 @@
 ---
-name: audit
+name: backend-auth-security-audit
 description: Logging de sécurité, audit trail et conformité
 workflows:
   - id: audit-setup

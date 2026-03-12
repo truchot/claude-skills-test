@@ -1,5 +1,5 @@
 ---
-name: code-review-orchestrator
+name: leaddev-code-review-orchestrator
 description: Coordination de la revue de code et de l'assurance qualité quotidienne
 ---
 
@@ -65,6 +65,24 @@ Type de review ?
    └─ Approbation ou Feedback
 ```
 
+
+## Red Flags
+
+| Signal | Seuil | Action |
+|--------|-------|--------|
+| PRs en attente > 48h | > 2 PRs bloquées | Relancer les reviewers |
+| Commentaires non résolus | > 5 par PR | Réunion de clarification |
+| Même erreur récurrente | 3+ occurrences | Escalader vers mentoring |
+
+## Escalades
+
+| Situation | Cible | Quand |
+|-----------|-------|-------|
+| Standards qualité à redéfinir | `direction-technique/qualite` | Changement de politique qualité |
+| Vulnérabilité critique détectée | `security-expert/appsec` | CVE, injection, fuite de données |
+| Impact performance majeur | `direction-technique/performance` | Dégradation SLO/SLA |
+| Conflit entre reviewers | `lead-dev` orchestrateur principal | Désaccord sur l'approche |
+| Besoin de formation identifié | `lead-dev/mentoring` | Dev répète les mêmes erreurs |
 
 ## Livrables
 

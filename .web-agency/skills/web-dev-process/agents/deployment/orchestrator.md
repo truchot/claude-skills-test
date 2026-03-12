@@ -1,5 +1,5 @@
 ---
-name: deployment-orchestrator
+name: webdev-deployment-orchestrator
 description: Orchestrateur de la phase Deployment - Stratégies de mise en production
 ---
 

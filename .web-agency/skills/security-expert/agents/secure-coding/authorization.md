@@ -1,5 +1,5 @@
 ---
-name: authorization
+name: secexp-secure-coding-authorization
 description: Expert controle d'acces - RBAC, ABAC, policies et permissions
 ---
 

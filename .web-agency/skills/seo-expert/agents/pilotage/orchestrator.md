@@ -1,5 +1,5 @@
 ---
-name: pilotage-orchestrator
+name: seo-pilotage-orchestrator
 description: Orchestrateur du domaine Pilotage et Mesure SEO
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: reporting-orchestrator
+name: finance-reporting-orchestrator
 description: Orchestre la génération de rapports
 version: 1.0.0
 ---

@@ -1,5 +1,5 @@
 ---
-name: infrastructure-orchestrator
+name: dirtech-infrastructure-orchestrator
 description: Orchestrateur du domaine Infrastructure - DevOps et déploiement
 ---
 

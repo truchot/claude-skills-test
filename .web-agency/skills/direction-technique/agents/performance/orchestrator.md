@@ -1,5 +1,5 @@
 ---
-name: performance-orchestrator
+name: dirtech-performance-orchestrator
 description: Orchestrateur du domaine Performance - Optimisation et monitoring
 ---
 

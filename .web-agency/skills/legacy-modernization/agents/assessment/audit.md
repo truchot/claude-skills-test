@@ -1,5 +1,5 @@
 ---
-name: audit
+name: legacy-assessment-audit
 description: Expert audit technique - Evaluation complete des systemes legacy
 ---
 

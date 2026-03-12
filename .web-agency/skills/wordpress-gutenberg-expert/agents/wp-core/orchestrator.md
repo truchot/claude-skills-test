@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-wp-core-orchestrator
 description: WP Core Orchestrator
 ---
 

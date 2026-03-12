@@ -1,0 +1,179 @@
+# Team Profile Schema v1.0
+# Defines the structure of team member profiles used by team-management agents.
+
+type: object
+required:
+  - id
+  - name
+  - role
+  - skills
+  - availability
+
+properties:
+  id:
+    type: string
+    pattern: "^dev-[0-9]{3}$"
+    description: "Unique identifier (ex: dev-001)"
+
+  name:
+    type: string
+    description: "Full name of the team member"
+
+  email:
+    type: string
+    format: email
+    description: "Professional email address"
+
+  role:
+    type: string
+    enum:
+      - frontend
+      - backend
+      - fullstack
+      - devops
+      - lead
+      - architect
+    description: "Primary role in the team"
+
+  seniority:
+    type: string
+    enum:
+      - junior
+      - mid
+      - senior
+      - lead
+    description: "Current seniority level"
+
+  start_date:
+    type: string
+    format: date
+    description: "Date joined the team (YYYY-MM-DD)"
+
+  skills:
+    type: object
+    description: "Competency map grouped by domain"
+    properties:
+      frontend:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            level:
+              type: string
+              enum: [none, beginner, intermediate, advanced, expert]
+            years:
+              type: number
+              minimum: 0
+      backend:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            level:
+              type: string
+              enum: [none, beginner, intermediate, advanced, expert]
+            years:
+              type: number
+              minimum: 0
+      devops:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            level:
+              type: string
+              enum: [none, beginner, intermediate, advanced, expert]
+            years:
+              type: number
+              minimum: 0
+      testing:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            level:
+              type: string
+              enum: [none, beginner, intermediate, advanced, expert]
+            years:
+              type: number
+              minimum: 0
+      soft_skills:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            level:
+              type: string
+              enum: [none, beginner, intermediate, advanced, expert]
+
+  availability:
+    type: object
+    properties:
+      current_sprint_capacity:
+        type: number
+        description: "Total story points capacity for current sprint"
+      allocated:
+        type: number
+        description: "Story points already allocated"
+      on_call:
+        type: boolean
+        description: "Currently on-call rotation"
+      planned_absences:
+        type: array
+        items:
+          type: object
+          properties:
+            from:
+              type: string
+              format: date
+            to:
+              type: string
+              format: date
+            reason:
+              type: string
+              enum: [vacation, training, conference, personal]
+
+  preferences:
+    type: object
+    properties:
+      mentoring:
+        type: boolean
+        description: "Willing to mentor others"
+      pair_programming:
+        type: string
+        enum: [eager, willing, reluctant]
+        description: "Attitude towards pair programming"
+      focus_areas:
+        type: array
+        items:
+          type: string
+        description: "Technical areas of interest"
+      work_style:
+        type: string
+        enum: [deep_focus, collaborative, mixed]
+        description: "Preferred working style"
+
+  growth_targets:
+    type: array
+    description: "Skills the member wants to develop"
+    items:
+      type: object
+      required:
+        - skill
+        - target_level
+      properties:
+        skill:
+          type: string
+          description: "Name of the skill to develop"
+        current_level:
+          type: string
+          enum: [none, beginner, intermediate, advanced, expert]
+        target_level:
+          type: string
+          enum: [beginner, intermediate, advanced, expert]
+        deadline:
+          type: string
+          description: "Target quarter (ex: 2026-Q3)"
+        training_method:
+          type: string
+          enum: [pair_programming, course, workshop, side_project, self_study]

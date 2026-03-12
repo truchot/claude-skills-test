@@ -1,5 +1,5 @@
 ---
-name: architecture-orchestrator
+name: dirtech-architecture-orchestrator
 description: Orchestrateur du domaine Architecture - Conception et validation des architectures techniques
 ---
 

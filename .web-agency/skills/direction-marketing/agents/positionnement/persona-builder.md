@@ -1,5 +1,5 @@
 ---
-name: persona-builder
+name: dirmkt-positionnement-persona-builder
 description: Création et documentation des personas marketing cibles
 domain: positionnement
 workflows:

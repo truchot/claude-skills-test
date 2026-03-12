@@ -1,5 +1,5 @@
 ---
-name: infrastructure-orchestrator
+name: devops-infrastructure-orchestrator
 description: Orchestrateur du domaine Infrastructure - IaC, Terraform, cloud
 ---
 

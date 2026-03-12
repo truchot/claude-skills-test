@@ -396,78 +396,21 @@ Question: "Comment rendre mon block accessible au clavier ?"
 
 ## Questions Multi-Domaines
 
-Combine les expertises quand nécessaire :
+Combine les expertises quand nécessaire. Exemples courants :
 
-```
-"CPT avec capabilities custom"
-→ wp-core/custom-post-types.md + wp-core/custom-roles.md
-
-"Sécuriser un callback save_post"
-→ wp-core/hooks-filters.md + wp-core/security-validation.md
-
-"Block dynamique avec rendu PHP sécurisé"
-→ gutenberg-blocks/custom-blocks.md + wp-core/security-validation.md
-
-"Block qui fetch des données REST"
-→ gutenberg-blocks/custom-blocks.md + gutenberg-blocks/data-stores.md + wp-rest-api-expert.md
-
-"Initialiser un projet avec repo et CI/CD"
-→ tooling/repository-setup.md + tooling/project-init.md + tooling/cicd-pipelines.md
-
-"Pipeline CI/CD avec déploiement SSH"
-→ tooling/cicd-pipelines.md + tooling/deployment-ssh.md
-
-"Environnement complet local + staging + production"
-→ tooling/local-dev.md + tooling/staging-setup.md + tooling/deployment-ssh.md
-
-"Configuration multi-environnement complète"
-→ tooling/environment-config.md + tooling/local-dev.md + tooling/staging-setup.md
-
-"Maquette Figma → theme.json complet"
-→ design/design-tokens.md + theme/block-theme.md
-
-"Block theme complet avec templates et patterns"
-→ theme/block-theme.md + theme/templates-patterns.md
-
-"Block theme avec styles optimisés"
-→ theme/block-theme.md + theme/style-engine.md
-
-"Pattern interactif dans un block theme"
-→ theme/templates-patterns.md + theme/interactivity-api.md
-
-"Block interactif avec Interactivity API"
-→ gutenberg-blocks/custom-blocks.md + theme/interactivity-api.md
-
-"Tester un block custom complet"
-→ gutenberg-blocks/custom-blocks.md + testing/js-unit-tests.md + testing/e2e-tests.md
-
-"Plugin WordPress avec tests PHPUnit"
-→ wp-core/hooks-filters.md + testing/php-unit-tests.md
-
-"Tests visuels et e2e combinés"
-→ design/visual-review.md + testing/e2e-tests.md
-
-"Plugin avec tracking conforme RGPD"
-→ wp-core/hooks-filters.md + gdpr-consent-api.md
-
-"Workflow projet complet avec issues normalisées"
-→ tooling/repository-setup.md + tooling/issue-management.md + tooling/cicd-pipelines.md
-
-"Plugin internationalisé avec traductions JS"
-→ i18n-localization.md + gutenberg-blocks/custom-blocks.md
-
-"Block avec Schema SEO intégré"
-→ gutenberg-blocks/custom-blocks.md + seo-expert.md
-
-"Block accessible avec navigation clavier"
-→ gutenberg-blocks/custom-blocks.md + accessibility-expert.md
-
-"Thème FSE multilingue"
-→ theme/block-theme.md + theme/templates-patterns.md + i18n-localization.md
-
-"Plugin complet : i18n + SEO + a11y"
-→ i18n-localization.md + seo-expert.md + accessibility-expert.md
-```
+| Besoin | Agents combinés |
+|--------|----------------|
+| CPT avec capabilities custom | `wp-core/custom-post-types` + `wp-core/custom-roles` |
+| Block dynamique sécurisé | `gutenberg-blocks/custom-blocks` + `wp-core/security-validation` |
+| Block + données REST | `gutenberg-blocks/custom-blocks` + `data-stores` + `wp-rest-api-expert` |
+| Projet complet (repo + CI/CD) | `tooling/repository-setup` + `project-init` + `cicd-pipelines` |
+| Env local → staging → prod | `tooling/local-dev` + `staging-setup` + `deployment-ssh` |
+| Figma → theme.json | `design/design-tokens` + `theme/block-theme` |
+| Block theme + patterns | `theme/block-theme` + `templates-patterns` |
+| Block interactif | `gutenberg-blocks/custom-blocks` + `theme/interactivity-api` |
+| Plugin testé complet | `wp-core/hooks-filters` + `testing/php-unit-tests` + `e2e-tests` |
+| Plugin RGPD conforme | `wp-core/hooks-filters` + `gdpr-consent-api` |
+| Plugin i18n + SEO + a11y | `i18n-localization` + `seo-expert` + `accessibility-expert` |
 
 ## Format de Réponse
 

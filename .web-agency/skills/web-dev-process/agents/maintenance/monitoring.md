@@ -1,5 +1,5 @@
 ---
-name: monitoring-orchestrator
+name: webdev-maintenance-monitoring
 description: Orchestrateur pour l'observabilité et le monitoring
 workflows:
   - template: wf-audit

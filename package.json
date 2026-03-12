@@ -1,0 +1,34 @@
+{
+  "name": "web-agency-framework",
+  "version": "4.3.0",
+  "private": true,
+  "description": "AI-powered web agency orchestration framework",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint '.web-agency/state-manager/src/**/*.ts'",
+    "lint:fix": "eslint --fix '.web-agency/state-manager/src/**/*.ts'",
+    "format": "prettier --write '.web-agency/state-manager/src/**/*.ts'",
+    "format:check": "prettier --check '.web-agency/state-manager/src/**/*.ts'",
+    "test": "cd .web-agency/state-manager && npm test",
+    "validate:agents": "bash .web-agency/scripts/verify-agent-count.sh"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write --prose-wrap always"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.0"
+  }
+}

@@ -1,5 +1,5 @@
 ---
-name: communication-orchestrator
+name: pm-communication-orchestrator
 description: Orchestrateur de la communication client - CR et emails professionnels
 ---
 

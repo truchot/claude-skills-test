@@ -1,5 +1,5 @@
 ---
-name: brand-identity
+name: uxui-branding-brand-identity
 description: Crée l'identité visuelle complète - logo, charte graphique, brand book
 version: 2.0.0
 workflows:

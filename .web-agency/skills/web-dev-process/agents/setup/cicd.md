@@ -1,5 +1,5 @@
 ---
-name: cicd-orchestrator
+name: webdev-setup-cicd
 description: Orchestrateur pour les principes CI/CD et automatisation (Niveau QUOI)
 workflows:
   - id: wdp-setup-cicd

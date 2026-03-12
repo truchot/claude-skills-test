@@ -1,5 +1,5 @@
 ---
-name: reporting-orchestrator
+name: mktanalytics-reporting-orchestrator
 description: Orchestrateur Reporting - Dashboards et KPIs
 domain: reporting
 ---

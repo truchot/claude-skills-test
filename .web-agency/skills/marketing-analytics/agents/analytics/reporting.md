@@ -1,5 +1,5 @@
 ---
-name: reporting
+name: mktanalytics-analytics-reporting
 description: Production des rapports et dashboards marketing
 workflows:
   - id: reporting-dashboard

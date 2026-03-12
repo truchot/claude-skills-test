@@ -194,67 +194,7 @@ Le workflow n'est **pas strictement linéaire**. Des itérations sont possibles 
 3. **Limite** : Max 3 itérations par livrable, sinon escalade humaine
 4. **Version** : Incrémenter la version du document modifié
 
-### ✅ Workflow de Validation
-
-Chaque livrable du triptyque passe par un processus de validation.
-
-#### Rôles et Responsabilités
-
-| Rôle | Responsabilité | Qui ? |
-|------|----------------|-------|
-| **Créateur** | Produit le livrable | Agent IA |
-| **Reviewer** | Vérifie la qualité et cohérence | Agent orchestrateur |
-| **Validateur** | Approuve pour usage | Humain (client/sponsor) |
-
-#### Processus de Validation
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                     VALIDATION WORKFLOW                          │
-│                                                                  │
-│   CRÉATION          REVIEW             VALIDATION    PUBLICATION │
-│                                                                  │
-│   ┌─────────┐      ┌─────────┐        ┌─────────┐   ┌─────────┐ │
-│   │ Agent   │─────►│ Orchest │───────►│ Humain  │──►│ .project│ │
-│   │ crée    │      │ review  │        │ valide  │   │ /...    │ │
-│   └─────────┘      └────┬────┘        └────┬────┘   └─────────┘ │
-│                         │                  │                     │
-│                    ┌────▼────┐        ┌────▼────┐                │
-│                    │ Rejet ? │        │ Rejet ? │                │
-│                    │ → Retour│        │ → Retour│                │
-│                    └─────────┘        └─────────┘                │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-#### Critères de Validation par Livrable
-
-| Livrable | Critères Agent | Critères Humain |
-|----------|----------------|-----------------|
-| `problem-definition` | Structure complète, cohérent | Reflète bien la réalité business |
-| `offer-definition` | Lié au problème, pricing cohérent | Validé par product/sales |
-| `persona` | Basé sur données, actionnable | Reconnaissable par les équipes |
-| `brand-positioning` | Différenciant, ancré triptyque | Aligné avec vision direction |
-
-#### En Cas de Rejet
-
-```markdown
-## Rejet de Validation
-
-**Livrable** : [nom du fichier]
-**Rejeteur** : [Agent / Humain]
-**Raison** : [Explication]
-
-### Corrections Demandées
-1. [Correction 1]
-2. [Correction 2]
-
-### Délai
-- Correction attendue : [date]
-- Prochaine review : [date]
-```
-
-#### Escalade
+### Validation et Escalade
 
 | Situation | Action |
 |-----------|--------|
@@ -262,112 +202,19 @@ Chaque livrable du triptyque passe par un processus de validation.
 | Désaccord agent/humain | Réunion de cadrage avec sponsor |
 | Blocage > 5 jours | Activation mode dégradé temporaire |
 
-## 🔄 Guide de Migration (Projets Existants)
-
-### Scénario 1 : Nouveau Projet
-
-```bash
-# Workflow standard - triptyque obligatoire
-1. discovery → problem-definition.md
-2. discovery → offer-definition.md
-3. persona-builder → persona.md
-4. → Continuer avec la stratégie marketing
-```
-
-### Scénario 2 : Projet Existant SANS Triptyque
-
-**Projets en cours qui n'ont pas le triptyque fondamental.**
-
-```bash
-# Vérification
-ls .project/strategy/problem-definition.md 2>/dev/null || echo "❌ MANQUANT"
-ls .project/strategy/offer-definition.md 2>/dev/null || echo "❌ MANQUANT"
-ls .project/marketing/persona.md 2>/dev/null || echo "❌ MANQUANT"
-```
-
-**Options de migration :**
-
-| Situation | Action | Impact |
-|-----------|--------|--------|
-| Travail marketing en cours | **Pause** + Compléter triptyque | Qualité améliorée |
-| Travail marketing terminé | **Créer triptyque rétroactivement** | Documentation |
-| Urgence business | **Mode dégradé** (voir ci-dessous) | Risque qualité |
+Chaque livrable passe par : **Création (Agent)** → **Review (Orchestrateur)** → **Validation (Humain)** → **Publication (.project/)**.
 
 ### Mode Dégradé (Temporaire)
 
-Si le triptyque ne peut pas être créé immédiatement :
+Si le triptyque ne peut pas être créé immédiatement, activer le mode dégradé :
 
-#### Governance Rules
-
-| Aspect | Rule |
-|--------|------|
-| **Who can activate?** | Project lead, direction-marketing orchestrator, or sponsor |
-| **Max duration** | 14 days (hard limit) |
-| **Auto-deactivation** | When deadline passes OR triptyque completed |
-| **Tracking** | File `.project/.degraded-mode.yml` (version controlled) |
-| **Escalation** | If deadline extended more than once → sponsor approval required |
-
-#### Degraded Mode Tracking File
-
-Create `.project/.degraded-mode.yml` when activating:
-
-```yaml
-# .project/.degraded-mode.yml
-degraded_mode:
-  active: true
-  activated_at: 2025-01-15T10:00:00Z
-  activated_by: "project-lead"
-  reason: "Urgence business - Migration en cours"
-  deadline: 2025-01-29T23:59:59Z
-  responsible: "discovery-agent"
-  extensions: []
-  allowed_deliverables:
-    - seo-audit
-    - technical-audit
-  blocked_deliverables:
-    - editorial-charter
-    - keyword-research
-    - content-calendar
-    - brand-positioning
-```
-
-#### CI Check (Recommended)
-
-Add to your CI pipeline to catch expired degraded modes:
-
-```bash
-# Check if degraded mode has expired
-if [ -f ".project/.degraded-mode.yml" ]; then
-  deadline=$(yq '.degraded_mode.deadline' .project/.degraded-mode.yml)
-  if [ "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \> "$deadline" ]; then
-    echo "❌ Degraded mode expired! Complete triptyque or request extension."
-    exit 1
-  fi
-fi
-```
-
-#### Template de Notification
-
-```markdown
-## ⚠️ MODE DÉGRADÉ ACTIVÉ
-
-**Raison** : [Urgence business / Client existant / Migration en cours]
-**Activé par** : [Nom/Rôle]
-**Deadline triptyque** : [Date limite - max 14 jours]
-**Responsable** : [Qui va créer le triptyque]
-
-Les livrables suivants peuvent continuer en mode dégradé :
-- [ ] seo-audit (pas de prérequis marketing)
-- [ ] technical-audit (pas de prérequis marketing)
-
-⛔ BLOQUÉ jusqu'au triptyque :
-- [ ] editorial-charter
-- [ ] keyword-research
-- [ ] content-calendar
-- [ ] brand-positioning
-
-📁 Tracking: `.project/.degraded-mode.yml`
-```
+| Aspect | Règle |
+|--------|-------|
+| Qui peut activer | Project lead, orchestrator, ou sponsor |
+| Durée max | 14 jours |
+| Tracking | `.project/.degraded-mode.yml` |
+| Livrables autorisés | seo-audit, technical-audit |
+| Livrables bloqués | editorial-charter, keyword-research, content-calendar, brand-positioning |
 
 ### Structure `.project/` Attendue
 
@@ -379,80 +226,8 @@ Les livrables suivants peuvent continuer en mode dégradé :
 ├── marketing/
 │   ├── persona.md               # 🥉 TROISIÈME (persona-builder)
 │   ├── brand-positioning.md     # Après triptyque
-│   ├── seo-audit.md             # NIVEAU 0 (pas de prérequis mktg)
-│   ├── keyword-research.md      # Après persona + brand-positioning
-│   └── editorial-charter.md     # Après triptyque
+│   └── ...
 └── ... autres domaines
-```
-
-### Initialisation pour Nouveaux Projets
-
-Pour un **nouveau projet** qui n'a pas encore de triptyque :
-
-```bash
-# 1. Créer la structure de base
-mkdir -p .project/strategy .project/marketing
-
-# 2. Lancer l'agent discovery pour questionner l'utilisateur
-# L'agent posera les questions pour créer :
-# - .project/strategy/problem-definition.md
-# - .project/strategy/offer-definition.md
-
-# 3. Une fois problem + offer définis, lancer persona-builder
-# L'agent créera :
-# - .project/marketing/persona.md
-```
-
-**Processus recommandé :**
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    INITIALISATION TRIPTYQUE                      │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  1. /marketing "nouveau projet - définir le problème"            │
-│     └─→ Route vers: positionnement/discovery                     │
-│         └─→ Produit: .project/strategy/problem-definition.md     │
-│                                                                  │
-│  2. /marketing "définir les offres"                              │
-│     └─→ Route vers: positionnement/discovery                     │
-│         └─→ Produit: .project/strategy/offer-definition.md       │
-│                                                                  │
-│  3. /marketing "créer les personas"                              │
-│     └─→ Route vers: positionnement/persona-builder               │
-│         └─→ Produit: .project/marketing/persona.md               │
-│                                                                  │
-│  ✅ TRIPTYQUE COMPLET - Prêt pour stratégie marketing            │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Checklist pour Projets Existants (Migration)
-
-Pour un **projet existant** qui a du contenu marketing mais pas de triptyque formalisé :
-
-```markdown
-## Migration vers Triptyque v1.0
-
-- [ ] **Étape 1** : Identifier si le projet a déjà des éléments du triptyque
-      - Documents existants sur le problème ?
-      - Documentation des offres ?
-      - Personas définis (même informellement) ?
-
-- [ ] **Étape 2** : Formaliser ce qui existe
-      - Convertir au format standard
-      - Placer dans .project/strategy/ ou .project/marketing/
-
-- [ ] **Étape 3** : Compléter ce qui manque
-      - Utiliser discovery pour problème/offres
-      - Utiliser persona-builder pour personas
-
-- [ ] **Étape 4** : Valider le triptyque
-      - Review par le client/sponsor
-      - Alignement équipe confirmé
-
-- [ ] **Étape 5** : Débloquer le travail marketing
-      - Retirer le mode dégradé si actif
-      - Reprendre le workflow standard
 ```
 
 ## Architecture

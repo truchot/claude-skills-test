@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-state-orchestrator
 description: Routes state management questions to specialized agents
 ---
 

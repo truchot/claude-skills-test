@@ -1,5 +1,5 @@
 ---
-name: coverage
+name: backend-testing-coverage
 description: Couverture de code, mutation testing et métriques de qualité
 workflows:
   - id: coverage-setup

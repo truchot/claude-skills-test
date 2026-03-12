@@ -1,5 +1,5 @@
 ---
-name: testing-orchestrator
+name: webdev-testing-orchestrator
 description: Orchestrateur de la phase Testing - Stratégie globale de tests
 ---
 

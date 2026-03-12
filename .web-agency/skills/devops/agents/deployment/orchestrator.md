@@ -1,5 +1,5 @@
 ---
-name: deployment-orchestrator
+name: devops-deployment-orchestrator
 description: Orchestrateur du domaine Deployment - Stratégies, rollback
 ---
 

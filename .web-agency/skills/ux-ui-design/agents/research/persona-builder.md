@@ -1,5 +1,5 @@
 ---
-name: persona-builder
+name: uxui-research-persona-builder
 description: Crée des personas utilisateurs détaillés basés sur la recherche
 version: 1.0.0
 workflows:

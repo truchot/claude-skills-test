@@ -64,6 +64,25 @@ SPRINT REVIEW
 └─ Collecte des retours → amélioration continue
 ```
 
+## Red Flags
+
+| Signal | Seuil | Action |
+|--------|-------|--------|
+| Dev bloqué > 4h | Sans aide | Activer blocker-resolution immédiatement |
+| Tâche non commencée | > 2 jours après assignation | Vérifier la compréhension |
+| Daily standup > 15 min | Récurrent | Restructurer le format |
+| Sprint goal menacé | > 30% tickets en retard | Alerter lead-dev principal |
+
+## Escalades
+
+| Situation | Cible | Quand |
+|-----------|-------|-------|
+| Surcharge de l'équipe | `team-management/task-allocation` | Capacité dépassée |
+| Conflit interpersonnel | `team-management/performance` | Tension persistante |
+| Blocage technique profond | `lead-dev/technical-decisions` | Besoin d'arbitrage technique |
+| Estimation dépassée | `project-management/pilotage` | Retard projet significatif |
+| Besoin de renfort | `direction-operations/ressources` | Staffing insuffisant |
+
 ## Livrables
 
 | Livrable | Description |

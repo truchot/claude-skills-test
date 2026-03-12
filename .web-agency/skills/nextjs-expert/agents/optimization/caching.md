@@ -1,5 +1,5 @@
 ---
-name: caching
+name: nextjs-optimization-caching
 description: Stratégies de cache Next.js
 workflows:
   - id: caching-strategy

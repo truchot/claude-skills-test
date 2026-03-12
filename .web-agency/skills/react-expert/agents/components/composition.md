@@ -1,5 +1,5 @@
 ---
-name: composition
+name: react-components-composition
 description: Advanced composition patterns - Compound components, Render Props, and HOC
 workflows:
   - id: react-patterns-impl

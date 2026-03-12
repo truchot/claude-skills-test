@@ -1,5 +1,5 @@
 ---
-name: gitlab-ci
+name: wp-tooling-gitlab-ci
 description: GitLab CI/CD Expert
 workflows:
   - id: gitlab-ci-setup

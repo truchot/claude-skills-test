@@ -1,5 +1,5 @@
 ---
-name: pilotage-orchestrator
+name: pm-pilotage-orchestrator
 description: Orchestrateur du pilotage projet - Planning, suivi et alertes
 ---
 

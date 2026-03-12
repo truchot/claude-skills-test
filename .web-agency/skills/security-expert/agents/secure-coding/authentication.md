@@ -1,5 +1,5 @@
 ---
-name: authentication
+name: secexp-secure-coding-authentication
 description: Expert authentification securisee - JWT, OAuth2, sessions, MFA
 ---
 

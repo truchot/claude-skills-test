@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-components-orchestrator
 description: Routes component domain questions to specialized agents
 ---
 

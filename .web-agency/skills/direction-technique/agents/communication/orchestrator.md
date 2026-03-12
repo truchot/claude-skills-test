@@ -1,5 +1,5 @@
 ---
-name: communication-orchestrator
+name: dirtech-communication-orchestrator
 description: Orchestrateur du domaine Communication - Transmission du savoir technique
 ---
 

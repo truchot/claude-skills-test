@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: react-styling-orchestrator
 description: Routes styling questions to specialized agents
 ---
 

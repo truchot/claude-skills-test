@@ -1,5 +1,5 @@
 ---
-name: article-writer
+name: support-knowledge-article-writer
 description: Rédige des articles d'aide et tutoriels
 version: 1.0.0
 workflows:

@@ -134,7 +134,248 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | Prometheus, Grafana, logs, alerting | `devops/monitoring` |
 | Blue-Green, Canary, rollback, feature flag | `devops/deployment` |
 
-### ✅ Domaines Récemment Ajoutés (v3.2.0)
+### Team Management (Gestion d'Équipe)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| onboarding, intégration, nouveau dev, arrivée | `team-management/onboarding` |
+| compétence, matrice, skill, lacune, bus factor | `team-management/skills-tracking` |
+| assigner, attribution, staffing, qui pour | `team-management/task-allocation` |
+| charge, équilibrer, disponibilité, capacité | `team-management/task-allocation` |
+| vélocité, burnout, surcharge, moral | `team-management/performance` |
+| pair programming, reviewer, knowledge sharing | `team-management/collaboration` |
+| carrière, progression, 1:1, feedback, évaluation | `team-management/career` |
+
+### Incident Management (Gestion d'Incidents)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| incident, down, 500, erreur production, panne | `incident-management/detection` |
+| sévérité, P1, P2, classifier, triage | `incident-management/detection` |
+| war room, coordination crise, bridge call | `incident-management/response` |
+| runbook, procédure urgence, que faire | `incident-management/response` |
+| communication incident, status page | `incident-management/response` |
+| root cause, 5 whys, postmortem, blameless | `incident-management/resolution` |
+| action corrective, suivi incident | `incident-management/resolution` |
+
+### Agent Performance Monitor (Méta-Monitoring)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| usage agent, statistiques agents, fréquence utilisation | `agent-performance-monitor/usage-metrics` |
+| temps résolution, latence agent, performance agent | `agent-performance-monitor/usage-metrics` |
+| taux succès, taux échec, efficacité agent | `agent-performance-monitor/usage-metrics` |
+| routage qualité, rerouting, erreur aiguillage | `agent-performance-monitor/routing-quality` |
+| goulot, bottleneck, engorgement, blocage agent | `agent-performance-monitor/routing-quality` |
+| couverture agent, lacune, demande non couverte | `agent-performance-monitor/routing-quality` |
+| agent redondant, consolider, fusionner agents | `agent-performance-monitor/optimization` |
+| qualité prompt, instruction agent, clarté | `agent-performance-monitor/optimization` |
+| dashboard framework, tableau de bord agents | `agent-performance-monitor/optimization` |
+| digest hebdomadaire, rapport agents, weekly | `agent-performance-monitor/optimization` |
+
+### Tech Radar (Veille Technologique)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| évaluer technologie, comparer framework, benchmark techno | `tech-radar/evaluation` |
+| adopt, trial, assess, hold, radar techno | `tech-radar/evaluation` |
+| risque adoption, vendor lock-in, maturité techno | `tech-radar/evaluation` |
+| compatibilité stack, intégration technologie | `tech-radar/evaluation` |
+| audit dépendances, npm audit, vulnérabilité lib | `tech-radar/tracking` |
+| veille techno, tendance, nouvelle release | `tech-radar/tracking` |
+| déprécié, deprecated, EOL, fin support | `tech-radar/tracking` |
+| ADR, decision record, documenter choix technique | `tech-radar/tracking` |
+| migration technologique, upgrade majeur, transition | `tech-radar/migration` |
+| PoC, proof of concept, prototype validation | `tech-radar/migration` |
+| optimiser stack, simplifier, réduire complexité | `tech-radar/migration` |
+| coût bénéfice, ROI technologique, trade-off techno | `tech-radar/migration` |
+
+### Backend Developer (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| Node.js, Express, NestJS, API REST backend | `backend-developer/api` |
+| JWT, OAuth, bcrypt, session, auth | `backend-developer/auth-security` |
+| PostgreSQL, MongoDB, Prisma, TypeORM, query | `backend-developer/database` |
+| cache Redis, profiling, N+1, indexation | `backend-developer/performance` |
+| PHPUnit, Supertest, Jest backend | `backend-developer/testing` |
+| Clean Architecture, hexagonal, DDD backend | `backend-developer/architecture` |
+
+### Frontend Developer (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| HTML, CSS, JavaScript, TypeScript, composant | `frontend-developer/foundations` |
+| React, Vue, Angular, framework frontend | `frontend-developer/frameworks` |
+| ES6+, async/await, closures, modules JS | `frontend-developer/javascript` |
+| Tailwind, Sass, CSS Modules, styled-components | `frontend-developer/styling` |
+| Redux, Zustand, Context, state frontend | `frontend-developer/state-management` |
+| Core Web Vitals, lazy loading, bundle size | `frontend-developer/performance` |
+| Jest, Vitest, RTL, Cypress, Playwright | `frontend-developer/testing` |
+| Webpack, Vite, ESLint, Prettier, tooling frontend | `frontend-developer/tooling` |
+
+### React Expert (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| React, hooks, useState, useEffect, useRef | `react-expert/hooks` |
+| composant React, props, children, forms | `react-expert/components` |
+| Redux, Zustand, Context, state management | `react-expert/state` |
+| React Query, SWR, Suspense, data fetching | `react-expert/data` |
+| RTL, hooks testing, mocking React | `react-expert/testing` |
+| memoization, React.memo, useMemo, code splitting | `react-expert/performance` |
+
+### AI Integration (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| OpenAI, Claude API, Mistral, LLM, LangChain | `ai-integration/llm` |
+| RAG, retrieval, chunking, ingestion, embeddings | `ai-integration/rag` |
+| vector database, Pinecone, pgvector, Weaviate | `ai-integration/vectors` |
+| prompt engineering, templates, guardrails | `ai-integration/prompting` |
+| AI agents, multi-agent, tools, memory | `ai-integration/agents` |
+| MLOps, model deployment, fine-tuning, monitoring | `ai-integration/mlops` |
+
+### DDD - Domain-Driven Design (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| bounded context, context mapping, ubiquitous language | `ddd/strategic` |
+| entity, value object, aggregate, repository, domain event | `ddd/tactical` |
+| event storming, domain storytelling, example mapping | `ddd/strategic` |
+| CQRS, event sourcing, saga, anti-corruption layer | `ddd/tactical` |
+| DDD pattern selector, model validator, performance | `ddd/tooling` |
+| aggregate template, value object template | `ddd/templates` |
+| e-commerce domain, anemic to rich migration | `ddd/case-studies` |
+| Next.js DDD, intégration framework DDD | `ddd/integrations` |
+
+### Security Expert (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| SAST, DAST, IAST, SCA, AppSec | `security-expert/appsec` |
+| secure coding, validation input, auth sécurisée | `security-expert/secure-coding` |
+| threat modeling, STRIDE, attack tree, risque | `security-expert/threat-modeling` |
+| pentest, OWASP Top 10, API security, vulnérabilité web | `security-expert/penetration` |
+| SOC2, ISO 27001, PCI-DSS, conformité sécurité | `security-expert/compliance` |
+
+### Testing Process (Méthodologie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| stratégie de tests, pyramide tests, TDD, BDD | `testing-process/strategy` |
+| test unitaire méthodologie, intégration, e2e, component | `testing-process/types` |
+| couverture code, mutation testing, flaky tests | `testing-process/quality` |
+| test de charge, load testing, performance frontend | `testing-process/performance` |
+| test sécurité OWASP, dépendances, headers | `testing-process/security` |
+| test accessibilité, WCAG audit | `testing-process/accessibility` |
+
+### Client Intake (Réception)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| nouveau client, demande entrante, premier contact | `client-intake/reception` |
+| qualifier besoin, complexité, urgence, faisabilité | `client-intake/qualification` |
+| extraire exigences, stakeholders, contraintes | `client-intake/extraction` |
+| accusé réception, clarification, statut demande | `client-intake/response` |
+| router demande, skill matcher, priorité | `client-intake/routing` |
+
+### Direction Artistique (Stratégie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| identité visuelle, charte graphique, brand audit | `direction-artistique/branding` |
+| stratégie UX, parcours utilisateur, principes UX | `direction-artistique/ux-strategy` |
+| vision design, principes design, innovation design | `direction-artistique/design-strategy` |
+| style guide, standards composants, critères qualité | `direction-artistique/guidelines` |
+| brief créatif, délégation design, validation créative | `direction-artistique/orchestration` |
+
+### Direction Commerciale (Stratégie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| stratégie commerciale, objectifs CA, go-to-market | `direction-commerciale/strategie-commerciale` |
+| modèle pricing, valorisation services, négociation | `direction-commerciale/pricing` |
+| partenariats stratégiques, évaluation partenaires | `direction-commerciale/partenariats` |
+| analyse rentabilité, marge, arbitrage investissement | `direction-commerciale/rentabilite` |
+| comptes clés, satisfaction stratégique, rétention | `direction-commerciale/relation-client` |
+
+### Direction Marketing (Stratégie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| stratégie marketing, audit marché, roadmap marketing | `direction-marketing/strategie` |
+| positionnement marque, persona, proposition valeur | `direction-marketing/positionnement` |
+| canaux acquisition, funnel design, budget marketing | `direction-marketing/acquisition` |
+| KPIs marketing, OKR, attribution, ROI | `direction-marketing/mesure` |
+| brief marketing, délégation, validation stratégie | `direction-marketing/orchestration` |
+
+### Direction Opérations (Stratégie)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| gouvernance, vision projet, comitologie, règles | `direction-operations/gouvernance` |
+| capacité équipe, allocation, staffing, budget RH | `direction-operations/ressources` |
+| priorisation portefeuille, roadmap stratégique | `direction-operations/pilotage` |
+| standards qualité, SLA, amélioration continue | `direction-operations/qualite-delivery` |
+| synchro équipes, dépendances, knowledge management | `direction-operations/coordination` |
+
+### Commercial CRM (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| pipeline commercial, opportunité, forecast ventes | `commercial-crm/pipeline` |
+| prospection, lead generation, qualification prospect | `commercial-crm/prospection` |
+| proposition commerciale, closing, négociation prix | `commercial-crm/negotiation` |
+| renouvellement, upsell, fidélisation client | `commercial-crm/retention` |
+
+### Content Management (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| calendrier éditorial, workflow publication | `content-management/editorial` |
+| rédaction article, page, copywriting web | `content-management/redaction` |
+| gestion médias, assets, images, vidéos | `content-management/assets` |
+| localisation, traduction, multi-langue | `content-management/localization` |
+
+### Finance Analytics (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| facture, devis, facturation, paiement | `finance-analytics/billing` |
+| KPIs business, métriques financières | `finance-analytics/kpis` |
+| reporting financier, tableau de bord direction | `finance-analytics/reporting` |
+| prévisions financières, forecast, trésorerie | `finance-analytics/forecasting` |
+
+### Legal Compliance (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| RGPD, données personnelles, traitement, DPO | `legal-compliance/rgpd` |
+| CGV, CGU, mentions légales, politique confidentialité | `legal-compliance/documents` |
+| audit conformité, gap analysis, plan remédiation | `legal-compliance/audit` |
+| cookies, consentement, bandeau cookie, CNIL | `legal-compliance/cookies` |
+
+### Support Client (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| ticket support, demande client, SLA support | `support-client/ticketing` |
+| FAQ, base de connaissances, article aide | `support-client/knowledge` |
+| escalade support, transfert, niveau 2 | `support-client/escalation` |
+| satisfaction client, NPS, CSAT, feedback | `support-client/satisfaction` |
+
+### Legacy Modernization (Implémentation)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| audit legacy, évaluation code existant, dette | `legacy-modernization/assessment` |
+| stratégie modernisation, strangler fig, roadmap legacy | `legacy-modernization/strategies` |
+| migration code, réécriture progressive, extraction | `legacy-modernization/migration` |
+| refactoring legacy, clean code, découplage | `legacy-modernization/refactoring` |
+| tests legacy, couverture rétroactive, golden master | `legacy-modernization/testing` |
+
+### ✅ Domaines Récemment Ajoutés (v4.3.0)
 
 Ces domaines sont maintenant **disponibles** et couverts par les skills suivants :
 
@@ -164,6 +405,29 @@ Requête utilisateur
 │  ├─ Choix lib, pattern ? → lead-dev/technical-decisions
 │  ├─ Formation, mentoring ? → lead-dev/mentoring
 │  └─ Release, deploy, hotfix ? → lead-dev/delivery
+│
+├─ Concerne les PERSONNES de l'équipe ?
+│  ├─ Onboarding nouveau dev ? → team-management/onboarding
+│  ├─ Compétences, matrice, gaps ? → team-management/skills-tracking
+│  ├─ Qui assigner, charge, dispo ? → team-management/task-allocation
+│  ├─ Vélocité, burnout, qualité ? → team-management/performance
+│  ├─ Pair programming, reviews ? → team-management/collaboration
+│  └─ Carrière, 1:1, feedback ? → team-management/career
+│
+├─ Concerne un INCIDENT technique ?
+│  ├─ Classifier, impact ? → incident-management/detection
+│  ├─ War room, runbook, comm ? → incident-management/response
+│  └─ Root cause, postmortem ? → incident-management/resolution
+│
+├─ Concerne la PERFORMANCE des AGENTS IA ?
+│  ├─ Usage, stats, succès ? → agent-performance-monitor/usage-metrics
+│  ├─ Routage, couverture, goulots ? → agent-performance-monitor/routing-quality
+│  └─ Optimisation, consolidation ? → agent-performance-monitor/optimization
+│
+├─ Concerne la VEILLE TECHNOLOGIQUE ?
+│  ├─ Évaluer une techno, adopt/trial ? → tech-radar/evaluation
+│  ├─ Dépendances, dépréciations, ADR ? → tech-radar/tracking
+│  └─ Migration, PoC, stack ? → tech-radar/migration
 │
 ├─ Concerne un PROCESSUS de dev ?
 │  └─ → web-dev-process
@@ -205,6 +469,57 @@ Requête utilisateur
 │  ├─ Benchmark concurrentiel ? → direction-technique/strategy/benchmark
 │  ├─ Roadmap technique ? → direction-technique/strategy/strategie-digitale
 │  └─ KPIs business ? → direction-technique/strategy/kpis-business
+│
+├─ Concerne l'implémentation BACKEND ?
+│  └─ → backend-developer
+│
+├─ Concerne React spécifiquement ?
+│  └─ → react-expert
+│
+├─ Concerne l'intégration IA/LLM ?
+│  └─ → ai-integration
+│
+├─ Concerne le DDD (Domain-Driven Design) ?
+│  └─ → ddd
+│
+├─ Concerne la SÉCURITÉ applicative ?
+│  └─ → security-expert
+│
+├─ Concerne la MÉTHODOLOGIE de tests ?
+│  └─ → testing-process
+│
+├─ Concerne la RÉCEPTION d'une demande client ?
+│  └─ → client-intake
+│
+├─ Concerne la DIRECTION ARTISTIQUE ?
+│  └─ → direction-artistique
+│
+├─ Concerne la DIRECTION COMMERCIALE ?
+│  └─ → direction-commerciale
+│
+├─ Concerne la DIRECTION MARKETING ?
+│  └─ → direction-marketing
+│
+├─ Concerne la DIRECTION OPÉRATIONS ?
+│  └─ → direction-operations
+│
+├─ Concerne le CRM ou le PIPELINE COMMERCIAL ?
+│  └─ → commercial-crm
+│
+├─ Concerne la GESTION de CONTENU éditorial ?
+│  └─ → content-management
+│
+├─ Concerne la FINANCE ou la FACTURATION ?
+│  └─ → finance-analytics
+│
+├─ Concerne le JURIDIQUE ou la CONFORMITÉ ?
+│  └─ → legal-compliance
+│
+├─ Concerne le SUPPORT CLIENT ?
+│  └─ → support-client
+│
+├─ Concerne la MODERNISATION de code legacy ?
+│  └─ → legacy-modernization
 │
 └─ Autre domaine ?
    └─ → Tous les domaines sont couverts. Clarifier le besoin si ambigu.
@@ -253,6 +568,42 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | | Config → `devops/monitoring` | Si Prometheus, Grafana |
 | **infrastructure** | Stratégie → `direction-technique/infrastructure` | Si choix cloud |
 | | IaC → `devops/infrastructure` | Si Terraform, AWS, GCP |
+| **onboarding** | Code/mentoring → `lead-dev/mentoring` | Si feedback code, formation technique |
+| | Intégration équipe → `team-management/onboarding` | Si nouveau dev, setup, accueil |
+| **feedback** | Code review → `lead-dev/code-review` | Si retour sur du code/PR |
+| | Carrière/progression → `team-management/career` | Si évaluation, 1:1, SBI |
+| **knowledge sharing** | Session/présentation → `team-management/collaboration` | Si organiser un partage collectif |
+| | Mentoring individuel → `lead-dev/mentoring` | Si accompagner un dev sur un sujet |
+| **migration** | Architecture/décision → `direction-technique/avant-projet` | Si décision stratégique de migration |
+| | Plan de migration step-by-step → `tech-radar/migration` | Si planifier la transition |
+| | Legacy modernisation → `legacy-modernization` | Si refactoring progressif d'un legacy |
+| **dépendance** | Audit sécurité/versions → `tech-radar/tracking` | Si audit des libs, CVE |
+| | Mise à jour opérationnelle → `lead-dev/technical-decisions` | Si bump une lib spécifique |
+| **performance agent** | Méta-monitoring framework → `agent-performance-monitor` | Si performance des agents IA |
+| | Performance humaine → `team-management/performance` | Si vélocité dev, burnout |
+| **dashboard** | Dashboard framework agents → `agent-performance-monitor/optimization` | Si monitoring des agents |
+| | Dashboard business → `marketing-analytics` | Si KPIs business, GA4 |
+| | Dashboard charge équipe → `team-management/task-allocation` | Si charge des devs |
+| **branding** | Stratégie brand globale → `direction-artistique/branding` | Si vision identité, charte |
+| | Exécution design → `ux-ui-design/branding` | Si logo, assets, motion |
+| **RGPD** | Conformité juridique → `legal-compliance/rgpd` | Si audit, DPO, conformité |
+| | Sécurité code → `security-expert/compliance/rgpd` | Si implémentation technique |
+| | Direction technique → `direction-technique/securite` | Si politique RGPD |
+| **facturation** | Opérationnel factures → `finance-analytics/billing` | Si créer/gérer factures |
+| | Projet client → `project-management/facturation` | Si facture projet client |
+| **prospection** | CRM opérationnel → `commercial-crm/prospection` | Si pipeline, leads |
+| | Stratégie → `direction-commerciale/strategie-commerciale` | Si go-to-market |
+| **contenu** | Stratégie éditoriale → `content-marketing` | Si ligne éditoriale, SEO |
+| | Gestion CMS → `content-management` | Si workflow, assets, publication |
+| | Copywriting site → `content-management/redaction` | Si rédaction pages |
+| **audit** | Audit marché → `direction-marketing/strategie` | Si benchmark, SWOT |
+| | Audit conformité → `legal-compliance/audit` | Si gap analysis, conformité |
+| | Audit sécurité → `security-expert/appsec` | Si SAST/DAST |
+| | Audit legacy → `legacy-modernization` | Si évaluation code existant |
+| **ticket** | Support client → `support-client/ticketing` | Si demande utilisateur |
+| | Bug dev → `lead-dev/team-coordination` | Si blocage technique |
+| **persona** | Stratégie marketing → `direction-marketing/positionnement` | Si définition personas marché |
+| | UX Research → `ux-ui-design/research` | Si personas UX produit |
 
 ### Règle de Décision en 4 Étapes
 

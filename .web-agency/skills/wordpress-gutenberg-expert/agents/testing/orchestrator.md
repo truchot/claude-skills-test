@@ -1,5 +1,5 @@
 ---
-name: orchestrator
+name: wp-testing-orchestrator
 description: Testing Orchestrator
 ---
 
