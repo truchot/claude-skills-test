@@ -158,7 +158,39 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | root cause, 5 whys, postmortem, blameless | `incident-management/resolution` |
 | action corrective, suivi incident | `incident-management/resolution` |
 
-### ✅ Domaines Récemment Ajoutés (v4.2.0)
+### Agent Performance Monitor (Méta-Monitoring)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| usage agent, statistiques agents, fréquence utilisation | `agent-performance-monitor/usage-metrics` |
+| temps résolution, latence agent, performance agent | `agent-performance-monitor/usage-metrics` |
+| taux succès, taux échec, efficacité agent | `agent-performance-monitor/usage-metrics` |
+| routage qualité, rerouting, erreur aiguillage | `agent-performance-monitor/routing-quality` |
+| goulot, bottleneck, engorgement, blocage agent | `agent-performance-monitor/routing-quality` |
+| couverture agent, lacune, demande non couverte | `agent-performance-monitor/routing-quality` |
+| agent redondant, consolider, fusionner agents | `agent-performance-monitor/optimization` |
+| qualité prompt, instruction agent, clarté | `agent-performance-monitor/optimization` |
+| dashboard framework, tableau de bord agents | `agent-performance-monitor/optimization` |
+| digest hebdomadaire, rapport agents, weekly | `agent-performance-monitor/optimization` |
+
+### Tech Radar (Veille Technologique)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| évaluer technologie, comparer framework, benchmark techno | `tech-radar/evaluation` |
+| adopt, trial, assess, hold, radar techno | `tech-radar/evaluation` |
+| risque adoption, vendor lock-in, maturité techno | `tech-radar/evaluation` |
+| compatibilité stack, intégration technologie | `tech-radar/evaluation` |
+| audit dépendances, npm audit, vulnérabilité lib | `tech-radar/tracking` |
+| veille techno, tendance, nouvelle release | `tech-radar/tracking` |
+| déprécié, deprecated, EOL, fin support | `tech-radar/tracking` |
+| ADR, decision record, documenter choix technique | `tech-radar/tracking` |
+| migration technologique, upgrade majeur, transition | `tech-radar/migration` |
+| PoC, proof of concept, prototype validation | `tech-radar/migration` |
+| optimiser stack, simplifier, réduire complexité | `tech-radar/migration` |
+| coût bénéfice, ROI technologique, trade-off techno | `tech-radar/migration` |
+
+### ✅ Domaines Récemment Ajoutés (v4.3.0)
 
 Ces domaines sont maintenant **disponibles** et couverts par les skills suivants :
 
@@ -201,6 +233,16 @@ Requête utilisateur
 │  ├─ Classifier, impact ? → incident-management/detection
 │  ├─ War room, runbook, comm ? → incident-management/response
 │  └─ Root cause, postmortem ? → incident-management/resolution
+│
+├─ Concerne la PERFORMANCE des AGENTS IA ?
+│  ├─ Usage, stats, succès ? → agent-performance-monitor/usage-metrics
+│  ├─ Routage, couverture, goulots ? → agent-performance-monitor/routing-quality
+│  └─ Optimisation, consolidation ? → agent-performance-monitor/optimization
+│
+├─ Concerne la VEILLE TECHNOLOGIQUE ?
+│  ├─ Évaluer une techno, adopt/trial ? → tech-radar/evaluation
+│  ├─ Dépendances, dépréciations, ADR ? → tech-radar/tracking
+│  └─ Migration, PoC, stack ? → tech-radar/migration
 │
 ├─ Concerne un PROCESSUS de dev ?
 │  └─ → web-dev-process
@@ -296,6 +338,16 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | | Carrière/progression → `team-management/career` | Si évaluation, 1:1, SBI |
 | **knowledge sharing** | Session/présentation → `team-management/collaboration` | Si organiser un partage collectif |
 | | Mentoring individuel → `lead-dev/mentoring` | Si accompagner un dev sur un sujet |
+| **migration** | Architecture/décision → `direction-technique/avant-projet` | Si décision stratégique de migration |
+| | Plan de migration step-by-step → `tech-radar/migration` | Si planifier la transition |
+| | Legacy modernisation → `legacy-modernization` | Si refactoring progressif d'un legacy |
+| **dépendance** | Audit sécurité/versions → `tech-radar/tracking` | Si audit des libs, CVE |
+| | Mise à jour opérationnelle → `lead-dev/technical-decisions` | Si bump une lib spécifique |
+| **performance agent** | Méta-monitoring framework → `agent-performance-monitor` | Si performance des agents IA |
+| | Performance humaine → `team-management/performance` | Si vélocité dev, burnout |
+| **dashboard** | Dashboard framework agents → `agent-performance-monitor/optimization` | Si monitoring des agents |
+| | Dashboard business → `marketing-analytics` | Si KPIs business, GA4 |
+| | Dashboard charge équipe → `team-management/task-allocation` | Si charge des devs |
 
 ### Règle de Décision en 4 Étapes
 

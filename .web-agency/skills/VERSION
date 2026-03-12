@@ -1,7 +1,7 @@
 # Web Agency IA - Version Information
 
 ## Current Version
-VERSION=4.2.0
+VERSION=4.3.0
 RELEASE_DATE=2026-03-12
 
 ## Schema Version
@@ -13,8 +13,8 @@ WORKFLOW_SCHEMA=1.0.0
 MIN_CLAUDE_CODE_VERSION=1.0.0
 
 ## Statistics
-TOTAL_SKILLS=32
-TOTAL_AGENTS=904
+TOTAL_SKILLS=34
+TOTAL_AGENTS=926
 TOTAL_WORKFLOWS=9
 
 ## Skills Breakdown
@@ -35,6 +35,8 @@ web-dev-process=64
 testing-process=25
 team-management=18
 incident-management=9
+agent-performance-monitor=10
+tech-radar=12
 
 # Niveau 4: Implémentation
 frontend-developer=33

@@ -3,6 +3,11 @@ name: team-management
 description: |-
   Gestion de l'équipe technique — onboarding, compétences, allocation,
   performance, collaboration et évolution de carrière des développeurs.
+  Utilise ce skill quand: (1) onboarding d'un nouveau développeur,
+  (2) évaluation des compétences de l'équipe, (3) assignation intelligente
+  de tâches, (4) détection de surcharge ou burnout, (5) organisation de
+  pair programming, (6) préparation d'un 1:1 ou feedback structuré,
+  (7) planification de formation.
 metadata:
   version: 1.0.0
   status: active

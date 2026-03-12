@@ -2,7 +2,11 @@
 name: incident-management
 description: |-
   Gestion structurée des incidents techniques — détection, classification,
-  réponse, résolution et apprentissage post-incident.
+  réponse, résolution et apprentissage post-incident. Utilise ce skill quand:
+  (1) classifier la sévérité d'un incident (P1-P4), (2) coordonner la réponse
+  à un incident, (3) rédiger la communication incident, (4) faciliter un
+  postmortem blameless, (5) analyser la root cause, (6) suivre les actions
+  correctives post-incident.
 metadata:
   version: 1.0.0
   status: active
