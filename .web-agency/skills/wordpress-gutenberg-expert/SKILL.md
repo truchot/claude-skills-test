@@ -71,7 +71,9 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ custom-blocks.md
 │  ├─ block-variations.md
 │  ├─ block-styles.md
-│  └─ data-stores.md
+│  ├─ data-stores.md
+│  ├─ block-bindings.md          # NOUVEAU — Block Bindings API (WP 6.5+)
+│  └─ block-hooks.md             # NOUVEAU — Block Hooks (insertion auto)
 │
 ├─ Tooling (agents/tooling/)
 │  ├─ orchestrator.md
@@ -79,14 +81,23 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ project-init.md
 │  ├─ environment-config.md
 │  ├─ local-dev.md
+│  ├─ wp-playground.md            # NOUVEAU — wp-now, Playground, Blueprints
+│  ├─ mcp-integration.md          # NOUVEAU — MCP Adapter WordPress
 │  ├─ staging-setup.md
 │  ├─ build-tooling.md
 │  ├─ repository-setup.md
 │  ├─ cicd-pipelines.md
 │  ├─ gitlab-ci.md
 │  ├─ deployment-ssh.md
+│  ├─ go-live-checklist.md        # NOUVEAU — Checklist mise en prod
 │  ├─ issue-management.md
 │  └─ quality-check.md
+│
+├─ Discovery (agents/discovery/)   # NOUVEAU DOMAINE
+│  └─ site-audit.md               # Audit de site existant
+│
+├─ Content (agents/content/)       # NOUVEAU DOMAINE
+│  └─ content-import.md           # Import, export, migration
 │
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
@@ -117,7 +128,7 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
-**Total : 37 agents spécialisés**
+**Total : 44 agents spécialisés** (37 originaux + 7 nouveaux)
 
 ## Domaines et Agents
 
@@ -136,7 +147,7 @@ Sous-orchestrateur avec 6 agents spécialisés :
 
 ### 2. Gutenberg (`agents/gutenberg-blocks/`)
 
-Sous-orchestrateur avec 4 agents spécialisés :
+Sous-orchestrateur avec 6 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -144,10 +155,12 @@ Sous-orchestrateur avec 4 agents spécialisés :
 | `block-variations.md` | Variantes fonctionnelles (registerBlockVariation) |
 | `block-styles.md` | Variantes visuelles CSS (registerBlockStyle) |
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
+| `block-bindings.md` | Block Bindings API (WP 6.5+), sources custom, post-meta bindings |
+| `block-hooks.md` | Block Hooks, insertion automatique, blockHooks dans block.json |
 
 ### 3. Tooling (`agents/tooling/`)
 
-Sous-orchestrateur avec 12 agents spécialisés :
+Sous-orchestrateur avec 15 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -155,12 +168,15 @@ Sous-orchestrateur avec 12 agents spécialisés :
 | `project-init.md` | Structure projet, Composer, package.json |
 | `environment-config.md` | .env, wp-config.php multi-environnement, constantes WP |
 | `local-dev.md` | wp-env, Local by Flywheel, Docker, base de données locale |
+| `wp-playground.md` | WordPress Playground, wp-now, Blueprints, WASM runtime |
+| `mcp-integration.md` | MCP Adapter WordPress, Abilities API, connexion Claude Code ↔ WP |
 | `staging-setup.md` | Serveur staging, .htpasswd, utilisateurs WP, notification client |
 | `build-tooling.md` | @wordpress/scripts, webpack, npm |
 | `repository-setup.md` | Création repo Git/GitHub, .gitignore, branches, gitflow |
 | `cicd-pipelines.md` | GitHub Actions, tests automatisés, linting, builds |
 | `gitlab-ci.md` | GitLab CI pipelines, .gitlab-ci.yml, runners, environnements |
 | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
+| `go-live-checklist.md` | Checklist mise en production, vérifications pré/post-launch |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 | `quality-check.md` | Linting (PHPCS, ESLint, markdownlint), validation, pre-commit |
 
@@ -194,7 +210,19 @@ Sous-orchestrateur avec 3 agents :
 | `js-unit-tests.md` | Jest, @wordpress/scripts test-unit-js, React Testing Library |
 | `e2e-tests.md` | Playwright, @wordpress/e2e-test-utils, tests d'intégration |
 
-### 7. Agents Directs
+### 7. Discovery (`agents/discovery/`)
+
+| Agent | Domaine |
+|-------|---------|
+| `site-audit.md` | Audit de site existant, inventaire contenu/plugins, performance baseline |
+
+### 8. Content (`agents/content/`)
+
+| Agent | Domaine |
+|-------|---------|
+| `content-import.md` | Import WXR, migration DB, search-replace, uploads sync, Classic→Blocks |
+
+### 9. Agents Directs
 
 | Agent | Fichier | Domaine |
 |-------|---------|---------|
@@ -214,15 +242,22 @@ Sous-orchestrateur avec 3 agents :
 | hook, action, filter, add_action, add_filter, priorité | WP Core | `agents/wp-core/hooks-filters.md` |
 | nonce, sanitize, escape, security, CSRF, XSS, SQL injection | WP Core | `agents/wp-core/security-validation.md` |
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
+| block bindings, register_block_bindings_source, post-meta binding, custom source | Gutenberg | `agents/gutenberg-blocks/block-bindings.md` |
+| block hooks, blockHooks, hooked_block_types, insertion auto, injection block | Gutenberg | `agents/gutenberg-blocks/block-hooks.md` |
 | WP-CLI, commande, projet, init, composer, package.json | Tooling | `agents/tooling/orchestrator.md` |
 | .env, wp-config, environment, constantes, config, WP_DEBUG | Tooling | `agents/tooling/environment-config.md` |
 | wp-env, docker, local, localhost, database locale | Tooling | `agents/tooling/local-dev.md` |
+| playground, wp-now, wasm, blueprint, studio | Tooling | `agents/tooling/wp-playground.md` |
+| MCP, mcp-adapter, abilities API, Claude Code WordPress, AI WordPress | Tooling | `agents/tooling/mcp-integration.md` |
 | staging, serveur staging, .htpasswd, protection | Tooling | `agents/tooling/staging-setup.md` |
 | build, webpack, npm, @wordpress/scripts | Tooling | `agents/tooling/build-tooling.md` |
 | repo, repository, git init, git clone, .gitignore, branches | Tooling | `agents/tooling/repository-setup.md` |
 | CI/CD, pipeline, GitHub Actions, tests, linting, phpcs, phpunit | Tooling | `agents/tooling/cicd-pipelines.md` |
 | deploy, déploiement, SSH, rsync, secrets, production | Tooling | `agents/tooling/deployment-ssh.md` |
+| go-live, mise en prod, checklist production, launch, lancement | Tooling | `agents/tooling/go-live-checklist.md` |
 | issue, bug report, template, label, GitHub issue, GitLab | Tooling | `agents/tooling/issue-management.md` |
+| audit, inventaire, refonte, analyse site existant, migration assessment | Discovery | `agents/discovery/site-audit.md` |
+| import, export, migration contenu, WXR, search-replace, uploads, Classic→Blocks | Content | `agents/content/content-import.md` |
 | token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
 | theme, block theme, theme.json settings, structure theme, functions.php | Theme | `agents/theme/block-theme.md` |
 | template, template-part, pattern, hero, cta, style variation | Theme | `agents/theme/templates-patterns.md` |
@@ -303,6 +338,33 @@ Question: "Comment ajouter des données structurées Schema.org ?"
 
 Question: "Comment rendre mon block accessible au clavier ?"
 → accessibility-expert.md
+
+Question: "Comment lier un block natif à un champ custom ?"
+→ Gutenberg → block-bindings.md
+
+Question: "Comment injecter un CTA après chaque post ?"
+→ Gutenberg → block-hooks.md
+
+Question: "Comment lancer WordPress sans Docker ?"
+→ Tooling → wp-playground.md
+
+Question: "Comment connecter Claude Code à mon site WordPress ?"
+→ Tooling → mcp-integration.md
+
+Question: "Que vérifier avant la mise en production ?"
+→ Tooling → go-live-checklist.md
+
+Question: "Comment auditer un site avant refonte ?"
+→ Discovery → site-audit.md
+
+Question: "Comment migrer le contenu vers un nouveau site ?"
+→ Content → content-import.md
+
+Question: "Comment créer un site WordPress complet ?"
+→ workflows/create-site.md
+
+Question: "Comment faire une refonte de site WordPress ?"
+→ workflows/redesign-site.md
 ```
 
 ### Étape 3 : Exécution
@@ -333,6 +395,9 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment créer une variation de Cover/Group ? | `gutenberg-blocks/block-variations.md` |
 | Comment ajouter un style CSS à un block ? | `gutenberg-blocks/block-styles.md` |
 | Comment utiliser useSelect/useDispatch ? | `gutenberg-blocks/data-stores.md` |
+| Comment connecter un block à post-meta sans code custom ? | `gutenberg-blocks/block-bindings.md` |
+| Comment créer une source de données custom pour blocks ? | `gutenberg-blocks/block-bindings.md` |
+| Comment injecter un block automatiquement dans un template ? | `gutenberg-blocks/block-hooks.md` |
 
 ### Tooling
 
@@ -353,6 +418,11 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment faire des tests automatisés ? | `tooling/cicd-pipelines.md` |
 | Comment déployer avec SSH/rsync ? | `tooling/deployment-ssh.md` |
 | Comment configurer les secrets GitHub ? | `tooling/deployment-ssh.md` |
+| Comment utiliser WordPress Playground / wp-now ? | `tooling/wp-playground.md` |
+| Comment créer un Blueprint pour Playground ? | `tooling/wp-playground.md` |
+| Comment connecter Claude Code à mon site WordPress ? | `tooling/mcp-integration.md` |
+| Comment configurer le MCP Adapter WordPress ? | `tooling/mcp-integration.md` |
+| Que vérifier avant la mise en production ? | `tooling/go-live-checklist.md` |
 | Comment créer des templates d'issues ? | `tooling/issue-management.md` |
 
 ### Design
@@ -383,6 +453,21 @@ Question: "Comment rendre mon block accessible au clavier ?"
 | Comment tester mon plugin avec PHPUnit ? | `testing/php-unit-tests.md` |
 | Comment tester mes composants React ? | `testing/js-unit-tests.md` |
 | Comment faire des tests e2e ? | `testing/e2e-tests.md` |
+
+### Discovery
+
+| Question | Agent Final |
+|----------|-------------|
+| Comment auditer un site WordPress existant ? | `discovery/site-audit.md` |
+| Comment inventorier contenu et plugins avant refonte ? | `discovery/site-audit.md` |
+
+### Content
+
+| Question | Agent Final |
+|----------|-------------|
+| Comment migrer le contenu d'un site WordPress ? | `content/content-import.md` |
+| Comment convertir du contenu Classic en blocks ? | `content/content-import.md` |
+| Comment gérer les redirections SEO après migration ? | `content/content-import.md` |
 
 ### Agents Directs
 
@@ -467,6 +552,30 @@ Combine les expertises quand nécessaire :
 
 "Plugin complet : i18n + SEO + a11y"
 → i18n-localization.md + seo-expert.md + accessibility-expert.md
+
+"Afficher des données custom sans créer un block custom"
+→ gutenberg-blocks/block-bindings.md + wp-core/custom-meta.md
+
+"CTA automatique après chaque article"
+→ gutenberg-blocks/block-hooks.md + theme/templates-patterns.md
+
+"Audit complet avant refonte de site"
+→ discovery/site-audit.md + seo-expert.md
+
+"Migration complète d'un site WordPress"
+→ discovery/site-audit.md + content/content-import.md + tooling/go-live-checklist.md
+
+"Créer un site WordPress de A à Z"
+→ workflows/create-site.md (Brief → Design → Scaffolding → Build → Deploy)
+
+"Refonte complète d'un site existant"
+→ workflows/redesign-site.md (Audit → Design → Scaffolding → Migration → Go-Live)
+
+"Environnement de test rapide sans Docker"
+→ tooling/wp-playground.md + tooling/local-dev.md
+
+"Connecter Claude Code à WordPress pour administration IA"
+→ tooling/mcp-integration.md
 ```
 
 ## Format de Réponse
@@ -488,6 +597,13 @@ Combine les expertises quand nécessaire :
 
 - [Liens vers la documentation]
 ```
+
+## Workflows
+
+| Workflow | Description | Phases |
+|----------|-------------|--------|
+| `workflows/create-site.md` | Création complète d'un site WordPress | Brief → Design System → Scaffolding → Build → Deploy |
+| `workflows/redesign-site.md` | Refonte d'un site WordPress existant | Audit → Design → Scaffolding → Migration → Go-Live |
 
 ## Documentation du Skill
 
