@@ -648,3 +648,113 @@ L'écosystème converge vers **Playground comme fondation technique** :
 ### 10.5 WordPress Telex (à surveiller)
 
 Annoncé à WordCamp US 2025, **WordPress Telex** est une initiative pour la génération de blocks en langage naturel. Cela pourrait transformer la création de contenu et de patterns. À intégrer dans nos workflows quand l'API sera disponible.
+
+---
+
+## 11. Écosystème IA + WordPress : État des lieux critique
+
+> **Découverte majeure** : L'écosystème Claude Code + WordPress est déjà bien plus avancé qu'anticipé.
+
+### 11.1 Automattic wp-site-creator (Claude Cowork Plugin)
+
+**C'est LE projet de référence.** Annoncé en février 2026 par Automattic :
+
+- **Repo** : `Automattic/wordpress-agent-skills` → `claude-cowork/wp-site-creator`
+- **Fonctionnement** : Transforme une conversation Claude en un block theme déployé sur WordPress Studio
+- **Commandes** :
+  - `/quick-build` — Flow rapide en une session
+  - `/design-site` — Pipeline professionnel multi-phases (style tiles, layouts, mockups, galerie de design live)
+- **Skills inclus** : Site Specification, Site Design (fonts, colors, layout), WordPress Theme Creation
+- **Prérequis** : Claude Code + WordPress Studio (macOS) + Node.js 18+
+
+**Impact sur notre stratégie** : Ce plugin fait exactement ce que nous envisagions avec le workflow `/wp-create-site`. Nous devons soit l'intégrer/l'étendre, soit nous différencier (ex: support Bedrock, déploiement serveur, migration).
+
+### 11.2 MCP Servers WordPress — Écosystème mature
+
+| Serveur MCP | Mainteneur | Statut | Outils |
+|-------------|------------|--------|--------|
+| **WordPress/mcp-adapter** | WordPress Core AI team | **Officiel, entre dans WP Core 6.9** | Abilities API → MCP |
+| **WordPress.com MCP** | Automattic | Officiel, OAuth 2.1 | Plans payants WordPress.com |
+| **AI Engine (Meow Apps)** | Communauté | Stable | `claude mcp add` en une ligne |
+| **Claudeus WP MCP** | Communauté | Stable | **145+ outils**, batch operations |
+| **InstaWP MCP** | InstaWP | Stable | Posts, pages, media, users + sandbox |
+| **WooCommerce MCP** | WooCommerce | Officiel | Produits, commandes, permissions |
+| **MCP for WP (CloudFest)** | Communauté | Stable | WP-CLI as MCP Host |
+
+**L'info capitale** : Le **WordPress MCP Adapter est officiel** et entre dans WordPress Core via l'Abilities API en version 6.9. Cela signifie que tout site WordPress 6.9+ sera nativement contrôlable par Claude Code via MCP.
+
+### 11.3 Skills Claude Code pour WordPress existants
+
+| Projet | Source | Couverture |
+|--------|--------|------------|
+| **wp-site-creator** (Automattic) | GitHub officiel | Création de thèmes block depuis un prompt |
+| **claude-wordpress-skills** (elvismdev) | GitHub communauté | Performance, sécurité, Gutenberg, best practices |
+| **Notre skill** (ce repo) | Ce repo | Le plus complet : 42 agents, 6 domaines |
+
+### 11.4 Implications stratégiques
+
+Notre skill `wordpress-gutenberg-expert` se positionne différemment :
+
+| Aspect | wp-site-creator (Automattic) | Notre skill |
+|--------|------------------------------|-------------|
+| **Scope** | Création de thème uniquement | Tout le cycle de vie WP |
+| **Environnement** | Studio (macOS) | wp-env, Bedrock, serveurs |
+| **Déploiement** | Local uniquement | SSH, CI/CD, staging, prod |
+| **Contenu** | Généré par IA | Migration, import, audit |
+| **Architecture** | Monolithique | 42 agents modulaires |
+| **Cible** | Prototypage rapide | Projets professionnels |
+
+**Notre avantage compétitif** : la profondeur et la couverture complète (WP Core, testing, SEO, a11y, GDPR, deployment, CI/CD). Le wp-site-creator d'Automattic est excellent pour le bootstrapping mais ne couvre pas le cycle de vie complet d'un projet en agence.
+
+### 11.5 Plan d'intégration MCP recommandé
+
+**Priorité absolue** : Intégrer le WordPress MCP Adapter officiel dans notre workflow.
+
+```
+Claude Code + MCP Adapter
+        ↓
+┌───────────────────────┐
+│  WordPress 6.9+       │
+│  (Abilities API)      │
+│                       │
+│  • Créer des pages    │
+│  • Installer plugins  │
+│  • Modifier options   │
+│  • Gérer le contenu   │
+│  • Exporter/importer  │
+│  • Lancer WP-CLI      │
+└───────────────────────┘
+```
+
+Cela permettrait à notre skill de **contrôler directement** un site WordPress depuis Claude Code, transformant les agents en véritables opérateurs autonomes.
+
+---
+
+## 12. Stratégie révisée
+
+Au vu de ces découvertes, la stratégie d'implémentation est révisée :
+
+### Priorité 0 : Intégration MCP (nouveau)
+
+1. Documenter l'intégration du WordPress MCP Adapter officiel
+2. Créer un agent `agents/tooling/mcp-integration.md` pour configurer la connexion
+3. Adapter les agents existants pour utiliser MCP quand disponible
+
+### Priorité 1 : Différenciation (maintenu + enrichi)
+
+4. `agents/gutenberg-blocks/block-bindings.md` — Non couvert par wp-site-creator
+5. `agents/tooling/wp-playground.md` — Dev moderne
+6. `workflows/create-site.md` — Plus complet que `/quick-build` (Bedrock, CI/CD, deploy)
+7. `agents/discovery/site-audit.md` — Non couvert ailleurs
+
+### Priorité 2 : Cycle de vie complet (maintenu)
+
+8. `agents/content/content-import.md` — Migration (notre différenciation clé)
+9. `agents/tooling/go-live-checklist.md` — Go-live professionnel
+10. `workflows/redesign-site.md` — Refonte guidée
+
+### Priorité 3 : Veille (enrichi)
+
+11. Surveiller WordPress Telex pour l'intégration IA native
+12. Suivre l'évolution du MCP Adapter dans WP Core
+13. Évaluer le remplacement de Webpack par esbuild dans @wordpress/scripts v2
