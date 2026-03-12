@@ -38,7 +38,7 @@ Après : Custom Field → Block Binding (1 ligne) → Frontend
 ## Sources
 
 - **Block Bindings API** : <https://developer.wordpress.org/block-editor/reference-guides/block-api/block-bindings/>
-- **WP 6.9 improvements** : <https://make.wordpress.org/core/2025/11/12/block-bindings-improvements-in-wordpress-6-9/>
+- **WP 6.9 improvements** : <https://make.wordpress.org/core/tag/block-bindings/>
 
 ## Sources de données intégrées
 

@@ -72,8 +72,9 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ block-variations.md
 │  ├─ block-styles.md
 │  ├─ data-stores.md
-│  ├─ block-bindings.md          # NOUVEAU — Block Bindings API (WP 6.5+)
-│  └─ block-hooks.md             # NOUVEAU — Block Hooks (insertion auto)
+│  ├─ block-bindings.md          # Block Bindings API (WP 6.5+)
+│  ├─ block-hooks.md             # Block Hooks (insertion auto)
+│  └─ data-views.md              # DataViews & DataForm (WP 6.7+)
 │
 ├─ Tooling (agents/tooling/)
 │  ├─ orchestrator.md
@@ -81,27 +82,29 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ project-init.md
 │  ├─ environment-config.md
 │  ├─ local-dev.md
-│  ├─ wp-playground.md            # NOUVEAU — wp-now, Playground, Blueprints
-│  ├─ mcp-integration.md          # NOUVEAU — MCP Adapter WordPress
+│  ├─ wp-playground.md            # wp-now, Playground, Blueprints
+│  ├─ mcp-integration.md          # MCP Adapter WordPress
 │  ├─ staging-setup.md
 │  ├─ build-tooling.md
 │  ├─ repository-setup.md
 │  ├─ cicd-pipelines.md
 │  ├─ gitlab-ci.md
 │  ├─ deployment-ssh.md
-│  ├─ go-live-checklist.md        # NOUVEAU — Checklist mise en prod
+│  ├─ go-live-checklist.md        # Checklist mise en prod
+│  ├─ trellis-deploy.md           # Trellis/Ansible provisioning & deploy
 │  ├─ issue-management.md
 │  └─ quality-check.md
 │
-├─ Discovery (agents/discovery/)   # NOUVEAU DOMAINE
+├─ Discovery (agents/discovery/)
 │  └─ site-audit.md               # Audit de site existant
 │
-├─ Content (agents/content/)       # NOUVEAU DOMAINE
+├─ Content (agents/content/)
 │  └─ content-import.md           # Import, export, migration
 │
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
 │  ├─ design-tokens.md
+│  ├─ figma-to-wp.md              # Pipeline Figma → WordPress
 │  └─ visual-review.md
 │
 ├─ Theme (agents/theme/)
@@ -128,7 +131,7 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
-**Total : 44 agents spécialisés** (37 originaux + 7 nouveaux)
+**Total : 47 agents spécialisés** (37 originaux + 10 nouveaux)
 
 ## Domaines et Agents
 
@@ -147,7 +150,7 @@ Sous-orchestrateur avec 6 agents spécialisés :
 
 ### 2. Gutenberg (`agents/gutenberg-blocks/`)
 
-Sous-orchestrateur avec 6 agents spécialisés :
+Sous-orchestrateur avec 7 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -157,10 +160,11 @@ Sous-orchestrateur avec 6 agents spécialisés :
 | `data-stores.md` | useSelect, useDispatch, @wordpress/data, stores |
 | `block-bindings.md` | Block Bindings API (WP 6.5+), sources custom, post-meta bindings |
 | `block-hooks.md` | Block Hooks, insertion automatique, blockHooks dans block.json |
+| `data-views.md` | DataViews & DataForm, remplacement WP_List_Table, admin moderne |
 
 ### 3. Tooling (`agents/tooling/`)
 
-Sous-orchestrateur avec 15 agents spécialisés :
+Sous-orchestrateur avec 16 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -177,16 +181,18 @@ Sous-orchestrateur avec 15 agents spécialisés :
 | `gitlab-ci.md` | GitLab CI pipelines, .gitlab-ci.yml, runners, environnements |
 | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | `go-live-checklist.md` | Checklist mise en production, vérifications pré/post-launch |
+| `trellis-deploy.md` | Trellis/Ansible provisioning, déploiement zero-downtime |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 | `quality-check.md` | Linting (PHPCS, ESLint, markdownlint), validation, pre-commit |
 
 ### 4. Design (`agents/design/`)
 
-Sous-orchestrateur avec 2 agents :
+Sous-orchestrateur avec 3 agents :
 
 | Agent | Domaine |
 |-------|---------|
 | `design-tokens.md` | Maquettes → theme.json, couleurs, typo, spacing |
+| `figma-to-wp.md` | Pipeline Figma → WordPress (tokens, patterns, templates) |
 | `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
 ### 5. Theme (`agents/theme/`)
@@ -244,6 +250,7 @@ Sous-orchestrateur avec 3 agents :
 | block, variation, style, registerBlockType, useSelect, useDispatch, store | Gutenberg | `agents/gutenberg-blocks/orchestrator.md` |
 | block bindings, register_block_bindings_source, post-meta binding, custom source | Gutenberg | `agents/gutenberg-blocks/block-bindings.md` |
 | block hooks, blockHooks, hooked_block_types, insertion auto, injection block | Gutenberg | `agents/gutenberg-blocks/block-hooks.md` |
+| DataViews, DataForm, WP_List_Table, admin table, grid view, data table | Gutenberg | `agents/gutenberg-blocks/data-views.md` |
 | WP-CLI, commande, projet, init, composer, package.json | Tooling | `agents/tooling/orchestrator.md` |
 | .env, wp-config, environment, constantes, config, WP_DEBUG | Tooling | `agents/tooling/environment-config.md` |
 | wp-env, docker, local, localhost, database locale | Tooling | `agents/tooling/local-dev.md` |
@@ -255,10 +262,12 @@ Sous-orchestrateur avec 3 agents :
 | CI/CD, pipeline, GitHub Actions, tests, linting, phpcs, phpunit | Tooling | `agents/tooling/cicd-pipelines.md` |
 | deploy, déploiement, SSH, rsync, secrets, production | Tooling | `agents/tooling/deployment-ssh.md` |
 | go-live, mise en prod, checklist production, launch, lancement | Tooling | `agents/tooling/go-live-checklist.md` |
+| Trellis, Ansible, provisioning, zero-downtime, Roots deploy | Tooling | `agents/tooling/trellis-deploy.md` |
 | issue, bug report, template, label, GitHub issue, GitLab | Tooling | `agents/tooling/issue-management.md` |
 | audit, inventaire, refonte, analyse site existant, migration assessment | Discovery | `agents/discovery/site-audit.md` |
 | import, export, migration contenu, WXR, search-replace, uploads, Classic→Blocks | Content | `agents/content/content-import.md` |
-| token, maquette, figma, palette, design system | Design | `agents/design/orchestrator.md` |
+| token, maquette, palette, design system | Design | `agents/design/orchestrator.md` |
+| figma, maquette vers WordPress, conversion design, design to code | Design | `agents/design/figma-to-wp.md` |
 | theme, block theme, theme.json settings, structure theme, functions.php | Theme | `agents/theme/block-theme.md` |
 | template, template-part, pattern, hero, cta, style variation | Theme | `agents/theme/templates-patterns.md` |
 | style engine, wp_style_engine, CSS, supports, variables CSS, --wp--preset | Theme | `agents/theme/style-engine.md` |
@@ -365,6 +374,15 @@ Question: "Comment créer un site WordPress complet ?"
 
 Question: "Comment faire une refonte de site WordPress ?"
 → workflows/redesign-site.md
+
+Question: "Comment créer une page d'admin moderne ?"
+→ Gutenberg → data-views.md
+
+Question: "Comment convertir ma maquette Figma en WordPress ?"
+→ Design → figma-to-wp.md
+
+Question: "Comment déployer avec Trellis et Ansible ?"
+→ Tooling → trellis-deploy.md
 ```
 
 ### Étape 3 : Exécution
@@ -398,6 +416,8 @@ Question: "Comment faire une refonte de site WordPress ?"
 | Comment connecter un block à post-meta sans code custom ? | `gutenberg-blocks/block-bindings.md` |
 | Comment créer une source de données custom pour blocks ? | `gutenberg-blocks/block-bindings.md` |
 | Comment injecter un block automatiquement dans un template ? | `gutenberg-blocks/block-hooks.md` |
+| Comment créer une page d'admin moderne (DataViews) ? | `gutenberg-blocks/data-views.md` |
+| Comment remplacer WP_List_Table par DataViews ? | `gutenberg-blocks/data-views.md` |
 
 ### Tooling
 
@@ -423,6 +443,8 @@ Question: "Comment faire une refonte de site WordPress ?"
 | Comment connecter Claude Code à mon site WordPress ? | `tooling/mcp-integration.md` |
 | Comment configurer le MCP Adapter WordPress ? | `tooling/mcp-integration.md` |
 | Que vérifier avant la mise en production ? | `tooling/go-live-checklist.md` |
+| Comment déployer avec Trellis/Ansible ? | `tooling/trellis-deploy.md` |
+| Comment provisionner un serveur pour WordPress ? | `tooling/trellis-deploy.md` |
 | Comment créer des templates d'issues ? | `tooling/issue-management.md` |
 
 ### Design
@@ -431,6 +453,8 @@ Question: "Comment faire une refonte de site WordPress ?"
 |----------|-------------|
 | Comment extraire les design tokens ? | `design/design-tokens.md` |
 | Comment structurer theme.json depuis une maquette ? | `design/design-tokens.md` |
+| Comment convertir une maquette Figma en block theme ? | `design/figma-to-wp.md` |
+| Comment mapper les composants Figma vers des blocks ? | `design/figma-to-wp.md` |
 | Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
 
 ### Theme
@@ -576,6 +600,18 @@ Combine les expertises quand nécessaire :
 
 "Connecter Claude Code à WordPress pour administration IA"
 → tooling/mcp-integration.md
+
+"Maquette Figma → site WordPress complet"
+→ design/figma-to-wp.md + theme/block-theme.md + theme/templates-patterns.md
+
+"Admin page custom moderne pour plugin"
+→ gutenberg-blocks/data-views.md + wp-rest-api-expert.md
+
+"Déploiement zero-downtime avec Bedrock"
+→ tooling/bedrock-setup.md + tooling/trellis-deploy.md
+
+"Infrastructure complète : Bedrock + Trellis + CI/CD"
+→ tooling/bedrock-setup.md + tooling/trellis-deploy.md + tooling/cicd-pipelines.md
 ```
 
 ## Format de Réponse

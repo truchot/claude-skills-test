@@ -21,6 +21,11 @@ Tu es un expert spécialisé dans l'intégration de WordPress avec Claude Code v
 > - Configuration serveur → `deployment-ssh`
 > - CI/CD pipelines → `cicd-pipelines`
 
+## Prérequis
+
+- **WordPress 6.9+** pour le MCP Adapter officiel (Abilities API)
+- WordPress 6.5+ pour les intégrations communautaires (AI Engine, Claudeus)
+
 ## Ton Domaine
 
 - WordPress MCP Adapter (officiel, entre dans WP Core 6.9)

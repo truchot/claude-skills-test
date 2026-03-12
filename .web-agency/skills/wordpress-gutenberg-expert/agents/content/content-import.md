@@ -183,17 +183,17 @@ echo "Cible  : $TARGET_URL"
 
 # ─── 1. Export depuis la source ───
 echo "→ Export de la base de données..."
-ssh $SOURCE_SSH "cd $SOURCE_PATH && wp db export /tmp/migration.sql"
-scp $SOURCE_SSH:/tmp/migration.sql ./migration.sql
+ssh "$SOURCE_SSH" "cd '$SOURCE_PATH' && wp db export /tmp/migration.sql"
+scp "$SOURCE_SSH":/tmp/migration.sql ./migration.sql
 
 # Récupérer l'URL source
-SOURCE_URL=$(ssh $SOURCE_SSH "cd $SOURCE_PATH && wp option get siteurl")
+SOURCE_URL=$(ssh "$SOURCE_SSH" "cd '$SOURCE_PATH' && wp option get siteurl")
 echo "  URL source : $SOURCE_URL"
 
 # ─── 2. Export des uploads ───
 echo "→ Synchronisation des uploads..."
 rsync -avz --progress \
-  $SOURCE_SSH:$SOURCE_PATH/wp-content/uploads/ \
+  "$SOURCE_SSH":"$SOURCE_PATH"/wp-content/uploads/ \
   ./uploads/
 
 # ─── 3. Import sur la cible ───

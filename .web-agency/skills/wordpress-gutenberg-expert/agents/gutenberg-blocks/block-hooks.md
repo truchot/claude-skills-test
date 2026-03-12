@@ -96,8 +96,8 @@ Avec Block Hook (mon-plugin/cta after core/post-content) :
 add_filter( 'hooked_block_types', function( $hooked_block_types, $relative_position, $anchor_block_type, $context ) {
     // Ajouter le CTA après le contenu uniquement sur les articles
     if ( 'after' === $relative_position && 'core/post-content' === $anchor_block_type ) {
-        // Vérifier le contexte (template)
-        if ( $context instanceof WP_Block_Template && 'single' === $context->slug ) {
+        // Vérifier le contexte (template) — $context est WP_Block_Template|WP_Post|array
+        if ( $context instanceof \WP_Block_Template && 'single' === $context->slug ) {
             $hooked_block_types[] = 'my-plugin/newsletter-cta';
         }
     }

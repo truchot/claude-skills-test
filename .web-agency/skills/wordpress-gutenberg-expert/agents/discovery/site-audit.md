@@ -68,7 +68,19 @@ wp-env run cli wp ...
 #   ./audit-site.sh "wp-env run cli"            # via wp-env
 #   ./audit-site.sh "ssh user@server 'cd /var/www && wp'"  # via SSH
 
-WP="${1:-wp}"
+# Validation de l'argument pour éviter l'injection de commande
+WP_CMD="${1:-wp}"
+# Sanitize: n'autoriser que des commandes connues
+case "$WP_CMD" in
+  wp|"wp-env run cli wp"|"wp-env run cli"|wp-env*|ssh*)
+    WP="$WP_CMD"
+    ;;
+  *)
+    echo "❌ Commande WP-CLI non reconnue: $WP_CMD"
+    echo "Usage: ./audit-site.sh [wp|'wp-env run cli wp'|'ssh user@server ...']"
+    exit 1
+    ;;
+esac
 OUTPUT_DIR="./audit-$(date +%Y%m%d)"
 mkdir -p "$OUTPUT_DIR"
 
