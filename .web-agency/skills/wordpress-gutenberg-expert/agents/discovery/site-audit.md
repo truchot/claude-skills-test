@@ -62,22 +62,35 @@ wp-env run cli wp ...
 ```bash
 #!/bin/bash
 # scripts/audit-site.sh
-# Usage: ./audit-site.sh [wp-cli-prefix]
+# Usage: ./audit-site.sh [mode] [ssh-host] [remote-path]
 # Exemples:
-#   ./audit-site.sh ""                          # WP-CLI local
-#   ./audit-site.sh "wp-env run cli"            # via wp-env
-#   ./audit-site.sh "ssh user@server 'cd /var/www && wp'"  # via SSH
+#   ./audit-site.sh                                # WP-CLI local (par défaut)
+#   ./audit-site.sh wp-env                         # via wp-env
+#   ./audit-site.sh ssh user@server /var/www/site  # via SSH (host et path séparés)
 
-# Validation de l'argument pour éviter l'injection de commande
-WP_CMD="${1:-wp}"
-# Sanitize: n'autoriser que des commandes connues
-case "$WP_CMD" in
-  wp|"wp-env run cli wp"|"wp-env run cli"|wp-env*|"ssh "[a-zA-Z0-9._-]*@[a-zA-Z0-9._-]*" "*)
-    WP="$WP_CMD"
+MODE="${1:-local}"
+
+case "$MODE" in
+  local)
+    WP="wp"
+    ;;
+  wp-env)
+    WP="wp-env run cli wp"
+    ;;
+  ssh)
+    SSH_HOST="${2:?'SSH host requis (user@server)'}"
+    REMOTE_PATH="${3:?'Chemin distant requis (/var/www/site)'}"
+    # Valider le format user@host (alphanum, points, tirets, underscores)
+    if [[ ! "$SSH_HOST" =~ ^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$ ]]; then
+      echo "❌ Format SSH invalide: $SSH_HOST (attendu: user@host)"
+      exit 1
+    fi
+    # Construire la commande SSH explicitement — jamais de freeform
+    WP="ssh $SSH_HOST cd $REMOTE_PATH && wp"
     ;;
   *)
-    echo "❌ Commande WP-CLI non reconnue: $WP_CMD"
-    echo "Usage: ./audit-site.sh [wp|'wp-env run cli wp'|'ssh user@server ...']"
+    echo "❌ Mode non reconnu: $MODE"
+    echo "Usage: ./audit-site.sh [local|wp-env|ssh user@host /path]"
     exit 1
     ;;
 esac
@@ -152,9 +165,9 @@ $WP cron event list --format=json > "$OUTPUT_DIR/cron.json"
 # ─── 12. Résumé ───
 echo ""
 echo "=== Résumé de l'audit ==="
-echo "Site : $(cat $OUTPUT_DIR/sitename.txt)"
-echo "URL : $(cat $OUTPUT_DIR/siteurl.txt)"
-echo "WP : $(cat $OUTPUT_DIR/wp-version.txt)"
+echo "Site : $(cat "$OUTPUT_DIR/sitename.txt")"
+echo "URL : $(cat "$OUTPUT_DIR/siteurl.txt")"
+echo "WP : $(cat "$OUTPUT_DIR/wp-version.txt")"
 echo "Plugins actifs : $($WP plugin list --status=active --format=count)"
 echo "Plugins inactifs : $($WP plugin list --status=inactive --format=count)"
 echo ""

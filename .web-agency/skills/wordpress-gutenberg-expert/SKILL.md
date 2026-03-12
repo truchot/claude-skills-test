@@ -92,6 +92,7 @@ Orchestrateur Principal (SKILL.md)
 │  ├─ deployment-ssh.md
 │  ├─ go-live-checklist.md        # Checklist mise en prod
 │  ├─ trellis-deploy.md           # Trellis/Ansible provisioning & deploy
+│  ├─ bedrock-setup.md            # Architecture Bedrock (Composer, structure)
 │  ├─ issue-management.md
 │  └─ quality-check.md
 │
@@ -104,8 +105,7 @@ Orchestrateur Principal (SKILL.md)
 ├─ Design (agents/design/)
 │  ├─ orchestrator.md
 │  ├─ design-tokens.md
-│  ├─ figma-to-wp.md              # Pipeline Figma → WordPress
-│  └─ visual-review.md
+│  └─ figma-to-wp.md              # Pipeline Figma → WordPress
 │
 ├─ Theme (agents/theme/)
 │  ├─ orchestrator.md
@@ -131,7 +131,7 @@ Orchestrateur Principal (SKILL.md)
 └─ Accessibility Expert (agents/accessibility-expert.md)
 ```
 
-**Total : 47 agents spécialisés** (37 originaux + 10 nouveaux)
+**Total : 46 agents spécialisés** (36 originaux + 10 nouveaux) + 6 orchestrateurs
 
 ## Domaines et Agents
 
@@ -164,7 +164,7 @@ Sous-orchestrateur avec 7 agents spécialisés :
 
 ### 3. Tooling (`agents/tooling/`)
 
-Sous-orchestrateur avec 16 agents spécialisés :
+Sous-orchestrateur avec 17 agents spécialisés :
 
 | Agent | Domaine |
 |-------|---------|
@@ -182,18 +182,18 @@ Sous-orchestrateur avec 16 agents spécialisés :
 | `deployment-ssh.md` | SSH, secrets, rsync, SFTP, déploiement serveur |
 | `go-live-checklist.md` | Checklist mise en production, vérifications pré/post-launch |
 | `trellis-deploy.md` | Trellis/Ansible provisioning, déploiement zero-downtime |
+| `bedrock-setup.md` | Architecture Bedrock, Composer, structure professionnelle |
 | `issue-management.md` | Issues GitHub/GitLab, templates, labels, automatisation |
 | `quality-check.md` | Linting (PHPCS, ESLint, markdownlint), validation, pre-commit |
 
 ### 4. Design (`agents/design/`)
 
-Sous-orchestrateur avec 3 agents :
+Sous-orchestrateur avec 2 agents :
 
 | Agent | Domaine |
 |-------|---------|
 | `design-tokens.md` | Maquettes → theme.json, couleurs, typo, spacing |
 | `figma-to-wp.md` | Pipeline Figma → WordPress (tokens, patterns, templates) |
-| `visual-review.md` | Diff visuel Figma vs intégration, Playwright, régression |
 
 ### 5. Theme (`agents/theme/`)
 
@@ -455,7 +455,6 @@ Question: "Comment déployer avec Trellis et Ansible ?"
 | Comment structurer theme.json depuis une maquette ? | `design/design-tokens.md` |
 | Comment convertir une maquette Figma en block theme ? | `design/figma-to-wp.md` |
 | Comment mapper les composants Figma vers des blocks ? | `design/figma-to-wp.md` |
-| Comment comparer maquette Figma vs intégration ? | `design/visual-review.md` |
 
 ### Theme
 
@@ -552,9 +551,6 @@ Combine les expertises quand nécessaire :
 
 "Plugin WordPress avec tests PHPUnit"
 → wp-core/hooks-filters.md + testing/php-unit-tests.md
-
-"Tests visuels et e2e combinés"
-→ design/visual-review.md + testing/e2e-tests.md
 
 "Plugin avec tracking conforme RGPD"
 → wp-core/hooks-filters.md + gdpr-consent-api.md

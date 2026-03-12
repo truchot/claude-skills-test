@@ -4,7 +4,7 @@
 
 ## Date : 2026-03-12
 
-> **Sources** : Analyse du repo existant (37 agents dans le skill wordpress-gutenberg-expert, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
+> **Sources** : Analyse du repo existant (36 agents + 6 orchestrateurs dans le skill wordpress-gutenberg-expert, 871 agents totaux dans le framework) + recherche web approfondie sur l'écosystème WordPress 2025-2026 (WP-CLI v2.12, wp-env Playground runtime, WordPress 6.9, Block Bindings API, WordPress Telex IA).
 
 ---
 
@@ -546,14 +546,15 @@ wordpress-gutenberg-expert/
 | WP Core | 6 | 6 | 0 |
 | Gutenberg Blocks | 4 | 7 | 3 (bindings, hooks, data-views) |
 | Theme | 4 | 4 | 0 (enrichissement) |
-| Tooling | 12 | 16 | 4 (playground, go-live, trellis, migration) |
-| Design | 2 | 3 | 1 (figma-to-wp) |
+| Tooling | 13 | 17 | 4 (playground, go-live, trellis, mcp-integration) |
+| Design | 1 | 2 | 1 (figma-to-wp) |
 | Testing | 3 | 3 | 0 |
-| Content | 0 | 2 | 2 (import, inventory) |
+| Content | 0 | 1 | 1 (content-import) |
 | Discovery | 0 | 1 | 1 (site-audit) |
-| Headless | 0 | 2 | 2 (wpgraphql, faust) |
 | Experts | 5 | 5 | 0 |
-| **Total** | **36** | **49** | **13** |
+| **Total** | **36** | **46** | **10** |
+
+> **Note** : Le plan initial prévoyait 13 nouveaux agents (content-inventory, headless/wpgraphql, headless/faust-nextjs non réalisés). 10 ont été implémentés. `visual-review.md` était listé dans la proposition mais jamais créé.
 
 ---
 
@@ -691,7 +692,7 @@ Annoncé à WordCamp US 2025, **WordPress Telex** est une initiative pour la gé
 |--------|--------|------------|
 | **wp-site-creator** (Automattic) | GitHub officiel | Création de thèmes block depuis un prompt |
 | **claude-wordpress-skills** (elvismdev) | GitHub communauté | Performance, sécurité, Gutenberg, best practices |
-| **Notre skill** (ce repo) | Ce repo | Le plus complet : 42 agents, 6 domaines |
+| **Notre skill** (ce repo) | Ce repo | Le plus complet : 46 agents, 6 domaines |
 
 ### 11.4 Implications stratégiques
 
@@ -703,7 +704,7 @@ Notre skill `wordpress-gutenberg-expert` se positionne différemment :
 | **Environnement** | Studio (macOS) | wp-env, Bedrock, serveurs |
 | **Déploiement** | Local uniquement | SSH, CI/CD, staging, prod |
 | **Contenu** | Généré par IA | Migration, import, audit |
-| **Architecture** | Monolithique | 42 agents modulaires |
+| **Architecture** | Monolithique | 46 agents modulaires |
 | **Cible** | Prototypage rapide | Projets professionnels |
 
 **Notre avantage compétitif** : la profondeur et la couverture complète (WP Core, testing, SEO, a11y, GDPR, deployment, CI/CD). Le wp-site-creator d'Automattic est excellent pour le bootstrapping mais ne couvre pas le cycle de vie complet d'un projet en agence.
@@ -824,7 +825,7 @@ Au vu de ces découvertes, la stratégie d'implémentation est révisée :
 
 | Métrique | Avant | Après | Évolution |
 |----------|-------|-------|-----------|
-| Agents totaux | 37 | 47 | +10 (+27%) |
+| Agents totaux (hors orchestrateurs) | 36 | 46 | +10 (+28%) |
 | Domaines | 6 | 8 | +2 (Discovery, Content) |
 | Workflows | 0 | 2 | +2 |
 | Agents enrichis | — | 7 | — |

@@ -140,6 +140,7 @@ wp search-replace 'https://ancien-site.com' 'http://localhost:8888' --all-tables
 rsync -av user@old-server:/var/www/site/wp-content/uploads/ ./uploads/
 
 # 4. Régénérer les thumbnails
+# ⚠️ Sur les gros sites (10k+ médias), exécuter dans screen/tmux
 wp media regenerate --yes
 
 # 5. Convertir le contenu classique en blocks (si nécessaire)
@@ -171,7 +172,7 @@ add_action( 'template_redirect', function() {
     $redirects = array(
         '/ancien-slug/' => '/nouveau-slug/',
     );
-    $request = strtok( $_SERVER['REQUEST_URI'], '?' );
+    $request = sanitize_text_field( strtok( $_SERVER['REQUEST_URI'], '?' ) );
     if ( isset( $redirects[ $request ] ) ) {
         wp_redirect( home_url( $redirects[ $request ] ), 301 );
         exit;

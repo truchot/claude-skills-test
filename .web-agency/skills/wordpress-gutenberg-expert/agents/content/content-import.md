@@ -157,7 +157,7 @@ wp search-replace 'old' 'new' \
 
 # Inclure seulement certaines tables
 wp search-replace 'old' 'new' \
-  --include-columns=post_content,guid
+  --include-column=post_content
 
 # Verbose (voir chaque remplacement)
 wp search-replace 'old' 'new' --all-tables --verbose
@@ -211,6 +211,8 @@ wp rewrite flush
 wp transient delete --all
 
 # Régénérer les thumbnails
+# ⚠️ Sur les gros sites (10k+ médias), cette commande peut durer plusieurs heures.
+# Exécuter dans screen/tmux : screen -S regen wp media regenerate --yes
 echo "→ Régénération des thumbnails..."
 wp media regenerate --yes
 
@@ -285,8 +287,9 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
                 continue;
             }
 
-            // Wrapper le contenu classique dans un block Classic
-            // ou le convertir en paragraphes
+            // wp:freeform = le block "Classic" intégré à Gutenberg core (WP 5.0+).
+            // C'est un block NATIF — il ne nécessite PAS le plugin Classic Editor.
+            // Le contenu est rendu via TinyMCE dans l'éditeur, tel quel en front.
             $block_content = '<!-- wp:freeform -->' . "\n" . $content . "\n" . '<!-- /wp:freeform -->';
 
             wp_update_post( array(
@@ -326,7 +329,10 @@ add_action( 'template_redirect', function() {
         '/category/old/' => '/categorie/nouveau/',
     );
 
-    $request = strtok( $_SERVER['REQUEST_URI'], '?' );
+    // Sanitize et supprimer la query string avant le lookup.
+    // La destination est un tableau hardcodé (safe), mais sanitize_text_field()
+    // protège contre d'éventuelles adaptations futures du snippet.
+    $request = sanitize_text_field( strtok( $_SERVER['REQUEST_URI'], '?' ) );
 
     if ( isset( $redirects[ $request ] ) ) {
         wp_redirect( home_url( $redirects[ $request ] ), 301 );
