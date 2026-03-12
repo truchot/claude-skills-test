@@ -1,0 +1,100 @@
+# Example Team Profile — Use as template for real profiles
+# Copy this file and rename to dev-XXX.yaml
+
+id: dev-001
+name: "Alice Martin"
+email: "alice.martin@example.com"
+role: fullstack
+seniority: senior
+start_date: "2023-06-15"
+
+skills:
+  frontend:
+    react:
+      level: expert
+      years: 5
+    nextjs:
+      level: advanced
+      years: 3
+    typescript:
+      level: expert
+      years: 4
+    css_tailwind:
+      level: intermediate
+      years: 2
+    vue:
+      level: beginner
+      years: 0.5
+  backend:
+    nodejs:
+      level: advanced
+      years: 4
+    python:
+      level: intermediate
+      years: 2
+    postgresql:
+      level: intermediate
+      years: 3
+    redis:
+      level: beginner
+      years: 1
+  devops:
+    docker:
+      level: advanced
+      years: 3
+    github_actions:
+      level: advanced
+      years: 2
+    kubernetes:
+      level: beginner
+      years: 0.5
+    aws:
+      level: intermediate
+      years: 2
+  testing:
+    jest:
+      level: expert
+      years: 4
+    cypress:
+      level: advanced
+      years: 2
+    playwright:
+      level: intermediate
+      years: 1
+  soft_skills:
+    code_review:
+      level: expert
+    mentoring:
+      level: advanced
+    technical_writing:
+      level: intermediate
+
+availability:
+  current_sprint_capacity: 8
+  allocated: 5
+  on_call: false
+  planned_absences:
+    - from: "2026-04-14"
+      to: "2026-04-18"
+      reason: vacation
+
+preferences:
+  mentoring: true
+  pair_programming: eager
+  focus_areas:
+    - performance
+    - architecture
+    - accessibility
+  work_style: mixed
+
+growth_targets:
+  - skill: kubernetes
+    current_level: beginner
+    target_level: intermediate
+    deadline: "2026-Q3"
+    training_method: pair_programming
+  - skill: rust
+    current_level: none
+    target_level: beginner
+    deadline: "2026-Q4"
+    training_method: side_project

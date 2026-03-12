@@ -1,0 +1,5 @@
+# Ignore real team profiles (contain personal data)
+profiles/*.yaml
+
+# Keep the example template
+!profiles/example.yaml

@@ -134,7 +134,31 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 | Prometheus, Grafana, logs, alerting | `devops/monitoring` |
 | Blue-Green, Canary, rollback, feature flag | `devops/deployment` |
 
-### ✅ Domaines Récemment Ajoutés (v3.2.0)
+### Team Management (Gestion d'Équipe)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| onboarding, intégration, nouveau dev, arrivée | `team-management/onboarding` |
+| compétence, matrice, skill, lacune, bus factor | `team-management/skills-tracking` |
+| assigner, attribution, staffing, qui pour | `team-management/task-allocation` |
+| charge, équilibrer, disponibilité, capacité | `team-management/task-allocation` |
+| vélocité, burnout, surcharge, moral | `team-management/performance` |
+| pair programming, reviewer, knowledge sharing | `team-management/collaboration` |
+| carrière, progression, 1:1, feedback, évaluation | `team-management/career` |
+
+### Incident Management (Gestion d'Incidents)
+
+| Mots-clés | Skill |
+|-----------|-------|
+| incident, down, 500, erreur production, panne | `incident-management/detection` |
+| sévérité, P1, P2, classifier, triage | `incident-management/detection` |
+| war room, coordination crise, bridge call | `incident-management/response` |
+| runbook, procédure urgence, que faire | `incident-management/response` |
+| communication incident, status page | `incident-management/response` |
+| root cause, 5 whys, postmortem, blameless | `incident-management/resolution` |
+| action corrective, suivi incident | `incident-management/resolution` |
+
+### ✅ Domaines Récemment Ajoutés (v4.2.0)
 
 Ces domaines sont maintenant **disponibles** et couverts par les skills suivants :
 
@@ -164,6 +188,19 @@ Requête utilisateur
 │  ├─ Choix lib, pattern ? → lead-dev/technical-decisions
 │  ├─ Formation, mentoring ? → lead-dev/mentoring
 │  └─ Release, deploy, hotfix ? → lead-dev/delivery
+│
+├─ Concerne les PERSONNES de l'équipe ?
+│  ├─ Onboarding nouveau dev ? → team-management/onboarding
+│  ├─ Compétences, matrice, gaps ? → team-management/skills-tracking
+│  ├─ Qui assigner, charge, dispo ? → team-management/task-allocation
+│  ├─ Vélocité, burnout, qualité ? → team-management/performance
+│  ├─ Pair programming, reviews ? → team-management/collaboration
+│  └─ Carrière, 1:1, feedback ? → team-management/career
+│
+├─ Concerne un INCIDENT technique ?
+│  ├─ Classifier, impact ? → incident-management/detection
+│  ├─ War room, runbook, comm ? → incident-management/response
+│  └─ Root cause, postmortem ? → incident-management/resolution
 │
 ├─ Concerne un PROCESSUS de dev ?
 │  └─ → web-dev-process
