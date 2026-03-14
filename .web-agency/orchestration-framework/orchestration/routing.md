@@ -347,7 +347,7 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
    "Vous souhaitez créer, corriger ou optimiser ?"
 ```
 
-### Matrice RACI Simplifiée
+### Matrice RACI Simplifiée (Technique)
 
 | Concern | Décide (STRATÉGIE) | Définit Process (PROCESSUS) | Coordonne | Exécute (IMPLÉMENTATION) |
 |---------|-------------------|------------------------|-----------|-------------------|
@@ -363,6 +363,8 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | Infrastructure | direction-technique | web-dev-process | lead-dev | devops |
 | Containers | direction-technique | devops | lead-dev | devops |
 | Kubernetes | direction-technique | devops | lead-dev | devops |
+
+> **RACI complète inter-métiers** (par phase de projet et par type de décision) : voir [`direction-operations/agents/gouvernance/comitologie.md`](../../skills/direction-operations/agents/gouvernance/comitologie.md)
 
 ## Seuils de Complexité
 
