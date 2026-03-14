@@ -16,17 +16,17 @@ Ce document définit comment combiner plusieurs skills pour des requêtes comple
 
 | Skill | Niveau | Agents | Domaine |
 |-------|--------|--------|---------|
-| direction-technique | 1-STRATÉGIE | 52 | Décisions, politiques |
-| web-dev-process | 2-PROCESSUS | 61 | Méthodologie dev |
-| testing-process | 2-PROCESSUS | 25 | Méthodologie tests |
-| lead-dev | 2-OPÉRATIONS | 27 | Coordination équipe |
-| frontend-developer | 3-IMPLÉMENTATION | 33 | Code frontend |
-| backend-developer | 3-IMPLÉMENTATION | 32 | Code backend |
-| devops | 3-IMPLÉMENTATION | 30 | CI/CD, infrastructure |
-| react-expert | 3-IMPLÉMENTATION | 28 | Spécialisation React |
-| nextjs-expert | 3-IMPLÉMENTATION | 35 | Spécialisation Next.js |
-| wordpress-gutenberg | 3-IMPLÉMENTATION | 41 | WordPress/Gutenberg |
-| design-system | 3-IMPLÉMENTATION | 21 | Tokens, composants |
+| direction-technique | STRATÉGIE | 52 | Décisions, politiques |
+| web-dev-process | PROCESSUS | 61 | Méthodologie dev |
+| testing-process | PROCESSUS | 25 | Méthodologie tests |
+| lead-dev | PROCESSUS | 27 | Coordination équipe |
+| frontend-developer | IMPLÉMENTATION | 33 | Code frontend |
+| backend-developer | IMPLÉMENTATION | 32 | Code backend |
+| devops | IMPLÉMENTATION | 30 | CI/CD, infrastructure |
+| react-expert | IMPLÉMENTATION | 28 | Spécialisation React |
+| nextjs-expert | IMPLÉMENTATION | 35 | Spécialisation Next.js |
+| wordpress-gutenberg | IMPLÉMENTATION | 41 | WordPress/Gutenberg |
+| design-system | IMPLÉMENTATION | 21 | Tokens, composants |
 | project-management | TRANSVERSE | 24 | Gestion projet |
 
 ## Types de Composition
@@ -70,16 +70,17 @@ Skills indépendants travaillant en même temps.
 Selon ADR-005 et ADR-006, les skills s'empilent :
 
 ```
-NIVEAU 1 : POURQUOI (direction-technique)
+STRATÉGIE (direction-technique)
         │
         ▼
-NIVEAU 2 : QUOI/QUI
+PROCESSUS
         ├── web-dev-process (méthodologie)
         ├── testing-process (tests)
-        └── lead-dev (coordination)
+        ├── lead-dev (coordination)
+        └── project-management (gestion projet)
         │
         ▼
-NIVEAU 3 : COMMENT (implémentation)
+IMPLÉMENTATION
         ├── frontend-developer / react-expert / nextjs-expert
         ├── backend-developer
         ├── devops
@@ -246,14 +247,29 @@ NIVEAU 3 : COMMENT (implémentation)
 
 ## Règles de Composition
 
-### 1. Toujours Respecter la Hiérarchie
+### 1. Adapter le Processus à la Complexité
+
+Le processus doit être proportionnel à la taille de la tâche. L'over-engineering processuel est un anti-pattern.
+
+| Complexité | Durée estimée | Niveaux mobilisés | Exemple |
+|------------|---------------|-------------------|---------|
+| **MICRO** | < 2h | IMPLÉMENTATION seul | Fix CSS, typo, ajout champ formulaire |
+| **PETIT** | < 2 jours | PROCESSUS + IMPLÉMENTATION | Nouvelle page, composant, endpoint API |
+| **MOYEN** | 2 à 15 jours | STRATÉGIE + PROCESSUS + IMPLÉMENTATION | Nouvelle feature, refactoring majeur |
+| **GRAND** | > 15 jours | Processus complet (ENTRÉE → STRATÉGIE → PROCESSUS → IMPLÉMENTATION) | Nouveau projet, migration, refonte |
+
+**Règles :**
+- **MICRO** : L'agent d'implémentation agit directement, sans orchestration
+- **PETIT** : Le lead-dev ou web-dev-process coordonne, pas besoin de direction-technique
+- **MOYEN** : Direction-technique valide l'approche, puis délègue
+- **GRAND** : Processus complet avec toutes les phases et points de validation humaine
 
 ```
-❌ MAUVAIS : Aller directement en implémentation
-   "Crée un composant Button" → react-expert
+❌ OVER-PROCESS : Fix CSS via direction-technique → web-dev-process → react-expert
+✅ PROPORTIONNEL : Fix CSS → react-expert (MICRO, implémentation directe)
 
-✅ BON : Respecter les niveaux
-   direction-technique (si nouveau) → web-dev-process → react-expert
+❌ SOUS-PROCESS : Nouveau projet e-commerce → nextjs-expert (sans cadrage)
+✅ PROPORTIONNEL : Nouveau projet → client-intake → direction-technique → ... (GRAND)
 ```
 
 ### 2. Un Orchestrateur Principal
@@ -300,8 +316,8 @@ Valider humainement avant de passer au skill suivant :
 
 - **Skill soup** : Invoquer 5+ skills en parallèle sans coordination
 - **Boucle infinie** : A → B → A → B...
-- **Skip de niveau** : Aller directement en implémentation sans processus
-- **Over-engineering** : Invoquer direction-technique pour un simple bug fix
+- **Skip de niveau** : Aller directement en IMPLÉMENTATION pour un projet MOYEN/GRAND
+- **Over-process** : Invoquer direction-technique pour une tâche MICRO (< 2h)
 - **Sous-utilisation** : Ne pas utiliser testing-process pour définir la stratégie tests
 
 ## Références

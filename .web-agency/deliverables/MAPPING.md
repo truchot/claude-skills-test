@@ -6,30 +6,41 @@
 
 | Skill | Niveau | Agents | Livrables définis | Couverture |
 |-------|--------|--------|-------------------|------------|
-| client-intake | 0 | 23 | À analyser | - |
-| web-agency | 1 | - | Orchestrateur | - |
-| task-orchestrator | 1 | 16 | À analyser | - |
-| direction-technique | 2 | 52 | 165 uniques | 93% |
-| direction-marketing | 2 | 25 | À analyser | - |
-| direction-artistique | 2 | 25 | À analyser | - |
-| project-management | 3 | 24 | À analyser | - |
-| lead-dev | 3 | 27 | À analyser | - |
-| web-dev-process | 3 | 61 | 172 uniques | 94% |
-| testing-process | 3 | 25 | À analyser | - |
-| frontend-developer | 4 | 33 | À analyser | - |
-| backend-developer | 4 | 32 | 71 uniques | 100% |
-| devops | 4 | 30 | À analyser | - |
-| wordpress-gutenberg-expert | 4 | 41 | 169 uniques | 100% |
-| react-expert | 4 | 28 | À analyser | - |
-| nextjs-expert | 4 | 35 | À analyser | - |
-| design-system-foundations | 4 | 21 | À analyser | - |
-| marketing | 4 | 115 | 279 uniques | 68% |
-| content-management | 4 | 17 | À analyser | - |
-| ux-ui-design | 4 | 22 | À analyser | - |
-| legal-compliance | 4 | 16 | À analyser | - |
-| support-client | 4 | 16 | À analyser | - |
-| commercial-crm | 4 | 17 | À analyser | - |
-| finance-analytics | 4 | 17 | À analyser | - |
+| client-intake | ENTRÉE | 23 | À analyser | - |
+| web-agency | ENTRÉE | - | Orchestrateur | - |
+| task-orchestrator | ENTRÉE | 16 | À analyser | - |
+| direction-technique | STRATÉGIE | 52 | 165 uniques | 93% |
+| direction-operations | STRATÉGIE | - | À analyser | - |
+| direction-commerciale | STRATÉGIE | - | À analyser | - |
+| direction-marketing | STRATÉGIE | 25 | À analyser | - |
+| direction-artistique | STRATÉGIE | 25 | À analyser | - |
+| project-management | PROCESSUS | 24 | À analyser | - |
+| lead-dev | PROCESSUS | 27 | À analyser | - |
+| web-dev-process | PROCESSUS | 61 | 172 uniques | 94% |
+| testing-process | PROCESSUS | 25 | À analyser | - |
+| experience-client | PROCESSUS | - | À analyser | - |
+| frontend-developer | IMPLÉMENTATION | 33 | À analyser | - |
+| backend-developer | IMPLÉMENTATION | 32 | 71 uniques | 100% |
+| devops | IMPLÉMENTATION | 30 | À analyser | - |
+| wordpress-gutenberg-expert | IMPLÉMENTATION | 41 | 169 uniques | 100% |
+| react-expert | IMPLÉMENTATION | 28 | À analyser | - |
+| nextjs-expert | IMPLÉMENTATION | 35 | À analyser | - |
+| design-system-foundations | IMPLÉMENTATION | 21 | À analyser | - |
+| seo-expert | IMPLÉMENTATION | 20 | À analyser | - |
+| paid-media | IMPLÉMENTATION | 20 | À analyser | - |
+| marketing-analytics | IMPLÉMENTATION | 20 | À analyser | - |
+| content-marketing | IMPLÉMENTATION | 20 | À analyser | - |
+| customer-success | IMPLÉMENTATION | 15 | À analyser | - |
+| marketing-ops | IMPLÉMENTATION | 20 | À analyser | - |
+| content-management | IMPLÉMENTATION | 17 | À analyser | - |
+| ux-ui-design | IMPLÉMENTATION | 22 | À analyser | - |
+| legal-compliance | IMPLÉMENTATION | 16 | À analyser | - |
+| support-client | IMPLÉMENTATION | 16 | À analyser | - |
+| commercial-crm | IMPLÉMENTATION | 17 | À analyser | - |
+| finance-analytics | IMPLÉMENTATION | 17 | À analyser | - |
+| ai-integration | IMPLÉMENTATION | - | À analyser | - |
+| legacy-modernization | IMPLÉMENTATION | - | À analyser | - |
+| security-expert | IMPLÉMENTATION | - | À analyser | - |
 
 ---
 

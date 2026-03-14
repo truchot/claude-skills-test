@@ -261,10 +261,10 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
    "audit sécurité RGPD" → direction-technique/securite/conformite-rgpd
    "audit sécurité code" → lead-dev/code-review/security-review
 
-2. NIVEAU D'ABSTRACTION : Identifier POURQUOI vs QUOI vs COMMENT
-   "Quelle politique de tests ?" → direction-technique (POURQUOI)
-   "Quelle pyramide de tests ?" → web-dev-process (QUOI)
-   "Comment écrire ce test ?" → skill technique (COMMENT)
+2. NIVEAU D'ABSTRACTION : Identifier STRATÉGIE vs PROCESSUS vs IMPLÉMENTATION
+   "Quelle politique de tests ?" → direction-technique (STRATÉGIE)
+   "Quelle pyramide de tests ?" → web-dev-process (PROCESSUS)
+   "Comment écrire ce test ?" → skill technique (IMPLÉMENTATION)
 
 3. CONTEXTE TECHNOLOGIQUE : Si techno explicite, router vers skill techno
    "tests Next.js" → nextjs-expert/testing
@@ -277,7 +277,7 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 
 ### Matrice RACI Simplifiée
 
-| Concern | Décide (POURQUOI) | Définit Process (QUOI) | Coordonne | Exécute (COMMENT) |
+| Concern | Décide (STRATÉGIE) | Définit Process (PROCESSUS) | Coordonne | Exécute (IMPLÉMENTATION) |
 |---------|-------------------|------------------------|-----------|-------------------|
 | Stack technique | direction-technique | - | - | - |
 | Architecture | direction-technique | web-dev-process | lead-dev | skills techniques |
@@ -292,11 +292,37 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | Containers | direction-technique | devops | lead-dev | devops |
 | Kubernetes | direction-technique | devops | lead-dev | devops |
 
+## Seuils de Complexité
+
+Avant de router, évaluer la complexité pour déterminer quels niveaux mobiliser :
+
+```
+Requête utilisateur
+│
+├─ Estimation < 2h ? (fix, typo, ajout simple)
+│  └─ MICRO → Router directement vers le skill IMPLÉMENTATION
+│     Pas d'orchestration, pas de validation STRATÉGIE
+│
+├─ Estimation < 2 jours ? (composant, page, endpoint)
+│  └─ PETIT → PROCESSUS + IMPLÉMENTATION
+│     lead-dev ou web-dev-process coordonne
+│
+├─ Estimation 2-15 jours ? (feature, refactoring)
+│  └─ MOYEN → STRATÉGIE + PROCESSUS + IMPLÉMENTATION
+│     direction-technique valide l'approche
+│
+└─ Estimation > 15 jours ? (projet, migration)
+   └─ GRAND → ENTRÉE + STRATÉGIE + PROCESSUS + IMPLÉMENTATION
+      Processus complet avec client-intake
+```
+
+> **Règle d'or** : Le processus doit être proportionnel à la tâche. Mobiliser direction-technique pour un fix CSS est aussi nuisible que de lancer un projet e-commerce sans cadrage.
+
 ## Priorité en Cas d'Ambiguïté
 
 1. **Match exact** : Mot-clé présent dans la table
 2. **Spécificité** : Mot-clé composé > mot-clé simple
-3. **Niveau d'abstraction** : POURQUOI → QUOI → COMMENT
+3. **Niveau d'abstraction** : STRATÉGIE → PROCESSUS → IMPLÉMENTATION
 4. **Contexte conversation** : Skill déjà utilisé récemment
 5. **Demander clarification** : Si vraiment ambigu
 
