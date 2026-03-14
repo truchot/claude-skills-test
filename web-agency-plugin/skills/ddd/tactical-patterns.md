@@ -85,7 +85,6 @@ class PlaceOrderUseCase {
     const order = Order.create(cmd.customerId);
     cmd.items.forEach(i => order.addLine(i.productId, i.quantity, i.price));
     await this.orders.save(order);
-    await this.eventBus.publishAll(order.domainEvents);
     return order.id;
   }
 }
@@ -97,9 +96,4 @@ class PlaceOrderUseCase {
 - Modeles separes optimises pour ecriture et lecture
 
 ## Specification
-```typescript
-class ActiveCustomerSpec implements Specification<Customer> {
-  isSatisfiedBy(customer: Customer): boolean { return customer.status === 'active'; }
-  and(other: Specification<Customer>): Specification<Customer> { return new AndSpec(this, other); }
-}
-```
+Regles metier composables: `isSatisfiedBy(entity)`, combinables avec `and()`, `or()`, `not()`.
