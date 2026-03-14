@@ -35,14 +35,15 @@ NIVEAU 2 : ORCHESTRATION (Relation Client)
 
 | Domaine | Agents | Responsabilité |
 |---------|--------|----------------|
-| `accueil` | 5 | Premier contact et établissement de la confiance |
+| `accueil` | 6 | Premier contact, établissement de la confiance, handoff depuis client-intake |
 | `cadrage` | 5 | Proposition et clarification en langage business |
 | `co-creation` | 5 | Participation du client et collecte de feedback |
-| `suivi` | 6 | Rapports d'avancement, communication proactive, satisfaction continue |
+| `suivi` | 7 | Rapports d'avancement, communication proactive, dashboard actualisé |
 | `lancement` | 4 | Formation, bilan J+30, célébration |
 | `fidelisation` | 5 | Rapports mensuels, trimestriels, bilan annuel |
+| `mesure` | 1 | Mesure continue de la satisfaction (NPS/CSAT) |
 
-**Total : 30 agents + 5 validators = 35 fichiers**
+**Total : 33 agents + 5 validators = 38 fichiers**
 
 ## Workflow Principal
 
@@ -56,11 +57,14 @@ Premier Contact → Proposition → Co-création → Suivi Hebdo → Lancement �
 | Requête concerne... | → Domaine |
 |---------------------|-----------|
 | Premier contact, bienvenue, onboarding, présentation | `accueil` |
+| Transition depuis client-intake, handoff qualification | `accueil/handoff-intake` |
 | Proposition, devis, périmètre, clarification, reformulation | `cadrage` |
 | Feedback, validation, atelier, co-construction, maquette | `co-creation` |
 | Avancement, rapport, statut, point hebdo, communication proactive | `suivi` |
+| Dashboard, visibilité avancement, tableau de bord | `suivi/dashboard-client` |
 | Formation, mise en ligne, bilan J+30, célébration, go-live | `lancement` |
 | Rapport mensuel, trimestriel, bilan annuel, renouvellement, upsell | `fidelisation` |
+| Satisfaction, NPS, CSAT, feedback client, enquête | `mesure` |
 
 ## Coordination avec Autres Skills
 
