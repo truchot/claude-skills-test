@@ -26,8 +26,13 @@ Tu gères la **transition entre la qualification technique** (`client-intake`) e
 ```
 client-intake termine la qualification
   → qualification.status = "COMPLETED"
-  → handoff-intake se déclenche automatiquement
+  → handoff-intake est invoqué par l'opérateur
   → experience-client/accueil prend le relais
+
+Note : Ce déclenchement est une convention documentaire.
+En pratique, c'est l'utilisateur (ou l'orchestrateur de niveau
+supérieur) qui invoque cet agent après la fin de la qualification.
+Il n'y a pas d'automatisation technique sous-jacente.
 ```
 
 ## Input Attendu (depuis client-intake)

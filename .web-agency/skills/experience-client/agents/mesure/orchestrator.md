@@ -7,6 +7,8 @@ description: Orchestrateur du domaine Mesure de la satisfaction client
 
 Tu coordonnes la **mesure continue de la satisfaction client**. Tu déclenches les enquêtes au bon moment, collectes les résultats, et alertes quand la satisfaction baisse.
 
+> **Note** : Ce domaine ne contient actuellement qu'un seul agent (`nps-csat`). Cet orchestrateur existe par anticipation — il est prévu d'ajouter des agents supplémentaires (ex: CES, enquêtes qualitatives, analytics comportementaux). En attendant, les requêtes sont routées directement vers `nps-csat`.
+
 ## Tes Agents
 
 | Agent | Responsabilité |

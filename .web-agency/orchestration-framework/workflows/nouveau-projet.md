@@ -10,30 +10,30 @@ Ce workflow guide la composition des skills pour un nouveau projet de A à Z, en
 ## Vue d'Ensemble
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                        WORKFLOW NOUVEAU PROJET (DOUBLE VISION)                           │
-├─────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                          │
-│  Phase 1        Phase 2         Phase 3         Phase 4        Phase 5       Phase 6    │
-│  ACCUEIL &      CO-CRÉATION     SETUP           DEV/TEST       DÉPLOIEMENT   LANCEMENT  │
-│  CADRAGE                                                       & LIVRAISON   & SUIVI    │
-│                                                                                          │
-│  ┌─────────┐   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐   ┌─────────┐│
-│  │ Brief   │──►│ Specs   │───►│ Repo    │───►│ Code    │───►│ Recette │──►│ Bilan   ││
-│  │ Devis   │   │ Archi   │    │ CI/CD   │    │ Tests   │    │ Deploy  │   │ J+30    ││
-│  │ Contrat │   │ Design  │    │ Envs    │    │ Review  │    │ PV      │   │ Fidéli  ││
-│  └─────────┘   └─────────┘    └─────────┘    └─────────┘    └─────────┘   └─────────┘│
-│                                                                                          │
-│  Process:       Process:        Process:        Process:       Process:      Process:    │
-│  • proj-mgmt    • dir-tech      • web-dev       • dev skills   • proj-mgmt   • exp-cli  │
-│  • dir-tech     • design-sys    • devops        • web-dev      • devops      • cust-suc  │
-│  • exp-client   • exp-client    (interne)       • exp-client   • exp-client  • support   │
-│                                                                                          │
-│  Client vit:    Client vit:     Client vit:     Client vit:    Client vit:   Client vit:│
-│  CONFIANCE      PARTICIPATION   (rien)          SÉRÉNITÉ       SÉCURITÉ      FIERTÉ     │
-│  CLARTÉ                                                                      FIDÉLITÉ   │
-│                                                                                          │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│              WORKFLOW NOUVEAU PROJET (DOUBLE VISION)                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  Phase 1      Phase 2      Phase 3    Phase 4    Phase 5     Phase 6      │
+│  ACCUEIL &    CO-CRÉATION  SETUP      DEV/TEST   DÉPLOIE-    LANCEMENT    │
+│  CADRAGE                                         MENT        & SUIVI      │
+│                                                                             │
+│  ┌───────┐   ┌───────┐   ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐    │
+│  │Brief  │──►│Specs  │──►│Repo   │─►│Code   │─►│Recette│─►│Bilan  │    │
+│  │Devis  │   │Archi  │   │CI/CD  │  │Tests  │  │Deploy │  │J+30   │    │
+│  │Contrat│   │Design │   │Envs   │  │Review │  │PV     │  │Fidéli │    │
+│  └───────┘   └───────┘   └───────┘  └───────┘  └───────┘  └───────┘    │
+│                                                                             │
+│  Process:     Process:     Process:   Process:   Process:    Process:      │
+│  • proj-mgmt  • dir-tech   • web-dev  • dev sk.  • proj-mg  • exp-cli    │
+│  • dir-tech   • design-s   • devops   • web-dev  • devops   • cust-suc   │
+│  • exp-cli    • exp-cli    (interne)  • exp-cli  • exp-cli  • support    │
+│                                                                             │
+│  Client vit:  Client vit:  Client:    Client:    Client:    Client vit:  │
+│  CONFIANCE    PARTICIPA-   (rien)     SÉRÉNITÉ   SÉCURITÉ   FIERTÉ       │
+│  CLARTÉ       TION                                          FIDÉLITÉ     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---

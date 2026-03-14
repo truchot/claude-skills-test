@@ -30,7 +30,7 @@ La mesure de satisfaction se déclenche automatiquement à ces moments :
 | Après l'appel découverte | Accueil | CSAT (1 question) | 10 secondes |
 | Après envoi de la proposition | Cadrage | CSAT (1 question) | 10 secondes |
 | Après chaque validation de maquette | Co-création | CSAT (2 questions) | 20 secondes |
-| Toutes les 2 semaines pendant le développement | Réalisation | CSAT (1 question) | 10 secondes |
+| Au minimum tous les 15 jours calendaires pendant le développement | Réalisation | CSAT (1 question) | 10 secondes |
 | Après la mise en ligne | Déploiement | NPS (1 question) | 10 secondes |
 | À J+30 | Lancement | NPS + CSAT (3 questions) | 30 secondes |
 | Chaque trimestre | Accompagnement | NPS (1 question) | 10 secondes |
@@ -82,6 +82,11 @@ Pondération :
 - Dernière mesure : ×3
 - Avant-dernière : ×2
 - Plus anciennes : ×1
+
+Formule : Score = somme(mesure × poids) / somme(poids)
+
+Exemple : mesures 4/5, 3/5, 5/5 (de la plus récente à la plus ancienne)
+→ (4×3 + 3×2 + 5×1) / (3+2+1) = 23/6 = 3.83/5
 
 Échelle :
 🟢 Score ≥ 4/5 (ou NPS ≥ 8) → Excellent
@@ -142,7 +147,7 @@ Merci pour votre retour !
 | Règle | Pourquoi |
 |-------|----------|
 | **1-2 questions maximum** (sauf bilan annuel) | Le temps du client est précieux |
-| **Jamais 2 enquêtes en moins de 2 semaines** | Ne pas harceler |
+| **Au moins 15 jours calendaires entre deux enquêtes** | Ne pas harceler. Cette règle prime sur les déclencheurs automatiques : si une transition de phase tombe moins de 15 jours après la dernière enquête, reporter ou fusionner. |
 | **Toujours contextualisée** | "Après notre dernière démo..." pas "Êtes-vous satisfait ?" |
 | **Réponse en 1 clic** | Étoiles ou échelle, pas de texte obligatoire |
 | **Remerciement immédiat** | "Merci pour votre retour !" dès le clic |
