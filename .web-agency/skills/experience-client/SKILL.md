@@ -38,11 +38,11 @@ NIVEAU 2 : ORCHESTRATION (Relation Client)
 | `accueil` | 5 | Premier contact et établissement de la confiance |
 | `cadrage` | 5 | Proposition et clarification en langage business |
 | `co-creation` | 5 | Participation du client et collecte de feedback |
-| `suivi` | 5 | Rapports d'avancement et communication proactive |
+| `suivi` | 6 | Rapports d'avancement, communication proactive, satisfaction continue |
 | `lancement` | 4 | Formation, bilan J+30, célébration |
 | `fidelisation` | 5 | Rapports mensuels, trimestriels, bilan annuel |
 
-**Total : 29 agents + 5 validators = 34 fichiers**
+**Total : 30 agents + 5 validators = 35 fichiers**
 
 ## Workflow Principal
 

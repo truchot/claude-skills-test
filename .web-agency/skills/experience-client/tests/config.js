@@ -15,7 +15,7 @@ export const SKILL_CONFIG = {
     'accueil': ['orchestrator', 'premier-contact', 'ecoute-active', 'synthese-besoin', 'qualification-rapide'],
     'cadrage': ['orchestrator', 'proposition-projet', 'traducteur-technique', 'options-budget', 'planning-client'],
     'co-creation': ['orchestrator', 'walkthrough-narratif', 'collecte-feedback', 'arbitrage-guide', 'validation-formelle'],
-    'suivi': ['orchestrator', 'rapport-avancement', 'demo-intermediaire', 'alerte-proactive', 'guide-mise-en-ligne'],
+    'suivi': ['orchestrator', 'rapport-avancement', 'demo-intermediaire', 'alerte-proactive', 'guide-mise-en-ligne', 'checkpoint-satisfaction'],
     'lancement': ['orchestrator', 'formation-client', 'bilan-lancement', 'celebration'],
     'fidelisation': ['orchestrator', 'rapport-mensuel', 'point-trimestriel', 'bilan-partenariat', 'veille-opportunites']
   },
@@ -30,5 +30,5 @@ export const SKILL_CONFIG = {
   ],
 
   // Total attendu
-  totalAgents: 29
+  totalAgents: 30
 };

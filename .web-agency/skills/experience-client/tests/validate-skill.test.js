@@ -39,7 +39,7 @@ describe('Skill experience-client', () => {
       const content = await readFileContent(resolvePath('SKILL.md'));
 
       assert.ok(
-        content.includes('29') || content.includes('29 agents'),
+        content.includes(String(SKILL_CONFIG.totalAgents)) || content.includes(`${SKILL_CONFIG.totalAgents} agents`),
         `SKILL.md devrait mentionner ${SKILL_CONFIG.totalAgents} agents`
       );
     });
