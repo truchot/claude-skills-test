@@ -31,9 +31,24 @@ Ce framework est **bilingue par design** (voir [ADR-007](./learnings/decisions/A
 | **Conception** | `3-conception` | Spécification, design, architecture | "design phase" |
 | **Réalisation** | `4-realisation` | Développement, implémentation, production | "development phase" |
 | **Déploiement** | `5-deploiement` | Mise en ligne, livraison, release | "deployment phase" |
-| **Maintenance** | `6-maintenance` | Post-lancement, suivi, exploitation | "maintenance phase" |
+| **Lancement** | `6-lancement` | Activation marketing, go-live, formation client | "launch phase" |
+| **Maintenance** | `7-maintenance` | Post-lancement, suivi, exploitation | "maintenance phase" |
+| **Bilan** | `8-bilan` | Rétrospective, REX, post-mortem, mesure des résultats | "review phase" |
 
 > **Note** : Les IDs techniques (`1-intake`, `2-strategy`...) sont utilisés dans le frontmatter YAML. Les termes canoniques français sont utilisés dans les descriptions et la communication.
+
+### Acteurs et Rôles
+
+| Terme canonique | Synonymes courants | Définition |
+|----------------|-------------------|------------|
+| **Responsable stratégique** | Direction, pilote, sponsor | Définit le POURQUOI : objectifs, contraintes, standards de qualité |
+| **Coordinateur** | Chef de projet, CDP, PM, lead | Définit le QUOI et coordonne le QUI : périmètre, planning, affectations |
+| **Spécialiste** | Développeur, designer, rédacteur, expert | Exécute le COMMENT : code, maquettes, contenu, livrables concrets |
+| **Référent métier** | Expert transverse, consultant interne | Apporte une expertise ponctuelle sur un domaine (SEO, légal, sécurité, accessibilité) |
+| **Client** | Commanditaire, donneur d'ordre, stakeholder | La personne ou l'organisation qui commande et valide le projet |
+| **Buddy** | Mentor, parrain, tuteur | Accompagnateur d'un nouveau membre pendant son onboarding |
+
+> **Dans le framework** : les skills de niveau 1 (direction-*) sont des **responsables stratégiques**, les skills de niveau 2 sont des **coordinateurs**, les skills de niveau 3-4 sont des **spécialistes**.
 
 ### Niveaux Hiérarchiques
 
@@ -111,6 +126,22 @@ Ce framework est **bilingue par design** (voir [ADR-007](./learnings/decisions/A
 | **Escalade** | Escalation, remontée | Pour tous — quand un agent ne peut pas traiter seul |
 | **Composition** | Chaîne, pipeline, workflow | Pour tech — comment les skills s'enchaînent |
 | **Arbitrage** | Résolution de conflit, médiation | Pour management — quand deux skills se contredisent |
+| **Point de contrôle** | Checkpoint, gate, jalon | Pour tous — moment où un humain doit valider avant de continuer |
+| **Transition** | Handoff, passation, handover | Pour tous — passage d'un livrable d'un métier à un autre |
+| **Demande de changement** | Change request, CR, avenant | Pour CDP — modification formelle du périmètre en cours de projet |
+
+### Qualité et Validation
+
+| Terme canonique | Synonymes courants | Contexte |
+|----------------|-------------------|----------|
+| **Revue** | Review, code review, relecture, CR | Examen critique d'un livrable par un pair ou un supérieur |
+| **Audit** | Assessment, diagnostic, analyse | Analyse complète d'un système ou processus selon des critères définis |
+| **Test** | QA, vérification, contrôle qualité | Vérification automatisée ou manuelle d'un comportement attendu |
+| **Critères d'acceptation** | Acceptance criteria, DoD, Definition of Done | Conditions mesurables pour qu'un livrable soit considéré comme terminé |
+| **Satisfaction client** | NPS, CSAT, feedback | Mesure du ressenti client à un instant donné du projet |
+
+> **Convention** : "revue" pour un examen ponctuel par un pair, "audit" pour une analyse systématique selon une grille.
+> "Test" désigne la vérification technique (automatisée ou manuelle), pas la validation client (qui est la "recette").
 
 ### Complexité
 
