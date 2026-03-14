@@ -64,6 +64,13 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 └── README.md        # Ce fichier
 ```
 
+## Terminologie
+
+Ce framework est bilingue (français pour le contenu, anglais pour les identifiants techniques). Voir :
+
+- [**Glossaire officiel**](./GLOSSAIRE.md) — termes canoniques, synonymes, guide par profil
+- [ADR-007](./learnings/decisions/ADR-007-naming-conventions.md) — conventions de nommage FR/EN
+
 ## Philosophie
 
 ### Séparation des responsabilités (ADR-006)

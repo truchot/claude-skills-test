@@ -348,3 +348,4 @@ Après le frontmatter, chaque livrable **DOIT** contenir :
 
 - Format : `skill/domain/agent-name`
 - Exemple : `direction-technique/specification/specification-technique`
+- Pour la terminologie et les synonymes, consulter le [Glossaire officiel](../GLOSSAIRE.md)
