@@ -1,0 +1,73 @@
+name: Framework-Wide Validation
+
+on:
+  pull_request:
+    paths:
+      - '.web-agency/orchestration-framework/**'
+      - '.web-agency/deliverables/**'
+      - '.web-agency/scripts/**'
+      - '.web-agency/package.json'
+  push:
+    branches:
+      - main
+    paths:
+      - '.web-agency/orchestration-framework/**'
+      - '.web-agency/deliverables/**'
+      - '.web-agency/scripts/**'
+      - '.web-agency/package.json'
+
+jobs:
+  validate-hierarchy:
+    name: Validate Hierarchy Consistency
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Run hierarchy consistency tests
+        run: node --test .web-agency/orchestration-framework/tests/validate-hierarchy-consistency.test.js
+
+  validate-deliverables:
+    name: Validate Deliverables
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate frontmatter
+        run: bash .web-agency/scripts/validate-frontmatter.sh
+
+      - name: Validate cross-references
+        run: bash .web-agency/scripts/validate-crossrefs.sh
+
+  validate-framework-tests:
+    name: Run Framework Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Run orchestration framework tests
+        run: node --test .web-agency/orchestration-framework/tests/*.test.js
+
+      - name: Run task orchestrator tests
+        run: node --test .web-agency/orchestration-framework/task-orchestrator/tests/*.test.js

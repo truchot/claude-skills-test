@@ -1,0 +1,24 @@
+{
+  "name": "web-agency-framework",
+  "version": "4.0.0",
+  "description": "AI-driven web agency process framework - centralized validation",
+  "private": true,
+  "type": "module",
+  "comment": "Zero external dependencies - uses only Node.js built-ins",
+  "scripts": {
+    "test": "node scripts/run-all-tests.js",
+    "test:skills": "node scripts/run-all-tests.js --skills-only",
+    "test:framework": "node scripts/run-all-tests.js --framework-only",
+    "test:deliverables": "bash scripts/validate-all.sh",
+    "test:frontmatter": "bash scripts/validate-frontmatter.sh",
+    "test:crossrefs": "bash scripts/validate-crossrefs.sh",
+    "test:hierarchy": "node --test orchestration-framework/tests/validate-hierarchy-consistency.test.js",
+    "test:skill": "node scripts/run-all-tests.js --skill",
+    "validate": "npm test && npm run test:deliverables"
+  },
+  "keywords": ["claude-skills", "web-agency", "ai-framework"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
