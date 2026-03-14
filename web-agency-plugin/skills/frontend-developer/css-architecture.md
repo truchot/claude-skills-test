@@ -17,12 +17,8 @@
 
 ## Flexbox
 ```css
-/* Navigation responsive */
 .nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-/* Centrage */
 .center { display: flex; align-items: center; justify-content: center; }
-/* Spacer pattern */
-.spacer { flex: 1; }
 ```
 
 ## Custom Properties (CSS Variables)
