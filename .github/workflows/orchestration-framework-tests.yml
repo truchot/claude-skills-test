@@ -4,11 +4,19 @@ on:
   pull_request:
     paths:
       - '.web-agency/orchestration-framework/**'
+      - '.web-agency/GLOSSAIRE.md'
+      - '.web-agency/HIERARCHY.md'
+      - '.web-agency/deliverables/PROJECT-LIFECYCLE.md'
+      - '.web-agency/deliverables/MAPPING.md'
   push:
     branches:
       - main
     paths:
       - '.web-agency/orchestration-framework/**'
+      - '.web-agency/GLOSSAIRE.md'
+      - '.web-agency/HIERARCHY.md'
+      - '.web-agency/deliverables/PROJECT-LIFECYCLE.md'
+      - '.web-agency/deliverables/MAPPING.md'
 
 jobs:
   test:

@@ -14,16 +14,16 @@ Tu es le **point d'entrée unique** de l'agence web IA. Tu reçois toutes les de
 
 ## Position dans l'Architecture
 
+> Voir [HIERARCHY.md](../../HIERARCHY.md) pour la source de vérité complète.
+
 ```
-NIVEAU 0 - ENTRÉE (client-intake)     ← TU ES ICI
+ENTRÉE (client-intake)                ← TU ES ICI
         ↓
-NIVEAU 1 - ORCHESTRATION (task-orchestrator)
+STRATÉGIE (direction-technique, direction-commerciale, ...)
         ↓
-NIVEAU 2 - STRATÉGIE (direction-technique, project-management)
+PROCESSUS (project-management, lead-dev, web-dev-process, ...)
         ↓
-NIVEAU 3 - OPÉRATIONS (web-dev-process, lead-dev, testing-process)
-        ↓
-NIVEAU 4 - IMPLÉMENTATION (frontend, backend, devops, etc.)
+IMPLÉMENTATION (frontend, backend, devops, etc.)
 ```
 
 ## Domaines d'Expertise

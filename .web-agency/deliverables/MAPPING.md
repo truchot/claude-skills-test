@@ -6,12 +6,12 @@
 
 | Skill | Niveau | Agents | Livrables définis | Couverture |
 |-------|--------|--------|-------------------|------------|
-| client-intake | ENTRÉE | 23 | À analyser | - |
+| client-intake | ENTRÉE | 23 | 12 uniques | 80% |
 | web-agency | ENTRÉE | - | Orchestrateur | - |
 | task-orchestrator | ENTRÉE | 16 | À analyser | - |
 | direction-technique | STRATÉGIE | 52 | 165 uniques | 93% |
 | direction-operations | STRATÉGIE | - | À analyser | - |
-| direction-commerciale | STRATÉGIE | - | À analyser | - |
+| direction-commerciale | STRATÉGIE | 27 | 18 uniques | 85% |
 | direction-marketing | STRATÉGIE | 25 | À analyser | - |
 | direction-artistique | STRATÉGIE | 25 | À analyser | - |
 | project-management | PROCESSUS | 24 | À analyser | - |
@@ -92,6 +92,34 @@
 
 ## Mapping Détaillé par Skill
 
+### client-intake (23 agents, 80% couverture)
+
+| Domaine | Agent | Livrables produits |
+|---------|-------|-------------------|
+| **reception** | email-parser | `client-request`, `intake-record` |
+| **reception** | form-handler | `client-request`, `intake-record` |
+| **reception** | chat-handler | `client-request`, `intake-record` |
+| **reception** | webhook-receiver | `client-request`, `intake-record` |
+| **reception** | attachment-processor | `attachment-summary` |
+| **qualification** | intent-classifier | `project-qualification` |
+| **qualification** | complexity-assessor | `complexity-assessment` |
+| **qualification** | urgency-detector | `urgency-classification` |
+| **qualification** | budget-estimator | `budget-estimation-initial` |
+| **qualification** | feasibility-checker | `feasibility-assessment` |
+| **extraction** | requirements-extractor | `requirements-list` |
+| **extraction** | stakeholder-identifier | `stakeholder-map` |
+| **extraction** | timeline-parser | `timeline-estimate` |
+| **extraction** | tech-stack-detector | `tech-stack-analysis` |
+| **extraction** | constraints-mapper | `constraints-list` |
+| **response** | acknowledgment-sender | `acknowledgment-email` |
+| **response** | clarification-requester | `clarification-request` |
+| **response** | status-notifier | `status-update` |
+| **response** | rejection-handler | `rejection-notice` |
+| **routing** | skill-matcher | `routing-decision` |
+| **routing** | priority-ranker | `priority-ranking` |
+| **routing** | workload-balancer | `workload-report` |
+| **routing** | dependency-resolver | `dependency-map` |
+
 ### backend-developer (32 agents, 100% couverture)
 
 | Domaine | Agent | Livrables produits |
@@ -138,6 +166,33 @@
 | **securite** | conformite-rgpd | `rgpd-compliance-report` |
 | **communication** | documentation-technique | `technical-documentation` |
 | **communication** | onboarding-technique | `onboarding-guide` |
+
+### direction-commerciale (27 agents, 85% couverture)
+
+| Domaine | Agent | Livrables produits |
+|---------|-------|-------------------|
+| **strategie-commerciale** | vision-commerciale | `commercial-strategy`, `market-positioning` |
+| **strategie-commerciale** | objectifs-ca | `revenue-objectives`, `quarterly-targets` |
+| **strategie-commerciale** | segmentation-marche | `market-segmentation-matrix` |
+| **strategie-commerciale** | go-to-market | `gtm-plan` |
+| **strategie-commerciale** | veille-concurrentielle | `competitive-benchmark` |
+| **pricing** | modeles-pricing | `pricing-grid`, `pricing-models` |
+| **pricing** | valorisation-services | `service-catalog` |
+| **pricing** | pricing-projets | `quote-guidelines` |
+| **pricing** | negociation-strategy | `negotiation-playbook` |
+| **partenariats** | strategie-partenariats | `partnership-plan` |
+| **partenariats** | evaluation-partenaires | `partner-scorecard` |
+| **partenariats** | modeles-collaboration | `partnership-framework` |
+| **partenariats** | suivi-partenariats | `partner-dashboard` |
+| **rentabilite** | analyse-rentabilite | `profitability-report` |
+| **rentabilite** | objectifs-marge | `margin-objectives` |
+| **rentabilite** | arbitrage-investissement | `business-case` |
+| **rentabilite** | optimisation-couts | `cost-optimization-plan` |
+| **rentabilite** | forecast-financier | `financial-forecast` |
+| **relation-client** | strategie-comptes-cles | `key-account-plan` |
+| **relation-client** | satisfaction-strategique | `nps-strategy` |
+| **relation-client** | developpement-compte | `upsell-strategy` |
+| **relation-client** | retention-strategique | `retention-plan` |
 
 ### wordpress-gutenberg-expert (41 agents, 100% couverture)
 
