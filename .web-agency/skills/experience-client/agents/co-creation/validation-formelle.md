@@ -196,6 +196,12 @@ sont correctement documentees.
 *Reference archivage : [reference]*
 ```
 
+## Regle d'Or
+
+> Chaque element du PV presente le "pourquoi" avant le "quoi". Pas "Voici la page catalogue validee" mais "Cette page permet a vos clients de trouver rapidement le bon produit. Voici ce qui a ete valide."
+
+*Voir aussi : Phase 2 du [workflow nouveau-projet](../../../../orchestration-framework/workflows/nouveau-projet.md#phase-2--co-création)*
+
 ## Regles de Redaction du PV
 
 ```

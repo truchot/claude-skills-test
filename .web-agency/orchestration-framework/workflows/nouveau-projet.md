@@ -154,11 +154,35 @@ Si estimation > 50 j/h ou budget > 50k€ → Validation direction
 
 ### Touchpoint Client
 
-| # | Touchpoint | Ce que le client vit |
-|---|------------|---------------------|
-| A | **Email de transition** : "Bonne nouvelle, la construction de votre projet démarre !" | "Ça y est, ça avance !" |
+| # | Touchpoint | Agent | Ce que le client vit |
+|---|------------|-------|---------------------|
+| A | **Email de transition** | `accueil/premier-contact` | "Ça y est, ça avance !" |
 
 > Le client ne doit PAS être sollicité pendant le setup. Un simple email de transition suffit pour maintenir la confiance.
+
+#### Template Email de Transition Phase 3
+
+```markdown
+Objet : Bonne nouvelle, {prénom} — la construction démarre !
+
+Bonjour {prénom},
+
+Votre projet {nom_projet} passe en phase de construction.
+
+**Ce que ça veut dire :** nos équipes techniques préparent
+l'environnement de travail pour commencer le développement.
+
+**Ce que vous avez à faire :** rien pour le moment !
+Nous reviendrons vers vous dès que la première version
+sera visible sur votre espace de test.
+
+**Prochaine étape :** votre premier rapport d'avancement
+arrivera dans {délai}.
+
+À très vite,
+{prenom_responsable}
+{nom_agence}
+```
 
 ### Livrables Phase 3
 
@@ -206,8 +230,8 @@ Si estimation > 50 j/h ou budget > 50k€ → Validation direction
 | A | Rapport d'avancement en 5 lignes | Hebdomadaire | experience-client | suivi/rapport-avancement |
 | B | Démo intermédiaire | Toutes les 2 semaines | experience-client | suivi/demo-intermediaire |
 | C | Alerte proactive si risque | Au besoin | experience-client | suivi/alerte-proactive |
-| D | Dashboard client temps réel | Continu | experience-client | suivi/dashboard-client |
-| E | Checkpoint satisfaction | Toutes les 2 semaines | experience-client | mesure/nps-csat |
+| D | Dashboard client actualisé | À chaque point projet | experience-client | suivi/dashboard-client |
+| E | Checkpoint satisfaction | Au min. tous les 15 jours | experience-client | mesure/nps-csat |
 | F | Accès environnement de test | Continu | devops | staging |
 
 ### Livrables Phase 4
@@ -218,7 +242,7 @@ Si estimation > 50 j/h ou budget > 50k€ → Validation direction
 - [ ] Déploiement staging
 - [ ] **Rapports d'avancement hebdomadaires envoyés** (NOUVEAU)
 - [ ] **Au moins 2 démos intermédiaires réalisées** (NOUVEAU)
-- [ ] **CSAT mesuré toutes les 2 semaines** (NOUVEAU)
+- [ ] **CSAT mesuré au min. tous les 15 jours** (NOUVEAU)
 
 ### Règle d'Or
 

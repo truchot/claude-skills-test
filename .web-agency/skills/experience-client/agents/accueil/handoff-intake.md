@@ -78,6 +78,9 @@ Ajouter les données émotionnelles et relationnelles que `client-intake` ne cap
 
 Produire un dossier consolidé qui servira de référence tout au long du projet :
 
+> **Important** : Le JSON ci-dessous est un **template structurel** à usage documentaire.
+> Les valeurs sont des exemples fictifs. Ne jamais versionner de données client réelles dans git.
+
 ```json
 {
   "relation_client": {

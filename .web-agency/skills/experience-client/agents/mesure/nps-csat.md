@@ -188,6 +188,17 @@ Les données de satisfaction alimentent automatiquement :
 | Alerte de satisfaction | Notification quand le score baisse |
 | Données pour les bilans | Alimentation automatique des rapports de fidélisation |
 
+## Coordination Inter-Skills
+
+Cet agent est le seul agent du domaine `mesure` (pas d'orchestrateur dédié).
+
+| Skill | Interaction |
+|-------|-------------|
+| `experience-client/suivi` | Intègre le score dans les rapports d'avancement |
+| `experience-client/lancement` | Fournit le score pour le bilan J+30 |
+| `experience-client/fidelisation` | Fournit la courbe de satisfaction pour les bilans |
+| `customer-success` | Partage les données NPS pour le suivi fidélisation |
+
 ## Escalades
 
 | Situation | Action |

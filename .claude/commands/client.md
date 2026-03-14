@@ -85,6 +85,10 @@ SI la demande concerne le support post-livraison:
 
 SI la demande concerne le pipeline commercial:
   → commercial-crm (avec coordination experience-client)
+
+SI le client signale un bug bloquant en production:
+  → support-client (escalade immédiate) + alerte experience-client
+  → Priorité : résoudre d'abord, communiquer ensuite
 ```
 
 ### 4. Fallback

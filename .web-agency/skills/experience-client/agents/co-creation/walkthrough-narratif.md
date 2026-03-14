@@ -162,6 +162,12 @@ et clique sur "Ajouter au panier".
 | Fiche produit | Avis clients | Voulez-vous moderer les avis ? |
 ```
 
+## Regle d'Or
+
+> Chaque presentation presente le "pourquoi" avant le "quoi". Pas "Voici la maquette de la page produit" mais "Vos clients arriveront sur cette page apres avoir cherche un produit. Voici ce qu'ils verront et pourquoi."
+
+*Voir aussi : Phase 2 du [workflow nouveau-projet](../../../../orchestration-framework/workflows/nouveau-projet.md#phase-2--co-création)*
+
 ## Regles de Narration
 
 ```

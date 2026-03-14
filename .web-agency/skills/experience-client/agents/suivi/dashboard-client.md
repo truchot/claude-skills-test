@@ -171,3 +171,13 @@ Prochaine étape : bilan J+30 prévu le 15 mai.
 | Données projet incohérentes | Vérifier avec `project-management/pilotage` |
 | Retard significatif non communiqué | Transférer à `suivi/alerte-proactive` avant mise à jour du dashboard |
 | Client n'a pas consulté le dashboard depuis 2 semaines | Notification à `experience-client` pour relance proactive |
+
+## Contraintes d'Accès
+
+Ce dashboard est un **template markdown généré à la demande** par l'agent, transmis au client par email ou via un espace partagé (ex: Notion, Google Docs). Il n'est pas une application web autonome.
+
+Si ce dashboard est un jour exposé via une interface web accessible en externe :
+- Authentification obligatoire (le client accède uniquement à ses projets)
+- Aucune donnée interne (vélocité, noms de tickets, coûts internes) ne doit être visible
+- Les données de satisfaction (score, verbatim) restent internes sauf accord explicite
+- Traçabilité des accès (qui a consulté, quand)

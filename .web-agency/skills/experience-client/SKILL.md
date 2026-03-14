@@ -38,12 +38,12 @@ NIVEAU 2 : ORCHESTRATION (Relation Client)
 | `accueil` | 6 | Premier contact, établissement de la confiance, handoff depuis client-intake |
 | `cadrage` | 5 | Proposition et clarification en langage business |
 | `co-creation` | 5 | Participation du client et collecte de feedback |
-| `suivi` | 7 | Rapports d'avancement, communication proactive, dashboard temps réel |
+| `suivi` | 7 | Rapports d'avancement, communication proactive, dashboard actualisé |
 | `lancement` | 4 | Formation, bilan J+30, célébration |
 | `fidelisation` | 5 | Rapports mensuels, trimestriels, bilan annuel |
-| `mesure` | 2 | Mesure continue de la satisfaction (NPS/CSAT) |
+| `mesure` | 1 | Mesure continue de la satisfaction (NPS/CSAT) |
 
-**Total : 34 agents + 5 validators = 39 fichiers**
+**Total : 33 agents + 5 validators = 38 fichiers**
 
 ## Workflow Principal
 
@@ -61,7 +61,7 @@ Premier Contact → Proposition → Co-création → Suivi Hebdo → Lancement �
 | Proposition, devis, périmètre, clarification, reformulation | `cadrage` |
 | Feedback, validation, atelier, co-construction, maquette | `co-creation` |
 | Avancement, rapport, statut, point hebdo, communication proactive | `suivi` |
-| Dashboard, visibilité temps réel, tableau de bord | `suivi/dashboard-client` |
+| Dashboard, visibilité avancement, tableau de bord | `suivi/dashboard-client` |
 | Formation, mise en ligne, bilan J+30, célébration, go-live | `lancement` |
 | Rapport mensuel, trimestriel, bilan annuel, renouvellement, upsell | `fidelisation` |
 | Satisfaction, NPS, CSAT, feedback client, enquête | `mesure` |

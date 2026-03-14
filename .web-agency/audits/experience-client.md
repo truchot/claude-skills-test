@@ -14,7 +14,7 @@ type: audit
 
 ## Synthèse Exécutive
 
-Le framework web-agency a considérablement progressé depuis l'audit du 2026-03-13. L'ajout du skill `experience-client` (34 agents + 5 validators) constitue une avancée majeure. Le parcours émotionnel client en 8 phases est bien pensé et les validators (zero-jargon, ton-et-empathie, etc.) sont un dispositif unique et puissant.
+Le framework web-agency a considérablement progressé depuis l'audit du 2026-03-13. L'ajout du skill `experience-client` (33 agents + 5 validators) constitue une avancée majeure. Le parcours émotionnel client en 8 phases est bien pensé et les validators (zero-jargon, ton-et-empathie, etc.) sont un dispositif unique et puissant.
 
 **Cependant**, 5 problèmes critiques empêchent encore d'offrir la meilleure expérience client possible.
 
@@ -56,7 +56,7 @@ Le framework web-agency a considérablement progressé depuis l'audit du 2026-03
 
 ### GAP 2 : Déconnexion entre `experience-client` et `client-intake`
 
-**Problème** : `client-intake` (28 agents) et `experience-client` (34 agents) couvrent des phases qui se chevauchent :
+**Problème** : `client-intake` (28 agents) et `experience-client` (33 agents) couvrent des phases qui se chevauchent :
 - `client-intake` a un domaine `reception/` et `qualification/`
 - `experience-client` a un domaine `accueil/` avec `premier-contact`, `ecoute-active`, `qualification-rapide`
 
@@ -221,7 +221,7 @@ Avant toute décision technique, poser 3 questions :
 
 ## Conclusion
 
-Le framework a les fondations pour offrir une expérience client exceptionnelle. Le skill `experience-client` avec ses 34 agents et 5 validators est un dispositif unique et puissant. Le parcours émotionnel en 8 phases (CONFIANCE → CLARTÉ → PARTICIPATION → SÉRÉNITÉ → SÉCURITÉ → FIERTÉ → SOUTIEN → FIDÉLITÉ) est remarquable.
+Le framework a les fondations pour offrir une expérience client exceptionnelle. Le skill `experience-client` avec ses 33 agents et 5 validators est un dispositif unique et puissant. Le parcours émotionnel en 8 phases (CONFIANCE → CLARTÉ → PARTICIPATION → SÉRÉNITÉ → SÉCURITÉ → FIERTÉ → SOUTIEN → FIDÉLITÉ) est remarquable.
 
 Les 3 actions qui auront le plus d'impact immédiat :
 
