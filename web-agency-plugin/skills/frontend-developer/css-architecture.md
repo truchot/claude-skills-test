@@ -80,16 +80,10 @@ const button = cva('px-4 py-2 rounded font-medium', {
 
 ## Animations
 ```css
-/* Transitions */
 .btn { transition: background-color 150ms ease, transform 150ms ease; }
 .btn:active { transform: scale(0.98); }
-
-/* Keyframes */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
-.animate-in { animation: fadeIn 300ms ease-out; }
-
-/* Respect preferences */
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; } }
 ```
 
 ## Architecture CSS

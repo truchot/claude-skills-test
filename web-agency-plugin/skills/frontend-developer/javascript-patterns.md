@@ -71,26 +71,17 @@ document.querySelector('.list').addEventListener('click', (e) => {
   const item = e.target.closest('[data-id]');
   if (item) handleClick(item.dataset.id);
 });
-
 // IntersectionObserver (lazy loading, infinite scroll)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) loadMore(); });
 }, { threshold: 0.1 });
-observer.observe(sentinel);
-
-// ResizeObserver
-const ro = new ResizeObserver(entries => {
-  entries.forEach(entry => adjustLayout(entry.contentRect));
-});
 ```
 
 ## API Integration
 ```ts
-// Client HTTP type-safe
 async function apiClient<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE_URL}${endpoint}`, {
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
-    ...options,
+    headers: { 'Content-Type': 'application/json', ...options?.headers }, ...options,
   });
   if (!res.ok) throw new ApiError(res.status, await res.text());
   return res.json();

@@ -1,52 +1,30 @@
 # Tactical Patterns - DDD
 
 ## Entity
-Objet avec identite unique qui persiste dans le temps.
+Identite unique, mutable, cycle de vie. Egalite par ID.
 ```typescript
 class Customer {
-  private constructor(
-    private readonly _id: CustomerId,
-    private _name: string,
-    private _email: Email,
-    private _status: CustomerStatus
-  ) {}
-
+  private constructor(readonly _id: CustomerId, private _name: string, private _email: Email) {}
   static create(name: string, email: string): Customer {
-    return new Customer(CustomerId.generate(), name, Email.create(email), 'active');
+    return new Customer(CustomerId.generate(), name, Email.create(email));
   }
-
-  activate(): void {
-    if (this._status === 'active') throw new DomainError('Already active');
-    this._status = 'active';
-  }
-
   equals(other: Customer): boolean { return this._id.equals(other._id); }
 }
 ```
-Question cle: "Si deux objets ont les memes attributs, sont-ils le meme objet?" Non -> Entity.
+Question cle: "Memes attributs = meme objet?" Non -> Entity, Oui -> Value Object.
 
 ## Value Object
-Immuable, egalite par valeur. Encapsule validation.
+Immuable, egalite par valeur, validation dans constructeur.
 ```typescript
 class Money {
   private constructor(readonly amount: number, readonly currency: string) {
     if (amount < 0) throw new DomainError('Amount cannot be negative');
   }
-  static of(amount: number, currency: string): Money { return new Money(amount, currency); }
+  static of(amount: number, currency: string) { return new Money(amount, currency); }
   add(other: Money): Money {
     if (this.currency !== other.currency) throw new DomainError('Currency mismatch');
     return Money.of(this.amount + other.amount, this.currency);
   }
-  equals(other: Money): boolean {
-    return this.amount === other.amount && this.currency === other.currency;
-  }
-}
-
-class Email {
-  private constructor(readonly value: string) {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) throw new DomainError('Invalid email');
-  }
-  static create(value: string): Email { return new Email(value.toLowerCase()); }
 }
 ```
 
