@@ -1,0 +1,9 @@
+{
+  "name": "web-agency",
+  "description": "Framework IA pour agence web digitale — 29 skills techniques et métier, 17 agents spécialisés, 5 commandes workflow. Expertise : développement web, design, marketing digital, gestion de projet, relation client.",
+  "version": "5.0.0",
+  "author": {
+    "name": "Truchot"
+  },
+  "license": "MIT"
+}
