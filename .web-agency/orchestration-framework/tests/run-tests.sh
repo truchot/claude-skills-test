@@ -42,6 +42,8 @@ TESTS=(
   "validate-orchestrator-routing.test.js"
   "validate-template-generation.test.js"
   "validate-agent-examples.test.js"
+  "validate-hierarchy-consistency.test.js"
+  "validate-glossaire-consistency.test.js"
 )
 
 PASSED=0

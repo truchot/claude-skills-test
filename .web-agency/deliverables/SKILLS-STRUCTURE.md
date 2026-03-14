@@ -120,35 +120,42 @@ skill/domain/agent-name
 
 | Skill | Niveau | Description |
 |-------|--------|-------------|
-| `client-intake` | 0 | Prise de brief client |
-| `web-agency` | 1 | Orchestrateur principal |
-| `task-orchestrator` | 1 | Orchestration des tâches |
-| `direction-technique` | 2 | Direction technique |
-| `direction-marketing` | 2 | Direction marketing |
-| `direction-artistique` | 2 | Direction artistique |
-| `project-management` | 3 | Gestion de projet |
-| `lead-dev` | 3 | Lead développeur |
-| `web-dev-process` | 3 | Processus de développement web |
-| `testing-process` | 3 | Processus de test |
-| `frontend-developer` | 4 | Développement frontend |
-| `backend-developer` | 4 | Développement backend |
-| `devops` | 4 | DevOps et infrastructure |
-| `wordpress-gutenberg-expert` | 4 | Expert WordPress/Gutenberg |
-| `react-expert` | 4 | Expert React |
-| `nextjs-expert` | 4 | Expert Next.js |
-| `design-system-foundations` | 4 | Design system |
-| `seo-expert` | 4 | SEO et référencement |
-| `paid-media` | 4 | Publicité payante (SEA, Social Ads) |
-| `marketing-analytics` | 4 | Analytics et mesure marketing |
-| `content-marketing` | 4 | Contenu et social media |
-| `customer-success` | 4 | Fidélisation et rétention |
-| `marketing-ops` | 4 | Campagnes et automation |
-| `content-management` | 4 | Gestion de contenu |
-| `ux-ui-design` | 4 | UX/UI Design |
-| `legal-compliance` | 4 | Conformité légale |
-| `support-client` | 4 | Support client |
-| `commercial-crm` | 4 | Commercial et CRM |
-| `finance-analytics` | 4 | Finance et analytics |
+| `client-intake` | ENTRÉE | Prise de brief client |
+| `web-agency` | ENTRÉE | Orchestrateur principal |
+| `task-orchestrator` | ENTRÉE | Orchestration des tâches |
+| `direction-technique` | STRATÉGIE | Direction technique |
+| `direction-operations` | STRATÉGIE | Direction des opérations |
+| `direction-commerciale` | STRATÉGIE | Direction commerciale |
+| `direction-marketing` | STRATÉGIE | Direction marketing |
+| `direction-artistique` | STRATÉGIE | Direction artistique |
+| `project-management` | PROCESSUS | Gestion de projet |
+| `lead-dev` | PROCESSUS | Lead développeur |
+| `web-dev-process` | PROCESSUS | Processus de développement web |
+| `testing-process` | PROCESSUS | Processus de test |
+| `experience-client` | PROCESSUS | Expérience client |
+| `frontend-developer` | IMPLÉMENTATION | Développement frontend |
+| `backend-developer` | IMPLÉMENTATION | Développement backend |
+| `devops` | IMPLÉMENTATION | DevOps et infrastructure |
+| `wordpress-gutenberg-expert` | IMPLÉMENTATION | Expert WordPress/Gutenberg |
+| `react-expert` | IMPLÉMENTATION | Expert React |
+| `nextjs-expert` | IMPLÉMENTATION | Expert Next.js |
+| `design-system-foundations` | IMPLÉMENTATION | Design system |
+| `seo-expert` | IMPLÉMENTATION | SEO et référencement |
+| `paid-media` | IMPLÉMENTATION | Publicité payante (SEA, Social Ads) |
+| `marketing-analytics` | IMPLÉMENTATION | Analytics et mesure marketing |
+| `content-marketing` | IMPLÉMENTATION | Contenu et social media |
+| `customer-success` | IMPLÉMENTATION | Fidélisation et rétention |
+| `marketing-ops` | IMPLÉMENTATION | Campagnes et automation |
+| `content-management` | IMPLÉMENTATION | Gestion de contenu |
+| `ux-ui-design` | IMPLÉMENTATION | UX/UI Design |
+| `legal-compliance` | IMPLÉMENTATION | Conformité légale |
+| `support-client` | IMPLÉMENTATION | Support client |
+| `commercial-crm` | IMPLÉMENTATION | Commercial et CRM |
+| `finance-analytics` | IMPLÉMENTATION | Finance et analytics |
+| `ai-integration` | IMPLÉMENTATION | Intégration d'IA |
+| `legacy-modernization` | IMPLÉMENTATION | Modernisation de code legacy |
+| `security-expert` | IMPLÉMENTATION | Sécurité applicative |
+| `ddd` | TRANSVERSE | Domain-Driven Design |
 
 ## Validation des Références
 

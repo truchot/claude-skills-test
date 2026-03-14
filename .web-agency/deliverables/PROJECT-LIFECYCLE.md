@@ -24,18 +24,18 @@
 │                   📄 Estimation     📄 Data Model   📄 Docs              │
 │                                                                              │
 │                                                                              │
-│  PHASE 5          PHASE 6           PHASE 7                                 │
-│  DÉPLOIEMENT      LANCEMENT         MAINTENANCE                             │
-│  ──────────       ─────────         ───────────                             │
+│  PHASE 5          PHASE 6           PHASE 7          PHASE 8               │
+│  DÉPLOIEMENT      LANCEMENT         MAINTENANCE      BILAN                 │
+│  ──────────       ─────────         ───────────      ─────                 │
 │                                                                              │
-│  ┌──────────┐    ┌──────────┐      ┌──────────┐                            │
-│  │CI/CD     │───►│Marketing │─────►│Support   │                            │
-│  │Infra     │    │Go-live   │      │Évolution │                            │
-│  └──────────┘    └──────────┘      └──────────┘                            │
-│      │                │                  │                                  │
-│      ▼                ▼                  ▼                                  │
-│  📄 Pipeline      📄 Stratégie     📄 Tickets                             │
-│  📄 Runbook       📄 Analytics     📄 Changelog                           │
+│  ┌──────────┐    ┌──────────┐      ┌──────────┐    ┌──────────┐           │
+│  │CI/CD     │───►│Marketing │─────►│Support   │───►│Rétro     │           │
+│  │Infra     │    │Go-live   │      │Évolution │    │REX       │           │
+│  └──────────┘    └──────────┘      └──────────┘    └──────────┘           │
+│      │                │                  │               │                  │
+│      ▼                ▼                  ▼               ▼                  │
+│  📄 Pipeline      📄 Stratégie     📄 Tickets      📄 Post-mortem        │
+│  📄 Runbook       📄 Analytics     📄 Changelog    📄 Lessons learned    │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -189,6 +189,28 @@
 | 7.3 | `post-mortem` | direction-technique/support/post-mortem | Incidents | 📝 À créer |
 | 7.4 | `changelog` | web-dev-process/maintenance/* | Releases | 📝 À créer |
 | 7.5 | `tech-debt-report` | direction-technique/qualite/dette-technique | 4.7 | 📝 À créer |
+
+---
+
+## Phase 8 : BILAN (Rétrospective & Capitalisation)
+
+**Skills impliqués** : `direction-technique/support`, `project-management`, `direction-operations`
+
+**Durée typique** : 3-5 jours
+
+### Livrables dans l'ordre
+
+| # | Livrable | Agent producteur | Dépend de | Statut |
+|---|----------|------------------|-----------|--------|
+| 8.1 | `post-mortem` | direction-technique/support/post-mortem | 7.3 | ✅ Créé |
+| 8.2 | `project-metrics-report` | project-management/livraison/bilan-projet | 6.6, 7.5 | 📝 À créer |
+| 8.3 | `client-satisfaction-survey` | experience-client/suivi/satisfaction | 7.2 | 📝 À créer |
+| 8.4 | `lessons-learned` | direction-operations/capitalisation/rex | 8.1, 8.2 | 📝 À créer |
+| 8.5 | `process-improvement-plan` | direction-operations/capitalisation/amelioration | 8.4 | 📝 À créer |
+
+**Output Phase 8** → Input prochain projet : `lessons-learned`, `process-improvement-plan`
+
+> **Boucle vertueuse** : Les enseignements de la Phase 8 alimentent directement la Phase 1 du projet suivant, améliorant progressivement les estimations, les processus et la satisfaction client.
 
 ---
 

@@ -13,8 +13,10 @@ Tu es l'orchestrateur du skill **Direction Commerciale**. Tu pilotes la stratég
 
 ## Position dans la Hiérarchie
 
+> Voir [HIERARCHY.md](../../HIERARCHY.md) pour la source de vérité complète.
+
 ```
-NIVEAU 1 : POURQUOI (Décisions stratégiques)
+STRATÉGIE : POURQUOI (Décisions stratégiques)
 ├── direction-technique      → Tech & Architecture
 ├── direction-operations     → Projet & Équipes
 ├── direction-commerciale    → Finance & Sales (CE SKILL)
@@ -66,7 +68,7 @@ Ce skill répond aux questions stratégiques :
 │  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐               │
 │  │ commercial-crm  │ │ finance-        │ │ legal-          │               │
 │  │                 │ │ analytics       │ │ compliance      │               │
-│  │ (NIVEAU 3)      │ │ (NIVEAU 3)      │ │ (NIVEAU 3)      │               │
+│  │ (IMPLÉMENTATION)      │ │ (IMPLÉMENTATION)      │ │ (IMPLÉMENTATION)      │               │
 │  └─────────────────┘ └─────────────────┘ └─────────────────┘               │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -213,18 +215,18 @@ Requête Commerciale Stratégique
 │  └─ Stratégie rétention → relation-client/retention-strategique
 │
 ├─ Gestion pipeline / prospection ?
-│  └─ → skill commercial-crm (NIVEAU 3)
+│  └─ → skill commercial-crm (IMPLÉMENTATION)
 │
 ├─ Facturation / recouvrement / KPIs ?
-│  └─ → skill finance-analytics (NIVEAU 3)
+│  └─ → skill finance-analytics (IMPLÉMENTATION)
 │
 └─ Contrats / CGV / conformité ?
-   └─ → skill legal-compliance (NIVEAU 3)
+   └─ → skill legal-compliance (IMPLÉMENTATION)
 ```
 
 ## Interaction avec les Autres Skills
 
-### Skills Supervisés (NIVEAU 3 - COMMENT)
+### Skills Supervisés (IMPLÉMENTATION - COMMENT)
 
 | Skill | Relation |
 |-------|----------|
@@ -232,7 +234,7 @@ Requête Commerciale Stratégique
 | `finance-analytics` | Reçoit objectifs marge, règles facturation |
 | `legal-compliance` | Reçoit politique contractuelle |
 
-### Skills Pairs (NIVEAU 1 - POURQUOI)
+### Skills Pairs (STRATÉGIE - POURQUOI)
 
 | Skill | Interaction |
 |-------|-------------|
@@ -274,5 +276,5 @@ Requête Commerciale Stratégique
 ### v1.0.0
 
 - Création initiale avec 5 domaines et 27 agents
-- Positionnement NIVEAU 1 (POURQUOI) pour les décisions stratégiques commerciales et financières
+- Positionnement STRATÉGIE (POURQUOI) pour les décisions stratégiques commerciales et financières
 - Supervision des skills : commercial-crm, finance-analytics, legal-compliance

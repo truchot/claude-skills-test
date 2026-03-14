@@ -29,21 +29,21 @@ flowchart TB
     class GP,TECH,DESIGN domain
 ```
 
-## Hiérarchie des Skills (3 Niveaux)
+## Hiérarchie des Skills
 
 ```mermaid
 flowchart TB
-    subgraph N1["NIVEAU 1 : STRATÉGIE<br/>(POURQUOI - Décisions, politiques, standards)"]
+    subgraph N1["STRATÉGIE<br/>(Décisions, politiques, standards)"]
         DT["direction-technique (52)<br/>Architecture • Choix technologiques<br/>Standards • Estimation"]
     end
 
-    subgraph N2["NIVEAU 2 : OPÉRATIONS / PROCESSUS<br/>(QUOI/QUI - Méthodologie, process, coordination)"]
+    subgraph N2["PROCESSUS<br/>(Méthodologie, coordination, process)"]
         WDP["web-dev-process (61)<br/>──────────────<br/>QUOI: Méthodo<br/>• 7 phases<br/>• Checklists<br/>• Workflows"]
         TP["testing-process (25)<br/>──────────────<br/>QUOI: Tests<br/>• Stratégie<br/>• Types tests<br/>• Qualité/Perf"]
         LD["lead-dev (27)<br/>──────────────<br/>QUI: Coordination<br/>• Code review<br/>• Mentoring<br/>• Delivery"]
     end
 
-    subgraph N3["NIVEAU 3 : IMPLÉMENTATION<br/>(COMMENT - Code, configuration, patterns)"]
+    subgraph N3["IMPLÉMENTATION<br/>(Code, configuration, patterns)"]
         FD["frontend-developer<br/>(33)"]
         BD["backend-developer<br/>(32)"]
         DO["devops<br/>(30)"]
@@ -53,7 +53,7 @@ flowchart TB
         NE["nextjs-expert<br/>(35)"]
     end
 
-    subgraph PM["SÉPARÉ : GESTION PROJET"]
+    subgraph PM["PROCESSUS : GESTION PROJET"]
         PMG["project-management (24)<br/>Brief • Estimation • Planning<br/>Communication • Livraison • Facturation"]
     end
 
@@ -287,22 +287,19 @@ flowchart TB
 flowchart TB
     subgraph HIERARCHIE["TOUJOURS respecter la hiérarchie"]
         direction TB
-        P1["1. POURQUOI<br/>(direction-technique)"]
-        P2["2. QUOI<br/>(web-dev-process, testing-process)"]
-        P3["3. QUI<br/>(lead-dev)"]
-        P4["4. COMMENT<br/>(skills implémentation)"]
-        P1 --> P2 --> P3 --> P4
+        P1["STRATÉGIE<br/>(direction-technique)"]
+        P2["PROCESSUS<br/>(web-dev-process, testing-process, lead-dev)"]
+        P3["IMPLÉMENTATION<br/>(skills techniques)"]
+        P1 --> P2 --> P3
     end
 
     classDef n1 fill:#e1f5fe,stroke:#01579b
     classDef n2 fill:#fff3e0,stroke:#e65100
-    classDef n3 fill:#fce4ec,stroke:#c2185b
-    classDef n4 fill:#e8f5e9,stroke:#2e7d32
+    classDef n3 fill:#e8f5e9,stroke:#2e7d32
 
     class P1 n1
     class P2 n2
     class P3 n3
-    class P4 n4
 ```
 
 ### Composition Horizontale (Parallèle)

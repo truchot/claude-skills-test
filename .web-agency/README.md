@@ -8,25 +8,28 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 
 ```
 .web-agency/
-├── skills/          # 31 skills métier, ~900 agents
+├── skills/          # 35 skills métier, ~950 agents
 │   │
-│   │  NIVEAU 1 : POURQUOI (5 directions stratégiques)
+│   │  ENTRÉE (3 skills d'accueil et routage)
+│   ├── client-intake/           # Qualification besoins
+│   ├── web-agency/              # Routage des demandes
+│   ├── task-orchestrator/       # Priorisation et distribution
+│   │
+│   │  STRATÉGIE (5 directions stratégiques)
 │   ├── direction-technique/     # Tech & Architecture
 │   ├── direction-operations/    # Projet & Équipes
 │   ├── direction-commerciale/   # Finance & Sales
 │   ├── direction-marketing/     # Acquisition & Growth
 │   ├── direction-artistique/    # Créatif & Brand
 │   │
-│   │  NIVEAU 2 : QUOI (7 skills de processus)
-│   ├── web-agency/              # Routage des demandes
+│   │  PROCESSUS (5 skills de processus)
 │   ├── project-management/      # Planning, coordination
 │   ├── lead-dev/                # Coordination équipe dev
 │   ├── web-dev-process/         # Méthodologie développement
 │   ├── testing-process/         # Stratégie tests
-│   ├── client-intake/           # Qualification besoins
-│   ├── task-orchestrator/       # Priorisation et distribution
+│   ├── experience-client/       # Parcours et satisfaction client
 │   │
-│   │  NIVEAU 3 : COMMENT (19 skills d'implémentation)
+│   │  IMPLÉMENTATION (21 skills d'implémentation)
 │   ├── frontend-developer/      # Code frontend
 │   ├── backend-developer/       # Code backend
 │   ├── devops/                  # CI/CD, infrastructure
@@ -46,6 +49,11 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 │   ├── commercial-crm/          # Pipeline, CRM
 │   ├── finance-analytics/       # Facturation, KPIs
 │   ├── content-management/      # Contenu éditorial
+│   ├── ai-integration/          # Intégration IA
+│   ├── legacy-modernization/    # Modernisation legacy
+│   ├── security-expert/         # Sécurité applicative
+│   │
+│   │  TRANSVERSE (1 skill transversal)
 │   └── ddd/                     # Domain-Driven Design
 │
 ├── learnings/       # Système de learning loop
@@ -56,13 +64,26 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 └── README.md        # Ce fichier
 ```
 
+## Terminologie
+
+Ce framework est bilingue (français pour le contenu, anglais pour les identifiants techniques). Voir :
+
+- [**Glossaire officiel**](./GLOSSAIRE.md) — termes canoniques, synonymes, guide par profil
+- [ADR-007](./learnings/decisions/ADR-007-naming-conventions.md) — conventions de nommage FR/EN
+
 ## Philosophie
 
 ### Séparation des responsabilités (ADR-006)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  NIVEAU 1 : POURQUOI (5 directions stratégiques)                        │
+│  ENTRÉE (3 skills d'accueil et routage)                                 │
+│                                                                         │
+│  client-intake, web-agency, task-orchestrator                           │
+│                                                                         │
+│  → Qualification, routage et priorisation des demandes                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│  STRATÉGIE (5 directions stratégiques)                                  │
 │                                                                         │
 │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐       │
 │  │ direction-  │ │ direction-  │ │ direction-  │ │ direction-  │       │
@@ -74,23 +95,29 @@ Ce dossier contient toutes les instructions, skills et workflows indépendants d
 │                        └─────────────┘                                  │
 │  → Décisions stratégiques, pas de code                                  │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 2 : QUOI (7 skills de processus)                                │
+│  PROCESSUS (5 skills de processus)                                      │
 │                                                                         │
-│  web-agency, project-management, lead-dev, web-dev-process,             │
-│  testing-process, client-intake, task-orchestrator                      │
+│  project-management, lead-dev, web-dev-process, testing-process,        │
+│  experience-client                                                      │
 │                                                                         │
 │  → Processus et coordination, pas de code                               │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  NIVEAU 3 : COMMENT (19 skills d'implémentation)                        │
+│  IMPLÉMENTATION (21 skills d'implémentation)                            │
 │                                                                         │
 │  frontend-developer, backend-developer, devops, react-expert,           │
 │  nextjs-expert, wordpress-gutenberg-expert, design-system-foundations,  │
 │  ux-ui-design, seo-expert, paid-media, marketing-analytics,             │
 │  customer-success, content-marketing, marketing-ops, legal-compliance,  │
 │  support-client, commercial-crm, finance-analytics, content-management, │
-│  ddd                                                                    │
+│  ai-integration, legacy-modernization, security-expert                  │
 │                                                                         │
 │  → Code réel et livrables concrets                                      │
+├─────────────────────────────────────────────────────────────────────────┤
+│  TRANSVERSE (1 skill transversal)                                       │
+│                                                                         │
+│  ddd                                                                    │
+│                                                                         │
+│  → Méthodologies applicables à tous les niveaux                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 

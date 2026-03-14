@@ -164,6 +164,117 @@ Action : Documenter pour prochaine rétrospective
 - Escalader au mauvais niveau hiérarchique
 - Oublier de clôturer l'escalade
 
+## Arbitrage Inter-Skills
+
+### Le Problème
+
+Deux skills de même niveau peuvent produire des recommandations contradictoires. Contrairement à l'escalade humaine (un problème remonte), l'arbitrage inter-skills résout un **conflit horizontal** entre métiers.
+
+### Exemples de Conflits Courants
+
+| Skill A | Recommande | Skill B | Recommande | Conflit |
+|---------|------------|---------|------------|---------|
+| `seo-expert` | Pages longues, riches en texte | `ux-ui-design` | Interface minimaliste, peu de texte | Contenu vs UX |
+| `direction-technique` | Stack Next.js | `marketing-ops` | Plugin WordPress spécifique | Techno vs besoin métier |
+| `legal-compliance` | Bandeau cookies intrusif | `customer-success` | Parcours fluide sans friction | Conformité vs expérience |
+| `seo-expert` | URLs longues avec mots-clés | `ux-ui-design` | URLs courtes et lisibles | SEO vs lisibilité |
+| `devops` | Infrastructure haute dispo (coûteuse) | `finance-analytics` | Réduire les coûts serveur | Fiabilité vs budget |
+| `direction-technique` | Refactoring complet | `project-management` | Livrer la feature d'abord | Qualité vs délai |
+
+### Règles de Priorité par Contexte
+
+Quand deux skills s'opposent, appliquer cette hiérarchie de priorité :
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  PRIORITÉ 1 : LÉGAL & SÉCURITÉ                             │
+│  legal-compliance, security-expert                          │
+│  → Conformité non-négociable (RGPD, accessibilité, OWASP)  │
+│  → Pas d'arbitrage possible, on s'adapte autour            │
+├─────────────────────────────────────────────────────────────┤
+│  PRIORITÉ 2 : UTILISATEUR                                   │
+│  ux-ui-design, customer-success, experience-client          │
+│  → L'expérience utilisateur prime sur l'optimisation        │
+│  → Un site beau mais inutilisable ne sert à personne       │
+├─────────────────────────────────────────────────────────────┤
+│  PRIORITÉ 3 : BUSINESS                                      │
+│  direction-commerciale, project-management, finance         │
+│  → Le technique sert le business, pas l'inverse            │
+│  → ROI et objectifs métier guident les choix               │
+├─────────────────────────────────────────────────────────────┤
+│  PRIORITÉ 4 : TECHNIQUE                                     │
+│  direction-technique, devops, lead-dev                      │
+│  → Qualité technique importante mais au service du reste   │
+│  → Compromis acceptable si le business l'exige             │
+├─────────────────────────────────────────────────────────────┤
+│  PRIORITÉ 5 : OPTIMISATION                                  │
+│  seo-expert, paid-media, marketing-analytics                │
+│  → Optimisation cède face à l'UX et au légal               │
+│  → Chercher des solutions qui satisfont les deux parties   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Processus d'Arbitrage
+
+```
+Conflit détecté entre Skill A et Skill B
+│
+├─ Les deux skills sont dans la même priorité ?
+│  └─ OUI → Escalade humaine (P3). Un humain tranche.
+│
+├─ Un skill a une priorité supérieure ?
+│  └─ OUI → Le skill prioritaire l'emporte.
+│         Le skill de moindre priorité doit ADAPTER
+│         sa recommandation (pas l'abandonner).
+│
+└─ Le conflit est mitigeable ?
+   ├─ OUI → Trouver un compromis technique.
+   │        Documenter dans un `arbitrage-decision`.
+   └─ NON → Escalade humaine (P2). Décision requise.
+```
+
+### Livrable : Arbitrage Decision
+
+Chaque arbitrage doit être tracé :
+
+```markdown
+## Arbitrage - [Titre court]
+
+**Date** : [Date]
+**Skills en conflit** : [Skill A] vs [Skill B]
+
+**Position Skill A** : [Ce que Skill A recommande et pourquoi]
+**Position Skill B** : [Ce que Skill B recommande et pourquoi]
+
+**Règle de priorité appliquée** : [Priorité X > Priorité Y]
+
+**Décision** : [Ce qui a été décidé]
+**Compromis** : [Comment le skill de moindre priorité a été accommodé]
+
+**Impact** : [Conséquences de la décision]
+**Décideur** : [Humain qui a validé, ou "automatique" si règle de priorité claire]
+```
+
+### Exemples d'Arbitrages Résolus
+
+#### SEO vs UX : Pages longues vs interface minimaliste
+
+- **Règle** : UTILISATEUR (P2) > OPTIMISATION (P5)
+- **Décision** : Interface minimaliste avec contenu SEO en accordion/tabs
+- **Compromis** : Le contenu SEO est présent mais ne dégrade pas l'UX. Sections dépliables, FAQ structurée, contenu progressif.
+
+#### Legal vs UX : Bandeau cookies intrusif vs parcours fluide
+
+- **Règle** : LÉGAL (P1) > UTILISATEUR (P2)
+- **Décision** : Le bandeau cookies est obligatoire
+- **Compromis** : `ux-ui-design` conçoit un bandeau élégant, non-intrusif visuellement, qui respecte le RGPD tout en minimisant la friction. Pas de dark patterns.
+
+#### Tech vs Business : Refactoring vs livraison feature
+
+- **Règle** : BUSINESS (P3) > TECHNIQUE (P4)
+- **Décision** : La feature est livrée d'abord
+- **Compromis** : `direction-technique` obtient un sprint de refactoring planifié dans les 4 semaines suivantes. La dette technique est documentée et échéancée, pas ignorée.
+
 ## Références
 
 - [Règles de routage](./routing.md)

@@ -9,9 +9,85 @@ Ce document définit les règles de routage des requêtes vers les skills approp
 
 ## Principe
 
-> Une requête = Un skill principal identifié
+> Une requête = Une **intention** + un **domaine** + une **urgence** → Un skill principal identifié
 
-## Matrice de Routage par Mots-clés
+Les utilisateurs (surtout les clients) ne parlent **pas** en mots-clés techniques. Le routing doit comprendre l'intention derrière la requête, pas chercher un mot-clé exact.
+
+## Étape 1 : Identifier l'Intention
+
+Chaque requête exprime une intention fondamentale. C'est le **premier filtre** de routage.
+
+| Intention | Signaux (langage client) | Signaux (langage technique) |
+|-----------|-------------------------|----------------------------|
+| **CRÉER** | "je veux un site", "il me faudrait", "on aimerait avoir", "nouveau projet" | "créer", "développer", "implémenter", "setup" |
+| **CORRIGER** | "ça marche pas", "il y a un souci", "c'est cassé", "ça bug", "erreur" | "fix", "bug", "debug", "patch", "hotfix" |
+| **OPTIMISER** | "c'est lent", "ça rame", "améliorer", "plus rapide", "plus beau" | "performance", "optimiser", "refactoring", "bundle size" |
+| **ANALYSER** | "je comprends pas", "c'est quoi", "pourquoi", "est-ce que c'est bien" | "audit", "review", "analyse", "benchmark", "diagnostic" |
+| **DOCUMENTER** | "comment ça marche", "pour l'équipe", "il faut expliquer" | "doc", "README", "onboarding", "guide", "specs" |
+| **COMMUNIQUER** | "dire au client", "point projet", "présenter", "expliquer au client" | "CR", "reporting", "email", "démo" |
+| **MAINTENIR** | "mettre à jour", "ça date", "montée de version", "sécuriser" | "update", "migration", "patch", "monitoring" |
+
+## Étape 2 : Identifier le Domaine
+
+| Domaine | Signaux (langage client) | Signaux (langage technique) |
+|---------|-------------------------|----------------------------|
+| **SITE / APP** | "le site", "l'appli", "la page", "le formulaire", "le bouton" | "frontend", "composant", "page", "route" |
+| **DONNÉES** | "les données", "la base", "les infos", "les fiches" | "API", "base de données", "backend", "serveur" |
+| **VISUEL** | "le design", "l'apparence", "le look", "les couleurs", "le logo" | "UI", "maquette", "design system", "branding" |
+| **SERVEUR** | "l'hébergement", "le serveur", "c'est en ligne", "la mise en ligne" | "deploy", "CI/CD", "Docker", "infrastructure" |
+| **MARKETING** | "les visiteurs", "Google", "la pub", "les réseaux", "les emails" | "SEO", "ads", "analytics", "campagne" |
+| **BUSINESS** | "le client", "le devis", "le planning", "la facture", "le contrat" | "projet", "estimation", "brief", "livraison" |
+| **SÉCURITÉ** | "c'est sûr ?", "les données sont protégées ?", "RGPD" | "sécurité", "OWASP", "auth", "RGPD" |
+| **CONTENU** | "les textes", "les articles", "le blog", "les images" | "CMS", "contenu", "rédaction", "média" |
+
+## Étape 3 : Identifier l'Urgence
+
+| Urgence | Signaux | Action |
+|---------|---------|--------|
+| **BLOQUANT** | "rien ne marche", "en panne", "les clients ne peuvent pas", "urgent" | Escalade P1/P2 → intervention immédiate |
+| **IMPORTANT** | "il faudrait vite", "avant la deadline", "prioritaire" | Prioriser dans le sprint en cours |
+| **NORMAL** | "quand vous pouvez", "pour la prochaine version", "on aimerait" | Planifier normalement |
+| **NICE-TO-HAVE** | "si possible", "ce serait bien", "un jour", "idéalement" | Backlog, prochaine roadmap |
+
+## Étape 4 : Router vers le Skill
+
+### Matrice Intention × Domaine → Skill
+
+| | SITE/APP | DONNÉES | VISUEL | SERVEUR | MARKETING | BUSINESS | SÉCURITÉ | CONTENU |
+|---|---------|---------|--------|---------|-----------|----------|----------|---------|
+| **CRÉER** | `frontend-developer` | `backend-developer` | `ux-ui-design` | `devops` | `marketing-ops` | `project-management` | `security-expert` | `content-management` |
+| **CORRIGER** | `react-expert` / `nextjs-expert` | `backend-developer` | `design-system` | `devops` | `marketing-analytics` | `project-management` | `backend-developer` | `content-management` |
+| **OPTIMISER** | `nextjs-expert` | `backend-developer` | `ux-ui-design` | `devops` | `seo-expert` | `experience-client` | `security-expert` | `seo-expert` |
+| **ANALYSER** | `direction-technique` | `direction-technique` | `direction-artistique` | `direction-technique` | `marketing-analytics` | `direction-commerciale` | `direction-technique` | `content-marketing` |
+| **DOCUMENTER** | `web-dev-process` | `web-dev-process` | `design-system` | `devops` | `content-marketing` | `project-management` | `legal-compliance` | `content-marketing` |
+| **COMMUNIQUER** | `experience-client` | `experience-client` | `experience-client` | `experience-client` | `customer-success` | `experience-client` | `experience-client` | `experience-client` |
+| **MAINTENIR** | `lead-dev` | `lead-dev` | `design-system` | `devops` | `marketing-ops` | `support-client` | `security-expert` | `content-management` |
+
+### Exemples de Requêtes en Langage Client → Routage
+
+| Ce que dit le client | Intention | Domaine | Urgence | → Skill |
+|---------------------|-----------|---------|---------|---------|
+| "Je veux un site pour mon resto" | CRÉER | SITE | NORMAL | `project-management` → `direction-technique` (GRAND) |
+| "Le site rame" | OPTIMISER | SITE | IMPORTANT | `nextjs-expert/optimization` ou `frontend-developer/performance` |
+| "Je veux améliorer mon site" | OPTIMISER | SITE | NORMAL | `direction-technique` (ANALYSER d'abord) puis spécialiste |
+| "Personne nous trouve sur Google" | OPTIMISER | MARKETING | IMPORTANT | `seo-expert` |
+| "Le formulaire marche plus" | CORRIGER | SITE | BLOQUANT | `frontend-developer` ou `backend-developer` (MICRO) |
+| "On veut changer le logo" | CRÉER | VISUEL | NORMAL | `ux-ui-design/branding` |
+| "C'est quand la livraison ?" | COMMUNIQUER | BUSINESS | NORMAL | `experience-client/suivi` |
+| "On a besoin de plus de clients" | CRÉER | MARKETING | NORMAL | `direction-marketing` → `paid-media` + `seo-expert` |
+| "Le site est down !" | CORRIGER | SERVEUR | BLOQUANT | `devops` (P1 → escalade immédiate) |
+| "Faut mettre à jour WordPress" | MAINTENIR | CONTENU | NORMAL | `wordpress-gutenberg-expert` |
+| "Les mails de contact arrivent pas" | CORRIGER | DONNÉES | IMPORTANT | `backend-developer` ou `devops` |
+| "On aimerait un espace client" | CRÉER | SITE | NORMAL | `project-management` → `direction-technique` (MOYEN/GRAND) |
+| "C'est pas RGPD notre truc" | ANALYSER | SÉCURITÉ | IMPORTANT | `legal-compliance` |
+| "Combien ça va coûter ?" | COMMUNIQUER | BUSINESS | NORMAL | `experience-client/cadrage` |
+| "Montrez-nous où on en est" | COMMUNIQUER | BUSINESS | NORMAL | `experience-client/suivi` |
+
+---
+
+## Référence : Matrice de Routage par Mots-clés
+
+> Cette matrice sert de **référence détaillée** quand l'intention est claire et qu'on doit router vers le bon sous-domaine d'un skill.
 
 ### Project Management
 
@@ -147,67 +223,65 @@ Ces domaines sont maintenant **disponibles** et couverts par les skills suivants
 
 > **Tous les domaines métiers sont désormais couverts.** L'agence web IA est complète.
 
-## Arbre de Décision
+## Arbre de Décision (Intention-First)
 
 ```
 Requête utilisateur
 │
-├─ Concerne le CLIENT ou le PROJET ?
-│  └─ → project-management
+├─ 1. QUELLE INTENTION ?
+│  │
+│  ├─ CRÉER (nouveau projet, feature, contenu)
+│  │  ├─ Complexité GRAND ? → project-management → direction-technique → skills
+│  │  ├─ Complexité MOYEN ? → direction-technique → skill spécialisé
+│  │  ├─ Complexité PETIT ? → lead-dev → skill spécialisé
+│  │  └─ Complexité MICRO ? → skill spécialisé directement
+│  │
+│  ├─ CORRIGER (bug, erreur, panne)
+│  │  ├─ Urgence BLOQUANT ? → Escalade P1 + skill spécialisé immédiat
+│  │  ├─ Urgence IMPORTANT ? → lead-dev → skill spécialisé
+│  │  └─ Urgence NORMAL ? → skill spécialisé directement
+│  │
+│  ├─ OPTIMISER (performance, UX, SEO)
+│  │  ├─ Impact large (multi-skills) ? → direction-technique (ANALYSER d'abord)
+│  │  └─ Impact ciblé ? → skill spécialisé directement
+│  │
+│  ├─ ANALYSER (audit, review, benchmark)
+│  │  └─ → Toujours STRATÉGIE d'abord (direction-technique, direction-marketing, etc.)
+│  │
+│  ├─ DOCUMENTER (specs, guides, onboarding)
+│  │  ├─ Documentation stratégique ? → direction-technique
+│  │  ├─ Documentation process ? → web-dev-process
+│  │  └─ Documentation technique ? → skill spécialisé
+│  │
+│  ├─ COMMUNIQUER (client, équipe, reporting)
+│  │  ├─ Communication client ? → experience-client
+│  │  ├─ Communication projet ? → project-management
+│  │  └─ Communication équipe ? → lead-dev
+│  │
+│  └─ MAINTENIR (update, migration, monitoring)
+│     ├─ Migration majeure ? → direction-technique → lead-dev → skills
+│     ├─ Mise à jour courante ? → lead-dev → skill spécialisé
+│     └─ Monitoring/alerting ? → devops
 │
-├─ Concerne une DÉCISION technique STRATÉGIQUE ?
-│  └─ → direction-technique
+├─ 2. QUEL DOMAINE ? (pour identifier le skill spécialisé)
+│  │
+│  ├─ SITE/APP → frontend-developer, react-expert, nextjs-expert
+│  ├─ DONNÉES → backend-developer
+│  ├─ VISUEL → ux-ui-design, design-system-foundations
+│  ├─ SERVEUR → devops
+│  ├─ MARKETING → seo-expert, paid-media, marketing-analytics,
+│  │               content-marketing, customer-success, marketing-ops
+│  ├─ BUSINESS → project-management, experience-client, commercial-crm
+│  ├─ SÉCURITÉ → security-expert, legal-compliance
+│  ├─ CONTENU → content-management, wordpress-gutenberg-expert
+│  └─ Techno explicite ? → Router vers le skill techno (nextjs, wordpress, react...)
 │
-├─ Concerne la COORDINATION d'équipe dev ?
-│  ├─ Code review, PR, qualité ? → lead-dev/code-review
-│  ├─ Tâches, daily, blocage ? → lead-dev/team-coordination
-│  ├─ Choix lib, pattern ? → lead-dev/technical-decisions
-│  ├─ Formation, mentoring ? → lead-dev/mentoring
-│  └─ Release, deploy, hotfix ? → lead-dev/delivery
-│
-├─ Concerne un PROCESSUS de dev ?
-│  └─ → web-dev-process
-│
-├─ Concerne l'implémentation FRONTEND ?
-│  └─ → frontend-developer (ou react-expert)
-│
-├─ Concerne Next.js spécifiquement ?
-│  └─ → nextjs-expert
-│
-├─ Concerne l'implémentation BACKEND ?
-│  └─ → backend-developer
-│
-├─ Concerne DevOps (CI/CD, containers, K8s, IaC, monitoring) ?
-│  └─ → devops
-│
-├─ Concerne WordPress/Gutenberg ?
-│  └─ → wordpress-gutenberg-expert
-│
-├─ Concerne le DESIGN SYSTEM ?
-│  └─ → design-system-foundations
-│
-├─ Concerne UX/UI ou BRANDING ?
-│  ├─ Wireframes, prototypes ? → ux-ui-design/wireframes
-│  ├─ Maquettes HD, design visuel ? → ux-ui-design/design-visuel
-│  ├─ Branding, identité, DA ? → ux-ui-design/branding
-│  ├─ Motion design, animations ? → ux-ui-design/branding/motion-design
-│  └─ Tests utilisateurs ? → ux-ui-design/tests-utilisateurs
-│
-├─ Concerne MARKETING ou CONTENU ?
-│  ├─ SEO, référencement ? → seo-expert
-│  ├─ Google Ads, Social Ads ? → paid-media
-│  ├─ Tracking, analytics, attribution ? → marketing-analytics
-│  ├─ Ligne éditoriale, copywriting ? → content-marketing
-│  ├─ Fidélisation, rétention ? → customer-success
-│  └─ Campagnes, email, automation ? → marketing-ops
-│
-├─ Concerne STRATÉGIE DIGITALE ?
-│  ├─ Benchmark concurrentiel ? → direction-technique/strategy/benchmark
-│  ├─ Roadmap technique ? → direction-technique/strategy/strategie-digitale
-│  └─ KPIs business ? → direction-technique/strategy/kpis-business
-│
-└─ Autre domaine ?
-   └─ → Tous les domaines sont couverts. Clarifier le besoin si ambigu.
+└─ 3. QUELLE URGENCE ? (pour ajuster le processus)
+   │
+   ├─ BLOQUANT → Escalade P1/P2, bypass du processus normal
+   ├─ IMPORTANT → Prioriser, réduire le processus au minimum utile
+   ├─ NORMAL → Processus standard selon la complexité
+   └─ NICE-TO-HAVE → Backlog, planification future
 ```
 
 ## Matrice de Désambiguïsation
@@ -257,27 +331,25 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 ### Règle de Décision en 4 Étapes
 
 ```
-1. SPÉCIFICITÉ : Le mot-clé le plus spécifique gagne
-   "audit sécurité RGPD" → direction-technique/securite/conformite-rgpd
-   "audit sécurité code" → lead-dev/code-review/security-review
+1. INTENTION : Que veut faire l'utilisateur ? (CRÉER, CORRIGER, OPTIMISER...)
+   "Le site rame" → OPTIMISER (pas chercher "rame" dans les mots-clés)
+   "On veut un blog" → CRÉER (pas chercher "blog")
 
-2. NIVEAU D'ABSTRACTION : Identifier POURQUOI vs QUOI vs COMMENT
-   "Quelle politique de tests ?" → direction-technique (POURQUOI)
-   "Quelle pyramide de tests ?" → web-dev-process (QUOI)
-   "Comment écrire ce test ?" → skill technique (COMMENT)
+2. DOMAINE + SPÉCIFICITÉ : Quel domaine, quel skill ?
+   "audit sécurité RGPD" → ANALYSER + SÉCURITÉ → legal-compliance
+   "audit sécurité code" → ANALYSER + DONNÉES → lead-dev/code-review
 
-3. CONTEXTE TECHNOLOGIQUE : Si techno explicite, router vers skill techno
-   "tests Next.js" → nextjs-expert/testing
-   "tests React" → react-expert/testing
-   "tests backend" → backend-developer/testing
+3. COMPLEXITÉ + URGENCE : Quel processus mobiliser ?
+   MICRO + NORMAL → skill directement
+   GRAND + BLOQUANT → escalade + processus complet accéléré
 
 4. EN DERNIER RECOURS : Demander clarification à l'utilisateur
-   "Vous parlez de tests : politique, process, ou implémentation ?"
+   "Vous souhaitez créer, corriger ou optimiser ?"
 ```
 
-### Matrice RACI Simplifiée
+### Matrice RACI Simplifiée (Technique)
 
-| Concern | Décide (POURQUOI) | Définit Process (QUOI) | Coordonne | Exécute (COMMENT) |
+| Concern | Décide (STRATÉGIE) | Définit Process (PROCESSUS) | Coordonne | Exécute (IMPLÉMENTATION) |
 |---------|-------------------|------------------------|-----------|-------------------|
 | Stack technique | direction-technique | - | - | - |
 | Architecture | direction-technique | web-dev-process | lead-dev | skills techniques |
@@ -292,13 +364,42 @@ Ces mots-clés apparaissent dans plusieurs skills. Utiliser le contexte pour rou
 | Containers | direction-technique | devops | lead-dev | devops |
 | Kubernetes | direction-technique | devops | lead-dev | devops |
 
+> **RACI complète inter-métiers** (par phase de projet et par type de décision) : voir [`direction-operations/agents/gouvernance/comitologie.md`](../../skills/direction-operations/agents/gouvernance/comitologie.md)
+
+## Seuils de Complexité
+
+Avant de router, évaluer la complexité pour déterminer quels niveaux mobiliser :
+
+```
+Requête utilisateur
+│
+├─ Estimation < 2h ? (fix, typo, ajout simple)
+│  └─ MICRO → Router directement vers le skill IMPLÉMENTATION
+│     Pas d'orchestration, pas de validation STRATÉGIE
+│
+├─ Estimation < 2 jours ? (composant, page, endpoint)
+│  └─ PETIT → PROCESSUS + IMPLÉMENTATION
+│     lead-dev ou web-dev-process coordonne
+│
+├─ Estimation 2-15 jours ? (feature, refactoring)
+│  └─ MOYEN → STRATÉGIE + PROCESSUS + IMPLÉMENTATION
+│     direction-technique valide l'approche
+│
+└─ Estimation > 15 jours ? (projet, migration)
+   └─ GRAND → ENTRÉE + STRATÉGIE + PROCESSUS + IMPLÉMENTATION
+      Processus complet avec client-intake
+```
+
+> **Règle d'or** : Le processus doit être proportionnel à la tâche. Mobiliser direction-technique pour un fix CSS est aussi nuisible que de lancer un projet e-commerce sans cadrage.
+
 ## Priorité en Cas d'Ambiguïté
 
-1. **Match exact** : Mot-clé présent dans la table
-2. **Spécificité** : Mot-clé composé > mot-clé simple
-3. **Niveau d'abstraction** : POURQUOI → QUOI → COMMENT
-4. **Contexte conversation** : Skill déjà utilisé récemment
-5. **Demander clarification** : Si vraiment ambigu
+1. **Intention** : Identifier CRÉER / CORRIGER / OPTIMISER / ANALYSER / DOCUMENTER / COMMUNIQUER / MAINTENIR
+2. **Domaine** : Identifier SITE / DONNÉES / VISUEL / SERVEUR / MARKETING / BUSINESS / SÉCURITÉ / CONTENU
+3. **Complexité** : Évaluer MICRO / PETIT / MOYEN / GRAND pour calibrer le processus
+4. **Spécificité techno** : Si une technologie est nommée, router vers le skill spécialisé
+5. **Contexte conversation** : Skill déjà utilisé récemment
+6. **Demander clarification** : Si vraiment ambigu
 
 ## Références
 

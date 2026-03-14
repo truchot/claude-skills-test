@@ -1,0 +1,31 @@
+name: Experience Client Skill Tests
+
+on:
+  pull_request:
+    paths:
+      - '.web-agency/skills/experience-client/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '.web-agency/skills/experience-client/**'
+
+jobs:
+  test:
+    name: Validate Experience Client Skill
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Run validation tests
+        working-directory: .web-agency/skills/experience-client
+        run: node --test tests/*.test.js
