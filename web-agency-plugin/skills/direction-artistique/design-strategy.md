@@ -93,18 +93,5 @@ Exemples types :
 - [ ] Etats interactifs tous definis
 
 ### Style Guide
-- Documenter chaque style visuel avec exemple
-- Regles d'usage par contexte (web, mobile, email)
+- Documenter styles visuels avec exemples et regles d'usage
 - Versionner et maintenir a jour
-
-## Brief Creatif - Template
-
-```
-Projet : [nom]
-Objectif : [quoi resoudre]
-Cible : [personas concernes]
-Contraintes : [techniques, marque, delai]
-References : [inspirations, benchmarks]
-Livrables attendus : [formats, nombre]
-Criteres de validation : [checklist]
-```
