@@ -6,7 +6,7 @@
 - Langue de communication : français par défaut
 
 ## Plugin web-agency
-Le plugin `web-agency` fournit 29 skills, 17 agents et 5 commandes.
+Le plugin `web-agency` fournit 34 skills, 17 agents et 5 commandes.
 - Commandes : `/web-agency:tech`, `/web-agency:design`, `/web-agency:marketing`, `/web-agency:project`, `/web-agency:client`
 - Skills techniques : auto-détectés par contexte (fichiers, imports, configs)
 - Skills métier : invoqués automatiquement par Claude selon la conversation

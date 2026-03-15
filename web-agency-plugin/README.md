@@ -24,13 +24,13 @@ claude --plugin-dir ./web-agency-plugin
 | `/web-agency:project` | Workflow projet : planning, estimation, suivi, livraison |
 | `/web-agency:client` | Workflow client : communication, rapports, fidélisation |
 
-### 29 Skills
+### 34 Skills
 
 **11 skills auto-trigger** (chargés automatiquement par contexte technique) :
 react-expert, nextjs-expert, wordpress-expert, frontend-developer, backend-developer, devops, design-system, security-expert, seo-expert, ux-ui-design, ddd
 
-**18 skills Claude-only** (invoqués automatiquement par contexte conversationnel) :
-direction-technique, direction-marketing, direction-artistique, direction-operations, direction-commerciale, project-management, lead-dev, web-dev-process, testing-process, experience-client, paid-media, content-marketing, marketing-analytics, marketing-ops, customer-success, content-management, ai-integration, legacy-modernization
+**23 skills Claude-only** (invoqués automatiquement par contexte conversationnel) :
+direction-technique, direction-marketing, direction-artistique, direction-operations, direction-commerciale, project-management, lead-dev, web-dev-process, testing-process, experience-client, paid-media, content-marketing, marketing-analytics, marketing-ops, customer-success, content-management, ai-integration, legacy-modernization, client-intake, commercial-crm, finance-analytics, legal-compliance, support-client
 
 ### 17 Agents (contexte isolé, délégation automatique)
 
