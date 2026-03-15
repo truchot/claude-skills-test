@@ -91,11 +91,9 @@ H1: Titre (keyword principal)
 
 ## Métriques contenu
 
-| Métrique             | Cible       | Outil            |
-|----------------------|-------------|------------------|
-| Trafic organique     | +10%/mois   | GA4              |
-| Temps sur page       | > 3 min     | GA4              |
-| Taux de rebond       | < 60%       | GA4              |
-| Leads générés        | Selon funnel| CRM              |
-| Partages sociaux     | > 20/article| BuzzSumo         |
-| Position moyenne SEO | Top 10      | Search Console   |
+| Métrique             | Cible       | Outil          |
+|----------------------|-------------|----------------|
+| Trafic organique     | +10%/mois   | GA4            |
+| Temps sur page       | > 3 min     | GA4            |
+| Taux de rebond       | < 60%       | GA4            |
+| Position moyenne SEO | Top 10      | Search Console |

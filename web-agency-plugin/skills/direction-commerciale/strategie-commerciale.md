@@ -76,17 +76,8 @@ WHAT → Services concrets proposes
 
 ## Veille Concurrentielle
 
-### Battle Card Template
-```
-[Concurrent X]
-Positionnement : ...
-Forces / Faiblesses : ...
-Quand on gagne / perd : ...
-Arguments cles : ...
-Objections courantes : ...
-```
-
-### Sources : sites, LinkedIn, Clutch/G2, retours terrain, events
+### Battle Card : Positionnement, Forces/Faiblesses, Quand on gagne/perd, Arguments, Objections
+### Sources veille : sites, LinkedIn, Clutch/G2, retours terrain, events
 
 ## Partenariats
 

@@ -90,13 +90,7 @@ Besoin identifie
 | Review transverse | Hebdo | Tous leads | Dependances |
 | Retro globale | Mensuel | Toute equipe | Amelioration |
 
-### Dependances inter-projets
-| Type | Risque | Mitigation |
-|------|--------|------------|
-| Ressource | Disponibilite | Allocation strategique |
-| Technique | Compatibilite | Contrats d'interface |
-| Business | Priorite | Arbitrage direction |
-| Timeline | Retard cascade | Buffer + suivi |
+### Dependances : Ressource (allocation), Technique (contrats interface), Business (arbitrage), Timeline (buffer)
 
 ## Communication : Urgent → Slack+Email | Important → tous canaux | Info → Slack+Doc | Reference → Doc
 

@@ -54,10 +54,7 @@ Phase 4 : Optimisation globale (scaling)
 | Canal sous-performant | Reduire ou arreter |
 | Nouveau canal | 10-15% du budget test |
 
-### Reallocation dynamique
-- Review mensuelle des performances par canal
-- Transfert budget des canaux faibles vers les forts
-- Garder 10% en reserve pour opportunites
+Reallocation dynamique : review mensuelle, transfert vers canaux performants, 10% reserve
 
 ## Growth Strategy
 
