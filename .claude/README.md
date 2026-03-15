@@ -1,82 +1,47 @@
-# Configuration Claude
+# Configuration Claude Code
 
-Ce dossier contient les commandes spécifiques à Claude Code.
+## Architecture v5
 
-## Structure
+Le framework web-agency a été restructuré en **plugin Claude Code**.
 
+### Projet (`.claude/`)
 ```
 .claude/
-├── commands/              # 4 commandes intelligentes
-│   ├── tech.md            # Technique (routage intelligent)
-│   ├── design.md          # Design (UX/UI/DA)
-│   ├── marketing.md       # Marketing
-│   └── project.md         # Gestion de projet
-├── commands-archive/      # Anciennes commandes (référence)
-├── tests/                 # Tests de validation
-└── README.md              # Ce fichier
+├── settings.json          # Hooks de session tracking
+├── rules/                 # 8 rules conditionnelles par path
+│   ├── react-conventions.md
+│   ├── nextjs-conventions.md
+│   ├── api-conventions.md
+│   ├── wordpress-conventions.md
+│   ├── css-design-tokens.md
+│   ├── security-rules.md
+│   ├── ci-cd-rules.md
+│   └── seo-rules.md
+└── hooks/
+    └── session-tracker.sh
 ```
 
-## Commandes Disponibles
-
-### `/tech` - Technique
-Point d'entrée technique unifié qui route vers le bon agent selon le contexte:
-- **Niveau 2**: direction-technique (architecture, vision)
-- **Niveau 3**: lead-dev, devops, testing-process (coordination)
-- **Niveau 4**: frontend, backend, react, nextjs, wordpress (implémentation)
-
+### Plugin (`web-agency-plugin/`)
 ```
-/tech optimiser les performances
-/tech architecture microservices
-/tech créer composant Button
+web-agency-plugin/
+├── skills/     # 29 skills (11 auto-trigger + 18 Claude-only)
+├── agents/     # 17 agents (audit, production, orchestration, marketing)
+├── commands/   # 5 commandes (/web-agency:tech, design, marketing, project, client)
+└── hooks/      # Hooks du plugin
 ```
 
-### `/design` - Design
-Point d'entrée design avec routage stratégie/exécution:
-- **Niveau 2**: direction-artistique (branding, vision créative)
-- **Niveau 3**: ux-ui-design (wireframes, prototypes)
-- **Niveau 4**: design-system-foundations (composants, tokens)
+### Utilisation
+```bash
+# Charger le plugin en dev
+claude --plugin-dir ./web-agency-plugin
 
-```
-/design refonte identité visuelle
-/design wireframe page checkout
-/design créer composant Card
-```
-
-### `/marketing` - Marketing
-Point d'entrée marketing avec routage stratégie/exécution:
-- **Niveau 2**: direction-marketing (stratégie, positionnement)
-- **Niveau 3**: marketing (SEO, content, campagnes)
-
-```
-/marketing stratégie acquisition B2B
-/marketing audit SEO technique
+# Les commandes sont namespacées
+/web-agency:tech
+/web-agency:design
+/web-agency:marketing
+/web-agency:project
+/web-agency:client
 ```
 
-### `/project` - Projet
-Point d'entrée pour la visibilité et coordination:
-- project-management (suivi, planning)
-- web-agency (orchestration globale)
-- task-orchestrator (découpage tâches)
-
-```
-/project état du projet Alpha
-/project prioriser les initiatives Q1
-```
-
-## Architecture
-
-```
-.claude/               # Interface Claude (4 commandes)
-    │
-    └── référence →
-                      .web-agency/        # Framework agnostique
-                      ├── skills/         # 24 skills, 757 agents
-                      └── learnings/      # Learning loop
-```
-
-Les commandes analysent le contexte et routent vers les skills appropriés dans `.web-agency/`.
-
-## Anciennes Commandes
-
-Les 23 commandes granulaires ont été archivées dans `commands-archive/` pour référence.
-Elles peuvent être restaurées si nécessaire.
+### Migration depuis v4
+L'ancien framework est archivé dans `.web-agency-v4-archive/`.
