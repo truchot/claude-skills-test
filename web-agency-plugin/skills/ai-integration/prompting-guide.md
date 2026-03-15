@@ -51,31 +51,18 @@ await openai.beta.chat.completions.parse({
 `Réponds UNIQUEMENT en JSON : {"summary": "string", "score": number}`;
 ```
 
-## Anti-Prompt Injection
+## Sécurité & Guardrails
 
 ```typescript
-// Toujours séparer system (fiable) / user (non fiable)
+// Séparer system (fiable) / user (non fiable)
 const messages = [
   { role: 'system', content: systemPrompt },
-  { role: 'user', content: sanitize(userInput) },
+  { role: 'user', content: input.replace(/ignore.*instructions/gi, '[FILTERED]').slice(0, 10000) },
 ];
-function sanitize(input: string): string {
-  return input
-    .replace(/ignore.*instructions/gi, '[FILTERED]')
-    .replace(/system.*prompt/gi, '[FILTERED]')
-    .slice(0, 10000);
+// Validation output
+function validate(output: string, schema: z.ZodSchema) {
+  try { return schema.parse(JSON.parse(output)); } catch { return null; }
 }
-```
-
-## Guardrails
-
-```typescript
-function validateOutput(output: string, schema: z.ZodSchema) {
-  try { return schema.parse(JSON.parse(output)); }
-  catch { return null; } // Fallback ou retry
-}
-const BLOCKED = [/carte.*crédit/i, /mot.*passe/i];
-const hasSensitive = (t: string) => BLOCKED.some(p => p.test(t));
 ```
 
 ## Tests (promptfoo)
@@ -85,31 +72,12 @@ prompts: ["Résume en 3 points : {{text}}"]
 providers: [openai:gpt-4o, anthropic:messages:claude-sonnet-4-20250514]
 tests:
   - vars: { text: "..." }
-    assert:
-      - type: llm-rubric
-        value: "Contient exactement 3 points"
-      - type: cost
-        threshold: 0.01
+    assert: [{ type: llm-rubric, value: "3 points" }, { type: cost, threshold: 0.01 }]
 ```
-
-```bash
-npx promptfoo eval && npx promptfoo view
-```
-
-## Optimisation Coûts
-
-| Technique | Économie |
-|-----------|----------|
-| Prompt plus court | 20-50% |
-| Modèle mini/haiku | 80-95% |
-| Cache réponses | 50-90% |
 
 ## Checklist
 
-- [ ] Rôle et contexte définis
-- [ ] Format sortie spécifié
-- [ ] Sanitization inputs utilisateur
-- [ ] Validation output (schema)
-- [ ] Guardrails contenu sensible
-- [ ] Tests automatisés (promptfoo)
-- [ ] Versioning des prompts
+- [ ] Rôle/contexte/format définis, few-shot si complexe
+- [ ] Sanitization inputs, validation output (schema)
+- [ ] Tests automatisés (promptfoo), versioning prompts
+- [ ] Coûts : prompt court, modèle mini/haiku (-80%), cache (-50%)

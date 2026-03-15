@@ -51,14 +51,8 @@ Notre equipe technique prend en charge votre demande.
 Objet: Precision sur votre demande - [intake_id]
 
 Bonjour [Prenom],
-
 Merci pour votre message. Pour mieux comprendre votre besoin,
-pourriez-vous nous preciser :
-
-[questions_specifiques]
-
-Ces informations nous permettront de vous proposer
-la solution la plus adaptee.
+pourriez-vous nous preciser : [questions_specifiques]
 ```
 
 ## Rejet poli (hors scope)
@@ -67,12 +61,8 @@ la solution la plus adaptee.
 Objet: Re: [sujet_original]
 
 Bonjour [Prenom],
-
-Merci de votre interet. Apres analyse, votre demande sort
-du perimetre de nos services ([raison]).
-
+Apres analyse, votre demande sort du perimetre de nos services ([raison]).
 Nous vous recommandons de contacter [alternative].
-N'hesitez pas a revenir vers nous pour tout projet web.
 ```
 
 ## Notification de statut
@@ -81,10 +71,7 @@ N'hesitez pas a revenir vers nous pour tout projet web.
 Objet: Mise a jour - [intake_id]
 
 Bonjour [Prenom],
-
 Votre demande [intake_id] est passee au statut : [statut].
-[details_specifiques]
-
 Prochaine etape : [next_action]
 ```
 

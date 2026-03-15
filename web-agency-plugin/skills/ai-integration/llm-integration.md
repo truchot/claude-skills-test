@@ -93,9 +93,6 @@ catch (e) {
 ## Checklist Production
 
 - [ ] API keys en env vars, jamais en code
-- [ ] Streaming activé pour UX réactive
-- [ ] Error handling + retry backoff + timeout 30s
-- [ ] Rate limiting côté client
-- [ ] Cache embeddings et réponses stables
-- [ ] Monitoring coûts et latence
-- [ ] Tests de régression prompts critiques
+- [ ] Streaming activé, error handling + retry backoff + timeout 30s
+- [ ] Rate limiting côté client, cache embeddings/réponses stables
+- [ ] Monitoring coûts/latence, tests régression prompts critiques

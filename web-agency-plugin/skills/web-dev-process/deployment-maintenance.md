@@ -92,9 +92,6 @@ logger.info('Order created', { orderId });             // Business event
 | Nettoyage code mort | Trimestriel (knip) |
 | Rotation secrets | Trimestriel |
 
-## Bug Report Template
+## Bug Report
 
-```markdown
-## Bug: [Titre] | Sévérité: P0-P3 | Env: Prod/Staging
-Étapes: 1... | Attendu: ... | Obtenu: ... | Logs/Screenshots: ...
-```
+`## Bug: [Titre] | Sévérité: P0-P3 | Env | Étapes | Attendu | Obtenu | Logs`

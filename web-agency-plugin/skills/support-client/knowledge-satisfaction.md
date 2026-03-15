@@ -92,10 +92,4 @@ Envoi auto apres cloture : note resolution (1-5), delai acceptable (Oui/Non), co
 
 ### Actions correctives
 
-| Constat | Action |
-|---------|--------|
-| Tickets recurrents meme sujet | Creer/ameliorer FAQ |
-| CSAT bas sur une categorie | Former l'equipe |
-| SLA non respectes | Revoir capacite/priorisation |
-| NPS detracteurs | Appel individuel + plan |
-| Faible self-service | Enrichir knowledge base |
+Tickets recurrents → creer/ameliorer FAQ. CSAT bas → former l'equipe. SLA non respectes → revoir capacite. NPS detracteurs → appel individuel. Faible self-service → enrichir knowledge base.

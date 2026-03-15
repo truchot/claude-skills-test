@@ -94,9 +94,6 @@ pnpm dev | pnpm test | pnpm build
 ## Contexte → Décision → Conséquences
 ```
 
-## Checklist Dev Quotidienne
+## Checklist Dev
 
-- [ ] Branche à jour (rebase main)
-- [ ] Tests passent localement
-- [ ] PR avec description claire
-- [ ] Pas de secrets, logs debug, code commenté
+- [ ] Branche à jour (rebase), tests OK, PR claire, pas de secrets/debug

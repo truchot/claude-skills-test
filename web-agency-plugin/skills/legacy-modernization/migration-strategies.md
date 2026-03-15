@@ -93,9 +93,4 @@ const flags = {
 
 ## Anti-Patterns
 
-| Anti-Pattern | Alternative |
-|-------------|-------------|
-| Big Bang Rewrite | Strangler Fig |
-| Pas de tests avant refactoring | Tests caractérisation |
-| Migration données one-shot | Sync bidirectionnelle |
-| Copier-coller le legacy | Repenser le design |
+Big Bang Rewrite > Strangler Fig | Pas de tests > Caractérisation | One-shot data > Sync bidirectionnelle
