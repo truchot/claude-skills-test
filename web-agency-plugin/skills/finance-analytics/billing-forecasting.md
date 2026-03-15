@@ -2,7 +2,7 @@
 
 ## Facturation
 
-### Processus de facturation
+### Processus
 
 ```
 Livraison validee → Generation facture → Envoi client → Suivi paiement → Relance si retard
@@ -15,22 +15,12 @@ facture:
   numero: FAC-YYYY-XXXX
   date_emission: YYYY-MM-DD
   date_echeance: YYYY-MM-DD  # +30j par defaut
-  vendeur:
-    raison_sociale: ""
-    siret: ""
-    tva_intra: ""
-    adresse: ""
-  client:
-    raison_sociale: ""
-    adresse: ""
+  vendeur: { raison_sociale, siret, tva_intra, adresse }
+  client: { raison_sociale, adresse }
   lignes:
-    - description: ""
-      quantite: 1
-      prix_unitaire_ht: 0
-      tva: 20  # %
+    - { description, quantite, prix_unitaire_ht, tva: 20 }
   conditions: "Paiement a 30 jours"
   penalites: "3x taux interet legal"
-  escompte: "Pas d'escompte pour paiement anticipe"
 ```
 
 ### Echeancier type par projet
@@ -52,37 +42,25 @@ facture:
 | J+30 | Mise en demeure | Courrier AR | Formel |
 | J+45 | Contentieux | Courrier avocat | Legal |
 
-### Gestion des avoirs
+### Avoirs
 
-Emettre un avoir quand :
-- Erreur sur la facture originale
-- Remise accordee a posteriori
-- Annulation partielle de prestation
-- Retour/insatisfaction justifiee
-
-Format : AVO-YYYY-XXXX, reference a la facture originale obligatoire
+Emettre un avoir (AVO-YYYY-XXXX) quand : erreur facture, remise a posteriori, annulation partielle, insatisfaction justifiee. Reference facture originale obligatoire.
 
 ## Previsions financieres
 
 ### Methodologie forecast
 
 ```
-Forecast_M+1 = MRR_actuel
-             + Pipeline_weighted (SQL * 0.4 + PROPOSAL * 0.6 + NEGO * 0.75)
-             - Churn_prevu
-             + Upsells_identifies * 0.5
+Forecast_M+1 = MRR_actuel + Pipeline_weighted - Churn_prevu + Upsells * 0.5
 ```
 
 ### Pipeline weighting
 
 | Stage | Probabilite |
 |-------|-------------|
-| Lead | 10% |
-| MQL | 20% |
-| SQL | 40% |
-| Proposal | 60% |
-| Negotiation | 75% |
-| Verbal commit | 90% |
+| Lead / MQL | 10% / 20% |
+| SQL / Proposal | 40% / 60% |
+| Negotiation / Verbal commit | 75% / 90% |
 
 ### Scenarios previsionnels
 
@@ -100,25 +78,17 @@ Forecast_M+1 = MRR_actuel
 ### Revenue
 | Source | M1 | M2 | ... | M12 | Total |
 |--------|----|----|-----|-----|-------|
-| MRR    |    |    |     |     |       |
-| Projets|    |    |     |     |       |
-| Autres |    |    |     |     |       |
+| MRR / Projets / Autres |    |    |     |     |       |
 
 ### Charges
 | Poste | Mensuel | Annuel |
 |-------|---------|--------|
-| Salaires |     |        |
-| Outils/SaaS | |        |
-| Locaux |      |        |
-| Marketing |   |        |
-| Divers |      |        |
+| Salaires / Outils / Locaux / Marketing |     |        |
 
 ### Objectifs
 | Metrique | Objectif | Suivi |
 |----------|----------|-------|
-| CA annuel |         |       |
-| Marge brute |       |       |
-| Nb nouveaux clients | |     |
+| CA annuel / Marge brute / Nb nouveaux clients |         |       |
 ```
 
 ### Revue budgetaire

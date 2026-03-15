@@ -105,15 +105,5 @@ Prochaine etape : [next_action]
 - Inclure toujours la reference intake_id
 - Mentionner le delai de reponse concret
 - Si P1/P2 : ajouter numero de telephone direct
-- Si > 50k : signature du directeur commercial
 
-## Variables disponibles
-
-| Variable | Source |
-|----------|--------|
-| `[Prenom]` | stakeholder-identifier |
-| `[type]` | intent-classifier |
-| `[resume_projet]` | requirements-extractor |
-| `[delai]` | urgency-detector |
-| `[intake_id]` | systeme |
-| `[SLA]` | urgency-detector |
+## Variables : `[Prenom]` (stakeholder-identifier), `[type]` (intent-classifier), `[resume_projet]` (requirements-extractor), `[delai]`/`[SLA]` (urgency-detector), `[intake_id]` (systeme)

@@ -88,4 +88,3 @@ Lead → Qualification BANT → Proposition → Negociation → Closing → Onbo
 
 - **direction-commerciale** : decisions strategiques, remises > 20%
 - **project-management** : transition closing → delivery
-- **finance-analytics** : previsions CA, facturation

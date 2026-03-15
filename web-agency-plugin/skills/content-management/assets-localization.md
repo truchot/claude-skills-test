@@ -2,23 +2,13 @@
 
 ## Optimisation images
 
-### Formats recommandés
-| Format | Usage              | Support   | Cible taille |
-|--------|--------------------|-----------|--------------|
-| WebP   | Standard web       | 97%+      | < 100KB      |
-| AVIF   | Perf maximale      | 85%       | < 80KB       |
-| JPEG   | Fallback photos    | Universel | < 200KB      |
-| PNG    | Transparence       | Universel | < 150KB      |
-| SVG    | Icônes, logos      | Universel | < 5KB        |
-
-### Compression par type
-| Image        | Qualité | Format | Poids max |
-|--------------|---------|--------|-----------|
-| Hero banner  | 85%     | WebP   | 200KB     |
-| Photo produit| 80%     | WebP   | 100KB     |
-| Illustration | 90%     | WebP   | 80KB      |
-| Thumbnail    | 75%     | WebP   | 20KB      |
-| Icône        | Lossless| SVG    | 5KB       |
+### Formats et compression
+| Format | Usage           | Support | Image type   | Qualité | Poids max |
+|--------|-----------------|---------|--------------|---------|-----------|
+| WebP   | Standard web    | 97%+    | Hero banner  | 85%     | 200KB     |
+| AVIF   | Perf maximale   | 85%     | Photo produit| 80%     | 100KB     |
+| SVG    | Icônes, logos   | 100%    | Icône        | Lossless| 5KB       |
+| JPEG   | Fallback        | 100%    | Thumbnail    | 75%     | 20KB      |
 
 ### Pattern srcset responsive
 ```html
@@ -29,98 +19,74 @@
   alt="Description" loading="lazy" decoding="async">
 ```
 
-### Pipeline : `Upload → Validation → Compression → Resize → WebP+Fallback → CDN`
+**Pipeline** : `Upload → Validation → Compression → Resize → WebP+Fallback → CDN`
 
 ## Gestion vidéo
 
-### Specs par type
-| Type        | Durée    | Codec | Résolution | Hosting      |
-|-------------|----------|-------|------------|--------------|
-| Hero/Banner | 15-30s   | H.264 | 1080p      | Self/CDN     |
-| Tutoriel    | 3-10min  | H.264 | 1080p      | YouTube/Vimeo|
-| Témoignage  | 1-3min   | H.264 | 1080p      | YouTube      |
-| Story/Reel  | 15-60s   | H.264 | 1080x1920  | Insta/TikTok |
+| Type       | Durée   | Résolution | Hosting       |
+|------------|---------|------------|---------------|
+| Hero       | 15-30s  | 1080p 16:9 | Self/CDN      |
+| Tutoriel   | 3-10min | 1080p 16:9 | YouTube/Vimeo |
+| Story/Reel | 15-60s  | 1080x1920  | Insta/TikTok  |
 
-### Accessibilité vidéo
-- [ ] Sous-titres WebVTT (.vtt)
-- [ ] Transcription HTML/PDF
-- [ ] Contrôles clavier
-- [ ] Audio description (recommandé)
+**Accessibilité** : sous-titres VTT + transcription + contrôles clavier
 
 ## Organisation assets
 
-### Structure dossiers
+### Structure et nommage
 ```
-/assets
-├── /images/{blog,products,banners,icons}
-├── /videos/{tutorials,testimonials,demos}
-├── /documents/{whitepapers,case-studies,legal}
-└── /brand/{logos,colors,templates}
+/assets/{images,videos,documents,brand}/{sous-catégorie}/
+Nommage : {type}-{desc}-{date}.ext  (ex: banner-spring-2026.webp)
 ```
-
-### Convention nommage
-| Pattern                       | Exemple                    |
-|-------------------------------|----------------------------|
-| `{type}-{desc}-{date}`       | `banner-spring-2026.webp`  |
-| `{product}-{variant}-{angle}`| `shoe-red-front.jpg`       |
-| `{page}-{section}-{device}`  | `home-hero-mobile.png`     |
 
 ### Alt text WCAG 2.1 AA
-| Type image    | Alt text              | Règle             |
-|---------------|-----------------------|-------------------|
-| Informative   | Description contenu   | Requis            |
-| Décorative    | `alt=""`              | Vide obligatoire  |
-| Fonctionnelle | Action/destination    | Requis            |
-| Complexe      | Description + longdesc| Requis            |
+| Type image    | Alt text            | Règle            |
+|---------------|---------------------|------------------|
+| Informative   | Description contenu | Requis           |
+| Décorative    | `alt=""`            | Vide obligatoire |
+| Fonctionnelle | Action/destination  | Requis           |
 
 ## Localisation (i18n)
 
-### Workflow traduction
+### Workflow
 ```
 Source (fr-FR) → Traduction → Révision native → Adaptation locale → QA → Publication
 ```
 
-### Langues - priorités type
-| Langue     | Code  | Priorité | Couverture cible |
-|------------|-------|----------|-----------------|
-| Français   | fr-FR | Source   | 100%            |
-| Anglais    | en-US | P1       | 100%            |
-| Allemand   | de-DE | P2       | 80%             |
-| Espagnol   | es-ES | P2       | 80%             |
+### Priorités langues type
+| Langue   | Code  | Priorité | Couverture |
+|----------|-------|----------|------------|
+| Français | fr-FR | Source   | 100%       |
+| Anglais  | en-US | P1       | 100%       |
+| Allemand | de-DE | P2       | 80%        |
+| Espagnol | es-ES | P2       | 80%        |
 
-### Structure fichiers i18n
+### Format ICU recommandé
 ```json
-// Format ICU recommandé
 {
-  "items.count": "{count, plural, =0 {Aucun article} one {# article} other {# articles}}",
+  "items.count": "{count, plural, =0 {Aucun} one {# article} other {# articles}}",
   "user.greeting": "Bonjour {name} !"
 }
 ```
 
-### Checklist validation i18n
+### Checklist i18n
 - [ ] Toutes les clés présentes dans toutes les langues
 - [ ] Pas de texte hardcodé dans le code
-- [ ] Pluriels gérés (ICU format)
-- [ ] Encodage UTF-8 sans BOM
-- [ ] Fallback langue défini
-- [ ] Direction RTL supportée si nécessaire
+- [ ] Pluriels gérés (ICU), encodage UTF-8 sans BOM
+- [ ] Fallback langue défini, direction RTL si nécessaire
 - [ ] Formats locaux (dates, nombres, monnaies) via `Intl` API
 
-### Adaptation culturelle - checklist
-- [ ] Formats date/heure adaptés
-- [ ] Séparateurs numériques corrects
-- [ ] Symboles monétaires bien placés
-- [ ] Unités de mesure (métrique vs impérial)
-- [ ] Références culturelles localisées
-- [ ] Images et couleurs appropriées
+### Adaptation culturelle
+- [ ] Formats date/heure et séparateurs numériques adaptés
+- [ ] Symboles monétaires, unités de mesure localisées
+- [ ] Références culturelles et images appropriées
 - [ ] Mentions légales locales
 
-### Outils recommandés
-| Outil       | Usage           | Type      |
-|-------------|-----------------|-----------|
-| i18next     | Framework React | npm       |
-| FormatJS    | ICU Messages    | npm       |
-| Phrase      | TMS             | API/CLI   |
-| Lokalise    | TMS             | API/CLI   |
-| Sharp       | Images Node.js  | Library   |
-| Cloudinary  | CDN + transform | Service   |
+### Outils
+| Outil      | Usage          | Type    |
+|------------|----------------|---------|
+| i18next    | Framework React| npm     |
+| FormatJS   | ICU Messages   | npm     |
+| Phrase     | TMS            | API/CLI |
+| Sharp      | Images Node.js | Library |
+| Cloudinary | CDN + transform| Service |

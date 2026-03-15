@@ -1,172 +1,115 @@
 # Prompt Engineering Guide
 
-## Principes Fondamentaux
+## Principes : spécifique, contextualisé, structuré, itératif
 
-1. **Être spécifique** : instructions claires, rôle, contraintes, format attendu
-2. **Donner du contexte** : domaine, audience, exemples
-3. **Structurer** : sections, délimiteurs, output format
-4. **Itérer** : tester, mesurer, affiner
-
-## Patterns de Prompting
+## Patterns
 
 ### Zero-Shot (tâches simples)
 ```
 Tu es un expert SEO. Analyse ce titre et suggère 3 améliorations :
 Titre : "{title}"
-Pour chaque suggestion, explique l'impact SEO.
 ```
 
 ### Few-Shot (format précis)
 ```
 Classifie le sentiment :
-- "J'adore ce produit!" → positif
-- "Très déçu, ne fonctionne pas" → négatif
-- "Ça fait le job" → neutre
-
-Maintenant classifie : "{text}" →
+- "J'adore!" → positif | "Très déçu" → négatif | "Ça fait le job" → neutre
+Classifie : "{text}" →
 ```
 
 ### Chain-of-Thought (raisonnement)
 ```
-Résous ce problème étape par étape :
-1. Identifie les éléments clés
-2. Analyse les relations
-3. Tire une conclusion
-
-Problème : {problem}
+Résous étape par étape : 1) Identifie les éléments 2) Analyse 3) Conclus
 ```
 
-### ReAct (actions + raisonnement)
+### ReAct (actions)
 ```
-Thought: Je dois chercher l'information X
-Action: search("query")
-Observation: [résultat]
-Thought: Maintenant je peux répondre
-Answer: [réponse]
+Thought → Action: tool("query") → Observation → Answer
 ```
 
-## Structure de Prompt Efficace
+## Structure de Prompt
 
 ```typescript
-const prompt = `
-## Rôle
-Tu es un ${role} expert en ${domain}.
-
-## Contexte
-${context}
-
-## Tâche
-${task}
-
-## Contraintes
-- ${constraint1}
-- ${constraint2}
-
-## Format de sortie
-${outputFormat}
-
-## Entrée
-${input}
-`;
+const prompt = `## Rôle : ${role} expert en ${domain}
+## Contexte : ${context}
+## Tâche : ${task}
+## Contraintes : ${constraints}
+## Format de sortie : ${format}
+## Entrée : ${input}`;
 ```
 
-## Output Parsing (JSON Mode)
+## Output Parsing (JSON)
 
 ```typescript
 // OpenAI - Structured Output
-const result = await openai.beta.chat.completions.parse({
-  model: 'gpt-4o',
-  response_format: zodResponseFormat(schema, 'result'),
+import { zodResponseFormat } from 'openai/helpers/zod';
+await openai.beta.chat.completions.parse({
+  model: 'gpt-4o', response_format: zodResponseFormat(schema, 'result'),
   messages: [{ role: 'user', content: prompt }],
 });
-
-// Claude - Via instruction dans le prompt
-const prompt = `Réponds UNIQUEMENT en JSON valide avec ce format :
-{"summary": "string", "score": number, "tags": ["string"]}
-
-Analyse : ${text}`;
+// Claude - instruction dans le prompt
+`Réponds UNIQUEMENT en JSON : {"summary": "string", "score": number}`;
 ```
 
 ## Anti-Prompt Injection
 
 ```typescript
-// Séparer system/user
+// Toujours séparer system (fiable) / user (non fiable)
 const messages = [
-  { role: 'system', content: systemPrompt },  // Instructions fiables
-  { role: 'user', content: sanitize(userInput) },  // Input non fiable
+  { role: 'system', content: systemPrompt },
+  { role: 'user', content: sanitize(userInput) },
 ];
-
-// Sanitization
 function sanitize(input: string): string {
   return input
     .replace(/ignore.*instructions/gi, '[FILTERED]')
     .replace(/system.*prompt/gi, '[FILTERED]')
-    .slice(0, 10000);  // Limiter la taille
+    .slice(0, 10000);
 }
 ```
 
 ## Guardrails
 
 ```typescript
-// Validation output
-function validateLLMOutput(output: string, schema: z.ZodSchema) {
-  try {
-    return schema.parse(JSON.parse(output));
-  } catch {
-    return null;  // Fallback ou retry
-  }
+function validateOutput(output: string, schema: z.ZodSchema) {
+  try { return schema.parse(JSON.parse(output)); }
+  catch { return null; } // Fallback ou retry
 }
-
-// Content filtering
-const BLOCKED_PATTERNS = [/carte.*crédit/i, /mot.*passe/i, /numéro.*sécu/i];
-function filterSensitive(text: string): boolean {
-  return BLOCKED_PATTERNS.some(p => p.test(text));
-}
+const BLOCKED = [/carte.*crédit/i, /mot.*passe/i];
+const hasSensitive = (t: string) => BLOCKED.some(p => p.test(t));
 ```
 
-## Tests de Prompts (promptfoo)
+## Tests (promptfoo)
 
 ```yaml
-# promptfooconfig.yaml
-prompts:
-  - "Résume ce texte en 3 points : {{text}}"
-  - "En tant qu'expert, fais un résumé en 3 bullets : {{text}}"
-providers:
-  - openai:gpt-4o
-  - anthropic:messages:claude-sonnet-4-20250514
+prompts: ["Résume en 3 points : {{text}}"]
+providers: [openai:gpt-4o, anthropic:messages:claude-sonnet-4-20250514]
 tests:
-  - vars: { text: "Lorem ipsum..." }
+  - vars: { text: "..." }
     assert:
-      - type: contains
-        value: "point clé"
       - type: llm-rubric
-        value: "La réponse contient exactement 3 points"
+        value: "Contient exactement 3 points"
       - type: cost
         threshold: 0.01
 ```
 
 ```bash
-npx promptfoo eval    # Lancer les tests
-npx promptfoo view    # Voir les résultats
+npx promptfoo eval && npx promptfoo view
 ```
-
-## Checklist Prompt Production
-
-- [ ] Rôle et contexte définis clairement
-- [ ] Format de sortie spécifié (JSON, markdown, etc.)
-- [ ] Few-shot examples si format complexe
-- [ ] Sanitization des inputs utilisateur
-- [ ] Validation du output (schema, type)
-- [ ] Guardrails contre contenu sensible
-- [ ] Tests automatisés (promptfoo ou équivalent)
-- [ ] Versioning des prompts (git, template engine)
-- [ ] Monitoring qualité en production
 
 ## Optimisation Coûts
 
-| Technique | Économie | Impact qualité |
-|-----------|----------|----------------|
-| Prompt plus court | 20-50% | Faible si bien fait |
-| Modèle plus petit (mini/haiku) | 80-95% | Moyen |
-| Cache réponses identiques | 50-90% | Aucun |
-| Batch processing | 20-30% | Aucun |
+| Technique | Économie |
+|-----------|----------|
+| Prompt plus court | 20-50% |
+| Modèle mini/haiku | 80-95% |
+| Cache réponses | 50-90% |
+
+## Checklist
+
+- [ ] Rôle et contexte définis
+- [ ] Format sortie spécifié
+- [ ] Sanitization inputs utilisateur
+- [ ] Validation output (schema)
+- [ ] Guardrails contenu sensible
+- [ ] Tests automatisés (promptfoo)
+- [ ] Versioning des prompts

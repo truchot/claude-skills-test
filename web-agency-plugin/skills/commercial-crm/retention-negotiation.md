@@ -84,20 +84,13 @@
 | Refonte identite | Design system, charte |
 | Expansion internationale | Multi-langue, i18n |
 
-### Gestion des renouvellements
+### Renouvellements
 
-- J-90 : notification interne, revue du compte
-- J-60 : contact client, bilan de satisfaction
-- J-30 : envoi proposition de renouvellement
-- J-15 : relance si pas de retour
-- J-0 : renouvellement ou cloture
+J-90 : revue compte | J-60 : bilan satisfaction | J-30 : proposition renouvellement | J-15 : relance | J-0 : decision
 
 ### Metriques retention
 
 | Metrique | Cible |
 |----------|-------|
-| Taux renouvellement | > 85% |
-| Net Revenue Retention | > 110% |
-| NPS | > 40 |
-| Churn mensuel | < 3% |
-| Upsell rate | > 20% |
+| Taux renouvellement / NRR | > 85% / > 110% |
+| NPS / Churn mensuel / Upsell rate | > 40 / < 3% / > 20% |

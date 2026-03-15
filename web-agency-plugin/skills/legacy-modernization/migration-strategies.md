@@ -1,62 +1,44 @@
 # Migration Strategies
 
-## Comparatif des Stratégies
+## Comparatif
 
-| Stratégie | Risque | Durée | Complexité | Quand utiliser |
-|-----------|--------|-------|------------|----------------|
-| Strangler Fig | Bas | Long | Moyenne | Remplacement progressif |
-| Branch by Abstraction | Bas | Moyen | Moyenne | Changement d'implémentation |
-| Parallel Run | Très bas | Long | Haute | Criticité maximale (paiements) |
-| Big Bang Rewrite | TRES HAUT | Variable | Haute | JAMAIS (anti-pattern) |
+| Stratégie | Risque | Durée | Quand |
+|-----------|--------|-------|-------|
+| Strangler Fig | Bas | Long | Remplacement progressif (défaut) |
+| Branch by Abstraction | Bas | Moyen | Changement d'implémentation |
+| Parallel Run | Très bas | Long | Criticité max (paiements) |
+| Big Bang Rewrite | TRES HAUT | Variable | JAMAIS (anti-pattern) |
 
-## Strangler Fig (recommandé par défaut)
+## Strangler Fig (recommandé)
 
 ```
-Façade/Proxy route le trafic :
-
-Phase 1:  Legacy [████████████] 100% → Nouveau [            ] 0%
-Phase 2:  Legacy [████████    ]  70% → Nouveau [████        ] 30%
-Phase 3:  Legacy [████        ]  30% → Nouveau [████████    ] 70%
-Phase 4:  Legacy [            ]   0% → Nouveau [████████████] 100%
+Phase 1: Legacy 100% → Nouveau 0%    (façade en place)
+Phase 2: Legacy 70%  → Nouveau 30%   (migration progressive)
+Phase 3: Legacy 30%  → Nouveau 70%
+Phase 4: Legacy 0%   → Nouveau 100%  (legacy supprimé)
 ```
 
 ```typescript
-// Proxy/Façade avec feature flags
 class ServiceProxy {
-  async handleRequest(req: Request) {
-    if (featureFlags.isEnabled('new-user-service', req.userId)) {
-      return newService.handle(req);  // Nouveau système
-    }
-    return legacyService.handle(req);  // Legacy
+  async handle(req: Request) {
+    if (featureFlags.isEnabled('new-service', req.userId))
+      return newService.handle(req);
+    return legacyService.handle(req);
   }
 }
 ```
 
-**Étapes** : Identifier le périmètre > Créer la façade > Implémenter le nouveau > Router progressivement > Supprimer le legacy
-
 ## Branch by Abstraction
 
-```
-1. Insérer une interface devant le legacy
-2. Implémenter la nouvelle version derrière l'interface
-3. Basculer via configuration
-4. Supprimer l'ancienne implémentation
-```
-
 ```typescript
-// Étape 1 : Interface
-interface PaymentProcessor {
-  processPayment(amount: number): Promise<Result>;
-}
-
-// Étape 2 : Legacy implémente l'interface
+// 1. Interface devant le legacy
+interface PaymentProcessor { process(amount: number): Promise<Result>; }
+// 2. Legacy implémente l'interface
 class LegacyPayment implements PaymentProcessor { ... }
-
-// Étape 3 : Nouveau implémente la même interface
+// 3. Nouveau implémente la même interface
 class StripePayment implements PaymentProcessor { ... }
-
-// Étape 4 : Switch via config
-const processor: PaymentProcessor = config.useNewPayment
+// 4. Switch via config
+const processor: PaymentProcessor = config.useNew
   ? new StripePayment() : new LegacyPayment();
 ```
 
@@ -64,85 +46,56 @@ const processor: PaymentProcessor = config.useNewPayment
 
 ```typescript
 async function processOrder(order: Order) {
-  const [legacyResult, newResult] = await Promise.allSettled([
-    legacySystem.process(order),
-    newSystem.process(order),
+  const [legacy, nouveau] = await Promise.allSettled([
+    legacySystem.process(order), newSystem.process(order),
   ]);
-
-  // Comparer les résultats (logging, pas de blocage)
-  if (JSON.stringify(legacyResult) !== JSON.stringify(newResult)) {
-    logger.warn('Divergence detected', { legacyResult, newResult });
-  }
-
-  return legacyResult;  // Legacy fait foi jusqu'à confiance établie
+  if (JSON.stringify(legacy) !== JSON.stringify(nouveau))
+    logger.warn('Divergence', { legacy, nouveau });
+  return legacy; // Legacy fait foi jusqu'à confiance établie
 }
 ```
 
 ## Migration de Données
 
-### Stratégies
-| Approche | Downtime | Complexité | Quand |
-|----------|----------|------------|-------|
-| ETL one-shot | Oui (fenêtre) | Basse | Petites BDD |
-| Sync bidirectionnelle (CDC) | Non | Haute | Grosse BDD, zero downtime |
-| Double-write | Non | Moyenne | Transition progressive |
-
-### Checklist Migration Données
-- [ ] Schema nouveau défini et validé
-- [ ] Script de migration écrit et testé
-- [ ] Données de test migrées et vérifiées
-- [ ] Rollback testé (retour arrière possible)
-- [ ] Validation intégrité post-migration
-- [ ] Performance vérifiée sur volume réel
+| Approche | Downtime | Quand |
+|----------|----------|-------|
+| ETL one-shot | Oui (fenêtre) | Petites BDD |
+| Sync bidirectionnelle (CDC) | Non | Grosse BDD, zero downtime |
+| Double-write | Non | Transition progressive |
 
 ## Refactoring Incrémental
 
-### Identifier les Seams (points de découpe)
-```
-Seam = endroit où on peut intercepter le comportement sans modifier le code
-- Interface/Abstraction
-- Point d'injection de dépendance
-- Appel API/Service
-- Event/Message
-```
-
-### Approche
-1. Couvrir par tests de caractérisation
-2. Identifier les seams
+1. Couvrir par tests de caractérisation (golden master)
+2. Identifier les seams (interface, injection, API, event)
 3. Extraire petit module derrière interface
-4. Tester le nouveau module isolément
-5. Basculer progressivement
+4. Tester isolément, basculer progressivement
 
-## Feature Flags pour Migration
+## Feature Flags
 
 ```typescript
-// Bascule progressive
 const flags = {
-  'new-checkout': { enabled: true, rollout: 25 },    // 25% des users
-  'new-search': { enabled: true, rollout: 100 },      // 100% (migration terminée)
-  'new-auth': { enabled: false, rollout: 0 },          // Pas encore
+  'new-checkout': { enabled: true, rollout: 25 },  // 25% users
+  'new-search': { enabled: true, rollout: 100 },    // Terminé
+  'new-auth': { enabled: false },                    // Pas encore
 };
 ```
 
-## Checklist Migration Production
+## Checklist Migration
 
 - [ ] Tests de caractérisation sur le legacy
-- [ ] Stratégie choisie et documentée (ADR)
+- [ ] Stratégie documentée (ADR)
 - [ ] Façade/proxy en place
 - [ ] Feature flags configurés
-- [ ] Monitoring différentiel (legacy vs nouveau)
-- [ ] Plan de rollback testé
-- [ ] Chaque étape réversible
+- [ ] Monitoring différentiel
+- [ ] Plan rollback testé, chaque étape réversible
 - [ ] Validation métier à chaque phase
-- [ ] Communication stakeholders
-- [ ] Suppression du legacy planifiée (ne pas oublier)
+- [ ] Suppression legacy planifiée
 
-## Anti-Patterns à Éviter
+## Anti-Patterns
 
-| Anti-Pattern | Risque | Alternative |
-|-------------|--------|-------------|
-| Big Bang Rewrite | Échec > 70% | Strangler Fig |
-| Pas de tests avant refactoring | Régressions | Tests caractérisation |
-| Migration données one-shot | Downtime | Sync bidirectionnelle |
-| Ignorer le legacy | Dette croissante | Bubble Context (DDD) |
-| Copier-coller le legacy | Bugs copiés | Repenser le design |
+| Anti-Pattern | Alternative |
+|-------------|-------------|
+| Big Bang Rewrite | Strangler Fig |
+| Pas de tests avant refactoring | Tests caractérisation |
+| Migration données one-shot | Sync bidirectionnelle |
+| Copier-coller le legacy | Repenser le design |

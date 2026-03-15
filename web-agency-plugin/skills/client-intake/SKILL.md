@@ -88,4 +88,3 @@ Demande entrante → Reception (parse canal) → Qualification (intent + complex
 - **project-management** : transition vers gestion de projet
 - **direction-technique** : consultations et decisions architecture
 - **lead-dev** : support technique et bugs
-- **commercial-crm** : qualification commerciale avancee

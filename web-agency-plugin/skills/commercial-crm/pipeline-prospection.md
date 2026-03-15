@@ -88,20 +88,12 @@ Ajuster selon : historique conversion, saisonnalite, tendance pipeline
 
 ### Qualification rapide (5 min)
 
-Questions essentielles au premier contact :
-1. Quel est votre projet ? (Need)
-2. Pour quand ? (Timeline)
-3. Avez-vous un budget defini ? (Budget)
-4. Qui decide ? (Authority)
-
-Si score BANT >= 50 → passer en SQL, sinon nurturing
+Questions essentielles : Quel projet ? (Need) / Pour quand ? (Timeline) / Budget defini ? (Budget) / Qui decide ? (Authority). Si BANT >= 50 → SQL, sinon nurturing.
 
 ### Metriques prospection
 
 | Metrique | Cible |
 |----------|-------|
 | Taux reponse cold email | > 15% |
-| Taux qualification | > 30% |
-| Conversion MQL → SQL | > 40% |
-| Cout acquisition lead | < 50 EUR |
-| Time to qualify | < 48h |
+| Taux qualification / Conversion MQL→SQL | > 30% / > 40% |
+| Cout acquisition lead / Time to qualify | < 50 EUR / < 48h |
