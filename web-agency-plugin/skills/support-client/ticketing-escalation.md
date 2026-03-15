@@ -1,27 +1,37 @@
-# Ticketing & Escalade
+# Ticketing & Escalation
 
 ## Workflow ticketing
 
 ```
-Reception → Triage (categorie + priorite) → Routage → Resolution → Cloture → Feedback
+Reception → Triage (categorie + priorite) → Routage (equipe + agent) → Resolution → Cloture → Feedback
 ```
 
 ## Triage des tickets
 
-1. **Classifier** la categorie (Bug, Question, Feature, Billing, Account, Feedback)
-2. **Evaluer** impact (Bloquant, Degrade, Mineur) et urgence (Critique, Haute, Normale)
-3. **Attribuer** priorite P1-P4 via matrice, **router** vers le niveau adequat
+1. **Classifier** categorie (Bug, Question, Feature, Billing, Account, Feedback)
+2. **Evaluer** impact (Bloquant/Degrade/Mineur) x urgence (Critique/Haute/Normale)
+3. **Priorite** : Bloquant+Critique=P1, Degrade+Haute=P2, Mineur+Normale=P4 (voir matrice SKILL.md)
 
-### Routage automatique
+## Equipes & Routage
 
-| Categorie + Priorite | Niveau | Assignation |
-|----------------------|--------|-------------|
-| Bug P1 | L2/L3 | Dev senior + alert manager |
-| Bug P2-P3 | L2 | Dev disponible (load balancing) |
-| Question P3-P4 | L1 | Agent support |
-| Feature Request | L1 | Product backlog |
-| Billing | L1 | Equipe admin |
-| Account + securite | L2 | Admin systeme, priorite P1 forcee |
+| Equipe | Competences | Niveau |
+|--------|-------------|--------|
+| Support L1 | Questions generales, how-to, FAQ | Tier 1 |
+| Tech Support L2 | Bugs, configuration, diagnostic | Tier 2 |
+| Dev Support L3 | Bugs complexes, code fixes | Tier 3 |
+| Billing | Facturation, remboursements | Specialise |
+| Account Security | Securite, fraude, acces | Specialise |
+
+| Condition | Destination | Action supplementaire |
+|-----------|-------------|----------------------|
+| Question P3/P4 | Support L1 | - |
+| Bug P2 | Tech Support L2 | - |
+| Bug P1 | Tech Support L2 | Escalade auto L3 + alerte |
+| Billing | Billing | - |
+| Account + tags securite/fraude | Account Security | Override P1 |
+| Feature Request | Support L1 | Transfert Product backlog |
+
+Assignation agent : disponibilite → competence categorie → charge la plus faible → file d'attente.
 
 ## SLA par priorite
 
@@ -32,27 +42,24 @@ Reception → Triage (categorie + priorite) → Routage → Resolution → Clotu
 | P3 | 4h | 24h | Apres 12h sans progres |
 | P4 | 8h | 72h | Apres 48h sans progres |
 
-### Alertes SLA
-
-| Seuil | Action |
-|-------|--------|
-| 75% temps ecoule | Notifier agent |
-| 90% temps ecoule | Notifier manager |
-| 100% (breach) | Escalade auto + rapport |
+Alertes : **75%** temps ecoule → notifier agent | **90%** → notifier manager | **100%** (breach) → escalade auto + rapport.
 
 ## Resolution et cloture
 
-**Template reponse :** `Bonjour [Prenom], ref [TICKET-ID]. Diagnostic: [X]. Solution: [Y]. Statut: [Resolu/En cours/Escalade].`
+Templates reponse (validation humaine requise) : accuse reception, demande info, resolution, escalade.
 
-**Checklist cloture :**
-- [ ] Probleme resolu et confirme par le client
-- [ ] Solution documentee (alimente la base de connaissances)
-- [ ] Ticket categorise correctement (stats)
-- [ ] Enquete satisfaction envoyee (J+1)
+**Checklist cloture :** resolution confirmee, solution documentee (alimente KB), ticket tagge, enquete CSAT envoyee J+1.
 
-Cloture auto si pas de reponse client apres 7 jours.
+| Statut | Condition |
+|--------|-----------|
+| Resolu | Solution confirmee par client |
+| Resolu - Auto | Pas de reponse 7 jours |
+| Non resolu | Hors scope / abandonne (raison documentee) |
+| Duplicate | Merge avec ticket existant |
 
-## Matrice d'escalade
+---
+
+## Matrice d'escalation
 
 | Motif | De → Vers | Trigger |
 |-------|-----------|---------|
@@ -65,19 +72,16 @@ Cloture auto si pas de reponse client apres 7 jours.
 
 ### Template escalade
 
-```markdown
-## Escalade - [TICKET-ID]
-**De :** [L1/L2] | **Vers :** [L2/L3/Manager]
-**Priorite :** [P1-P4] | **SLA restant :** [temps]
-**Contexte :** [resume du probleme]
-**Actions tentees :** 1. [action] → [resultat]
-**Attendu :** [ce qui est attendu de l'equipe destinataire]
-**Impact :** Tier [Standard/Premium/VIP] | Revenue at risk: [Oui/Non]
+```
+Escalade [TICKET-ID] | De: [L1/L2] → Vers: [L2/L3/Manager]
+Priorite: [P1-P4] | SLA restant: [temps] | Tier: [Standard/Premium/VIP]
+Contexte: [resume] | Revenue at risk: [Oui/Non]
+Actions tentees: [action → resultat] | Attendu: [action destinataire]
 ```
 
 ## Gestion des incidents majeurs
 
-**Incident majeur** = P1 affectant >10% utilisateurs ou service indisponible.
+Incident majeur = P1 affectant >10% utilisateurs ou service indisponible.
 
 | Severite | Impact | Exemples |
 |----------|--------|----------|
@@ -86,9 +90,10 @@ Cloture auto si pas de reponse client apres 7 jours.
 | SEV3 | Degradation | Lenteurs, erreurs partielles |
 
 ### Processus incident
-
 ```
-Detection → Confirmation severite → War room → Resolution → Communication → Post-mortem
+Detection (monitoring/tickets multiples/escalade)
+→ Triage severite → War room (equipe + bridge call + roles)
+→ Resolution (root cause → fix → staging → prod)
+→ Communication (status page + clients + interne)
+→ Post-mortem (timeline, root cause, actions correctives, prevention)
 ```
-
-Post-mortem obligatoire : timeline, root cause, actions correctives, mesures de prevention.

@@ -2,26 +2,18 @@
 
 ## Base de connaissances
 
-### Structure FAQ
+### Types de contenu
 
-```markdown
-## [Categorie]
+Criteres de creation : > 10 tickets/mois, resolution < 5 min, self-service possible.
 
-### [Question frequente]
-**Reponse courte :** [1-2 phrases]
-**Details :** [Explication complete avec etapes]
-**Voir aussi :** [Articles lies]
-```
+| Type | Usage | Longueur |
+|------|-------|----------|
+| FAQ | Questions frequentes, reponse courte + details | 1-2 phrases |
+| How-to | Tache simple, etapes numerotees | 300-500 mots |
+| Tutorial | Processus complet avec screenshots | 800-1500 mots |
+| Troubleshooting | Resolution problemes courants | Variable |
 
-### Criteres pour creer une FAQ
-
-| Critere | Seuil |
-|---------|-------|
-| Frequence de la question | > 10 tickets/mois |
-| Resolution simple | < 5 min |
-| Reponse standardisable | Oui |
-
-### Categories knowledge base
+### Categories
 
 | Categorie | Contenu type |
 |-----------|-------------|
@@ -29,42 +21,41 @@
 | Utilisation | Fonctionnalites, tutoriels, how-to |
 | Troubleshooting | Problemes courants, solutions |
 | Facturation | Paiements, factures, abonnements |
-| Compte / API | Gestion compte, securite, documentation technique |
+| Compte / API | Gestion compte, securite, doc technique |
 
-### Template article
+### Structure article
 
-```markdown
-# [Titre clair et descriptif]
-**Applicable a :** [produit/service] | **MAJ :** [date]
-
-## Probleme / Question
-[Description]
-
-## Solution
-### Etape 1 : [titre]
-[Instructions]
-
-## Points d'attention
-- [avertissements ou prerequis]
 ```
+# [Titre clair] — Applicable a: [produit] | MAJ: [date]
+## Probleme/Question → ## Prerequis → ## Etapes (numerotees)
+## Points d'attention → ## Problemes courants → ## Voir aussi
+```
+
+### Optimisation recherche
+
+- **Tags** : mots-cles + synonymes (ex: "mot de passe", "password", "mdp", "reset")
+- **Titres** : privilegier les termes recherches, ameliorer si CTR < 50%
+- **Maillage** : liens entre articles connexes
+- **Analyse** : suivre les recherches sans resultat → creer le contenu manquant
 
 ### Maintenance
 
 | Action | Frequence |
 |--------|-----------|
 | Revue articles existants | Trimestrielle |
-| Identification gaps (tickets sans FAQ) | Mensuelle |
+| Identification gaps (recherches sans resultat, tickets recurrents) | Mensuelle |
 | MAJ apres release produit | A chaque release |
 | Archivage articles obsoletes | Semestrielle |
+
+Workflow : ticket recurrent → identifier gap → rediger (FAQ/article) → tagger → publier → mesurer.
+
+---
 
 ## Satisfaction client
 
 ### NPS (Net Promoter Score)
 
-```
-0-6 : Detracteurs | 7-8 : Passifs | 9-10 : Promoteurs
-NPS = % Promoteurs - % Detracteurs
-```
+0-6: Detracteurs | 7-8: Passifs | 9-10: Promoteurs. **NPS = %Promoteurs - %Detracteurs.**
 
 | NPS | Interpretation | Action |
 |-----|---------------|--------|
@@ -73,23 +64,35 @@ NPS = % Promoteurs - % Detracteurs
 | 0-30 | A ameliorer | Plan d'action prioritaire |
 | < 0 | Critique | Intervention urgente |
 
-### CSAT (Customer Satisfaction)
+### CSAT & CES
 
-Score 1-5 : CSAT = (Nb satisfaits [4-5] / Nb total reponses) x 100
+- **CSAT** : score 1-5. CSAT = (Nb satisfaits [4-5] / Total) x 100. Cible > 90%.
+- **CES** (Customer Effort Score) : effort ressenti par le client. Cible < 3/5.
 
-### Enquete post-ticket
+Enquete post-ticket (auto J+1) : note resolution (1-5), delai acceptable (Oui/Non), commentaire libre.
 
-Envoi auto apres cloture : note resolution (1-5), delai acceptable (Oui/Non), commentaire libre.
+### Analyse par segment
 
-### Analyse et amelioration
+| Segment | NPS cible | CSAT cible | Suivi |
+|---------|-----------|------------|-------|
+| Enterprise | > 60 | > 4.5 | Mensuel |
+| SMB | > 40 | > 4.2 | Mensuel |
+| Starter | > 30 | > 4.0 | Mensuel |
+
+### Feedback loops
 
 | Source | Metrique | Frequence |
 |--------|----------|-----------|
 | Tickets | Volume, categories, recurrence | Hebdo |
-| NPS / CSAT | Score + verbatims | Mensuelle |
-| Knowledge base | Taux resolution self-service | Mensuelle |
-| SLA | Taux de respect | Hebdo |
+| NPS / CSAT | Score + verbatims | Mensuel |
+| Knowledge base | Taux resolution self-service | Mensuel |
+| SLA breaches | Taux de respect | Hebdo |
+| Feedback agents | Retours terrain qualitatifs | Mensuel |
 
-### Actions correctives
+### Actions correctives (prioriser par impact haut / effort faible)
 
-Tickets recurrents → creer/ameliorer FAQ. CSAT bas → former l'equipe. SLA non respectes → revoir capacite. NPS detracteurs → appel individuel. Faible self-service → enrichir knowledge base.
+- Tickets recurrents → creer/ameliorer FAQ
+- CSAT bas → former l'equipe sur les points faibles
+- SLA non respectes → revoir capacite / staffing
+- NPS detracteurs → appel individuel de recuperation
+- Faible self-service → enrichir KB + optimiser recherche
