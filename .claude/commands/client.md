@@ -54,7 +54,8 @@ Référence: `.web-agency/skills/experience-client/agents/fidelisation/`
 | Signaux | Phase | → Domaine |
 |---------|-------|-----------|
 | nouveau client, premier contact, demande entrante | Accueil | `accueil` |
-| proposition, devis, périmètre, budget, planning | Cadrage | `cadrage` |
+| proposition, périmètre, planning | Cadrage | `cadrage` |
+| devis, estimation, budget, chiffrage, quote, invoice | Devis | `invoice-generator` |
 | maquette, feedback, validation, atelier, prototype | Co-création | `co-creation` |
 | avancement, rapport, point projet, statut, démo | Suivi | `suivi` |
 | mise en ligne, formation, go-live, lancement | Lancement | `lancement` |
@@ -76,6 +77,10 @@ Référence: `.web-agency/skills/experience-client/agents/fidelisation/`
 ```
 SI la demande concerne une communication client:
   → experience-client (toujours)
+
+SI la demande concerne un devis ou une estimation budgétaire:
+  → invoice-generator/agents/devis (génère le JSON structuré)
+  → Puis proposer envoi via pennylane-send.js ou qonto-send.js
 
 SI la demande concerne la qualification technique:
   → client-intake (puis handoff vers experience-client)
@@ -127,6 +132,8 @@ Tout livrable sortant vers le client passe par les 5 validators dans cet ordre :
 
 - `/client répondre au mail du client Dupont` → `accueil/premier-contact`
 - `/client préparer la proposition pour ACME` → `cadrage/proposition-projet`
+- `/client devis site vitrine 5 pages pour restaurant italien` → `invoice-generator/agents/devis` → JSON
+- `/client estimation budget refonte e-commerce 20k€ client allemand` → `invoice-generator/agents/devis` → JSON (de)
 - `/client présenter les maquettes au client` → `co-creation/walkthrough-narratif`
 - `/client point d'avancement hebdo` → `suivi/rapport-avancement`
 - `/client le client demande où on en est` → `suivi/rapport-avancement`

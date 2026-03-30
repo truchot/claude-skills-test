@@ -1,0 +1,20 @@
+{
+  "pennylane": {
+    "api_token": "VOTRE_TOKEN_PENNYLANE",
+    "api_url": "https://app.pennylane.com/api/external/v1"
+  },
+  "qonto": {
+    "organization_slug": "votre-organisation",
+    "secret_key": "VOTRE_SECRET_KEY_QONTO",
+    "api_url": "https://thirdparty.qonto.com/v2"
+  },
+  "agency": {
+    "name": "Mon Agence Web",
+    "siret": "123 456 789 00001",
+    "tva_intra": "FR12345678900",
+    "default_tva_rate": 20,
+    "default_currency": "EUR",
+    "payment_conditions": "30 jours fin de mois",
+    "validity_days": 30
+  }
+}
