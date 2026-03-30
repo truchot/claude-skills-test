@@ -1,0 +1,27 @@
+{
+  "pennylane": {
+    "api_token": "VOTRE_TOKEN_PENNYLANE",
+    "company_id": "VOTRE_COMPANY_ID",
+    "api_url": "https://app.pennylane.com/api/external/v1"
+  },
+  "qonto": {
+    "organization_slug": "votre-organisation",
+    "secret_key": "VOTRE_SECRET_KEY_QONTO",
+    "api_url": "https://thirdparty.qonto.com/v2"
+  },
+  "anthropic": {
+    "api_key": "VOTRE_CLE_API_ANTHROPIC"
+  },
+  "agency": {
+    "name": "Mon Agence Web",
+    "address": "12 rue de l'Innovation, 75001 Paris",
+    "siret": "123 456 789 00001",
+    "tva_intra": "FR12345678900",
+    "email": "contact@monagence.fr",
+    "phone": "+33 1 23 45 67 89",
+    "default_tva_rate": 20,
+    "default_currency": "EUR",
+    "payment_conditions": "30 jours à réception de facture",
+    "validity_days": 30
+  }
+}
